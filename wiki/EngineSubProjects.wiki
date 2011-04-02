@@ -16,7 +16,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Description: includes managing score and other attributes
      * Design Goals:
      * Core Responsibilities:
-     * Collaborates With:
+     * Collaborates With: Events; Stats
      * Extensions:
   # Levels
      * Claimed by 
