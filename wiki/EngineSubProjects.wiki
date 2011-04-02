@@ -6,7 +6,7 @@ Based on our discussion, I have created the packages below to serve as the basis
 
 Claiming a package below will be done on a first come first serve basis this week in your current teams, but for the next round it will be based on interest and knowledge of the area (so we will shuffle teams). To claim a package, a team must *edit this page* to fill out the information requested for the package. If your team cannot complete this basic information, then it may not be appropriate for you to work on that package.
 
-You may add new packages to the list below, but they must have the same basic information as the other packages and be substantially different from the existing packages.
+You may add new packages to the list below, but they must have the same basic information as the other packages and be substantially different from the existing packages. You may also change the name of a package if you have something more descriptive or general in mind.
 
 
 = Details =
@@ -32,21 +32,21 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Collision Manager (detecting and allowing custom reponses)
+  # Collisions
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Event System (allow handling of game events outside the main game loop)
+  # Events
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # State System (allow games to be in different states during play)
+  # States/Modes
      * Claimed by 
      * Description: 
      * Design Goals:
