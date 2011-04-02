@@ -106,8 +106,9 @@ You may add new packages to the list below, but they must have the same basic in
      * Claimed by Team 11 (Charlie Hatcher Alex Lee)
      * Description: Allow game designers to edit levels graphically rather than hand editing a text file.
      * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
+     * Core Responsibilities: Develop a user interface that allows users to load, save, and alter level files
+                                                graphically.
+     * Collaborates With:Level, Possibly Development Environment, and GameLoop
      * Extensions:
   # Mod Environment
      * Claimed by 
