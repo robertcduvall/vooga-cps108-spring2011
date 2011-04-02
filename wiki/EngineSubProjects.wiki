@@ -41,7 +41,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Extensions:
   # Events
      * Claimed by: Team 1: Michael Ansel, Ethan Goh
-     * Description: Provides the control necessary for event driven system.  Manages the timely processing and synchronization of each event.   
+     * Description: Provides the control necessary for an event driven system.  Manages the timely processing and synchronization of events.   
      * Design Goals: Create an efficient and extensible system that allows users to easily register and swap out sets of event handlers.
      * Core Responsibilities: Provide the framework for which all the components make requests (fire/register events) to the engine to be processed.
      * Collaborates With: Game Loop, States/Modes, Physics Engine, Game Resources, Any other team that potentially requires a set of controls to drive their component.
