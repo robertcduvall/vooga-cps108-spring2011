@@ -68,11 +68,11 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With:
      * Extensions:
   # Game Loop
-     * Claimed by 
+     * Claimed by Team 14: DJ Sharkey and Kevin Wang
      * Description: allow control of the main game loop
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
+     * Design Goals:To allow the basic control loop  (input->update->render) to be easily accessed and altered.
+     * Core Responsibilities: To simply the control and progression of the game.
+     * Collaborates With: Players, Levels, Views, (really with everyone, but through layers of separation)
      * Extensions:
   # Physics Engine 
      * Claimed by: Team 12: Nathan Klug and Anne Weng
