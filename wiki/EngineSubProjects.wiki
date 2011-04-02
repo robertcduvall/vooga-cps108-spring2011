@@ -75,7 +75,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With:
      * Extensions:
   # Physics Engine 
-     * Claimed by 
+     * Claimed by: Team 12: Nathan Klug and Anne Weng
      * Description: Allow game designers to easily use standard physical reactions or define their own style of physics for a game.
      * Design Goals:
      * Core Responsibilities:
