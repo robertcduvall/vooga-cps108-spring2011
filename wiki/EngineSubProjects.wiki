@@ -96,7 +96,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: Events
      * Extensions:
   # Replay
-     * Claimed by 
+     * Claimed by Team 10: Josue Mirtil, and Chris James
      * Description:  Allow users to save, resume, or re-view previously played games.
      * Design Goals:
      * Core Responsibilities:
