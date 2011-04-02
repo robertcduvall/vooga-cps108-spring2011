@@ -34,10 +34,10 @@ You may add new packages to the list below, but they must have the same basic in
      * Extensions:
   # Collisions
      * Claimed by: Team 8 - Max Egan, Julian Genkins
-     * Description: 
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
+     * Description: Creating more intelligent, efficient collision manager and collision system. Allow for a wider variety of collisions.
+     * Design Goals: Include both a standard set of collision guidelines as well as an API that allows extension into game-specific collisions. 
+     * Core Responsibilities: A user friendly collision core that is strong enough for ease of basic use but flexible enough to be extended into environments  which might require implementation of new collision rules.
+     * Collaborates With: Physics Engine, Events, States/Modes?
      * Extensions:
   # Events
      * Claimed by: Team 1: Michael Ansel, Ethan Goh
