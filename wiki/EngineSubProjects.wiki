@@ -91,7 +91,7 @@ You may add new packages to the list below, but they must have the same basic in
   # Networking Engine 
      * Claimed by Team 15: Lingzhao Xie, Roman Zhang
      * Description: Allow users to sit at different computers and connect to a common game session. An update at any one computer should be visible immediately to all connected users.
-     * Design Goals: Provide an API so users can create a game and become visible on the network, other users can join/exit the game. Users can send out any serializable object, the network engine will generate an event upon receive.
+     * Design Goals: Provide an API so users can create a game and become visible on the local area network, other users can join/exit the game. Users can send out any serializable object, the network engine will generate an event upon receive.
      * Core Responsibilities:
      * Collaborates With: Events
      * Extensions:
