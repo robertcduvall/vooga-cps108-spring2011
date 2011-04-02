@@ -40,7 +40,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With:
      * Extensions:
   # Events
-     * Claimed by 
+     * Claimed by: Team 1: Michael Ansel, Ethan Goh
      * Description: 
      * Design Goals:
      * Core Responsibilities:
