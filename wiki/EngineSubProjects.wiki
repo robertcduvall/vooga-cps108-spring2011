@@ -53,30 +53,23 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Game Resources (specifically images, sounds, time, random)
+  # Game Resources
      * Claimed by 
-     * Description: 
+     * Description: specifically images, sounds, time, random-ness
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Overlay/Static View (view game statistics separate from game play)
+  # Stats
      * Claimed by 
-     * Description: 
+     * Description: view game statistics separate from game play
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Command Access (for future enhancement via game console)
+  # Game Loop
      * Claimed by 
-     * Description: 
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
-     * Extensions:
-  # Game Loop (allow control of the main game loop)
-     * Claimed by 
-     * Description: 
+     * Description: allow control of the main game loop
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
@@ -102,30 +95,30 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Level Editor Designing levels for a game is difficult for many reasons: the shear number of objects to create and the difficulty of testing the level's play-ability are chief among them. But these problems are compounded if the game designer must hand-edit a text file to specify appearance of all the level's objects. Build an application that allows game designers to load, save, and edit the appearance of game levels graphically. Your GUI should show conform to standard visual design principles of modern applications (e.g., File, Edit, and Help menus as well as context specific toolbars and preference dialogs). Design XML file(s) rather than Java code that can be used to initialize your game (i.e., describing game level configurations, game resources, and other game specific data as appropriate).
+  # Replay
+     * Claimed by 
+     * Description:  Allow users to save, resume, or re-view previously played games.
+     * Design Goals:
+     * Core Responsibilities:
+     * Collaborates With:
+     * Extensions:
+  # Level Editor
      * Claimed by 
      * Description:
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Replay Allow users to save, resume, or re-view previously played games.
+  # Mod Environment
      * Claimed by 
      * Description:
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Development Environment. Support game designers in debugging by providing the ability to pause and step the game action, to highlight attributes of game objects (like their health, velocity, nearest neighbors, etc.) visually or by clicking on them, and move or change objects to create specific game situations. Extend even further to provide a means for game designers to test that that games do expected things, can be won and lost, and progress through levels properly.
+  # Development Environment
      * Claimed by 
-     * Description:
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
-     * Extensions:
-  # Mod Environment Game companies encourage this practice because different versions of a game add extra play value and interest for purchasing the original game. Basic characteristics of the look and feel of the game should be able to be easily changed: the graphical icons used in game (e.g., to turn a SciFi game into a political statement); the keys used for interaction (e.g., to accommodate multiple players on the same keyboard); and the point values of game objectives (e.g., to make a bonus level). Extend it further by allowing users to change variables of game play or even add new rules or behaviors to a game.
-     * Claimed by 
-     * Description:
+     * Description: 
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
