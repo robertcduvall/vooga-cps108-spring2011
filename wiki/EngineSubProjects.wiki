@@ -41,8 +41,8 @@ You may add new packages to the list below, but they must have the same basic in
      * Extensions:
   # Events
      * Claimed by: Team 1: Michael Ansel, Ethan Goh
-     * Description: 
-     * Design Goals:
+     * Description: Controls the game loop based on an event driven system.  Manages the timely processing and synchronization of each event.   
+     * Design Goals: Create an efficient and extensible system that allows users to easily register and swap out sets of event handlers.
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
