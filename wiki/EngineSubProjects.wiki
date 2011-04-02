@@ -74,23 +74,23 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Physics Engine Allow game designers to easily use standard physical reactions or define their own style of physics for a game.
+  # Physics Engine 
      * Claimed by 
-     * Description: 
+     * Description: Allow game designers to easily use standard physical reactions or define their own style of physics for a game.
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Artificial Intelligence Engine Allow game designers to create smart enemies to oppose the player.
+  # Artificial Intelligence Engine
      * Claimed by 
-     * Description: 
+     * Description:  Allow game designers to create smart enemies to oppose the player.
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
      * Extensions:
-  # Networking Engine Allow users to sit at different computers and connect to a common game session. An update at any one computer should be visible immediately to all connected users.
+  # Networking Engine 
      * Claimed by 
-     * Description: 
+     * Description: Allow users to sit at different computers and connect to a common game session. An update at any one computer should be visible immediately to all connected users.
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With:
