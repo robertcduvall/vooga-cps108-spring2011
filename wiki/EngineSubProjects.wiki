@@ -33,7 +33,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With:
      * Extensions:
   # Collisions
-     * Claimed by 
+     * Claimed by: Team 8 - Max Egan, Julian Genkins
      * Description: 
      * Design Goals:
      * Core Responsibilities:
