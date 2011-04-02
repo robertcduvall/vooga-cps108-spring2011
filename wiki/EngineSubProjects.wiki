@@ -18,70 +18,60 @@
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # Collision Manager (detecting and allowing custom reponses)
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # Event System (allow handling of game events outside the main game loop)
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # State System (allow games to be in different states during play)
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # Game Resources (specifically images, sounds, time, random)
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # Overlay/Static View (view game statistics separate from game play)
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # Command Access (for future enhancement via game console)
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # Game Loop (allow control of the main game loop)
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # Physics Engine Allow game designers to easily use standard physical reactions or define their own style of physics for a game.
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # Artificial Intelligence Engine Allow game designers to create smart enemies to oppose the player.
      * Claimed by 
      * Description: 
      * Design Goals:
      * Core Features:
      * Extensions:
-
   # Networking Engine Allow users to sit at different computers and connect to a common game session. An update at any one computer should be visible immediately to all connected users.
      * Claimed by 
      * Description: 
