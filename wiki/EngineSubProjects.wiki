@@ -6,7 +6,121 @@
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  # Player/Item System (includes managing score and other attributes)
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+  # Level System (includes view of game space)
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # Collision Manager (detecting and allowing custom reponses)
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # Event System (allow handling of game events outside the main game loop)
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # State System (allow games to be in different states during play)
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # Game Resources (specifically images, sounds, time, random)
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # Overlay/Static View (view game statistics separate from game play)
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # Command Access (for future enhancement via game console)
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # Game Loop (allow control of the main game loop)
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # Physics Engine Allow game designers to easily use standard physical reactions or define their own style of physics for a game.
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # Artificial Intelligence Engine Allow game designers to create smart enemies to oppose the player.
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+  # Networking Engine Allow users to sit at different computers and connect to a common game session. An update at any one computer should be visible immediately to all connected users.
+     * Claimed by 
+     * Description: 
+     * Design Goals:
+     * Core Features:
+     * Extensions:
+
+Asset Management. Make your game engine as efficient as possible (while keeping the design goals of the project). For example, cache all images and sounds so they are only stored once, use a fast collision detection algorithm.
+
+  # Level Editor Designing levels for a game is difficult for many reasons: the shear number of objects to create and the difficulty of testing the level's play-ability are chief among them. But these problems are compounded if the game designer must hand-edit a text file to specify appearance of all the level's objects. Build an application that allows game designers to load, save, and edit the appearance of game levels graphically. Your GUI should show conform to standard visual design principles of modern applications (e.g., File, Edit, and Help menus as well as context specific toolbars and preference dialogs). Design XML file(s) rather than Java code that can be used to initialize your game (i.e., describing game level configurations, game resources, and other game specific data as appropriate).
+
+
+
+
+
+
+
+Replay Allow users to save, resume, or re-view previously played games.
+
+Core Requirements:
+
+Extensions:
+
+Examples:
+
+
+
+
+
+Development Environment. Support game designers in debugging by providing the ability to pause and step the game action, to highlight attributes of game objects (like their health, velocity, nearest neighbors, etc.) visually or by clicking on them, and move or change objects to create specific game situations. Extend even further to provide a means for game designers to test that that games do expected things, can be won and lost, and progress through levels properly.
+
+Core Requirements:
+
+Extensions:
+
+Examples:
+
+
+
+
+
+Mod Environment Game companies encourage this practice because different versions of a game add extra play value and interest for purchasing the original game. Basic characteristics of the look and feel of the game should be able to be easily changed: the graphical icons used in game (e.g., to turn a SciFi game into a political statement); the keys used for interaction (e.g., to accommodate multiple players on the same keyboard); and the point values of game objectives (e.g., to make a bonus level). Extend it further by allowing users to change variables of game play or even add new rules or behaviors to a game.
