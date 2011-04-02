@@ -12,7 +12,7 @@ You may add new packages to the list below, but they must have the same basic in
 = Details =
 
   # Players
-     * Claimed by 
+     * Claimed by Team 13: Andrea Scripa and Kevin Tao
      * Description: includes managing score and other attributes
      * Design Goals:
      * Core Responsibilities:
