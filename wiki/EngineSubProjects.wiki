@@ -19,11 +19,11 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: Events; Stats
      * Extensions:
   # Levels
-     * Claimed by 
-     * Description:
+     * Claimed by: Team 3: Andrew Patterson, Wes Brown
+     * Description: includes defining a level and its contents
      * Design Goals:
      * Core Responsibilities:
-     * Collaborates With:
+     * Collaborates With: States, Players, Resources, Level Editor
      * Extensions:
   # Views
      * Claimed by 
