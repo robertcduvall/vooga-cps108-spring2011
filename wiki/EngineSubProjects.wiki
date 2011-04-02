@@ -4,7 +4,10 @@
 
 Based on our discussion, I have created the packages below to serve as the basis for our engine that will support making games more easily. However, I do not necessarily expect that this will be the final breakdown of these responsibilities. As we flesh out the overall design, some packages may be merged and new ones may be created --- thus communication between the teams working on these packages is essential, even from the start.
 
-Note, you may add
+Claiming a package below will be done on a first come first serve basis this week, but for the next round it will be based on interest and knowledge of the area. To claim a package, a team must *edit this page* to fill out the information requested for the package. If your team cannot complete this basic information, then it may not be appropriate for you to work on that package.
+
+You may add new packages to the list below, but they must have the same basic information as the other packages and be substantially different from 
+
 
 = Details =
 
