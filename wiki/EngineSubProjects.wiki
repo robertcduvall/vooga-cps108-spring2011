@@ -103,7 +103,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With:
      * Extensions:
   # Level Editor
-     * Claimed by 
+     * Claimed by Team 11 (Charlie Hatcher Alex Lee)
      * Description:
      * Design Goals:
      * Core Responsibilities:
