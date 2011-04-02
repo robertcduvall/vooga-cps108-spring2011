@@ -2,6 +2,8 @@
 
 = Introduction =
 
+Based on our discussion, I have created the packages below to serve as the basis for our engine that will support making games more easily. However, I do not necessarily expect that this will be the final breakdown of these responsibilities. As we flesh out the overall design, some packages may be merged and new ones may be created --- thus communication between the teams working on these packages is essential, even from the start.
+
 Note, you may add
 
 = Details =
