@@ -10,6 +10,7 @@
      * Claimed by 
      * Description: 
      * Design Goals:
+
      * Core Features:
      * Extensions:
   # Level System (includes view of game space)
