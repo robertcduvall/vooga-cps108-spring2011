@@ -22,7 +22,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Claimed by: Team 3: Andrew Patterson, Wes Brown
      * Description: Includes defining a level and its content, and initializing and managing all levels.
      * Design Goals: Define a flexible file format that can be used to represent and read in various types of levels
-     * Core Responsibilities:
+     * Core Responsibilities: Provide a file format to represent a level and provide a method to import and initialize game levels.
      * Collaborates With: States, Players, Resources, Level Editor
      * Extensions:
   # Views
