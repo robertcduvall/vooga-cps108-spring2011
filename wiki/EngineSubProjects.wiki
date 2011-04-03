@@ -26,7 +26,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: States, Players, Resources, Level Editor
      * Extensions:
   # Views
-     * Claimed by: Team 9 - Conrad, Shun 
+     * Claimed by:  
      * Description: views of game space
      * Design Goals:
      * Core Responsibilities:
@@ -47,7 +47,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: Game Loop, States/Modes, Physics Engine, Game Resources, Any other team that potentially requires a set of controls to drive their component.
      * Extensions:
   # States/Modes
-     * Claimed by Conrad Hayes
+     * Claimed by Team 9 - Conrad, Shun
      * Description: 
      * Design Goals:
      * Core Responsibilities:
@@ -61,7 +61,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With:
      * Extensions:
   # Stats
-     * Claimed by shun fan
+     * Claimed by 
      * Description: view game statistics separate from game play
      * Design Goals:
      * Core Responsibilities:
