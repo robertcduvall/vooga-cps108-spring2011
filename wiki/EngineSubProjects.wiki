@@ -26,7 +26,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: States, Players, Resources, Level Editor
      * Extensions:
   # Views
-     * Claimed by: Team 3 - Conrad, Shun 
+     * Claimed by: Team 9 - Conrad, Shun 
      * Description: views of game space
      * Design Goals:
      * Core Responsibilities:
