@@ -20,7 +20,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Extensions:
   # Levels
      * Claimed by: Team 3: Andrew Patterson, Wes Brown
-     * Description: includes defining a level and its contents
+     * Description: Includes defining a level and its content, and initializing and managing all levels.
      * Design Goals:
      * Core Responsibilities:
      * Collaborates With: States, Players, Resources, Level Editor
