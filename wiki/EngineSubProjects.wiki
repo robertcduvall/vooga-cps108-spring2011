@@ -100,7 +100,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Description:  Allow users to save, resume, or re-view previously played games.
      * Design Goals:
      * Core Responsibilities:
-     * Collaborates With:
+     * Collaborates With: States/Modes
      * Extensions:
   # Level Editor
      * Claimed by Team 11 (Charlie Hatcher Alex Lee)
