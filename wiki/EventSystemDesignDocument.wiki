@@ -27,7 +27,7 @@ Unfortunately, an event-system is not the panacea for all game design - the cost
 
 = Design =
 
-==The Event SandBox==
+==The Event Sandbox==
 
 
 
@@ -40,5 +40,5 @@ Reactor Pattern: http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikipedi
   # Events, Event Listeners, Event Handlers, Event Registration.
   # Event Sandbox
     # Blocking Sandbox
-    # PassThrough Sandbox
+    # Passthrough Sandbox
   # Registering and Unregistering Events
