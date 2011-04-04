@@ -54,11 +54,11 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With:
      * Extensions:
   # Game Resources
-     * Claimed by 
-     * Description: specifically images, sounds, time, random-ness
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
+     * Claimed by Misha Lavrov, Sterling Dorminey
+     * Description: path-based sprite movement, XML image loading, simple sprite-based GUI, customizable keyboard input, advanced randomization
+     * Design Goals: Create lightweight utility classes that can be used with GTGE tools without imposing a strict framework
+     * Core Responsibilities: Provide framework for loading non-level resources and other utility functions.
+     * Collaborates With: maybe Events, maybe Level Editor, for certain functionality
      * Extensions:
   # Stats
      * Claimed by 
