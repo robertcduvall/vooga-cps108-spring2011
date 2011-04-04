@@ -51,7 +51,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Description: To coordinate flow between different game states in a Game (ie. running, paused, loading, etc.) - "kind of a state-machine kind of style"
      * Design Goals: To create a very easy way to add different "GameStates" to a game and organize Game Loop coding accordingly
      * Core Responsibilities: Implementing multiple GameStates within a hierarchy system, holding/managing respective keyEvents for each GameState
-     * Collaborates With: Game Loop, Event Team, and possibly LevelTeam
+     * Collaborates With: Game Loop, Event Team, Network Engine, and LevelTeam
      * Extensions: tbd.
   # Game Resources
      * Claimed by Misha Lavrov, Sterling Dorminey
