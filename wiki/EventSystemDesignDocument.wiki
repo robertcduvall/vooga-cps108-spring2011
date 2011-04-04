@@ -1,0 +1,27 @@
+#summary Explains the essential concepts behind event-driven game development.
+
+= Introduction =
+
+The Game Engine is designed to be event driven, meaning that specific triggering of events and invocation of their respective callbacks change the state of the Game, which in turn leads to another set of states based on other internal or external chain reactions. The important concept of designing an event system involves the thorough understanding of *Event Registration, Event Listeners* and *Event Callbacks*. As part of the preliminary steps before partaking in a detailed discussion of the design of the Event System, we will proceed to provide definitions for this terminology.
+
+*Event Registration* is the act of keeping track of an Event, namely by attaching an 'unbiased' observer to it. This 'unbiased' observer is known as the *Event Listener*, which notifies a reactionary force that a signal has been received. This reactionary force is often called the *Event Handler* or the *Event Callback*.
+
+A physical example will be presented to accurately portray this concept. Imagine a world in a state of dynamic equilibrium, for example, an acid-base titration. Normally, if there are no external forces, the state (pH) of the chemical reaction will remain the same. To a scientist (Event Listener), an unbiased observer who wants to analyze the state of the reaction, would insert a probe into the solution (Triggers the Event) such as Phenolphthalein, which detects when the pH of the solution increases beyond 8.2. The scientist is 'listening' on a color change in the solution, and when it does, he will note the titration volume (Event Handling). In performing the reaction, the scientist adds stimulus to the system, namely adding base to the solution, disrupting the equilibrium of the solution. At some point in time, the pH of the solution will exceed 8.2, the solution will change color, triggering and Event that notifies the scientist, who will then handle and record the data as required. 
+
+Event driven systems are exemplified by sensors such as trap doors or laser trip mines . In this case, event registration is the act of setting up a laser trip mine whose beam spans across the room. The trip mine listens on any moving object that comes in between the path of the mine. When this event is triggered, the mine handles this swiftly by exploding in the face of the intruder.
+
+From this example, we have a basic design concept for a video game. One could easily imagine a maze game that requires one to navigate through trap filled room, whose traps are all registered in exact same fashion as described above. Explosions of laser mines could set of other adjacent mines, and lead to various other chain reactions that violently changes the state of the game.
+
+Classically, one could think of games as a temporal progression (time-driven engine) - i.e after a fixed amount of time, spawn enemies in top left corner; after the player's weapon charges up again, fire the weapon. All these things happen after a timer expires, and the forward progression in time drives the changes in game state. 
+
+However, the key conceptual jump is abstracting time-driven engines by another level, noting and understanding that a the ticks of timers are merely specific events. By containment, we see that a time-driven engine is a subset of an event-based engine, making the event-driven system potentially much more powerful and extensible than the time-driven system, which is the justification for using an event-based system to drive this game engine.
+
+Unfortunately, 
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
