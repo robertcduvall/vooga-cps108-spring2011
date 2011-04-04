@@ -123,3 +123,10 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities: Develop user interface for manipulation of values. Also develop UI for visual representation of variable state over time(plot graph)
      * Collaborates With:
      * Extensions:
+  # User Interface Design
+     * Claimed by - Team ?( David Colon-Smith and David Crowe)
+     * Description: Create user interface components- menus, "pop-overs", and display components.
+     * Design Goals: Create re-usable parts that are extendable and easy to use- that can be used to structure the game into a coherent and impressive final product
+     * Core Responsibilities: UI Objects
+     * Collaborates With: 
+     * Extensions: 
