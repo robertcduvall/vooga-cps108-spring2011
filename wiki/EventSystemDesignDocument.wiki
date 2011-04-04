@@ -42,7 +42,7 @@ On the other extreme, a Passthrough Sandbox is a type of Sandbox that inherits A
 This is where we need input from all the other teams. Think about what events your component often connects or disconnects from system. Which ones more commonly remain? Are you able to categorize these events into a manageable fashion? Please let the Events team know. 
 
 ==The Reactor Pattern==
-Reactor Pattern: http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikipedia.org/wiki/Reactor_pattern
+Reactor Pattern: [http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikipedia.org/wiki/Reactor_pattern
 
 'nuf said... for now.
 
