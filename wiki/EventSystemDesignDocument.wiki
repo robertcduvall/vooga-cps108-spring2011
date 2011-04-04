@@ -37,8 +37,8 @@ Reactor Pattern: http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikipedi
 
 =Key Takeaways=
 
-  #Events, Event Listeners, Event Handlers, Event Registration.
-  #Event Sandbox
-    #Blocking Sandbox
-    #PassThrough Sandbox
-  #Registering and Unregistering Events
+  # Events, Event Listeners, Event Handlers, Event Registration.
+  # Event Sandbox
+    # Blocking Sandbox
+    # PassThrough Sandbox
+  # Registering and Unregistering Events
