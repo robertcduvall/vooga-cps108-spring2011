@@ -25,4 +25,7 @@ However, the key conceptual jump is abstracting time-driven engines by another l
 Unfortunately, an event-system is not the panacea for all game design - the cost one pays for using an event-system is the multiple orders of increased complexity that comes with this additional design power. In order to bring order to the chaos that might ensue by making interconnections between events, this event system API strives to simplify, organize and process the events in a manner that is debuggable within reasonable time to an average human being. 
 
 
-= Details =
+= Design =
+
+==The Reactor Pattern==
+Reactor Pattern [http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikipedia.org/wiki/Reactor_pattern
