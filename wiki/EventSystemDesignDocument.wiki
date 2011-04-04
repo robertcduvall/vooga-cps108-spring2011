@@ -19,6 +19,7 @@ Classically, one could think of games as a temporal progression (time-driven eng
 
 However, the key conceptual jump is abstracting time-driven engines by another level, noting and understanding that a the ticks of timers are merely specific events. By containment, we see that a time-driven engine is a subset of an event-based engine, making the event-driven system potentially much more powerful and extensible than the time-driven system, which is the justification for using an event-based system to drive this game engine.
 
-Unfortunately, 
+Unfortunately, an event-system is not the panacea for all game design - the cost one pays for using an event-system is the multiple orders of increased complexity that comes with this additional design power. In order to bring order to the chaos that might ensue by making interconnections between events, this event system API strives to simplify, organize and process the events in a manner that is debuggable within reasonable time to an average human being. 
+
 
 = Details =
