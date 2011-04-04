@@ -48,10 +48,10 @@ You may add new packages to the list below, but they must have the same basic in
      * Extensions:
   # States/Modes
      * Claimed by Team 9 - Conrad, Shun
-     * Description: 
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
+     * Description: To coordinate flow between different game states in a Game (ie. running, paused, loading, etc.)
+     * Design Goals: To create a very easy way to add different "GameStates" to a game and organize accordingly
+     * Core Responsibilities: Implementing multiple GameStates within a hierarchy system, holding/managing respective keyEvents for each GameState
+     * Collaborates With: Game Loop and Event Team
      * Extensions:
   # Game Resources
      * Claimed by Misha Lavrov, Sterling Dorminey
