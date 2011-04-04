@@ -18,10 +18,4 @@ However, the key conceptual jump is abstracting time-driven engines by another l
 
 Unfortunately, 
 
-
 = Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
