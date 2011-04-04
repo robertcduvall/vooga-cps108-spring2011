@@ -1,7 +1,7 @@
 #summary Explains the essential concepts behind event-driven game development.
 =Event System Design Document=
 
-==author: Ethan Yong-Hui Goh==
+===Author: Ethan Yong-Hui Goh===
 
 = Introduction =
 
