@@ -26,12 +26,12 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: States, Players, Resources, Level Editor
      * Extensions:
   # Views
-     * Claimed by:  
-     * Description: views of game space
-     * Design Goals:
-     * Core Responsibilities:
+     * Claimed by:  Team 6 - Alex Daniel, Andrew Miller
+     * Description: views of game space, additional window features for game
+     * Design Goals: Create a game space that allows for image wrapping/reflecting
+     * Core Responsibilities: Define edge behavior and imaging
      * Collaborates With: Physics (setting coordinate standards)
-     * Extensions:
+     * Extensions: z-axis
   # Collisions
      * Claimed by: Team 8 - Max Egan, Julian Genkins
      * Description: Creating more intelligent, efficient collision manager and collision system. Allow for a wider variety of collisions.
