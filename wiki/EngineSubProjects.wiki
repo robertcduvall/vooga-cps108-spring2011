@@ -82,11 +82,11 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: Events, Collisions, (possibly Level/Level Editor for the currently active forces), View (setting coordinate standards)
      * Extensions:
   # Artificial Intelligence Engine
-     * Claimed by
+     * Claimed by Austin Benesh
      * Description:  Allow game designers to create smart enemies to oppose the player.
-     * Design Goals:
+     * Design Goals: Create an engine to control a player either in single or multi-player mode
      * Core Responsibilities:
-     * Collaborates With:
+     * Collaborates With: Players, Events, Collisions and Advanced Sprites
      * Extensions:
   # Networking Engine 
      * Claimed by Team 15: Lingzhao Xie, Roman Zhang
