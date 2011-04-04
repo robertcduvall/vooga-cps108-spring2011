@@ -30,11 +30,16 @@ Unfortunately, an event-system is not the panacea for all game design - the cost
 ==The Event Sandbox==
 Any given Game State should have its own sandbox, connecting all the necessary events and external forces/inputs (e.g user interactions). This encapsulates a given state of the game, making it independent and modular, allowing the game to dynamically connect or disconnect from states during a state change.
 
-The Event Sandbox can be thought of as a Stack of individual Sandbox-ed states. The game connects only to the top sandbox, meaning that all the functionality of the game is defined by only the top state. However, it is conceivable that certain new states might want to inherit from previous states, or completely override the event handlers that are in the previous states. This introduces the concept of Blocking Sandboxes and Passthrough Sandboxes. 
+The Event Sandbox can be thought of as a Stack of individual Sandbox-ed states. The game connects only to the top sandbox, meaning that all the functionality of the game is defined by only the top state. However, it is conceivable that certain new states might want to inherit from previous states, or completely override the event handlers that are in the previous states. Rather than forcing the user to remake all the connections every time there is a state change, we have attempted to provide a more useable interface that assists in this context switch. This introduces the concept of Blocking Sandboxes and Passthrough Sandboxes. 
 
 ===Blocking Sandbox===
+A Blocking Sandbox is a type of Sandbox that inherits no event listeners from the previous state. It is a clean slate where the user must reconnect all the desired events. 
 
 ===Passthrough Sandbox===
+On the other extreme, a Passthrough Sandbox is a type of Sandbox that inherits ALL event listeners from the previous state. It is a duplicate copy of the previous state where users might want to add additional functionality or override a few, not most of the the events.
+
+===Somewhere in the middle Sandbox===
+This is where we need input from all the other teams. Think about what events your component often connects or disconnects from system. Which ones more commonly remain? Are you able to categorize these events into a manageable fashion? Please let the Events team know. 
 
 ==The Reactor Pattern==
 Reactor Pattern: http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikipedia.org/wiki/Reactor_pattern
@@ -48,3 +53,4 @@ Reactor Pattern: http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikipedi
     # Blocking Sandbox
     # Passthrough Sandbox
   # Registering and Unregistering Events
+  # Think about state changes in your component, and what type of sandbox might make your life easier.
