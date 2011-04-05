@@ -61,7 +61,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: maybe Events, Level & Level Editor, for certain functionality
      * Extensions:
   # Stats
-     * Claimed by Team 4 (Yin Xiao, Chao Chen)
+     * Claimed by Team 4: Yin Xiao, Chao Chen
      * Description: view game statistics separate from game play
      * Design Goals:
      * Core Responsibilities:
