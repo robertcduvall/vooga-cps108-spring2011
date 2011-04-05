@@ -63,9 +63,9 @@ You may add new packages to the list below, but they must have the same basic in
   # Stats
      * Claimed by Team 4: Yin Xiao, Chao Chen
      * Description: view game statistics separate from game play
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
+     * Design Goals: To help game designer record any statistical or historical information for a game. 
+     * Core Responsibilities: By using observer update statistical information. Can return, save or write this information.
+     * Collaborates With: Mainly Events, any group that potentially needs game stats.
      * Extensions:
   # Game Loop
      * Claimed by Team 14: DJ Sharkey and Kevin Wang
