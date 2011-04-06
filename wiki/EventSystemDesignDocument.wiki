@@ -63,21 +63,62 @@ Currently, groups of events are supported with globs, which serve as namespaces 
 
 Globs [http://en.wikipedia.org/wiki/Glob_(programming)] http://en.wikipedia.org/wiki/Glob_(programming)
 
+==Firing Events==
+The Event Manager currently supports firing events by specific name, or firing groups of events specified by globs. To fire an event, you can invoke one of the following methods in Event Manager:
 
-==The Event Sandbox==
-Any given Game State is contained in its own Event sandbox, connecting all the necessary events and external forces/inputs (e.g user interactions). This encapsulates a given state of the game, making it independent and modular, allowing the game to dynamically connect or disconnect from states during a state change.
+{{{
+public void fireEvents (Object source, String glob);
+public void fireEvents (Object source, String glob, Object arg);
+}}}
 
-The Event Sandbox can be thought of as a Stack of individual Sandbox-ed states. The game connects only to the top sandbox, meaning that all the functionality of the game is defined by only the top state. However, it is conceivable that certain new states might want to inherit from previous states, or completely override the event handlers that are in the previous states. Rather than forcing the user to remake all the connections every time there is a state change, we have attempted to provide a more useable interface that assists in this context switch. This introduces the concept of Blocking Sandboxes and Passthrough Sandboxes. 
+The second method contains a third argument, in which one can pass parameters that are needed inside the event handler. The first method invokes the second method with null third argument. 
 
-===Blocking Sandbox===
-A Blocking Sandbox is a type of Sandbox that inherits no event listeners from the previous state. It is a clean slate where the user must reconnect all the desired events. 
+==Example - Registering and Firing Events==
 
-Usage Example: A Pause screen might want to use this type of Sandbox when layering a new game state. In a pause screen, all motion of the game in stopped, and control in limited to selection in the menu screen. It is more convenient to redefine all the keymappings and mouseover events from a clean state.
+{{{
+1 public class Example1{
+2 EventManager myEventManager = new EventManager();
+3 public void createEventHandler(){
+4    myEventManager.registerEventHandler("Message",
+5        new IEventHandler()
+6        {
+7            public void handleEvent (Object o)
+8            {
+9                sayHi();
+10            }
+11        });
+12 }
+13
+14 public void sayHi()
+15 {
+16    System.out.println("Hi");
+17 }
+18 
+19 public static void main(String[] args)
+20 {
+21     myEventManager.fireEvent("Message");
+22 }
+23 }
+}}}
 
-===Passthrough Sandbox===
-On the other extreme, a Passthrough Sandbox is a type of Sandbox that inherits ALL event listeners from the previous state. It is a duplicate copy of the previous state where users might want to add additional functionality or override a few, not most of the the events.
+==The Event Layer Stack==
 
-Usage Example: A layered heads up display might use this type of Sandbox. In a game that uses the keyboard to control the player, one might want to add mouse support within the heads up display region where one could select items or weapons to use. This additional layer of mouse control is easier to add onto the existing state. 
+Any given Game State is contained in its own Event Layer, connecting all the necessary events and external forces/inputs (e.g user interactions). This encapsulates a given state of the game, making it independent and modular, allowing the game to dynamically connect or disconnect from states during a state change.
+
+The Event stack can be thought of as a Stack of individual Event Layer that represent the current state of the program. The Event Manager connects only to the top Layer, meaning that all the functionality of the game is defined by only the top state. However, it is conceivable that certain new states might want to inherit from previous states, or completely override the event handlers that are in the previous states. Rather than forcing the user to remake all the connections every time there is a state change, we have attempted to provide a more useable interface that assists in this context switch. This introduces the concept of Event Filters.
+
+==Event Filters==
+In the Event Manager, there is a collection of Event Handlers that are active depending of what state of the game one is in, which is defined by the Event Layer as mentioned above. However, each Event Layer needs to know what events that it will inherit from the previous layer, and this is defined by a list of Event Filters. Event Filters behave like Matchers in Java Regular Expressions, where one will filter a given event String name based on a user-defined set of rules. The construction of the Event Layer takes a list of Event Filters, which upon construction will use this list to obtain the necessary handlers from the layer below.
+
+===Remove-All Filter===
+A Blocking Filter is a type of Filter that inherits no event listeners from the previous state. It is a clean slate where the user must reconnect all the desired events. 
+
+Usage Example: A Pause screen might want to use this type of Filter when layering a new game state. In a pause screen, all motion of the game in stopped, and control in limited to selection in the menu screen. It is more convenient to redefine all the keymappings and mouseover events from a clean state.
+
+===Keep-All Filter===
+On the other extreme, a Keep-All Filter is a type of Filter that inherits ALL event listeners from the previous state. It is a duplicate copy of the previous state where users might want to add additional functionality or override a few, not most of the the events.
+
+Usage Example: A layered heads up display might use this type of Filter. In a game that uses the keyboard to control the player, one might want to add mouse support within the heads up display region where one could select items or weapons to use. This additional layer of mouse control is easier to add onto the existing state. 
 
 ===Somewhere in the middle Sandbox===
 This is where we need input from all the other teams. Think about what events your component often connects or disconnects from system. Which ones more commonly remain? Are you able to categorize these events into a manageable fashion? Please let the Events team know. 
