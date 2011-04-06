@@ -98,10 +98,10 @@ You may add new packages to the list below, but they must have the same basic in
   # Replay
      * Claimed by Team 10: Josue Mirtil, and Chris James
      * Description:  Allow users to save, resume, or re-view previously played games.
-     * Design Goals: Creating Class that links changes to state by time elapsed between changes. This "StateTable" would then be used to replay/save/resume play. StateTable will hold serialized objects. Save files in txt format will save StateTables in tree structure, based on resume point and save point. 
+     * Design Goals: Creating Class that links changes to game elements by time elapsed between changes. This "StateTable" would then be used to replay/save/resume play. StateTable will be stored as serialized objects. Save files in txt format will save StateTables and rebuild as tree structure, based on resume point and save point. 
      * Core Responsibilities: Create a way in which the user can save and resume gameplay even after closing the game. Also allow user to replay game.
-     * Collaborates With: States/Modes
-     * Extensions: Allow pause functionality in-game. Allow user to compare replays using tree traversal. Allow for fast-forward, rewind, and skipping through replays.
+     * Collaborates With: ???
+     * Extensions: Allow user to compare replays using tree traversal. Allow for fast-forward, rewind, and skipping through replays.
   # Level Editor
      * Claimed by Team 11 (Charlie Hatcher Alex Lee)
      * Description: Allow game designers to edit levels graphically rather than hand editing a text file.
