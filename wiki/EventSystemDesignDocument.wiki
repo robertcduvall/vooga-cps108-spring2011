@@ -29,6 +29,41 @@ Unfortunately, an event-system is not the panacea for all game design - the cost
 
 = Design =
 
+==The Event Manager Class==
+
+The Event Manager Class is the core of the Event System. It processes all event related things, such as event registration, firing of events, and handling of events. The interface to the Event Manager allows registration of Events of three types - basic event handlers, timed events, and every-turn events. 
+
+==Event Registration==
+
+===Basic Event Handlers===
+Basic event handlers listen on a specific Event that will be fired in the future. Registration of this type requires the exact String name of the Event that it is listening on, and the callback method that is to be invoked upon receiving the event. 
+
+{{{
+public void registerEventHandler(String eventName, IEventHandler eventHandler);
+}}}
+
+===Timed Events===
+There are two types of Timed Events - periodic and one-shot timer events. Periodic events are events that need to be fired at specific time intervals, for example, the activation of a player's weapon after a specified cooldown period. One-shot events on the other hand, are events that are only fired once at a specified time in the future, for example, starting a boss battle 30 seconds after the level has started.
+
+In both cases, the interface two each type is similar. It requires the exact name of the Event to be fired, and the time delay between the firing of the event(s). 
+{{{
+public Timer addTimer (String eventName, long delay);  // one shot
+public PeriodicTimer addPeriodicTimer (String eventName, long interval) // periodic
+}}}
+
+===Every-Turn Events===
+Every-Turn Events are actions that need to be performed constantly by the game, for example, in collision detection or in the physics engine. Every-Turn events should not be explicitly fired by the user. 
+
+{{{
+public void addEveryTurnEvent(String eventName, IEventHandler eventHandler)
+}}}
+
+==Event Grouping and Naming==
+Currently, groups of events are supported with globs, which serve as namespaces for the event group. This particular implementation may change in the later future, however, support of this feature will not disappear. 
+
+Globs [http://en.wikipedia.org/wiki/Glob_(programming)] http://en.wikipedia.org/wiki/Glob_(programming)
+
+
 ==The Event Sandbox==
 Any given Game State is contained in its own Event sandbox, connecting all the necessary events and external forces/inputs (e.g user interactions). This encapsulates a given state of the game, making it independent and modular, allowing the game to dynamically connect or disconnect from states during a state change.
 
