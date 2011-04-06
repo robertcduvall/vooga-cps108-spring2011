@@ -3,6 +3,8 @@
 
 ====Author: Ethan Yong-Hui Goh====
 
+= Some of this information is out of date. It is still a good overview, but terms and details may have changed. We will try to update it soon. Thank you for your patience. =
+
 = Introduction =
 
 ==Background and Definitions==
