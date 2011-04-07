@@ -22,14 +22,7 @@ public class ImageKey implements Comparable<ImageKey>
         {
             if (index == other.index)
             {
-                if (dir == null && other.dir == null)
-                    return 0;
-                else if (dir == null)
-                    return -1;
-                else if (other.dir == null)
-                    return 1;
-                else
-                    return (int) (dir.getAngle() - other.dir.getAngle());
+                return dir.getAngle() - other.dir.getAngle();
             }
             else
             {
