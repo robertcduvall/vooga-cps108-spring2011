@@ -67,7 +67,7 @@ Unfortunately, due to inherent tendency for Strings to be accidentally mistyped,
 
   # Separate each logical word chunk in the description with a period character '.'
   # Use Upper Camel Case, that is, capitalize the first letter of every word. 
-  #Do not use white space.
+  # Do not use white space.
 
 ==Firing Events==
 The Event Manager currently supports firing events by specific name, or firing groups of events specified by globs. To fire an event, you can invoke one of the following methods in Event Manager:
