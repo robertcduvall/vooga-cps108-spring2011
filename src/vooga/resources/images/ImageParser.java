@@ -32,17 +32,20 @@ public class ImageParser
         DIRECTIONS = "directions",
         ORDER = "order",
         FRAME = "frame",
-        DELAY = "t";
+        DELAY = "t",
+        OFFSET = "offset",
+        ROW_OFFSET = "row",
+        COL_OFFSET = "column";
     
     private ImageLoader parent;
     private BaseLoader bsLoader;
     
-    private String currentName;
-    private int currentState;
-    private Direction currentDir;
-    private BufferedImage[] currentImages;
-//    private int rowLength;
-    private int currentImage;
+    private String currentName = null;
+    private int currentState = 0;
+    private Direction currentDir = null;
+    private BufferedImage[] currentImages = null;
+    private int rowLength = 0;
+    private int currentImage = 0;
 
     private Direction getDirection(char c)
     {
@@ -93,12 +96,28 @@ public class ImageParser
         
         currentImages = ImageUtil.splitImages(source, cols, rows);
         currentImage = 0;
-//        rowLength = cols;
+        rowLength = cols;
+    }
+    
+    private void updateCurrentImage(Element element)
+    {
+        if (hasChild(element, OFFSET))
+        {
+            currentImage = Integer.parseInt(getValue(element, OFFSET));
+        }
+        else if (hasChild(element, ROW_OFFSET) && hasChild(element, COL_OFFSET))
+        {
+            currentImage = Integer.parseInt(getValue(element, COL_OFFSET)) +
+                        rowLength * Integer.parseInt(getValue(element, ROW_OFFSET));
+        }
     }
     
     private void parseImageData(Element imageElement)
     {
         updateImages(imageElement);
+        
+        if (currentImages != null)
+            updateCurrentImage(imageElement);
      
         currentState = 0;
         
@@ -138,6 +157,9 @@ public class ImageParser
     {
         updateImages(stateElement);
         
+        if (currentImages != null)
+            updateCurrentImage(stateElement);
+        
         if (hasChild(stateElement, DIRECTIONS))
         {
             Element dirElement = (Element) stateElement.getElementsByTagName(DIRECTIONS).item(0);
@@ -162,6 +184,10 @@ public class ImageParser
     private void parseAnimation (Element dirElement)
     {
         updateImages(dirElement);
+        
+        if (currentImages != null)
+            updateCurrentImage(dirElement);
+
         
         NodeList frames = dirElement.getElementsByTagName(FRAME);
         
