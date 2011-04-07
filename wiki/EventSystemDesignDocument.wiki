@@ -64,7 +64,7 @@ public void addEveryTurnEvent(String eventName, IEventHandler eventHandler)
 ==Event Grouping and Naming==
 Currently, groups of events are supported with globs, which serve as namespaces for the event group. This particular implementation may change in the later future, however, support of this feature will not disappear. 
 
-Globs [http://en.wikipedia.org/wiki/Glob_(programming)] http://en.wikipedia.org/wiki/Glob_(programming)
+[http://en.wikipedia.org/wiki/Glob_(programming)] 
 
 Unfortunately, due to inherent tendency for Strings to be accidentally mistyped, we have come up with a list conventions in order to avoid accidental misuse.
 
