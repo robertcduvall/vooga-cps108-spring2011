@@ -2,6 +2,19 @@ package vooga.resources.images;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import com.golden.gamedev.engine.BaseLoader;
+import com.golden.gamedev.util.ImageUtil;
 import vooga.resources.Direction;
 
 /**
@@ -27,15 +40,233 @@ import vooga.resources.Direction;
  * @author Misha
  *
  */
-public class ImageLoader //TODO add functionality
+public class ImageLoader
 {
+    private static final String
+        IMAGE = "image",
+        NAME = "name",
+        SOURCE = "source",
+        WIDTH = "width",
+        HEIGHT = "height",
+        ROWS = "rows",
+        COLUMNS = "columns",
+        STATE = "state",
+        COUNT = "count",
+        DIRECTIONS = "directions",
+        ORDER = "order",
+        FRAME = "frame",
+        DELAY = "t";
+
+    
+    private SortedMap<ImageKey, AnimatedImage> images;
+    private BaseLoader bsLoader;
+    private String currentName;
+    private int currentState;
+    private Direction currentDir;
+    private BufferedImage[] currentImages;
+    private int rowLength;
+    private int currentImage;
+    
+
+    private Direction getDirection(char c)
+    {
+        switch(c)
+        {
+            case 'N': case 'n': return Direction.NORTH;
+            case 'S': case 's': return Direction.SOUTH;
+            case 'E': case 'e': return Direction.EAST;
+            case 'W': case 'w': return Direction.WEST;
+            default: return null;
+        }
+    }
+    
+    private boolean hasChild(Element element, String name)
+    {
+        return element.getElementsByTagName(name).getLength() > 0;
+    }
+    
+    private String getValue(Element element, String name)
+    {
+        Node node = element.getElementsByTagName(name).item(0);
+        
+        return node.getFirstChild().getNodeValue();
+    }
+
+    private void updateImages(Element element)
+    {
+        if (!hasChild(element, SOURCE)) return;
+        
+        BufferedImage source = bsLoader.getImage(getValue(element, SOURCE));
+
+        int rows = 0;
+        int cols = 0;
+        
+        if (hasChild(element, ROWS))
+            rows = Integer.parseInt(getValue(element, ROWS));
+        else if (hasChild(element, WIDTH))
+            rows = source.getWidth() / Integer.parseInt(getValue(element, WIDTH));
+        else
+            rows = 1;
+        
+        if (hasChild(element, COLUMNS))
+            cols = Integer.parseInt(getValue(element, COLUMNS));
+        else if (hasChild(element, HEIGHT))
+            rows = source.getHeight() / Integer.parseInt(getValue(element, HEIGHT));
+        else
+            cols = 1;
+        
+        currentImages = ImageUtil.splitImages(source, cols, rows);
+        currentImage = 0;
+        rowLength = cols;
+    }
+    
+    private void parseImageData(Element imageElement)
+    {
+        updateImages(imageElement);
+     
+        currentState = 0;
+        
+        NodeList states = imageElement.getElementsByTagName(STATE);
+        
+        if (states.getLength() > 0)
+        {
+            for(int i=0; i < states.getLength(); i++)
+            {
+                Element stateElement = (Element) states.item(i);
+                
+                String count = stateElement.getAttribute(COUNT);
+                
+                if (count.equals(""))
+                {
+                    parseStateData(stateElement);
+                }
+                else if (count.equals("*"))
+                {
+                    while (currentImage < currentImages.length)
+                        parseStateData(stateElement);
+                }
+                else
+                {
+                    for(int j=0; j<Integer.parseInt(count); j++)
+                        parseStateData(stateElement);
+                }
+            }
+        }
+        else
+        {
+            parseStateData(imageElement);
+        }
+    }
+    
+    private void parseStateData (Element stateElement)
+    {
+        updateImages(stateElement);
+        
+        if (hasChild(stateElement, DIRECTIONS))
+        {
+            Element dirElement = (Element) stateElement.getElementsByTagName(DIRECTIONS).item(0);
+            String order = dirElement.getAttribute(ORDER);
+            if (order.isEmpty()) order = "NESW";
+            
+            for(char c : order.toCharArray())
+            {
+                currentDir = getDirection(c);
+                parseAnimation(dirElement);
+            }
+        }
+        else
+        {
+            currentDir = null;
+            parseAnimation(stateElement);
+        }
+        
+        currentState++;
+    }
+
+    private void parseAnimation (Element dirElement)
+    {
+        updateImages(dirElement);
+        
+        NodeList frames = dirElement.getElementsByTagName(FRAME);
+        
+        AnimatedImage anim = new AnimatedImage(); 
+        
+        if (frames.getLength() == 0)
+        {
+            anim.addFrame(currentImages[currentImage++]);
+        }
+        else
+        {
+            for(int i=0; i < frames.getLength(); i++)
+            {
+                Element frame = (Element) frames.item(i);
+                
+                int delay = 0;
+                if (!frame.getAttribute(DELAY).isEmpty())
+                    delay = Integer.parseInt(frame.getAttribute(DELAY));
+                
+                String count = frame.getAttribute(COUNT);
+                
+                if (count.equals(""))
+                {
+                    anim.addFrame(currentImages[currentImage++], delay);
+                }
+                else if (count.equals("*"))
+                {
+                    while (currentImage < currentImages.length)
+                        anim.addFrame(currentImages[currentImage++], delay);
+                }
+                else
+                {
+                    for(int j=0; j<Integer.parseInt(count); j++)
+                        anim.addFrame(currentImages[currentImage++], delay);
+                }
+            }
+        }
+        
+        images.put(new ImageKey(currentName, currentState, currentDir), anim);
+    }
+
     /**
      * Initializes the ImageLoader from a resource file. 
      * 
      * @param resource The file to load the image specs from
      */
-    public ImageLoader(File resource)
+    public ImageLoader(File resource, BaseLoader bsLoader)
     {
+        this.bsLoader = bsLoader;
+        images = new TreeMap<ImageKey, AnimatedImage>();
+        
+        try
+        {
+            DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = db.parse(resource);
+            NodeList nodeList = doc.getElementsByTagName(IMAGE);
+            
+            for(int i=0; i<nodeList.getLength(); i++)
+            {
+                Element imageXML = (Element) nodeList.item(i);
+                currentName = imageXML.getAttribute(NAME);
+                parseImageData(imageXML);
+            }
+
+        }
+        catch (ParserConfigurationException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (SAXException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
     }
     
     /** See getImage(name, imageIndex, direction, time). */
@@ -65,7 +296,7 @@ public class ImageLoader //TODO add functionality
      */
     public BufferedImage getImage(String name, int imageIndex, Direction direction, long time)
     {
-        return null;
+        return images.get(new ImageKey(name, imageIndex, direction)).getFrame(time);
     }
 
     /** See getAnimation(name, imageIndex, direction) */    
@@ -87,7 +318,7 @@ public class ImageLoader //TODO add functionality
      */
     public BufferedImage[] getAnimation(String name, int imageIndex, Direction direction)
     {
-        return null;
+        return images.get(new ImageKey(name, imageIndex, direction)).getFrames();
     }
 
     /**
@@ -99,6 +330,8 @@ public class ImageLoader //TODO add functionality
      */
     public int getIndexRange(String name)
     {
-        return 0;
+        ImageKey last = images.headMap(new ImageKey(name+"/0", 0, null)).lastKey();
+        
+        return last.getIndex() + 1;
     }
 }

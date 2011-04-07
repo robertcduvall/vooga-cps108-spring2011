@@ -27,9 +27,7 @@ public enum Direction
             case DOWN: return Math.PI/2;
             case LEFT: return Math.PI;
             case RIGHT: return 0;
-            default: return 0; 
-            //why do I need a default?
-            //is java this stupid?
+            default: return 0;
         }
     }
 }
