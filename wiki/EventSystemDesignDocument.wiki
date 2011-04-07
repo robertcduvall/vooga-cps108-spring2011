@@ -76,8 +76,8 @@ Unfortunately, due to inherent tendency for Strings to be accidentally mistyped,
 The Event Manager currently supports firing events by specific name, or firing groups of events specified by globs. To fire an event, you can invoke one of the following methods in Event Manager:
 
 {{{
-public void fireEvents (Object source, String glob);
-public void fireEvents (Object source, String glob, Object arg);
+public void fireEvent (Object source, String glob);
+public void fireEvent (Object source, String glob, Object arg);
 }}}
 
 The second method contains a third argument, in which one can pass parameters that are needed inside the event handler. The first method invokes the second method with null third argument. 
