@@ -2,6 +2,18 @@ package vooga.resources.images;
 
 import vooga.resources.Direction;
 
+/**
+ * Contains all the data by which an image or animation 
+ * is indexed in the ImageLoader class: 
+ * name, index, and direction.
+ * 
+ * Not really intended for use by any other classes, since
+ * it doesn't have much associated functionality beyond being
+ * capable of being a key in a TreeMap.
+ * 
+ * @author Misha
+ *
+ */
 public class ImageKey implements Comparable<ImageKey>
 {
     private String name;
