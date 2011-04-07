@@ -76,8 +76,8 @@ Unfortunately, due to inherent tendency for Strings to be accidentally mistyped,
 The Event Manager currently supports firing events by specific name, or firing groups of events specified by globs. To fire an event, you can invoke one of the following methods in Event Manager:
 
 {{{
-public void fireEvent (Object source, String glob);
-public void fireEvent (Object source, String glob, Object arg);
+public void fireEvent(final Object source, final String eventName)
+public void fireEvent(final Object source, final String eventName, final Object arg)
 }}}
 
 The second method contains a third argument, in which one can pass parameters that are needed inside the event handler. The first method invokes the second method with null third argument. 
@@ -136,6 +136,13 @@ It is conceivable that one would want to remove a certain namespace of events. U
 There might exist a temptation for a Game creator to abuse the creation of Event Layers states for some reason or another. Not every single state change in the game should deserve its own event Layer, as the true power of this setup comes with the fact that one can restore a previous state. If an enemy fires a bullet at the player, the new addition of a sprite and movement control should not deserve a whole new Event Layer. Instead, the individual event should be added to the loop and deactivated when the bullet collides and/or is destroyed. 
 
 In this sense, one must use his or her discretion when deciding when to create a new Event Layer. In most cases, an Event Layer should have a distinct new state that one would want to return to at a later point in time, for example, collecting a time dependent weapon powerup could warrant the a new state. Another example would be in game-freezing menus, for example, a pause screen, or a level complete screen. Do keep in mind that constant state changing could potentially be a costly operation, and that excessive and abusive use would lead to decreased performance of the game.
+
+===Vooga Game Implementation===
+The Events API is currently aligned to serve two distinct groups of users. The Event Manager class contains several methods that dip into the core of the event manager, which grants the user direct access to the states that control the reactor engine. For an average game designer, incorrectly connecting components or making unjustified methods calls to the Event Manager might result in poor performance of the Engine. However, we cannot completely close this power down to the more experienced coders (more so groups in 108 that will be using the Events API). To cater to these two audiences, we have created the ISimpleEventManager interface, whose purpose is to narrow the interface to the Events Manager to cater to 99\% of the needs of game programmers. 
+
+VoogaGame, the entry point into using this entire Game Engine API, extends the original GoldenT engine, and has access to the Events System API through the ISimpleEventManager. 
+
+For those groups that are working directly with the EventManager class, please try to fully understand how the Event System works. Event driven systems tend to be extremely complex and have a decently steep learning curve. Please do not hesitate to ask questions or run concepts by Ethan or Michael, as this would benefit both your component, but also give us an idea of what aspects of this API could be improved. 
 
 ==The Reactor Pattern==
 Reactor Pattern: [http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikipedia.org/wiki/Reactor_pattern
