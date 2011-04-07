@@ -3,7 +3,10 @@
 
 ====Author: Ethan Yong-Hui Goh====
 
-== Disclaimer: Some of this information might be slightly inaccurate. If there is a gaping issue that one is still unclear on after reading this wiki, feel free to email Ethan or Michael with more specific questions directly. We are trying to make this system as easy to understand and use as possible. Thank you for your patience. ==
+== Disclaimer:== 
+Some of this information might be slightly inaccurate. If there is a gaping issue that one is still unclear on after reading this wiki, feel free to email Ethan or Michael with more specific questions directly. We are trying to make this system as easy to understand and use as possible. Thank you for your patience.
+
+<wiki:toc max_depth="3" />
 
 = Introduction =
 
