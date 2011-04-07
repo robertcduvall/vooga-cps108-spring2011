@@ -137,7 +137,7 @@ There might exist a temptation for a Game creator to abuse the creation of Event
 
 In this sense, one must use his or her discretion when deciding when to create a new Event Layer. In most cases, an Event Layer should have a distinct new state that one would want to return to at a later point in time, for example, collecting a time dependent weapon powerup could warrant the a new state. Another example would be in game-freezing menus, for example, a pause screen, or a level complete screen. Do keep in mind that constant state changing could potentially be a costly operation, and that excessive and abusive use would lead to decreased performance of the game.
 
-===Vooga Game Implementation===
+==Vooga Game Implementation==
 The Events API is currently aligned to serve two distinct groups of users. The Event Manager class contains several methods that dip into the core of the event manager, which grants the user direct access to the states that control the reactor engine. For an average game designer, incorrectly connecting components or making unjustified methods calls to the Event Manager might result in poor performance of the Engine. However, we cannot completely close this power down to the more experienced coders (more so groups in 108 that will be using the Events API). To cater to these two audiences, we have created the ISimpleEventManager interface, whose purpose is to narrow the interface to the Events Manager to cater to 99\% of the needs of game programmers. 
 
 VoogaGame, the entry point into using this entire Game Engine API, extends the original GoldenT engine, and has access to the Events System API through the ISimpleEventManager. 
