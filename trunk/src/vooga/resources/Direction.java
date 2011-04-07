@@ -19,13 +19,13 @@ public enum Direction
     public static final Direction NORTH = UP, WEST = RIGHT, EAST = LEFT, SOUTH = DOWN;
     public static final Direction POS_X = RIGHT, NEG_X = LEFT, POS_Y = DOWN, NEG_Y = UP;
     
-    public double getAngle()
+    public int getAngle()
     {
         switch(this)
         {
-            case UP: return -Math.PI/2;
-            case DOWN: return Math.PI/2;
-            case LEFT: return Math.PI;
+            case UP: return 270;
+            case DOWN: return 90;
+            case LEFT: return 180;
             case RIGHT: return 0;
             default: return 0;
         }
