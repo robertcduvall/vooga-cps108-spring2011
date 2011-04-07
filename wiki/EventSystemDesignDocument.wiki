@@ -142,8 +142,14 @@ Reactor Pattern: [http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikiped
 =Key Takeaways=
 
   # Events, Event Listeners, Event Handlers, Event Registration.
-  # Event Sandbox
-    # Blocking Sandbox
-    # Passthrough Sandbox
+  # Event Types
+    # Timed Events
+    # Basic handlers
+    # Every-Turn Events
+  # Event Layers
+  # Event Filters
+    # Keep-All Filter
+    # Remove-All Filter
+    # Custom Filters
   # Registering and Unregistering Events
-  # Think about state changes in your component, and what type of sandbox might make your life easier.
+  # Naming and Grouping Conventions
