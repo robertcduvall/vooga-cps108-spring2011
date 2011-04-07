@@ -63,6 +63,12 @@ Currently, groups of events are supported with globs, which serve as namespaces 
 
 Globs [http://en.wikipedia.org/wiki/Glob_(programming)] http://en.wikipedia.org/wiki/Glob_(programming)
 
+Unfortunately, due to inherent tendency for Strings to be accidentally mistyped, we have come up with a list conventions in order to avoid accidental misuse.
+
+  # Separate each logical word chunk in the description with a period character '.'
+  # Use Upper Camel Case, that is, capitalize the first letter of every word. 
+  #Do not use white space.
+
 ==Firing Events==
 The Event Manager currently supports firing events by specific name, or firing groups of events specified by globs. To fire an event, you can invoke one of the following methods in Event Manager:
 
@@ -120,11 +126,13 @@ On the other extreme, a Keep-All Filter is a type of Filter that inherits ALL ev
 
 Usage Example: A layered heads up display might use this type of Filter. In a game that uses the keyboard to control the player, one might want to add mouse support within the heads up display region where one could select items or weapons to use. This additional layer of mouse control is easier to add onto the existing state. 
 
-===Somewhere in the middle Sandbox===
-This is where we need input from all the other teams. Think about what events your component often connects or disconnects from system. Which ones more commonly remain? Are you able to categorize these events into a manageable fashion? Please let the Events team know. 
+===Custom Filter===
+It is conceivable that one would want to remove a certain namespace of events. Using Globs, one can use wildcards and other modifiers to specify the globs to remove or keep. Refer to the wikipedia page on Globs for more information on their usage. 
 
 ===Caveats===
-There might exist a temptation for a Game creator to abuse the creation of sandbox states for some reason or another. Not every single state change in the game should deserve its own sandbox. I.e If a player collects a simple powerup that changes the user's weapon, this does not deserve a whole new sandbox state. Instead, the individual event should be added to the loop and deactivated when the powerful wears off. One must use his or her discretion when deciding when to create a new sandbox. For the most part, creating a new sandbox is warranted when a game enters an entirely new state that it needs to return to after the state is over - especially game-freezing menus. Do keep in mind that state changing is a costly operation, and that excessive and abusive use would lead to decreased performance of the game.
+There might exist a temptation for a Game creator to abuse the creation of Event Layers states for some reason or another. Not every single state change in the game should deserve its own event Layer, as the true power of this setup comes with the fact that one can restore a previous state. If an enemy fires a bullet at the player, the new addition of a sprite and movement control should not deserve a whole new Event Layer. Instead, the individual event should be added to the loop and deactivated when the bullet collides and/or is destroyed. 
+
+In this sense, one must use his or her discretion when deciding when to create a new Event Layer. In most cases, an Event Layer should have a distinct new state that one would want to return to at a later point in time, for example, collecting a time dependent weapon powerup could warrant the a new state. Another example would be in game-freezing menus, for example, a pause screen, or a level complete screen. Do keep in mind that constant state changing could potentially be a costly operation, and that excessive and abusive use would lead to decreased performance of the game.
 
 ==The Reactor Pattern==
 Reactor Pattern: [http://en.wikipedia.org/wiki/Reactor_pattern]http://en.wikipedia.org/wiki/Reactor_pattern
