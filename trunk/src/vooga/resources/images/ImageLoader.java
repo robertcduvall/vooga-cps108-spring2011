@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 import com.golden.gamedev.engine.BaseLoader;
 import com.golden.gamedev.util.ImageUtil;
 import vooga.resources.Direction;
+import vooga.resources.ResourceException;
 
 /**
  * Loads images from sources specified in an XML resource file.
@@ -59,20 +60,9 @@ public class ImageLoader
             
             parser.parse(doc);
         }
-        catch (ParserConfigurationException e)
+        catch (Exception e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (SAXException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw ResourceException.resourceReadingException(resource.getName());
         }
     }
     
