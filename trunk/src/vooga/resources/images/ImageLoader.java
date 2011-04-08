@@ -2,18 +2,15 @@ package vooga.resources.images;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-import com.golden.gamedev.engine.BaseLoader;
-import com.golden.gamedev.util.ImageUtil;
 import vooga.resources.Direction;
 import vooga.resources.ResourceException;
+import com.golden.gamedev.engine.BaseLoader;
+import com.golden.gamedev.util.ImageUtil;
 
 /**
  * Loads images from sources specified in an XML resource file.
@@ -40,8 +37,7 @@ import vooga.resources.ResourceException;
  */
 public class ImageLoader
 {
-    private SortedMap<ImageKey, AnimatedImage> images;
-    
+    SortedMap<ImageKey, AnimatedImage> images; // can be accessed by ImageParser
 
     /**
      * Initializes the ImageLoader from a resource file. 
@@ -66,15 +62,7 @@ public class ImageLoader
         }
     }
     
-    /**
-     * Package-internal way for the parser to add
-     * processed images to the imageLoader.
-     */
-    void addImage(ImageKey key, AnimatedImage image)
-    {
-        images.put(key, image);
-    }
-    
+
     /** See getImage(name, imageIndex, direction, time). */
     public BufferedImage getImage(String name) {return getImage(name, 0, Direction.NORTH, 0);}
     /** See getImage(name, imageIndex, direction, time). */

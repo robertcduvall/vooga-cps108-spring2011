@@ -3,9 +3,11 @@ package vooga.resources.images;
 import java.awt.image.BufferedImage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import vooga.resources.Direction;
+import vooga.resources.ResourceException;
+import vooga.resources.xmlparser.Context;
+import vooga.resources.xmlparser.Expression;
 import com.golden.gamedev.engine.BaseLoader;
 import com.golden.gamedev.util.ImageUtil;
 
@@ -17,7 +19,7 @@ import com.golden.gamedev.util.ImageUtil;
  * @author Misha
  *
  */
-public class ImageParser
+public class ImageParser extends Context
 {
     private static final String
         IMAGE = "image",
@@ -33,20 +35,161 @@ public class ImageParser
         ORDER = "order",
         FRAME = "frame",
         DELAY = "t",
-        OFFSET = "offset",
-        ROW_OFFSET = "row",
-        COL_OFFSET = "column";
+        OFFSET = "offset";
+    
+    private class ImageTag extends Expression {
+        public String getTagName() {return IMAGE;}
+        public void parse(Context context, Element xmlElement) {
+            imageName = xmlElement.getAttribute(NAME);
+            
+            imageAdded = false;
+            parseChildren(context, xmlElement);
+            if (!imageAdded) addImage(0);
+        }
+    }
+    private class SourceTag extends Expression {
+        public String getTagName() {return SOURCE;}
+        public void parse(Context context, Element xmlElement) {
+            sourceImage = bsLoader.getImage(getValue(xmlElement));
+            tileCols = 1;
+            tileRows = 1;
+            tileIndex = 0;
+            updateTiles();
+        }
+    }
+    private class ColumnsTag extends Expression {
+        public String getTagName() {return COLUMNS;}
+        public void parse(Context context, Element xmlElement) {
+            if (sourceImage == null)
+                throw ResourceException.syntaxException();
+            tileCols = Integer.parseInt(getValue(xmlElement));
+            tileIndex = 0;
+            updateTiles();
+        }
+    }
+    private class RowsTag extends Expression {
+        public String getTagName() {return ROWS;}
+        public void parse(Context context, Element xmlElement) {
+            if (sourceImage == null)
+                throw ResourceException.syntaxException();
+            tileRows = Integer.parseInt(getValue(xmlElement));
+            tileIndex = 0;
+            updateTiles();
+        }
+    }    
+    private class WidthTag extends Expression {
+        public String getTagName() {return WIDTH;}
+        public void parse(Context context, Element xmlElement) {
+            int width = Integer.parseInt(getValue(xmlElement));
+            if (sourceImage == null)
+                throw ResourceException.syntaxException();
+            tileCols = sourceImage.getWidth() / width;
+            tileIndex = 0;
+            updateTiles();
+        }
+    }
+    private class HeightTag extends Expression {
+        public String getTagName() {return HEIGHT;}
+        public void parse(Context context, Element xmlElement) {
+            int height = Integer.parseInt(getValue(xmlElement));
+            if (sourceImage == null)
+                throw ResourceException.syntaxException();
+            tileRows = sourceImage.getHeight() / height;
+            tileIndex = 0;
+            updateTiles();
+        }
+    }
+    private abstract class RepeatableExpression extends Expression {
+        public void parse(Context context, Element xmlElement) {
+            String countStr = xmlElement.getAttribute(COUNT);
+            if (countStr.isEmpty())
+                nestedParse(context, xmlElement);
+            else if (countStr.equals("*"))
+                while (tileIndex < tiles.length)
+                    nestedParse(context, xmlElement);
+            else 
+                for(int i=0; i < Integer.parseInt(countStr); i++)
+                    nestedParse(context, xmlElement);
+                
+        }
+        
+        public void nestedParse(Context context, Element xmlElement) {
+            parseChildren(context, xmlElement);
+        }                                                                  
+    }
+    private class StateTag extends RepeatableExpression {
+        public String getTagName() {return STATE;}
+        public void nestedParse(Context context, Element xmlElement) {
+            imageAdded = false;
+            parseChildren(context, xmlElement);
+            if (!imageAdded) addImage(0);
+            state++;
+        }
+    }
+    private class DirectionsTag extends Expression {
+        public String getTagName() {return DIRECTIONS;}
+        public void parse(Context context, Element xmlElement) {
+            String order = xmlElement.getAttribute(ORDER);
+            if (order.isEmpty()) order = "NESW";
+            
+            for(char c : order.toCharArray()) {
+                dir = getDirection(c);
+
+                imageAdded = false;
+                parseChildren(context, xmlElement);
+                if (!imageAdded) addImage(0);
+            }
+        }
+    }
+    private class FrameTag extends RepeatableExpression {
+        public String getTagName() {return FRAME;}
+        public void nestedParse(Context context, Element xmlElement) {
+            parseChildren(context, xmlElement);
+            int duration = 0;
+            if (xmlElement.hasAttribute(DELAY))
+                duration = Integer.parseInt(xmlElement.getAttribute(DELAY));
+            
+            addImage(duration);
+        }
+    }
+    private class OffsetTag extends Expression {
+        public String getTagName() {return OFFSET;}
+        public void parse(Context context, Element xmlElement) {
+            tileIndex = Integer.parseInt(getValue(xmlElement));
+        }
+    }
+    
     
     private ImageLoader parent;
     private BaseLoader bsLoader;
     
-    private String currentName = null;
-    private int currentState = 0;
-    private Direction currentDir = null;
-    private BufferedImage[] currentImages = null;
-    private int rowLength = 0;
-    private int currentImage = 0;
+    private String imageName = null;
+    private int state = 0;
+    private Direction dir = null;
+    private BufferedImage sourceImage = null;
+    private BufferedImage[] tiles = null;
+    private int tileCols = 0;
+    private int tileRows = 0;
+    private int tileIndex = 0;
+    private boolean imageAdded = false;
+    
+    public ImageParser(ImageLoader parent, BaseLoader bsLoader)
+    {
+        this.parent = parent;
+        this.bsLoader = bsLoader;
+        
+        addDefinitions(new ImageTag(), new SourceTag(),
+                       new WidthTag(), new HeightTag(),
+                       new RowsTag(), new ColumnsTag(),
+                       new StateTag(), new DirectionsTag(),
+                       new FrameTag(), new OffsetTag());
+    }
 
+    public void updateTiles()
+    {
+        tiles = ImageUtil.splitImages(sourceImage, tileCols, tileRows);
+    }
+    
     private Direction getDirection(char c)
     {
         switch(c)
@@ -59,191 +202,27 @@ public class ImageParser
         }
     }
     
-    private boolean hasChild(Element element, String name)
+    public void addImage(int duration)
     {
-        return element.getElementsByTagName(name).getLength() > 0;
-    }
-    
-    private String getValue(Element element, String name)
-    {
-        Node node = element.getElementsByTagName(name).item(0);
+        ImageKey key = new ImageKey(imageName, state, dir);
         
-        return node.getFirstChild().getNodeValue();
-    }
-
-    private void updateImages(Element element)
-    {
-        if (!hasChild(element, SOURCE)) return;
-        
-        BufferedImage source = bsLoader.getImage(getValue(element, SOURCE));
-
-        int rows = 0;
-        int cols = 0;
-        
-        if (hasChild(element, ROWS))
-            rows = Integer.parseInt(getValue(element, ROWS));
-        else if (hasChild(element, WIDTH))
-            rows = source.getWidth() / Integer.parseInt(getValue(element, WIDTH));
-        else
-            rows = 1;
-        
-        if (hasChild(element, COLUMNS))
-            cols = Integer.parseInt(getValue(element, COLUMNS));
-        else if (hasChild(element, HEIGHT))
-            rows = source.getHeight() / Integer.parseInt(getValue(element, HEIGHT));
-        else
-            cols = 1;
-        
-        currentImages = ImageUtil.splitImages(source, cols, rows);
-        currentImage = 0;
-        rowLength = cols;
-    }
-    
-    private void updateCurrentImage(Element element)
-    {
-        if (hasChild(element, OFFSET))
+        if (!parent.images.containsKey(key))
         {
-            currentImage = Integer.parseInt(getValue(element, OFFSET));
-        }
-        else if (hasChild(element, ROW_OFFSET) && hasChild(element, COL_OFFSET))
-        {
-            currentImage = Integer.parseInt(getValue(element, COL_OFFSET)) +
-                        rowLength * Integer.parseInt(getValue(element, ROW_OFFSET));
-        }
-    }
-    
-    private void parseImageData(Element imageElement)
-    {
-        updateImages(imageElement);
-        
-        if (currentImages != null)
-            updateCurrentImage(imageElement);
-     
-        currentState = 0;
-        
-        NodeList states = imageElement.getElementsByTagName(STATE);
-        
-        if (states.getLength() > 0)
-        {
-            for(int i=0; i < states.getLength(); i++)
-            {
-                Element stateElement = (Element) states.item(i);
-                
-                String count = stateElement.getAttribute(COUNT);
-                
-                if (count.equals(""))
-                {
-                    parseStateData(stateElement);
-                }
-                else if (count.equals("*"))
-                {
-                    while (currentImage < currentImages.length)
-                        parseStateData(stateElement);
-                }
-                else
-                {
-                    for(int j=0; j<Integer.parseInt(count); j++)
-                        parseStateData(stateElement);
-                }
-            }
-        }
-        else
-        {
-            parseStateData(imageElement);
-        }
-    }
-    
-    private void parseStateData (Element stateElement)
-    {
-        updateImages(stateElement);
-        
-        if (currentImages != null)
-            updateCurrentImage(stateElement);
-        
-        if (hasChild(stateElement, DIRECTIONS))
-        {
-            Element dirElement = (Element) stateElement.getElementsByTagName(DIRECTIONS).item(0);
-            String order = dirElement.getAttribute(ORDER);
-            if (order.isEmpty()) order = "NESW";
-            
-            for(char c : order.toCharArray())
-            {
-                currentDir = getDirection(c);
-                parseAnimation(dirElement);
-            }
-        }
-        else
-        {
-            currentDir = null;
-            parseAnimation(stateElement);
+            parent.images.put(key, new AnimatedImage());
         }
         
-        currentState++;
+        parent.images.get(key).addFrame(tiles[tileIndex++], duration);
+        
+        imageAdded = true;
     }
-
-    private void parseAnimation (Element dirElement)
-    {
-        updateImages(dirElement);
         
-        if (currentImages != null)
-            updateCurrentImage(dirElement);
-
-        
-        NodeList frames = dirElement.getElementsByTagName(FRAME);
-        
-        AnimatedImage anim = new AnimatedImage(); 
-        
-        if (frames.getLength() == 0)
-        {
-            anim.addFrame(currentImages[currentImage++]);
-        }
-        else
-        {
-            for(int i=0; i < frames.getLength(); i++)
-            {
-                Element frame = (Element) frames.item(i);
-                
-                int delay = 0;
-                if (!frame.getAttribute(DELAY).isEmpty())
-                    delay = Integer.parseInt(frame.getAttribute(DELAY));
-                
-                String count = frame.getAttribute(COUNT);
-                
-                if (count.equals(""))
-                {
-                    anim.addFrame(currentImages[currentImage++], delay);
-                }
-                else if (count.equals("*"))
-                {
-                    while (currentImage < currentImages.length)
-                        anim.addFrame(currentImages[currentImage++], delay);
-                }
-                else
-                {
-                    for(int j=0; j<Integer.parseInt(count); j++)
-                        anim.addFrame(currentImages[currentImage++], delay);
-                }
-            }
-        }
-        
-        parent.addImage(new ImageKey(currentName, currentState, currentDir), anim);
-    }
-    
-    public ImageParser(ImageLoader parent, BaseLoader bsLoader)
-    {
-        this.parent = parent;
-        this.bsLoader = bsLoader;
-    }
-    
     public void parse(Document doc)
     {
-        NodeList nodeList = doc.getElementsByTagName(IMAGE);
+        NodeList nodeList = doc.getChildNodes();
         
         for(int i=0; i<nodeList.getLength(); i++)
         {
-            Element imageXML = (Element) nodeList.item(i);
-            currentName = imageXML.getAttribute(NAME);
-            parseImageData(imageXML);
+            parseElement((Element) nodeList.item(i));
         }
     }
 }
