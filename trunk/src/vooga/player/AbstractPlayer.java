@@ -34,4 +34,9 @@ public abstract class AbstractPlayer implements Cloneable
 		timeOfLastChange = System.nanoTime();
 	}
 	
+//	public boolean isActive()
+//	{
+//	    return true;
+//	}
+	
 }
