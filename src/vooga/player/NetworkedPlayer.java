@@ -13,9 +13,10 @@ public abstract class NetworkedPlayer extends AbstractPlayer
     
     public String getIPAddress(AbstractPlayer p)
     {
+    	return "";
         //Call networking engine for this info.
     }
     
-    //Add input listener
-    public 
+    // TODO: Add input listener
+    
 }
