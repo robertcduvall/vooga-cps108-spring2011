@@ -8,5 +8,5 @@ package vooga.player;
  *
  */
 public abstract class HumanPlayer extends AbstractPlayer{
-
+    //Has to listen to keyboard.
 }
