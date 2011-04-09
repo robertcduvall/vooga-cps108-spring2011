@@ -17,7 +17,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Design Goals:  Create a flexible player class that can hold different types of information about itself and have uniquely defined behavior by means of extension rather than modification.
      * Core Responsibilities: Create a player class with methods that allow the user to customize its behavior/reactions to events and set/update information about itself.
      * Collaborates With: Events; Stats; Game Resources; Levels
-     * Extensions:
+     * Extensions: Clone; History
   # Levels
      * Claimed by: Team 3: Andrew Patterson, Wes Brown
      * Description: Includes defining a level and its content, and initializing and managing all levels.
