@@ -13,9 +13,10 @@ import com.golden.gamedev.object.GameFontManager;
  *@author Chao Chen
  */
 
-public class StatsLayerString extends StatsLayer {
+public class DisplayString extends Display 
+{
 	public final static Color DEFAULT_COLOR = Color.WHITE;
-	public final static Font DEFAULT_FONT = new Font("mine", Font.PLAIN, 22);
+	public final static Font DEFAULT_FONT = new Font("default", Font.PLAIN, 22);
 	
 	private String myString;
 	private GameFont myFont;
@@ -28,7 +29,7 @@ public class StatsLayerString extends StatsLayer {
      * @param font
      * @param color
      */
-    public StatsLayerString (String str, Font font, Color color)
+    public DisplayString(String str, Font font, Color color)
     {
         myString = str;
         myColor = color;
@@ -37,60 +38,37 @@ public class StatsLayerString extends StatsLayer {
         myFont = fontManager.getFont(myRealFont, myColor);
     }
 
-	public StatsLayerString (String str)
+	public DisplayString(String str)
 	{
 		this(str, DEFAULT_FONT, DEFAULT_COLOR);
 	}
 
-	public StatsLayerString (String str, Font font)
+	public DisplayString(String str, Font font)
 	{
 		this(str, font, DEFAULT_COLOR);
 		
 	}
 
-	public StatsLayerString (String str, GameFont font)
+	public DisplayString(String str, GameFont font)
 	{
 		myString = str;
 		myFont = font;
 	}
 	
-	public StatsLayerString (String str, Color color)
+	public DisplayString(String str, Color color)
 	{
 		this(str, DEFAULT_FONT, color);	
 	}	
 	
-	public StatsLayerString (Map<String, String> attributes, OverlayTracker tracker)
+	public DisplayString (Map<String, String> map, DisplayTracker tracker)
 	{
-		this(attributes.get("label"));
-		
-		String fontName = attributes.get("fontName");
-		if (fontName != null && fontName.startsWith("gameFont")) {
-			GameFont gameFont = OverlayCreator.getGameFont(fontName.substring(8));
-			if (gameFont != null) {
-				setFont(gameFont);
-			} 
-		} else {
-			String fontStyleStr = attributes.get("fontStyle");
-			int fontStyle = OverlayCreator.stringToFontStyle(fontStyleStr);
-			String fontSizeStr = attributes.get("fontSize");
-			int fontSize;
-			if (fontSizeStr == null) {
-				fontSize = 22;
-			} else {
-				fontSize = Integer.valueOf(fontSizeStr);
-			}
-			String fontColorStr = attributes.get("color");
-			Color color = OverlayCreator.stringToColor(fontColorStr);
-			setFont(new Font(fontName, fontStyle, fontSize));
-			setColor(color);
-		}	
-		setLocation(attributes);
+		//TODO: implementation
 	}
 		
 	/**
 	 * set String font
 	 */
-	public void setFont (Font font)
+	public void setFont(Font font)
 	{
 		if(myRealFont != null){
 			myRealFont = font;
@@ -99,12 +77,12 @@ public class StatsLayerString extends StatsLayer {
 		}
 	}
 	
-	public void setString (String str)
+	public void setString(String str)
 	{
 		myString = str;
 	}
 	
-	public void setFont (GameFont font)
+	public void setFont(GameFont font)
 	{
 		myFont = font;
 		myRealFont = null;
@@ -113,7 +91,7 @@ public class StatsLayerString extends StatsLayer {
 	/**
 	 * set String color
 	 */
-	public void setColor (Color color)
+	public void setColor(Color color)
 	{
 		if(myRealFont != null){
 			myColor = color;
@@ -125,12 +103,12 @@ public class StatsLayerString extends StatsLayer {
 	/**
 	 * this method is needed by other stat classes
 	 */
-	public void print (String str, Graphics2D g)
+	public void print(String str, Graphics2D g)
 	{		
         createImage(str, g);
 	}
 	
-	private void createImage (String str, Graphics2D g)
+	private void createImage(String str, Graphics2D g)
 	{
 		myFont.drawString(g, str, (int) getX(), (int) getY());		
 	}
@@ -139,7 +117,7 @@ public class StatsLayerString extends StatsLayer {
 	 * print the String
 	 */
 	@Override
-	public void render (Graphics2D g)
+	public void render(Graphics2D g)
 	{
 		print(myString, g);
 	}
@@ -147,7 +125,7 @@ public class StatsLayerString extends StatsLayer {
 	/**
 	 * get the String
 	 */
-	public String getString ()
+	public String getString()
 	{
 		return myString;
 	}
@@ -156,7 +134,7 @@ public class StatsLayerString extends StatsLayer {
 	 * get the width of the string
 	 */
 	@Override
-	public int getWidth ()
+	public int getWidth()
 	{
 		return getTextWidth(myString);
 	}
@@ -165,17 +143,17 @@ public class StatsLayerString extends StatsLayer {
 	 * get the height of the string
 	 */
 	@Override
-	public int getHeight ()
+	public int getHeight()
 	{
 		return getTextHeight();
 	}	
 	
-	private int getTextWidth (String str)
+	private int getTextWidth(String str)
 	{
 	    return myFont.getWidth(str);
 	}
 	    
-	private int getTextHeight ()
+	private int getTextHeight()
 	{
 	    return myFont.getHeight();
 	}
