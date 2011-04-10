@@ -10,8 +10,8 @@ import java.util.Map;
  * 
  * @author Chao Chen
  */
-public class StatsLayerBar extends StatsLayer {
-
+public class DisplayBar extends Display 
+{
 	private static final int DEFAULT_MAXLENGTH = 100;
 	private static final int DEFAULT_HEIGHT = 5;
 	private static final Color DEFAULT_FILLCOLOR = Color.WHITE;
@@ -32,50 +32,53 @@ public class StatsLayerBar extends StatsLayer {
 	 * @param maxScore
 	 *            The maximum value of the statistic.
 	 */
-	public StatsLayerBar (Stat<Integer> stat, int maxScore) 
+	
+	public DisplayBar(Stat<Integer> stat, int maxScore) 
 	{
 		myStat = stat;
 		myMaxScore = maxScore;
 	}
 	
-	public StatsLayerBar (Map<String, String> attributes, OverlayTracker tracker)
+	public DisplayBar (Map<String, String> map, DisplayTracker tracker)
 	{
-		String strMax = attributes.get("max");
+		String strMax = map.get("max");
 		myMaxScore =  Integer.valueOf(strMax);
-		String statLoc = attributes.get("stat");
+		String statLoc = map.get("stat");
 		myStat = (Stat<Integer>)tracker.getStat(statLoc);	
-		String strLength = attributes.get("length");
+		String strLength = map.get("length");
 		if(strLength !=null){
 			setMaxLength(Integer.valueOf(strLength));
 		}
-		String strHeight = attributes.get("height");
+		String strHeight = map.get("height");
 		if(strHeight !=null){
 			setMaxLength(Integer.valueOf(strHeight));
 		}
-		setLocation(attributes);
-		String color = attributes.get("color");
+		setLocation(map);
+		String color = map.get("color");
 		if(color !=null){
-			setColor(OverlayCreator.stringToColor(color));
+			setColor(DisplayCreator.stringToColor(color));
 		}
-		String backColor = attributes.get("backColor");
+		String backColor = map.get("backColor");
 		if(backColor !=null){
-			setBackgroundColor(OverlayCreator.stringToColor(backColor));
+			setBackgroundColor(DisplayCreator.stringToColor(backColor));
 		}
 	}
+	
 	
 	/**
 	 * update the bar on display
 	 */
 	@Override
-	public void update (long t) 
+	public void update(long t) 
 	{
 		drawBar();
 	}
 
+	
 	/**
 	 * draw bar on the display according to user's specifics
 	 */
-	private void drawBar ()
+	private void drawBar()
 	{
 		BufferedImage bufferedImage = new BufferedImage(myMaxLength, myHeight, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = bufferedImage.createGraphics();
@@ -84,7 +87,7 @@ public class StatsLayerBar extends StatsLayer {
 		
 		double ratio = (double) myStat.getStat() / (double) myMaxScore;
 
-		// only draw the bar fill if the score is greater than 0
+		//only draw the bar when score > 0
 		if (ratio > 0) {
 			g2d.setColor(myColor);
 			g2d.fillRect(0, 0, (int) Math.round(ratio) * myMaxLength, myHeight);
@@ -94,99 +97,111 @@ public class StatsLayerBar extends StatsLayer {
 		setImage(bufferedImage);
 	}
 
+	
 	/**
 	 * color of the bar
 	 */
-	public Color getColor () 
+	public Color getColor() 
 	{
 		return myColor;
 	}
+	
 
 	/**
 	 * set new color for the bar
 	 */
-	public void setColor (Color color) 
+	public void setColor(Color color) 
 	{
 		myColor = color == null ? DEFAULT_FILLCOLOR : color;
 	}
 
+	
 	/**
 	 * max length of the bar
 	 */
-	public int getMaxLength () 
+	public int getMaxLength() 
 	{
 		return myMaxLength;
 	}
+	
 
 	/**
 	 * set max length of the bar
 	 */
-	public void setMaxLength (int maxLength) 
+	public void setMaxLength(int maxLength) 
 	{
 		myMaxLength = maxLength > 0 ? maxLength : DEFAULT_MAXLENGTH;
 	}
 
+	
 	/**
 	 * get Stat in the bar
 	 */
-	public Stat<Integer> getStat () 
+	public Stat<Integer> getStat() 
 	{
 		return myStat;
 	}
+	
 
 	/**
 	 * set new Stat in the bar
 	 */
-	public void setStat (Stat<Integer> stat) 
+	public void setStat(Stat<Integer> stat) 
 	{
 		if(stat != null)  myStat = stat;
 	}
 
+	
 	/**
 	 * max score of the bar
 	 */
-	public int getMaxScore () 
+	public int getMaxScore() 
 	{
 		return myMaxScore;
 	}
 
+	
 	/**
 	 * set the max score of the bar
 	 */
-	public void setMaxScore (int maxScore) 
+	public void setMaxScore(int maxScore) 
 	{
 		if(maxScore > 0)  myMaxScore = maxScore;
 	}
 
+	
 	/**
 	 * get the background color of the bar
 	 */
-	public Color getBackgroundColor () 
+	public Color getBackgroundColor() 
 	{
 		return myBackgroundColor;
 	}
 
+	
 	/**
 	 * set the background color of the bar
 	 */
-	public void setBackgroundColor (Color backgroundColor) 
+	public void setBackgroundColor(Color backgroundColor) 
 	{
 		myBackgroundColor = backgroundColor == null ? DEFAULT_BACKGROUNDCOLOR : backgroundColor;
 	}
 
+	
 	/**
 	 * get height of the bar, overrides getHeight() in Sprite
 	 */
 	@Override
-	public int getHeight () 
+	public int getHeight() 
 	{
 		return myHeight;
 	}
 
+	
 	/**
 	 * set height of the bar
 	 */
-	public void setHeight (int height) 
+	public void setHeight(int height) 
 	{
 		myHeight = height > 0 ? height : DEFAULT_HEIGHT;
 	}

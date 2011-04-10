@@ -5,18 +5,23 @@ package vooga.stats;
  * 
  *  @author Chao Chen
  */
-public class Stat<T> {	
+
+public class Stat<T> 
+{	
 	private T myStat;
 	
-	public Stat(T t){
+	public Stat(T t)
+	{
 		myStat = t;
 	}
 		
-	public T getStat() {
+	public T getStat() 
+	{
 		return myStat;
 	}
 	
-	public void setStat(T t){
+	public void setStat(T t)
+	{
 		myStat = t;
 	}
 }
