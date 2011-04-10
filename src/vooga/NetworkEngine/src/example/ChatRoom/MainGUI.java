@@ -189,7 +189,7 @@ public class MainGUI extends JFrame implements ActionListener
 		girdBagCon.ipadx = 5;
 		girdBagCon.ipady = 5;
 
-		userName = "user " + String.valueOf(System.currentTimeMillis() % 1000);
+		userName = "user" + String.valueOf(System.currentTimeMillis() % 1000);
 		nameLabel = new JLabel("User Name: " + userName);
 		girdBag.setConstraints(nameLabel, girdBagCon);
 		downPanel.add(nameLabel);
@@ -334,7 +334,7 @@ public class MainGUI extends JFrame implements ActionListener
 			networkEngine.setStartGame(true);
 		} else if (obj == clientMessage || obj == clientMessageButton) {
 			String message = clientMessage.getText();
-			networkEngine.send(message);
+			networkEngine.send(userName+" : "+message);
 			clientMessage.setText("");
 
 		} else if (obj == exitButton || obj == exitItem) {
