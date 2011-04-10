@@ -19,7 +19,7 @@ public class UpdateConnectionInfo implements Runnable
 	{
 		while(!engine.isClosed()){
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 				List<ConnectInfo> list = engine.getConnectionInfo();
 				gui.memberShow.setText("");
 				for(ConnectInfo info: list){
