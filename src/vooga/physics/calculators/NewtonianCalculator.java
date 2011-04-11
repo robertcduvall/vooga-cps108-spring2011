@@ -33,8 +33,9 @@ public class NewtonianCalculator extends PhysicsCalculator {
 
     /**
      * Applies a force which causes rotation.
-     * deltaOmega = F * sin(theta) * deltaT / (m * r)
-     * <br><img src="src/vooga/physics/util/angularvelocity.PNG">
+     * <br><br>
+     * Applies the following equation to determine the change in angular velocity.
+     * <br><img src="http://vooga-cps108-spring2011.googlecode.com/svn/trunk/src/vooga/physics/util/angularvelocity.PNG">
      * @param physicalObject
      * @param force
      * @param pointOfApplication

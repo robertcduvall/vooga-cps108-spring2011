@@ -107,7 +107,8 @@ public class PhysicsCalculator {
     }
 
     /**
-     * Applies an external force to an IPhysics object.
+     * Applies an external force to an IPhysics object using the Impulse Momentum Theorem.
+     * <br><br>Source: <a href="http://en.wikipedia.org/wiki/Impulse_momentum_theorem">Wikipedia</a>
      * @param physicalObject
      * @param force
      * @param elapsedTime
@@ -137,7 +138,8 @@ public class PhysicsCalculator {
     }
 
     /**
-     * Calculates the collision based on the masses and velocities of the objects colliding
+     * Calculates the collision based on the masses and velocities of the objects colliding.
+     * <br><br>Source: <a href="http://en.wikipedia.org/wiki/Coefficient_of_restitution#Speeds_after_impact">Wikipedia</a>
      * @param thisObject
      * @param otherObject
      * @param angleOfImpact

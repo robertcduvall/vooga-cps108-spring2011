@@ -4,9 +4,11 @@ import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
 /**
- * MathVector class for Forces.
+ * MathVector class for Forces. Has been made a separate class from MathVector
+ * so Forces are kept separate. It should not be a valid operation to add a
+ * Velocity to a Force.
  * 
- * @author Anne
+ * @author Anne Weng
  *
  */
 public class Force extends MathVector {

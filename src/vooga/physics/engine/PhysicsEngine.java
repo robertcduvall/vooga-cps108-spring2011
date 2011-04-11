@@ -117,17 +117,7 @@ public class PhysicsEngine {
         collision(object1, object2, angleOfImpact, pointOfImpact, 0);
     }
 
-    /**
-     * TODO: DESIGN DECISION/fill in more pros/cons
-     * 
-     * Basically, should IPhysics objects know their calculator? Pros: We
-     * wouldn't have to be passing around IPhysics objects and calculators
-     * 
-     * Cons: Another method to implement in the IPhysics interface Too many
-     * interdependencies?
-     * 
-     * Nathan decided that objects should know their calculators
-     * 
+    /** 
      * General collision method. Tells the two physical objects that a collision
      * occurred.
      * 
