@@ -5,6 +5,7 @@ package vooga.util.math;
  * it is guaranteed to be wrapped to [0, 2pi].
  * 
  * @author Alex Lee (Reused from SLogo project)
+ * @author Nathan Klug and Anne Weng (as implemented in the physics engine
  */
 public class Angle implements Comparable<Angle> {
 
