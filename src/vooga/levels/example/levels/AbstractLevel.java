@@ -1,11 +1,12 @@
-package vooga.levels;
+package levels;
 
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.TreeMap;
+import main.CustomGame;
+import main.CustomPlayField;
 import com.golden.gamedev.object.Background;
-import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 
 
@@ -21,21 +22,19 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
 {
     private String myFilePath;
     private int myId;
-    private IGoal myGoal;
-    private Queue<Background> myBackgrounds;
-    private PlayField myPlayField;
-    private TreeMap<Class<?>, ArrayList<Sprite>> mySprites;
-    private Queue<String> myMusic;
+    protected IGoal myGoal;
+    protected Queue<Background> myBackgrounds;
+    protected CustomPlayField myPlayField;
+    protected TreeMap<Class<?>, ArrayList<Sprite>> mySprites;
+    protected Queue<String> myMusic;
 
 
-    public AbstractLevel (String filePath, int id, PlayField pf)
+    public AbstractLevel (String filePath, int id, CustomPlayField pf)
     {
         myPlayField = pf;
         myFilePath = filePath;
         myId = id;
         mySprites = new TreeMap<Class<?>, ArrayList<Sprite>>();
-        LevelBuilder levelBuilder = new LevelBuilder();
-        levelBuilder.buildLevel(myFilePath);
     }
 
 
