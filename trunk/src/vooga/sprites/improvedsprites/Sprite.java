@@ -25,7 +25,6 @@ import vooga.sprites.improvedsprites.interfaces.IRender;
 import vooga.sprites.improvedsprites.interfaces.ISprite;
 import vooga.sprites.improvedsprites.interfaces.ISpriteBase;
 import vooga.sprites.spritebuilder.components.ISpriteUpdater;
-import vooga.util.LineMath;
 import vooga.util.buildable.BuildException;
 import vooga.util.buildable.IBuildable;
 import vooga.util.buildable.components.ComponentResources;
