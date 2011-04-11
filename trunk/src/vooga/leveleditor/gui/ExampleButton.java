@@ -6,7 +6,7 @@ import java.awt.Transparency;
 import java.awt.event.MouseEvent;
 import java.awt.geom.GeneralPath;
 
-import level.editor.example.game.FirstGUIUse;
+import vooga.leveleditor.example.game.FirstGUIUse;
 
 import com.golden.gamedev.GameObject;
 import com.golden.gamedev.gui.TButton;
