@@ -28,6 +28,8 @@ public abstract class AbstractPlayer implements Cloneable
     // One "player" dynamically controls 2 players?  switch() method.
     
     //Events as strings - can dynamically switch between them.
+    
+    //Need to meet with Stats group and integrate our class with Julian's things
 	
 	protected int playerId;
 	private long timeOfLastChange;
@@ -41,7 +43,7 @@ public abstract class AbstractPlayer implements Cloneable
 	
 	public abstract int compareTo(AbstractPlayer p);
 	
-	public abstract AbstractPlayer clone();
+	public abstract AbstractPlayer clone();  //Taken care of by Julian
 	
 	public abstract boolean equals(AbstractPlayer p);
 	

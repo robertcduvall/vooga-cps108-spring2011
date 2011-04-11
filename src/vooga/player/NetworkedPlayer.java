@@ -14,7 +14,7 @@ public abstract class NetworkedPlayer extends AbstractPlayer
     // So maybe we can get rid of these.
     //Need a way of decoding packets?
     
-    public String getIPAddress(AbstractPlayer p)
+    public String getMACAddress(AbstractPlayer p)
     {
     	return "";
         //Call networking engine for this info.
