@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
+import vooga.levels.example.collisions.collisionshapes.CollisionRect;
+import vooga.levels.example.collisions.collisionshapes.CollisionShape;
 import vooga.sprites.improvedsprites.interfaces.ICollider;
 import vooga.sprites.improvedsprites.interfaces.IMobility;
 import vooga.sprites.improvedsprites.interfaces.IRender;
@@ -31,8 +33,6 @@ import vooga.util.buildable.components.ComponentResources;
 import vooga.util.buildable.components.ComponentSet;
 import vooga.util.buildable.components.IComponent;
 import vooga.util.buildable.components.predefined.basic.Velocity2DC;
-import collisions.collisionshapes.CollisionRect;
-import collisions.collisionshapes.CollisionShape;
 import com.golden.gamedev.object.Background;
 
 
