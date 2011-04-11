@@ -1,7 +1,7 @@
-package weapons;
+package vooga.levels.example.weapons;
 
-import main.CustomPlayField;
-import sprites.Ship;
+import vooga.levels.example.main.CustomPlayField;
+import vooga.levels.example.sprites.Ship;
 import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Sprite;
 

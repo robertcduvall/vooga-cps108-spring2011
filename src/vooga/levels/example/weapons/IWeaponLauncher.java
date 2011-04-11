@@ -1,4 +1,4 @@
-package weapons;
+package vooga.levels.example.weapons;
 
 import java.awt.Graphics2D;
 

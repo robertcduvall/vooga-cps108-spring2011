@@ -1,4 +1,4 @@
-package vooga.levels;
+package vooga.levels.example.levels;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeSet;
-import vooga.levels.AbstractLevel;
+import vooga.levels.example.levels.AbstractLevel;
+import vooga.levels.example.main.CustomPlayField;
 import vooga.levels.example.reflection.Reflection;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
@@ -21,14 +22,14 @@ import com.golden.gamedev.object.Sprite;
  */
 public class LevelManager
 {
-    private static final String LEVEL_ORDER_FILE = "level_resources/LevelOrder";
+    private static final String LEVEL_ORDER_FILE = "levelorder";
     private static LevelManager myInstance;
 
     private Map<Integer, String> myLevelOrderMap;
     private TreeSet<AbstractLevel> myCurrentLevels;
     private int myNumOfLevels;
     private int myNumOfLevelsCompleted;
-    private PlayField myPlayField;
+    private CustomPlayField myPlayField;
 
 
     /**
@@ -77,19 +78,10 @@ public class LevelManager
      */
     public void loadLevel (int id)
     {
-
         String levelName = myLevelOrderMap.get(id);
         if (levelName == null) throw LevelException.NON_EXISTANT_LEVEL;
-        AbstractLevel requestedLevel;
-        try
-        {
-            requestedLevel = ((AbstractLevel) Reflection.createInstance(levelName, levelName + id, id, myPlayField));
-            requestedLevel.loadLevel();
-        }
-        catch (Exception e)
-        {
-            throw LevelException.LEVEL_LOADING_ERROR;
-        }
+        AbstractLevel requestedLevel = (AbstractLevel) Reflection.createInstance(levelName, levelName, id, myPlayField);
+        requestedLevel.loadLevel();
         myCurrentLevels.add(requestedLevel);
     }
 
@@ -99,7 +91,10 @@ public class LevelManager
      */
     public void loadNextLevel ()
     {
-        loadLevel(myCurrentLevels.last().getId() + 1);
+        int newLevelId = myCurrentLevels.last().getId() + 1;
+        myCurrentLevels.clear();
+        loadLevel(newLevelId);
+        
     }
 
 
@@ -220,7 +215,7 @@ public class LevelManager
     /**
      * Sets the playingfield
      */
-    public void setPlayField (PlayField pf)
+    public void setPlayField (CustomPlayField pf)
     {
         myPlayField = pf;
     }

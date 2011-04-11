@@ -1,10 +1,10 @@
-package weapons;
+package vooga.levels.example.weapons;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import main.CustomPlayField;
-import sprites.Ship;
+import vooga.levels.example.main.CustomPlayField;
+import vooga.levels.example.sprites.Ship;
 import com.golden.gamedev.Game;
 
 

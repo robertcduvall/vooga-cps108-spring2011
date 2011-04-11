@@ -1,7 +1,7 @@
-package weapons;
+package vooga.levels.example.weapons;
 
-import main.CustomPlayField;
-import resourceManager.ResourceManager;
+import vooga.levels.example.main.CustomPlayField;
+import vooga.levels.example.resourceManager.ResourceManager;
 import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Sprite;
 
