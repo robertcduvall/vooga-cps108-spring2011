@@ -1,4 +1,4 @@
-package levels;
+package vooga.levels;
 
 /**
  * Represents an exceptional situation specific to the model.

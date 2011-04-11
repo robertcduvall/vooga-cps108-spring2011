@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.TreeMap;
+import other.CustomGame;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;

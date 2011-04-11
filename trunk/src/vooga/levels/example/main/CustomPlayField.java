@@ -1,9 +1,9 @@
 package main;
 
 import java.awt.Graphics2D;
-import levels.LevelManager;
 import resourceManager.ResourceManager;
 import sprites.Ship;
+import vooga.levels.LevelManager;
 import collisions.BulletCollision;
 import collisions.WallStopCollision;
 import com.golden.gamedev.Game;
