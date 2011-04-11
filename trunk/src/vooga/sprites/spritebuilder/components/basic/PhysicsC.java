@@ -2,9 +2,11 @@ package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Point;
 import vooga.physics.calculators.PhysicsCalculator;
+import vooga.physics.engine.PhysicsEngine;
 import vooga.physics.interfaces.IPhysics;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.components.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 
 /**
@@ -13,7 +15,7 @@ import vooga.util.buildable.components.BasicComponent;
  * @author Nathan Klug
  *
  */
-public class PhysicsC extends BasicComponent implements IPhysics
+public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater
 {
     private Sprite mySprite;
     private PhysicsCalculator myCalculator;
@@ -97,6 +99,13 @@ public class PhysicsC extends BasicComponent implements IPhysics
     public void setPhysicsOnOff (boolean isOn)
     {
         this.isOn = isOn;
+    }
+
+
+    @Override
+    public void update(Sprite s, long elapsedTime) {
+        PhysicsEngine.getInstance().applyWorldForces(this, elapsedTime);
+        
     }
 
 }
