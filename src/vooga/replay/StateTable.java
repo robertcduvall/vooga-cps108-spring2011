@@ -1,4 +1,4 @@
-package replay;
+package vooga.replay;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
