@@ -24,6 +24,7 @@ public class PhysicsEngine {
 
     private PhysicsEngine() {
         worldForces = new HashSet<Force>();
+        pointSources = new HashSet<IVectorField>();
         isOn = true;
     }
 

@@ -1,5 +1,7 @@
 package vooga.physics.interfaces;
 
+import java.awt.Point;
+
 import vooga.physics.calculators.PhysicsCalculator;
 import vooga.physics.util.Velocity;
 
@@ -22,6 +24,8 @@ public interface IPhysics {
     public PhysicsCalculator getCalculator();
     
     public double getMass();
+    
+    public Point getCenter();
     
     public Velocity getVelocity();
     

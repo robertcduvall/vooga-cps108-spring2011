@@ -26,6 +26,7 @@ public interface IVectorField {
     
     /**
      * Gets the attraction constant for a vector field, e.g. the gravitational constant.
+     * Should be positive for attraction or negative for repulsion.
      * @return
      */
     public double getAttractionConstant(); 
