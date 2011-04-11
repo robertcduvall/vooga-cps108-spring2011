@@ -10,9 +10,11 @@ import java.util.ResourceBundle;
 import vooga.reflection.Reflection;
 import vooga.physics.engine.PhysicsEngine;
 import vooga.physics.interfaces.IPhysics;
+import vooga.physics.interfaces.IVectorField;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
+import vooga.util.math.MathVector;
 
 /**
  * To be used in a particular game object (such as a sprite) which extends
@@ -107,6 +109,12 @@ public class PhysicsCalculator {
         }
     }
 
+    /**
+     * Applies an external force to an IPhysics object.
+     * @param physicalObject
+     * @param force
+     * @param elapsedTime
+     */
     protected void applyForce(IPhysics physicalObject, Force force, long elapsedTime) {
         if (physicalObject.isOn()) { // Is this really necessary, since it's
                                      // currently protected?
@@ -116,6 +124,18 @@ public class PhysicsCalculator {
             spriteVelocity.addVector(deltaVelocity);
             physicalObject.setVelocity(spriteVelocity);
         }
+    }
+
+    /**
+     * Applies an external field to an IPhysics object.
+     * @param physicalObject
+     * @param field
+     * @param elapsedTime
+     */
+    protected void applyField(IPhysics physicalObject, IVectorField field, long elapsedTime) {
+        MathVector radius = new MathVector(physicalObject.getCenter(), field.getSource());
+        double magnitude = field.getAttractionConstant() * field.getMagnitude() * physicalObject.getMass() / radius.getMagnitude();
+        applyForce(physicalObject, new Force(magnitude, radius.getAngle()), elapsedTime);
     }
 
     /**

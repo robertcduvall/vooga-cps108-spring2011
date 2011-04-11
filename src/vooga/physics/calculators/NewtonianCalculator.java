@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
+import vooga.physics.interfaces.IVectorField;
 import vooga.physics.util.Force;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
@@ -39,7 +40,7 @@ public class NewtonianCalculator extends PhysicsCalculator {
      * @param elapsedTime
      */
     public void applyRotationalForce(INewtonianPhysics physicalObject, Force force, Point pointOfApplication, long elapsedTime) {
-        MathVector radius = new MathVector(physicalObject.getCenterOfMass(), pointOfApplication);
+        MathVector radius = new MathVector(physicalObject.getCenter(), pointOfApplication);
         Angle theta = radius.getVectorAngle(force);
         double deltaOmega = force.getMagnitude() * Math.sin(theta.getRadians()) * elapsedTime /
         physicalObject.getMass() / radius.getMagnitude();
