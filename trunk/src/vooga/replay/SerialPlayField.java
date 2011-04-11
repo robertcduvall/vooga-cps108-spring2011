@@ -1,4 +1,4 @@
-package replay;
+package vooga.replay;
 import java.io.Serializable;
 
 import com.golden.gamedev.object.*;

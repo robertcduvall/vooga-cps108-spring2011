@@ -1,4 +1,4 @@
-package replay;
+package vooga.replay;
 import java.io.*;
 
 public class StateTableFileManager {
