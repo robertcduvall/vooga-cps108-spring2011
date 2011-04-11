@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Level>
+	<Parameters>
+		<StartT>14</StartT>
+		<FishToSave>180</FishToSave>
+	</Parameters>
+	<Path>
+		<XOffset>0</XOffset>
+		<YOffset>59</YOffset>
+		<Speed>0.5</Speed>
+		<Points>
+			<Point x="-30" y="0" />
+			<Point x="20" y="0" />
+			<Point x="57" y="0" />
+			<Point x="105" y="1" />
+			<Point x="145" y="0" />
+			<Point x="213" y="-2" />
+			<Point x="272" y="5" />
+			<Point x="295" y="27" />
+			<Point x="291" y="57" />
+			<Point x="268" y="75" />
+			<Point x="235" y="82" />
+			<Point x="182" y="90" />
+			<Point x="127" y="90" />
+			<Point x="74" y="86" />
+			<Point x="53" y="96" />
+			<Point x="40" y="110" />
+			<Point x="33" y="132" />
+			<Point x="40" y="151" />
+			<Point x="67" y="164" />
+			<Point x="119" y="157" />
+			<Point x="169" y="155" />
+			<Point x="215" y="156" />
+			<Point x="243" y="166" />
+			<Point x="255" y="189" />
+			<Point x="252" y="206" />
+			<Point x="233" y="219" />
+			<Point x="188" y="220" />
+			<Point x="143" y="221" />
+			<Point x="103" y="221" />
+			<Point x="77" y="221" />
+			<Point x="58" y="242" />
+			<Point x="55" y="264" />
+			<Point x="66" y="277" />
+			<Point x="88" y="279" />
+			<Point x="116" y="284" />
+			<Point x="154" y="292" />
+			<Point x="224" y="289" />
+			<Point x="277" y="286" />
+			<Point x="311" y="286" />
+			<Point x="355" y="292" />
+			<Point x="394" y="291" />
+			<Point x="466" y="288" />
+			<Point x="499" y="288" />
+			<Point x="538" y="288" />
+			<Point x="565" y="281" />
+			<Point x="582" y="261" />
+			<Point x="589" y="237" />
+			<Point x="572" y="208" />
+			<Point x="544" y="204" />
+			<Point x="513" y="203" />
+			<Point x="483" y="203" />
+			<Point x="438" y="209" />
+			<Point x="410" y="202" />
+			<Point x="393" y="186" />
+			<Point x="398" y="160" />
+			<Point x="418" y="147" />
+			<Point x="439" y="142" />
+			<Point x="465" y="142" />
+			<Point x="490" y="143" />
+			<Point x="514" y="145" />
+			<Point x="556" y="148" />
+			<Point x="585" y="139" />
+			<Point x="597" y="115" />
+			<Point x="598" y="94" />
+			<Point x="586" y="77" />
+			<Point x="556" y="70" />
+			<Point x="520" y="65" />
+			<Point x="484" y="65" />
+			<Point x="453" y="66" />
+			<Point x="379" y="71" />
+			<Point x="357" y="58" />
+			<Point x="344" y="32" />
+			<Point x="353" y="9" />
+			<Point x="387" y="-2" />
+			<Point x="423" y="-4" />
+			<Point x="461" y="-5" />
+			<Point x="487" y="-2" />
+			<Point x="515" y="8" />
+		</Points>
+	</Path>
+</Level>

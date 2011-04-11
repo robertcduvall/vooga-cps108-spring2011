@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Level>
+	<Parameters>
+		<StartT>15</StartT>
+		<FishToSave>128</FishToSave>
+	</Parameters>
+	<Path>
+		<XOffset>10</XOffset>
+		<YOffset>323</YOffset>
+		<Speed>0.65</Speed>
+		<Points>
+			<Point x="-40" y="0" />
+			<Point x="23" y="0" />
+			<Point x="139" y="0" />
+			<Point x="270" y="0" />
+			<Point x="430" y="0" />
+			<Point x="505" y="1" />
+			<Point x="538" y="-3" />
+			<Point x="548" y="-14" />
+			<Point x="545" y="-28" />
+			<Point x="536" y="-48" />
+			<Point x="387" y="-264" />
+			<Point x="365" y="-284" />
+			<Point x="342" y="-286" />
+			<Point x="324" y="-280" />
+			<Point x="296" y="-256" />
+			<Point x="98" y="-79" />
+			<Point x="80" y="-62" />
+			<Point x="83" y="-42" />
+			<Point x="104" y="-36" />
+			<Point x="370" y="-70" />
+			<Point x="390" y="-60" />
+		</Points>
+	</Path>
+</Level>
