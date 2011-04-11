@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeSet;
 import reflection.Reflection;
-import levels.AbstractLevel;
+import vooga.levels.AbstractLevel;
 import main.CustomPlayField;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;

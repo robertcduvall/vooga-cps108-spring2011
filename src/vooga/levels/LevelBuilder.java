@@ -1,4 +1,4 @@
-package levels;
+package vooga.levels;
 
 
 public class LevelBuilder {
