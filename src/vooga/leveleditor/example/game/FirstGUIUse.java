@@ -1,13 +1,9 @@
 package vooga.leveleditor.example.game;
 
 import java.awt.Color;
-
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-
-import level.editor.gui.LevelEditor;
-
-
+import vooga.leveleditor.gui.LevelEditor;
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
 import com.golden.gamedev.gui.toolkit.FrameWork;
