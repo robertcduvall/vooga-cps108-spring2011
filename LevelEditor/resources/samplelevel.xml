@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<level>
+    <title>A Sample Level</title>
+    <width>800</width>
+    <height>600</height>
+    <background type="ColorBackground">Color.RED</background>
+    
+    <sprite name="sprite1">
+        <x>200</x>
+        <y>200</y>
+        <speed>0</speed>
+        <image></image>
+    </sprite>
+</level>
