@@ -4,15 +4,26 @@ import java.awt.Point;
 import vooga.physics.calculators.PhysicsCalculator;
 import vooga.physics.interfaces.IPhysics;
 import vooga.physics.util.Velocity;
+import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.BasicComponent;
 
+/**
+ * Physics Component of a Sprite, extends BasicComponent and implements IPhysics.
+ * 
+ * @author Nathan Klug
+ *
+ */
 public class PhysicsC extends BasicComponent implements IPhysics
 {
-
+    private Sprite mySprite;
+    private PhysicsCalculator myCalculator;
+    private double myMass;
+    private boolean isOn;
+    
     @Override
     protected int compareTo (BasicComponent o)
     {
-        // TODO Auto-generated method stub
+        //TODO: do we use this to compare whether a component is more specific for physics than another
         return 0;
     }
 
@@ -20,55 +31,57 @@ public class PhysicsC extends BasicComponent implements IPhysics
     @Override
     protected Object[] getFields ()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return this.getClass().getFields();
     }
 
 
     @Override
     protected void setFields (Object ... fields)
     {
-        // TODO Auto-generated method stub
-
+        mySprite = (Sprite) fields[0];
+        myMass = (Double) fields[1];
+        if (fields.length > 2)
+            myCalculator = (PhysicsCalculator) fields[2];
+        isOn = true;
     }
 
 
     @Override
     public PhysicsCalculator getCalculator ()
     {
-        // TODO Auto-generated method stub
-        return null;
+        if (myCalculator == null){
+            myCalculator = PhysicsCalculator.getBestCalcForInterface(this);
+        }
+        return myCalculator;
     }
 
 
     @Override
     public double getMass ()
     {
-        // TODO Auto-generated method stub
-        return 0;
+        return myMass;
     }
 
 
     @Override
     public Point getCenter ()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return new Point((int) mySprite.getCenterX(), (int) mySprite.getCenterY());
     }
 
 
     @Override
     public Velocity getVelocity ()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return new Velocity(mySprite.getHorizontalSpeed(), -mySprite.getVerticalSpeed());
     }
 
 
     @Override
     public void setVelocity (Velocity newVelocity)
     {
-        // TODO Auto-generated method stub
+        mySprite.setHorizontalSpeed(newVelocity.getXComponent());
+        mySprite.setVerticalSpeed(-newVelocity.getYComponent());
         
     }
 
@@ -76,16 +89,14 @@ public class PhysicsC extends BasicComponent implements IPhysics
     @Override
     public boolean isOn ()
     {
-        // TODO Auto-generated method stub
-        return false;
+        return isOn;
     }
 
 
     @Override
     public void setPhysicsOnOff (boolean isOn)
     {
-        // TODO Auto-generated method stub
-        
+        this.isOn = isOn;
     }
 
 }
