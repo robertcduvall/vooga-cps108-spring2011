@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.Collection;
 import java.util.HashSet;
 import vooga.physics.interfaces.IPhysics;
+import vooga.physics.interfaces.IVectorField;
 import vooga.physics.util.Force;
 import vooga.util.math.Angle;
 
@@ -17,6 +18,7 @@ import vooga.util.math.Angle;
 public class PhysicsEngine {
 
     private static Collection<Force> worldForces;
+    private static Collection<IVectorField> pointSources;
     private static PhysicsEngine myInstance;
     private static boolean isOn;
 
