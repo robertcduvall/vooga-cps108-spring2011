@@ -1,6 +1,9 @@
-package reflection;
+package vooga.reflection;
 
 import java.lang.reflect.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -270,5 +273,38 @@ public class Reflection
     private static boolean isAssignableFrom (Class<?> formal, Class<?> arg)
     {
         return formal.isAssignableFrom(arg);
+    }
+    
+    /**
+     * From a given object, gets the strings representing the names of the interfaces
+     * the object implements
+     * @param toGetInterfaces
+     * @return
+     */
+    public static Collection<String> getInterfaceNames(Object toGetInterfaces){
+        Class[] asClasses = toGetInterfaces.getClass().getInterfaces();
+        Set<String> interfaces = new HashSet<String>();
+        for (Class c : asClasses){
+            interfaces.add(asClasses.toString());
+        }
+        return interfaces;
+    }
+    
+    /**
+     * Gets all the interfaces held by a class which subclass the given superclass
+     * @param <T>
+     * @param <T>
+     * @param toGetInterfaces
+     * @param superClass
+     * @return
+     */
+    public static <T> Collection<T> getInterfacesWhichSubclass(Object toGetInterfaces, Class<T> superClass){
+        Class[] interfaces = toGetInterfaces.getClass().getInterfaces();
+        Collection<T> toReturn = new HashSet<T>();
+        for (Class iFace : interfaces){
+            if (superClass.getClass().isAssignableFrom(iFace))
+                toReturn.add((T) iFace);
+        }
+        return toReturn;
     }
 }

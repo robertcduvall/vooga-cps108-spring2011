@@ -1,30 +1,33 @@
 package vooga.physics.engine;
 
 import java.awt.Point;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 import vooga.physics.interfaces.IPhysics;
-import vooga.physics.interfaces.IVectorField;
+import vooga.physics.interfaces.IPointForce;
 import vooga.physics.util.Force;
+import vooga.reflection.Reflection;
 import vooga.util.math.Angle;
 
 /**
- * I propose that we unify WorldForceManager and WorldPhysicsCalculator into this one class. Is this okay?
- * TODO: Comment here
+ * I propose that we unify WorldForceManager and WorldPhysicsCalculator into
+ * this one class. Is this okay? TODO: Comment here
  * 
  * @author Nathan Klug
- *
+ * 
  */
 public class PhysicsEngine {
 
     private static Collection<Force> worldForces;
-    private static Collection<IVectorField> pointSources;
+    private static Collection<IPointForce> pointForces;
     private static PhysicsEngine myInstance;
     private static boolean isOn;
 
     private PhysicsEngine() {
         worldForces = new HashSet<Force>();
-        pointSources = new HashSet<IVectorField>();
+        pointForces = new HashSet<IPointForce>();
         isOn = true;
     }
 
@@ -64,13 +67,32 @@ public class PhysicsEngine {
      * @param physics
      * @param elapsedTime
      */
-    public Collection<Force> getWorldForces() {
+    public void applyWorldForces(IPhysics physicalObject, long elapsedTime) {
         if (isOn) {
-            return worldForces;
+            for (Force f : worldForces) {
+                physicalObject.getCalculator().applyForce(physicalObject, f, elapsedTime);
+            }
+            
+            Collection<IPointForce> myInterfaces = Reflection.getInterfacesWhichSubclass(physicalObject,
+                    IPointForce.class);
+
+            for (IPointForce myIFace : myInterfaces) {
+                String myIFaceName = myIFace.getClass().toString();
+                for (IPointForce f : pointForces) {
+                    Collection<IPointForce> interfaces = Reflection.getInterfacesWhichSubclass(f, IPointForce.class);
+
+                    for (IPointForce iFace : interfaces) {
+                        String interfaceName = iFace.getClass().toString();
+                        if (myIFaceName.equals(interfaceName)) {
+                            physicalObject.getCalculator().applyField(myIFace, iFace, elapsedTime);
+                        }
+                    }
+                }
+
+            }
         }
-        return new HashSet<Force>();
     }
-    
+
     /**
      * Elastic collision method. Coefficient of Restitution is set to 1.
      * 
@@ -98,12 +120,12 @@ public class PhysicsEngine {
     /**
      * TODO: DESIGN DECISION/fill in more pros/cons
      * 
-     * Basically, should IPhysics objects know their calculator?
-     * Pros: We wouldn't have to be passing around IPhysics objects and calculators
+     * Basically, should IPhysics objects know their calculator? Pros: We
+     * wouldn't have to be passing around IPhysics objects and calculators
      * 
-     * Cons: Another method to implement in the IPhysics interface
-     *       Too many interdependencies?
-     *       
+     * Cons: Another method to implement in the IPhysics interface Too many
+     * interdependencies?
+     * 
      * Nathan decided that objects should know their calculators
      * 
      * General collision method. Tells the two physical objects that a collision
@@ -117,8 +139,10 @@ public class PhysicsEngine {
      */
     public void collision(IPhysics object1, IPhysics object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         if (isOn) {
-            object1.getCalculator().collisionOccurred(object1, object2, angleOfImpact, pointOfImpact, coefficientOfRestitution);
-            object2.getCalculator().collisionOccurred(object1, object2, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+            object1.getCalculator().collisionOccurred(object1, object2, angleOfImpact, pointOfImpact,
+                    coefficientOfRestitution);
+            object2.getCalculator().collisionOccurred(object1, object2, angleOfImpact, pointOfImpact,
+                    coefficientOfRestitution);
         }
     }
 
