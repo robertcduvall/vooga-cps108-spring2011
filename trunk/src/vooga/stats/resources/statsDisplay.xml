@@ -1,1 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<Display>
+
+<Stat type="Integer" value="0" name="score"></Stat>
+<Stat type="Integer" value="50" name="health"></Stat>
+
+<Group name="ScoreGroup">
+<DisplayString xLoc="10" yLoc="100" fontName="Times New Roman" label="Health: " fontSize="32"></DisplayString>
+<DisplayBar xLoc="110" yLoc="110" max="100" stat="health" color="red" backColor="black"></DisplayBar>
+</Group>
+
+</Display>
