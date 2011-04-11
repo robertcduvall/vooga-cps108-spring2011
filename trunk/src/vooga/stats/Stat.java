@@ -4,6 +4,7 @@ package vooga.stats;
  * Generic Stat class. You can customize to any Object class
  * 
  *  @author Chao Chen
+ *  @author Yin Xiao
  */
 
 public class Stat<T> 
