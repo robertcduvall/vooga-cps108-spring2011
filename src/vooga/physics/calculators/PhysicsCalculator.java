@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import vooga.reflection.Reflection;
 import vooga.physics.engine.PhysicsEngine;
 import vooga.physics.interfaces.IPhysics;
-import vooga.physics.interfaces.IVectorField;
+import vooga.physics.interfaces.IPointForce;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
@@ -102,10 +102,7 @@ public class PhysicsCalculator {
      */
     public void updateWithPhysics(long elapsedTime, IPhysics physicalObject) {
         if (physicalObject.isOn()) {
-            Collection<Force> forces = PhysicsEngine.getInstance().getWorldForces();
-            for (Force f : forces) {
-                applyForce(physicalObject, f, elapsedTime);
-            }
+            PhysicsEngine.getInstance().applyWorldForces(physicalObject, elapsedTime);
         }
     }
 
@@ -115,7 +112,7 @@ public class PhysicsCalculator {
      * @param force
      * @param elapsedTime
      */
-    protected void applyForce(IPhysics physicalObject, Force force, long elapsedTime) {
+    public void applyForce(IPhysics physicalObject, Force force, long elapsedTime) {
         if (physicalObject.isOn()) { // Is this really necessary, since it's
                                      // currently protected?
             Velocity deltaVelocity = new Velocity(force.getMagnitude() * elapsedTime / physicalObject.getMass(),
@@ -125,6 +122,7 @@ public class PhysicsCalculator {
             physicalObject.setVelocity(spriteVelocity);
         }
     }
+    
 
     /**
      * Applies an external field to an IPhysics object.
@@ -132,9 +130,9 @@ public class PhysicsCalculator {
      * @param field
      * @param elapsedTime
      */
-    protected void applyField(IPhysics physicalObject, IVectorField field, long elapsedTime) {
-        MathVector radius = new MathVector(physicalObject.getCenter(), field.getSource());
-        double magnitude = field.getAttractionConstant() * field.getMagnitude() * physicalObject.getMass() / radius.getMagnitude();
+    public void applyField(IPointForce physicalObject, IPointForce field, long elapsedTime) {
+        MathVector radius = new MathVector(physicalObject.getCenter(), field.getCenter());
+        double magnitude = field.getPointMagnitude() * field.CONSTANT * physicalObject.getPointMagnitude() / radius.getMagnitude();
         applyForce(physicalObject, new Force(magnitude, radius.getAngle()), elapsedTime);
     }
 
