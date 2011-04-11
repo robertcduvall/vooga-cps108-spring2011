@@ -6,9 +6,9 @@ import org.exolab.castor.mapping.MappingException;
 import org.exolab.castor.tools.MappingTool;
 import org.exolab.castor.xml.XMLContext;
 
-import sprites.Bomb;
-import sprites.Order;
-import sprites.TestSprite;
+import vooga.levels.example.sprites.Bomb;
+import vooga.levels.example.sprites.Order;
+import vooga.levels.example.sprites.TestSprite;
 
 public class MappingBuilder {
 
