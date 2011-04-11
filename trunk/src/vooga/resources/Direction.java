@@ -19,6 +19,11 @@ public enum Direction
     public static final Direction NORTH = UP, WEST = RIGHT, EAST = LEFT, SOUTH = DOWN;
     public static final Direction POS_X = RIGHT, NEG_X = LEFT, POS_Y = DOWN, NEG_Y = UP;
     
+    /**
+     * Gets the angle, in degrees, corresponding to a direction.
+     * 
+     * @return The angle.
+     */
     public int getAngle()
     {
         switch(this)

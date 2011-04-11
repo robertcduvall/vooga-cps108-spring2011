@@ -1,13 +1,11 @@
 package vooga.resources.images;
 
 import java.awt.image.BufferedImage;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import vooga.resources.Direction;
 import vooga.resources.ResourceException;
-import vooga.resources.xmlparser.Context;
-import vooga.resources.xmlparser.Expression;
+import vooga.resources.xmlparser.Parser;
+import vooga.resources.xmlparser.XMLTag;
 import com.golden.gamedev.engine.BaseLoader;
 import com.golden.gamedev.util.ImageUtil;
 
@@ -19,7 +17,7 @@ import com.golden.gamedev.util.ImageUtil;
  * @author Misha
  *
  */
-public class ImageParser extends Context
+public class ImageParser extends Parser
 {
     private static final String
         IMAGE = "image",
@@ -35,11 +33,13 @@ public class ImageParser extends Context
         ORDER = "order",
         FRAME = "frame",
         DELAY = "t",
-        OFFSET = "offset";
+        OFFSET = "offset",
+        ROW_OFFSET = "row",
+        COL_OFFSET = "column";
     
-    private class ImageTag extends Expression {
+    private class ImageTag extends XMLTag {
         public String getTagName() {return IMAGE;}
-        public void parse(Context context, Element xmlElement) {
+        public void parse(Parser context, Element xmlElement) {
             imageName = xmlElement.getAttribute(NAME);
             
             imageAdded = false;
@@ -47,9 +47,9 @@ public class ImageParser extends Context
             if (!imageAdded) addImage(0);
         }
     }
-    private class SourceTag extends Expression {
+    private class SourceTag extends XMLTag {
         public String getTagName() {return SOURCE;}
-        public void parse(Context context, Element xmlElement) {
+        public void parse(Parser context, Element xmlElement) {
             sourceImage = bsLoader.getImage(getValue(xmlElement));
             tileCols = 1;
             tileRows = 1;
@@ -57,9 +57,9 @@ public class ImageParser extends Context
             updateTiles();
         }
     }
-    private class ColumnsTag extends Expression {
+    private class ColumnsTag extends XMLTag {
         public String getTagName() {return COLUMNS;}
-        public void parse(Context context, Element xmlElement) {
+        public void parse(Parser context, Element xmlElement) {
             if (sourceImage == null)
                 throw ResourceException.syntaxException();
             tileCols = Integer.parseInt(getValue(xmlElement));
@@ -67,9 +67,9 @@ public class ImageParser extends Context
             updateTiles();
         }
     }
-    private class RowsTag extends Expression {
+    private class RowsTag extends XMLTag {
         public String getTagName() {return ROWS;}
-        public void parse(Context context, Element xmlElement) {
+        public void parse(Parser context, Element xmlElement) {
             if (sourceImage == null)
                 throw ResourceException.syntaxException();
             tileRows = Integer.parseInt(getValue(xmlElement));
@@ -77,9 +77,9 @@ public class ImageParser extends Context
             updateTiles();
         }
     }    
-    private class WidthTag extends Expression {
+    private class WidthTag extends XMLTag {
         public String getTagName() {return WIDTH;}
-        public void parse(Context context, Element xmlElement) {
+        public void parse(Parser context, Element xmlElement) {
             int width = Integer.parseInt(getValue(xmlElement));
             if (sourceImage == null)
                 throw ResourceException.syntaxException();
@@ -88,9 +88,9 @@ public class ImageParser extends Context
             updateTiles();
         }
     }
-    private class HeightTag extends Expression {
+    private class HeightTag extends XMLTag {
         public String getTagName() {return HEIGHT;}
-        public void parse(Context context, Element xmlElement) {
+        public void parse(Parser context, Element xmlElement) {
             int height = Integer.parseInt(getValue(xmlElement));
             if (sourceImage == null)
                 throw ResourceException.syntaxException();
@@ -99,8 +99,8 @@ public class ImageParser extends Context
             updateTiles();
         }
     }
-    private abstract class RepeatableExpression extends Expression {
-        public void parse(Context context, Element xmlElement) {
+    private abstract class RepeatableTag extends XMLTag {
+        public void parse(Parser context, Element xmlElement) {
             String countStr = xmlElement.getAttribute(COUNT);
             if (countStr.isEmpty())
                 nestedParse(context, xmlElement);
@@ -113,22 +113,22 @@ public class ImageParser extends Context
                 
         }
         
-        public void nestedParse(Context context, Element xmlElement) {
+        public void nestedParse(Parser context, Element xmlElement) {
             parseChildren(context, xmlElement);
         }                                                                  
     }
-    private class StateTag extends RepeatableExpression {
+    private class StateTag extends RepeatableTag {
         public String getTagName() {return STATE;}
-        public void nestedParse(Context context, Element xmlElement) {
+        public void nestedParse(Parser context, Element xmlElement) {
             imageAdded = false;
             parseChildren(context, xmlElement);
             if (!imageAdded) addImage(0);
             state++;
         }
     }
-    private class DirectionsTag extends Expression {
+    private class DirectionsTag extends XMLTag {
         public String getTagName() {return DIRECTIONS;}
-        public void parse(Context context, Element xmlElement) {
+        public void parse(Parser context, Element xmlElement) {
             String order = xmlElement.getAttribute(ORDER);
             if (order.isEmpty()) order = "NESW";
             
@@ -141,9 +141,9 @@ public class ImageParser extends Context
             }
         }
     }
-    private class FrameTag extends RepeatableExpression {
+    private class FrameTag extends RepeatableTag {
         public String getTagName() {return FRAME;}
-        public void nestedParse(Context context, Element xmlElement) {
+        public void nestedParse(Parser context, Element xmlElement) {
             parseChildren(context, xmlElement);
             int duration = 0;
             if (xmlElement.hasAttribute(DELAY))
@@ -152,13 +152,28 @@ public class ImageParser extends Context
             addImage(duration);
         }
     }
-    private class OffsetTag extends Expression {
+    private class OffsetTag extends XMLTag {
         public String getTagName() {return OFFSET;}
-        public void parse(Context context, Element xmlElement) {
+        public void parse(Parser context, Element xmlElement) {
             tileIndex = Integer.parseInt(getValue(xmlElement));
         }
     }
-    
+    private class RowOffsetTag extends XMLTag {
+        public String getTagName() {return ROW_OFFSET;}
+        public void parse(Parser context, Element xmlElement) {
+            int row = Integer.parseInt(getValue(xmlElement));
+            int col = tileIndex % tileCols;
+            tileIndex = row * tileCols + col;
+        }
+    }
+    private class ColumnOffsetTag extends XMLTag {
+        public String getTagName() {return COL_OFFSET;}
+        public void parse(Parser context, Element xmlElement) {
+            int row = tileIndex / tileCols;
+            int col = Integer.parseInt(getValue(xmlElement));
+            tileIndex = row * tileCols + col;
+        }
+    }
     
     private ImageLoader parent;
     private BaseLoader bsLoader;
@@ -173,6 +188,13 @@ public class ImageParser extends Context
     private int tileIndex = 0;
     private boolean imageAdded = false;
     
+    /**
+     * Creates a new ImageParser that will load images from a
+     * BaseLoader and save them in ImageLoader.
+     * 
+     * @param parent The ImageLoader using this parser.
+     * @param bsLoader The BaseLoader to use to actually load images.
+     */
     public ImageParser(ImageLoader parent, BaseLoader bsLoader)
     {
         this.parent = parent;
@@ -182,14 +204,27 @@ public class ImageParser extends Context
                        new WidthTag(), new HeightTag(),
                        new RowsTag(), new ColumnsTag(),
                        new StateTag(), new DirectionsTag(),
-                       new FrameTag(), new OffsetTag());
+                       new FrameTag(), new OffsetTag(),
+                       new RowOffsetTag(), new ColumnOffsetTag());
     }
 
-    public void updateTiles()
+    /**
+     * Updates the tileset retrieved from the image -- this is called
+     * whenever the source image or the number of tiles horizontally or
+     * vertically changes.
+     */
+    private void updateTiles()
     {
         tiles = ImageUtil.splitImages(sourceImage, tileCols, tileRows);
     }
     
+    /**
+     * Converts a character (lowercase or uppercase N, S, E, or W)
+     * into a direction.
+     * 
+     * @param c The character to convert.
+     * @return The corresponding direction
+     */
     private Direction getDirection(char c)
     {
         switch(c)
@@ -202,7 +237,14 @@ public class ImageParser extends Context
         }
     }
     
-    public void addImage(int duration)
+    /**
+     * Add an image with the current image data. If there is already
+     * an image there, add an image to it as a frame.
+     * 
+     * @param duration The duration of the frame added (use 0 by default, 
+     * and for static images).
+     */
+    private void addImage(int duration)
     {
         ImageKey key = new ImageKey(imageName, state, dir);
         
@@ -215,15 +257,6 @@ public class ImageParser extends Context
         
         imageAdded = true;
     }
-        
-    public void parse(Document doc)
-    {
-        NodeList nodeList = doc.getChildNodes();
-        
-        for(int i=0; i<nodeList.getLength(); i++)
-        {
-            parseElement((Element) nodeList.item(i));
-        }
-    }
+
 }
     
