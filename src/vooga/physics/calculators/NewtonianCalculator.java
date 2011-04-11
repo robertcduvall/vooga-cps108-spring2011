@@ -34,6 +34,7 @@ public class NewtonianCalculator extends PhysicsCalculator {
     /**
      * Applies a force which causes rotation.
      * deltaOmega = F * sin(theta) * deltaT / (m * r)
+     * <br><img src="src/vooga/physics/util/angularvelocity.PNG">
      * @param physicalObject
      * @param force
      * @param pointOfApplication
@@ -43,7 +44,7 @@ public class NewtonianCalculator extends PhysicsCalculator {
         MathVector radius = new MathVector(physicalObject.getCenter(), pointOfApplication);
         Angle theta = radius.getVectorAngle(force);
         double deltaOmega = force.getMagnitude() * theta.sin() * elapsedTime /
-        physicalObject.getMass() / radius.getMagnitude();
+                               physicalObject.getMass() / radius.getMagnitude();
         physicalObject.setRotationalVelocity(physicalObject.getRotationalVelocity() + deltaOmega);
     }
 

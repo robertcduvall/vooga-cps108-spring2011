@@ -16,9 +16,9 @@ public interface IPhysics {
      * Returns the calculator currently being used by the object. If it hasn't yet been defined,
      * add the following code to this method to define it using the current defaults:
      * 
-     * if (myCalculator == null)
+     * <pre>if (myCalculator == null)
      *      myCalculator = PhysicsCalculator.getBestCalcForInterface(this);
-     * return myCalculator;
+     *return myCalculator;</pre>
      * @return
      */
     public PhysicsCalculator getCalculator();
