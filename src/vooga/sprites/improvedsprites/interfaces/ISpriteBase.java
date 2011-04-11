@@ -2,7 +2,7 @@ package vooga.sprites.improvedsprites.interfaces;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import collisions.collisionshapes.CollisionShape;
+import vooga.levels.example.collisions.collisionshapes.CollisionShape;
 import com.golden.gamedev.object.Background;
 
 
