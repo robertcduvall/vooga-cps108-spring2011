@@ -21,7 +21,7 @@ import vooga.util.math.Angle;
  * BestCalculator), or by using the default calculator, which should be held by
  * the level or game or something.
  * 
- * TODO: Tell level/game to hold an instance of this, once this is finalized.
+ * TODO: Level team will need to change bestCalculator based on the level?
  * 
  * @author Nathan Klug
  * 
@@ -29,8 +29,11 @@ import vooga.util.math.Angle;
 public class PhysicsCalculator {
 
     private static final String BEST_CALC_RESOURCES = "calculators/bestCalculator";
+    // bestCalculators is a list of the preferred calculator to use by default
     static String[] bestCalculators;
+    // bestInterfaces is a list of the preferred interfaces to use when a Sprite implements multiple interfaces
     static String[] bestInterfaces;
+    // calculatorsToInterfaces is a map from the calculators to the interfaces that can be used by them
     static Map<String, String[]> calculatorsToInterfaces;
 
     public PhysicsCalculator() {
@@ -38,6 +41,11 @@ public class PhysicsCalculator {
         getDefaultsFromFile(BEST_CALC_RESOURCES);
     }
 
+    /**
+     * Gets the default best calculators, interfaces, and map from the defaults defined at fileName.
+     * 
+     * @param fileName
+     */
     private void getDefaultsFromFile(String fileName) {
         ResourceBundle resources = ResourceBundle.getBundle(fileName);
         bestCalculators = resources.getString("bestCalculators").split(",");
@@ -59,6 +67,13 @@ public class PhysicsCalculator {
         return new HashSet<String>(Arrays.asList(interfaceNames));
     }
 
+    /**
+     * Used to get the best calculator, based on the preferences in the resource file and the
+     * interfaces implemented by the parameter. 
+     * 
+     * @param physics the object who needs to know the best calculator for itself
+     * @return
+     */
     public static PhysicsCalculator getBestCalcForInterface(IPhysics physics) {
         ResourceBundle resources = ResourceBundle.getBundle(BEST_CALC_RESOURCES);
         Collection<String> objectInterfaces = getInterfaceNames(physics);
@@ -78,6 +93,11 @@ public class PhysicsCalculator {
         return null;
     }
 
+    /**
+     * Updates based on the basic physics (like gravity) in the world.
+     * @param elapsedTime
+     * @param physicalObject the object to update
+     */
     public void updateWithPhysics(long elapsedTime, IPhysics physicalObject) {
         if (physicalObject.isOn()) {
             Collection<Force> forces = PhysicsEngine.getInstance().getWorldForces();
@@ -89,7 +109,7 @@ public class PhysicsCalculator {
 
     protected void applyForce(IPhysics physicalObject, Force force, long elapsedTime) {
         if (physicalObject.isOn()) { // Is this really necessary, since it's
-                                     // currently private?
+                                     // currently protected?
             Velocity deltaVelocity = new Velocity(force.getMagnitude() * elapsedTime / physicalObject.getMass(),
                     force.getAngle());
             Velocity spriteVelocity = physicalObject.getVelocity();
@@ -98,6 +118,14 @@ public class PhysicsCalculator {
         }
     }
 
+    /**
+     * Calculates the collision based on the masses and velocities of the objects colliding
+     * @param thisObject
+     * @param otherObject
+     * @param angleOfImpact
+     * @param pointOfCollision
+     * @param coefficientOfRestitution
+     */
     public void collisionOccurred(IPhysics thisObject, IPhysics otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
         if (thisObject.isOn()) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);

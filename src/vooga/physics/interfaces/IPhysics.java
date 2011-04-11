@@ -10,6 +10,15 @@ import vooga.physics.util.Velocity;
  */
 public interface IPhysics {
     
+    /**
+     * Returns the calculator currently being used by the object. If it hasn't yet been defined,
+     * add the following code to this method to define it using the current defaults:
+     * 
+     * if (myCalculator == null)
+     *      myCalculator = PhysicsCalculator.getBestCalcForInterface(this);
+     * return myCalculator;
+     * @return
+     */
     public PhysicsCalculator getCalculator();
     
     public double getMass();
@@ -20,6 +29,9 @@ public interface IPhysics {
     
     public boolean isOn();
     
-    public void setPhysicsOnOff();
+    /**
+     * Turns the physics FOR THIS PARTICULAR OBJECT on or off based on the parameter.
+     */
+    public void setPhysicsOnOff(boolean isOn);
 
 }
