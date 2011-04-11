@@ -10,9 +10,9 @@ import java.util.ResourceBundle;
 import vooga.reflection.Reflection;
 import vooga.physics.engine.PhysicsEngine;
 import vooga.physics.interfaces.IPhysics;
+import vooga.physics.util.Force;
+import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
-import vooga.util.physics.Force;
-import vooga.util.physics.Velocity;
 
 /**
  * To be used in a particular game object (such as a sprite) which extends

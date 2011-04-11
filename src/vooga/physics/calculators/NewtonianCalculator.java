@@ -4,9 +4,9 @@ import java.awt.Point;
 
 import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
+import vooga.physics.util.Force;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
-import vooga.util.physics.Force;
 
 /**
  * Extends PhysicsCalculator by updating for things like friction, rotation
@@ -24,12 +24,12 @@ public class NewtonianCalculator extends PhysicsCalculator {
             this.updateWithPhysics(elapsedTime, physicalObject);
             if (physicalObject instanceof INewtonianPhysics) {
                 // TODO: do whatever should be done here
-        	
+
             }
 
         }
     }
-    
+
     /**
      * Applies a force which causes rotation.
      * deltaOmega = F * sin(theta) * deltaT / (m * r)
@@ -39,13 +39,13 @@ public class NewtonianCalculator extends PhysicsCalculator {
      * @param elapsedTime
      */
     public void applyRotationalForce(INewtonianPhysics physicalObject, Force force, Point pointOfApplication, long elapsedTime) {
-	MathVector radius = new MathVector(physicalObject.getCenterOfMass(), pointOfApplication);
-	Angle theta = radius.getVectorAngle(force);
-	double deltaOmega = force.getMagnitude() * Math.sin(theta.getRadians()) * elapsedTime /
-				physicalObject.getMass() / radius.getMagnitude();
-	physicalObject.setRotationalVelocity(physicalObject.getRotationalVelocity() + deltaOmega);
+        MathVector radius = new MathVector(physicalObject.getCenterOfMass(), pointOfApplication);
+        Angle theta = radius.getVectorAngle(force);
+        double deltaOmega = force.getMagnitude() * Math.sin(theta.getRadians()) * elapsedTime /
+        physicalObject.getMass() / radius.getMagnitude();
+        physicalObject.setRotationalVelocity(physicalObject.getRotationalVelocity() + deltaOmega);
     }
-    
+
     /**
      * Applies friction to an object.
      * @param physicalObject
@@ -54,17 +54,17 @@ public class NewtonianCalculator extends PhysicsCalculator {
      * @param elapsedTime
      */
     public void applyFriction(INewtonianPhysics physicalObject, Force force, Angle surfaceTangent, long elapsedTime) {
-	double normalMagnitude = force.getPerpComponent(surfaceTangent);
-	if (normalMagnitude < 0) {
-	    //Normal magnitude is negative so surfaceTangent is in direction of friction
-	    normalMagnitude = -normalMagnitude;
-	}
-	else {
-	    //Normal magnitude is positive so surfaceTangent is in direction opposite friction
-	    surfaceTangent.setNegativeAngle();
-	}
-	Force friction = new Force(normalMagnitude * physicalObject.getCoefficientOfFriction(), surfaceTangent);
-	applyForce(physicalObject, friction, elapsedTime);
+        double normalMagnitude = force.getPerpComponent(surfaceTangent);
+        if (normalMagnitude < 0) {
+            //Normal magnitude is negative so surfaceTangent is in direction of friction
+            normalMagnitude = -normalMagnitude;
+        }
+        else {
+            //Normal magnitude is positive so surfaceTangent is in direction opposite friction
+            surfaceTangent.setNegativeAngle();
+        }
+        Force friction = new Force(normalMagnitude * physicalObject.getCoefficientOfFriction(), surfaceTangent);
+        applyForce(physicalObject, friction, elapsedTime);
     }
-    
+
 }

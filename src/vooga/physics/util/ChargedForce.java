@@ -1,4 +1,4 @@
-package vooga.util.physics;
+package vooga.physics.util;
 
 import vooga.util.math.Angle;
 

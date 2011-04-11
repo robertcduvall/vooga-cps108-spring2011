@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.util.Collection;
 import java.util.HashSet;
 import vooga.physics.interfaces.IPhysics;
+import vooga.physics.util.Force;
 import vooga.util.math.Angle;
-import vooga.util.physics.Force;
 
 /**
  * I propose that we unify WorldForceManager and WorldPhysicsCalculator into this one class. Is this okay?
