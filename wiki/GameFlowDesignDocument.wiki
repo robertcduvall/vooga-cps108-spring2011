@@ -1,4 +1,8 @@
-GameFlow:
+#summary One-sentence summary of this page.
+
+Design document for GameFlow team. Explaining what we are trying to achieve.
+
+*GameFlow*:
 
 Motivation:
 To create “templates” that will make it much easier for game developers to create games. The goal is to create a working game with very little code.
