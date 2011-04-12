@@ -29,6 +29,16 @@ However, the key conceptual jump is abstracting time-driven engines by another l
 
 Unfortunately, an event-system is not the panacea for all game design - the cost one pays for using an event-system is the multiple orders of increased complexity that comes with this additional design power. In order to bring order to the chaos that might ensue by making interconnections between events, this event system API strives to simplify, organize and process the events in a manner that is debuggable within reasonable time to an average human being. 
 
+===Benefits of an Event Driven System===
+
+Shifting from a temporal game engine concept to an event driven concept can sometimes be rather hard to grasp. Often times, you may find yourself reverting to trying to make a game based on a global game timer. It is import to not lose sight of the event driven paradigm - to think of the game in terms of cause and effect pairs, that is, the occurring of certain events trigger other actions that follow logically. 
+
+The event driven system makes communication between classes extremely easy and extensible. In the overarching game class, instead of holding references to the every single object that the class would need to make a call to, all of that information is now contained and isolated within the event handler. This allows for much cleaner looking code, and lets one define "chain reactions" very easily. For example, similar to the Observer-Observable pattern, one can have multiple events (Observers) linked to the same event trigger (Observable), which transfers work to within a class that waits on an event to make a change to itself. 
+
+All object-oriented programmers will agree that having large decision trees to drive code is considered extremely poor design. With the event based model, when used appropriately, it removes the necessity of such clumsy blocks of code, which now is handled by the registration of events.  Moreover, work in now processed in a queue rather than a stack of function calls. In the earlier design, functions that occur logically in time would have to be nested or placed back to back.  Given this static call to the function, one is unable to interrupt the work flow until it is completed. If there were a method that made deep or computationally costly calls, this would reflect poorly on the performance of the engine, as the user would experience a "lag", or non-responsiveness in input. To avoid this, one would have to be consciously aware of the computational weight of each method call, and manually load balance minimize the latency. 
+
+However, events allow us to dynamically make function calls - the closest one can get in Java to function pointers in C/C++. By keeping a list of things to process in a queue, this allows the stream of work to be paused at any time, while maintaining the temporal order of the method calls without having to explicitly know the cost of each method call. The system can now poll for user input at any point in time in the event loop, by a simple swapping of the event reactor.
+
 
 = Design =
 
@@ -71,6 +81,13 @@ Unfortunately, due to inherent tendency for Strings to be accidentally mistyped,
   # Separate each logical word chunk in the description with a period character '.'
   # Use Upper Camel Case, that is, capitalize the first letter of every word. 
   # Do not use white space.
+
+Examples: Level.Alien.MoveLeft, Menu.HeadsUpDisplay.ClickWeapon
+
+There are also a few predefined namespaces that the user may choose to use when appropriate:
+  # Input.*
+  # Level.*
+  # User.*
 
 ==Firing Events==
 The Event Manager currently supports firing events by specific name, or firing groups of events specified by globs. To fire an event, you can invoke one of the following methods in Event Manager:
