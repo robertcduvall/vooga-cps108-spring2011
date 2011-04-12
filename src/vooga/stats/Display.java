@@ -12,24 +12,15 @@ import com.golden.gamedev.object.Sprite;
 public abstract class Display extends Sprite 
 {
     private static final long serialVersionUID = 1L;
-    private Stat myStat;	
+    //private Stat myStat;	
 	
 	protected void setLocation(Map<String, String> map)
 	{
-		String xLocStr = map.get("xLocation");
-		int xLoc;
-		if(xLocStr == null){
-			xLoc = 0;
-		}else{
-			xLoc = Integer.parseInt(xLocStr);
-		}
-		String yLocStr = map.get("yLocation");
-		int yLoc;
-		if(yLocStr == null){
-			yLoc = 0;
-		}else{
-			yLoc = Integer.valueOf(yLocStr);
-		}
-		setLocation(xLoc, yLoc);
+		String xStr = map.get("x");
+		String yStr = map.get("y");
+		int x, y;
+		x = xStr == null ? 0 : Integer.parseInt(xStr);
+		y = yStr == null ? 0 : Integer.parseInt(yStr);
+		setLocation(x, y);
 	}
 }

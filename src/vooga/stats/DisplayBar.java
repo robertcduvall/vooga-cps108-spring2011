@@ -42,16 +42,16 @@ public class DisplayBar extends Display
 	public DisplayBar (Map<String, String> map, DisplayTracker tracker)
 	{
 		String strMax = map.get("max");
-		myMaxScore =  Integer.valueOf(strMax);
+		myMaxScore =  Integer.parseInt(strMax);
 		String statLoc = map.get("stat");
 		myStat = (Stat<Integer>)tracker.getStat(statLoc);	
 		String strLength = map.get("length");
 		if(strLength !=null){
-			setMaxLength(Integer.valueOf(strLength));
+			setMaxLength(Integer.parseInt(strLength));
 		}
 		String strHeight = map.get("height");
 		if(strHeight !=null){
-			setMaxLength(Integer.valueOf(strHeight));
+			setMaxLength(Integer.parseInt(strHeight));
 		}
 		setLocation(map);
 		String color = map.get("color");
