@@ -1,16 +1,15 @@
-#summary One-sentence summary of this page.
+#summary Design document for GameFlow team. Explaining what we are trying to achieve.
 
-Design document for GameFlow team. Explaining what we are trying to achieve.
 
-*GameFlow*:
+=GameFlow=
 
-Motivation:
+*Motivation*:
 To create “templates” that will make it much easier for game developers to create games. The goal is to create a working game with very little code.
 
-Approach:
+*Approach*:
 We are going to use events as “states”, meaning that when events are fired, it indicates that a new state has be reached. Thus by registering a set of functions with each “state transition”/events, game developer can have a running game by just implementing several functions.
 
-Example:
+*Example*:
 
 (This is still very rough, but hopefully it will give you an idea how it will work.)
 In a very simple game, the flow of the game may just be:
