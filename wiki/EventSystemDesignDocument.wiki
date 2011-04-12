@@ -85,9 +85,9 @@ Unfortunately, due to inherent tendency for Strings to be accidentally mistyped,
 Examples: Level.Alien.MoveLeft, Menu.HeadsUpDisplay.ClickWeapon
 
 There are also a few predefined namespaces that the user may choose to use when appropriate:
-  # Input.*
-  # Level.*
-  # User.*
+  * Input.\*
+  * Level.\*
+  * User.\*
 
 ==Firing Events==
 The Event Manager currently supports firing events by specific name, or firing groups of events specified by globs. To fire an event, you can invoke one of the following methods in Event Manager:
