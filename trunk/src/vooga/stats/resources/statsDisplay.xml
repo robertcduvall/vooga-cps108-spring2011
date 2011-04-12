@@ -3,11 +3,11 @@
 <Display>
 
 <Stat type="Integer" value="0" name="score"></Stat>
-<Stat type="Integer" value="50" name="health"></Stat>
+<Stat type="Integer" value="100000" name="health"></Stat>
 
-<Group name="ScoreGroup">
-<DisplayString xLoc="10" yLoc="100" fontName="Times New Roman" label="Health: " fontSize="32"></DisplayString>
-<DisplayBar xLoc="110" yLoc="110" max="100" stat="health" color="red" backColor="black"></DisplayBar>
-</Group>
+<DisplayGroup name="DisplayGroup">
+<DisplayString x="90" y="100" fontName="Times New Roman" label="Health: " fontSize="36"></DisplayString>
+<DisplayBar x="100" y="100" max="100" stat="health" color="red" backColor="white"></DisplayBar>
+</DisplayGroup>
 
 </Display>
