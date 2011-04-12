@@ -1,7 +1,7 @@
-#summary Design document for GameFlow team. Explaining what we are trying to achieve.
+#summary Design document for Game Flow team. Explaining what we are trying to achieve.
 
 
-=GameFlow=
+=Game Flow=
 
 *Motivation*:
 To create “templates” that will make it much easier for game developers to create games. The goal is to create a working game with very little code.
@@ -25,6 +25,6 @@ Thus what the game flow team will provide is three empty methods for the game de
 P.S. At this point we actually don’t have any code at all and this is because we are still trying to figure out a good set of events to fire. However, most groups should be able to continue development without knowing our implementation. Please let us know if you have any questions. We will try to keep updating this wiki as our template takes shape.
 
 Peace
-GameFlow team
+Game Flow team
 
  
