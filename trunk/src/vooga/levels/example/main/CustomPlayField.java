@@ -19,7 +19,6 @@ import com.golden.gamedev.object.SpriteGroup;
  */
 public class CustomPlayField extends PlayField
 {
-    private static final ResourceManager playfieldResources = new ResourceManager("playfield");
     private Game myGame;
 
     // Sprite Groups
@@ -35,14 +34,15 @@ public class CustomPlayField extends PlayField
         myGame = game;
 
         // Initialize Sprite Groups
-        myBulletGroup = addGroup(new SpriteGroup(playfieldResources.getString("bullet_group_name")));
-        myAlienBulletGroup = addGroup(new SpriteGroup(playfieldResources.getString("alien_bullet_group_name")));
-        myAlienGroup = addGroup(new SpriteGroup(playfieldResources.getString("alien_group_name")));
-        myShipGroup = addGroup(new SpriteGroup(playfieldResources.getString("ship_group_name")));
+        myBulletGroup = addGroup(new SpriteGroup("bullet_group_name"));
+        myAlienBulletGroup = addGroup(new SpriteGroup("alien_bullet_group_name"));
+        myAlienGroup = addGroup(new SpriteGroup("alien_group_name"));
+        myShipGroup = addGroup(new SpriteGroup("ship_group_name"));
         myShipGroup.add(new Ship(myGame, this));
 
         setCollisionGroups();
         LevelManager.getInstance().setPlayField(this);
+        LevelManager.getInstance().setGame(myGame);
         LevelManager.getInstance().loadLevel(0);
 
     }

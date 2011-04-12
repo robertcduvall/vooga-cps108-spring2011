@@ -1,7 +1,7 @@
 package vooga.levels;
 
 /**
- * Represents an exceptional situation specific to the model.
+ * Represents an exceptional situation specific to levels.
  * 
  * @author Andrew Patterson
  * @author Robert C. Duvall
