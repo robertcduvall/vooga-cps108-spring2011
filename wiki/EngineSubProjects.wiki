@@ -121,7 +121,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Description: Allow designers greater control over development of their games by allowing them to easily trace their system during testing
      * Design Goals: Create a debugging framework that allows for the reading & setting of variables in the system
      * Core Responsibilities: Develop user interface for manipulation of values. Also develop UI for visual representation of variable state over time(plot graph)
-     * Collaborates With:
+     * Collaborates With: everyone(configuring debugger to display game engine classes from other teams)
      * Extensions:
   # User Interface Design
      * Claimed by - Team ?( David Colon-Smith and David Crowe)
