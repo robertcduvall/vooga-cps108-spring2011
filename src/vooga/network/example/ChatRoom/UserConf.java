@@ -61,12 +61,12 @@ public class UserConf extends JDialog {
 				public void actionPerformed (ActionEvent a) {
 					if(userName.getText().equals("")){
 						DLGINFO.setText(
-							"                                 username cannot be empty£¡");
+							"                                 username cannot be empty");
 						userName.setText(userInputName);
 						return;
 					}
 					else if(userName.getText().length() > 15){
-						DLGINFO.setText("                    username cannot be more than 15 chars£¡");
+						DLGINFO.setText("                    username cannot be more than 15 chars");
 						userName.setText(userInputName);
 						return;
 					}

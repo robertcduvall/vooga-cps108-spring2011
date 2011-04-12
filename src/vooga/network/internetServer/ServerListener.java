@@ -28,7 +28,6 @@ public class ServerListener extends Thread {
 				handler.start();
 			}
 		} catch (IOException e) {
-			//TODO: exception
 		}
 	}
 }
