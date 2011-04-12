@@ -1,0 +1,16 @@
+<!-- Each Object only shows Fields with names added in XML, unless show="all" -->
+<!-- FieldNames with no elements show all Fields of type, by default -->
+<!-- Be VERY careful with show="all" -->
+
+<Field>
+	<Object name="Debugger.TestGame">
+		<FieldName name="Debugger.Player" />
+		<FieldName name="int" />
+		<FieldName name="java.lang.String" />
+		<FieldName name="java.util.ArrayList" />
+	</Object>	
+	<Object name="Debugger.Player" show="all" >
+		<FieldName name="int" />
+		<FieldName name="java.lang.String">myName</FieldName>
+	</Object>
+</Field>
