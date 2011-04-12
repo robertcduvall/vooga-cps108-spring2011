@@ -1,7 +1,9 @@
 package vooga.levels.example.main;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import vooga.levels.example.resourceManager.ResourceManager;
+import vooga.core.VoogaGame;
 import com.golden.gamedev.Game;
 import com.golden.gamedev.GameLoader;
 import com.golden.gamedev.object.PlayField;
@@ -11,9 +13,8 @@ import com.golden.gamedev.object.background.ImageBackground;
 /** 
  * @author Andrew Patterson
  */
-public class CustomGame extends Game
+public class CustomGame extends VoogaGame
 {
-    private static final ResourceManager gameResources = new ResourceManager("game");    
     private PlayField myPlayfield;
     private static CustomGame myInstance;
 
@@ -24,7 +25,7 @@ public class CustomGame extends Game
     public static void main (String[] args)
     {
         GameLoader game = new GameLoader();
-        game.setup(new CustomGame(), gameResources.getDimension("screen_size"), false);
+        game.setup(new CustomGame(), new Dimension(1250,700), false);
         game.start();
     }
 
@@ -35,7 +36,7 @@ public class CustomGame extends Game
     public void initResources ()
     {
         myInstance = this;
-        myPlayfield = new CustomPlayField(new ImageBackground(getImage(gameResources.getString("background_image")), getWidth(), getHeight()),this);
+        myPlayfield = new CustomPlayField(new ColorBackground(Color.RED, getWidth(), getHeight()),this);
     }
 
 
@@ -70,15 +71,15 @@ public class CustomGame extends Game
      */
     public void youWin()
     {
-        myPlayfield = new PlayField(new ImageBackground(getImage(gameResources.getString("winning_image"))));
+        //myPlayfield = new PlayField(new ImageBackground(getImage(gameResources.getString("winning_image"))));
     }
 
     { distribute = false; }
 
-    public static CustomGame getInstance()
+    @Override
+    public void updatePlayField (long elapsedTime)
     {
-        if (myInstance == null) myInstance = new CustomGame();
-        return myInstance;
+        // TODO Auto-generated method stub
+        
     }
-
 }

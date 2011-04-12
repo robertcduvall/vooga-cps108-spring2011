@@ -9,6 +9,7 @@ import java.util.TreeSet;
 import vooga.levels.example.levels.AbstractLevel;
 import vooga.levels.example.main.CustomPlayField;
 import vooga.levels.example.reflection.Reflection;
+import com.golden.gamedev.Game;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 
@@ -30,6 +31,7 @@ public class LevelManager
     private int myNumOfLevels;
     private int myNumOfLevelsCompleted;
     private CustomPlayField myPlayField;
+    private Game myGame;
 
 
     /**
@@ -80,7 +82,7 @@ public class LevelManager
     {
         String levelName = myLevelOrderMap.get(id);
         if (levelName == null) throw LevelException.NON_EXISTANT_LEVEL;
-        AbstractLevel requestedLevel = (AbstractLevel) Reflection.createInstance(levelName, levelName, id, myPlayField);
+        AbstractLevel requestedLevel = (AbstractLevel) Reflection.createInstance(levelName, levelName, id, myPlayField, myGame);
         requestedLevel.loadLevel();
         myCurrentLevels.add(requestedLevel);
     }
@@ -219,5 +221,12 @@ public class LevelManager
     {
         myPlayField = pf;
     }
-
+    
+    /**
+     * Sets the game
+     */
+    public void setGame(Game game)
+    {
+        myGame = game;
+    }
 }

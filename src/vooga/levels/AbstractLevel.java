@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.TreeMap;
-import other.CustomGame;
+import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
@@ -20,6 +20,7 @@ import com.golden.gamedev.object.Sprite;
  */
 public abstract class AbstractLevel implements Comparable<AbstractLevel>
 {
+    private Game myGame;
     private String myFilePath;
     private int myId;
     private IGoal myGoal;
@@ -29,8 +30,9 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
     private Queue<String> myMusic;
 
 
-    public AbstractLevel (String filePath, int id, PlayField pf)
+    public AbstractLevel (String filePath, int id, PlayField pf, Game g)
     {
+        myGame = g;
         myPlayField = pf;
         myFilePath = filePath;
         myId = id;
@@ -95,7 +97,7 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
      */
     protected void addMusic ()
     {
-        CustomGame.getInstance().playMusic(myMusic.poll());
+        myGame.playMusic(myMusic.poll());
     }
 
 

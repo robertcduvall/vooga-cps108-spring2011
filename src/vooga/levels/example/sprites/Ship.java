@@ -3,7 +3,6 @@ package vooga.levels.example.sprites;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import vooga.levels.example.main.CustomGame;
 import vooga.levels.example.main.CustomPlayField;
 import vooga.levels.example.resourceManager.ResourceManager;
 import vooga.levels.example.weapons.IWeaponLauncher;
@@ -95,13 +94,7 @@ public class Ship extends Sprite
     {
         myHealth -= damage;
         if (myHealth < 0) 
-            if(myGame instanceof CustomGame)
-            {
-                CustomGame game = (CustomGame) myGame;
-                game.gameOver();
-            }
-            else
-                System.exit(0); //This should never happen
+            System.exit(0); //This should never happen
     }
     
     /**

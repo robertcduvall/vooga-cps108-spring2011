@@ -1,7 +1,6 @@
 package vooga.levels.example.sprites;
 
 import java.util.Random;
-import vooga.levels.example.main.CustomGame;
 import vooga.levels.example.main.CustomPlayField;
 import vooga.levels.example.weapons.AlienBullet;
 import com.golden.gamedev.Game;
@@ -23,7 +22,7 @@ public class BasicAlien extends Sprite implements Alien
     protected Game myGame;
 
 
-    public BasicAlien (int x, int y, int strength, CustomGame game, CustomPlayField pf)
+    public BasicAlien (int x, int y, int strength, Game game, CustomPlayField pf)
     {
         super(game.getImage(alienResources.getString("alien_image")), x, y);
         myGame = game;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.TreeMap;
-import vooga.levels.example.main.CustomGame;
 import vooga.levels.example.main.CustomPlayField;
+import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.Sprite;
 
@@ -20,6 +20,7 @@ import com.golden.gamedev.object.Sprite;
  */
 public abstract class AbstractLevel implements Comparable<AbstractLevel>
 {
+    protected Game myGame;
     private String myFilePath;
     private int myId;
     protected IGoal myGoal;
@@ -29,8 +30,9 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
     protected Queue<String> myMusic;
 
 
-    public AbstractLevel (String filePath, int id, CustomPlayField pf)
+    public AbstractLevel (String filePath, int id, CustomPlayField pf, Game g)
     {
+        myGame = g;
         myPlayField = pf;
         myFilePath = filePath;
         myId = id;
@@ -93,7 +95,7 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
      */
     protected void addMusic ()
     {
-        CustomGame.getInstance().playMusic(myMusic.poll());
+        myGame.playMusic(myMusic.poll());
     }
 
 
