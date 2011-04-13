@@ -5,6 +5,7 @@ import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
 import vooga.physics.interfaces.IPhysicsRotate;
 import vooga.physics.util.Force;
+import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.ISpriteCollider;
 import vooga.sprites.spritebuilder.components.ISpriteUpdater;
@@ -17,15 +18,7 @@ public class PhysicsRotateC extends BasicComponent implements IPhysicsRotate, IS
     
     private double myMass;
     private boolean isOn;
-    
-    @Override
-    public void collisionOccurred(IPhysics thisObject, IPhysics otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
-        /*TODO: We can't use the "apply rotational force" method, because we don't actually have a force,
-         * because we don't know how much time elapsed during the collision, so we need to implement this with
-         * the conservation of rotational momentum theorem.
-         */
-        
-    }
+
 
     @Override
     public void update(Sprite s, long elapsedTime) {
@@ -96,6 +89,36 @@ public class PhysicsRotateC extends BasicComponent implements IPhysicsRotate, IS
             isOn = (Boolean) fields[1];
         else
             isOn = true;
+        
+    }
+
+    @Override
+    public Point getCenter() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Velocity getVelocity() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setVelocity(Velocity newVelocity) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void collisionOccurred(ISpriteCollider otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+        /*TODO: We can't use the "apply rotational force" method, because we don't actually have a force,
+         * because we don't know how much time elapsed during the collision, so we need to implement this with
+         * the conservation of rotational momentum theorem.
+         * TODO: Also, with the currently implemented as ISpriteColliders (extending IPhysics),
+         * can we actually implement this, because they currently can't get the other object's rotational
+         * velocity?
+         */
         
     }
 }
