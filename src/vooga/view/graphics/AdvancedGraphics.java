@@ -51,16 +51,17 @@ public class AdvancedGraphics {
      * Returns the Graphics2D that has been modified by active functions
      * @return modified graphics
      */
-    public Graphics2D getState()
+    public AffineTransform getState()
     {
+    	AffineTransform result = new AffineTransform();
         for(AbstractGraphicsFunction function: myFunctions)
         {
             if(function.getFunctionStatus())
             {
-                myGraphics = function.doFunction(myGraphics);
+                result.concatenate(function.doFunction());
             }
         }
-        return myGraphics;
+        return result;
     }
 
 }

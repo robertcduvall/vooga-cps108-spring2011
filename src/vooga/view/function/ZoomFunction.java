@@ -1,6 +1,7 @@
 package vooga.view.function;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  * Extension of AbstractGraphicsFunction. Implementation of the Zoom function
@@ -17,11 +18,8 @@ public class ZoomFunction extends AbstractGraphicsFunction {
      * Overrides abstract method in super class. Performs zoom function based on scaling.
      */
     @Override
-    public Graphics2D doFunction(Graphics2D g) {
-        System.out.println("ZoomFunction: " + g.toString());
-        g.scale(scalex, scaley);
-        System.out.println("ZoomFunctionPerformed: " + g.toString());
-        return g;
+    public AffineTransform doFunction() {
+        return AffineTransform.getScaleInstance(scalex, scaley);
     }
     
     /**

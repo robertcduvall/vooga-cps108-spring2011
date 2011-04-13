@@ -1,6 +1,7 @@
 package vooga.view.function;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  * Abstract class representing graphic transformation function
@@ -16,7 +17,7 @@ public abstract class AbstractGraphicsFunction {
      * @param graphics object
      * @return modified graphics object
      */
-    public abstract Graphics2D doFunction(Graphics2D g);
+    public abstract AffineTransform doFunction();
     
     /**
      * Returns whether function is active or dormant.
