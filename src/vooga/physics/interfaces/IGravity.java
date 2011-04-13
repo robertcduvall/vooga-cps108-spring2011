@@ -1,6 +1,11 @@
 package vooga.physics.interfaces;
 
-public interface IGravity extends IPointForce {
+/**
+ * DEPRECATED: Use a PointFieldC instead
+ * @author Nathan Klug
+ *
+ */
+public interface IGravity extends IPointField {
 
     public static final double CONSTANT = 1;
 }

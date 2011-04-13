@@ -4,10 +4,15 @@ import java.awt.Point;
 import vooga.physics.calculators.PhysicsCalculator;
 import vooga.physics.engine.PhysicsEngine;
 import vooga.physics.interfaces.IPhysics;
+import vooga.physics.interfaces.IPointField;
+import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.components.ISpriteCollider;
 import vooga.sprites.spritebuilder.components.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
+import vooga.util.math.Angle;
+import vooga.util.math.MathVector;
 
 /**
  * Physics Component of a Sprite, extends BasicComponent and implements IPhysics.
@@ -15,10 +20,9 @@ import vooga.util.buildable.components.BasicComponent;
  * @author Nathan Klug
  *
  */
-public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater
+public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater, ISpriteCollider
 {
     private Sprite mySprite;
-    private PhysicsCalculator myCalculator;
     private double myMass;
     private boolean isOn;
     
@@ -43,18 +47,9 @@ public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater
         mySprite = (Sprite) fields[0];
         myMass = (Double) fields[1];
         if (fields.length > 2)
-            myCalculator = (PhysicsCalculator) fields[2];
-        isOn = true;
-    }
-
-
-    @Override
-    public PhysicsCalculator getCalculator ()
-    {
-        if (myCalculator == null){
-            myCalculator = PhysicsCalculator.getBestCalcForInterface(this);
-        }
-        return myCalculator;
+            isOn = (Boolean) fields[2];
+        else
+            isOn = true;
     }
 
 
@@ -104,8 +99,23 @@ public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater
 
     @Override
     public void update(Sprite s, long elapsedTime) {
-        PhysicsEngine.getInstance().applyWorldForces(this, elapsedTime);
-        
+        if (isOn())
+            PhysicsEngine.getInstance().applyWorldForces(this, elapsedTime);
+    }
+
+    /**
+     * Calculates the collision based on the masses and velocities of the objects colliding.
+     * <br><br>Source: <a href="http://en.wikipedia.org/wiki/Coefficient_of_restitution#Speeds_after_impact">Wikipedia</a>
+     * @param thisObject
+     * @param otherObject
+     * @param angleOfImpact
+     * @param pointOfCollision
+     * @param coefficientOfRestitution
+     */
+    public void collisionOccurred(ISpriteCollider otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+        if (isOn()) {
+            PhysicsEngine.getInstance().basicCollisionOccurred(this, otherObject, angleOfImpact, coefficientOfRestitution);
+        }
     }
 
 }
