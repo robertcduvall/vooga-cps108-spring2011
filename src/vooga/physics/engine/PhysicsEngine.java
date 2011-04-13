@@ -1,10 +1,8 @@
 package vooga.physics.engine;
 
 import java.awt.Point;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 import vooga.physics.calculators.PhysicsCalculator;
 import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
@@ -19,6 +17,7 @@ import vooga.util.math.MathVector;
 /**
  * The big, giant physics engine class that has all methods in physics you should ever need to use
  * @author Nathan Klug
+ * @author Anne Weng
  * 
  */
 public class PhysicsEngine {
@@ -323,14 +322,12 @@ public class PhysicsEngine {
             double normalMagnitude = force.getPerpComponent(surfaceTangent);
             if (normalMagnitude < 0) {
                 // Normal magnitude is negative so surfaceTangent is in
-                // direction of
-                // friction
+                // direction of friction
                 normalMagnitude = -normalMagnitude;
             }
             else {
                 // Normal magnitude is positive so surfaceTangent is in
-                // direction
-                // opposite friction
+                // direction opposite friction
                 surfaceTangent.setNegativeAngle();
             }
             Force friction = new Force(normalMagnitude * physicalObject.getCoefficientOfFriction(), surfaceTangent);

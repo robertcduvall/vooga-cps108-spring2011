@@ -11,7 +11,7 @@ import vooga.physics.util.Velocity;
  */
 public interface IPointField{
     
-    public static double CONSTANT = 0;
+    public double CONSTANT = 0;
     
     public double getPointMagnitude();
     

@@ -21,6 +21,7 @@ import vooga.util.math.MathVector;
  * 
  * 
  * @author Nathan Klug
+ * @author Anne Weng
  * 
  */
 public class PhysicsCalculator {
@@ -245,14 +246,12 @@ public class PhysicsCalculator {
             double normalMagnitude = force.getPerpComponent(surfaceTangent);
             if (normalMagnitude < 0) {
                 // Normal magnitude is negative so surfaceTangent is in
-                // direction of
-                // friction
+                // direction of friction
                 normalMagnitude = -normalMagnitude;
             }
             else {
                 // Normal magnitude is positive so surfaceTangent is in
-                // direction
-                // opposite friction
+                // direction opposite friction
                 surfaceTangent.setNegativeAngle();
             }
             Force friction = new Force(normalMagnitude * physicalObject.getCoefficientOfFriction(), surfaceTangent);
