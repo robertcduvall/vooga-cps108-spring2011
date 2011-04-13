@@ -1,12 +1,18 @@
 package vooga.util.buildable.components.predefined.basic;
 
+import java.awt.Graphics2D;
+import vooga.sprites.improvedsprites.interfaces.IRender;
+import vooga.sprites.improvedsprites.interfaces.Sprite;
+import vooga.sprites.spritebuilder.components.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.buildable.components.IComponent;
 
 
-public class HealthC extends BasicComponent
+public class HealthC extends BasicComponent implements ISpriteUpdater, IRender
 {
 
+    Integer myMax;
+   
     @Override
     protected int compareTo (BasicComponent o)
     {
@@ -23,6 +29,27 @@ public class HealthC extends BasicComponent
 
     @Override
     protected void setFields (Object ... fields)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void update (Sprite s, long elapsedTime)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void render (Graphics2D g)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void render (Graphics2D g, int x, int y)
     {
         // TODO Auto-generated method stub
         
