@@ -1,18 +1,14 @@
 package vooga.debugger.model;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.lang.reflect.Field;
 
-import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Debugger.Debugger;
-
-import util.MethodAction;
+import vooga.debugger.Debugger;
+import vooga.debugger.util.MethodAction;
 
 
 /**
