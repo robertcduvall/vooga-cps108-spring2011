@@ -1,4 +1,4 @@
-package function;
+package vooga.view.function;
 
 import java.awt.Graphics2D;
 

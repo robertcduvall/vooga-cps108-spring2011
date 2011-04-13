@@ -6,7 +6,7 @@ import java.util.Collection;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import Debugger.view.GameTreeNode;
+import vooga.debugger.view.GameTreeNode;
 
 import com.golden.gamedev.Game;
 

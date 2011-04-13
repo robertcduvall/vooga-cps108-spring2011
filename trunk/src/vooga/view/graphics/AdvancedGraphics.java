@@ -1,4 +1,4 @@
-package graphics;
+package vooga.view.graphics;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -7,8 +7,8 @@ import java.util.List;
 
 import com.golden.gamedev.Game;
 
-import function.AbstractGraphicsFunction;
-import function.ZoomFunction;
+import vooga.view.function.AbstractGraphicsFunction;
+import vooga.view.function.ZoomFunction;
 
 /**
  * Wrapper Class for Graphics2D.
