@@ -147,7 +147,7 @@ You may add new packages to the list below, but they must have the same basic in
   # Users 
      * Claimed by: Conrad Haynes
      * Description: Allow users to log in, choose an avatar to be used within the arcade (or even individual games), view personal high scores, and save their preferences (e.g., name, password, image, age (if parental controls are implemented), and favorite games, players, colors, etc). Offer social aspects by allowing players to rate, recommend, chat, or generally collaborate while playing games. Additionally, keep track of social aspects of game playing, such as most popular, recent, and highly reviewed games played.
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
-     * Extensions:
+     * Design Goals: To create a simple log-in / preference setting user-interface in the game that allow game designers to easily set their preferences, stats, and ratings. 
+     * Core Responsibilities: Develop multi-faceted user interface with back and front end, allow users to choose an avatar with saved preferences, and create easy log-in system for players to reach certain avatars 
+     * Collaborates With: Stats Team, Level Editor & Menu Team (for Swing GTGE interface advice, Rouge, and Arcade Team
+     * Extensions: Possible Extension of a Database
