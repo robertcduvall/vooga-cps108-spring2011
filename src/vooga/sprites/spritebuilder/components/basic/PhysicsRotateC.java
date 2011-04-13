@@ -7,13 +7,13 @@ import vooga.physics.interfaces.IPhysicsRotate;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.ISpriteCollider;
+import vooga.sprites.spritebuilder.components.ISpritePhysicsCollider;
 import vooga.sprites.spritebuilder.components.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
-public class PhysicsRotateC extends BasicComponent implements IPhysicsRotate, ISpriteUpdater, ISpriteCollider{
+public class PhysicsRotateC extends BasicComponent implements IPhysicsRotate, ISpriteUpdater, ISpritePhysicsCollider{
 
     
     private double myMass;
