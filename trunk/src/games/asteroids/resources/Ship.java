@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vooga.core.VoogaGame;
+import vooga.core.event.EventManager;
+import vooga.core.event.IEventHandler;
 
 
 import com.golden.gamedev.object.Sprite;
@@ -16,11 +18,13 @@ public class Ship {
 		void shoot();
 	}
 
+	
 	private static final int MOVE_DOWN = 1;
     private static final int MOVE_LEFT = -1;
     private static final int MOVE_RIGHT = 1;
     private static final int MOVE_UP = -1;
 
+    private EventManager myManager;
     private BufferedImage ImageShot;
     private Weapon myCurrentWeapon;
     private int myDirection;
@@ -30,7 +34,25 @@ public class Ship {
     
     
     public Ship(){
-    	
+    	myManager = new EventManager();
+    	myManager.registerEventHandler("EveryTurn.thrust.up",  new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+                moveUp();
+            }
+
+        });
+    	myManager.registerEventHandler("EveryTurn.thrust.down", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+                moveDown();
+            }
+
+        });
     	myCurrentWeapon = new Weapon(){
 
 			@Override
