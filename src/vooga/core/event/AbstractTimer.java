@@ -6,63 +6,60 @@ package vooga.core.event;
  */
 public abstract class AbstractTimer implements ITimer
 {
-    private Object myArgument;
-    private EventManager myEventManager;
-    private String myEventName;
+	private Object myArgument;
+	private EventManager myEventManager;
+	private String myEventName;
+	private String myTimerName;
 
+	protected AbstractTimer(EventManager eventManager, String timerName,
+			String eventName, Object arg)
+	{
+		myEventManager = eventManager;
+		myEventName = eventName;
+		myTimerName = timerName;
+		myArgument = arg;
+	}
 
-    protected AbstractTimer (EventManager eventManager,
-                             String eventName,
-                             Object arg)
-    {
-        myEventManager = eventManager;
-        myEventName = eventName;
-        myArgument = arg;
-    }
+	@Override
+	public String getName()
+	{
+		return myTimerName;
+	}
 
+	@Override
+	public int compareTo(ITimer other)
+	{
+		if (other == null)
+			throw new NullPointerException();
 
-    @Override
-    public void cancel ()
-    {
-        myEventManager.removeTimer(this);
-    }
+		return (int) Math.signum(this.getNextFireTime()
+				- other.getNextFireTime());
+	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this.getClass() == o.getClass())
+			return this.compareTo((ITimer) o) == 0;
+		else
+			return false;
+	}
 
-    @Override
-    public int compareTo (ITimer other)
-    {
-        if (other == null) throw new NullPointerException();
+	@Override
+	public void fireEvent()
+	{
+		myEventManager.fireEvent(this, myEventName, myArgument);
+	}
 
-        return (int) Math.signum(this.getNextFireTime() -
-                                 other.getNextFireTime());
-    }
+	@Override
+	public int hashCode()
+	{
+		return ((Long) this.getNextFireTime()).hashCode();
+	}
 
-
-    @Override
-    public boolean equals (Object o)
-    {
-        if (this.getClass() == o.getClass()) return this.compareTo((ITimer) o) == 0;
-        else return false;
-    }
-
-
-    @Override
-    public void fireEvent ()
-    {
-        myEventManager.fireEvent(this, myEventName, myArgument);
-    }
-
-
-    @Override
-    public int hashCode ()
-    {
-        return ((Long) this.getNextFireTime()).hashCode();
-    }
-
-
-    @Override
-    public boolean isReadyToFire ()
-    {
-        return getNextFireTime() <= System.currentTimeMillis();
-    }
+	@Override
+	public boolean isReadyToFire()
+	{
+		return getNextFireTime() <= System.currentTimeMillis();
+	}
 }

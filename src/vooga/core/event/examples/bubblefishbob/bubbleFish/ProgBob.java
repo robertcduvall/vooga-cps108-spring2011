@@ -350,8 +350,8 @@ public class ProgBob
         torpedo = false;
         smrocks = 0;
         levelNameVisible = true;
-        myEventManager.removeTimer(levelNameDisplayTimer);
-        levelNameDisplayTimer = myEventManager.addTimer(5, "User.HideLevelName");
+        myEventManager.removeTimer("LevelNameDisplayTimer");
+        myEventManager.addTimer("LevelNameDisplayTimer", 5, "User.HideLevelName");
         time_rewind = 0;
         time_paused = 0;
         items = null;

@@ -10,11 +10,12 @@ public class Timer extends AbstractTimer
 
 
     public Timer (EventManager eventManager,
+    		String timerName,
                   long delay,
                   String eventName,
                   Object arg)
     {
-        super(eventManager, eventName, arg);
+        super(eventManager, timerName, eventName, arg);
         myFireTime = System.currentTimeMillis() + delay;
     }
 

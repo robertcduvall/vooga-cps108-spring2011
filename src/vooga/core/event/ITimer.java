@@ -6,17 +6,13 @@ package vooga.core.event;
  */
 public interface ITimer extends Comparable<ITimer>
 {
-    void cancel ();
+	String getName();
 
+	void fireEvent();
 
-    void fireEvent ();
+	long getNextFireTime();
 
+	boolean isFinished();
 
-    long getNextFireTime ();
-
-
-    boolean isFinished ();
-
-
-    boolean isReadyToFire ();
+	boolean isReadyToFire();
 }

@@ -11,11 +11,12 @@ public class PeriodicTimer extends AbstractTimer
 
 
     public PeriodicTimer (EventManager eventManager,
+    			String timerName,
                           long interval,
                           String eventName,
                           Object arg)
     {
-        super(eventManager, eventName, arg);
+        super(eventManager, timerName, eventName, arg);
         myInterval = interval;
         myNextFireTime = System.currentTimeMillis() + interval;
     }
@@ -56,4 +57,6 @@ public class PeriodicTimer extends AbstractTimer
                              getInterval(),
                              getNextFireTime());
     }
+
+
 }

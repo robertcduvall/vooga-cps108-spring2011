@@ -34,7 +34,7 @@ public class EventManagerTest extends TestCase
     @Test
     public final void testOneShotTimer ()
     {
-        myEventManager.addTimer(1, "JUnit.TestComplete"); // 1 second timer
+        myEventManager.addTimer("TestTimer", 1, "JUnit.TestComplete"); // 1 second timer
 
         runToCompletion(5, true);
     }
@@ -52,7 +52,7 @@ public class EventManagerTest extends TestCase
                                                     decrementStepsRemaining();
                                                 }
                                             });
-        myEventManager.addPeriodicTimer(1, "JUnit.TestPeriodicTimer"); // 1 second timer
+        myEventManager.addPeriodicTimer("TestPeriodicTimer", 1, "JUnit.TestPeriodicTimer"); // 1 second timer
 
         setStepsRemaining(2);
 
