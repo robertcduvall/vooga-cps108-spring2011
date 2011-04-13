@@ -1,4 +1,4 @@
-package vooga.collisions.CollisionCheckers;
+package vooga.collisions.collisionCheckers;
 
 public interface ICollider 
 {
