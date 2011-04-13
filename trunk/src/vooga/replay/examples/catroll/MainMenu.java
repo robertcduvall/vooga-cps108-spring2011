@@ -18,10 +18,10 @@ public class MainMenu extends GameObject {
 
 	@Override
 	public void initResources() {
-		mainBackground = new ImageBackground(getImage("main.png"));
-		replayButton = new Sprite(getImage("replay.png"), this.getWidth() / 2,this.getHeight() / 4
+		mainBackground = new ImageBackground(getImage("resources/images/main.png"));
+		replayButton = new Sprite(getImage("resources/images/replay.png"), this.getWidth() / 2,this.getHeight() / 4
 				);
-		startButton = new Sprite(getImage("start.png"), this.getWidth() / 2,this.getHeight()- this.getHeight() / 4
+		startButton = new Sprite(getImage("resources/images/start.png"), this.getWidth() / 2,this.getHeight()- this.getHeight() / 4
 				);
 		startButton.setX(startButton.getX() - startButton.getWidth() / 2);
 		replayButton.setX(replayButton.getX() - startButton.getWidth() / 2);

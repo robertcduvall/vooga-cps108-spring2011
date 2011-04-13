@@ -25,20 +25,20 @@ public class StateTable implements Serializable {
 	//protected static final long serialVersionUID = 1L;
 	//private StateTable parent;
 	//private ArrayList<StateTable> children;
-	protected Map<Sprite, ArrayList<Point2D.Double>> myMap;
+	protected Map<Sprite, ArrayList<SpriteReplayData>> myMap;
 	protected List<Background> backgroundList;
 	protected Background myBackground;
 	protected int time;
 	protected SerialPlayField lastPlayField;
 
 	public StateTable() {
-		myMap = new HashMap<Sprite, ArrayList<Point2D.Double>>();
+		myMap = new HashMap<Sprite, ArrayList<SpriteReplayData>>();
 		backgroundList = new ArrayList<Background>();
 		time = 0;
 		lastPlayField = new SerialPlayField();
 	}
 
-	public Map<Sprite, ArrayList<Point2D.Double>> getTable() {
+	public Map<Sprite, ArrayList<SpriteReplayData>> getTable() {
 		return myMap;
 	}
 	
@@ -64,7 +64,7 @@ public class StateTable implements Serializable {
 		//updateHelper(field.getExtraGroup().getSprites());
 		for(Sprite a: myMap.keySet()){
 			if(!(myMap.get(a).size()==time+1)){
-				myMap.get(a).add(new Point2D.Double(-1,-1));
+				myMap.get(a).add(new SpriteReplayData(a,-1,-1));
 			}
 		}
 		time++;
@@ -74,12 +74,12 @@ public class StateTable implements Serializable {
 		for (Sprite a : sprites) {
 			if (a != null) {
 				if (!myMap.containsKey(a)) {
-					myMap.put(a, new ArrayList<Point2D.Double>());
+					myMap.put(a, new ArrayList<SpriteReplayData>());
 					for (int decrement = time; decrement > 0; decrement--) {
-						myMap.get(a).add(new Point2D.Double(-1, -1));
+						myMap.get(a).add(new SpriteReplayData(a,-1, -1));
 					}
 				}
-				myMap.get(a).add(new Point2D.Double(a.getX(), a.getY()));
+				myMap.get(a).add(new SpriteReplayData(a));
 			}
 		}
 		
@@ -103,8 +103,9 @@ public class StateTable implements Serializable {
 	public void transformSprite(int t) {
 		myBackground = backgroundList.get(t);
 		for (Sprite s : myMap.keySet()) {
-			Point2D.Double point = myMap.get(s).get(t);
-			s.setLocation(point.getX(), point.getY());
+			SpriteReplayData sData = myMap.get(s).get(t);
+			s.setLocation(sData.getX(), sData.getY());
+			s.setImage(sData.getImage());
 			s.setBackground(myBackground);
 		}
 		
