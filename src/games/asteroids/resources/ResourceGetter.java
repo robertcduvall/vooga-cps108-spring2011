@@ -5,8 +5,12 @@ package games.asteroids.resources;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import com.golden.gamedev.engine.BaseIO;
 import com.golden.gamedev.engine.BaseLoader;
@@ -24,30 +28,69 @@ public class ResourceGetter {
 	
 	private static BaseLoader bsLoader = new BaseLoader(new BaseIO(ResourceGetter.class), null);
 	
-	public static void main (String [] args) {
-		bsLoader.getImage("images/asteroid.gif");
+	public static void main (String [] args) throws IOException {
+		//bsLoader.getImage("images/asteroid.gif");
+
+		getAsteroidImage();
+		getBackgroundImage();
+		getBulletImage();
+		getExplosionImage();
+		getShipImage();
 	}
 			
-	public static BufferedImage getAsteroidImage() throws MalformedURLException{
-		URL url = new URL("file:src.games.asteroids.resources.asteroid.gif");
+	public static BufferedImage getAsteroidImage(){
 		
-		return ImageUtil.getImage(url);
+		try {
+			return ImageIO.read(new File("src/games/asteroids/resources/images/asteroid.gif"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 	
 	public static BufferedImage getBackgroundImage(){
-		return null;
+
+		try {
+			return ImageIO.read(new File("src/games/asteroids/resources/images/space.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 		
 	}
 	
 	public static BufferedImage getBulletImage(){
-		return null;
+
+		try {
+			return ImageIO.read(new File("src/games/asteroids/resources/images/green_bullet.gif"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 	
 	public static BufferedImage getExplosionImage(){
-		return null;
+
+		try {
+			return ImageIO.read(new File("src/games/asteroids/resources/images/explosion.gif"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 	
 	public static BufferedImage getShipImage(){
-		return null;
+
+		try {
+			return ImageIO.read(new File("src/games/asteroids/resources/images/ship.gif"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 }
