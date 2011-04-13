@@ -1,11 +1,11 @@
-#summary A Tutorial Series fo the Events System.
+#summary A Tutorial Series of the Events System.
 =Event System Tutorial: Lesson 1: Basic Events=
 
 ====Author: Ethan Yong-Hui Goh====
 
 Hi! Welcome to the Vooga Event System tutorial! This tutorial is meant to be an extremely user friendly document which will explain the use of the Events System through example. If the design document was too much to digest at once, here is another tutorial that may or may not help. Without much ado, lets get started!
 
-===Event Basics - again===
+===Event Basics...Again===
 Hopefully, by now, one understands the basic concepts of events. If not, think of events in terms of a cause and effect pair. The Event Trigger is the 'cause', and the Event Handler is the 'effect' (or response). Hopefully, you are familiar with the basics of Java, so we will jump right into how to set up things.  
 
 ===Understanding the Event Manager===
