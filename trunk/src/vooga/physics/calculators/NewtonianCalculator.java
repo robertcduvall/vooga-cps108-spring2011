@@ -9,7 +9,7 @@ import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
 /**
- * Extends PhysicsCalculator by updating for things like friction, rotation
+ * Deprecicated. Moved to PhysicsEngine.
  * 
  * @author Nathan Klug
  * @author Anne Weng
@@ -17,6 +17,10 @@ import vooga.util.math.MathVector;
  */
 public class NewtonianCalculator extends PhysicsCalculator {
 
+    
+    public NewtonianCalculator(){
+        super();
+    }
     @Override
     public void updateWithPhysics(long elapsedTime, IPhysics physicalObject) {
 

@@ -7,6 +7,8 @@ import vooga.physics.util.Velocity;
 
 /**
  * Interface which defines basic methods that all objects using physics should implement.
+ * See PhysicsC.
+ * 
  * @author Nathan Klug
  *
  */
@@ -21,7 +23,7 @@ public interface IPhysics {
      *return myCalculator;</pre>
      * @return
      */
-    public PhysicsCalculator getCalculator();
+    //public PhysicsCalculator getCalculator();
     
     public double getMass();
     

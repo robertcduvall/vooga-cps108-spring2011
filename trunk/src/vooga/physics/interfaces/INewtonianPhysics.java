@@ -1,6 +1,8 @@
 package vooga.physics.interfaces;
 
 /**
+ * DEPRECATED. Split between IPhysicsFriction and IPhysicsRotate
+ * 
  * Interface which extends IPhysics, defining more specific behavior that a
  * sprite can have.
  * 
