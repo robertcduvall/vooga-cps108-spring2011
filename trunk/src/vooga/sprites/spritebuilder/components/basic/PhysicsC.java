@@ -112,7 +112,7 @@ public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater
      * @param pointOfCollision
      * @param coefficientOfRestitution
      */
-    public void collisionOccurred(ISpriteCollider otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+    public void collisionOccurred(PhysicsC otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
         if (isOn()) {
             PhysicsEngine.getInstance().basicCollisionOccurred(this, otherObject, angleOfImpact, coefficientOfRestitution);
         }

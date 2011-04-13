@@ -111,7 +111,7 @@ public class PhysicsRotateC extends BasicComponent implements IPhysicsRotate, IS
     }
 
     @Override
-    public void collisionOccurred(ISpriteCollider otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+    public void collisionOccurred(PhysicsC otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
         /*TODO: We can't use the "apply rotational force" method, because we don't actually have a force,
          * because we don't know how much time elapsed during the collision, so we need to implement this with
          * the conservation of rotational momentum theorem.
