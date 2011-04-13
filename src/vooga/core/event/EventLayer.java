@@ -19,7 +19,6 @@ public class EventLayer
 	private List<IEventFilter> myEventFilters;
 	private Map<String, IEventHandler> myEventHandlers;
 	private LinkedList<IFiredEvent> myNextEventQueue;
-	private LinkedList<IFiredEvent> myPriorityEventQueue;
 	private EventLayer myParentLayer;
 
 	private Map<String, ITimer> myTimers;
@@ -29,7 +28,6 @@ public class EventLayer
 		myEventHandlers = new HashMap<String, IEventHandler>();
 		myCurrentEventQueue = new LinkedList<IFiredEvent>();
 		myNextEventQueue = new LinkedList<IFiredEvent>();
-		myPriorityEventQueue = new LinkedList<IFiredEvent>();
 		myTimers = new HashMap<String, ITimer>();
 		myEventFilters = new ArrayList<IEventFilter>();
 	}
@@ -55,11 +53,6 @@ public class EventLayer
 	public void addEvent(IFiredEvent event)
 	{
 		myNextEventQueue.add(event);
-	}
-
-	public void addPriorityEvent(IFiredEvent event)
-	{
-		myPriorityEventQueue.add(event);
 	}
 
 	public void addPeriodicTimer(EventManager eventManager, String timerName,
@@ -211,12 +204,6 @@ public class EventLayer
 	public void swapEventQueues()
 	{
 		LinkedList<IFiredEvent> temp = myCurrentEventQueue;
-
-		// Add High Priority events first
-		while (myPriorityEventQueue.size() > 0)
-		{
-			myNextEventQueue.addFirst(myPriorityEventQueue.pollLast());
-		}
 
 		myCurrentEventQueue = myNextEventQueue;
 		// for memory efficiency, recycle the old queue
