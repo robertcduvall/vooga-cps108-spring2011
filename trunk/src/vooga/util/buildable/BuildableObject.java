@@ -130,7 +130,7 @@ public abstract class BuildableObject extends Observable
         if (this.carriesComponent(comp)){
             try
             {
-                this.addComponent(ComponentResources.findConstructor(comp, args[0]).newInstance(args));
+                this.addComponent(ComponentResources.findConstructor(comp, Arrays.asList(args)).newInstance(args));
             }
             catch (Exception e)
             {

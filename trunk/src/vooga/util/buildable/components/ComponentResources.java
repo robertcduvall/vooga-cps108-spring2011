@@ -2,7 +2,10 @@ package vooga.util.buildable.components;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -34,18 +37,24 @@ public class ComponentResources
     /**
      * Finds the fist constructor in the class that carries this object type as its first parameter
      * @param next
+     * @param input 
      * @param firstarg - first arguement in constuctor
      * @return
      * @throws Exception
      */
-    public static Constructor<? extends IComponent> findConstructor (Class<? extends IComponent> next,
-                                         Object firstarg) throws Exception
+    @SuppressWarnings("unchecked")
+    public static Constructor<? extends IComponent> findConstructor (Class<? extends IComponent> next, Iterable<Object> input
+                                         ) throws Exception
     {
         
-        for (Constructor<?> c: next.getConstructors())
+        Iterator<Object> in = input.iterator();
+        Object firstarg = null;
+        for (Constructor<?> c: next.getDeclaredConstructors())
         {
-            Class[] params = c.getParameterTypes();
-            if (params.length != 0 && params[0].equals(firstarg.getClass()))
+            Class<?>[] params = c.getParameterTypes();
+            while (firstarg == null && in.hasNext())
+                firstarg = in.next();
+            if (params.length != 0 && firstarg != null && params[0].isInstance(firstarg))
                 return (Constructor<? extends IComponent>) c;
         }
         return next.getConstructor();
