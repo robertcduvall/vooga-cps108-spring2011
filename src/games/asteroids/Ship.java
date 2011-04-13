@@ -1,5 +1,8 @@
 package games.asteroids;
 
+/**
+ * @author Charlie Hatcher, Conrad Haynes, Yin Xiao, Lingzhao Xie
+ */
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
