@@ -9,7 +9,6 @@ public class AsteroidBulletCollision extends BasicCollisionGroup
     @Override
     public void collided (Sprite asteroid, Sprite bullet)
     {
-    // TODO Auto-generated method stub
         Asteroid myasteroid = (Asteroid) asteroid;
         myasteroid.explode();
         
