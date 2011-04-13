@@ -1,0 +1,21 @@
+package games.asteroids.collisions;
+
+import com.golden.gamedev.object.Sprite;
+import com.golden.gamedev.object.collision.BasicCollisionGroup;
+
+public class AsteroidBulletCollision extends BasicCollisionGroup
+{
+
+    @Override
+    public void collided (Sprite asteroid, Sprite bullet)
+    {
+    // TODO Auto-generated method stub
+        Asteroid myasteroid = (Asteroid) asteroid;
+        myasteroid.explode();
+        
+        Bullet mybullet = (Bullet) bullet;
+        mybullet.destroy();
+
+    }
+
+}
