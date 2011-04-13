@@ -11,7 +11,7 @@ import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.reflection.Reflection;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.ISpriteCollider;
+import vooga.sprites.spritebuilder.components.ISpritePhysicsCollider;
 import vooga.sprites.spritebuilder.components.basic.PhysicsC;
 import vooga.util.buildable.components.IComponent;
 import vooga.util.math.Angle;
@@ -138,16 +138,16 @@ public class PhysicsEngine {
         if (isOn) {
             if (object2.carriesComponent(PhysicsC.class)) {
                 for (IComponent c : object1.getComponents()) {
-                    if (c instanceof ISpriteCollider) {
-                        ((ISpriteCollider) c).collisionOccurred(object2.getComponent(PhysicsC.class), angleOfImpact,
+                    if (c instanceof ISpritePhysicsCollider) {
+                        ((ISpritePhysicsCollider) c).collisionOccurred(object2.getComponent(PhysicsC.class), angleOfImpact,
                                 pointOfImpact, coefficientOfRestitution);
                     }
                 }
             }
             if (object1.carriesComponent(PhysicsC.class)) {
                 for (IComponent c : object2.getComponents()) {
-                    if (c instanceof ISpriteCollider) {
-                        ((ISpriteCollider) c).collisionOccurred(object1.getComponent(PhysicsC.class), angleOfImpact,
+                    if (c instanceof ISpritePhysicsCollider) {
+                        ((ISpritePhysicsCollider) c).collisionOccurred(object1.getComponent(PhysicsC.class), angleOfImpact,
                                 pointOfImpact, coefficientOfRestitution);
                     }
                 }
@@ -283,7 +283,7 @@ public class PhysicsEngine {
      * @param pointOfCollision
      * @param coefficientOfRestitution
      */
-    public void basicCollisionOccurred(ISpriteCollider thisObject, PhysicsC otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
+    public void basicCollisionOccurred(ISpritePhysicsCollider thisObject, PhysicsC otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
         if (isOn()) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
             double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);

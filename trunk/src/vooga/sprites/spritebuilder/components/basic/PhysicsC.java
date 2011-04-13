@@ -8,7 +8,7 @@ import vooga.physics.interfaces.IPointField;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.ISpriteCollider;
+import vooga.sprites.spritebuilder.components.ISpritePhysicsCollider;
 import vooga.sprites.spritebuilder.components.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
@@ -20,7 +20,7 @@ import vooga.util.math.MathVector;
  * @author Nathan Klug
  *
  */
-public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater, ISpriteCollider
+public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater, ISpritePhysicsCollider
 {
     private Sprite mySprite;
     private double myMass;
