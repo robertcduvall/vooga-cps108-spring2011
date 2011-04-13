@@ -19,6 +19,7 @@ public class EventLayer
 	private List<IEventFilter> myEventFilters;
 	private Map<String, IEventHandler> myEventHandlers;
 	private LinkedList<IFiredEvent> myNextEventQueue;
+	private LinkedList<IFiredEvent> myPriorityEventQueue;
 	private EventLayer myParentLayer;
 
 	private Map<String, ITimer> myTimers;
@@ -28,6 +29,7 @@ public class EventLayer
 		myEventHandlers = new HashMap<String, IEventHandler>();
 		myCurrentEventQueue = new LinkedList<IFiredEvent>();
 		myNextEventQueue = new LinkedList<IFiredEvent>();
+		myPriorityEventQueue = new LinkedList<IFiredEvent>();
 		myTimers = new HashMap<String, ITimer>();
 		myEventFilters = new ArrayList<IEventFilter>();
 	}
@@ -55,17 +57,23 @@ public class EventLayer
 		myNextEventQueue.add(event);
 	}
 
+	public void addPriorityEvent(IFiredEvent event)
+	{
+		myPriorityEventQueue.add(event);
+	}
+
 	public void addPeriodicTimer(EventManager eventManager, String timerName,
 			String eventName, long interval, Object arg)
 	{
-		addTimer(timerName, new PeriodicTimer(eventManager, timerName, interval,
-				eventName, arg));
+		addTimer(timerName, new PeriodicTimer(eventManager, timerName,
+				interval, eventName, arg));
 	}
 
 	public void addTimer(EventManager eventManager, String timerName,
 			String eventName, long delay, Object arg)
 	{
-		addTimer(timerName, new Timer(eventManager, timerName, delay, eventName, arg));
+		addTimer(timerName, new Timer(eventManager, timerName, delay,
+				eventName, arg));
 	}
 
 	protected void addTimer(String timerName, ITimer timer)
@@ -156,7 +164,7 @@ public class EventLayer
 
 	public IFiredEvent removeEvent()
 	{
-		return myCurrentEventQueue.remove();
+		return myCurrentEventQueue.removeFirst();
 	}
 
 	public IEventHandler removeEventHandler(String eventName)
@@ -203,9 +211,17 @@ public class EventLayer
 	public void swapEventQueues()
 	{
 		LinkedList<IFiredEvent> temp = myCurrentEventQueue;
+
+		// Add High Priority events first
+		while (myPriorityEventQueue.size() > 0)
+		{
+			myNextEventQueue.addFirst(myPriorityEventQueue.pollLast());
+		}
+
 		myCurrentEventQueue = myNextEventQueue;
 		// for memory efficiency, recycle the old queue
 		myNextEventQueue = temp;
 		myNextEventQueue.clear();
+
 	}
 }
