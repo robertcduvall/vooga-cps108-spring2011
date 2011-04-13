@@ -19,21 +19,23 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
+import vooga.collisions.shapes.Polygon;
+import vooga.collisions.shapes.Quadrilateral;
+import vooga.collisions.shapes.Vertex;
 import vooga.sprites.improvedsprites.interfaces.ICollider;
 import vooga.sprites.improvedsprites.interfaces.IMobility;
 import vooga.sprites.improvedsprites.interfaces.IRender;
 import vooga.sprites.improvedsprites.interfaces.ISprite;
-import vooga.sprites.spritebuilder.components.ISpriteUpdater;
-import vooga.util.LineMath;
+import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
 import vooga.util.buildable.BuildException;
 import vooga.util.buildable.IBuildable;
 import vooga.util.buildable.components.ComponentResources;
 import vooga.util.buildable.components.ComponentSet;
 import vooga.util.buildable.components.IComponent;
 import vooga.util.buildable.components.predefined.basic.Velocity2DC;
-import collisions.collisionshapes.CollisionRect;
-import collisions.collisionshapes.CollisionShape;
+import vooga.util.math.LineMath;
 import com.golden.gamedev.object.Background;
+import com.golden.gamedev.object.collision.CollisionShape;
 
 
 /**
@@ -77,7 +79,7 @@ public class Sprite extends BaseSprite
      */
     private static final long serialVersionUID = -4499098097309229784L;
 
-    private CollisionShape myCollisionShape;
+    private Polygon myCollisionShape;
 
     protected ComponentSet<IComponent> myComponents;
 
@@ -362,15 +364,15 @@ public class Sprite extends BaseSprite
      * @see sprites.oldsprites.ISprite#getCollisionShape()
      */
     @Override
-    public CollisionShape getCollisionShape ()
+    public Polygon getCollisionShape ()
     {
         if (this.myCollisionShape == null)
         {
             return (this.myCollisionShape =
-                new CollisionRect(this.getX(),
-                                  this.getY(),
-                                  this.getWidth(),
-                                  this.getHeight()));
+                new Quadrilateral(new Vertex(this.getX(),this.getY()),
+                                  new Vertex(this.getX()+this.getHeight(), this.getY()),
+                                  new Vertex(this.getX(),this.getY() + this.getHeight()),
+                                  new Vertex(this.getX()+this.getHeight(),this.getY() + this.getHeight())));
         }
 
         return this.myCollisionShape;
@@ -617,7 +619,7 @@ public class Sprite extends BaseSprite
      * .CollisionShape)
      */
     @Override
-    public void setCollisionShape (CollisionShape cs)
+    public void setCollisionShape (Polygon cs)
     {
 
         this.myCollisionShape = cs;
@@ -761,17 +763,12 @@ public class Sprite extends BaseSprite
     }
 
 
-    @Override
-    public boolean collidesWith (ICollider o)
-    {
-        return myCollisionShape.collidesWith(o);
-    }
 
 
     @Override
-    public List<Line2D> getCollisionLines ()
+    public Iterable<Line2D> getCollisionLines ()
     {
-        return myCollisionShape.getCollisionLines();
+        return Arrays.asList(myCollisionShape.getSides());
     }
 
 

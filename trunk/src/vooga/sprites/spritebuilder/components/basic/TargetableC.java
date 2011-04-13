@@ -2,29 +2,38 @@ package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import vooga.sprites.improvedsprites.AnimatedSprite;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.improvedsprites.interfaces.IRender;
-import vooga.sprites.improvedsprites.interfaces.ITargetable;
-import vooga.sprites.spritebuilder.components.ISpriteUpdater;
 import vooga.sprites.util.targetindicators.TargetIndicator;
 import vooga.util.buildable.components.BasicComponent;
-import vooga.util.buildable.components.IComponent;
 
-public class TargetIndicatorC extends BasicComponent implements IComponent, IRender
+public class TargetableC extends BasicComponent implements IRender
 {
     
+    private boolean amTargetted;
     TargetIndicator myIndicator;
-    
-    TargetIndicatorC(TargetIndicator ti){
+
+    TargetableC(TargetIndicator ti){
         myIndicator = ti;
+        amTargetted = false;
     }
     
-    public TargetIndicatorC (BufferedImage buf, ITargetable t)
+    public TargetableC (BufferedImage buf, Sprite t)
     {
-        myIndicator = new TargetIndicator(buf, t);
+        this( new TargetIndicator(buf, t));
     }
     
+    public TargetableC ()
+    {
+        super();
+    }
+
+    @Override
+    protected int compareTo (BasicComponent o)
+    {
+        // TODO compare boolean?
+        return 0;
+    }
     
     @Override
     public void render (Graphics2D g)
@@ -38,29 +47,37 @@ public class TargetIndicatorC extends BasicComponent implements IComponent, IRen
         myIndicator.render(g, x, y);
     }
 
-    @Override
-    protected int compareTo (BasicComponent o)
-    {
-        // TODO how to compare target indicators?
-        return 0;
-    }
 
     @Override
     protected Object[] getFields ()
     {
-        return new Object[]{myIndicator};
+        return new Object[]{myIndicator, amTargetted};
     }
+
 
     @Override
     protected void setFields (Object ... fields)
     {
         myIndicator = (TargetIndicator) fields[0];
+        amTargetted = (Boolean) fields[1];
+        
     }
 
-    public TargetIndicator getIndicator ()
+
+    public boolean isTargetted ()
     {
-        return myIndicator;
+        return amTargetted;
     }
 
-
+    public void detarget ()
+    {
+        amTargetted = false;
+        myIndicator.setActive(false);
+    }
+    
+    public void target ()
+    {
+        amTargetted = true;
+    }
+    
 }
