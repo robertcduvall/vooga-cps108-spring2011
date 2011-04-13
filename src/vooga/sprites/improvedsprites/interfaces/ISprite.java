@@ -1,6 +1,8 @@
 package vooga.sprites.improvedsprites.interfaces;
 
-import collisions.collisionshapes.CollisionShape;
+import vooga.collisions.shapes.Polygon;
+import com.golden.gamedev.object.collision.CollisionShape;
+
 
 public interface ISprite 
 {
@@ -9,10 +11,10 @@ public interface ISprite
      * Returns default {@linkplain #defaultCollisionShape collision shape}, can
      * be used along with collision manager.
      */
-    public abstract CollisionShape getCollisionShape ();
+    public abstract Polygon getCollisionShape ();
 
 
-    public abstract void setCollisionShape (CollisionShape cs);
+    public abstract void setCollisionShape (Polygon cs);
     
     /**
      *  updates the sprite

@@ -48,10 +48,10 @@ public class TargetC extends BasicComponent
 
     public void setTarget (ITargetable target)
     {
-        myTarget = target;
+        myTarget = (ITargetable) target;
     }
 
-    public ITargetable getTarget ()
+    public Object getTarget ()
     {
         return myTarget;
     }

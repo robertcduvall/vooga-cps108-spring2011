@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import vooga.sprites.improvedsprites.Sprite;
@@ -24,10 +25,9 @@ public class SpriteBuilder
         myConstructors.addAll(Arrays.asList(classes));
     }
     
-    public Sprite createSprite(Object ...in){
+    public Sprite buildSprite(Sprite bs, Object ...in){
         Iterator<Class<? extends IComponent>> iter1 = myConstructors.iterator();
-        Queue<Object> input = new PriorityQueue<Object>(Arrays.asList(in));
-        Sprite bs = new Sprite();
+        Queue<Object> input = new LinkedList<Object>(Arrays.asList(in));
 
         while(iter1.hasNext()){
             if (!iter1.hasNext())
@@ -35,9 +35,8 @@ public class SpriteBuilder
             
             try
             {
-               Constructor<? extends IComponent> c = ComponentResources.findConstructor(iter1.next(), input.peek()); //find constructor
+               Constructor<? extends IComponent> c = ComponentResources.findConstructor(iter1.next(), input); //find constructor
                Object[] args = getConstructorArgs(c, input); //get arguements for constructor
-                
                bs.addComponent((IComponent) c.newInstance(args));
             }
             catch (Exception e)
@@ -70,13 +69,14 @@ public class SpriteBuilder
         ArrayList<Object> args = new  ArrayList<Object>();
         
         for (Class<?> p: params){
-            if (input.peek().getClass().equals(p))
+           System.out.println(input.peek().getClass() + " " + p);
+            if (p.isInstance(input.peek()))
                 args.add(input.poll());
             else
                 args.add(null);
             
         }
-        
+        System.out.println(args.size());
         return args.toArray();
     }
     
