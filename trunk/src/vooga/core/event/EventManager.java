@@ -31,8 +31,8 @@ public class EventManager implements ISimpleEventManager
 	private static final String EVERY_TURN_GLOB = "EveryTurn.*";
 
 	private EventLayer myCurrentFilter;
-	
-	private static long maxRuntimeInMillis = 500000;
+
+	private static long maxRuntimeInMillis = 10;
 
 	/**
 	 * Create a new, empty EventManager.
@@ -67,11 +67,6 @@ public class EventManager implements ISimpleEventManager
 		myCurrentFilter.addEvent(event);
 	}
 
-	private void addHighPriorityEvent(IFiredEvent event)
-	{
-		myCurrentFilter.addPriorityEvent(event);
-	}
-	
 	/**
 	 * Register a new Every Turn Event.
 	 * 
@@ -220,48 +215,6 @@ public class EventManager implements ISimpleEventManager
 		});
 	}
 
-	
-	private void fireHighPriorityEvent(final Object source, final String eventName,
-			final Object arg)
-	{
-		final IEventHandler handler = myCurrentFilter
-				.getEventHandler(eventName);
-		if (handler == null)
-		{
-			DEBUG.fireNonExistentEvent(source, eventName, arg);
-			return;
-		}
-		DEBUG.fireEvent(source, eventName, arg);
-		addHighPriorityEvent(new IFiredEvent()
-		{
-
-			@Override
-			public boolean eventNameMatches(String regex)
-			{
-				return Pattern.matches(regex, eventName);
-			}
-
-			@Override
-			public Object getSource()
-			{
-				return source;
-			}
-
-			@Override
-			public void run()
-			{
-				handler.handleEvent(arg);
-			}
-
-			@Override
-			public String toString()
-			{
-				return String.format("Event<%s>", eventName);
-			}
-
-		});
-	}
-	
 	/**
 	 * Fire all events matching <code>glob</code> (pattern) with provided
 	 * <code>source</code> context.
@@ -296,14 +249,6 @@ public class EventManager implements ISimpleEventManager
 			fireEvent(source, entry.getKey(), arg);
 	}
 
-	
-	private void fireHighPriorityEvents(Object source, String glob, Object arg)
-	{
-		for (Map.Entry<String, IEventHandler> entry : myCurrentFilter
-				.getEventHandlerEntries(glob))
-			fireHighPriorityEvent(source, entry.getKey(), arg);
-	}
-	
 	/**
 	 * Syntactic sugar to handle an event by immediately firing a different
 	 * event. Useful for keymaps and other similar "glue" constructs.
@@ -435,8 +380,8 @@ public class EventManager implements ISimpleEventManager
 	 */
 	public void update(long elapsedTime)
 	{
-		fireHighPriorityEvents(this, EVERY_TURN_GLOB, elapsedTime);
-		
+		runEveryTurnEvents(this, EVERY_TURN_GLOB, elapsedTime);
+
 		myCurrentFilter.swapEventQueues();
 
 		long eventManagerStartTime = System.currentTimeMillis();
@@ -448,7 +393,18 @@ public class EventManager implements ISimpleEventManager
 			DEBUG.runEvent(event);
 			event.run();
 		}
-			
+
+	}
+
+	private void runEveryTurnEvents(EventManager eventManager,
+			String everyTurnGlob, long elapsedTime)
+	{
+		for (Map.Entry<String, IEventHandler> entry : myCurrentFilter
+				.getEventHandlerEntries(everyTurnGlob))
+		{
+			entry.getValue().handleEvent(elapsedTime);
+		}
+
 	}
 
 	public void setDebugMode(boolean b)
