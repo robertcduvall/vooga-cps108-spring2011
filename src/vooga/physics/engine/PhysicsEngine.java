@@ -10,12 +10,17 @@ import vooga.physics.interfaces.IPointField;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.reflection.Reflection;
+import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.ISpriteCollider;
+import vooga.sprites.spritebuilder.components.basic.PhysicsC;
+import vooga.util.buildable.components.IComponent;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
 /**
- * The big, giant physics engine class that has all methods in physics you should ever need to use
+ * The big, giant physics engine class that has all methods in physics you
+ * should ever need to use
+ * 
  * @author Nathan Klug
  * @author Anne Weng
  * 
@@ -74,7 +79,7 @@ public class PhysicsEngine {
             for (Force f : worldForces) {
                 PhysicsCalculator.getInstance().applyForce(physicalObject, f, elapsedTime);
             }
-            
+
             Collection<IPointField> myInterfaces = Reflection.getInterfacesWhichSubclass(physicalObject,
                     IPointField.class);
 
@@ -103,7 +108,7 @@ public class PhysicsEngine {
      * @param pointOfCollision
      * @param angleOfImpact
      */
-    public void elasticCollision(ISpriteCollider object1, ISpriteCollider object2, Angle angleOfImpact, Point pointOfImpact) {
+    public void elasticCollision(Sprite object1, Sprite object2, Angle angleOfImpact, Point pointOfImpact) {
         collision(object1, object2, angleOfImpact, pointOfImpact, 1);
     }
 
@@ -115,11 +120,11 @@ public class PhysicsEngine {
      * @param pointOfCollision
      * @param angleOfImpact
      */
-    public void inelasticCollision(ISpriteCollider object1, ISpriteCollider object2, Angle angleOfImpact, Point pointOfImpact) {
+    public void inelasticCollision(Sprite object1, Sprite object2, Angle angleOfImpact, Point pointOfImpact) {
         collision(object1, object2, angleOfImpact, pointOfImpact, 0);
     }
 
-    /** 
+    /**
      * General collision method. Tells the two physical objects that a collision
      * occurred.
      * 
@@ -129,12 +134,24 @@ public class PhysicsEngine {
      * @param angleOfImpact
      * @param coefficientOfRestitution
      */
-    public void collision(ISpriteCollider object1, ISpriteCollider object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+    public void collision(Sprite object1, Sprite object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         if (isOn) {
-            object1.collisionOccurred(object2, angleOfImpact, pointOfImpact,
-                    coefficientOfRestitution);
-            object2.collisionOccurred(object2, angleOfImpact, pointOfImpact,
-                    coefficientOfRestitution);
+            if (object2.carriesComponent(PhysicsC.class)) {
+                for (IComponent c : object1.getComponents()) {
+                    if (c instanceof ISpriteCollider) {
+                        ((ISpriteCollider) c).collisionOccurred(object2.getComponent(PhysicsC.class), angleOfImpact,
+                                pointOfImpact, coefficientOfRestitution);
+                    }
+                }
+            }
+            if (object1.carriesComponent(PhysicsC.class)) {
+                for (IComponent c : object2.getComponents()) {
+                    if (c instanceof ISpriteCollider) {
+                        ((ISpriteCollider) c).collisionOccurred(object1.getComponent(PhysicsC.class), angleOfImpact,
+                                pointOfImpact, coefficientOfRestitution);
+                    }
+                }
+            }
         }
     }
 
@@ -146,7 +163,7 @@ public class PhysicsEngine {
      * @param angleOfImpact
      * @param pointOfImpact
      */
-    public void collision(ISpriteCollider object1, ISpriteCollider object2, Angle angleOfImpact, Point pointOfImpact) {
+    public void collision(Sprite object1, Sprite object2, Angle angleOfImpact, Point pointOfImpact) {
         elasticCollision(object1, object2, angleOfImpact, pointOfImpact);
     }
 
@@ -188,7 +205,7 @@ public class PhysicsEngine {
     public void togglePhysicsOnOff() {
         isOn = !isOn;
     }
-    
+
     /**
      * Updates based on the basic physics (like gravity) in the world.
      * 
@@ -266,7 +283,7 @@ public class PhysicsEngine {
      * @param pointOfCollision
      * @param coefficientOfRestitution
      */
-    public void basicCollisionOccurred(ISpriteCollider thisObject, ISpriteCollider otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
+    public void basicCollisionOccurred(ISpriteCollider thisObject, PhysicsC otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
         if (isOn()) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
             double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);
