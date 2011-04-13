@@ -1,5 +1,6 @@
 package games.asteroids;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import vooga.core.VoogaGame;
 import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
+import vooga.core.event.examples.VoogaExampleGame;
 
 
 import com.golden.gamedev.object.Sprite;
@@ -24,6 +26,7 @@ public class Ship {
     private static final int MOVE_RIGHT = 1;
     private static final int MOVE_UP = -1;
 
+    private VoogaExampleGame vGame;
     private EventManager myManager;
     private BufferedImage ImageShot;
     private Weapon myCurrentWeapon;
@@ -34,6 +37,26 @@ public class Ship {
     
     
     public Ship(){
+    	vGame = new VoogaExampleGame() {
+			
+			@Override
+			public void updatePlayField(long elapsedTime) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void render(Graphics2D g) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void initResources() {
+				// TODO Auto-generated method stub
+				
+			}
+		};
     	myManager = new EventManager();
     	myManager.registerEventHandler("EveryTurn.thrust.up",  new IEventHandler()
         {
@@ -50,6 +73,33 @@ public class Ship {
             public void handleEvent (Object o)
             {
                 moveDown();
+            }
+
+        });
+    	myManager.registerEventHandler("EveryTurn.thrust.left",new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+                moveLeft();
+            }
+
+        });
+    	myManager.registerEventHandler("EveryTurn.thrust.right",new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+                moveRight();
+            }
+
+        });
+    	myManager.registerEventHandler("EveryTurn.shoot",new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+                fireWeapon();
             }
 
         });
