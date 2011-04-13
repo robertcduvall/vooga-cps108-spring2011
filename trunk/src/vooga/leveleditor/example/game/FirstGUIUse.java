@@ -46,10 +46,13 @@ public class FirstGUIUse extends GameObject{
 			myFrame.add(new LevelEditor(this, "Demo", true, true, 0, 0, 200, 200));
 		}
 	}
+	
+	//Make this an adder
 	public Background getBackground(){
 		return myBackground;
 	}
 	
+	//Make this an adder rather than a getter
 	public SpriteGroup getSpriteGroup(){
 		return mySpriteGroup;
 	}
