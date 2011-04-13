@@ -68,7 +68,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: Mainly Events, any group that potentially needs game stats.
      * Extensions:
   # Game Control
-     * Claimed by DJ Sharkey, Kevin Wang, Shun Fan, Conrad Haynes
+     * Claimed by Kevin Wang, Shun Fan, Conrad Haynes
      * Description: Help coordinate the other teams so they'll fit together into a real game!
      * Design Goals: Make sure a game can be built on top of this.
      * Core Responsibilities: Communicate with other teams so they understand how they fit into the bigger system.
