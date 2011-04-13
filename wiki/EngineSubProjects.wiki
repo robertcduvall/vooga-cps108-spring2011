@@ -67,12 +67,12 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities: By using observer update statistical information. Can return, save or write this information.
      * Collaborates With: Mainly Events, any group that potentially needs game stats.
      * Extensions:
-  # Game Loop
-     * Claimed by DJ Sharkey and Kevin Wang
-     * Description: allow control of the main game loop
-     * Design Goals:To allow the basic control loop  (input->update->render) to be easily accessed and altered.
-     * Core Responsibilities: To simply the control and progression of the game.
-     * Collaborates With: Players, Levels, Views, (really with everyone, but through layers of separation)
+  # Game Control
+     * Claimed by DJ Sharkey, Kevin Wang, Shun Fan, Conrad Haynes
+     * Description: Help coordinate the other teams so they'll fit together into a real game!
+     * Design Goals: Make sure a game can be built on top of this.
+     * Core Responsibilities: Communicate with other teams so they understand how they fit into the bigger system.
+     * Collaborates With: Players, Levels, Game Resources, Collisions
      * Extensions:
   # Physics Engine 
      * Claimed by Nathan Klug, Anne Weng
