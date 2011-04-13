@@ -1,37 +1,31 @@
 package vooga.collisions.shapes;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 
 public class BoundingBox extends Rectangle2D.Double
 {
 
-	public BoundingBox(double width, double height)
+    public BoundingBox ()
+    {
+        super();
+    }
+
+    public BoundingBox (double x, double y, double w, double h)
+    {
+        super(x, y, w, h);
+    }
+
+	public BoundingBox(Point2D p, double width, double height)
 	{
-		this.width = width;
-		this.height = height;
+	    super(p.getX(), p.getY(), width, height );
 	}
-	
-	public BoundingBox(double width, double height, double xPos, double yPos)
-	{
-		this.x = xPos;
-		this.y = yPos;
-		this.width = width;
-		this.height = height;
-	}
-	
-	public BoundingBox(double width, double height, Vertex vertex)
-	{
-		this.width = width;
-		this.height = height;
-		this.x = vertex.getX();
-		this.y = vertex.getY();
-	}
-	
-	public BoundingBox(Rectangle2D rectangle)
-	{
-		this.width = rectangle.getWidth();
-		this.height = rectangle.getHeight();
-		this.x = rectangle.getMinX() - rectangle.getCenterX();
-		this.y = rectangle.getMinY() - rectangle.getCenterY();
-	}
+
+    public BoundingBox (Point2D v1, Point2D v2)
+    {
+        super(PolygonMath.getMinX(v1,v2), 
+              PolygonMath.getMinY(v1, v2),
+              Math.abs(v1.getX() - v2.getX()),
+              Math.abs(v1.getY() - v2.getY()));
+    }
 }
