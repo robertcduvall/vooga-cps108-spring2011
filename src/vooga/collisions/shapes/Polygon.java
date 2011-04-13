@@ -6,16 +6,16 @@ public class Polygon implements Shape
 {
 	private Vertex[] vertices;
 	private Vertex topLeftCorner;
-	private Vertex center;
+	private Vertex myCenter;
 	private double angle;
 	private BoundingBox boundingBox;
 
-	public Polygon(Vertex[] verticies)
+	public Polygon(Vertex ... verticies)
 	{
 		this.vertices = verticies.clone();
 		this.topLeftCorner = getTopLeftCorner(verticies);
-		center = updateCenter();
-		boundingBox = new BoundingBox(this.getWidth(), this.getHeight(), this.topLeftCorner);
+		myCenter = updateCenter();
+		boundingBox = new BoundingBox(this.topLeftCorner, this.getWidth(), this.getHeight());
 	}
 
 	@Override
@@ -28,89 +28,78 @@ public class Polygon implements Shape
 	
 	public void updateBoundingBox()
 	{
-		boundingBox.x = this.topLeftCorner.getX();
-		boundingBox.y = this.topLeftCorner.getY();
-		
-		boundingBox.width = this.getWidth();
-		boundingBox.height = this.getHeight();
+	    boundingBox.setFrame(topLeftCorner.getX(),topLeftCorner.getY(),this.getWidth(), this.getHeight());
 	}
 	
 	private Vertex updateCenter()
 	{
-		if(center == null)
+		if(myCenter == null)
 		{
-			center = new Vertex(0,0);
+			myCenter = new Vertex(0,0);
 		}
 		
-		double x = topLeftCorner.getX();
-		double y = topLeftCorner.getY();
-		
-		x = x + this.getWidth()/2;
-		y = y + this.getHeight()/2;
-		
-		center.setX(x);
-		center.setY(y);
-		return center;
+		myCenter.setLocation(topLeftCorner.getX() + this.getWidth()/2, topLeftCorner.getY() + this.getHeight()/2);
+		return myCenter;
 	}
 	
 	public Vertex getCenter()
 	{
-		return this.center;
+		return this.myCenter;
 	}
 
 	private double getWidth()
 	{
-		double topLeftCornerX = Math.abs(topLeftCorner.getX());
-		double maxWidth = 0;
-		for(Vertex comp : vertices)
-		{
-			if(comp.getX() > maxWidth)
-			{
-				maxWidth = Math.abs(comp.getX());
-			}
-		}
-		return Math.abs(maxWidth - topLeftCornerX);
+//		double topLeftCornerX = Math.abs(topLeftCorner.getX());
+//		double maxWidth = 0;
+//		for(Vertex comp : vertices)
+//		{
+//			if(comp.getX() > maxWidth)
+//			{
+//				maxWidth = Math.abs(comp.getX());
+//			}
+//		}
+		return PolygonMath.getMaxX(this) - topLeftCorner.getX();
 	}
 	
 	private double getHeight()
 	{
-		double topLeftCornerY = Math.abs(topLeftCorner.getY());
-		double maxHeight = 0;
-		for(Vertex comp : vertices)
-		{
-			if(comp.getY() > maxHeight)
-			{
-				maxHeight = Math.abs(comp.getY());
-			}
-		}
-		return Math.abs(maxHeight - topLeftCornerY);
+//		double topLeftCornerY = Math.abs(topLeftCorner.getY());
+//		double maxHeight = 0;
+//		for(Vertex comp : vertices)
+//		{
+//			if(comp.getY() > maxHeight)
+//			{
+//				maxHeight = Math.abs(comp.getY());
+//			}
+//		}
+		return PolygonMath.getMaxY(this) - topLeftCorner.getY();
 	}
 
 	private Vertex getTopLeftCorner(Vertex[] vertices)
 	{
-		Vertex returnVertex = null;
-		
-		if(vertices.length > 0)
-		{
-			double minX = vertices[0].getX();
-			double minY = vertices[0].getY();
-
-			for(int i = 1; i < vertices.length; i++)
-			{
-				if(minX > vertices[i].getX())
-				{
-					minX = vertices[i].getX();
-				}
-				
-				if(minY > vertices[i].getY())
-				{
-					minY = vertices[i].getY();
-				}
-			}
-			returnVertex = new Vertex(minX, minY);
-		}
-		
-		return returnVertex;
+//		Vertex returnVertex = null;
+//		
+//		if(vertices.length > 0)
+//		{
+//			double minX = vertices[0].getX();
+//			double minY = vertices[0].getY();
+//
+//			for(int i = 1; i < vertices.length; i++)
+//			{
+//				if(minX > vertices[i].getX())
+//				{
+//					minX = vertices[i].getX();
+//				}
+//				
+//				if(minY > vertices[i].getY())
+//				{
+//					minY = vertices[i].getY();
+//				}
+//			}
+//			returnVertex = new Vertex(minX, minY);
+//		}
+//		
+		return new Vertex(PolygonMath.getMinX(vertices), PolygonMath.getMinY(vertices));
 	}
 
 	private double getRadius(Vertex[] vertices)
@@ -118,52 +107,40 @@ public class Polygon implements Shape
 		double maxDistance = 0;
 		for(Vertex v1 : vertices)
 		{
-			for(Vertex v2: vertices)
-			{
-				if(maxDistance < v1.distanceTo(v2))
-				{
-					maxDistance = v1.distanceTo(v2);
-				}
-			}
+			if (v1.distance(myCenter) > maxDistance)
+			    maxDistance = v1.distance(myCenter);
 		}
 		return maxDistance;
 	}
 
-	public Side[] getSides()
+	public Line2D[] getSides()
 	{
 		Side[] sideArray = new Side[vertices.length];
 		
-		for(int i = 0; i < this.vertices.length - 1; i++)
-		{
-			sideArray[i] = new Side(vertices[i], vertices[i + 1]);
-		}
-		sideArray[this.vertices.length - 1] = new Side(vertices[this.vertices.length - 1], vertices[0]);
+		for(int i = 0; i < this.vertices.length; i++)
+			sideArray[i] = new Side(vertices[i], vertices[(i + 1)%vertices.length]);
 		
 		return sideArray;
 	}
 
-	public void move(double x, double y)
+	public void move(double dx, double dy)
 	{
 		for(Vertex comp : vertices)
-		{
-			comp.setX(comp.getX() + x);
-			comp.setY(comp.getY() + y);
-		}
+			comp.setLocation(comp.getX() + dx, comp.getY() + dy);
 		
-		this.topLeftCorner.setX(topLeftCorner.getX() + x);
-		this.topLeftCorner.setY(topLeftCorner.getY() + y);
+		this.topLeftCorner.setLocation(topLeftCorner.getX() + dx, topLeftCorner.getY() + dy);
 		
 		this.updateBoundingBox();
-		this.updateCenter();
+		this.myCenter.setLocation(myCenter.getX() + dx, myCenter.getY() + dy);
 		
 		System.out.println("topLeft is " + topLeftCorner.toString());
-		System.out.println("center is " + center.toString());
+		System.out.println("center is " + myCenter.toString());
 	}
 	
 	public void setLocation(double x, double y)
 	{
 		double offsetX = x - topLeftCorner.getX();
-		double offsetY = y = topLeftCorner.getY();
+		double offsetY = y - topLeftCorner.getY();
 		
 		this.move(offsetX, offsetY);
 	}
@@ -173,5 +150,10 @@ public class Polygon implements Shape
 		angle += degrees;
 		//TODO: finish this
 	}
+
+    public Vertex[] getVertices ()
+    {
+        return vertices;
+    }
 
 }
