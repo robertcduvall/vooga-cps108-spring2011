@@ -1,6 +1,7 @@
 package vooga.view.graphics;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import com.golden.gamedev.Game;
 
@@ -41,13 +42,16 @@ public abstract class GraphicsGame extends Game {
      */
     @Override
     public void render(Graphics2D g) {
-        this.renderGraphics(myAdvancedGraphics.getState());
+    	AffineTransform old = g.getTransform();
+    	g.setTransform(myAdvancedGraphics.getState());
+        transformedRender(g);
+        g.setTransform(old);
     }
     
     /**
      * Implemented by the user to render game objects
      * @param advancedgraphics
      */
-    public abstract void renderGraphics(Graphics2D graphics);
+    public abstract void transformedRender (Graphics2D graphics);
     
 }
