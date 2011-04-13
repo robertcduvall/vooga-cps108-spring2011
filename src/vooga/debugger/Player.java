@@ -1,4 +1,4 @@
-package Debugger;
+package vooga.debugger;
 
 import java.util.ArrayList;
 

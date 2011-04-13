@@ -1,13 +1,11 @@
-package Debugger;
+package vooga.debugger;
 
 import java.lang.reflect.Field;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-
-import Debugger.model.DebuggerModel;
-import Debugger.model.GameField;
-import Debugger.view.DebuggerView;
-import Debugger.view.GameTreeNode;
+import vooga.debugger.model.DebuggerModel;
+import vooga.debugger.model.GameField;
+import vooga.debugger.view.DebuggerView;
+import vooga.debugger.view.GameTreeNode;
 
 import com.golden.gamedev.Game;
 
