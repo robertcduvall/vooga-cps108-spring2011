@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,6 @@ public class DuelingDan extends VoogaExampleGame
 {
     public static void main (String[] args)
     {
-        EventManager.DEBUG_MODE = true;
         GameLoader loader = new GameLoader();
         loader.setup(new DuelingDan(), new Dimension(480, 360), false);
         loader.start();
@@ -39,6 +39,7 @@ public class DuelingDan extends VoogaExampleGame
 
     private void beginLevel ()
     {
+    	getEventManager().setDebugMode(true);
         getEventManager().resetFilterToParentState();
         // TODO load level from file
         // TODO initialize stats, play field
@@ -51,7 +52,7 @@ public class DuelingDan extends VoogaExampleGame
         }
         getBubbleSpriteGroup().reset();
 
-        addPeriodicTimer(1000, "User.GamePlay.Spawn.Bubble");
+        addPeriodicTimer("BubbleTimer", 1000, "User.GamePlay.Spawn.Bubble");
         // return and let all future actions be driven by input/timer events
     }
 
