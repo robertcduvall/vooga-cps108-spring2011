@@ -81,13 +81,6 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities: Extensible way to add forces like gravity, manage the changes to the state of game objects after a collision.
      * Collaborates With: Events, Collisions, (possibly Level/Level Editor for the currently active forces), View (setting coordinate standards)
      * Extensions:
-  # Artificial Intelligence Engine
-     * Claimed by
-     * Description:  Allow game designers to create smart enemies to oppose the player.
-     * Design Goals: Create an engine to control a player either in single or multi-player mode
-     * Core Responsibilities:
-     * Collaborates With: Players, Events, Collisions and Advanced Sprites
-     * Extensions:
   # Networking Engine 
      * Claimed by Team 15: Lingzhao Xie, Roman Zhang
      * Description: Allow users to sit at different computers and connect to a common game session. An update at any one computer should be visible immediately to all connected users.
@@ -109,14 +102,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities: Develop a user interface that allows users to load, save, and alter level files graphically.
      * Collaborates With:Level, Possibly Development Environment, and GameLoop
      * Extensions:
-  # Mod Environment
-     * Claimed by 
-     * Description:
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
-     * Extensions:
-  # Development Environment(Debugger)
+  # Debugger (Development Environment)
      * Claimed by - Team 2( Troy Ferrell & Austin Benesh)
      * Description: Allow designers greater control over development of their games by allowing them to easily trace their system during testing
      * Design Goals: Create a debugging framework that allows for the reading & setting of variables in the system
@@ -130,6 +116,27 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities: UI Objects
      * Collaborates With: 
      * Extensions: 
+  # Artificial Intelligence Engine
+     * Claimed by
+     * Description:  Allow game designers to create smart enemies to oppose the player.
+     * Design Goals: Create an engine to control a player either in single or multi-player mode
+     * Core Responsibilities:
+     * Collaborates With: Players, Events, Collisions and Advanced Sprites
+     * Extensions:
+  # Mod Environment
+     * Claimed by 
+     * Description: Game companies encourage this practice because different versions of a game add extra play value and interest for purchasing the original game. Basic characteristics of the look and feel of the game should be able to be easily changed: the graphical icons used in game (e.g., to turn a SciFi game into a political statement); the keys used for interaction (e.g., to accommodate multiple players on the same keyboard); and the point values of game objectives (e.g., to make a bonus level). Extend it further by allowing users to change variables of game play or even add new rules or behaviors to a game.
+     * Design Goals:
+     * Core Responsibilities:
+     * Collaborates With:
+     * Extensions:
+  # Standard XML format
+     * Claimed by
+     * Description: Design XML file(s) rather than Java code that can be used to initialize your game (i.e., describing game level configurations, game resources, and other game specific data as appropriate).
+     * Design Goals: 
+     * Core Responsibilities:
+     * Collaborates With: 
+     * Extensions: 
   # Arcade
      * Claimed by 
      * Description: Players can pick a game to play and play it repeatedly without quitting and restarting the program. Each game should display its own splash screen, instructions, any setup options it might need, and keep track of a high-score list through successive runs of the program until the player manually clears it. Games can be searched, tagged, or view what's being played right now.
@@ -137,3 +144,10 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities: 
      * Collaborates With: 
      * Extensions: 
+  # Users
+     * Claimed by 
+     * Description: Allow users to log in, choose an avatar to be used within the arcade (or even individual games), view personal high scores, and save their preferences (e.g., name, password, image, age (if parental controls are implemented), and favorite games, players, colors, etc). Offer social aspects by allowing players to rate, recommend, chat, or generally collaborate while playing games. Additionally, keep track of social aspects of game playing, such as most popular, recent, and highly reviewed games played.
+     * Design Goals:
+     * Core Responsibilities:
+     * Collaborates With:
+     * Extensions:
