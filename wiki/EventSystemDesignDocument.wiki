@@ -102,29 +102,49 @@ The second method contains a third argument, in which one can pass parameters th
 ==Example - Registering and Firing Events==
 
 {{{
-1 public class Example1{
-2 EventManager myEventManager = new EventManager();
-3 public void createEventHandler(){
-4    myEventManager.registerEventHandler("Message",
-5        new IEventHandler()
-6        {
-7            public void handleEvent (Object o)
-8            {
-9                sayHi();
-10            }
-11        });
-12 }
-13
-14 public void sayHi()
-15 {
-16    System.out.println("Hi");
-17 }
-18 
-19 public static void main(String[] args)
-20 {
-21     myEventManager.fireEvent("Message");
-22 }
-23 }
+package vooga.core.event.tutorial;
+import vooga.core.event.EventManager;
+import vooga.core.event.IEventHandler;
+
+public class Tutorial1
+{
+	private EventManager eventManager;
+
+	public Tutorial1()
+	{
+		eventManager = new EventManager();
+	}
+
+	public void createEventHandler()
+	{
+		eventManager.registerEventHandler("Message", new IEventHandler()
+		{
+			@Override
+			public void handleEvent(Object o)
+			{
+				sayHi();
+			}
+		});
+	}
+
+	public void sayHi()
+	{
+		System.out.println("Hi!");
+	}
+
+	public void doWork()
+	{
+		eventManager.fireEvent(this, "Message");
+		eventManager.update(0);
+	}
+
+	public static void main(String[] args)
+	{
+		Tutorial1 t1 = new Tutorial1();
+		t1.createEventHandler();
+		t1.doWork();
+	}
+}
 }}}
 
 ==The Event Layer Stack==
