@@ -3,13 +3,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 import javax.swing.JFrame;
 
-import Debugger.model.GameField;
-
+import vooga.debugger.model.GameField;
 
 
 /**

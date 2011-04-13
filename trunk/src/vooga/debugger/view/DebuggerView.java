@@ -1,35 +1,19 @@
 package vooga.debugger.view;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.Action;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
-import javax.swing.JTree;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
 
-import Debugger.Debugger;
-import Debugger.model.DebuggerModel;
-import Debugger.model.GameField;
-
-import util.MethodAction;
+import vooga.debugger.Debugger;
+import vooga.debugger.model.DebuggerModel;
+import vooga.debugger.model.GameField;
+import vooga.debugger.util.MethodAction;
 
 /**
  * Core class in charge of the view components for the Debugger system
