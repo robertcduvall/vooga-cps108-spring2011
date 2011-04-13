@@ -3,20 +3,13 @@
  */
 package games.asteroids.resources;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import javax.imageio.ImageIO;
 
 import com.golden.gamedev.engine.BaseIO;
 import com.golden.gamedev.engine.BaseLoader;
-import com.golden.gamedev.util.ImageUtil;
-
-import vooga.resources.images.ImageLoader;
 
 /**
  * @author Kevin Shun Nathan David C-S
