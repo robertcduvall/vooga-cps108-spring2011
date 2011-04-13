@@ -1,6 +1,6 @@
 package vooga.sprites.improvedsprites.interfaces;
 
-import vooga.levels.example.collisions.collisionshapes.CollisionShape;
+import collisions.collisionshapes.CollisionShape;
 
 public interface ISprite 
 {

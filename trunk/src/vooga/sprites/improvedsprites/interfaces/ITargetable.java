@@ -8,15 +8,5 @@ import java.awt.geom.RectangularShape;
 public interface ITargetable
 {
 
-    void target();
-    
-    void detarget();
-    
-    boolean isTargetted();
-    
-    Point2D getLocation();
-
-
-    Dimension getSize ();
     
 }

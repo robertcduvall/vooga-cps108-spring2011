@@ -4,8 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import vooga.sprites.improvedsprites.interfaces.IRender;
 import vooga.sprites.improvedsprites.interfaces.ISpriteBase;
+import vooga.sprites.improvedsprites.interfaces.ITargetable;
+import collisions.collisionshapes.CollisionRect;
+import collisions.collisionshapes.CollisionShape;
+import com.golden.gamedev.object.Background;
 
-public class BaseSprite implements ISpriteBase, IRender
+public class BaseSprite implements ISpriteBase, IRender, ITargetable
 {
  // /////// optimization /////////
     // private final Rectangle collisionOffset = new Rectangle(0,0,0,0); //

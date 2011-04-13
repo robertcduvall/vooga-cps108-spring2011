@@ -19,6 +19,7 @@ package vooga.sprites.improvedsprites;
 // JFC
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import com.golden.gamedev.object.Timer;
 
 /**
  * <code>AnimatedSprite</code> class is sprite that use several images and can
@@ -53,9 +54,9 @@ import java.awt.image.BufferedImage;
  * <code>AnimatedSprite</code> is only to make a simple animated sprite, there
  * is no property to control sprite animation behaviour. For more control to
  * determine sprite animation based on sprite status and direction, use
- * {@link com.golden.gamedev.object.sprite.AdvanceSprite}.
+ * {@link vooga.sprites.improvedsprites.golden.gamedev.object.sprite.AdvanceSprite}.
  * 
- * @see com.golden.gamedev.object.sprite.AdvanceSprite
+ * @see vooga.sprites.improvedsprites.golden.gamedev.object.sprite.AdvanceSprite
  */
 public class AnimatedSprite extends Sprite {
     
