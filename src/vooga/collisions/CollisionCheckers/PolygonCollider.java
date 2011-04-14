@@ -1,4 +1,4 @@
-package vooga.collisions.collisionCheckers;
+package vooga.collisions.CollisionCheckers;
 
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
