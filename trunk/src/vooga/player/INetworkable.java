@@ -1,25 +1,16 @@
-/**
- * 
- */
 package vooga.player;
 
-/**
- * @author Kevin Tao and Andrea Scripa
- *
- */
-public abstract class NetworkedPlayer extends AbstractPlayer
+public interface INetworkable
 {
+
     // The network team should just be firing events...
     // extend the listener and fire off to the server/locally.
     // So maybe we can get rid of these.
     //Need a way of decoding packets?
     
-    public String getMACAddress(AbstractPlayer p)
-    {
-    	return "";
-        //Call networking engine for this info.
-    }
+    // Call network engine for this info.
+    public String getMACAddress(AbstractPlayer p);
+  
     
     // TODO: Add input listener
-    
 }
