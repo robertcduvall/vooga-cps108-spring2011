@@ -1,26 +1,23 @@
 package vooga.view.graphics;
 
-import java.awt.Graphics2D;
+import graphics.GraphicsGame;
+
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.golden.gamedev.Game;
 
-import vooga.view.function.AbstractGraphicsFunction;
-import vooga.view.function.ZoomFunction;
+import function.AbstractGraphicsFunction;
 
 /**
- * Wrapper Class for Graphics2D.
- * Keeps track of active states and calls functions.
+ * Maintains AbstractGraphicsFunctions
+ * Calls functions on AffineTransform
  * @author Alex Daniel
  *
  */
 public class AdvancedGraphics {
-
-    //AdvancedGraphics resources
-    private Graphics2D myGraphics;
-    private Game myGame;
+    
+    private boolean myState;
     
     //Graphics States
     private List<AbstractGraphicsFunction> myFunctions;
@@ -29,39 +26,50 @@ public class AdvancedGraphics {
      * Creates instance of AdvancedGraphics
      * @param game object
      */
-    public AdvancedGraphics(Game game)
+    public AdvancedGraphics(GraphicsGame game)
     {
-        myGame = game;
-        myGraphics = myGame.bsGraphics.getBackBuffer();
-        myFunctions = new ArrayList<AbstractGraphicsFunction>();
-        this.createFunctionObjects();
-        
-        
-        System.out.println("Initial: " + myGraphics.toString());
-        
-    }
-    
-    //TODO: Resource/reflection
-    private void createFunctionObjects()
-    {
-        myFunctions.add(new ZoomFunction());
+        myFunctions = game.graphicsFunctions();
+        myState = false;
     }
     
     /**
-     * Returns the Graphics2D that has been modified by active functions
-     * @return modified graphics
+     * Sets the advancedGraphics feature active/inactive
+     * @param bool
      */
-    public AffineTransform getState()
+    public void setActivityState(boolean bool)
     {
-    	AffineTransform result = new AffineTransform();
-        for(AbstractGraphicsFunction function: myFunctions)
+        myState = bool;
+    }
+    
+    /**
+     * The activity state of advancedGraphics
+     * @return boolean
+     */
+    public boolean getActivityState()
+    {
+        return myState;
+    }
+    
+    /**
+     * Returns the AffineTransform that has been modified by active functions.
+     * If no functions exist, return null.
+     * @return AffineTransform
+     */
+    public AffineTransform getFunctionState()
+    {
+        if (myFunctions != null && myState)
         {
-            if(function.getFunctionStatus())
+            AffineTransform result = new AffineTransform();
+            for (AbstractGraphicsFunction function : myFunctions)
             {
                 result.concatenate(function.doFunction());
             }
+            return result;
         }
-        return result;
+        else
+        {
+            return null;
+        }
     }
 
 }
