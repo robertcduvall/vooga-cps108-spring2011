@@ -138,7 +138,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: 
      * Extensions: 
   # Arcade
-     * Claimed by 
+     * Claimed by Kevin Wang
      * Description: Players can pick a game to play and play it repeatedly without quitting and restarting the program. Each game should display its own splash screen, instructions, any setup options it might need, and keep track of a high-score list through successive runs of the program until the player manually clears it. Games can be searched, tagged, or view what's being played right now.
      * Design Goals: 
      * Core Responsibilities: 
