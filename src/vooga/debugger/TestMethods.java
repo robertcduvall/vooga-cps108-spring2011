@@ -1,7 +1,11 @@
 package vooga.debugger;
 
+import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.TreeMap;
+import java.util.TreeSet;
+
+import Debugger.model.ClassUtil;
 
 public class TestMethods
 {
@@ -13,6 +17,6 @@ public class TestMethods
 		TreeMap<Integer,String> list = new TreeMap<Integer,String>();
 		ArrayList<Integer> list2 = new ArrayList<Integer>();
 		list2.add(1);
-		//System.out.println(ClassUtil.iterableAsField(list2));
+		System.out.println(ClassUtil.iterableAsField(list2));
 	}
 }

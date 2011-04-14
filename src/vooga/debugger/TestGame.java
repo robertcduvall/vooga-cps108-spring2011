@@ -6,8 +6,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import vooga.debugger.Debugger.DebugLevel;
+
 import com.golden.gamedev.Game;
 import com.golden.gamedev.GameLoader;
+import com.golden.gamedev.object.Timer;
 
 
 /**
@@ -25,6 +28,7 @@ public class TestGame extends Game
 	public ArrayList<Integer> values;
 	public boolean isPaused = false;
 	
+	private Timer testTimer; 
 	/* (non-Javadoc)
 	 * @see com.golden.gamedev.Game#initResources()
 	 */
@@ -35,6 +39,7 @@ public class TestGame extends Game
 		values = new ArrayList<Integer>();
 		values.add(1);
 		myDebugger = new Debugger(this);
+		testTimer = new Timer(1000);
 		
 	}
 
@@ -62,6 +67,13 @@ public class TestGame extends Game
 			//demo++;
 		}
 		
+		
+		if(testTimer.action(arg0))
+		{
+			myDebugger.println("Test Debug", DebugLevel.INFO);
+		}
+		
+		
 		test = String.valueOf(dummy-10);
 		
 		myDebugger.update();
@@ -81,6 +93,7 @@ public class TestGame extends Game
 	 */
     public static void main(String[] args) 
     {
+   
         GameLoader game = new GameLoader();
         //game.setup(new SSOmega(), new Dimension(1280,860), false);
         game.setup(new TestGame(), new Dimension(1024,768), false);

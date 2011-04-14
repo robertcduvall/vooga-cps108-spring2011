@@ -1,4 +1,6 @@
-
+/**
+ * 
+ */
 package vooga.debugger.view;
 
 import java.awt.Component;
@@ -7,9 +9,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 /**
- * Class that update look of JTree used for displaying hierarchical view of fields in the game
- * 
- * @author Troy Ferrell
+ * @author Troy
  * @author usman - http://usmansaleem.blogspot.com/2006/08/setting-custom-icon-for-individual.html
  */
 
