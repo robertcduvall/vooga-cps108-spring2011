@@ -7,10 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
- * Node class used to build Field tree of game
- * Extends DefaultMutableTreeNode which is node class for JTree structure
- * 
- * @author Troy Ferrell
+ * @author Troy
+ *
  */
 public class GameTreeNode extends DefaultMutableTreeNode 
 {
