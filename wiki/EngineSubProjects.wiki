@@ -131,7 +131,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With:
      * Extensions:
   # Standard XML Resources
-     * Claimed by: Sterling Dorminey
+     * Claimed by: Sterling Dorminey, Alex Daniel
      * Description: Design XML file(s) rather than Java code that can be used to initialize your game (i.e., describing game level configurations, game resources, and other game specific data as appropriate).
      * Design Goals: 
      * Core Responsibilities:
