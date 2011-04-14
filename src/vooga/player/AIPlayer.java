@@ -9,7 +9,7 @@ package vooga.player;
  */
 public abstract class AIPlayer extends Player
 {
-    //Need a way of getting information about what the opponent has done.
-    //Poll for all events in the game,  Or the developer can refine to only poll for 
-    //certain ones.
+    //Listen to events to find out what has changed/what the opponent has done.
+    //Convert to common currency command and call AI engine with this information.
+    //Convert results of AI Engine and call updateSprite
 }
