@@ -3,6 +3,7 @@ package vooga.player;
 import com.golden.gamedev.object.Sprite;
 
 import java.util.ArrayList;
+import vooga.core.VoogaGame;
 
 public abstract class Player
 {
@@ -18,30 +19,31 @@ public abstract class Player
     //Have an "add" method with ArrayList that Sprites can add themselves to.
     //Maybe do another ArrayList with 1's and 0's to know which sprites should be active
     
-    
-    // pass the playfield and an instance of event manager (don't need to create our own)
-            // or an instance of VoogaGame - they have the same methods
-    
     // Game state tells us when to add ourselves. (Listen to them!)
     // Put player on playfield.
-    
-    // Or allow sprite to be null...
-    
-    // Have player have more than one sprite?
-    // One "player" dynamically controls 2 players?  switch() method.
     
     //Events as strings - can dynamically switch between them.
 	
 	protected int playerId;
-	private long timeOfLastChange;
-	private long timeOfLastChangeQuery;
 	private static int nextPlayerId= 1;
 	private boolean active = true;
 	private ArrayList<Sprite> mySprites = new ArrayList<Sprite>();
+	private VoogaGame gameInstance;
 	
 	public Player(){
 		playerId = nextPlayerId;
 		nextPlayerId ++;
+	}
+	
+	//Alternately, pass the playfield and an instance of EventManager.
+	//DJ is supposed to get back to me on this.
+	public void getGame(VoogaGame g)
+	{
+	    gameInstance = g;
+	}
+	
+	public void addEventListeners()
+	{
 	}
 	
 	public abstract void updateStats();
@@ -69,22 +71,6 @@ public abstract class Player
 	public abstract int compareTo(Player p);
 	
 	public abstract boolean equals(Player p);
-	
-	// Requested by the Replay group.
-	public boolean hasChanged(){
-		
-		if(timeOfLastChange > timeOfLastChangeQuery){
-			timeOfLastChangeQuery = System.nanoTime();
-			return true;
-		}else{
-			timeOfLastChangeQuery = System.nanoTime();
-			return false;
-		}
-	}
-	
-	public void changeOccurred(){
-		timeOfLastChange = System.nanoTime();
-	}
 	
 	public boolean getActive()
 	{
