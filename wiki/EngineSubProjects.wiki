@@ -12,7 +12,7 @@ You may add new packages to the list below, but they must have the same basic in
 = Details =
 
   # Players
-     * Claimed by Andrea Scripa, Kevin Tao
+     * Claimed by Kevin Tao
      * Description: includes managing score and other attributes
      * Design Goals:  Create a flexible player class that can hold different types of information about itself and have uniquely defined behavior by means of extension rather than modification.
      * Core Responsibilities: Create a player class with methods that allow the user to customize its behavior/reactions to events and set/update information about itself.
@@ -138,7 +138,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: 
      * Extensions: 
   # Arcade
-     * Claimed by Kevin Wang, Ethan Goh
+     * Claimed by Kevin Wang, Ethan Goh, Andrea Scripa
      * Description: Players can pick a game to play and play it repeatedly without quitting and restarting the program. Each game should display its own splash screen, instructions, any setup options it might need, and keep track of a high-score list through successive runs of the program until the player manually clears it. Games can be searched, tagged, or view what's being played right now.
      * Design Goals: Make it easy for user to navigate and search through several games and choose the game they want to play.
      * Core Responsibilities: record high scores and pertinent data regarding each game in catalog. Allow for easy navigation between each game.
