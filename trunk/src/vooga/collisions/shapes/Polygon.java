@@ -2,7 +2,7 @@ package vooga.collisions.shapes;
 
 import java.awt.geom.Line2D;
 
-public class Polygon implements Shape
+public class Polygon implements IBoxBounded
 {
 	private Vertex[] vertices;
 	private Vertex topLeftCorner;

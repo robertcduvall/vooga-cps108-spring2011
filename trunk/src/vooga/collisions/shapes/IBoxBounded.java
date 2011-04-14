@@ -1,6 +1,6 @@
 package vooga.collisions.shapes;
 
-public interface Shape 
+public interface IBoxBounded 
 {
 	public BoundingBox getBoundingBox();
 	
