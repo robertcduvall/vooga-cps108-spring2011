@@ -1,6 +1,5 @@
 package vooga.view.function;
 
-import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 /**
@@ -10,8 +9,7 @@ import java.awt.geom.AffineTransform;
  */
 public abstract class AbstractGraphicsFunction {
     
-    protected boolean myStatus = false;
-    
+   
     /**
      * Perform object's graphic manipulation function
      * @param graphics object
@@ -19,21 +17,4 @@ public abstract class AbstractGraphicsFunction {
      */
     public abstract AffineTransform doFunction();
     
-    /**
-     * Returns whether function is active or dormant.
-     * @return boolean of function status
-     */
-    public boolean getFunctionStatus()
-    {
-        return myStatus;
-    }
-    
-    /**
-     * Sets the functions status
-     * @param bool
-     */
-    public void setFunctionStatus(boolean bool)
-    {
-        myStatus = bool;
-    }
 }
