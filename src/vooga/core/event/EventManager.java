@@ -26,7 +26,7 @@ public class EventManager implements ISimpleEventManager
 		}
 	}
 
-	private static Logger DEBUG = new Logger(System.err);
+	private static EventLogger DEBUG = new EventLogger(System.err);
 
 	private static final String EVERY_TURN_GLOB = "EveryTurn.*";
 
