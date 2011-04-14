@@ -19,6 +19,7 @@ public class ConnectInfo implements Serializable
 		IP = s;
 	}
 
+	//You may also need a method to get the MAC address?  <3 Andrea
 	public String getIPaddress(){
 		return IP;
 	}

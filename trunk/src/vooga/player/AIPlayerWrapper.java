@@ -4,19 +4,16 @@
 package vooga.player;
 
 /**
- * @author Kevin Tao and Andrea Scripa We will create an all-events listener, to
- *         feed info to the AIPlayer.
+ * @author Andrea Scripa
  */
-public abstract class AIPlayerWrapper 
+public abstract class AIPlayerWrapper extends AbstractPlayerWrapper 
 {
-    private Player myPlayer;
-    
-    //Listen to events to find out what has changed/what the opponent has done.
-    //Convert to common currency command and call AI engine with this information.
-    //Convert results of AI Engine and call updateSprite
-    
-    
-    public AIPlayer(Player p){
-        Player myPlayer = p;
+    public AIPlayerWrapper (Player p)
+    {
+        super(p);
     }
+    
+    public abstract void addInputListeners();
+    
+    public abstract void calculateAIResponse(String event);
 }

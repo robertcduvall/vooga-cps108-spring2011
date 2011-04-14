@@ -8,7 +8,7 @@ import vooga.core.VoogaGame;
 public abstract class Player
 {
 	/**
-	 * @author Kevin Tao and Andrea Scripa
+	 * @author Andrea Scripa
 	 */
     
     //Store its wrapper
