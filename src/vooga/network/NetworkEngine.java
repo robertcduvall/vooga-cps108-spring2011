@@ -40,7 +40,7 @@ public interface NetworkEngine
 	List<Object> update();
 
 	/**
-	 * Serach for the hosts on local area network
+	 * Search for the hosts on local area network
 	 * 
 	 * @return
 	 */
