@@ -8,6 +8,7 @@ import vooga.core.event.PeriodicTimer;
 import vooga.core.event.Timer;
 import com.golden.gamedev.Game;
 
+// Shouldn't this just have the game loop in it?  <3 Andrea
 public abstract class VoogaGame extends Game implements ISimpleEventManager
 {
 	private EventManager myEventManager;
