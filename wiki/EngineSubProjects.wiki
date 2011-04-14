@@ -68,7 +68,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: Mainly Events, any group that potentially needs game stats.
      * Extensions:
   # Game Control
-     * Claimed by Kevin Wang, Shun Fan, Conrad Haynes
+     * Claimed by Shun Fan, Conrad Haynes
      * Description: Help coordinate the other teams so they'll fit together into a real game!
      * Design Goals: Make sure a game can be built on top of this.
      * Core Responsibilities: Communicate with other teams so they understand how they fit into the bigger system.
@@ -140,10 +140,10 @@ You may add new packages to the list below, but they must have the same basic in
   # Arcade
      * Claimed by Kevin Wang
      * Description: Players can pick a game to play and play it repeatedly without quitting and restarting the program. Each game should display its own splash screen, instructions, any setup options it might need, and keep track of a high-score list through successive runs of the program until the player manually clears it. Games can be searched, tagged, or view what's being played right now.
-     * Design Goals: 
-     * Core Responsibilities: 
-     * Collaborates With: 
-     * Extensions: 
+     * Design Goals: Make it easy for user to navigate and search through several games and choose the game they want to play.
+     * Core Responsibilities: record high scores and pertinent data regarding each game in catalog. Allow for easy navigation between each game.
+     * Collaborates With: User, level, player, event
+     * Extensions: Allow extension for other means of navigation through different games.
   # Users 
      * Claimed by: Conrad Haynes
      * Description: Allow users to log in, choose an avatar to be used within the arcade (or even individual games), view personal high scores, and save their preferences (e.g., name, password, image, age (if parental controls are implemented), and favorite games, players, colors, etc). Offer social aspects by allowing players to rate, recommend, chat, or generally collaborate while playing games. Additionally, keep track of social aspects of game playing, such as most popular, recent, and highly reviewed games played.
