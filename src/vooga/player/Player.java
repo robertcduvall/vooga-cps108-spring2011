@@ -10,6 +10,8 @@ public abstract class Player
 	/**
 	 * @author Kevin Tao and Andrea Scripa
 	 */
+    
+    //Store its wrapper
 	
     //Write up a design document. put on the wiki.
     //Decide on names for new level starting or keyboard input
@@ -17,7 +19,6 @@ public abstract class Player
     //Set up events listener - tells us about key inputs
     //On the action performed, update all sprites associated with this player.
     //Have an "add" method with ArrayList that Sprites can add themselves to.
-    //Maybe do another ArrayList with 1's and 0's to know which sprites should be active
     
     // Game state tells us when to add ourselves. (Listen to them!)
     // Put player on playfield.
@@ -42,9 +43,7 @@ public abstract class Player
 	    gameInstance = g;
 	}
 	
-	public void addEventListeners()
-	{
-	}
+	public abstract void addEventListeners();
 	
 	public abstract void updateStats();
 	
