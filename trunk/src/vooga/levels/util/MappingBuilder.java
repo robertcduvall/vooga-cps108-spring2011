@@ -11,6 +11,9 @@ import java.io.*;
 //import sprites.Order;
 //import sprites.TestSprite;
 
+/**
+ * Builds a map for the XML file
+ */
 public class MappingBuilder {
 
 //	public MappingBuilder() {
