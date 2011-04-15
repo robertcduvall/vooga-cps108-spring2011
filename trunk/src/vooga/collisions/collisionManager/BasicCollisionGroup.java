@@ -8,7 +8,6 @@ import vooga.collisions.shapes.ShapeFactory;
 import vooga.collisions.shapes.collisionShapes.BoundingBox;
 import vooga.collisions.shapes.collisionShapes.ICollisionShape;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritegroups.BasicSpriteGroup;
 import vooga.sprites.spritegroups.SpriteGroup;
 
 public abstract class BasicCollisionGroup extends CollisionManager
@@ -30,15 +29,15 @@ public abstract class BasicCollisionGroup extends CollisionManager
         }
     }
     
-    private void checkCollisions (SpriteGroup sg1,
-                                         SpriteGroup sg2)
+    private void checkCollisions (SpriteGroup<?> sg1,
+                                         SpriteGroup<?> sg2)
     {
         if (!sg1.isActive() || !sg2.isActive())
             return;
         
-        for(Sprite s1: sg1.getSprites()){
-            for (Sprite s2: sg2.getSprites()){
-                if(IntersectionFactory.areIntersecting(s1.getCollisionShape(), s2.getCollisionShape())){
+        for(Sprite s1: sg1){
+            for (Sprite s2: sg2){
+                if(this.areCollide(s1, s2)){
                     this.collided(s1, s2);
                 }
             }
@@ -59,13 +58,13 @@ public abstract class BasicCollisionGroup extends CollisionManager
      * @param shape2 bounding box of sprite 2
      * @return true, if the sprites is collided one another.
      */
-    public boolean isCollide(Sprite s1, Sprite s2, CollisionShape shape1, CollisionShape shape2) {
+    public boolean areCollide(Sprite s1, Sprite s2){
         if (!this.pixelPerfectCollision) {
-            return (shape1.intersects(shape2));
+            return (IntersectionFactory.areIntersecting(s1.getCollisionShape(), s2.getCollisionShape()));
             
         }
         else {
-            if (shape1.intersects(shape2)) {
+            if (IntersectionFactory.areIntersecting(s1.getCollisionShape(), s2.getCollisionShape())) {
                 return CollisionManager.isPixelCollide(s1.getX(), s1.getY(), s1
                         .getImage(), s2.getX(), s2.getY(), s2.getImage());
             }

@@ -21,7 +21,7 @@ public class ShapeFactory
 		return new Polygon(vertices);
 	}
 	
-	public static RegularPolygon makeRegularPolygon(double x, double y, double sideNum, double sideLength){
+	public static RegularPolygon makeRegularPolygon(double x, double y, int sideNum, double sideLength){
         return new RegularPolygon(x,y, sideNum, sideLength);
 	    
 	}
