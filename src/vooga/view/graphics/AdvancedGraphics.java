@@ -1,13 +1,12 @@
 package vooga.view.graphics;
 
-import graphics.GraphicsGame;
+import vooga.view.graphics.GraphicsGame;
 
 import java.awt.geom.AffineTransform;
 import java.util.List;
 
 import com.golden.gamedev.Game;
-
-import function.AbstractGraphicsFunction;
+import vooga.view.function.AbstractGraphicsFunction;
 
 /**
  * Maintains AbstractGraphicsFunctions

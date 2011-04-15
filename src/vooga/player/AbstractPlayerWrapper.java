@@ -1,5 +1,7 @@
 package vooga.player;
 
+import vooga.player.Player.PlayerType;
+
 /**
  * @author Andrea Scripa
  * 
@@ -8,7 +10,7 @@ package vooga.player;
  */
 public abstract class AbstractPlayerWrapper
 {
-    protected int type;
+    protected PlayerType type;
     
     /**
      * Constructor

@@ -14,7 +14,7 @@ public abstract class HumanPlayerWrapper extends AbstractPlayerWrapper
     {
         super(p);
         p.storeWrapper(this);
-        type = Player.HUMAN_PLAYER;
+        type = Player.PlayerType.HUMAN_PLAYER;
     }
     
     /**

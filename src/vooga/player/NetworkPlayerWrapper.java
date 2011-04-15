@@ -13,7 +13,7 @@ public abstract class NetworkPlayerWrapper extends AbstractPlayerWrapper
     {
         super(p);
         p.storeWrapper(this);
-        type = Player.NETWORK_PLAYER;
+        type = Player.PlayerType.NETWORK_PLAYER;
     }
 
     /**

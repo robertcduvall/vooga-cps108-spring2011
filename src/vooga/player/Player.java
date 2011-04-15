@@ -24,9 +24,12 @@ public abstract class Player
 	 * @author Andrea Scripa
 	 */
 	
-	public static final int HUMAN_PLAYER = 0;
-	public static final int AI_PLAYER = 1;
-	public static final int NETWORK_PLAYER = 2;
+	public static enum PlayerType
+	{
+	    HUMAN_PLAYER,
+	    AI_PLAYER,
+	    NETWORK_PLAYER
+	}
     
     private ArrayList<GameEntity> myEntities = new ArrayList<GameEntity>();
 	private ArrayList<AbstractPlayerWrapper> myWrappers = 
@@ -101,7 +104,7 @@ public abstract class Player
      * Returns the type (HUMAN_PLAYER, AI_PLAYER, or NETWORK_PLAYER) of a given wrapper
      * that Player holds.
      */
-	public int getWrapperType(AbstractPlayerWrapper w)
+	public PlayerType getWrapperType(AbstractPlayerWrapper w)
 	{
 	    return w.type;
 	}

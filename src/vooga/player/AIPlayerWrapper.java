@@ -15,7 +15,7 @@ public abstract class AIPlayerWrapper extends AbstractPlayerWrapper
     {
         super(p);
         p.storeWrapper(this);
-        type = Player.AI_PLAYER;
+        type = Player.PlayerType.AI_PLAYER;
     }
     
     /**

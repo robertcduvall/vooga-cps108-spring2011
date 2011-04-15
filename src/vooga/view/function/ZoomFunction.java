@@ -1,8 +1,7 @@
 package vooga.view.function;
 
 import java.awt.geom.AffineTransform;
-
-import function.AbstractGraphicsFunction;
+import vooga.view.function.AbstractGraphicsFunction;
 
 /**
  * Extension of AbstractGraphicsFunction. Implementation of the Zoom function
