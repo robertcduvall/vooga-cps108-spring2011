@@ -89,7 +89,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: Events, Players
      * Extensions:
   # Replay
-     * Claimed by Josue Mirtil, and Chris James
+     * Claimed by Josue Mirtil, Chris James
      * Description:  Allow users to save, resume, or re-view previously played games.
      * Design Goals: Creating Class that links changes to game elements by time elapsed between changes. This "StateTable" would then be used to replay/save/resume play. StateTable will be stored as serialized objects. Save files in txt format will save StateTables and rebuild as tree structure, based on resume point and save point. 
      * Core Responsibilities: Create a way in which the user can save and resume gameplay even after closing the game. Also allow user to replay game.
@@ -123,13 +123,6 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities:
      * Collaborates With: Players, Events, Collisions and Advanced Sprites
      * Extensions:
-  # Mod Environment
-     * Claimed by 
-     * Description: Game companies encourage this practice because different versions of a game add extra play value and interest for purchasing the original game. Basic characteristics of the look and feel of the game should be able to be easily changed: the graphical icons used in game (e.g., to turn a SciFi game into a political statement); the keys used for interaction (e.g., to accommodate multiple players on the same keyboard); and the point values of game objectives (e.g., to make a bonus level). Extend it further by allowing users to change variables of game play or even add new rules or behaviors to a game.
-     * Design Goals:
-     * Core Responsibilities:
-     * Collaborates With:
-     * Extensions:
   # Standard XML Resources
      * Claimed by: Sterling Dorminey, Alex Daniel
      * Description: Design XML file(s) rather than Java code that can be used to initialize your game (i.e., describing game level configurations, game resources, and other game specific data as appropriate).
@@ -151,10 +144,17 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities: Develop multi-faceted user interface with back and front end, allow users to choose an avatar with saved preferences, and create easy log-in system for players to reach certain avatars 
      * Collaborates With: Stats Team, Level Editor & Menu Team (for Swing GTGE interface advice, Replay Team (for info about the resume game table), Rouge, and Arcade Team
      * Extensions: Possible Extension of a Database
- # Rogue Programmer
+  # Rogue Programmer
      * Claimed by: DJ Sharkey
      * Description: Trying to make this system fit together.
      * Design Goals: Build a game
      * Core Responsibilities: Be a PM. :D
      * Collaborates With: Everyone.
      * Extensions: 
+  # Mod Environment
+     * Claimed by 
+     * Description: Game companies encourage this practice because different versions of a game add extra play value and interest for purchasing the original game. Basic characteristics of the look and feel of the game should be able to be easily changed: the graphical icons used in game (e.g., to turn a SciFi game into a political statement); the keys used for interaction (e.g., to accommodate multiple players on the same keyboard); and the point values of game objectives (e.g., to make a bonus level). Extend it further by allowing users to change variables of game play or even add new rules or behaviors to a game.
+     * Design Goals:
+     * Core Responsibilities:
+     * Collaborates With:
+     * Extensions:
