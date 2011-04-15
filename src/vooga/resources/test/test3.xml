@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- I don't know if comments work with this XML reader. Let's try it :) -->
+<resources>
+	<image name="enemies">
+		<source>src/vooga/resources/test/images/enemies.png</source>
+		<width>32</width>
+		<height>32</height>
+		<!-- state = enemy ID. Look for as many states as possible -->
+		<state count="*">
+			<!-- Each enemy has four directions -->
+			<directions order="SWNE">
+				<!-- Each direction is animated in four frames -->
+				<frame t="50" count="4" />
+			</directions>
+		</state>
+	</image>
+</resources>
