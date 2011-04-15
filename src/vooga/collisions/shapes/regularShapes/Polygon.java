@@ -17,7 +17,6 @@ public class Polygon extends Shape
 {
 	protected Vertex[] vertices;
 	protected Vertex topLeftCorner;
-	protected Vertex myCenter;
 	protected double angle;
 	protected BoundingBox boundingBox;
 
@@ -25,7 +24,7 @@ public class Polygon extends Shape
 	{
 		this.vertices = verticies.clone();
 		this.topLeftCorner = new Vertex(getTopLeftCorner(this.vertices));
-		myCenter = updateCenter();
+		center = updateCenter();
 		boundingBox = new BoundingBox(this.topLeftCorner, this.getWidth(), this.getHeight());
 	}
 	
@@ -37,7 +36,7 @@ public class Polygon extends Shape
 			this.vertices[i] = new Vertex(vertices[i]);
 		}
 		this.topLeftCorner = new Vertex(getTopLeftCorner(this.vertices));
-		myCenter = updateCenter();
+		center = updateCenter();
 		boundingBox = new BoundingBox(this.topLeftCorner, this.getWidth(), this.getHeight());
 	}
 
@@ -48,13 +47,13 @@ public class Polygon extends Shape
 	
 	private Vertex updateCenter()
 	{
-		if(myCenter == null)
+		if(center == null)
 		{
-			myCenter = new Vertex(0,0);
+			center = new Vertex(0,0);
 		}
 		
-		myCenter.setLocation(topLeftCorner.getX() + this.getWidth()/2, topLeftCorner.getY() + this.getHeight()/2);
-		return myCenter;
+		center.setLocation(topLeftCorner.getX() + this.getWidth()/2, topLeftCorner.getY() + this.getHeight()/2);
+		return center;
 	}
 
 	protected double getWidth()
@@ -78,8 +77,8 @@ public class Polygon extends Shape
 		double maxDistance = 0;
 		for(Vertex v1 : this.vertices)
 		{
-			if (v1.distance(myCenter) > maxDistance)
-			    maxDistance = v1.distance(myCenter);
+			if (v1.distance(center) > maxDistance)
+			    maxDistance = v1.distance(center);
 		}
 		return maxDistance;
 	}
@@ -96,16 +95,16 @@ public class Polygon extends Shape
 
 	public void move(double dx, double dy)
 	{
-		for(Vertex comp : vertices)
+		for(Vertex comp : this.vertices)
 			comp.setLocation(comp.getX() + dx, comp.getY() + dy);
 		
 		this.topLeftCorner.setLocation(topLeftCorner.getX() + dx, topLeftCorner.getY() + dy);
 		
 		this.updateBoundingBox();
-		this.myCenter.setLocation(myCenter.getX() + dx, myCenter.getY() + dy);
+		this.center.setLocation(center.getX() + dx, center.getY() + dy);
 		
-		System.out.println("topLeft is " + topLeftCorner.toString());
-		System.out.println("center is " + myCenter.toString());
+		//System.out.println("topLeft is " + topLeftCorner.toString());
+		//System.out.println("center is " + center.toString());
 	}
 	
 	public void setLocation(double x, double y)
@@ -116,22 +115,27 @@ public class Polygon extends Shape
 		this.move(offsetX, offsetY);
 	}
 	
+	/*
 	public void rotate(double degrees)	//I think this is right. I haven't tested it.
 	{
+		//this.move(60,60);
 		for(Vertex vertex : this.vertices)
 		{
 			//lets get the distance to move x first
 			//double hypotenuse = LineMath.length(new Line2D.Double(vertex, this.center));
+			//System.out.println(this.center);
 			double dx = Math.sin(Math.toRadians(degrees)) * LineMath.length(new Line2D.Double(vertex, this.center));
 			
 			//now y
 			//double angleA = (90 - ((180 - degrees) / 2));
 			double dy = Math.tan(Math.toRadians( (90 - ((180 - degrees) / 2)))) * dx;
 			
-			vertex.move(dx, dy);
+			vertex.setLocation(vertex.getX() + dx, vertex.getY() + dy);
+			System.out.println("dx = " + dx);
 		}
 		this.angle += degrees;
 	}
+	*/
 	
 	@Override
 	public void setAngle(double angle) 
