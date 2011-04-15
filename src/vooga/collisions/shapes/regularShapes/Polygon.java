@@ -208,6 +208,13 @@ public class Polygon extends Shape
 		return false;
 	}
 
+    @Override
+    public void rotate (double degrees)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 
 
