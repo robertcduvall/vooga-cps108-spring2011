@@ -47,7 +47,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: Game Loop, States/Modes, Physics Engine, Game Resources, Any other team that potentially requires a set of controls to drive their component.
      * Extensions:
   # States/Modes
-     * Claimed by Conrad Haynes
+     * Claimed by
      * Description: To coordinate flow between different game states in a Game (ie. running, paused, loading, etc.) - "kind of a state-machine kind of style"
      * Design Goals: To create a very easy way to add different "GameStates" to a game and organize Game Loop coding accordingly
      * Core Responsibilities: Implementing multiple GameStates within a hierarchy system, holding/managing respective keyEvents for each GameState
@@ -68,7 +68,7 @@ You may add new packages to the list below, but they must have the same basic in
      * Collaborates With: Mainly Events, any group that potentially needs game stats.
      * Extensions:
   # Game Control
-     * Claimed by Shun Fan, Conrad Haynes
+     * Claimed by Shun Fan
      * Description: Help coordinate the other teams so they'll fit together into a real game!
      * Design Goals: Make sure a game can be built on top of this.
      * Core Responsibilities: Communicate with other teams so they understand how they fit into the bigger system.
