@@ -2,11 +2,16 @@ package vooga.resources.images;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
 import vooga.resources.Direction;
 import vooga.resources.ResourceException;
 import com.golden.gamedev.engine.BaseLoader;
@@ -56,10 +61,14 @@ public class ImageLoader
             
             parser.parse(doc);
         }
-        catch (Exception e)
+        catch (IOException e)
         {
             throw ResourceException.resourceReadingException(resource.getName());
-        }
+        } catch (SAXException e) {
+            throw ResourceException.resourceReadingException(resource.getName());
+		} catch (ParserConfigurationException e) {
+            throw ResourceException.resourceReadingException(resource.getName());
+		}
     }
     
 
@@ -106,7 +115,7 @@ public class ImageLoader
             return ImageUtil.rotate(frame, angle);
         }
         
-        return null;
+        throw ResourceException.notFoundException();
     }
 
     /** See getAnimation(name, imageIndex, direction) */    
