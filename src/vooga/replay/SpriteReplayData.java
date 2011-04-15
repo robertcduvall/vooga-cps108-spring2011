@@ -6,6 +6,11 @@ import java.io.Serializable;
 
 import com.golden.gamedev.object.Sprite;
 
+/**
+ * Encapsulates Sprite data for recording. 
+ * 
+ * @author Josue, Chris
+ */
 public class SpriteReplayData implements Serializable{
 	
 	private Point2D.Double myPoint;
