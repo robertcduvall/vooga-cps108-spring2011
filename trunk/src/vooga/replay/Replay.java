@@ -6,26 +6,39 @@ import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
 
 /**
- * Instance of a "Replay" which updates and renders directly from a StateTable. 
+ * Instance of a "Replay" which updates and renders directly from a StateTable.
  * 
  * @author Josue, Chris
  */
 
-public class Replay extends GameObject{
-	
+public class Replay extends GameObject {
+
 	protected StateTable myTable;
 	protected int start, stop, time;
-	
-	public Replay(GameEngine ge, StateTable table, int start, int stop){
+	/**
+	 * Constructs a Replay Object.
+	 * 
+	 * @param ge - The Main GameEngine
+	 * @param table - The StateTable in which Replay will read from
+	 * @param start - A flag point denoting where in the StateTable Replay will begin to read
+	 * @param stop - A flag point denoting where in the StateTable Replay will finish reading from the StateTable
+	 */
+	public Replay(GameEngine ge, StateTable table, int start, int stop) {
 		super(ge);
 		this.myTable = table;
 		this.start = start;
 		this.stop = (stop <= table.getTime()) ? stop : table.getTime();
 		time = start;
 	}
-	
+	/**
+	 * Constructs a Replay Object with default flag points starting from the beginning of the StateTable and 
+	 * ending at the end of the StateTable 
+	 * 
+	 * @param ge
+	 * @param table
+	 */
 	public Replay(GameEngine ge, StateTable table) {
-		this(ge,table,0, table.getTime() - 1);
+		this(ge, table, 0, table.getTime() - 1);
 	}
 
 	@Override
@@ -42,24 +55,26 @@ public class Replay extends GameObject{
 	 */
 	@Override
 	public void update(long elapsedTime) {
-		if(inRange(time)){
+		if (inRange(time)) {
 			myTable.transformSprite(time);
 			time++;
 		}
 	}
-	
+
 	/**
-	 * Checks whether your current location in the StateTable is in the 
+	 * Checks whether your current location in the StateTable is in the
 	 * predetermined range.
 	 * 
-	 * @param t - Time variable for indices in StateTable
-	 * @return Boolean as to whether the time t falls in the predetermined range.
+	 * @param t
+	 *            - Time variable for indices in StateTable
+	 * @return Boolean as to whether the time t falls in the predetermined
+	 *         range.
 	 */
-	public boolean inRange(int t){
-		return t >= start && t <=  stop;
+	public boolean inRange(int t) {
+		return t >= start && t <= stop;
 	}
-	
-	public void setStateTable(StateTable st){
+
+	public void setStateTable(StateTable st) {
 		myTable = st;
 	}
 }

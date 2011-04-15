@@ -1,4 +1,5 @@
 package vooga.replay.examples.catroll;
+
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -17,9 +18,8 @@ import com.golden.gamedev.util.ImageUtil;
 
 public class Level1 extends GameObject {
 
-
 	private StateTableFileManager stfm = new StateTableFileManager();
-	
+
 	private StateTable myTable;
 	private Sprite myPlayer;
 	private Background myBackground;
@@ -42,10 +42,11 @@ public class Level1 extends GameObject {
 		myField = new PlayField();
 
 		myPlayer = new Sprite(image);
-		
+
 		PLAYER_GROUP = new SpriteGroup("player group");
 		PLAYER_GROUP.add(myPlayer);
-		myBackground = new ImageBackground(getImage("resources/images/background.png"));
+		myBackground = new ImageBackground(
+				getImage("resources/images/background.png"));
 
 		myField.addGroup(PLAYER_GROUP);
 		myField.setBackground(myBackground);
@@ -62,30 +63,30 @@ public class Level1 extends GameObject {
 		myField.update(elapsedTime);
 		if (keyDown(KeyEvent.VK_D)) {
 			myPlayer.moveX(.08 * elapsedTime);
-			angle+=elapsedTime;
+			angle += elapsedTime;
 			right = true;
-			myPlayer.setImage(ImageUtil.rotate(image,angle));
+			myPlayer.setImage(ImageUtil.rotate(image, angle));
 		}
 		if (keyDown(KeyEvent.VK_A)) {
 			myPlayer.moveX(-.08 * elapsedTime);
-			angle-=elapsedTime;
+			angle -= elapsedTime;
 			right = false;
-			myPlayer.setImage(ImageUtil.rotate(image,angle));
+			myPlayer.setImage(ImageUtil.rotate(image, angle));
 		}
 		if (keyDown(KeyEvent.VK_S)) {
 			myPlayer.moveY(.08 * elapsedTime);
 			elapsedTime = right ? elapsedTime : -elapsedTime;
-			angle+=elapsedTime;
-			myPlayer.setImage(ImageUtil.rotate(image,angle));
+			angle += elapsedTime;
+			myPlayer.setImage(ImageUtil.rotate(image, angle));
 		}
 		if (keyDown(KeyEvent.VK_W)) {
 			myPlayer.moveY(-.08 * elapsedTime);
 			elapsedTime = right ? elapsedTime : -elapsedTime;
-			angle+=elapsedTime;
-			myPlayer.setImage(ImageUtil.rotate(image,angle));
+			angle += elapsedTime;
+			myPlayer.setImage(ImageUtil.rotate(image, angle));
 		}
-		
-		if(keyDown(KeyEvent.VK_ESCAPE)){
+
+		if (keyDown(KeyEvent.VK_ESCAPE)) {
 			stfm.writeToNewSaveFile(myTable, "st");
 			parent.nextGame = new CatReplay(parent, myTable);
 			finish();
