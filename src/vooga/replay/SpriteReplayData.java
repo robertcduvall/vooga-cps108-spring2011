@@ -7,23 +7,23 @@ import java.io.Serializable;
 import com.golden.gamedev.object.Sprite;
 
 /**
- * Encapsulates Sprite data for recording. 
+ * Encapsulates Sprite data for recording.
  * 
  * @author Josue, Chris
  */
-public class SpriteReplayData implements Serializable{
-	
+public class SpriteReplayData implements Serializable {
+
 	private Point2D.Double myPoint;
 	private BufferedImage myImage;
-	
-	public SpriteReplayData(Sprite s){
-		myPoint = new Point2D.Double(s.getX(),s.getY());
+
+	public SpriteReplayData(Sprite s) {
+		myPoint = new Point2D.Double(s.getX(), s.getY());
 		myImage = s.getImage();
 	}
-	
-	public SpriteReplayData(Sprite s, double x, double y){
+
+	public SpriteReplayData(Sprite s, double x, double y) {
 		this(s);
-		myPoint = new Point2D.Double(x,y);
+		myPoint = new Point2D.Double(x, y);
 	}
 
 	public double getX() {
@@ -33,10 +33,9 @@ public class SpriteReplayData implements Serializable{
 	public double getY() {
 		return myPoint.getY();
 	}
-	
-	public BufferedImage getImage(){
+
+	public BufferedImage getImage() {
 		return myImage;
 	}
-	
 
 }

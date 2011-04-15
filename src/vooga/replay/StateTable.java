@@ -1,6 +1,5 @@
 package vooga.replay;
 
-
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.io.Serializable;
@@ -12,8 +11,8 @@ import java.util.Map;
 import com.golden.gamedev.object.*;
 
 /**
- * Records all the sprites and background that were updated in the game.
- * Used as the medium from which Sprite data is replayed. 
+ * Records all the sprites and background that were updated in the game. Used as
+ * the medium from which Sprite data is replayed.
  * 
  * @author Josue, Chris
  * 
@@ -22,8 +21,8 @@ import com.golden.gamedev.object.*;
 @SuppressWarnings("serial")
 public class StateTable implements Serializable {
 
-	//private StateTable parent;
-	//private ArrayList<StateTable> children;
+	// private StateTable parent;
+	// private ArrayList<StateTable> children;
 	protected Map<Sprite, ArrayList<SpriteReplayData>> myMap;
 	protected List<Background> backgroundList;
 	protected Background myBackground;
@@ -40,50 +39,51 @@ public class StateTable implements Serializable {
 	public Map<Sprite, ArrayList<SpriteReplayData>> getTable() {
 		return myMap;
 	}
-	
-	public Background getBackground(){
+
+	public Background getBackground() {
 		return myBackground;
 	}
-	
-	public int getTime(){
+
+	public int getTime() {
 		return time;
 	}
-	
+
 	/**
 	 * Using the play field, this will record the SpriteReplayData and the
 	 * background at that point in time.
 	 * 
-	 * @param field - PlayField passed to the StateTable to be recorded.
+	 * @param field
+	 *            - PlayField passed to the StateTable to be recorded.
 	 */
 	public void updateStateTable(PlayField field) {
 		backgroundList.add(field.getBackground());
 		for (SpriteGroup s : field.getGroups()) {
-			updateHelper( s.getSprites());
+			updateHelper(s.getSprites());
 		}
-		for(Sprite a: myMap.keySet()){
-			if(!(myMap.get(a).size()==time+1)){
-				myMap.get(a).add(new SpriteReplayData(a,-1,-1));
+		for (Sprite a : myMap.keySet()) {
+			if (!(myMap.get(a).size() == time + 1)) {
+				myMap.get(a).add(new SpriteReplayData(a, -1, -1));
 			}
 		}
 		time++;
 	}
-	
+
 	/**
 	 * Update helper method.
 	 */
-	private void updateHelper(Sprite[] sprites){ 
+	private void updateHelper(Sprite[] sprites) {
 		for (Sprite a : sprites) {
 			if (a != null) {
 				if (!myMap.containsKey(a)) {
 					myMap.put(a, new ArrayList<SpriteReplayData>());
 					for (int decrement = time; decrement > 0; decrement--) {
-						myMap.get(a).add(new SpriteReplayData(a,-1, -1));
+						myMap.get(a).add(new SpriteReplayData(a, -1, -1));
 					}
 				}
 				myMap.get(a).add(new SpriteReplayData(a));
 			}
 		}
-		
+
 	}
 
 	public void render(Graphics2D g) {
@@ -98,7 +98,8 @@ public class StateTable implements Serializable {
 	 * point in time. Also set the background at that time. This returns false
 	 * once reach the last value of the table.
 	 * 
-	 * @param t - Time, location in time relative to "StateTable indices"
+	 * @param t
+	 *            - Time, location in time relative to "StateTable indices"
 	 */
 	public void transformSprite(int t) {
 		myBackground = backgroundList.get(t);
@@ -108,19 +109,28 @@ public class StateTable implements Serializable {
 			s.setImage(sData.getImage());
 			s.setBackground(myBackground);
 		}
-		
+
 	}
-	public PlayField getLastPlayField(){
-		return (PlayField)lastPlayField;
+	/**
+	 * This is for saving/resuming purposes. When resuming the game from the save file 
+	 * this method will retrieve the last PlayField from the StateTable and start the game 
+	 * from this PlayField.
+	 * 
+	 * @return PlayField-the PlayField from the last update
+	 */
+	public PlayField getLastPlayField() {
+		return (PlayField) lastPlayField;
 	}
+
 	/**
 	 * Updates StateTable based on the kind of Game element being recorded.
 	 * 
-	 * @param field - PlayField from which the recording is made
+	 * @param field
+	 *            - PlayField from which the recording is made
 	 */
 	public void record(PlayField field) {
 		updateStateTable(field);
-		if(field != null)
+		if (field != null)
 			lastPlayField.setPlayField(field);
 	}
 

@@ -1,6 +1,5 @@
 package vooga.replay.examples.catroll;
 
-
 import vooga.replay.Replay;
 import vooga.replay.StateTable;
 
@@ -11,5 +10,5 @@ public class CatReplay extends Replay {
 	public CatReplay(GameEngine parent, StateTable table) {
 		super(parent, table);
 	}
-	
+
 }
