@@ -19,10 +19,12 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
+import vooga.collisions.CollisionCheckers.ICollidable;
 import vooga.collisions.shapes.Vertex;
+import vooga.collisions.shapes.collisionShapes.CollisionQuadrilateral;
+import vooga.collisions.shapes.collisionShapes.ICollisionShape;
 import vooga.collisions.shapes.regularShapes.Polygon;
 import vooga.collisions.shapes.regularShapes.Quadrilateral;
-import vooga.sprites.improvedsprites.interfaces.ICollider;
 import vooga.sprites.improvedsprites.interfaces.IMobility;
 import vooga.sprites.improvedsprites.interfaces.IRender;
 import vooga.sprites.improvedsprites.interfaces.ISprite;
@@ -67,7 +69,7 @@ import com.golden.gamedev.object.collision.CollisionShape;
  * @see com.golden.gamedev.object.Timer
  */
 public class Sprite extends BaseSprite
-    implements java.io.Serializable, IBuildable, ICollider, IMobility, ISprite
+    implements java.io.Serializable, IBuildable, ICollidable, IMobility, ISprite
 {
 
     // /////// optimization /////////
@@ -79,7 +81,7 @@ public class Sprite extends BaseSprite
      */
     private static final long serialVersionUID = -4499098097309229784L;
 
-    private CollisionShape myCollisionShape;
+    private ICollisionShape myCollisionShape;
 
     protected ComponentSet<IComponent> myComponents;
 
@@ -364,12 +366,12 @@ public class Sprite extends BaseSprite
      * @see sprites.oldsprites.ISprite#getCollisionShape()
      */
     @Override
-    public CollisionShape getCollisionShape ()
+    public ICollisionShape getCollisionShape ()
     {
         if (this.myCollisionShape == null)
         {
             return (this.myCollisionShape =
-                new Quadrilateral(new Vertex(this.getX(),this.getY()),
+                new CollisionQuadrilateral(new Vertex(this.getX(),this.getY()),
                                   new Vertex(this.getX()+this.getHeight(), this.getY()),
                                   new Vertex(this.getX(),this.getY() + this.getHeight()),
                                   new Vertex(this.getX()+this.getHeight(),this.getY() + this.getHeight())));
@@ -619,7 +621,7 @@ public class Sprite extends BaseSprite
      * .CollisionShape)
      */
     @Override
-    public void setCollisionShape (Polygon cs)
+    public void setCollisionShape (ICollisionShape cs)
     {
 
         this.myCollisionShape = cs;
@@ -762,11 +764,6 @@ public class Sprite extends BaseSprite
     }
 
 
-    @Override
-    public Iterable<Line2D> getCollisionLines ()
-    {
-        return Arrays.asList(myCollisionShape.getSides());
-    }
 
 
 
