@@ -121,12 +121,12 @@ public class Polygon extends Shape
 		for(Vertex vertex : this.vertices)
 		{
 			//lets get the distance to move x first
-			double hypotenuse = LineMath.length(new Line2D.Double(vertex, this.center));
-			double dx = Math.sin(Math.toRadians(degrees)) * hypotenuse;
+			//double hypotenuse = LineMath.length(new Line2D.Double(vertex, this.center));
+			double dx = Math.sin(Math.toRadians(degrees)) * LineMath.length(new Line2D.Double(vertex, this.center));
 			
 			//now y
-			double angleA = (90 - ((180 - degrees) / 2));
-			double dy = Math.tan(Math.toRadians(angleA)) * dx;
+			//double angleA = (90 - ((180 - degrees) / 2));
+			double dy = Math.tan(Math.toRadians( (90 - ((180 - degrees) / 2)))) * dx;
 			
 			vertex.move(dx, dy);
 		}
