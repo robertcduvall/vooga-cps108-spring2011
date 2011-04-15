@@ -26,7 +26,7 @@ public class Vertex extends Point2D.Double implements Cloneable
         super(p.getX(), p.getY());
     }
     
-    void move(double dx, double dy)
+    public void move(double dx, double dy)
     {
     	this.x += dx;
     	this.y += dy;

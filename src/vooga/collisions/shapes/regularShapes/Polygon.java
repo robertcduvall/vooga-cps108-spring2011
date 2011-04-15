@@ -11,6 +11,7 @@ import java.awt.geom.Line2D.Double;
 import vooga.collisions.shapes.Vertex;
 import vooga.collisions.shapes.collisionShapes.BoundingBox;
 import vooga.collisions.shapes.util.PolygonMath;
+import vooga.util.math.LineMath;
 
 public class Polygon extends Shape
 {
@@ -115,16 +116,27 @@ public class Polygon extends Shape
 		this.move(offsetX, offsetY);
 	}
 	
-	public void rotate(double degrees)
+	public void rotate(double degrees)	//I think this is right. I haven't tested it.
 	{
-		angle += degrees;
-		//TODO: finish this
+		for(Vertex vertex : this.vertices)
+		{
+			//lets get the distance to move x first
+			double hypotenuse = LineMath.length(new Line2D.Double(vertex, this.center));
+			double dx = Math.sin(Math.toRadians(degrees)) * hypotenuse;
+			
+			//now y
+			double angleA = (90 - ((180 - degrees) / 2));
+			double dy = Math.tan(Math.toRadians(angleA)) * dx;
+			
+			vertex.move(dx, dy);
+		}
+		this.angle += degrees;
 	}
 	
 	@Override
 	public void setAngle(double angle) 
 	{
-		// TODO Auto-generated method stub
+		this.rotate(angle - this.angle);
 	}
     
     public Point2D[] getPoints()

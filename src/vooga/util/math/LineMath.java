@@ -139,5 +139,6 @@ public class LineMath
     {
         return findDirection(new Line2D.Double(x,y,xs,ys));
     }
+    
 
 }
