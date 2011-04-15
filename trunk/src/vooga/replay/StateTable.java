@@ -1,5 +1,6 @@
 package vooga.replay;
 
+
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.io.Serializable;
@@ -12,17 +13,15 @@ import com.golden.gamedev.object.*;
 
 /**
  * Records all the sprites and background that were updated in the game.
+ * Used as the medium from which Sprite data is replayed. 
  * 
  * @author Josue, Chris
  * 
  */
+
 @SuppressWarnings("serial")
 public class StateTable implements Serializable {
 
-	/**
-	 * 
-	 */
-	//protected static final long serialVersionUID = 1L;
 	//private StateTable parent;
 	//private ArrayList<StateTable> children;
 	protected Map<Sprite, ArrayList<SpriteReplayData>> myMap;
@@ -51,17 +50,16 @@ public class StateTable implements Serializable {
 	}
 	
 	/**
-	 * Using the play field, this will record the sprites position and the
+	 * Using the play field, this will record the SpriteReplayData and the
 	 * background at that point in time.
 	 * 
-	 * @param field
+	 * @param field - PlayField passed to the StateTable to be recorded.
 	 */
-	public void updateStateTable(PlayField field) {// , long timeTaken){
+	public void updateStateTable(PlayField field) {
 		backgroundList.add(field.getBackground());
 		for (SpriteGroup s : field.getGroups()) {
 			updateHelper( s.getSprites());
 		}
-		//updateHelper(field.getExtraGroup().getSprites());
 		for(Sprite a: myMap.keySet()){
 			if(!(myMap.get(a).size()==time+1)){
 				myMap.get(a).add(new SpriteReplayData(a,-1,-1));
@@ -70,7 +68,10 @@ public class StateTable implements Serializable {
 		time++;
 	}
 	
-	private void updateHelper(Sprite[] sprites){ // sprite.point array == time + 1;
+	/**
+	 * Update helper method.
+	 */
+	private void updateHelper(Sprite[] sprites){ 
 		for (Sprite a : sprites) {
 			if (a != null) {
 				if (!myMap.containsKey(a)) {
@@ -97,8 +98,7 @@ public class StateTable implements Serializable {
 	 * point in time. Also set the background at that time. This returns false
 	 * once reach the last value of the table.
 	 * 
-	 * @param t
-	 * @return boolean
+	 * @param t - Time, location in time relative to "StateTable indices"
 	 */
 	public void transformSprite(int t) {
 		myBackground = backgroundList.get(t);
@@ -113,6 +113,11 @@ public class StateTable implements Serializable {
 	public PlayField getLastPlayField(){
 		return (PlayField)lastPlayField;
 	}
+	/**
+	 * Updates StateTable based on the kind of Game element being recorded.
+	 * 
+	 * @param field - PlayField from which the recording is made
+	 */
 	public void record(PlayField field) {
 		updateStateTable(field);
 		if(field != null)

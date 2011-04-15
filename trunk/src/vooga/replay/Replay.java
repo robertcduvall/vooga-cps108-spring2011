@@ -5,6 +5,12 @@ import java.awt.Graphics2D;
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
 
+/**
+ * Instance of a "Replay" which updates and renders directly from a StateTable. 
+ * 
+ * @author Josue, Chris
+ */
+
 public class Replay extends GameObject{
 	
 	protected StateTable myTable;
@@ -31,6 +37,9 @@ public class Replay extends GameObject{
 		myTable.render(g);
 	}
 
+	/**
+	 * Overriden update updates PlayField directly from global StateTable.
+	 */
 	@Override
 	public void update(long elapsedTime) {
 		if(inRange(time)){
@@ -39,6 +48,13 @@ public class Replay extends GameObject{
 		}
 	}
 	
+	/**
+	 * Checks whether your current location in the StateTable is in the 
+	 * predetermined range.
+	 * 
+	 * @param t - Time variable for indices in StateTable
+	 * @return Boolean as to whether the time t falls in the predetermined range.
+	 */
 	public boolean inRange(int t){
 		return t >= start && t <=  stop;
 	}

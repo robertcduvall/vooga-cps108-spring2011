@@ -22,7 +22,6 @@ public class Level1 extends GameObject {
 	
 	private StateTable myTable;
 	private Sprite myPlayer;
-	private DogSprite enemyDog;
 	private Background myBackground;
 	private int angle = 0;
 	private BufferedImage image = getImage("resources/images/cat.png");
@@ -39,23 +38,16 @@ public class Level1 extends GameObject {
 
 	@Override
 	public void initResources() {
-		//bsMusic.setBaseRenderer(new JavaLayerMp3Renderer());
-		//bsMusic.play("meowmix.mp3");
 		myTable = new StateTable();
 		myField = new PlayField();
 
 		myPlayer = new Sprite(image);
-		enemyDog = new DogSprite(getImage("resources/images/dog.png"));
-		
 		
 		PLAYER_GROUP = new SpriteGroup("player group");
 		PLAYER_GROUP.add(myPlayer);
-		ENEMY_GROUP = new SpriteGroup("enemy group");
-		ENEMY_GROUP.add(enemyDog);
 		myBackground = new ImageBackground(getImage("resources/images/background.png"));
 
 		myField.addGroup(PLAYER_GROUP);
-		myField.addGroup(ENEMY_GROUP);
 		myField.setBackground(myBackground);
 
 	}
