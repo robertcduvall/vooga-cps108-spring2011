@@ -1,6 +1,8 @@
 package vooga.collisions.shapes.collisionShapes;
 
-public interface ICollisionShape
+import vooga.collisions.shapes.regularShapes.IShape;
+
+public interface ICollisionShape extends IShape
 {
 	public boolean intersects(ICollisionShape s);
 }

@@ -4,32 +4,57 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.golden.gamedev.object.SpriteGroup;
-import com.golden.gamedev.object.collision.CollisionRect;
 
 import vooga.sprites.spritegroups.BasicSpriteGroup;
+import vooga.sprites.spritegroups.SpriteGroup;
 
 public abstract class CollisionManager 
 {
 
-	private ArrayList<SpriteGroup> groups;
+	protected ArrayList<SpriteGroup> myGroups;
 	private boolean active = true;
 
 	public CollisionManager()
 	{
-		//empty
+	    myGroups = new ArrayList<SpriteGroup>();
 	}
 
 	public void setCollisionGroup(SpriteGroup ... spriteGroups)
 	{
-		groups.clear();
-		groups.addAll(Arrays.asList(spriteGroups));
+		myGroups = new ArrayList<SpriteGroup>(Arrays.asList(spriteGroups));
 	}
 
-	public SpriteGroup getGroup(int index)
-	{
-		return groups.get(index);
+	public void addGroups(SpriteGroup ... spriteGroups){
+	    myGroups.addAll(Arrays.asList(spriteGroups));
 	}
+	
+	
+	public SpriteGroup getGroupByIndex(int index)
+	{
+		return myGroups.get(index);
+	}
+	
+	public SpriteGroup getGroupByName(String name)
+    {
+	    for (SpriteGroup sg : myGroups){
+	        if (sg.getName().equals(name))
+	            return sg;
+	    }
+        return null;
+    }
+	
+	public void removeGroupByIndex(int index)
+    {
+        myGroups.remove(index);
+    }
+    
+    public void removeGroupByName(String name)
+    {
+        for (SpriteGroup sg : myGroups){
+            if (sg.getName().equals(name))
+                myGroups.remove(sg);
+        }
+    }
 
 	public abstract void checkCollision();
 
@@ -43,9 +68,9 @@ public abstract class CollisionManager
 		this.active = b;
 	}
 
-	// //////////////optimization///////////
-	private final static CollisionRect iRect = new CollisionRect();
 
+	
+	
 	/**
 	 * Returns true whether <code>image1</code> at <code>x1</code>,
 	 * <code>y1</code> collided with <code>image2</code> at <code>x2</code>,

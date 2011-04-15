@@ -195,7 +195,7 @@ public class Circle extends Shape
     }
 
 
-    public List<Point2D> findIntersections (Line2D line)
+    public Point2D[] findIntersections (Line2D line)
     {
         if (this.contains(line)) return null;
         Point2D p =
@@ -205,8 +205,8 @@ public class Circle extends Shape
         double mag =
             Math.sqrt(radius * radius - Math.pow(p.distance(center), 2));
         double dir = LineMath.findDirection(line);
-        if (dir == radius) return Arrays.asList(new Point2D[] { p });
-        else return Arrays.asList(new Point2D[] {
+        if (dir == radius) return new Point2D[] { p };
+        else return new Point2D[] {
                 new Point2D.Double(p.getX() + mag *
                                            Math.cos(Math.toRadians(dir)),
                                    p.getY() + mag *
@@ -214,7 +214,7 @@ public class Circle extends Shape
                 new Point2D.Double(p.getX() - mag *
                                            Math.cos(Math.toRadians(dir)),
                                    p.getY() - mag *
-                                           Math.sin(Math.toRadians(dir))) });
+                                           Math.sin(Math.toRadians(dir))) };
 
     }
 
@@ -225,7 +225,7 @@ public class Circle extends Shape
 
         for (Line2D l : splitRectangleToEdges(rect))
         {
-            ins.addAll(this.findIntersections(l));
+            ins.addAll(Arrays.asList(this.findIntersections(l)));
         }
         return ins;
 
