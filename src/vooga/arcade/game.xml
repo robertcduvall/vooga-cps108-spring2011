@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+	<title>1</title>
+    <path>vooga.arcade.TestGame</path>
+	<genre>3</genre>
+	<author>4</author>
+	<description>5</description>
+	<datecreated>6</datecreated>
+	<highscores>
+		<first>7</first>
+		<second>8</second>
+		<third>9</third>
+	</highscores>
+	<version>10</version>
+	<price>11</price>
+	<language>12</language>
+	<dimension>
+		<width>300</width>
+		<height>300</height>
+	</dimension>
+</game>
