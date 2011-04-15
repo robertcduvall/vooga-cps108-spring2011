@@ -97,10 +97,10 @@ You may add new packages to the list below, but they must have the same basic in
      * Extensions: Allow user to compare replays using tree traversal. Allow for fast-forward, rewind, and skipping through replays.
   # Level Editor
      * Claimed by Charlie Hatcher, Alex Lee
-     * Description: Allow game designers to edit levels graphically rather than hand editing a text file.
+     * Description: Allow the users to load in a xml level file into a swing GUI and edit the level through drag and drop rather than hand editing the xml file.
      * Design Goals:Create an efficient and general model that allows users to create/modify levels for all types of games (panning, static etc).
      * Core Responsibilities: Develop a user interface that allows users to load, save, and alter level files graphically.
-     * Collaborates With:Level, Possibly Development Environment, and GameLoop
+     * Collaborates With:Level, Game Resources, Standard XML file format
      * Extensions:
   # Debugger (Development Environment)
      * Claimed by Troy Ferrell, Austin Benesh, Ethan Goh
