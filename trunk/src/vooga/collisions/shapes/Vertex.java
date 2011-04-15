@@ -28,9 +28,9 @@ public class Vertex extends Point2D.Double implements Cloneable
     
     public void move(double dx, double dy)
     {
-    	System.out.println("was: " + this.x);
+    	//System.out.println("was: " + this.x);
     	this.setLocation(this.x + dx, this.y + dy);
-    	System.out.println("now: " + this.x);
+    	//System.out.println("now: " + this.x);
     }
     
     public double diagonalLengthFromOrigin()
