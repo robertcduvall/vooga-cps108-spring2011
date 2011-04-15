@@ -15,27 +15,31 @@ import com.golden.gamedev.object.Sprite;
 /**
  * A manger that facilitates movement between levels, stores information
  * regarding the overall state of the levels and maintains the user’s position/
- * progress in the game. By default
+ * progress in the game.
  * 
  * @author Andrew Patterson & Wesley Brown
  */
 public class LevelManager
 {
     private static final String LEVEL_ORDER_FILE = "level_resources/LevelOrder";
+    /** The singleton instance of levelManager...Deprecated */
     private static LevelManager myInstance;
-
+    /** A map of level number to the associated XML file */
     private Map<Integer, String> myLevelOrderMap;
+    /** A set of the current levels */
     private TreeSet<AbstractLevel> myCurrentLevels;
+    /** The total number of levels */
     private int myNumOfLevels;
+    /** The total number of levels completed */
     private int myNumOfLevelsCompleted;
+    /** The playingfield which levels will add to */
     private PlayField myPlayField;
 
 
     /**
-     * Restrict access to private LevelManager constructor by singleton pattern
-     * Map level names/classes to level order
+     * Maps level names/classes to level order
      */
-    private LevelManager ()
+    public LevelManager ()
     {
         myLevelOrderMap = new HashMap<Integer, String>();
         myCurrentLevels = new TreeSet<AbstractLevel>();
@@ -60,6 +64,7 @@ public class LevelManager
 
     /**
      * Get access to level-related data through this singleton of LevelManager
+     * Dead method...will be removed April 2011
      * 
      * @return A singleton instance of LevelManager
      */
