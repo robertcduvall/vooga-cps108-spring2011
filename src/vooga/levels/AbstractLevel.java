@@ -1,9 +1,6 @@
 package vooga.levels;
 
-import java.util.ArrayList;
-import java.util.Queue;
-import java.util.Random;
-import java.util.TreeMap;
+import java.util.*;
 import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
@@ -11,23 +8,30 @@ import com.golden.gamedev.object.Sprite;
 
 
 /**
- * A basic level object which, by default, initializes all sprites, music and
- * backgrounds found in the associated XML file. If more complex level
- * initialization is required (conditional for example) level can be extended
- * and the initializeLevel() method can be overriden.
+ * A basic level object which gets the majority of its contents from an
+ * associated XML file. More complex level initializations can be accomplished
+ * by writting the loadLevel() method.
  * 
  * @author Andrew Patterson & Wesley Brown
  */
 public abstract class AbstractLevel implements Comparable<AbstractLevel>
 {
-    private Game myGame;
-    private String myFilePath;
+    /** The game for which this is a level for */
+    private Game myGame;   
+    /** The file path to the associated XML file */
+    private String myFilePath;  
+    /** The id/level number for this object */
     private int myId;
+    /** The goal which this level must reach in order to progress */
     private IGoal myGoal;
-    private Queue<Background> myBackgrounds;
+    /** A queue of all the backgrounds for this level - read in from the XML file */
+    private ArrayList<Background> myBackgrounds;
+    /** The playingfield to which objects (sprites...etc) will be added */
     private PlayField myPlayField;
+    /** A map of sprite type to all the instances of that type read from the XML file */
     private TreeMap<Class<?>, ArrayList<Sprite>> mySprites;
-    private Queue<String> myMusic;
+    /** A queue of all the music for this level - read in from the XML file */
+    private ArrayList<String> myMusic;
 
 
     public AbstractLevel (String filePath, int id, PlayField pf, Game g)
@@ -43,7 +47,8 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
 
 
     /**
-     * The key method that the LevelManager will call when loading a level
+     * The key method that the LevelManager will call when loading a level.
+     * The implementation of this method will determine how a level initializes.
      */
     public abstract void loadLevel ();
 
@@ -58,11 +63,11 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
 
 
     /**
-     * Sets the view's background
+     * Sets the playingfield's background
      */
     protected void addBackground ()
     {
-        myPlayField.setBackground(myBackgrounds.poll());
+        myPlayField.setBackground(myBackgrounds.remove(0));
     }
 
 
@@ -97,7 +102,7 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
      */
     protected void addMusic ()
     {
-        myGame.playMusic(myMusic.poll());
+        myGame.playMusic(myMusic.remove(0));
     }
 
 
