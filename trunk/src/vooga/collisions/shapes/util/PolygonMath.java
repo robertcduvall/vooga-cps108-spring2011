@@ -1,13 +1,17 @@
-package vooga.collisions.shapes;
+package vooga.collisions.shapes.util;
 
 import java.awt.geom.Point2D;
+
+import vooga.collisions.shapes.Vertex;
+import vooga.collisions.shapes.collisionShapes.BoundingBox;
+import vooga.collisions.shapes.regularShapes.Polygon;
 
 public class PolygonMath
 {
 
     public static double getMinX (Polygon p )
     {
-        return getMinX(p.getVertices());
+        return getMinX(p.getPoints());
     }
     
     public static double getMinX (Point2D ... vertices)
@@ -23,7 +27,7 @@ public class PolygonMath
 
     public static double getMinY (Polygon p )
     {
-        return getMinY(p.getVertices());
+        return getMinY(p.getPoints());
     }
     
     public static double getMinY (Point2D ... vertices)
@@ -40,7 +44,7 @@ public class PolygonMath
     
     
     public static BoundingBox findBoundingBox(Polygon p){
-        return findBoundingBox(p.getVertices());
+        return findBoundingBox(p.getPoints());
     }
 
     private static BoundingBox findBoundingBox (Point2D ... vertices)
@@ -52,7 +56,7 @@ public class PolygonMath
     
     public static double getMaxX (Polygon p )
     {
-        return getMaxX(p.getVertices());
+        return getMaxX(p.getPoints());
     }
 
     private static double getMaxX (Point2D... vertices)
@@ -70,7 +74,7 @@ public class PolygonMath
     
     public static double getMaxY (Polygon p )
     {
-        return getMaxY(p.getVertices());
+        return getMaxY(p.getPoints());
     }
     
     private static double getMaxY (Point2D ... vertices)

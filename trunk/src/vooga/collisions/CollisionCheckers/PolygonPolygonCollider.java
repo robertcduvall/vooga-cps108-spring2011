@@ -4,15 +4,15 @@ import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import vooga.collisions.shapes.Polygon;
 import vooga.collisions.shapes.Side;
+import vooga.collisions.shapes.regularShapes.Polygon;
 
 
-public class PolygonCollider 
+public class PolygonPolygonCollider 
 {
 	HashMap<Polygon, Side[]> polygonToLineMap;
 
-	public PolygonCollider(ArrayList<Polygon> polygonList)
+	public PolygonPolygonCollider(ArrayList<Polygon> polygonList)
 	{
 		polygonToLineMap = new HashMap<Polygon, Side[]>();
 

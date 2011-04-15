@@ -1,4 +1,6 @@
-package vooga.collisions.shapes;
+package vooga.collisions.shapes.regularShapes;
+
+import vooga.collisions.shapes.Vertex;
 
 public class Quadrilateral extends Polygon
 {

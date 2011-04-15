@@ -26,7 +26,12 @@ public class Vertex extends Point2D.Double implements Cloneable
         super(p.getX(), p.getY());
     }
     
-
+    void move(double dx, double dy)
+    {
+    	this.x += dx;
+    	this.y += dy;
+    }
+    
     public double diagonalLengthFromOrigin()
 	{
 		return Math.sqrt((this.x * this.x) + (this.y * this.y));
@@ -36,5 +41,5 @@ public class Vertex extends Point2D.Double implements Cloneable
 	{
 		return "X = " + this.getX() + " Y = " +this.getY();
 	}
-	
+
 }

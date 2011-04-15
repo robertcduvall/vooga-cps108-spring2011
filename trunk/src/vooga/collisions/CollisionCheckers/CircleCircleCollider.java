@@ -1,8 +1,8 @@
-package vooga.collisions.collisionCheckers;
+package vooga.collisions.CollisionCheckers;
 
 import java.util.ArrayList;
 
-import vooga.collisions.shapes.Circle;
+import vooga.collisions.shapes.regularShapes.Circle;
 
 public class CircleCircleCollider 
 {
