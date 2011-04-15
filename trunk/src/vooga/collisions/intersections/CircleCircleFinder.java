@@ -7,7 +7,7 @@ import vooga.util.math.LineMath;
 public class CircleCircleFinder extends IntersectionFinder {
 
 	@Override
-	boolean canApply(Class<? extends Shape> c1, Class<? extends Shape> c2)
+	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2)
 	{
 		if (c1.isInstance(Circle.class) && c2.isInstance(Circle.class))
 		{
