@@ -4,12 +4,15 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 import java.util.ArrayList;
 import java.util.List;
 
+import vooga.collisions.shapes.regularShapes.Circle;
 import vooga.collisions.shapes.regularShapes.Polygon;
+import vooga.collisions.shapes.regularShapes.RegularPolygon;
 
 public class ShapeFactory 
 {
@@ -17,6 +20,19 @@ public class ShapeFactory
 	{
 		return new Polygon(vertices);
 	}
+	
+	public static RegularPolygon makeRegularPolygon(double x, double y, double sideNum, double sideLength){
+        return new RegularPolygon(x,y, sideNum, sideLength);
+	    
+	}
+	
+	public static Circle makeCircle(double x, double y, double r){
+	    return new Circle(x,y,r);
+	}
+	
+	public static Circle makeCircle(Point2D c, double r){
+        return new Circle(c,r);
+    }
 
 
 	private java.awt.Shape makeShape (BufferedImage image)
