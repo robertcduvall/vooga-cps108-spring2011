@@ -1,17 +1,26 @@
 package vooga.player;
 
-
 /**
  * @author Andrea Scripa
+ * 
+ * The superclass of Player's three types of wrappers.  What all these wrappers have in 
+ * common is the ability to parse a specific kind of input.
  */
 public abstract class AbstractPlayerWrapper
 {
-    //add constructor
+    protected int type;
+    
+    /**
+     * Constructor
+     */
     public AbstractPlayerWrapper(Player p)
     {
-        
+        // TODO: DJ - once you decide whether I need an instance of VoogaGame or 
+        // EventManager (from which to listen for events), load it here.
     }
     
-    //add listeners
+    /**
+     * Listeners
+     */
     public abstract void addInputListeners();
 }

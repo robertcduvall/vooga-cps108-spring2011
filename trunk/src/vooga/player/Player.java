@@ -1,83 +1,108 @@
 package vooga.player;
 
-import com.golden.gamedev.object.Sprite;
-
 import java.util.ArrayList;
-import vooga.core.VoogaGame;
+import vooga.core.GameEntity;
 
+
+/**
+ * A developer can make one or more specialized players for his game (ex: PacManPlayer),
+ * which should extend this abstract class.
+ * 
+ * The wrappers for this class were designed such that Player can implement more than 
+ * one.  This would allow a developer both to give a Player AI characteristics and to
+ * allow the Player to be controlled by user input.
+ * 
+ * Note: Most events should be listened for in Player's wrappers or GameEntities; however
+ * it may be appropriate to add event listeners directly to Player if the developer wishes
+ * to change out a player's AI functionality during the game, for example.  One could also 
+ * do this to remove a wrapper and its functionality part-way through the game.
+ * 
+ */
 public abstract class Player
 {
 	/**
 	 * @author Andrea Scripa
 	 */
+	
+	public static final int HUMAN_PLAYER = 0;
+	public static final int AI_PLAYER = 1;
+	public static final int NETWORK_PLAYER = 2;
     
-    //Store its wrapper
+    private ArrayList<GameEntity> myEntities = new ArrayList<GameEntity>();
+	private ArrayList<AbstractPlayerWrapper> myWrappers = 
+	    new ArrayList<AbstractPlayerWrapper>();
 	
-    //Write up a design document. put on the wiki.
-    //Decide on names for new level starting or keyboard input
-    
-    //Set up events listener - tells us about key inputs
-    //On the action performed, update all sprites associated with this player.
-    //Have an "add" method with ArrayList that Sprites can add themselves to.
-    
-    // Game state tells us when to add ourselves. (Listen to them!)
-    // Put player on playfield.
-    
-    //Events as strings - can dynamically switch between them.
+	public Player(){}
 	
-	protected int playerId;
-	private static int nextPlayerId= 1;
-	private boolean active = true;
-	private ArrayList<Sprite> mySprites = new ArrayList<Sprite>();
-	private VoogaGame gameInstance;
+	/**
+     * Method to establish a listener to the game state. This is useful for knowing
+     * when to add Player's sprite(s) to the playfield because this occurs at the beginning 
+     * of the game or at the start of a new level.
+     */
+	public abstract void gameStateListener();
 	
-	public Player(){
-		playerId = nextPlayerId;
-		nextPlayerId ++;
-	}
-	
-	//Alternately, pass the playfield and an instance of EventManager.
-	//DJ is supposed to get back to me on this.
-	public void getGame(VoogaGame g)
-	{
-	    gameInstance = g;
-	}
-	
-	public abstract void addEventListeners();
-	
+	/**
+     * Method to update the stats a given Player may have.  It is useful both for updating
+     * the Player's record of its own stats and for sending these stats to the 
+     * vooga.stats package for further processing and/or storage.
+     */
 	public abstract void updateStats();
 	
-	public void addSprite(Sprite s)
+	/**
+     * Adds a GameEntity (a group of Sprites with same properties and same purpose in the 
+     * game) to Player.
+     * A Player always has one or more GameEntities, but not all GameEntities must be 
+     * associated with a Player.
+     */
+	public void addEntity(GameEntity ge)
 	{
-	    mySprites.add(s);
+	    myEntities.add(ge);
 	}
 	
-	public void updateSprites(String command)
+	/**
+     * Sends a command (which is found by parsing input to the Player) to all of Player's
+     * GameEntities.  These Entities can then decide what to do with this command and if
+     * it should be sent on to their Sprites.
+     */
+	public void updateEntities(String command)
 	{
-	    for(Sprite s : mySprites)
+	    for(GameEntity ge : myEntities)
 	    {
-	        //Need a performCommand method in Sprite that uses reflection to interpret
-	        //which method to call so the command will be performed.
-	        // s.performCommand(command);
+	        ge.interpretCommand(command);
 	    }
 	}
 	
-	//Developer decides how to map events to commands that are sent to the Sprites.
-	//Introduces a level of abstraction: this way events can come from multiple sources 
-	//but still map to the same command.
-	public abstract String eventToCommand(String event);
-	
-	public abstract int compareTo(Player p);
-	
-	public abstract boolean equals(Player p);
-	
-	public boolean getActive()
+	/**
+     * Returns all the GameEntities associate with Player.
+     */
+	public ArrayList<GameEntity> getEntities()
 	{
-	    return this.active;
+	    return myEntities;
 	}
 	
-	public void setActive(boolean b)
+	/**
+     * This method is called in the constructor of each type of wrapper.  When a new wrapper 
+     * is made for Player, it is stored in myWrappers so that it can be kept track of.  
+     */
+	public void storeWrapper(AbstractPlayerWrapper w)
 	{
-	    this.active = b;
+	    myWrappers.add(w);
+	}
+	
+	/**
+     * Returns all the wrappers associate with Player.
+     */
+	public ArrayList<AbstractPlayerWrapper> getWrappers()
+	{
+	    return myWrappers;
+	}
+	
+	/**
+     * Returns the type (HUMAN_PLAYER, AI_PLAYER, or NETWORK_PLAYER) of a given wrapper
+     * that Player holds.
+     */
+	public int getWrapperType(AbstractPlayerWrapper w)
+	{
+	    return w.type;
 	}
 }
