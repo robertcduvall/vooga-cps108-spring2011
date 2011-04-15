@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-import vooga.sprites.spritegroups.BasicSpriteGroup;
 import vooga.sprites.spritegroups.SpriteGroup;
 
 public abstract class CollisionManager 
