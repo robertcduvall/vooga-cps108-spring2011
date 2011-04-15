@@ -1,5 +1,6 @@
 package vooga.resources.xmlparser;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -22,7 +23,9 @@ public abstract class Parser
     /**
      * Creates a new parser with no syntax definitions.
      */
-    public Parser() {}
+    public Parser() {
+    	xmlDefinitions = new HashMap<String, XMLTag>();
+    }
 
     /**
      * Adds XML tags for the parser to recognize and interpret.
@@ -48,7 +51,9 @@ public abstract class Parser
      */
     public void parseElement(Element xmlElement)
     {
-        xmlDefinitions.get(xmlElement.getTagName()).parse(this, xmlElement);
+    	String tagName = xmlElement.getTagName();
+    	XMLTag tag = xmlDefinitions.get(tagName);
+        tag.parse(this, xmlElement);
     }
     
     /**

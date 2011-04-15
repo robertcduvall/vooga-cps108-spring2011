@@ -13,6 +13,10 @@ public class ResourceException extends RuntimeException
         return new ResourceException("Syntax error in resource file.");
     }
     
+    public static ResourceException notFoundException()
+    {
+    	return new ResourceException("Unable to find resource!");
+    }
 
     public ResourceException(String message)
     {

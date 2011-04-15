@@ -20,6 +20,7 @@ import com.golden.gamedev.util.ImageUtil;
 public class ImageParser extends Parser
 {
     private static final String
+    	RESOURCES = "resources",
         IMAGE = "image",
         NAME = "name",
         SOURCE = "source",
@@ -37,6 +38,16 @@ public class ImageParser extends Parser
         ROW_OFFSET = "row",
         COL_OFFSET = "column";
     
+    /**
+     * Root tag.
+     */
+    private class ResourcesTag extends XMLTag {
+    	public String getTagName() { return RESOURCES; }
+    	public void parse(Parser context, Element xmlElement) {
+    		parseChildren(context, xmlElement);
+    	}
+    	
+    }
     private class ImageTag extends XMLTag {
         public String getTagName() {return IMAGE;}
         public void parse(Parser context, Element xmlElement) {
@@ -180,7 +191,7 @@ public class ImageParser extends Parser
     
     private String imageName = null;
     private int state = 0;
-    private Direction dir = null;
+    private Direction dir = Direction.NORTH;
     private BufferedImage sourceImage = null;
     private BufferedImage[] tiles = null;
     private int tileCols = 0;
@@ -200,7 +211,8 @@ public class ImageParser extends Parser
         this.parent = parent;
         this.bsLoader = bsLoader;
         
-        addDefinitions(new ImageTag(), new SourceTag(),
+        addDefinitions(new ResourcesTag(),
+        			   new ImageTag(), new SourceTag(),
                        new WidthTag(), new HeightTag(),
                        new RowsTag(), new ColumnsTag(),
                        new StateTag(), new DirectionsTag(),
@@ -225,7 +237,7 @@ public class ImageParser extends Parser
      * @param c The character to convert.
      * @return The corresponding direction
      */
-    private Direction getDirection(char c)
+    private static Direction getDirection(char c)
     {
         switch(c)
         {
@@ -253,7 +265,8 @@ public class ImageParser extends Parser
             parent.images.put(key, new AnimatedImage());
         }
         
-        parent.images.get(key).addFrame(tiles[tileIndex++], duration);
+        AnimatedImage image = parent.images.get(key);
+        image.addFrame(tiles[tileIndex++], duration);
         
         imageAdded = true;
     }

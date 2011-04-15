@@ -13,7 +13,7 @@ import java.util.TreeMap;
  */
 public class AnimatedImage
 {
-    private SortedMap<Integer, BufferedImage> frames;
+    private TreeMap<Integer, BufferedImage> frames;
     private int totalTime;
     
     /**
@@ -71,7 +71,7 @@ public class AnimatedImage
     public BufferedImage getFrame(long time)
     {
         int subTime = totalTime == 0 ? 0 : (int) (time % totalTime);
-        int pastDuration = frames.headMap(subTime).lastKey();
+        int pastDuration = frames.headMap(subTime, true).lastKey();
         return frames.get(pastDuration);
     }
     

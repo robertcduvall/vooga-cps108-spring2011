@@ -1,6 +1,7 @@
 package vooga.resources.xmlparser;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -60,7 +61,9 @@ public abstract class XMLTag
         
         for(int i=0; i<children.getLength(); i++)
         {
-            context.parseElement((Element) children.item(i));
+        	Node child = children.item(i);
+        	if(child instanceof Element)
+        		context.parseElement((Element) child);
         }
     }
 
