@@ -1,37 +1,42 @@
-package vooga.collisions.shapes;
+package vooga.collisions.shapes.regularShapes;
 
 import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import vooga.collisions.shapes.Vertex;
 import vooga.util.math.LineMath;
 
 
-public class Circle implements Shape
+public class Circle extends Shape
 {
-
-    protected Point2D center;
 
     protected double radius;
 
 
-    public Circle (Point2D center, double radius)
+    public Circle (Vertex center, double radius)
     {
         this.center = center;
         this.radius = radius;
+    }
+    
+    public Circle (Point2D center, double radius)
+    {
+    	this(new Vertex(center), radius);
     }
 
 
     public Circle (Circle c)
     {
-        this.center = c.getCenter();
+        this.center = new Vertex(c.getCenter());
         this.radius = c.getRadius();
     }
 
@@ -78,32 +83,6 @@ public class Circle implements Shape
 
         return contains(p[0]) && contains(p[1]) && contains(p[2]) &&
                contains(p[3]);
-    }
-
-
-    @Override
-    public boolean contains (double x, double y)
-    {
-        return this.contains(new Point2D.Double(x, y));
-    }
-
-
-    @Override
-    public boolean contains (double x1, double y1, double x2, double y2)
-    {
-        return this.contains(x1, y1) && this.contains(x2, y2);
-    }
-
-
-    public Point2D getCenter ()
-    {
-        return center;
-    }
-
-
-    public void setCenter (Point2D center)
-    {
-        this.center = center;
     }
 
 
@@ -170,7 +149,7 @@ public class Circle implements Shape
     {
         for (Point2D p : getRectCorners(r))
             if (this.contains(p)) return true;
-
+        
         return false;
     }
 
@@ -295,4 +274,39 @@ public class Circle implements Shape
                 new Point2D.Double(x, y + h),
                 new Point2D.Double(x + w, y + h) };
     }
+
+	@Override
+	public void move(double dx, double dy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setLocation(double x, double y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rotate(double degrees) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAngle(double angle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double getMaxDistanceFromCenter() {
+		return getRadius();
+	}
+
+	@Override
+	public Point2D getTopLeftCorner(Point2D[] vertices) 
+	{
+		return new Point2D.Double(this.center.x - this.radius, this.center.y - radius);
+	}
 }

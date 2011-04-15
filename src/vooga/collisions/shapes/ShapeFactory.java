@@ -9,6 +9,8 @@ import java.awt.image.PixelGrabber;
 import java.util.ArrayList;
 import java.util.List;
 
+import vooga.collisions.shapes.regularShapes.Polygon;
+
 public class ShapeFactory 
 {
 	public static Polygon makePolygon(Vertex[] vertices)

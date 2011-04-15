@@ -19,9 +19,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
-import vooga.collisions.shapes.Polygon;
-import vooga.collisions.shapes.Quadrilateral;
 import vooga.collisions.shapes.Vertex;
+import vooga.collisions.shapes.regularShapes.Polygon;
+import vooga.collisions.shapes.regularShapes.Quadrilateral;
 import vooga.sprites.improvedsprites.interfaces.ICollider;
 import vooga.sprites.improvedsprites.interfaces.IMobility;
 import vooga.sprites.improvedsprites.interfaces.IRender;
@@ -79,7 +79,7 @@ public class Sprite extends BaseSprite
      */
     private static final long serialVersionUID = -4499098097309229784L;
 
-    private Polygon myCollisionShape;
+    private CollisionShape myCollisionShape;
 
     protected ComponentSet<IComponent> myComponents;
 
@@ -364,7 +364,7 @@ public class Sprite extends BaseSprite
      * @see sprites.oldsprites.ISprite#getCollisionShape()
      */
     @Override
-    public Polygon getCollisionShape ()
+    public CollisionShape getCollisionShape ()
     {
         if (this.myCollisionShape == null)
         {
@@ -738,7 +738,6 @@ public class Sprite extends BaseSprite
         this.updateComponents(elapsedTime);
     }
 
-
     /**
      * @param elapsedTime
      */
@@ -761,8 +760,6 @@ public class Sprite extends BaseSprite
         this.move(this.getHorizontalSpeed() * elapsedTime, this.getVerticalSpeed() *
                                                       elapsedTime);
     }
-
-
 
 
     @Override
