@@ -1,4 +1,4 @@
-package vooga.arcade;
+package vooga.arcade.parser;
 
 import java.awt.Graphics2D;
 

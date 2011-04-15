@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
 	<title>1</title>
-    <path>vooga.arcade.TestGame</path>
+    <path>vooga.arcade.parser.TestGame</path>
 	<genre>3</genre>
 	<author>4</author>
 	<description>5</description>
