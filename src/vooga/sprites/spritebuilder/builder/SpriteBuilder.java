@@ -14,7 +14,7 @@ import vooga.util.buildable.components.ComponentResources;
 import vooga.util.buildable.components.IComponent;
 import vooga.util.buildable.components.predefined.basic.IntegerC;
 
-public class SpriteBuilder
+public class SpriteBuilder<T extends Sprite>
 {
 
     
@@ -25,7 +25,7 @@ public class SpriteBuilder
         myConstructors.addAll(Arrays.asList(classes));
     }
     
-    public Sprite buildSprite(Sprite bs, Object ...in){
+    public T buildSprite(T bs, Object ...in){
         Iterator<Class<? extends IComponent>> iter1 = myConstructors.iterator();
         Queue<Object> input = new LinkedList<Object>(Arrays.asList(in));
 

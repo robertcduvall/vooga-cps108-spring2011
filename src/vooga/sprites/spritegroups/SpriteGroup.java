@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2008 Golden T Studios.
+ * Copyright (c) 2008 Golden T Studios.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,11 +18,15 @@ package vooga.sprites.spritegroups;
 
 // JFC
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+import vooga.sprites.improvedsprites.BaseSprite;
+import vooga.sprites.improvedsprites.Sprite;
 
 import com.golden.gamedev.object.Background;
-import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.Timer;
 import com.golden.gamedev.util.Utility;
 
@@ -66,13 +70,9 @@ import com.golden.gamedev.util.Utility;
  * @see com.golden.gamedev.object.PlayField
  * @see com.golden.gamedev.object.collision.CollisionGroup
  */
-public class BasicSpriteGroup {
+public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
     
     /** *********************** GROUP SPRITE FACTOR ***************************** */
-    
-    // total 'empty' sprite (NULL sprite, allocation only)
-    // reduce the cost of array enlargement operation
-    private int expandFactor = 20;
     
     // removes inactive sprites every 15 seconds
     private Timer scanFrequence = new Timer(15000);
@@ -88,8 +88,6 @@ public class BasicSpriteGroup {
     
     /** ****************** SPRITES THAT BELONG TO THIS GROUP ******************** */
     
-    private Sprite[] sprites; // member of this group
-    private int size; // all non-null sprites (active + inactive)
     
     /** ************************************************************************* */
     /** ************************** CONSTRUCTOR ********************************** */
@@ -99,178 +97,18 @@ public class BasicSpriteGroup {
      * Creates a new sprite group, with specified name. Name is used for group
      * identifier only.
      */
-    public BasicSpriteGroup(String name) {
+    @SuppressWarnings("unchecked")
+    public SpriteGroup(String name, T ... sprites) {
         this.name = name;
         this.background = Background.getDefaultBackground();
-        
-        this.sprites = new Sprite[this.expandFactor];
+        this.addAll(Arrays.asList(sprites));
     }
     
-    /** ************************************************************************* */
-    /** ************************* INSERTION OPERATION *************************** */
-    /** ************************************************************************* */
+   
     
-    /**
-     * Inserts sprite at the bottom (last index) of this group.
-     * <p>
-     * 
-     * Sprite at the last index (index = {@linkplain #getSize() size}-1) is
-     * rendered on top of other sprites (last rendered).
-     * 
-     * @see #add(int, Sprite)
-     */
-    public void add(Sprite member) {
-        this.sprites[this.size] = member;
-        member.setBackground(this.background);
-        
-        if (++this.size >= this.sprites.length) {
-            // time to enlarge sprite storage
-            this.sprites = (Sprite[]) Utility.expand(this.sprites,
-                    this.expandFactor);
-        }
-    }
     
-    /**
-     * Inserts sprite at specified index, range from [0 -
-     * {@linkplain #getSize() size}].
-     * <p>
-     * 
-     * Sprite at the first index (index = 0) is at the back of other sprites
-     * (first rendered). <br>
-     * Sprite at the last index (index = {@linkplain #getSize() size}-1) is
-     * rendered on top of other sprites (last rendered).
-     */
-    public void add(int index, Sprite member) {
-        if (index > this.size) {
-            index = this.size;
-        }
-        
-        if (index == this.size) {
-            this.add(member);
-            
-        }
-        else {
-            // shift sprites by one at specified index
-            System.arraycopy(this.sprites, index, this.sprites, index + 1,
-                    this.size - index);
-            // for (int i=size-1;i >= index;i--) {
-            // sprites[i+1] = sprites[i];
-            // }
-            this.sprites[index] = member;
-            member.setBackground(this.background);
-            
-            if (++this.size >= this.sprites.length) {
-                // time to enlarge sprite storage
-                this.sprites = (Sprite[]) Utility.expand(this.sprites,
-                        this.expandFactor);
-            }
-        }
-    }
     
-    /**
-     * Removes sprite at specified index from this group.
-     * <p>
-     * 
-     * This method has a big performance hit, <b>avoid</b> using this method in
-     * tight-loop (main-loop). <br>
-     * The standard way to remove a sprite from its group is by setting sprite
-     * active state to false
-     * {@link com.golden.gamedev.object.Sprite#setActive(boolean) Sprite.setActive(false)}.
-     * <p>
-     * 
-     * SpriteGroup is designed to remove any inactive sprites automatically
-     * after a period, use directly sprite removal method only for specific
-     * purpose (if you really know what you are doing).
-     * 
-     * @see com.golden.gamedev.object.Sprite#setActive(boolean)
-     * @see #getScanFrequence()
-     */
-    public Sprite remove(int index) {
-        Sprite removedSprite = this.sprites[index];
-        
-        int numMoved = this.size - index - 1;
-        if (numMoved > 0) {
-            System.arraycopy(this.sprites, index + 1, this.sprites, index,
-                    numMoved);
-        }
-        this.sprites[--this.size] = null;
-        
-        return removedSprite;
-    }
-    
-    /**
-     * Removes specified sprite from this group.
-     * <p>
-     * 
-     * This method has a big performance hit, <b>avoid</b> using this method in
-     * tight-loop (main-loop). <br>
-     * The standard way to remove a sprite from its group is by setting sprite
-     * active state to false
-     * {@link com.golden.gamedev.object.Sprite#setActive(boolean) Sprite.setActive(false)}.
-     * <p>
-     * 
-     * SpriteGroup is designed to remove any inactive sprites automatically
-     * after a period, use directly sprite removal method only for specific
-     * purpose (if you really know what you are doing).
-     * 
-     * @return true, if specified sprite is successfuly removed from the group,
-     *         or false if the sprite is not belong to this group.
-     * @see com.golden.gamedev.object.Sprite#setActive(boolean)
-     * @see #getScanFrequence()
-     */
-    public boolean remove(Sprite s) {
-        for (int i = 0; i < this.size; i++) {
-            if (this.sprites[i] == s) {
-                this.remove(i);
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    
-    /**
-     * Removes all members from this group, thus makes this group empty.
-     * <p>
-     * 
-     * For example: <br>
-     * Destroying all enemies when player got a bomb.
-     * 
-     * <pre>
-     * ENEMY_GROUP.clear();
-     * </pre>
-     * 
-     * <p>
-     * 
-     * This method simply set group size to nil. The sprites reference is
-     * actually removed when {@link #removeInactiveSprites()} is scheduled.
-     * <p>
-     * 
-     * To remove all sprites and also its reference immediately, use
-     * {@link #reset()} instead.
-     * 
-     * @see #reset()
-     */
-    public void clear() {
-        this.size = 0;
-    }
-    
-    /**
-     * Removes all group members, same with {@link #clear()}, except this
-     * method also removes sprite memory reference immediately.
-     * <p>
-     * 
-     * Use this method if only the size of the removed sprites is taking too big
-     * memory and you need to reclaim the used memory immediately.
-     * 
-     * @see #clear()
-     */
-    public void reset() {
-        this.sprites = null;
-        this.sprites = new Sprite[this.expandFactor];
-        this.size = 0;
-    }
-    
+ 
     /** ************************************************************************* */
     /** ************************* UPDATE THIS GROUP ***************************** */
     /** ************************************************************************* */
@@ -281,10 +119,11 @@ public class BasicSpriteGroup {
      * 
      * @see #getScanFrequence()
      */
+    @SuppressWarnings("unchecked")
     public void update(long elapsedTime) {
-        for (int i = 0; i < this.size; i++) {
-            if (this.sprites[i].isActive()) {
-                this.sprites[i].update(elapsedTime);
+        for (T sprite: this) {
+            if (sprite.isActive()) {
+                sprite.update(elapsedTime);
             }
         }
         
@@ -326,53 +165,18 @@ public class BasicSpriteGroup {
     }
     
     private void removeSprites(boolean removeImmutable) {
-        int i = 0;
-        int removed = 0;
-        while (i < this.size) {
-            // check for inactive sprite in range
-            if (removeImmutable == false) {
-                // do not remove immutable sprites
-                while (i + removed < this.size
-                        && (this.sprites[i + removed].isActive() == false && this.sprites[i
-                                + removed].isImmutable() == false)) {
-                    removed++;
+        ArrayList<T> temp = new ArrayList<T>();
+        for (T sprite: this) {
+            if (!sprite.isActive()) {
+                if (!sprite.isImmutable() || removeImmutable == true){
+                    temp.add(sprite);
                 }
+            }
                 
-            }
-            else {
-                // remove all inactive sprites include immutable ones
-                while (i + removed < this.size
-                        && this.sprites[i + removed].isActive() == false) {
-                    removed++;
-                }
-            }
             
-            if (removed > 0) {
-                this.removeRange(i, i + removed);
-                removed = 0;
-            }
-            
-            i++;
         }
+        this.removeAll(temp);
         
-        if (this.sprites.length > this.size + (this.expandFactor * 2)) {
-            // shrink sprite array
-            Sprite[] dest = new Sprite[this.size + this.expandFactor];
-            System.arraycopy(this.sprites, 0, dest, 0, this.size);
-            this.sprites = dest;
-        }
-    }
-    
-    private void removeRange(int fromIndex, int toIndex) {
-        int numMoved = this.size - toIndex;
-        System.arraycopy(this.sprites, toIndex, this.sprites, fromIndex,
-                numMoved);
-        
-        // let gc do its work
-        int newSize = this.size - (toIndex - fromIndex);
-        while (this.size != newSize) {
-            this.sprites[--this.size] = null;
-        }
     }
     
     /** ************************************************************************* */
@@ -392,10 +196,10 @@ public class BasicSpriteGroup {
             this.sort(this.comparator);
         }
         
-        for (int i = 0; i < this.size; i++) {
-            if (this.sprites[i].isActive()) {
+        for (T sprite : this) {
+            if (sprite.isActive()) {
                 // renders only active sprite
-                this.sprites[i].render(g);
+                sprite.render(g);
             }
         }
     }
@@ -410,8 +214,8 @@ public class BasicSpriteGroup {
      * 
      * @see #setComparator(Comparator)
      */
-    public void sort(Comparator c) {
-        Arrays.sort(this.sprites, 0, this.size, c);
+    public void sort(Comparator<T> c) {
+        Collections.sort(this, c);
     }
     
     /** ************************************************************************* */
@@ -458,8 +262,8 @@ public class BasicSpriteGroup {
         }
         
         // force all sprites to use a same background
-        for (int i = 0; i < this.size; i++) {
-            this.sprites[i].setBackground(this.background);
+        for (T sprite: this) {
+            sprite.setBackground(this.background);
         }
     }
     
@@ -559,10 +363,10 @@ public class BasicSpriteGroup {
      *         sprite in this group.
      * @see com.golden.gamedev.object.Sprite#setActive(boolean)
      */
-    public Sprite getActiveSprite() {
-        for (int i = 0; i < this.size; i++) {
-            if (this.sprites[i].isActive()) {
-                return this.sprites[i];
+    public T getActiveSprite() {
+        for (T sprite: this) {
+            if (sprite.isActive()) {
+                return (T) sprite;
             }
         }
         
@@ -633,97 +437,19 @@ public class BasicSpriteGroup {
      * @see com.golden.gamedev.object.Sprite#setImmutable(boolean)
      */
     public Sprite getInactiveSprite() {
-        for (int i = 0; i < this.size; i++) {
-            if (this.sprites[i].isActive() == false) {
-                this.sprites[i].setActive(true);
-                return this.sprites[i];
+        for (T sprite: this) {
+            if (!sprite.isActive()) {
+                sprite.setActive(true);
+                return sprite;
             }
         }
         
         return null;
     }
     
-    /**
-     * Returns all sprites (active, inactive, and also <b>null</b> sprite) in
-     * this group.
-     * <p>
-     * 
-     * How to iterate all sprites :
-     * 
-     * <pre>
-     * SpriteGroup GROUP;
-     * Sprite[] sprites = GROUP.getSprites();
-     * int size = GROUP.getSize();
-     * // iterate the sprite one by one
-     * for (int i = 0; i &lt; size; i++) {
-     *  // remember the sprite array consists inactive sprites too
-     *  // you need to check sprite active state before process the sprite
-     *  if (sprites[i].isActive()) {
-     *      // now, what do you want with this active sprite?
-     *      // move it to (0, 0)
-     *      sprites[i].setLocation(0, 0);
-     *  }
-     * }
-     * </pre>
-     * 
-     * @see #getSize()
-     */
-    public Sprite[] getSprites() {
-        return this.sprites;
-    }
+  
+
     
-    /**
-     * Returns total active and inactive sprites (<b>non-null</b> sprites) in
-     * this group.
-     * 
-     * @see #getSprites()
-     */
-    public int getSize() {
-        return this.size;
-    }
-    
-    /** ************************************************************************* */
-    /** ************************ GROUP FACTOR METHODS *************************** */
-    /** ************************************************************************* */
-    
-    /**
-     * Returns allocation size for empty sprite (null sprite).
-     * 
-     * @see #setExpandFactor(int)
-     */
-    public int getExpandFactor() {
-        return this.expandFactor;
-    }
-    
-    /**
-     * Sets allocation size for empty sprite (null sprite). This factor is used
-     * only for optimization (reduce the cost of array enlargement operation).
-     * <p>
-     * 
-     * The process : <br>
-     * If there is a new member insertion to the group and the group sprite
-     * array has been full, the array is expanded as large as this factor.
-     * 
-     * For example: <br>
-     * Expand factor is 20 (the default). <br>
-     * {@linkplain #getSize() The group size} is 100. <br>
-     * {@linkplain #getSprites() The group member} is also 100.
-     * <p>
-     * 
-     * If new member is added into this group, the group size is automatically
-     * grow to 120 (100+20). <br>
-     * The new sprite added is at index 101 and the rest is empty sprite (null
-     * sprite).
-     * <p>
-     * 
-     * <b>Note: use large expand factor if there are many sprites inserted into
-     * this group in a period.</b>
-     * 
-     * @see #getExpandFactor()
-     */
-    public void setExpandFactor(int factor) {
-        this.expandFactor = factor;
-    }
     
     /**
      * Schedule timer for {@linkplain #removeInactiveSprites() removing inactive
@@ -746,7 +472,7 @@ public class BasicSpriteGroup {
     
     public String toString() {
         return super.toString() + " " + "[name=" + this.name + ", active="
-                + this.getSize() + ", total=" + this.sprites.length
+                + this.size() + ", total="
                 + ", member=" + this.getActiveSprite() + ", background="
                 + this.background + "]";
     }
