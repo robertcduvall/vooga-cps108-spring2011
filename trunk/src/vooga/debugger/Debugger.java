@@ -6,23 +6,29 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import vooga.debugger.model.DebuggerModel;
 import vooga.debugger.model.GameField;
+import vooga.debugger.view.DebuggerToolbar;
 import vooga.debugger.view.DebuggerView;
 import vooga.debugger.view.GameTreeNode;
-
 
 import com.golden.gamedev.Game;
 
 /**
+ * Core class of Debugger system functioning as controller for MVC architecture
  * 
- * 
- * @author Troy Ferrell & Austin Benesh & Ethan Goh
+ * @author Troy Ferrell 
+ * @author Austin Benesh
+ * @author Ethan Goh
  */
 public class Debugger
 {
+	// TODO: need to load in some values from resources for init sizes of components
+	
 	private Game myGame;
 
 	private DebuggerView myView;
 	private DebuggerModel myModel;
+	
+	private boolean showAll;
 
 	private Debugger.DebugLevel debugLevel;
 
@@ -31,46 +37,54 @@ public class Debugger
 		ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
 	}
 
-	// private DebuggerGrapher myGrapher;
-
 	public Debugger(Game game)
 	{
+		showAll = false;
 		myGame = game;
 		myModel = new DebuggerModel(game);
 		myView = new DebuggerView(this, myModel);
 		debugLevel = DebugLevel.ALL;
 	}
 
+	/**
+	 * Update the debugger system. Includes updating the game fields being displayed in real-time.
+	 */
 	public void update()
 	{
 		myModel.update();
 	}
 
+	// Test method
 	private static String getMethodCaller()
 	{
 		StackTraceElement[] stackTrace = Thread.currentThread()
 				.getStackTrace();
 		return stackTrace[1] + ":";
 	}
-
+	
+	/**
+	 *  Print to the debugger console
+	 * @param s - string to output
+	 * @param d - debug level of printing
+	 */
 	public void println(String s, DebugLevel d)
 	{
 		if (debugLevel.compareTo(d) < 0)
-			myView.println(getMethodCaller() + " " + s);
+			myView.myHistoryPanel.println(getMethodCaller() + " " + s);
 	}
 
 	public void playGame()
 	{
-		myView.playButton.setEnabled(false);
-		myView.stopButton.setEnabled(true);
+		myView.myToolbar.playButton.setEnabled(false);
+		myView.myToolbar.stopButton.setEnabled(true);
 
 		// myGame.start();
 	}
 
 	public void stopGame()
 	{
-		myView.playButton.setEnabled(true);
-		myView.stopButton.setEnabled(false);
+		myView.myToolbar.playButton.setEnabled(true);
+		myView.myToolbar.stopButton.setEnabled(false);
 
 		// myGame.stop();
 	}
@@ -80,11 +94,30 @@ public class Debugger
 		// restart game
 	}
 
+	/**
+	 * Switch property for showing all fields in the Game Tree
+	 */
+	public void showAllFields()
+	{
+		showAll = !showAll;
+		
+		myView.myGameTreePanel.updateTree();
+	}
+	
+	/**
+	 * Get Game Tree of game system. Lays out fields of game classes in hierarchical structure
+	 * 
+	 * @return root node of Game Tree
+	 */
 	public GameTreeNode getGameTree()
 	{
-		return myModel.getGameTree();
+		return myModel.getGameTree(showAll);
 	}
 
+	/**
+	 * Add Game Field to system. Takes particular field and updates GUI with values of corresponding object in system
+	 * @param fieldNode - tree node with data of member field
+	 */
 	public void addField(GameTreeNode fieldNode)
 	{
 		// Convert Object[] to Field[]
@@ -104,6 +137,10 @@ public class Debugger
 		}
 	}
 
+	/**
+	 * Remove a Game Field from the system
+	 * @param field - GameField to be removed
+	 */
 	public void removeField(GameField field)
 	{
 		myView.removeFieldFromView(field);
