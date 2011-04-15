@@ -1,4 +1,4 @@
-package levels.util;
+package vooga.levels.util;
 
 import java.io.*;
 
@@ -13,20 +13,20 @@ import java.io.*;
 
 public class MappingBuilder {
 
-	public MappingBuilder() {
-		try {
-//			XMLContext context = new XMLContext(); 
-//			MappingTool tool = context.createMappingTool(); 
-//			tool.addClass(Order.class); 
-//			OutputStream file = new FileOutputStream("test.xml" ); 
-//			Writer writer = new OutputStreamWriter(file); 
-//			tool.write(writer); 
-			
-		} catch (MappingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+//	public MappingBuilder() {
+//		try {
+////			XMLContext context = new XMLContext(); 
+////			MappingTool tool = context.createMappingTool(); 
+////			tool.addClass(Order.class); 
+////			OutputStream file = new FileOutputStream("test.xml" ); 
+////			Writer writer = new OutputStreamWriter(file); 
+////			tool.write(writer); 
+//			
+////		} catch (MappingException e) {
+////			e.printStackTrace();
+////		} catch (FileNotFoundException e) {
+////			e.printStackTrace();
+////		}
+////	}
 
 }
