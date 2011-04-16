@@ -1,6 +1,5 @@
 package vooga.physics.util;
 
-import vooga.physics.engine.OldNewtonianPhysicsEngine;
 import vooga.physics.interfaces.IMovable;
 import vooga.physics.interfaces.IPhysics;
 import vooga.sprites.improvedsprites.Sprite;

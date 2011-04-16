@@ -2,17 +2,12 @@ package vooga.physics.engine;
 
 import java.util.Collection;
 import vooga.physics.util.Force;
-import vooga.physics.util.MassProportionalForce;
-import vooga.physics.util.Velocity;
 import java.awt.Point;
 import java.util.HashSet;
-import vooga.physics.calculators.PhysicsCalculator;
-import vooga.physics.interfaces.IMovable;
 import vooga.physics.interfaces.IPhysicsCollider;
 import vooga.physics.interfaces.IPointField;
 import vooga.physics.interfaces.IPhysicsToggle;
 import vooga.util.math.Angle;
-import vooga.util.math.MathVector;
 
 public abstract class AbstractPhysicsEngine implements IPhysicsToggle {
 

@@ -2,7 +2,6 @@ package vooga.physics.interfaces;
 
 import java.awt.Point;
 
-import vooga.physics.calculators.PhysicsCalculator;
 import vooga.physics.util.Velocity;
 
 /**

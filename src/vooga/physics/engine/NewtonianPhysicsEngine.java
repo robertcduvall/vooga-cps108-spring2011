@@ -6,9 +6,7 @@ import vooga.physics.interfaces.IPhysicsToggle;
 import vooga.physics.util.Force;
 import java.awt.Point;
 import java.util.HashSet;
-import vooga.physics.calculators.PhysicsCalculator;
 import vooga.physics.interfaces.IMovable;
-import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
 import vooga.physics.interfaces.IPhysicsCollider;
 import vooga.physics.interfaces.IPhysicsFriction;
@@ -22,72 +20,13 @@ import vooga.util.math.MathVector;
 
 public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPhysicsToggle{
 
-    private Collection<Force> worldForces;
-    private Collection<IPointField> pointForces;
-    private boolean isOn;
     private static NewtonianPhysicsEngine myInstance;
 
     private NewtonianPhysicsEngine(){
-        worldForces = new HashSet<Force>();
-        pointForces = new HashSet<IPointField>();
-        isOn = true;
+        super();
     }
 
-    /**
-     * Adds a force to the collection of worldwide forces.
-     * 
-     * @param force
-     */
-    public void addGlobalForce(Force force) {
-        worldForces.add(force);
-    }
 
-    /**
-     * Removes a force from the collection of worldwide forces.
-     * 
-     * @param force
-     */
-    public void removeGlobalForce(Force force) {
-        worldForces.remove(force);
-    }
-
-    /**
-     * Adds a point field to the collection of worldwide fields
-     * 
-     * @param field
-     */
-    public void addGlobalPointField(IPointField field){
-        pointForces.add(field);
-    }
-
-    /**
-     * Removes a point field from the collection of worldwide point fields.
-     * 
-     * @param field
-     */
-    public void removeGlobalForce(IPointField field) {
-        pointForces.remove(field);
-    }
-
-    /**
-     * Applies all of the worldwide forces to a sprite. This only applies the
-     * MassProportionalForces, such as gravity, which do not need physical
-     * properties like mass. Do not use this method if your sprite has a
-     * physical nature, or else these forces will be applied twice
-     * 
-     * TODO: should we change it so applying the world forces to a physical
-     * object does not apply the mass proportional forces?
-     * 
-     * @param sprite
-     * @param elapsedTime
-     */
-    public void applyWorldForces(IMovable movableObject, long elapsedTime) {
-        if (isOn) {
-            for (Force f : worldForces) {
-                applyForce(movableObject, f, elapsedTime);
-            }
-        }
-    }
 
     public void applyForce(IPhysics object, Force f, long elapsedTime){
         f.applyForce(object, elapsedTime);
@@ -96,19 +35,6 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
     public void applyForce(IMovable object, Force f, long elapsedTime){
         if (f.getClass() == MassProportionalForce.class)
             ((MassProportionalForce)f).applyForce(object, elapsedTime);
-    }
-
-    /**
-     * Applies all of the worldwide point fields to something which has that same field
-     * @param affectedObject
-     * @param elapsedTime
-     */
-    public void applyPointForces(IPointField affectedObject, long elapsedTime) {
-        for (IPointField field : pointForces) {
-            if (field.getClass() == affectedObject.getClass()) {
-                applyField(affectedObject, field, elapsedTime);
-            }
-        }
     }
 
     /**
@@ -173,6 +99,25 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
     public void collision(Object object1, Object object2, Angle angleOfImpact, Point pointOfImpact) {
         elasticCollision(object1, object2, angleOfImpact, pointOfImpact);
     }
+    
+    /**
+     * General collision method. Tells the two physical objects that a collision
+     * occurred.
+     * 
+     * @param object1
+     * @param object2
+     * @param pointOfCollision
+     * @param angleOfImpact
+     * @param coefficientOfRestitution
+     */
+    public void collision(IMovable object1, IMovable object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution){
+        if (isOn()) {
+            if (IPhysicsCollider.class.isAssignableFrom(object1.getClass()))
+                ((IPhysicsCollider)object1).collisionOccurred(object2, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+            if (IPhysicsCollider.class.isAssignableFrom(object2.getClass()))
+                ((IPhysicsCollider)object1).collisionOccurred(object1, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+        }
+    }
 
     /**
      * Calculates the collision based on the masses and velocities of the
@@ -188,7 +133,7 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
      * @param pointOfCollision
      * @param coefficientOfRestitution
      */
-    public void basicCollisionOccurred(IPhysics thisObject, IPhysics otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
+    public void calcOneSideOfCollision(IPhysics thisObject, IPhysics otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
         if (isOn()) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
             double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);
@@ -216,7 +161,7 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
      * @param angleOfImpact
      * @param coefficientOfRestitution
      */
-    public void basicCollisionOccurred(IPhysics thisObject, IMovable otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
+    public void calcOneSideOfCollision(IPhysics thisObject, IMovable otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
         if (isOn()) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
             double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);
