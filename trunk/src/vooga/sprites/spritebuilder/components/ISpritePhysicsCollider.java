@@ -11,7 +11,7 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  *
  */
-public interface ISpritePhysicsCollider extends IPhysics{
+public interface ISpritePhysicsCollider{
 
-    public void collisionOccurred(PhysicsC physicsC, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution);
+    public void collisionOccurred(Sprite otherSprite, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution);
 }

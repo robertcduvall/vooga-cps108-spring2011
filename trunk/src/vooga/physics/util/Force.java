@@ -1,5 +1,6 @@
 package vooga.physics.util;
 
+import vooga.physics.interfaces.IPhysics;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
@@ -9,19 +10,19 @@ import vooga.util.math.MathVector;
  * Velocity to a Force.
  * 
  * @author Anne Weng
- *
+ * 
  */
 public class Force extends MathVector {
 
     public Force(double magnitude, Angle angle) {
         super(magnitude, angle);
     }
-    
-    public Force(double xComponent, double yComponent){
+
+    public Force(double xComponent, double yComponent) {
         super(xComponent, yComponent);
     }
-    
-    public Force(double parallelComponent, double perpComponent, Angle angle){
+
+    public Force(double parallelComponent, double perpComponent, Angle angle) {
         super(parallelComponent, perpComponent, angle);
     }
 
@@ -29,9 +30,30 @@ public class Force extends MathVector {
         super.addVector(otherVector);
         return this;
     }
-    
-    public Force scalarMultiply(double scalar){
+
+    public Force scalarMultiply(double scalar) {
         super.scalarMultiply(scalar);
         return this;
+    }
+
+    /**
+     * Applies an external force to an IPhysics object using the Impulse
+     * Momentum Theorem. <br>
+     * <br>
+     * Source: <a
+     * href="http://en.wikipedia.org/wiki/Impulse_momentum_theorem">Wikipedia
+     * </a>
+     * 
+     * @param physicalObject
+     * @param force
+     * @param elapsedTime
+     */
+    public void applyForce(IPhysics physicalObject, long elapsedTime) {
+
+        Velocity deltaVelocity = new Velocity(this.getMagnitude() * elapsedTime / physicalObject.getMass(),
+                this.getAngle());
+        Velocity spriteVelocity = physicalObject.getVelocity();
+        spriteVelocity.addVector(deltaVelocity);
+        physicalObject.setVelocity(spriteVelocity);
     }
 }

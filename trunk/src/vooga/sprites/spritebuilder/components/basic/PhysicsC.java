@@ -1,18 +1,14 @@
 package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Point;
-import vooga.physics.calculators.PhysicsCalculator;
 import vooga.physics.engine.PhysicsEngine;
 import vooga.physics.interfaces.IPhysics;
-import vooga.physics.interfaces.IPointField;
-import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.ISpritePhysicsCollider;
 import vooga.sprites.spritebuilder.components.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
-import vooga.util.math.MathVector;
 
 /**
  * Physics Component of a Sprite, extends BasicComponent and implements IPhysics.
@@ -112,9 +108,12 @@ public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater
      * @param pointOfCollision
      * @param coefficientOfRestitution
      */
-    public void collisionOccurred(PhysicsC otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+    public void collisionOccurred(Sprite otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
         if (isOn()) {
-            PhysicsEngine.getInstance().basicCollisionOccurred(this, otherObject, angleOfImpact, coefficientOfRestitution);
+            if (otherObject.carriesComponent(PhysicsC.class))
+                PhysicsEngine.getInstance().basicCollisionOccurred(this, otherObject.getComponent(PhysicsC.class), angleOfImpact, coefficientOfRestitution);
+            else 
+                PhysicsEngine.getInstance().basicCollisionOccurred(this, otherObject, angleOfImpact, coefficientOfRestitution);
         }
     }
 

@@ -8,6 +8,7 @@ import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
 import vooga.physics.interfaces.IPointField;
 import vooga.physics.util.Force;
+import vooga.physics.util.MassProportionalForce;
 import vooga.physics.util.Velocity;
 import vooga.reflection.Reflection;
 import vooga.sprites.improvedsprites.Sprite;
@@ -69,6 +70,27 @@ public class PhysicsEngine {
     }
 
     /**
+     * Applies all of the worldwide forces to a sprite. This only applies the
+     * MassProportionalForces, such as gravity, which do not need physical
+     * properties like mass. Do not use this method if your sprite has a
+     * physical nature, or else these forces will be applied twice
+     * 
+     * TODO: should we change it so applying the world forces to a physical
+     * object does not apply the mass proportional forces?
+     * 
+     * @param sprite
+     * @param elapsedTime
+     */
+    public void applyWorldForces(Sprite sprite, long elapsedTime) {
+        if (isOn) {
+            for (Force f : worldForces) {
+                if (f instanceof MassProportionalForce)
+                    ((MassProportionalForce) f).applyForce(sprite, elapsedTime);
+            }
+        }
+    }
+
+    /**
      * Applies all of the worldwide forces to something with a physics nature.
      * 
      * @param physics
@@ -77,25 +99,15 @@ public class PhysicsEngine {
     public void applyWorldForces(IPhysics physicalObject, long elapsedTime) {
         if (isOn) {
             for (Force f : worldForces) {
-                PhysicsCalculator.getInstance().applyForce(physicalObject, f, elapsedTime);
+                f.applyForce(physicalObject, elapsedTime);
             }
+        }
+    }
 
-            Collection<IPointField> myInterfaces = Reflection.getInterfacesWhichSubclass(physicalObject,
-                    IPointField.class);
-
-            for (IPointField myIFace : myInterfaces) {
-                String myIFaceName = myIFace.getClass().toString();
-                for (IPointField f : pointForces) {
-                    Collection<IPointField> interfaces = Reflection.getInterfacesWhichSubclass(f, IPointField.class);
-
-                    for (IPointField iFace : interfaces) {
-                        String interfaceName = iFace.getClass().toString();
-                        if (myIFaceName.equals(interfaceName)) {
-                            PhysicsCalculator.getInstance().applyField(myIFace, iFace, elapsedTime);
-                        }
-                    }
-                }
-
+    public void applyPointForces(IPointField affectedObject, long elapsedTime) {
+        for (IPointField field : pointForces) {
+            if (field.getClass() == affectedObject.getClass()) {
+                PhysicsCalculator.getInstance().applyField(affectedObject, field, elapsedTime);
             }
         }
     }
@@ -136,20 +148,16 @@ public class PhysicsEngine {
      */
     public void collision(Sprite object1, Sprite object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         if (isOn) {
-            if (object2.carriesComponent(PhysicsC.class)) {
-                for (IComponent c : object1.getComponents()) {
-                    if (c instanceof ISpritePhysicsCollider) {
-                        ((ISpritePhysicsCollider) c).collisionOccurred(object2.getComponent(PhysicsC.class), angleOfImpact,
-                                pointOfImpact, coefficientOfRestitution);
-                    }
+            for (IComponent c : object1.getComponents()) {
+                if (c instanceof ISpritePhysicsCollider) {
+                    ((ISpritePhysicsCollider) c).collisionOccurred(object2, angleOfImpact, pointOfImpact,
+                            coefficientOfRestitution);
                 }
             }
-            if (object1.carriesComponent(PhysicsC.class)) {
-                for (IComponent c : object2.getComponents()) {
-                    if (c instanceof ISpritePhysicsCollider) {
-                        ((ISpritePhysicsCollider) c).collisionOccurred(object1.getComponent(PhysicsC.class), angleOfImpact,
-                                pointOfImpact, coefficientOfRestitution);
-                    }
+            for (IComponent c : object2.getComponents()) {
+                if (c instanceof ISpritePhysicsCollider) {
+                    ((ISpritePhysicsCollider) c).collisionOccurred(object1, angleOfImpact, pointOfImpact,
+                            coefficientOfRestitution);
                 }
             }
         }
@@ -220,29 +228,6 @@ public class PhysicsEngine {
     }
 
     /**
-     * Applies an external force to an IPhysics object using the Impulse
-     * Momentum Theorem. <br>
-     * <br>
-     * Source: <a
-     * href="http://en.wikipedia.org/wiki/Impulse_momentum_theorem">Wikipedia
-     * </a>
-     * 
-     * @param physicalObject
-     * @param force
-     * @param elapsedTime
-     */
-    public void applyForce(IPhysics physicalObject, Force force, long elapsedTime) {
-        if (isOn()) { // Is this really necessary, since it's
-                      // currently protected?
-            Velocity deltaVelocity = new Velocity(force.getMagnitude() * elapsedTime / physicalObject.getMass(),
-                    force.getAngle());
-            Velocity spriteVelocity = physicalObject.getVelocity();
-            spriteVelocity.addVector(deltaVelocity);
-            physicalObject.setVelocity(spriteVelocity);
-        }
-    }
-
-    /**
      * Applies an external field to an IPhysics object.
      * 
      * @param physicalObject
@@ -283,7 +268,7 @@ public class PhysicsEngine {
      * @param pointOfCollision
      * @param coefficientOfRestitution
      */
-    public void basicCollisionOccurred(ISpritePhysicsCollider thisObject, PhysicsC otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
+    public void basicCollisionOccurred(IPhysics thisObject, IPhysics otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
         if (isOn()) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
             double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);
@@ -300,6 +285,40 @@ public class PhysicsEngine {
                     angleOfImpact);
             thisObject.setVelocity(newVelocity);
         }
+    }
+
+    /**
+     * Calculates collision based on the physical properties of the current
+     * sprite and the velocity of the other sprite. Less exact calculation.
+     * 
+     * @param thisObject
+     * @param otherObject
+     * @param angleOfImpact
+     * @param coefficientOfRestitution
+     */
+    public void basicCollisionOccurred(IPhysics thisObject, Sprite otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
+        if (isOn()) {
+            double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
+            double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);
+            double otherParallel = getSpriteVelocity(otherObject).getParallelComponent(angleOfImpact);
+            double otherPerp = getSpriteVelocity(otherObject).getPerpComponent(angleOfImpact);
+
+            // Uses the coefficient of restitution in a way that works properly
+            // for the endpoints (0 and 1), but I'm not
+            // sure about the intermediate behavior?
+            Velocity newVelocity = new Velocity(-myParallel * coefficientOfRestitution + otherParallel, -myPerp
+                    * coefficientOfRestitution + otherPerp, angleOfImpact);
+            thisObject.setVelocity(newVelocity);
+        }
+    }
+
+    public static Velocity getSpriteVelocity(Sprite sprite) {
+        return new Velocity(sprite.getHorizontalSpeed(), -sprite.getVerticalSpeed());
+    }
+
+    public static void setSpriteVelocity(Sprite sprite, Velocity velocity) {
+        sprite.setHorizontalSpeed(velocity.getXComponent());
+        sprite.setVerticalSpeed(-velocity.getYComponent());
     }
 
     /**
@@ -348,7 +367,7 @@ public class PhysicsEngine {
                 surfaceTangent.setNegativeAngle();
             }
             Force friction = new Force(normalMagnitude * physicalObject.getCoefficientOfFriction(), surfaceTangent);
-            applyForce(physicalObject, friction, elapsedTime);
+            friction.applyForce(physicalObject, elapsedTime);
         }
     }
 
