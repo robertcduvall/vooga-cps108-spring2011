@@ -2,12 +2,15 @@ package vooga.levels;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeSet;
+import vooga.core.VoogaGame;
 import vooga.levels.AbstractLevel;
 import vooga.levels.example.reflection.Reflection;
+import vooga.player.Player;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 
@@ -22,24 +25,32 @@ import com.golden.gamedev.object.Sprite;
 public class LevelManager
 {
     private static final String LEVEL_ORDER_FILE = "level_resources/LevelOrder";
-    /** The singleton instance of levelManager...Deprecated */
-    private static LevelManager myInstance;
+    /** The vooga game for this level */
+    
     /** A map of level number to the associated XML file */
     private Map<Integer, String> myLevelOrderMap;
+    
     /** A set of the current levels */
     private TreeSet<AbstractLevel> myCurrentLevels;
+    
     /** The total number of levels */
     private int myNumOfLevels;
+    
     /** The total number of levels completed */
     private int myNumOfLevelsCompleted;
+    
     /** The playingfield which levels will add to */
     private PlayField myPlayField;
+    
+    /** The players for this level */
+    private Collection<Player> myPlayer;
 
 
     /**
      * Maps level names/classes to level order
      */
-    public LevelManager ()
+    //TODO No longer a singleton
+    public LevelManager (VoogaGame g, Collection<Player> players)
     {
         myLevelOrderMap = new HashMap<Integer, String>();
         myCurrentLevels = new TreeSet<AbstractLevel>();
@@ -59,19 +70,6 @@ public class LevelManager
             levelNumber++;
         }
         myNumOfLevels = levelNumber;
-    }
-
-
-    /**
-     * Get access to level-related data through this singleton of LevelManager
-     * Dead method...will be removed April 2011
-     * 
-     * @return A singleton instance of LevelManager
-     */
-    public static LevelManager getInstance ()
-    {
-        if (myInstance == null) myInstance = new LevelManager();
-        return myInstance;
     }
 
 
@@ -187,6 +185,9 @@ public class LevelManager
     {
         myCurrentLevels.first().addSprite(type);
     }
+    
+    //Adds sprite back into playingfield
+    public void addSprite(Sprites s);
 
 
     /**
@@ -220,14 +221,7 @@ public class LevelManager
     {
         myCurrentLevels.first().addMusic();
     }
-
-
-    /**
-     * Sets the playingfield
-     */
-    public void setPlayField (PlayField pf)
-    {
-        myPlayField = pf;
-    }
-
+    
+    update();
+    render();
 }
