@@ -1,6 +1,7 @@
 package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Point;
+import vooga.physics.engine.PhysicsEngine;
 import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
 import vooga.physics.interfaces.IPhysicsRotate;
@@ -13,9 +14,9 @@ import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
-public class PhysicsRotateC extends BasicComponent implements IPhysicsRotate, ISpriteUpdater, ISpritePhysicsCollider{
+public class PhysicsRotateC extends PhysicsC implements IPhysicsRotate{
 
-    
+    private Sprite mySprite;
     private double myMass;
     private boolean isOn;
 
@@ -79,39 +80,22 @@ public class PhysicsRotateC extends BasicComponent implements IPhysicsRotate, IS
 
     @Override
     protected Object[] getFields() {
-        return new Object[]{myMass, isOn};
+        return new Object[]{mySprite, myMass, isOn};
     }
 
     @Override
     protected void setFields(Object... fields) {
-        myMass = (Double) fields[0];
-        if (fields.length > 1)
-            isOn = (Boolean) fields[1];
+        mySprite = (Sprite) fields[0];
+        myMass = (Double) fields[1];
+        if (fields.length > 2)
+            isOn = (Boolean) fields[2];
         else
             isOn = true;
         
     }
 
     @Override
-    public Point getCenter() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Velocity getVelocity() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setVelocity(Velocity newVelocity) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void collisionOccurred(PhysicsC otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+    public void collisionOccurred(Sprite otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
         /*TODO: We can't use the "apply rotational force" method, because we don't actually have a force,
          * because we don't know how much time elapsed during the collision, so we need to implement this with
          * the conservation of rotational momentum theorem.
@@ -119,6 +103,22 @@ public class PhysicsRotateC extends BasicComponent implements IPhysicsRotate, IS
          * can we actually implement this, because they currently can't get the other object's rotational
          * velocity?
          */
+        
+    }
+
+    @Override
+    public Point getCenter() {
+        return new Point((int)mySprite.getX(), (int)mySprite.getY());
+    }
+
+    @Override
+    public Velocity getVelocity() {
+        return PhysicsEngine.getSpriteVelocity(mySprite);
+    }
+
+    @Override
+    public void setVelocity(Velocity newVelocity) {
+        PhysicsEngine.setSpriteVelocity(mySprite, newVelocity);
         
     }
 }

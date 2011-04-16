@@ -1,7 +1,11 @@
 package vooga.sprites.spritebuilder.components.basic;
 
+import java.awt.Point;
 import vooga.physics.interfaces.IPhysicsFriction;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.components.ISpritePhysicsCollider;
 import vooga.util.buildable.components.BasicComponent;
+import vooga.util.math.Angle;
 
 /**
  * Component to use if you want an object to exert frictional force.
@@ -10,7 +14,7 @@ import vooga.util.buildable.components.BasicComponent;
  * @author Nathan Klug
  *
  */
-public class PhysicsFrictionC extends BasicComponent implements IPhysicsFriction{
+public class PhysicsFrictionC extends BasicComponent implements IPhysicsFriction, ISpritePhysicsCollider{
 
     private double coefficient = 2;
     private boolean isOn;
@@ -50,6 +54,12 @@ public class PhysicsFrictionC extends BasicComponent implements IPhysicsFriction
             isOn = (Boolean) fields[1];
         else
             isOn = true;
+    }
+
+    @Override
+    public void collisionOccurred(Sprite otherSprite, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+        // TODO this should exert a force opposite to the direciton of the other sprite's movement
+        
     }
     
 }
