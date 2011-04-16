@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mapping xmlns="http://castor.exolab.org/" xmlns:cst="http://castor.exolab.org/"><description xmlns="">Castor generated mapping file</description><class name="sprites.Order"><description xmlns="">Default mapping for class sprites.Order</description><map-to/><field name="orderNumber" type="java.lang.String"><bind-xml name="order-number" node="element"/></field><field name="orderItems" type="java.lang.Object" collection="arraylist"><bind-xml name="order-items" node="element"/></field></class></mapping>
