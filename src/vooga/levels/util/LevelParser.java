@@ -1,9 +1,22 @@
 package vooga.levels.util;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import com.golden.gamedev.object.background.ColorBackground;
+
+import vooga.levels.AbstractLevel;
 import vooga.levels.util.tags.BackgroundTag;
 import vooga.levels.util.tags.SpriteTag;
 import vooga.resources.xmlparser.Parser;
@@ -15,7 +28,7 @@ import vooga.resources.xmlparser.XMLTag;
  *
  */
 public class LevelParser extends Parser {
-	private String background;
+	private AbstractLevel level;
 	private Map<String, SpriteConstructor> spriteFactoryMap;
 	private ConverterRack converterRack;
 	
@@ -28,8 +41,10 @@ public class LevelParser extends Parser {
 		}
 		
 	}
-	public LevelParser() {
+	public LevelParser(AbstractLevel level) {
 		super();
+		
+		this.level = level;
 		
 		spriteFactoryMap = new HashMap<String, SpriteConstructor>();
 		converterRack = new ConverterRack();
@@ -38,12 +53,25 @@ public class LevelParser extends Parser {
 								new SpriteTag(this));
 	}
 	
-	public void setBackground(String background) {
-		this.background = background;
+	public void parse(String filename) throws LevelParserException {
+		File xmlFile = new File(filename);
+		try {
+			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	        Document doc = db.parse(xmlFile);
+	        super.parse(doc);
+		} catch(IOException e) {
+			throw LevelParserException.IO_ERROR;
+		} catch (SAXException e) {
+			throw LevelParserException.SYNTAX_ERROR;
+		} catch (ParserConfigurationException e) {
+			throw LevelParserException.SYSTEM_ERROR;
+		}
+
 	}
 	
-	public String getBackground() {
-		return background;
+	public void setBackground(String background) {
+		//FIXME
+		level.setBackground(new ColorBackground(Color.black));
 	}
 	
 	public void addSprite(String name, SpriteConstructor factory) {
@@ -52,5 +80,5 @@ public class LevelParser extends Parser {
 
 	public ConverterRack getConverterRack() {
 		return converterRack;
-	}	
+	}
 }
