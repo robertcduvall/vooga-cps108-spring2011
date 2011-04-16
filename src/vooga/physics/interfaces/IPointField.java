@@ -9,18 +9,11 @@ import vooga.physics.util.Velocity;
  * @author Nathan Klug
  *
  */
-public interface IPointField{
+public interface IPointField extends IPhysicsToggle{
     
-    public double CONSTANT = 0;
+    public static double constant = 0;
     
     public double getPointMagnitude();
-    
-    public boolean isOn();
-    
-    /**
-     * Turns the physics FOR THIS PARTICULAR OBJECT on or off based on the parameter.
-     */
-    public void setPhysicsOnOff(boolean isOn);
 
     public Point getCenter();
 

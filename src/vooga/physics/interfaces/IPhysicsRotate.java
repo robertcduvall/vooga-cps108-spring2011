@@ -1,22 +1,20 @@
 package vooga.physics.interfaces;
 
+import java.awt.Point;
+
 /**
  * Interface which defines objects that can rotate. See PhyiscsRotateC.
  * @author Nathan Klug
  *
  */
-public interface IPhysicsRotate {
+public interface IPhysicsRotate extends IPhysicsToggle{
 
     public double getMass();
     
     public double getRotationalVelocity();
 
     public void setRotationalVelocity(double newVelocity);
+
+    public Point getCenter();
     
-    public boolean isOn();
-    
-    /**
-     * Turns the physics FOR THIS PARTICULAR OBJECT on or off based on the parameter.
-     */
-    public void setPhysicsOnOff(boolean isOn);
 }

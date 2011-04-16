@@ -50,7 +50,7 @@ public class PointFieldC extends BasicComponent implements IPointField{
     }
 
     @Override
-    public void setPhysicsOnOff(boolean isOn) {
+    public void turnPhysicsOnOff(boolean isOn) {
         this.isOn = isOn;
         
     }
