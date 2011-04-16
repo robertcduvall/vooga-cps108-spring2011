@@ -14,22 +14,26 @@ import com.golden.gamedev.object.Sprite;
  * 
  * @author Andrew Patterson & Wesley Brown
  */
-public abstract class AbstractLevel implements Comparable<AbstractLevel>
+
+
+//Need to declare all sprite groups and collision managers here
+public abstract class AbstractLevel extends PlayField implements Comparable<AbstractLevel> 
 {
     /** The game for which this is a level for */
     private Game myGame;   
-    /** The file path to the associated XML file */
-    private String myFilePath;  
+    
     /** The id/level number for this object */
-    private int myId;
+    //private int myId;
+    
     /** The goal which this level must reach in order to progress */
     private IGoal myGoal;
+    
     /** A queue of all the backgrounds for this level - read in from the XML file */
     private ArrayList<Background> myBackgrounds;
-    /** The playingfield to which objects (sprites...etc) will be added */
-    private PlayField myPlayField;
+    
     /** A map of sprite type to all the instances of that type read from the XML file */
     private TreeMap<Class<?>, ArrayList<Sprite>> mySprites;
+    
     /** A queue of all the music for this level - read in from the XML file */
     private ArrayList<String> myMusic;
 
@@ -37,7 +41,6 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
     public AbstractLevel (String filePath, int id, PlayField pf, Game g)
     {
         myGame = g;
-        myPlayField = pf;
         myFilePath = filePath;
         myId = id;
         mySprites = new TreeMap<Class<?>, ArrayList<Sprite>>();
@@ -50,7 +53,8 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
      * The key method that the LevelManager will call when loading a level.
      * The implementation of this method will determine how a level initializes.
      */
-    public abstract void loadLevel ();
+    
+    public abstract void loadLevel (String filePath);
 
 
     /**
@@ -67,7 +71,7 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
      */
     protected void addBackground ()
     {
-        myPlayField.setBackground(myBackgrounds.remove(0));
+        setBackground(myBackgrounds.remove(0));
     }
 
 
@@ -80,10 +84,12 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
         {
             for (Sprite currentSprite : currentSpriteList)
             {
-                myPlayField.add(currentSprite);
+                add(currentSprite);
             }
         }
     }
+    
+    protected void addAllSprites(String type);
 
 
     /**
@@ -93,8 +99,10 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
      */
     protected void addSprite (String className)
     {
-        myPlayField.add(getSprite(className));
+        add(getSprite(className));
     }
+    
+    protected void addSprite(Sprite);
 
 
     /**
@@ -184,4 +192,7 @@ public abstract class AbstractLevel implements Comparable<AbstractLevel>
         if (other != null && other instanceof AbstractLevel) return myId == ((AbstractLevel) other).getId();
         else return false;
     }
+    
+    //
+    protected addPlayer(Player);
 }
