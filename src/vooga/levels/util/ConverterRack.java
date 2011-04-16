@@ -49,6 +49,9 @@ public class ConverterRack {
 		addConverter(Double.class, new DoubleConverter());
 	}
 	
+	/**
+	 * Converts an object from a string into class target.
+	 */
 	public Object convert(Class<?> target, String input) {
 		if(!conversionMap.containsKey(target)) {
 			throw new RuntimeException("Unable to convert");
