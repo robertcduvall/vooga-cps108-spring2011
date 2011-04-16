@@ -7,12 +7,12 @@ import vooga.physics.calculators.PhysicsCalculator;
 import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
 import vooga.physics.interfaces.IPointField;
+import vooga.physics.interfaces.IPhysicsCollider;
 import vooga.physics.util.Force;
 import vooga.physics.util.MassProportionalForce;
 import vooga.physics.util.Velocity;
 import vooga.reflection.Reflection;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.ISpritePhysicsCollider;
 import vooga.sprites.spritebuilder.components.basic.PhysicsC;
 import vooga.util.buildable.components.IComponent;
 import vooga.util.math.Angle;
@@ -26,14 +26,14 @@ import vooga.util.math.MathVector;
  * @author Anne Weng
  * 
  */
-public class PhysicsEngine {
+public class OldNewtonianPhysicsEngine {
 
-    private static Collection<Force> worldForces;
-    private static Collection<IPointField> pointForces;
-    private static PhysicsEngine myInstance;
-    private static boolean isOn;
+    private Collection<Force> worldForces;
+    private Collection<IPointField> pointForces;
+    private static OldNewtonianPhysicsEngine myInstance;
+    private boolean isOn;
 
-    private PhysicsEngine() {
+    private OldNewtonianPhysicsEngine() {
         worldForces = new HashSet<Force>();
         pointForces = new HashSet<IPointField>();
         isOn = true;
@@ -44,9 +44,9 @@ public class PhysicsEngine {
      * 
      * @return
      */
-    public static PhysicsEngine getInstance() {
+    public static OldNewtonianPhysicsEngine getInstance() {
         if (myInstance == null) {
-            myInstance = new PhysicsEngine();
+            myInstance = new OldNewtonianPhysicsEngine();
         }
         return myInstance;
     }
@@ -59,6 +59,15 @@ public class PhysicsEngine {
     public void addGlobalForce(Force force) {
         worldForces.add(force);
     }
+    
+    /**
+     * Adds a point field to the collection of worldwide fields
+     * 
+     * @param field
+     */
+    public void addGlobalPointField(IPointField field){
+        pointForces.add(field);
+    }
 
     /**
      * Removes a force from the collection of worldwide forces.
@@ -67,6 +76,15 @@ public class PhysicsEngine {
      */
     public void removeGlobalForce(Force force) {
         worldForces.remove(force);
+    }
+    
+    /**
+     * Removes a point field from the collection of worldwide point fields.
+     * 
+     * @param field
+     */
+    public void removeGlobalForce(IPointField field) {
+        pointForces.remove(field);
     }
 
     /**
@@ -84,8 +102,8 @@ public class PhysicsEngine {
     public void applyWorldForces(Sprite sprite, long elapsedTime) {
         if (isOn) {
             for (Force f : worldForces) {
-                if (f instanceof MassProportionalForce)
-                    ((MassProportionalForce) f).applyForce(sprite, elapsedTime);
+                //if (f instanceof MassProportionalForce)
+                    //((MassProportionalForce) f).applyForce(sprite, elapsedTime);
             }
         }
     }
@@ -149,14 +167,14 @@ public class PhysicsEngine {
     public void collision(Sprite object1, Sprite object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         if (isOn) {
             for (IComponent c : object1.getComponents()) {
-                if (c instanceof ISpritePhysicsCollider) {
-                    ((ISpritePhysicsCollider) c).collisionOccurred(object2, angleOfImpact, pointOfImpact,
+                if (c instanceof IPhysicsCollider) {
+                    ((IPhysicsCollider) c).collisionOccurred(object2, angleOfImpact, pointOfImpact,
                             coefficientOfRestitution);
                 }
             }
             for (IComponent c : object2.getComponents()) {
-                if (c instanceof ISpritePhysicsCollider) {
-                    ((ISpritePhysicsCollider) c).collisionOccurred(object1, angleOfImpact, pointOfImpact,
+                if (c instanceof IPhysicsCollider) {
+                    ((IPhysicsCollider) c).collisionOccurred(object1, angleOfImpact, pointOfImpact,
                             coefficientOfRestitution);
                 }
             }
@@ -237,7 +255,7 @@ public class PhysicsEngine {
     public void applyField(IPointField physicalObject, IPointField field, long elapsedTime) {
         if (isOn()) {
             MathVector radius = new MathVector(physicalObject.getCenter(), field.getCenter());
-            double magnitude = field.getPointMagnitude() * field.CONSTANT * physicalObject.getPointMagnitude()
+            double magnitude = field.getPointMagnitude() * field.constant * physicalObject.getPointMagnitude()
                     / radius.getMagnitude();
             applyForce(physicalObject, new Force(magnitude, radius.getAngle()), elapsedTime);
         }

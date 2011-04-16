@@ -2,8 +2,8 @@ package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Point;
 import vooga.physics.interfaces.IPhysicsFriction;
+import vooga.physics.interfaces.IPhysicsCollider;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.ISpritePhysicsCollider;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
 
@@ -14,7 +14,7 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  *
  */
-public class PhysicsFrictionC extends BasicComponent implements IPhysicsFriction, ISpritePhysicsCollider{
+public class PhysicsFrictionC extends BasicComponent implements IPhysicsFriction, IPhysicsCollider{
 
     private double coefficient = 2;
     private boolean isOn;
@@ -30,7 +30,7 @@ public class PhysicsFrictionC extends BasicComponent implements IPhysicsFriction
     }
 
     @Override
-    public void setPhysicsOnOff(boolean isOn) {
+    public void turnPhysicsOnOff(boolean isOn) {
         this.isOn = isOn;
         
     }
@@ -56,9 +56,10 @@ public class PhysicsFrictionC extends BasicComponent implements IPhysicsFriction
             isOn = true;
     }
 
+
     @Override
-    public void collisionOccurred(Sprite otherSprite, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
-        // TODO this should exert a force opposite to the direciton of the other sprite's movement
+    public void collisionOccurred(Object otherSprite, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+        // TODO Auto-generated method stub
         
     }
     

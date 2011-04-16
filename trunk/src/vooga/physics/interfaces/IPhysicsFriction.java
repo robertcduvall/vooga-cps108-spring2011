@@ -5,14 +5,7 @@ package vooga.physics.interfaces;
  * @author Nathan Klug
  *
  */
-public interface IPhysicsFriction {
+public interface IPhysicsFriction extends IPhysicsToggle{
     
     public double getCoefficientOfFriction();
-    
-    public boolean isOn();
-    
-    /**
-     * Turns the physics FOR THIS PARTICULAR OBJECT on or off based on the parameter.
-     */
-    public void setPhysicsOnOff(boolean isOn);
 }

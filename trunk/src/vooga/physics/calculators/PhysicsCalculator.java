@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.ResourceBundle;
 import vooga.reflection.Reflection;
-import vooga.physics.engine.PhysicsEngine;
+import vooga.physics.engine.OldNewtonianPhysicsEngine;
 import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
 import vooga.physics.interfaces.IPointField;
@@ -114,7 +114,7 @@ public class PhysicsCalculator {
      */
     public void updateWithPhysics(long elapsedTime, IPhysics physicalObject) {
         if (isOn()) {
-            PhysicsEngine.getInstance().applyWorldForces(physicalObject, elapsedTime);
+            OldNewtonianPhysicsEngine.getInstance().applyWorldForces(physicalObject, elapsedTime);
         }
     }
 
@@ -159,7 +159,7 @@ public class PhysicsCalculator {
     public void applyField(IPointField physicalObject, IPointField field, long elapsedTime) {
         if (isOn()) {
             MathVector radius = new MathVector(physicalObject.getCenter(), field.getCenter());
-            double magnitude = field.getPointMagnitude() * field.CONSTANT * physicalObject.getPointMagnitude()
+            double magnitude = field.getPointMagnitude() * field.constant * physicalObject.getPointMagnitude()
                     / radius.getMagnitude();
             applyForce(physicalObject, new Force(magnitude, radius.getAngle()), elapsedTime);
         }
