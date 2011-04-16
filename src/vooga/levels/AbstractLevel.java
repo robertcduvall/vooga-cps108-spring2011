@@ -22,9 +22,6 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     /** The game for which this is a level for */
     private Game myGame;   
     
-    /** The id/level number for this object */
-    //private int myId;
-    
     /** The goal which this level must reach in order to progress */
     private IGoal myGoal;
     
@@ -42,7 +39,6 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     {
         myGame = g;
         myFilePath = filePath;
-        myId = id;
         mySprites = new TreeMap<Class<?>, ArrayList<Sprite>>();
         LevelBuilder levelBuilder = new LevelBuilder();
         levelBuilder.buildLevel(myFilePath);
@@ -111,17 +107,6 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     protected void addMusic ()
     {
         myGame.playMusic(myMusic.remove(0));
-    }
-
-
-    /**
-     * Gets this level's id number
-     * 
-     * @return level number
-     */
-    public int getId ()
-    {
-        return myId;
     }
 
 
