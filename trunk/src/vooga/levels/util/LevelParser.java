@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vooga.levels.util.tags.BackgroundTag;
+import vooga.levels.util.tags.SpriteTag;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
@@ -33,7 +34,8 @@ public class LevelParser extends Parser {
 		spriteFactoryMap = new HashMap<String, SpriteConstructor>();
 		converterRack = new ConverterRack();
 		
-		super.addDefinitions(new LevelTag(), new BackgroundTag(this));
+		super.addDefinitions(new LevelTag(), new BackgroundTag(this),
+								new SpriteTag(this));
 	}
 	
 	public void setBackground(String background) {
