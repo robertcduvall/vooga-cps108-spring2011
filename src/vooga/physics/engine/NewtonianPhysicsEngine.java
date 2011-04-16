@@ -26,7 +26,7 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
     private Collection<IPointField> pointForces;
     private boolean isOn;
     private static NewtonianPhysicsEngine myInstance;
-    
+
     private NewtonianPhysicsEngine(){
         worldForces = new HashSet<Force>();
         pointForces = new HashSet<IPointField>();
@@ -88,11 +88,11 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
             }
         }
     }
-    
+
     public void applyForce(IPhysics object, Force f, long elapsedTime){
         f.applyForce(object, elapsedTime);
     }
-    
+
     public void applyForce(IMovable object, Force f, long elapsedTime){
         if (f.getClass() == MassProportionalForce.class)
             ((MassProportionalForce)f).applyForce(object, elapsedTime);
@@ -110,7 +110,7 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
             }
         }
     }
-    
+
     /**
      * Applies an external field to an object.
      * 
@@ -135,7 +135,7 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
             spriteVelocity.addVector(deltaVelocity);
             physicalObject.setVelocity(spriteVelocity);
         }
-    
+
     }
 
     /**
@@ -265,21 +265,31 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
      * @param surfaceTangent
      * @param elapsedTime
      */
-    public void applyFriction(IPhysicsFriction objectWithFriction, IPhysics otherObject, Force force, Angle surfaceTangent, long elapsedTime) {
+    public void applyFriction(Object thisObject, Object otherObject, Force force, Angle surfaceTangent, long elapsedTime) {
         if (isOn()) {
-            double normalMagnitude = force.getPerpComponent(surfaceTangent);
-            if (normalMagnitude < 0) {
-                // Normal magnitude is negative so surfaceTangent is in
-                // direction of friction
-                normalMagnitude = -normalMagnitude;
+            if (IPhysicsFriction.class.isAssignableFrom(thisObject.getClass())) {
+                double mu = 0; //Coefficient of friction
+                if (IPhysicsFriction.class.isAssignableFrom(otherObject.getClass())) {
+                    //Get max coefficient of friction, otherwise mu = 0 for frictionless
+                    mu = Math.max(((IPhysicsFriction)thisObject).getCoefficientOfFriction(),
+                            ((IPhysicsFriction)otherObject).getCoefficientOfFriction());
+                }
+                double normalMagnitude = force.getPerpComponent(surfaceTangent);
+                if (normalMagnitude < 0) {
+                    // Normal magnitude is negative so surfaceTangent is in
+                    // direction of friction
+                    normalMagnitude = -normalMagnitude;
+                }
+                else {
+                    // Normal magnitude is positive so surfaceTangent is in
+                    // direction opposite friction
+                    surfaceTangent.setNegativeAngle();
+                }
+                Force friction = new Force(normalMagnitude * mu, surfaceTangent);
+                if (IPhysics.class.isAssignableFrom(thisObject.getClass())) {
+                    friction.applyForce((IPhysics)thisObject, elapsedTime);
+                }
             }
-            else {
-                // Normal magnitude is positive so surfaceTangent is in
-                // direction opposite friction
-                surfaceTangent.setNegativeAngle();
-            }
-            Force friction = new Force(normalMagnitude * objectWithFriction.getCoefficientOfFriction(), surfaceTangent);
-            friction.applyForce(otherObject, elapsedTime);
         }
     }
 
