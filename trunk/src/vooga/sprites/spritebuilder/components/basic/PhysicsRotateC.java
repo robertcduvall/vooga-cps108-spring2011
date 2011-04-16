@@ -1,7 +1,6 @@
 package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Point;
-import vooga.physics.interfaces.INewtonianPhysics;
 import vooga.physics.interfaces.IPhysics;
 import vooga.physics.interfaces.IPhysicsRotate;
 import vooga.physics.interfaces.IPhysicsCollider;
@@ -58,7 +57,7 @@ public class PhysicsRotateC extends PhysicsC implements IPhysicsRotate{
      * @param pointOfApplication
      * @param elapsedTime
      */
-    public void applyRotationalForce(INewtonianPhysics physicalObject, Force force, Point pointOfApplication, long elapsedTime) {
+    public void applyRotationalForce(IPhysicsRotate physicalObject, Force force, Point pointOfApplication, long elapsedTime) {
         MathVector radius = new MathVector(physicalObject.getCenter(), pointOfApplication);
         Angle theta = radius.getVectorAngle(force);
         double deltaOmega = force.getMagnitude() * theta.sin() * elapsedTime /
