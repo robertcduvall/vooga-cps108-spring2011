@@ -1,5 +1,6 @@
 package vooga.resources.xmlparser;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import org.w3c.dom.Document;
@@ -16,10 +17,32 @@ import org.w3c.dom.NodeList;
  * @author Misha
  *
  */
-public abstract class Parser
+public class Parser
 {
     protected Map<String, XMLTag> xmlDefinitions;
-    
+ 
+    /**
+     * Source tag. Allows inclusion of other XML files.
+     * @author Sterling Dorminey
+     *
+     */
+    private static final class SourceTag extends XMLTag {
+    	private static final String TAG_NAME = "source";
+    	
+		@Override
+		public String getTagName() {
+			return TAG_NAME;
+		}
+		
+		@Override
+		public void parse(Parser context, Element xmlElement) {
+			String filename = getValue(xmlElement);
+			
+			File xmlFile = new File(filename);
+			Parser subParser = new Parser(super);
+		}
+    	
+    }
     /**
      * Creates a new parser with no syntax definitions.
      */
@@ -27,6 +50,13 @@ public abstract class Parser
     	xmlDefinitions = new HashMap<String, XMLTag>();
     }
 
+    /**
+     * Creates a parser from an existing parser.
+     */
+    public Parser(Parser oldParser) {
+    	xmlDefinitions = new HashMap<String, XMLTag>(oldParser.xmlDefinitions);
+    }
+    
     /**
      * Adds XML tags for the parser to recognize and interpret.
      */

@@ -27,4 +27,8 @@ public class PoolDeferredConstructor {
 	public String getSpriteGroup() {
 		return spriteConstructor.getSpriteGroup();
 	}
+	
+	public String getTargetName() {
+		return spriteConstructor.getTargetName();
+	}
 }
