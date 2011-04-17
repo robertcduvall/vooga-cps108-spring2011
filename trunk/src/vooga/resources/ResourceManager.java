@@ -13,7 +13,7 @@ import vooga.resources.xmlparser.Parser;
 public class ResourceManager extends Parser {
 	
 	private ImageLoader imageLoader;
-	
+	private VoogaGame game;
 	
 	/**
 	 * Constructs a resource manager given the root game class, and a filename.
@@ -22,5 +22,17 @@ public class ResourceManager extends Parser {
 	 */
 	public ResourceManager(VoogaGame game, String filename) {
 		super();
+		
+		this.game = game;
+		
+		parse(filename);
+	}
+
+	public VoogaGame getGame() {
+		return game;
+	}
+	
+	public void setImageLoader(ImageLoader imageLoader)	{
+		this.imageLoader = imageLoader;
 	}
 }
