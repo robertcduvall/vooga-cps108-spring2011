@@ -21,6 +21,7 @@ import com.golden.gamedev.object.background.ColorBackground;
 import vooga.levels.AbstractLevel;
 import vooga.levels.util.tags.BackgroundTag;
 import vooga.levels.util.tags.CollisionManagerTag;
+import vooga.levels.util.tags.InstanceTag;
 import vooga.levels.util.tags.SpriteTag;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
@@ -53,7 +54,8 @@ public class LevelParser extends Parser {
 		converterRack = new ConverterRack();
 		
 		super.addDefinitions(new LevelTag(), new BackgroundTag(this),
-								new SpriteTag(this), new CollisionManagerTag(this));
+								new SpriteTag(this), new CollisionManagerTag(this),
+								new InstanceTag(this));
 	}
 	
 	public void parse(String filename) throws LevelParserException {
@@ -81,7 +83,7 @@ public class LevelParser extends Parser {
 		level.setBackground(new ColorBackground(Color.black));
 	}
 	
-	public void addSprite(String name, SpriteConstructor factory) {
+	public void addSpriteArchetype(String name, SpriteConstructor factory) {
 		spriteFactoryMap.put(name, factory);
 	}
 
