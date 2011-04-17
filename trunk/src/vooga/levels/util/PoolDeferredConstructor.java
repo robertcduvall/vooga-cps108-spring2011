@@ -20,8 +20,8 @@ public class PoolDeferredConstructor {
 		this.otherAssignments = otherAssignments;
 	}
 	
-	public Sprite construct() {
-		return spriteConstructor.construct(otherAssignments);
+	public void construct() {
+		spriteConstructor.construct(otherAssignments);
 	}
 	
 	public String getSpriteGroup() {
