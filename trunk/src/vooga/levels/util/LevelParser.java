@@ -98,4 +98,10 @@ public class LevelParser extends Parser {
 	public ConverterRack getConverterRack() {
 		return converterRack;
 	}
+
+    public void addRandomSprite ()
+    {
+        // TODO Auto-generated method stub
+        
+    }
 }

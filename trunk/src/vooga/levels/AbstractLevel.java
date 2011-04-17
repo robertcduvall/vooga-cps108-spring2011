@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Queue;
 import vooga.core.VoogaGame;
 import vooga.levels.util.LevelParser;
+import vooga.levels.util.PoolDeferredConstructor;
 import vooga.player.Player;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
@@ -66,8 +67,8 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      */
     public void parseXMLFile (String fileName)
     {
-        mySpritePool = new SpritePool(this);
         myLevelParser = new LevelParser(this);
+        mySpritePool = new SpritePool(myLevelParser);
         myLevelParser.parse(fileName);
     }
 
@@ -139,7 +140,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      */
     public void addRandomSprite ()
     {
-        mySpritePool.addRandomSprite();
+        myLevelParser.addRandomSprite();
     }
 
 
@@ -179,9 +180,9 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      * 
      * @param spritePool for this level
      */
-    public void setSpritePool (SpritePool spritePool)
+    public void addToPool (PoolDeferredConstructor poolObject)
     {
-        mySpritePool = spritePool;
+        mySpritePool.addToPool(poolObject);
     }
 
     /**
