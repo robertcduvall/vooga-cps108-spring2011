@@ -11,30 +11,39 @@ import com.golden.gamedev.object.Sprite;
 
 public class SpritePool
 {
-    private Map<String, Collection<PoolDeferredConstructor>> mySprites;
+    private Map<String, ArrayList<PoolDeferredConstructor>> mySprites;
     private LevelParser myLevelParser;
 
     public SpritePool (LevelParser parser)
     {
-        mySprites = new TreeMap<String, Collection<PoolDeferredConstructor>>();
+        mySprites = new TreeMap<String, ArrayList<PoolDeferredConstructor>>();
         myLevelParser = parser;
     }
 
     public void addAllSprites ()
     {
-        // TODO Auto-generated method stub
-        
+        for(Collection<PoolDeferredConstructor> currentConstructorCollection : mySprites.values())
+        {
+            for(PoolDeferredConstructor currentConstructor : currentConstructorCollection)
+            {
+                currentConstructor.construct();
+            }
+        }
     }
     
     public void addAllSprites(String type)
     {
-        
+        Collection<PoolDeferredConstructor> constructorsOfType = mySprites.get(type);
+        for(PoolDeferredConstructor currentConstructor : constructorsOfType)
+        {
+            currentConstructor.construct();
+        }
     }
     
-    public void addSprite (String className)
+    public void addSprite (String type)
     {
-        // TODO Auto-generated method stub
-        
+        ArrayList<PoolDeferredConstructor> constructorsOfType = mySprites.get(type);
+        constructorsOfType.remove(0).construct();
     }
     
     public void addToPool(PoolDeferredConstructor poolObject)
@@ -45,9 +54,7 @@ public class SpritePool
             mySprites.put(spriteType, new ArrayList<PoolDeferredConstructor>());            
         }
         mySprites.get(spriteType).add(poolObject);        
-    }
-    
-    
+    }  
 }
 
 ////

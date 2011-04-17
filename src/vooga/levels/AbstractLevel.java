@@ -73,11 +73,6 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
         myLevelParser.parse(fileName);
     }
     
-    public void parseXML () {
-    	
-    }
-    
-
 
     /**
      * Checks if the current level's goal has been achieved
