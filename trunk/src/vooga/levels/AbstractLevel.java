@@ -2,47 +2,53 @@ package vooga.levels;
 
 import java.util.*;
 
+import vooga.core.VoogaGame;
+import vooga.levels.util.LevelParser;
 import vooga.player.Player;
 
 import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
+import com.golden.gamedev.object.SpriteGroup;
 
 
 /**
  * A basic level object which gets the majority of its contents from an
  * associated XML file. More complex level initializations can be accomplished
- * by writting the loadLevel() method.
+ * by writing the loadLevel() method.
  * 
  * @author Andrew Patterson & Wesley Brown
  */
 
-
 //Need to declare all sprite groups and collision managers here
 public abstract class AbstractLevel extends PlayField implements Comparable<AbstractLevel> 
 {
-    /** The game for which this is a level for */
-    private Game myGame;   
+    /** The XML parser which is used for reading the level file and creating objects based on the data */
+    private LevelParser myLevelParser;
+    
+    /** The vooga game for which this is a level for */
+    private VoogaGame myGame;   
     
     /** The goal which this level must reach in order to progress */
     private IGoal myGoal;
     
     /** A queue of all the backgrounds for this level - read in from the XML file */
-    private ArrayList<Background> myBackgrounds;
+    private Queue<Background> myBackgrounds;
     
     /** A map of sprite type to all the instances of that type read from the XML file */
     private TreeMap<Class<?>, ArrayList<Sprite>> mySprites;
     
     /** A queue of all the music for this level - read in from the XML file */
-    private ArrayList<String> myMusic;
+    private Queue<String> myMusic;
     
-    private int myLevelID;
+    /** This level's current id; will change each time a new xml file is read */
+    private int myId;
 
 
-    public AbstractLevel (Collection<Player> players, int id, String filepath)
+    public AbstractLevel (Collection<Player> players, VoogaGame game )
     {
-        myLevelID = id;
+        myGame = game;
         mySprites = new TreeMap<Class<?>, ArrayList<Sprite>>();
     }
 
@@ -51,15 +57,19 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      * The key method that the LevelManager will call when loading a level.
      * The implementation of this method will determine how a level initializes.
      */
-    public abstract void loadLevel (String filePath);
-    // creates xmlparser(level instance), parse(filename) within the level
-    // TODO: does this mean this still needs to be abstract?
-
+    public abstract void loadLevel ();
+    
+    public void parseXMLFile(String fileName)
+    {
+        myLevelParser = new LevelParser(this);
+        myLevelParser.parse(fileName);
+        //TODO implement
+    }
 
     /**
      * Checks if the current level's goal has been achieved
      */
-    public void checkCompletion ()
+    public boolean checkCompletion ()
     {
         if(myGoal.checkCompletion()) myGoal.progress();
     }
@@ -70,12 +80,14 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      */
     protected void addBackground ()
     {
-        setBackground(myBackgrounds.remove(0));
+        if(myBackgrounds.size() > 0){
+            setBackground(myBackgrounds.remove());
+        }
     }
 
 
     /**
-     * Place all previously read sprites on the playingfield
+     * Places all sprites from the initial condition pool onto the playingfield
      */
     protected void addAllSprites ()
     {
@@ -88,60 +100,19 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
         }
     }
     
+    /**
+     * Places all sprites of a specific type from the pool onto the playingfield
+     * @param type
+     */
     protected void addAllSprites(String type);
 
 
     /**
-     * Places all sprites of the specified type on the playingfield
+     * Places one sprite of the specified type onto the playingfield
      * 
      * @param className of the sprite you wish to initialize
      */
     protected void addSprite (String className)
-    {
-        add(getSprite(className));
-    }
-    
-    protected void addSprite(Sprite);
-
-
-    /**
-     * Begins this level's music track
-     */
-    protected void addMusic ()
-    {
-        myGame.playMusic(myMusic.remove(0));
-    }
-
-
-    /**
-     * Adds a random sprite of a random type, removing it from the sprite pool
-     */
-    public void addRandomSprite ()
-    {
-        myPlayField.add(getRandomSprite());
-    }
-
-
-    /**
-     * Gets a random sprite of a random type, removing it from the sprite pool
-     * 
-     * @return a random sprite
-     */
-    public Sprite getRandomSprite ()
-    {
-        Random generator = new Random();
-        ArrayList<Sprite> myRandSpriteType = mySprites.get(generator.nextInt(mySprites.size()));
-        return myRandSpriteType.get(generator.nextInt(myRandSpriteType.size()));
-    }
-
-
-    /**
-     * Gets the first sprite of the given type from the sprite pool
-     * 
-     * @param type of sprite to return
-     * @return the first sprite of the given type
-     */
-    public Sprite getSprite (String className)
     {
         Class<?> requestedClass;
         try
@@ -152,9 +123,32 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
         {
             throw LevelException.NON_EXISTANT_SPRITE;
         }
-        return mySprites.get(requestedClass).remove(0);
+        add(mySprites.get(requestedClass).remove(0));
+    }
+    
+    public void addSprite(String spriteArchetype, Object...paramaters)
+    {
+        myLevelParser.createNewSpriteOfArchetype(spriteArchetype);
     }
 
+
+    /**
+     * Adds a random sprite from the pool onto the playingfield, removing it from the sprite pool
+     */
+    public void addRandomSprite ()
+    {
+        Random generator = new Random();
+        ArrayList<Sprite> myRandSpriteType = mySprites.get(generator.nextInt(mySprites.size()));
+        add(myRandSpriteType.get(generator.nextInt(myRandSpriteType.size())));    
+    }
+
+    /**
+     * Begins this level's music track
+     */
+    protected void addMusic ()
+    {
+        myGame.playMusic(myMusic.remove(0));
+    }
 
     /**
      * Compares a level based on its id
@@ -183,4 +177,31 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     
     //
     protected addPlayer(Player);
+    
+    public int getId()
+    {
+        return myId;
+    }
+    
+    public void setSpritePool();
+    
+    public void setBackgroundPool();
+    
+    public void setMusicPool();
+    
+    @Override
+    public SpriteGroup getGroup(String groupName)
+    {
+        SpriteGroup[] allGroups = getGroups();
+        for(SpriteGroup currentGroup : allGroups)
+        {
+            if(currentGroup.getName().equals(groupName))
+            {
+                return currentGroup;
+            }
+        }
+        SpriteGroup newGroup = new SpriteGroup(groupName);
+        addGroup(newGroup);
+        return newGroup;
+    }
 }

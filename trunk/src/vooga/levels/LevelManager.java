@@ -7,12 +7,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeSet;
 import vooga.core.VoogaGame;
-import vooga.levels.AbstractLevel;
 import vooga.levels.example.reflection.Reflection;
 import vooga.player.Player;
-import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 
 /**
@@ -38,10 +35,9 @@ public class LevelManager {
 	private Collection<Player> myPlayers;
 
 	/** The current running game */
-	private VoogaGame myGame; // TODO: Do we need this?
+	private VoogaGame myGame;
 	
-	private String currentLevelType = ""; // current type of level being used
-	private AbstractLevel activeLevel;
+	private AbstractLevel myActiveLevel;
 
 	/**
 	 * Maps level names/classes to level order
@@ -61,7 +57,6 @@ public class LevelManager {
 			myLevelOrderMap.put(levelNumber, in.next());
 			levelNumber++;
 		}
-
 		myNumOfLevels = levelNumber;
 	}
 
@@ -73,23 +68,22 @@ public class LevelManager {
 	 * @param id representing level to load
 	 */
 	public void loadLevel(int id) {		
-		String levelName = myLevelOrderMap.get(id);
-		if (levelName == null) {
-			throw LevelException.NON_EXISTANT_LEVEL;
-		}
-		
-		// First item is the class type, second is the user defined name which
-		// is irrelevant
-		String[] levelDef = levelName.split("\\_");
-
-		if (levelDef[0].toLowerCase().equals(currentLevelType)) {
-			activeLevel.loadlevel();
-		} else {
-			currentLevelType = levelDef[0];
-
+	    if(!(myLevelOrderMap.containsKey(id)))
+	        throw LevelException.NON_EXISTANT_LEVEL;
+		String levelFileName = myLevelOrderMap.get(id);
+	
+		// First item is the class type of the level
+		//second is the user defined name which is a comment
+		String[] levelDef = levelFileName.split("\\_");
+		String activeLevelClass = myActiveLevel.getClass().getName();
+		activeLevelClass = activeLevelClass.substring(0,activeLevelClass.indexOf(".")); //Gets rid of .class
+		if (activeLevelClass.equals(levelDef[0])) {
+			myActiveLevel.loadLevel(levelFileName);
+		} 
+		else {
 			try {
-				activeLevel = ((AbstractLevel) Reflection.createInstance(levelDef[0], myPlayers, id, levelName));
-				activeLevel.loadLevel();
+				myActiveLevel = ((AbstractLevel) Reflection.createInstance(levelDef[0], myPlayers, myGame));
+				myActiveLevel.loadLevel(levelFileName);
 			} catch (Exception e) {
 				throw LevelException.LEVEL_LOADING_ERROR;
 			}
@@ -100,31 +94,29 @@ public class LevelManager {
 	 * Loads the level that comes after the current level
 	 */
 	public void loadNextLevel() {
-		loadLevel(activeLevel.getId() + 1);
+		loadLevel(myActiveLevel.getId() + 1);
 	}
 
 	/**
 	 * Loads the level that came before the current level
 	 */
 	public void loadPreviousLevel() {
-		loadLevel(activeLevel.getId() - 1);
+		loadLevel(myActiveLevel.getId() - 1);
 	}
 
 	/**
 	 * Checks if the current level is complete
 	 */
 	public void checkLevelCompletion() {
-		for (AbstractLevel currentLevel : myCurrentLevels) {
-			currentLevel.checkCompletion();
-		}
-		myNumOfLevelsCompleted++;
+		if(myActiveLevel.checkCompletion())
+		    myNumOfLevelsCompleted++;
 	}
 
 	/**
 	 * Retrieves the highest running level's id
 	 */
 	public int getCurrentLevel() {
-		// return myCurrentLevels.last().getId();
+		 return myActiveLevel.getId();
 	}
 
 	/**
@@ -145,7 +137,7 @@ public class LevelManager {
 	 * Adds a random sprite from the lowest running level pool
 	 */
 	public void addRandomSprite() {
-		myCurrentLevels.first().addRandomSprite();
+		myActiveLevel.addRandomSprite();
 	}
 
 	/**
@@ -154,7 +146,7 @@ public class LevelManager {
 	 * @return a random sprite
 	 */
 	public Sprite getRandomSprite() {
-		return myCurrentLevels.first().getRandomSprite();
+		return myActiveLevel.getRandomSprite();
 	}
 
 	/**
@@ -165,11 +157,9 @@ public class LevelManager {
 	 *            of Sprite to add
 	 */
 	public void addNewSprite(String type) {
-		myCurrentLevels.first().addSprite(type);
+		myActiveLevel.addSprite(type);
 	}
 
-	// Adds sprite back into playingfield
-	public void addSprite(Sprites s);
 
 	/**
 	 * Add a new sprite of the specified type to the playingfield. The sprite is
@@ -180,7 +170,7 @@ public class LevelManager {
 	 * @return sprite of the specified type
 	 */
 	public Sprite getNewSprite(String type) {
-		return myCurrentLevels.first().getSprite(type);
+		return myActiveLevel.getSprite(type);
 	}
 
 	/**
@@ -188,7 +178,7 @@ public class LevelManager {
 	 * of backgrounds. The background is taken from the lowest running level.
 	 */
 	public void useNextBackground() {
-		myCurrentLevels.first().addBackground();
+		myActiveLevel.addBackground();
 	}
 
 	/**
@@ -196,14 +186,14 @@ public class LevelManager {
 	 * taken from the lowest running level.
 	 */
 	public void useNextMusic() {
-		myCurrentLevels.first().addMusic();
+		myActiveLevel.addMusic();
 	}
 
 	public void update(long elapsedTime) {
-		// level.update(elapsedTime);
+		 myActiveLevel.update(elapsedTime);
 	}
 
-	public void render(Graphics2D g, int x, int y) {
-		// level.render(g, x, y);
+	public void render(Graphics2D g) {
+		 myActiveLevel.render(g);
 	}
 }
