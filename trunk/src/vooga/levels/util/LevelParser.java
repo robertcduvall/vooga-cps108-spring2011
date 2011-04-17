@@ -23,6 +23,7 @@ import vooga.levels.util.tags.BackgroundTag;
 import vooga.levels.util.tags.CollisionManagerTag;
 import vooga.levels.util.tags.InstanceTag;
 import vooga.levels.util.tags.SpriteTag;
+import vooga.resources.xmlparser.ParserException;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
@@ -56,22 +57,6 @@ public class LevelParser extends Parser {
 		super.addDefinitions(new LevelTag(), new BackgroundTag(this),
 								new SpriteTag(this), new CollisionManagerTag(this),
 								new InstanceTag(this));
-	}
-	
-	public void parse(String filename) throws LevelParserException {
-		File xmlFile = new File(filename);
-		try {
-			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-	        Document doc = db.parse(xmlFile);
-	        super.parse(doc);
-		} catch(IOException e) {
-			throw LevelParserException.IO_ERROR;
-		} catch (SAXException e) {
-			throw LevelParserException.SYNTAX_ERROR;
-		} catch (ParserConfigurationException e) {
-			throw LevelParserException.SYSTEM_ERROR;
-		}
-
 	}
 	
 	public AbstractLevel getLevel() {
