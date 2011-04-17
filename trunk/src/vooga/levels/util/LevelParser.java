@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -14,6 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.background.ColorBackground;
 
 import vooga.levels.AbstractLevel;
@@ -83,6 +85,22 @@ public class LevelParser extends Parser {
 		spriteFactoryMap.put(name, factory);
 	}
 
+	/**
+	 * Construct a sprite given the name of its archetype and other assignments for it.
+	 * @return an instance of the constructed sprite.
+	 */
+	public Sprite makeSprite(String name, List<String> otherAssignments) {
+		SpriteConstructor factory = spriteFactoryMap.get(name);
+		return factory.construct(otherAssignments);
+	}
+	
+	/**
+	 * Returns the sprite constructor associated with the given archetype.
+	 */
+	public SpriteConstructor getSpriteConstructor(String type) {
+		return spriteFactoryMap.get(type);
+	}
+	
 	public ConverterRack getConverterRack() {
 		return converterRack;
 	}

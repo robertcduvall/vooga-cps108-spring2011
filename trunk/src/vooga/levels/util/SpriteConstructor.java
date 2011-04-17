@@ -15,14 +15,16 @@ import com.golden.gamedev.object.Sprite;
  */
 public class SpriteConstructor {
 	private String className;
+	private String spriteGroup;
 	private List<String> partialAssignments;
 	private ConverterRack converterRack;
 	
 	public SpriteConstructor(ConverterRack converterRack, String className,
-			List<String> partialAssignments) {
+			String spriteGroup, List<String> partialAssignments) {
 		this.converterRack = converterRack;
 		this.className = className;
 		this.partialAssignments = partialAssignments;
+		this.spriteGroup = spriteGroup;
 	}
 	
 	/**
