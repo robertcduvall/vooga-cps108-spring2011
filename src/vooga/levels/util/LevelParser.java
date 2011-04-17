@@ -88,6 +88,13 @@ public class LevelParser extends Parser {
 		return spriteFactoryMap.get(type);
 	}
 	
+	/**
+	 * Returns the map of archetype names to sprite constructors.
+	 */
+	public Map<String, SpriteConstructor> getSpriteConstructorMap() {
+		return spriteFactoryMap;
+	}
+	
 	public ConverterRack getConverterRack() {
 		return converterRack;
 	}
