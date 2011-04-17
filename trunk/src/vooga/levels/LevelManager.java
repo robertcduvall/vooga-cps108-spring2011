@@ -7,6 +7,7 @@ import java.util.Map;
 import vooga.core.VoogaGame;
 import vooga.levels.example.reflection.Reflection;
 import vooga.player.Player;
+import vooga.sprites.improvedsprites.Sprite;
 
 
 /**
@@ -35,7 +36,6 @@ public class LevelManager
 
     /** The current, active level for this game */
     private AbstractLevel myActiveLevel;
-
 
     /**
      * Maps level names/classes to level order
