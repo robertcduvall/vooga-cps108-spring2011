@@ -1,25 +1,31 @@
 package vooga.levels;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Random;
-import java.util.TreeMap;
-import vooga.levels.util.LevelParser;
+import java.util.*;
 import vooga.levels.util.PoolDeferredConstructor;
-import com.golden.gamedev.object.Sprite;
 
+
+/**
+ * A storage area for sprite constructors which will eventually be added to the
+ * level. All sprite constructors in this pool have been fully defined in the
+ * XML file
+ * 
+ * @author Andrew Patterson
+ */
 public class SpritePool
 {
+    /** A map of sprite types to instances of these sprites (in constructor form) */
     private Map<String, ArrayList<PoolDeferredConstructor>> mySprites;
-    private LevelParser myLevelParser;
 
-    public SpritePool (LevelParser parser)
+    public SpritePool ()
     {
         mySprites = new TreeMap<String, ArrayList<PoolDeferredConstructor>>();
-        myLevelParser = parser;
     }
 
+    
+    /**
+     * Takes all the sprites from this pool, constructs them and
+     * lets the sprite constructor add them to the playingfield
+     */
     public void addAllSprites ()
     {
         for(Collection<PoolDeferredConstructor> currentConstructorCollection : mySprites.values())
@@ -31,6 +37,11 @@ public class SpritePool
         }
     }
     
+    
+    /**
+     * Takes all sprites of a specific type from this pool, constructs them and
+     * lets the sprite constructor add them to the playingfield
+     */
     public void addAllSprites(String type)
     {
         Collection<PoolDeferredConstructor> constructorsOfType = mySprites.get(type);
@@ -40,13 +51,25 @@ public class SpritePool
         }
     }
     
+    
+    /**
+     * Takes one sprites of a specific type from this pool, constructs it and
+     * lets the sprite constructor add it to the playingfield
+     */
     public void addSprite (String type)
     {
         ArrayList<PoolDeferredConstructor> constructorsOfType = mySprites.get(type);
         constructorsOfType.remove(0).construct();
     }
     
-    public void addToPool(PoolDeferredConstructor poolObject)
+    
+    /**
+     * Adds a sprite constructor to the pool, sorting it accordingly;
+     * Called by levelParser
+     * 
+     * @param sprite constructor to add
+     */
+    public void addToPool (PoolDeferredConstructor poolObject)
     {
         String spriteType = poolObject.getTargetName();        
         if(!mySprites.containsKey(spriteType))
@@ -56,32 +79,3 @@ public class SpritePool
         mySprites.get(spriteType).add(poolObject);        
     }  
 }
-
-////
-////for (ArrayList<Sprite> currentSpriteList : mySprites.values())
-////{
-////    for (Sprite currentSprite : currentSpriteList)
-////    {
-////        add(currentSprite);
-////    }
-////}
-//
-//Class<?> requestedClass;
-//try
-//{
-//    requestedClass = Class.forName(className);
-//}
-//catch (ClassNotFoundException e)
-//{
-//    throw LevelException.NON_EXISTANT_SPRITE;
-//}
-//add(mySprites.get(requestedClass).remove(0));
-//
-//
-//
-//
-
-//
-//
-
-
