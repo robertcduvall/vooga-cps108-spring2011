@@ -10,7 +10,6 @@ import java.util.Scanner;
 import vooga.core.VoogaGame;
 import vooga.levels.example.reflection.Reflection;
 import vooga.player.Player;
-import com.golden.gamedev.object.Sprite;
 
 /**
  * A manger that facilitates movement between levels, stores information
@@ -78,12 +77,12 @@ public class LevelManager {
 		String activeLevelClass = myActiveLevel.getClass().getName();
 		activeLevelClass = activeLevelClass.substring(0,activeLevelClass.indexOf(".")); //Gets rid of .class
 		if (activeLevelClass.equals(levelDef[0])) {
-			myActiveLevel.loadLevel(levelFileName);
+			myActiveLevel.loadLevel();
 		} 
 		else {
 			try {
 				myActiveLevel = ((AbstractLevel) Reflection.createInstance(levelDef[0], myPlayers, myGame));
-				myActiveLevel.loadLevel(levelFileName);
+				myActiveLevel.loadLevel();
 			} catch (Exception e) {
 				throw LevelException.LEVEL_LOADING_ERROR;
 			}
@@ -140,14 +139,6 @@ public class LevelManager {
 		myActiveLevel.addRandomSprite();
 	}
 
-	/**
-	 * Returns a Sprite from the lowest running level sprite pool
-	 * 
-	 * @return a random sprite
-	 */
-	public Sprite getRandomSprite() {
-		return myActiveLevel.getRandomSprite();
-	}
 
 	/**
 	 * Add a new sprite of the specified type to the playingfield. The sprite is
@@ -160,18 +151,6 @@ public class LevelManager {
 		myActiveLevel.addSprite(type);
 	}
 
-
-	/**
-	 * Add a new sprite of the specified type to the playingfield. The sprite is
-	 * taken from the lowest running level sprite pool.
-	 * 
-	 * @param type
-	 *            of Sprite to return
-	 * @return sprite of the specified type
-	 */
-	public Sprite getNewSprite(String type) {
-		return myActiveLevel.getSprite(type);
-	}
 
 	/**
 	 * Changes the playingfield background to the next background in a sequence

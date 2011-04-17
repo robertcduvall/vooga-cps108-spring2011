@@ -1,15 +1,12 @@
 package vooga.levels;
 
-import java.util.*;
-
+import java.util.Collection;
+import java.util.Queue;
 import vooga.core.VoogaGame;
 import vooga.levels.util.LevelParser;
 import vooga.player.Player;
-
-import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
-import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 
@@ -20,69 +17,74 @@ import com.golden.gamedev.object.SpriteGroup;
  * 
  * @author Andrew Patterson & Wesley Brown
  */
-
-//Need to declare all sprite groups and collision managers here
-public abstract class AbstractLevel extends PlayField implements Comparable<AbstractLevel> 
+public abstract class AbstractLevel extends PlayField implements Comparable<AbstractLevel>
 {
     /** The XML parser which is used for reading the level file and creating objects based on the data */
     private LevelParser myLevelParser;
-    
+
     /** The vooga game for which this is a level for */
-    private VoogaGame myGame;   
-    
+    private VoogaGame myGame;
+
     /** The goal which this level must reach in order to progress */
     private IGoal myGoal;
-    
-    /** A queue of all the backgrounds for this level - read in from the XML file */
+
+    /** A queue of all the backgrounds for this level - read in from the XML file  */
     private Queue<Background> myBackgrounds;
-    
-    /** A map of sprite type to all the instances of that type read from the XML file */
-    private TreeMap<Class<?>, ArrayList<Sprite>> mySprites;
-    
+
+    /** A sprite pool of all the sprites from the XML file */
+    private SpritePool mySpritePool;
+
     /** A queue of all the music for this level - read in from the XML file */
     private Queue<String> myMusic;
-    
-    /** This level's current id; will change each time a new xml file is read */
+
+    /** This level's current id; could change each time a new XML file is read */
     private int myId;
 
+    /** This level's players */
+    private Collection<Player> myPlayers;
 
-    public AbstractLevel (Collection<Player> players, VoogaGame game )
+
+    public AbstractLevel (Collection<Player> players, VoogaGame game)
     {
         myGame = game;
-        mySprites = new TreeMap<Class<?>, ArrayList<Sprite>>();
+        myPlayers = players;
     }
 
 
     /**
-     * The key method that the LevelManager will call when loading a level.
-     * The implementation of this method will determine how a level initializes.
+     * The key method that the LevelManager will call when loading a level. The
+     * implementation of this method will determine how a level initializes.
      */
     public abstract void loadLevel ();
-    
-    public void parseXMLFile(String fileName)
+
+
+    /**
+     * Parses the XML file, storing its contents within the level
+     * Will be called by level manager before loadLevel is called
+     * 
+     * @param name of XML file for this level
+     */
+    public void parseXMLFile (String fileName)
     {
+        mySpritePool = new SpritePool(this);
         myLevelParser = new LevelParser(this);
         myLevelParser.parse(fileName);
-        //TODO implement
     }
+
 
     /**
      * Checks if the current level's goal has been achieved
+     * 
+     * @return the level's completion status
      */
     public boolean checkCompletion ()
     {
-        if(myGoal.checkCompletion()) myGoal.progress();
-    }
-
-
-    /**
-     * Sets the playingfield's background
-     */
-    protected void addBackground ()
-    {
-        if(myBackgrounds.size() > 0){
-            setBackground(myBackgrounds.remove());
+        if (myGoal.checkCompletion())
+        {
+            myGoal.progress();
+            return true;
         }
+        return false;
     }
 
 
@@ -91,64 +93,151 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      */
     protected void addAllSprites ()
     {
-        for (ArrayList<Sprite> currentSpriteList : mySprites.values())
-        {
-            for (Sprite currentSprite : currentSpriteList)
-            {
-                add(currentSprite);
-            }
-        }
+        mySpritePool.addAllSprites();
     }
-    
-    /**
-     * Places all sprites of a specific type from the pool onto the playingfield
-     * @param type
-     */
-    protected void addAllSprites(String type);
 
 
     /**
-     * Places one sprite of the specified type onto the playingfield
+     * Takes all sprites of a specific type and places them onto the playingfield
      * 
-     * @param className of the sprite you wish to initialize
+     * @param type of sprite to add
      */
-    protected void addSprite (String className)
+    protected void addAllSprites (String type)
     {
-        Class<?> requestedClass;
-        try
-        {
-            requestedClass = Class.forName(className);
-        }
-        catch (ClassNotFoundException e)
-        {
-            throw LevelException.NON_EXISTANT_SPRITE;
-        }
-        add(mySprites.get(requestedClass).remove(0));
-    }
-    
-    public void addSprite(String spriteArchetype, Object...paramaters)
-    {
-        myLevelParser.createNewSpriteOfArchetype(spriteArchetype);
+        mySpritePool.addAllSprites(type);
     }
 
 
     /**
-     * Adds a random sprite from the pool onto the playingfield, removing it from the sprite pool
+     * Takes one sprite of the specified type and places it onto the playingfield
+     * 
+     * @param type of the sprite you wish to initialize
+     */
+    protected void addSprite (String type)
+    {
+        mySpritePool.addSprite(type);
+    }
+
+
+    /**
+     * Creates a new sprite of the specified type, with the specified parameters
+     * and places it onto the playingfield. Note that this method does NOT draw
+     * from the sprite pool
+     * 
+     * @param type
+     * @param paramaters
+     */
+    public void addSprite (String type, Object ... paramaters)
+    {
+        //TODO
+        //myLevelParser.createNewSpriteOfArchetype(spriteArchetype);
+    }
+
+
+    /**
+     * Takes a random sprite from the pool and places it onto the playingfield
      */
     public void addRandomSprite ()
     {
-        Random generator = new Random();
-        ArrayList<Sprite> myRandSpriteType = mySprites.get(generator.nextInt(mySprites.size()));
-        add(myRandSpriteType.get(generator.nextInt(myRandSpriteType.size())));    
+        mySpritePool.addRandomSprite();
     }
 
+
     /**
-     * Begins this level's music track
+     * If one exists, plays the next music track for this file
      */
     protected void addMusic ()
     {
-        myGame.playMusic(myMusic.remove(0));
+        myGame.playMusic(myMusic.remove());
     }
+    
+    
+    /**
+     * Sets the playingfield's background
+     */
+    protected void addBackground ()
+    {
+        if (myBackgrounds.size() > 0)
+        {
+            setBackground(myBackgrounds.remove());
+        }
+    }
+
+    /**
+     * Adds a player onto this level
+     * 
+     * @param player to add
+     */
+    protected void addPlayer (Player p)
+    {
+        myPlayers.add(p);
+    }
+
+
+    /**
+     * Sets this level's sprite pool; called by LevelParser
+     * 
+     * @param spritePool for this level
+     */
+    public void setSpritePool (SpritePool spritePool)
+    {
+        mySpritePool = spritePool;
+    }
+
+    /**
+     * Sets the background queue for this level
+     * Called by LevelParser
+     * 
+     * @param background files for this level
+     */
+    public void setBackgroundPool (Queue<Background> backgrounds)
+    {
+        myBackgrounds = backgrounds;
+    }
+
+    /**
+     * Sets the music queue for this level; called by LevelParser
+     * @param music files for this leve
+     */
+    public void setMusicPool (Queue<String> music)
+    {
+        myMusic = music;
+    }
+
+    /**
+     * Returns this level's id
+     * 
+     * @return level's id
+     */
+    public int getId ()
+    {
+        return myId;
+    }
+
+
+    /**
+     * If it exists, returns the sprite group of the specified name. If it
+     * doesn't exist, a new sprite group of the specified name is created, added
+     * to the playingfield and returned
+     * 
+     * @return a sprite group of the specified name
+     */
+    @Override
+    public SpriteGroup getGroup (String groupName)
+    {
+        SpriteGroup[] allGroups = getGroups();
+        for (SpriteGroup currentGroup : allGroups)
+        {
+            if (currentGroup.getName().equals(groupName))
+            {
+                return currentGroup;
+            }
+        }
+        SpriteGroup newGroup = new SpriteGroup(groupName);
+        addGroup(newGroup);
+        return newGroup;
+    }
+
 
     /**
      * Compares a level based on its id
@@ -173,35 +262,5 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     {
         if (other != null && other instanceof AbstractLevel) return myId == ((AbstractLevel) other).getId();
         else return false;
-    }
-    
-    //
-    protected addPlayer(Player);
-    
-    public int getId()
-    {
-        return myId;
-    }
-    
-    public void setSpritePool();
-    
-    public void setBackgroundPool();
-    
-    public void setMusicPool();
-    
-    @Override
-    public SpriteGroup getGroup(String groupName)
-    {
-        SpriteGroup[] allGroups = getGroups();
-        for(SpriteGroup currentGroup : allGroups)
-        {
-            if(currentGroup.getName().equals(groupName))
-            {
-                return currentGroup;
-            }
-        }
-        SpriteGroup newGroup = new SpriteGroup(groupName);
-        addGroup(newGroup);
-        return newGroup;
     }
 }
