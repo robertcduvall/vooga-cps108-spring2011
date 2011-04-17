@@ -1,12 +1,9 @@
 package vooga.levels;
 
 import java.awt.Graphics2D;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import vooga.core.VoogaGame;
 import vooga.levels.example.reflection.Reflection;
 import vooga.player.Player;
@@ -21,8 +18,6 @@ import vooga.player.Player;
  */
 public class LevelManager
 {
-    private static final String LEVEL_ORDER_FILE = "level_resources/LevelOrder";
-
     /** A map of level number to the associated XML file */
     private Map<Integer, String> myLevelOrderMap;
 
