@@ -1,6 +1,9 @@
 package vooga.levels;
 
 import java.util.*;
+
+import vooga.player.Player;
+
 import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
@@ -33,15 +36,14 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     
     /** A queue of all the music for this level - read in from the XML file */
     private ArrayList<String> myMusic;
+    
+    private int myLevelID;
 
 
-    public AbstractLevel (String filePath, int id, PlayField pf, Game g)
+    public AbstractLevel (Collection<Player> players, int id, String filepath)
     {
-        myGame = g;
-        myFilePath = filePath;
+        myLevelID = id;
         mySprites = new TreeMap<Class<?>, ArrayList<Sprite>>();
-        LevelBuilder levelBuilder = new LevelBuilder();
-        levelBuilder.buildLevel(myFilePath);
     }
 
 
@@ -49,8 +51,9 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      * The key method that the LevelManager will call when loading a level.
      * The implementation of this method will determine how a level initializes.
      */
-    
     public abstract void loadLevel (String filePath);
+    // creates xmlparser(level instance), parse(filename) within the level
+    // TODO: does this mean this still needs to be abstract?
 
 
     /**
