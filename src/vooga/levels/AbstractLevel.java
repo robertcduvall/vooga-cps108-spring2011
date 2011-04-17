@@ -49,6 +49,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     {
         myGame = game;
         myPlayers = players;
+        myPlayers = players;
     }
 
 
@@ -71,6 +72,11 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
         mySpritePool = new SpritePool(myLevelParser);
         myLevelParser.parse(fileName);
     }
+    
+    public void parseXML () {
+    	
+    }
+    
 
 
     /**
