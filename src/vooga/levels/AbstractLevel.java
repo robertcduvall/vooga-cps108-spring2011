@@ -165,6 +165,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
         }
     }
 
+    
     /**
      * Adds a player onto this level
      * 
@@ -238,6 +239,17 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
         SpriteGroup newGroup = new SpriteGroup(groupName);
         addGroup(newGroup);
         return newGroup;
+    }
+    
+    
+    /**
+     * Returns this level's players
+     * 
+     * @return all the players for this level
+     */
+    public Collection<Player> getPlayers()
+    {
+        return myPlayers;
     }
 
 
