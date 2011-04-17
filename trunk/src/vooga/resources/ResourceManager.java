@@ -2,6 +2,7 @@ package vooga.resources;
 
 import vooga.core.VoogaGame;
 import vooga.resources.images.ImageLoader;
+import vooga.resources.managertags.ImageResourceTag;
 import vooga.resources.xmlparser.Parser;
 
 /**
@@ -25,6 +26,8 @@ public class ResourceManager extends Parser {
 		
 		this.game = game;
 		
+		addDefinitions(new ImageResourceTag(this));
+		
 		parse(filename);
 	}
 
@@ -34,5 +37,12 @@ public class ResourceManager extends Parser {
 	
 	public void setImageLoader(ImageLoader imageLoader)	{
 		this.imageLoader = imageLoader;
+	}
+	
+	/**
+	 * Gets the image loader, which is used to load images.
+	 */
+	public ImageLoader getImageLoader() {
+		return imageLoader;
 	}
 }
