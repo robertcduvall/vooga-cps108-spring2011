@@ -10,6 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import vooga.resources.Direction;
@@ -49,6 +50,7 @@ public class ImageLoader
      * 
      * @param resource The file to load the image specs from
      */
+    @Deprecated
     public ImageLoader(File resource, BaseLoader bsLoader)
     {
         images = new TreeMap<ImageKey, AnimatedImage>();
@@ -71,7 +73,18 @@ public class ImageLoader
 		}
     }
     
-
+    /**
+     * Construct image loader.
+     * @param bsLoader the base loader (gotten from a VoogaGame).
+     * @param rootElement the root tag (gotten from a root XML document.)
+     */
+    public ImageLoader(BaseLoader bsLoader, Element rootElement) {
+    	images = new TreeMap<ImageKey, AnimatedImage>();
+    	
+    	ImageParser parser = new ImageParser(this, bsLoader);
+    	parser.parseElement(rootElement);
+    }
+    
     /** See getImage(name, imageIndex, direction, time). */
     public BufferedImage getImage(String name) {return getImage(name, 0, Direction.NORTH, 0);}
     /** See getImage(name, imageIndex, direction, time). */

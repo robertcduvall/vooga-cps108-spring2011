@@ -4,6 +4,7 @@ import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import vooga.levels.AbstractLevel;
 import vooga.reflection.Reflection;
 
 import com.golden.gamedev.object.Sprite;
@@ -18,9 +19,11 @@ public class SpriteConstructor {
 	private String spriteGroup;
 	private List<String> partialAssignments;
 	private ConverterRack converterRack;
+	private AbstractLevel level;
 	
-	public SpriteConstructor(ConverterRack converterRack, String className,
-			String spriteGroup, List<String> partialAssignments) {
+	public SpriteConstructor(AbstractLevel level, ConverterRack converterRack, 
+			String className, String spriteGroup, List<String> partialAssignments) {
+		this.level = level;
 		this.converterRack = converterRack;
 		this.className = className;
 		this.partialAssignments = partialAssignments;
@@ -28,9 +31,18 @@ public class SpriteConstructor {
 	}
 	
 	/**
+	 * Constructs a sprite, adding it to the appropriate sprite in the level.
+	 * @param otherAssignments the assignments to finish the assignment.
+	 */
+	public void construct(List<String> otherAssignments) {
+		Sprite sprite = constructInstance(otherAssignments);
+		level.getGroup(spriteGroup).add(sprite);
+	}
+	
+	/**
 	 * Construct a sprite given other assignments to complete the constructor args.
 	 */
-	public Sprite construct(List<String> otherAssignments) {
+	private Sprite constructInstance(List<String> otherAssignments) {
 		Class<?> spriteClass;
 		try {
 			spriteClass = Class.forName(className);
