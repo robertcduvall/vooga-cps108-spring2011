@@ -1,11 +1,18 @@
 package vooga.resources.xmlparser;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -14,7 +21,7 @@ import org.w3c.dom.NodeList;
  * the context in which the tags are parsed, and add XMLTag instances for
  * the class to recognize.
  * 
- * @author Misha
+ * @author Misha and Sterling
  *
  */
 public class Parser
@@ -23,23 +30,28 @@ public class Parser
  
     /**
      * Source tag. Allows inclusion of other XML files.
-     * @author Sterling Dorminey
      *
      */
-    private static final class SourceTag extends XMLTag {
+    private class SourceTag extends XMLTag {
     	private static final String TAG_NAME = "source";
+    	
+    	private Parser parser;
     	
 		@Override
 		public String getTagName() {
 			return TAG_NAME;
 		}
 		
+		public SourceTag(Parser parser) {
+			this.parser = parser;
+		}
+		
 		@Override
 		public void parse(Parser context, Element xmlElement) {
 			String filename = getValue(xmlElement);
 			
-			File xmlFile = new File(filename);
-			Parser subParser = new Parser(super);
+			Parser subParser = new Parser(parser);
+			subParser.parse(filename);
 		}
     	
     }
@@ -48,13 +60,16 @@ public class Parser
      */
     public Parser() {
     	xmlDefinitions = new HashMap<String, XMLTag>();
+    	
+    	addDefinition(new SourceTag(this));
     }
 
     /**
      * Creates a parser from an existing parser.
      */
     public Parser(Parser oldParser) {
-    	xmlDefinitions = new HashMap<String, XMLTag>(oldParser.xmlDefinitions);
+    	this();
+    	xmlDefinitions.putAll(oldParser.xmlDefinitions);
     }
     
     /**
@@ -100,4 +115,25 @@ public class Parser
             parseElement((Element) nodeList.item(i));
         }
     }
+    
+    /**
+     * Parses an XML document.
+     * @param filename the filename of the XML file.
+     * @throws ParserException an exception that can occur during parsing.
+     */
+	public void parse(String filename) throws ParserException {
+		File xmlFile = new File(filename);
+		try {
+			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	        Document doc = db.parse(xmlFile);
+	        parse(doc);
+		} catch(IOException e) {
+			throw ParserException.IO_ERROR;
+		} catch (SAXException e) {
+			throw ParserException.SYNTAX_ERROR;
+		} catch (ParserConfigurationException e) {
+			throw ParserException.SYSTEM_ERROR;
+		}
+
+	}
 }
