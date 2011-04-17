@@ -41,7 +41,7 @@ public class SpriteTag extends XMLTag {
 			args.add(getValue((Element) children.item(i)));
 		}
 		
-		parser.addSprite(name, new SpriteConstructor(parser.getConverterRack(), className,
+		parser.addSpriteArchetype(name, new SpriteConstructor(parser.getConverterRack(), className,
 				spriteGroup, args));
 	}
 }

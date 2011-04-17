@@ -65,4 +65,8 @@ public class SpriteConstructor {
 	public String getTargetName() {
 		return className;
 	}
+
+	public String getSpriteGroup() {
+		return spriteGroup;
+	}
 }
