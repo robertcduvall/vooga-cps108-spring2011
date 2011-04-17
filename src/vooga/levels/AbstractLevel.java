@@ -69,7 +69,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     public void parseXMLFile (String fileName)
     {
         myLevelParser = new LevelParser(this);
-        mySpritePool = new SpritePool(myLevelParser);
+        mySpritePool = new SpritePool();
         myLevelParser.parse(fileName);
     }
     
