@@ -1,8 +1,9 @@
 package vooga.resources;
 
 import vooga.core.VoogaGame;
+import vooga.levels.LevelManager;
 import vooga.resources.images.ImageLoader;
-import vooga.resources.managertags.ImageResourceTag;
+import vooga.resources.managertags.*;
 import vooga.resources.xmlparser.Parser;
 
 /**
@@ -14,6 +15,7 @@ import vooga.resources.xmlparser.Parser;
 public class ResourceManager extends Parser {
 	
 	private ImageLoader imageLoader;
+	private LevelManager levelManager;
 	private VoogaGame game;
 	
 	/**
@@ -26,7 +28,7 @@ public class ResourceManager extends Parser {
 		
 		this.game = game;
 		
-		addDefinitions(new ImageResourceTag(this));
+		addDefinitions(new ImageResourceTag(this), new LevelTag(this));
 		
 		parse(filename);
 	}
