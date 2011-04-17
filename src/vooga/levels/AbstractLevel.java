@@ -6,6 +6,8 @@ import vooga.core.VoogaGame;
 import vooga.levels.util.LevelParser;
 import vooga.levels.util.PoolDeferredConstructor;
 import vooga.player.Player;
+import vooga.sprites.improvedsprites.Sprite;
+
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.SpriteGroup;
@@ -42,13 +44,12 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     private int myId;
 
     /** This level's players */
-    private Collection<Player> myPlayers;
+    private Collection<Sprite> myPlayers; //TODO: switch back to player
 
 
-    public AbstractLevel (Collection<Player> players, VoogaGame game)
+    public AbstractLevel (Collection<Sprite> players, VoogaGame game)
     {
         myGame = game;
-        myPlayers = players;
         myPlayers = players;
     }
 
@@ -171,7 +172,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      * 
      * @param player to add
      */
-    protected void addPlayer (Player p)
+    protected void addPlayer (Sprite p) //TODO: change back to player
     {
         myPlayers.add(p);
     }
