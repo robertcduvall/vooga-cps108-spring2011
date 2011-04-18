@@ -2,12 +2,11 @@ package vooga.levels;
 
 import java.util.Collection;
 import java.util.Queue;
-import vooga.core.VoogaGame;
 import vooga.levels.util.LevelParser;
 import vooga.levels.util.PoolDeferredConstructor;
-import vooga.player.Player;
 import vooga.sprites.improvedsprites.Sprite;
 
+import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.SpriteGroup;
@@ -26,7 +25,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     private LevelParser myLevelParser;
 
     /** The vooga game for which this is a level for */
-    private VoogaGame myGame;
+    private Game myGame; //TODO: switch to voogagame
 
     /** The goal which this level must reach in order to progress */
     private IGoal myGoal;
@@ -47,7 +46,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     private Collection<Sprite> myPlayers; //TODO: switch back to player
 
 
-    public AbstractLevel (Collection<Sprite> players, VoogaGame game)
+    public AbstractLevel (Collection<Sprite> players, Game game)
     {
         myGame = game;
         myPlayers = players;
@@ -248,7 +247,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      * 
      * @return all the players for this level
      */
-    public Collection<Player> getPlayers()
+    public Collection<Sprite> getPlayers()
     {
         return myPlayers;
     }
