@@ -1,5 +1,8 @@
 package games.asteroids.collisions;
 
+import games.asteroids.Asteroid;
+import games.asteroids.Bullet;
+
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 

@@ -17,7 +17,7 @@ import vooga.core.event.examples.VoogaExampleGame;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
-public class Ship {
+public class Ship extends Sprite {
 	
 	interface Weapon{
 		void shoot();
@@ -149,5 +149,10 @@ public class Ship {
     {
         mySprite.moveY(MOVE_UP);
     }
+
+	public void damage() {
+		// TODO Auto-generated method stub
+		
+	}
     
 }
