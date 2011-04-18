@@ -1,6 +1,8 @@
 package vooga.leveleditor.gui;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
@@ -16,26 +18,33 @@ public class DrawingBoard extends JPanel
     public static final int LAYER_SPRITES = 100;
     public static final int LAYER_DRAG = 500;
 
+    private SwingGUI owner;
+
     private Palette palette;
     private ImageIcon test;
 
     private JLayeredPane layers;
 
-    public DrawingBoard()
+    public DrawingBoard(SwingGUI owner)
     {
+        /*
+         * Associate this with the controller.
+         */
+        this.owner = owner;
+
         /*
          * Use a BorderLayout so that we can easily fill all available space.
          */
         this.setLayout(new BorderLayout());
-        
+
         /*
          * Set up test image
          */
         test =  new ImageIcon("src/vooga/leveleditor/images/space_ship.png");
-       // DragableImage image = new DragableImage(test);
-        
+        // DragableImage image = new DragableImage(test);
 
-       
+
+
         /*
          * Load the background image so that we know how big the drawing board
          * should be.
@@ -70,9 +79,10 @@ public class DrawingBoard extends JPanel
         //layers.add(image);
         //layers.moveToFront(image);
         //layers.setLayer(image, 1);
+        layers.addMouseMotionListener(new MouseTracker());
         JScrollPane layersHolder = new JScrollPane(layers);
         this.add(layersHolder, BorderLayout.CENTER);
-        
+
         /*
          * Create the palette on the left.
          */
@@ -83,7 +93,7 @@ public class DrawingBoard extends JPanel
         paletteHolder.setPreferredSize(new Dimension(240, 600));
         add(paletteHolder, BorderLayout.WEST);
 
-        
+
 
         /*
          * Add the greenscreen and the background.
@@ -94,7 +104,30 @@ public class DrawingBoard extends JPanel
         background.setBounds(100, 100, width, height);
         layers.add(background, LAYER_BACKGROUND);
     }
-  
-    
+
+    private class MouseTracker implements MouseMotionListener
+    {   
+        @Override
+        public void mouseDragged(MouseEvent arg0)
+        {
+            return;
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent arg0)
+        {
+            int x = arg0.getX();
+            int y = arg0.getY();
+            owner.setStatusBar(String.format("(%d, %d)", x, y));
+            
+            /*
+            if(currentFloatingSprite != null)
+            {
+                DraggableImage c = DrawingBoard.this.currentFloatingSprite;
+                c.setBounds(x, y, c.getWidth(), c.getHeight());
+            }
+            */
+        }
+    }
 
 }
