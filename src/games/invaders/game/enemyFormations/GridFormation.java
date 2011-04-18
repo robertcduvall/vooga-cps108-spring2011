@@ -23,8 +23,11 @@ public class GridFormation extends Formation {
 	public GridFormation(GameObject game, List<SpriteGroup> spriteGroups,
 			int formationShipsWide, int formationShipsHigh) {
 		units = new ArrayList<Sprite>();
-		String[] lineColors = new String[] { "EneShipRed1.png",
-				"EneShipRed2.png", "EneShipGrn1.png", "EneShipGrn2.png" };
+		String[] lineColors = new String[] {
+				"resources/images/EneShipRed1.png",
+				"resources/images/EneShipRed2.png",
+				"resources/images/EneShipGrn1.png",
+				"resources/images/EneShipGrn2.png" };
 		units = new ArrayList<Sprite>();
 		double centerX = game.getWidth() / 2;
 		double shipDistanceX = game.getWidth() * 2 / 3 / formationShipsWide;

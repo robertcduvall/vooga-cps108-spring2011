@@ -81,10 +81,12 @@ public class InvadersGame extends GameObject {
 	public void initResources() {
 		bsMusic
 				.setBaseRenderer(new com.golden.gamedev.engine.audio.WaveRenderer());
-		bsMusic.play("theme.wav");
-		font2 = fontManager.getFont(getImage("BitmapFont.png"));
+		bsMusic.play("resources/audio/theme.wav");
+		font2 = fontManager
+				.getFont(getImage("resources/images/BitmapFont.png"));
 
-		// background = new ImageBackground(getImage("back.png"), 320, 240);
+		// background = new
+		// ImageBackground(getImage("resources/images/back.png"), 320, 240);
 		playfield = new PlayField(background);
 
 		setMaskColor(Color.BLACK); // Makes sprite background transparent
@@ -117,8 +119,9 @@ public class InvadersGame extends GameObject {
 			public void collided(Sprite s1, Sprite s2) {
 				s1.setActive(false);
 				s2.setActive(false);
-				explosion = new VolatileSprite(getImages("Explode.png", 4, 1),
-						s2.getX(), s2.getY());
+				explosion = new VolatileSprite(getImages(
+						"resources/images/Explode.png", 4, 1), s2.getX(), s2
+						.getY());
 				playfield.add(explosion);
 				score += 10; // Reward the player :)
 			}
@@ -131,8 +134,9 @@ public class InvadersGame extends GameObject {
 			public void collided(Sprite s1, Sprite s2) {
 				s1.setActive(false);
 				s2.setActive(false);
-				explosion = new VolatileSprite(
-						getImages("ExplodeRed.png", 4, 1), s2.getX(), s2.getY());
+				explosion = new VolatileSprite(getImages(
+						"resources/images/ExplodeRed.png", 4, 1), s2.getX(), s2
+						.getY());
 				playfield.add(explosion);
 				hero.subtractHitpoints(1);
 			}
@@ -144,8 +148,9 @@ public class InvadersGame extends GameObject {
 			@Override
 			public void collided(Sprite s1, Sprite s2) {
 				s1.setActive(false);
-				explosion = new VolatileSprite(
-						getImages("ExplodeRed.png", 4, 1), s2.getX(), s2.getY());
+				explosion = new VolatileSprite(getImages(
+						"resources/images/ExplodeRed.png", 4, 1), s2.getX(), s2
+						.getY());
 				playfield.add(explosion);
 				score += 10;
 				hero.subtractHitpoints(1);

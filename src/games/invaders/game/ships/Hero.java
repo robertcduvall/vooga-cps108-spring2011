@@ -19,7 +19,7 @@ public class Hero extends Ship {
 	private double hitpoints = 3;
 
 	public Hero(GameObject game) {
-		super(game.getImage("pship.png"));
+		super(game.getImage("resources/images/pship.png"));
 		this.game = (InvadersGame) game;
 		equilibriumHeight = this.game.fieldDimensions.getSize().getHeight() - 110;
 	}
@@ -86,7 +86,8 @@ public class Hero extends Ship {
 				activeMissile = 0;
 				missileDisplacement *= -1;
 			}
-			Sprite playerMissile = new Sprite(game.getImage("pmissle.png"));
+			Sprite playerMissile = new Sprite(game
+					.getImage("resources/images/pmissle.png"));
 			// TODO: Change getX() below to getCenterX()
 			playerMissile
 					.setLocation(getX() + missileDisplacement, getY() - 15);
