@@ -31,7 +31,7 @@ public class DrawingBoard extends JPanel
         /*
          * Set up test image
          */
-        test =  new ImageIcon("leveleditor/images/space_ship.png");
+        test =  new ImageIcon("src/vooga/leveleditor/images/space_ship.png");
         DragableImage image = new DragableImage(test);
         
 
@@ -52,7 +52,7 @@ public class DrawingBoard extends JPanel
         BufferedImage bgimage = null;
         try
         {
-            bgimage = ImageIO.read(new File("leveleditor/images/images/space.jpg"));
+            bgimage = ImageIO.read(new File("src/vooga/leveleditor/images/space.jpg"));
         }
         catch(IOException e)
         {
@@ -92,15 +92,7 @@ public class DrawingBoard extends JPanel
         background.setBounds(100, 100, width, height);
         layers.add(background, LAYER_BACKGROUND);
     }
-    /** Returns an ImageIcon, or null if the path was invalid. */
-    protected static ImageIcon createImageIcon(String path) {
-        java.net.URL imgURL = DrawingBoard.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }
+  
+    
 
 }
