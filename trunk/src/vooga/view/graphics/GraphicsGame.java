@@ -1,8 +1,9 @@
 package vooga.view.graphics;
 
-import function.AbstractGraphicsFunction;
-import graphics.AdvancedGraphics;
+import vooga.view.function.AbstractGraphicsFunction;
+import vooga.view.graphics.AdvancedGraphics;
 
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.List;
 
