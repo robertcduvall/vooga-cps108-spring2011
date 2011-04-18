@@ -87,8 +87,9 @@ public class Hero extends Ship {
 				missileDisplacement *= -1;
 			}
 			Sprite playerMissile = new Sprite(game.getImage("pmissle.png"));
-			playerMissile.setLocation(getCenterX() + missileDisplacement,
-					getY() - 15);
+			// TODO: Change getX() below to getCenterX()
+			playerMissile
+					.setLocation(getX() + missileDisplacement, getY() - 15);
 			playerMissile.setVerticalSpeed(-0.50);
 
 			getMissileGroup().add(playerMissile);
