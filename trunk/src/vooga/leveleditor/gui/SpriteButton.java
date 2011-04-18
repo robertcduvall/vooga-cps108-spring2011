@@ -38,7 +38,7 @@ public class SpriteButton extends JButton
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            DragableImage s = new DragableImage(myIcon, myPane);
+            DraggableImage s = new DraggableImage(myIcon, myPane);
             myPane.addMouseMotionListener(s);
         }
        
