@@ -13,9 +13,6 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-
-import vooga.arcade.gui.helper.AffineImage;
-import vooga.arcade.gui.helper.DrawableData;
 import vooga.core.event.examples.bubblefishbob.util.resources.ResourceManager;
 
 import com.golden.gamedev.Game;
@@ -50,10 +47,9 @@ public final class GameXMLParser {
         String[] dataArray = getItemData(root);
 
         String[][] results = getListData(root);     
-        
-        DrawableData drawableData = createDarableData(root);
+        Image image = createImage(root);
 
-        return new ArcadeGameObject(game, dataArray, results[0], results[1], drawableData);
+        return new ArcadeGameObject(game, dataArray, results[0], results[1], image, root, path);
     }
 
     /**
@@ -129,19 +125,15 @@ public final class GameXMLParser {
      * @param root
      * @return
      */
-    protected static DrawableData createDarableData(Element root) {
+    protected static Image createImage(Element root) {
         Image image = null;
         try {
             image = ImageIO.read(new File(root.getChildText(resourceManager.getString("image"))));
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
-        DrawableData drawableData = new DrawableData();
-        drawableData.addImage(new AffineImage(image, new AffineTransform()));
-        return drawableData;
+        return image;
     }
 
     /**
