@@ -55,6 +55,13 @@ public class InvadersGame extends GameObject {
 		super(parent);
 	}
 
+	/**
+	 * TODO: A better way of doing levels for this game would be to have the
+	 * current level to launch the next level, giving the level it creates it's
+	 * creator, so as to maintain continuity of game state and not have to
+	 * instantiate everything all the time.
+	 */
+
 	@Override
 	public void initResources() {
 		hideCursor();
