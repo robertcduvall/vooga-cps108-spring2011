@@ -42,14 +42,17 @@ public class MainMenu extends GameObject {
 
 		setMaskColor(Color.YELLOW);
 
-		mainMenuTitle = new ImageBackground(getImage("title.png"), 320, 240);
+		mainMenuTitle = new ImageBackground(
+				getImage("resources/images/title.png"), 320, 240);
 
-		arrow = getImage("MenuArrow.png");
+		arrow = getImage("resources/images/MenuArrow.png");
 
-		font = fontManager.getFont(getImage("BitmapFont.png"));
+		font = fontManager.getFont(getImage("resources/images/BitmapFont.png"));
 
-		blueStar = new AnimatedSprite(getImages("BlueStar.png", 7, 1), 26, 22);
-		redStar = new AnimatedSprite(getImages("RedStar.png", 7, 1), 239, 150);
+		blueStar = new AnimatedSprite(getImages(
+				"resources/images/BlueStar.png", 7, 1), 26, 22);
+		redStar = new AnimatedSprite(getImages("resources/images/RedStar.png",
+				7, 1), 239, 150);
 
 		blueStar.setAnimationTimer(aniTimer);
 		redStar.setAnimationTimer(aniTimer);
