@@ -2,11 +2,17 @@ package vooga.replay;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
+
+import vooga.replay.examples.catroll.ImageSaveSprite;
 
 import com.golden.gamedev.object.*;
 
@@ -89,6 +95,11 @@ public class StateTable implements Serializable {
 	public void render(Graphics2D g) {
 		myBackground.render(g);
 		for (Sprite s : myMap.keySet()) {
+			try {
+				s.setImage(ImageIO.read(new File(((ImageSaveSprite)s).getImageFileName())));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			s.render(g);
 		}
 	}
