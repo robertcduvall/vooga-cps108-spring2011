@@ -11,13 +11,32 @@ package vooga.resources;
  */
 public enum Direction
 {
+    /** Direction pointing to the top of the screen. */
     UP,
+    /** Direction pointing to the bottom of the screen. */
     DOWN,
+    /** Direction pointing to the left of the screen. */
     LEFT,
+    /** Direction pointing to the right of the screen. */
     RIGHT;
     
-    public static final Direction NORTH = UP, WEST = RIGHT, EAST = LEFT, SOUTH = DOWN;
-    public static final Direction POS_X = RIGHT, NEG_X = LEFT, POS_Y = DOWN, NEG_Y = UP;
+    /** Alias for UP. */
+    public static final Direction NORTH = UP;
+    /** Alias for RIGHT. */
+    public static final Direction WEST = RIGHT;
+    /** Alias for LEFT. */
+    public static final Direction EAST = LEFT;
+    /** Alias for DOWN. */
+    public static final Direction SOUTH = DOWN;
+
+    /** Positive X direction: alias for RIGHT. */
+    public static final Direction POS_X = RIGHT;
+    /** Negative X direction: alias for LEFT. */
+    public static final Direction NEG_X = LEFT;
+    /** Positive Y direction: alias for DOWN. */
+    public static final Direction POS_Y = DOWN;
+    /** Negative Y direction: alias for UP. */
+    public static final Direction NEG_Y = UP;    
     
     /**
      * Gets the angle, in degrees, corresponding to a direction.
