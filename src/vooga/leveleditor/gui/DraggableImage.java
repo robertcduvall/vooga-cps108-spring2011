@@ -24,6 +24,11 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {		
+	
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
 		x = arg0.getX();
 		y = arg0.getY();
 		parent.remove(this);
@@ -31,11 +36,5 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 		this.setOpaque(true);
 		this.setBounds(x, y, icon.getIconWidth(), icon.getIconWidth());
 		parent.add(this);
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		
-
 	}
 }
