@@ -177,11 +177,6 @@ public class InvadersGame extends GameObject {
 			playfield.setBackground(colorBackground);
 			discoTimer.refresh();
 		}
-		// Player
-		if (unitMoveTimer.isActive()) {
-			// hero.update(elapsedTime);
-		}
-
 		// TODO: Make enemies fire
 		// Press escape key to exit level
 		if (keyDown(KeyEvent.VK_ESCAPE)) {
