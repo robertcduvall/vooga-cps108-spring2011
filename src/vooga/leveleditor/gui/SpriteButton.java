@@ -12,6 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLayeredPane;
 
 /**
  * A button that holds a sprite.
@@ -20,9 +21,11 @@ public class SpriteButton extends JButton
 {
 
     private ImageIcon myIcon;
+    private JLayeredPane myPane;
 
-    public SpriteButton()
+    public SpriteButton(JLayeredPane pane)
     {
+    	myPane = pane;
         myIcon = new ImageIcon("src/vooga/leveleditor/images/space_ship.png");
         this.setIcon(myIcon);
         this.setPreferredSize(new Dimension(100, 100));
@@ -36,7 +39,9 @@ public class SpriteButton extends JButton
         public void actionPerformed(ActionEvent e)
         {
             DragableImage s = new DragableImage(myIcon);
+            myPane.add(s);
         }
+       
 
     }
 

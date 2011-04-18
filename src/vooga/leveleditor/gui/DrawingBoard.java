@@ -35,16 +35,7 @@ public class DrawingBoard extends JPanel
         DragableImage image = new DragableImage(test);
         
 
-        /*
-         * Create the palette on the left.
-         */
-        palette = new Palette();
-        JScrollPane paletteHolder = new JScrollPane(palette,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        paletteHolder.setPreferredSize(new Dimension(240, 600));
-        add(paletteHolder, BorderLayout.WEST);
-
+       
         /*
          * Load the background image so that we know how big the drawing board
          * should be.
@@ -76,11 +67,22 @@ public class DrawingBoard extends JPanel
          */
         layers = new JLayeredPane();
         layers.setPreferredSize(new Dimension(width+200, height+200));
-        layers.add(image);
-        layers.moveToFront(image);
-        layers.setLayer(image, 1);
+        //layers.add(image);
+        //layers.moveToFront(image);
+        //layers.setLayer(image, 1);
         JScrollPane layersHolder = new JScrollPane(layers);
         this.add(layersHolder, BorderLayout.CENTER);
+        
+        /*
+         * Create the palette on the left.
+         */
+        palette = new Palette(layers);
+        JScrollPane paletteHolder = new JScrollPane(palette,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        paletteHolder.setPreferredSize(new Dimension(240, 600));
+        add(paletteHolder, BorderLayout.WEST);
+
         
 
         /*
