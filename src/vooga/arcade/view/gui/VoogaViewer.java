@@ -2,8 +2,6 @@ package vooga.arcade.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.TextArea;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
