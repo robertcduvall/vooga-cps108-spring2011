@@ -3,7 +3,7 @@ package vooga.core.event.examples.duelingdan;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-import vooga.core.VoogaGame;
+import vooga.core.Game;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
@@ -28,13 +28,13 @@ public class Dan
     private BufferedImage ImageWhiteDanRight;
     private Weapon myCurrentWeapon;
     private int myDirection;
-    private VoogaGame myGame;
+    private Game myGame;
     private SpriteGroup myShots;
     private Sprite mySprite;
     private List<Weapon> myWeapons;
 
 
-    public Dan (VoogaGame game)
+    public Dan (Game game)
     {
         myGame = game;
 

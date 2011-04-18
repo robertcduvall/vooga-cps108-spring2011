@@ -1,6 +1,6 @@
 package vooga.resources;
 
-import vooga.core.VoogaGame;
+import vooga.core.Game;
 import vooga.levels.LevelManager;
 import vooga.resources.images.ImageLoader;
 import vooga.resources.managertags.*;
@@ -16,14 +16,14 @@ public class ResourceManager extends Parser {
 	
 	private ImageLoader imageLoader;
 	private LevelManager levelManager;
-	private VoogaGame game;
+	private Game game;
 	
 	/**
 	 * Constructs a resource manager given the root game class, and a filename.
 	 * @param game the root game class.
 	 * @param filename the name of the XML file defining all resources.
 	 */
-	public ResourceManager(VoogaGame game, String filename) {
+	public ResourceManager(Game game, String filename) {
 		super();
 		
 		this.game = game;
@@ -33,7 +33,7 @@ public class ResourceManager extends Parser {
 		parse(filename);
 	}
 
-	public VoogaGame getGame() {
+	public Game getGame() {
 		return game;
 	}
 	

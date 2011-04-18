@@ -9,11 +9,11 @@ import vooga.core.event.Timer;
 import com.golden.gamedev.Game;
 
 // Shouldn't this just have the game loop in it?  <3 Andrea
-public abstract class VoogaGame extends Game implements ISimpleEventManager
+public abstract class Game extends Game implements ISimpleEventManager
 {
 	private EventManager myEventManager;
 
-	public VoogaGame()
+	public Game()
 	{
 		super();
 		myEventManager = new EventManager();

@@ -10,10 +10,10 @@ import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.background.ImageBackground;
 
-import vooga.core.VoogaGame;
+import vooga.core.Game;
 import vooga.resources.images.*;
 
-public class Example extends VoogaGame {
+public class Example extends Game {
 
 	private static final String RESOURCE_XML_FILE = "src/vooga/resources/test/test2.xml";
 	private ImageLoader loader;

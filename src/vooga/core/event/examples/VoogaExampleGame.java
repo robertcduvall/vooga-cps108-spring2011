@@ -7,14 +7,14 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.KeyStroke;
-import vooga.core.VoogaGame;
+import vooga.core.Game;
 import vooga.core.event.IEventHandler;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 
-public abstract class VoogaExampleGame extends VoogaGame
+public abstract class VoogaExampleGame extends Game
 {
     protected static class KeyMap
     {
@@ -83,14 +83,14 @@ public abstract class VoogaExampleGame extends VoogaGame
     {
         private String myCloseOnEvent;
         private String myFilter;
-        private VoogaGame myGame;
+        private Game myGame;
         private String myOnCloseEvent;
         private PlayField myPlayField;
         private Sprite mySprite;
         private SpriteGroup mySpriteGroup;
 
 
-        public SimpleMenu (VoogaGame game,
+        public SimpleMenu (Game game,
                            PlayField playField,
                            BufferedImage image,
                            String removeEventsGlob,
