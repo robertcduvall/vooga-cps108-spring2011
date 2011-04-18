@@ -37,10 +37,10 @@ public class Hero extends Ship {
 	public void update(long elapsedTime) {
 		super.update(elapsedTime);
 		if (game.keyDown(KeyEvent.VK_LEFT)) {
-			addHorizontalSpeed(game.unitMoveTimer.getDelay(), -0.0015, -5000);
+			addHorizontalSpeed(elapsedTime, -0.0015, -5000);
 		}
 		if (game.keyDown(KeyEvent.VK_RIGHT)) {
-			addHorizontalSpeed(game.unitMoveTimer.getDelay(), 0.0015, 5000);
+			addHorizontalSpeed(elapsedTime, 0.0015, 5000);
 		}
 		// if (getX() < 5) {
 		// setX(game.fieldDimensions.getWidth() - 5);
@@ -52,19 +52,19 @@ public class Hero extends Ship {
 		// }
 		// TODO: For demo only, Restore this for springiness in actual game
 		double verticalAcceleration = 0;
-		verticalAcceleration += (equilibriumHeight - getY()) * 0.00004;
+		verticalAcceleration += (equilibriumHeight - getY()) * 0.00003;
 		if (game.keyDown(KeyEvent.VK_UP)) {
-			verticalAcceleration -= 0.0006;
+			verticalAcceleration -= 0.0004;
 		}
 		if (game.keyDown(KeyEvent.VK_DOWN)) {
-			verticalAcceleration += 0.0006;
+			verticalAcceleration += 0.0004;
 		}
-		addVerticalSpeed(game.unitMoveTimer.getDelay(), verticalAcceleration,
-				(verticalAcceleration > 0) ? 10 : -10);
+		addVerticalSpeed(elapsedTime, verticalAcceleration,
+				(verticalAcceleration > 0) ? 8 : -8);
 		setVerticalSpeed(getVerticalSpeed()
-				* Math.pow(2, -(elapsedTime) / 1000D));
+				* Math.pow(2, -(elapsedTime) / 1200D));
 		setHorizontalSpeed(getHorizontalSpeed()
-				* Math.pow(2, -elapsedTime / 1000D));
+				* Math.pow(2, -elapsedTime / 1200D));
 		// Fire missile -- Uses "timer" to set fire rate
 		// KeyEvent.
 		if (playerCanFire && isActive()) {

@@ -28,50 +28,28 @@ import com.golden.gamedev.object.sprite.VolatileSprite;
 
 public class InvadersGame extends GameObject {
 
-	{
-		hideCursor();
-	}
-
-	GameFont font2;
-
 	public PlayField playfield;
-	Background background = new ColorBackground(new Color(0));
 
-	SpriteGroup enemyMissileGroup;
+	public GameFont font2;
 
-	Hero hero;
 	public SpriteGroup enemyGroup = new SpriteGroup("Enemy formation");
-	List<Sprite> enemies;
+	public List<Sprite> enemies;
 
-	VolatileSprite explosion;
+	public VolatileSprite explosion;
+	public Hero hero;
 
-	public Timer unitMoveTimer = new Timer(7); // Movement Delay
-	Timer endTimer = new Timer(3000);
-	Timer discoTimer = new Timer((int) Math.round((1000.0 * 60) / 118));
+	public Timer endTimer = new Timer(3000);
+	public Timer discoTimer = new Timer((int) Math.round((1000.0 * 60) / 118));
 
-	BasicCollisionGroup playerMissleToEnemy, enemyMissleToPlayer,
+	public BasicCollisionGroup playerMissleToEnemy, enemyMissleToPlayer,
 			enemyShipToPlayer;
 
-	private int score = 0;
-	private boolean waveDisplay;
-	private boolean endOfGame;
+	public long score = 0;
+	public boolean endOfGame;
 
-	// TODO: get the dimensions sent from VacuumInterlopers
-	public final Dimension fieldDimensions = bsGraphics.getSize();
+	public Dimension fieldDimensions = bsGraphics.getSize();
 
-	// AI Pattern Arrays
-
-	double[] moveSpeed;
-	double[] moveAngle;
-
-	List<SpriteGroup> spriteGroups;
-	Level level;
-
-	// "moveAngle" Values
-	// 0 : moving to top (12 o'clock)
-	// 90 : moving to right (3 o'clock)
-	// 180 : moving to bottom (6 o'clock)
-	// 270 : moving to left (9 o'clock)
+	public Level level;
 
 	public InvadersGame(GameEngine parent) {
 		super(parent);
@@ -79,6 +57,7 @@ public class InvadersGame extends GameObject {
 
 	@Override
 	public void initResources() {
+		hideCursor();
 		bsMusic
 				.setBaseRenderer(new com.golden.gamedev.engine.audio.WaveRenderer());
 		bsMusic.play("resources/audio/theme.wav");
@@ -87,13 +66,14 @@ public class InvadersGame extends GameObject {
 
 		// background = new
 		// ImageBackground(getImage("resources/images/back.png"), 320, 240);
-		playfield = new PlayField(background);
+		playfield = new PlayField(new ColorBackground(Color.BLACK));
 
 		setMaskColor(Color.BLACK); // Makes sprite background transparent
 
 		// Sprite Initialization
 		// Create player hero
 		hero = new Hero(this);
+		// TODO: Why does hero need to be final, and is this bad?
 		hero.setLocation(fieldDimensions.getWidth() / 2, fieldDimensions
 				.getHeight() - 50);
 		enemyGroup = new SpriteGroup("Enemy Group");
@@ -106,7 +86,7 @@ public class InvadersGame extends GameObject {
 		playerGroup.add(hero);
 		// Missiles added to these groups at fire time
 		SpriteGroup playerMissileGroup = hero.getMissileGroup();
-		enemyMissileGroup = new SpriteGroup("Enemy Missle Group");
+		SpriteGroup enemyMissileGroup = new SpriteGroup("Enemy Missle Group");
 		// Sprite Management #3 //
 		playfield.addGroup(playerGroup);
 		playfield.addGroup(playerMissileGroup);
@@ -175,13 +155,7 @@ public class InvadersGame extends GameObject {
 	public void update(long elapsedTime) {
 		// TODO: Break method up into parts
 		playfield.update(elapsedTime);
-		if (discoTimer.action(elapsedTime)) {
-			// Background colorBackground = new ColorBackground(new Color(0));
-			Background colorBackground = new ColorBackground(new Color(
-					(int) (Math.random() * 256 * 256 * 256)));
-			playfield.setBackground(colorBackground);
-			discoTimer.refresh();
-		}
+		updateBackground(elapsedTime);
 		// TODO: Make enemies fire
 		// Press escape key to exit level
 		if (keyDown(KeyEvent.VK_ESCAPE)) {
@@ -208,12 +182,21 @@ public class InvadersGame extends GameObject {
 
 	}
 
+	private void updateBackground(long elapsedTime) {
+		if (discoTimer.action(elapsedTime)) {
+			// Background colorBackground = new ColorBackground(new Color(0));
+			Background colorBackground = new ColorBackground(new Color(
+					(int) (Math.random() * 256 * 256 * 256)));
+			playfield.setBackground(colorBackground);
+			discoTimer.refresh();
+		}
+	}
+
 	@Override
 	public void render(Graphics2D g) {
 		playfield.render(g);
-		if (waveDisplay) {
-			font2.drawString(g, "WAVE 1", 110, 240 / 2);
-		}
+		// font2.drawString(g, "WAVE 1", 110, 240 / 2);
+		// TODO: Display wave/level information
 		font2.drawString(g, "SCORE: " + String.valueOf(score), 1, 12);
 		g.setColor(Color.YELLOW);
 		g.drawString("Press ESCAPE to quit", 150, 22);
