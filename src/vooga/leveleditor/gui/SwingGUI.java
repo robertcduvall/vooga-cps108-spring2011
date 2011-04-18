@@ -11,13 +11,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 
-
+/**
+ * The main controller.
+ */
 public class SwingGUI extends JFrame
 {
-
-    //private XMLDealer xml;
-
-    //private ScrollablePicture picture;
 
     private JMenuBar menubar;
 
@@ -31,7 +29,6 @@ public class SwingGUI extends JFrame
          * Initialize the window.
          */
         setTitle("Level Editor");
-        setSize(1000, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         /*
@@ -40,7 +37,7 @@ public class SwingGUI extends JFrame
         setupMenubar();
 
         /*
-         * Set up the toolbar. 
+         * Set up the toolbar.
          */
         setupToolbar();
 
@@ -54,9 +51,6 @@ public class SwingGUI extends JFrame
          * Set up the status bar.
          */
         setupStatusbar();
-
-        this.pack();
-        this.setVisible(true);
     }
 
     /**
@@ -78,7 +72,7 @@ public class SwingGUI extends JFrame
 
         JMenuItem loadmenuitem = new JMenuItem("Load");
         loadmenuitem.setMnemonic(KeyEvent.VK_L);
-        // loadmenuitem.addActionListener(new LoadAction());
+        loadmenuitem.addActionListener(new LoadAction());
         filemenu.add(loadmenuitem);
 
         JMenuItem savemenuitem = new JMenuItem("Save");
@@ -103,21 +97,15 @@ public class SwingGUI extends JFrame
 
         }
     }
-    /**
+
     private class LoadAction implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
-            JFileChooser fc = new JFileChooser();
-            int val = fc.showOpenDialog(SwingGUI.this);
-            if(val == JFileChooser.APPROVE_OPTION)
-            {
-                xml = new XMLDealer(fc.getSelectedFile());
-                System.out.println(xml.toString());
-            }
+
         }
     }
-     */
+
     private class SaveAction implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -149,6 +137,9 @@ public class SwingGUI extends JFrame
         toolbar.add(grabButton);
     }
 
+    /**
+     * Helper method for the constructor. Sets up the status bar.
+     */
     private void setupStatusbar()
     {
         statusbar = new StatusBar();
@@ -170,7 +161,7 @@ public class SwingGUI extends JFrame
         }
     }
 
-    protected void setStatusBar(String message)
+    public void setStatusBar(String message)
     {
         statusbar.setText(message);
     }
@@ -178,6 +169,10 @@ public class SwingGUI extends JFrame
     public static void main(String[] args)
     {
         SwingGUI g = new SwingGUI();
+
+        g.pack();
+        g.setVisible(true);
+        g.setExtendedState(g.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }
 
 }
