@@ -2,8 +2,10 @@ package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Point;
 import vooga.physics.engine.NewtonianPhysicsEngine;
-import vooga.physics.interfaces.IPhysics;
-import vooga.physics.interfaces.IPhysicsCollider;
+import vooga.physics.interfaces.IPhysicsCustomCollide;
+import vooga.physics.interfaces.newtonian.INewtonianMovable;
+import vooga.physics.interfaces.newtonian.INewtonianCollider;
+import vooga.physics.interfaces.newtonian.INewtonianPhysical;
 import vooga.physics.mediators.VoogaPhysicsMediator;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
@@ -18,7 +20,7 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  * 
  */
-public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater, IPhysicsCollider {
+public class PhysicsC extends BasicComponent implements INewtonianPhysical, ISpriteUpdater{
     private Sprite mySprite;
     private double myMass;
     private boolean isOn;
@@ -82,36 +84,4 @@ public class PhysicsC extends BasicComponent implements IPhysics, ISpriteUpdater
         if (isOn())
             NewtonianPhysicsEngine.getInstance().applyWorldForces(this, elapsedTime);
     }
-
-    /**
-     * Calculates the collision based on the masses and velocities of the
-     * objects colliding. <br>
-     * <br>
-     * Source: <a href=
-     * "http://en.wikipedia.org/wiki/Coefficient_of_restitution#Speeds_after_impact"
-     * >Wikipedia</a>
-     * 
-     * @param thisObject
-     * @param otherObject
-     * @param angleOfImpact
-     * @param pointOfCollision
-     * @param coefficientOfRestitution
-     */
-    public void collisionOccurred(Object otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
-        if (isOn()) {
-            if (Sprite.class.isAssignableFrom(otherObject.getClass())) {
-                Sprite otherObjectSprite = Sprite.class.cast(otherObject);
-                if (otherObjectSprite.carriesComponent(PhysicsC.class))
-                    NewtonianPhysicsEngine.getInstance().calcOneSideOfCollision(this,
-                            ((Sprite) otherObject).getComponent(PhysicsC.class), angleOfImpact,
-                            coefficientOfRestitution);
-                else
-                    NewtonianPhysicsEngine.getInstance().calcOneSideOfCollision(this,
-                            VoogaPhysicsMediator.spriteToMovable((Sprite) otherObject), angleOfImpact,
-                            coefficientOfRestitution);
-
-            }
-        }
-    }
-
 }

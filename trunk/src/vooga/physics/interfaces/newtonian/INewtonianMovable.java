@@ -1,8 +1,8 @@
-package vooga.physics.interfaces;
+package vooga.physics.interfaces.newtonian;
 
 import vooga.physics.util.Velocity;
 
-public interface IMovable {
+public interface INewtonianMovable {
     
     public Velocity getVelocity();
     

@@ -1,6 +1,6 @@
 package vooga.physics.util;
 
-import vooga.physics.interfaces.IPhysics;
+import vooga.physics.interfaces.newtonian.INewtonianPhysical;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
@@ -48,7 +48,7 @@ public class Force extends MathVector {
      * @param force
      * @param elapsedTime
      */
-    public void applyForce(IPhysics physicalObject, long elapsedTime) {
+    public void applyForce(INewtonianPhysical physicalObject, long elapsedTime) {
 
         Velocity deltaVelocity = new Velocity(this.getMagnitude() * elapsedTime / physicalObject.getMass(),
                 this.getAngle());

@@ -1,7 +1,7 @@
 package vooga.physics.util;
 
-import vooga.physics.interfaces.IMovable;
-import vooga.physics.interfaces.IPhysics;
+import vooga.physics.interfaces.newtonian.INewtonianMovable;
+import vooga.physics.interfaces.newtonian.INewtonianPhysical;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.math.Angle;
 
@@ -36,7 +36,7 @@ public class MassProportionalForce extends Force {
      * @param elapsedTime
      */
     @Override
-    public void applyForce(IPhysics physicalObject, long elapsedTime) {
+    public void applyForce(INewtonianPhysical physicalObject, long elapsedTime) {
         Velocity deltaVelocity = new Velocity(this.getMagnitude() * elapsedTime, this.getAngle());
         Velocity spriteVelocity = physicalObject.getVelocity();
         spriteVelocity.addVector(deltaVelocity);
@@ -50,7 +50,7 @@ public class MassProportionalForce extends Force {
      * @param force
      * @param elapsedTime
      */
-    public void applyForce(IMovable object, long elapsedTime) {
+    public void applyForce(INewtonianMovable object, long elapsedTime) {
         Velocity deltaVelocity = new Velocity(this.getMagnitude() * elapsedTime, this.getAngle());
         Velocity objectVelocity = object.getVelocity();
         objectVelocity.addVector(deltaVelocity);

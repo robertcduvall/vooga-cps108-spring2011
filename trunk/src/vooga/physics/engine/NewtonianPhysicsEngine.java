@@ -1,40 +1,35 @@
 package vooga.physics.engine;
 
-import java.util.Collection;
 import vooga.physics.interfaces.IPointField;
-import vooga.physics.interfaces.IPhysicsToggle;
 import vooga.physics.util.Force;
 import java.awt.Point;
-import java.util.HashSet;
-import vooga.physics.interfaces.IMovable;
-import vooga.physics.interfaces.IPhysics;
-import vooga.physics.interfaces.IPhysicsCollider;
-import vooga.physics.interfaces.IPhysicsFriction;
-import vooga.physics.interfaces.IPhysicsRotate;
+import vooga.physics.interfaces.newtonian.INewtonianMovable;
+import vooga.physics.interfaces.newtonian.INewtonianPhysical;
+import vooga.physics.interfaces.newtonian.INewtonianFriction;
+import vooga.physics.interfaces.newtonian.INewtonianRotate;
 import vooga.physics.util.MassProportionalForce;
 import vooga.physics.util.Velocity;
-import vooga.reflection.Reflection;
-import vooga.util.buildable.components.IComponent;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
-public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPhysicsToggle{
+public class NewtonianPhysicsEngine extends BasePhysicsEngine {
 
     private static NewtonianPhysicsEngine myInstance;
 
-    private NewtonianPhysicsEngine(){
+    private NewtonianPhysicsEngine() {
         super();
     }
 
-
-
-    public void applyForce(IPhysics object, Force f, long elapsedTime){
-        f.applyForce(object, elapsedTime);
+    public void applyForce(INewtonianPhysical object, Force force, long elapsedTime) {
+        if (!super.applyForce(object, force, elapsedTime))
+            force.applyForce(object, elapsedTime);
     }
 
-    public void applyForce(IMovable object, Force f, long elapsedTime){
-        if (f.getClass() == MassProportionalForce.class)
-            ((MassProportionalForce)f).applyForce(object, elapsedTime);
+    public void applyForce(INewtonianMovable object, MassProportionalForce force, long elapsedTime) {
+        if (!super.applyForce(object, force, elapsedTime)) {
+            if (force.getClass() == MassProportionalForce.class)
+                ((MassProportionalForce) force).applyForce(object, elapsedTime);
+        }
     }
 
     /**
@@ -45,22 +40,20 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
      * @param elapsedTime
      */
     public void applyField(IPointField object, IPointField field, long elapsedTime) {
-        if (isOn()) {
+        if (!super.applyField(object, field, elapsedTime)) {
             MathVector radius = new MathVector(object.getCenter(), field.getCenter());
             double magnitude = field.getPointMagnitude() * IPointField.constant * object.getPointMagnitude()
-            / radius.getMagnitude();
+                    / radius.getMagnitude();
             applyFieldForce(object, new Force(magnitude, radius.getAngle()), elapsedTime);
         }
     }
 
     private void applyFieldForce(IPointField physicalObject, Force force, long elapsedTime) {
-        if (isOn()) {
-            Velocity deltaVelocity = new Velocity(force.getMagnitude() * elapsedTime
-                    / physicalObject.getPointMagnitude(), force.getAngle());
-            Velocity spriteVelocity = physicalObject.getVelocity();
-            spriteVelocity.addVector(deltaVelocity);
-            physicalObject.setVelocity(spriteVelocity);
-        }
+        Velocity deltaVelocity = new Velocity(force.getMagnitude() * elapsedTime / physicalObject.getPointMagnitude(),
+                force.getAngle());
+        Velocity spriteVelocity = physicalObject.getVelocity();
+        spriteVelocity.addVector(deltaVelocity);
+        physicalObject.setVelocity(spriteVelocity);
 
     }
 
@@ -99,25 +92,6 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
     public void collision(Object object1, Object object2, Angle angleOfImpact, Point pointOfImpact) {
         elasticCollision(object1, object2, angleOfImpact, pointOfImpact);
     }
-    
-    /**
-     * General collision method. Tells the two physical objects that a collision
-     * occurred.
-     * 
-     * @param object1
-     * @param object2
-     * @param pointOfCollision
-     * @param angleOfImpact
-     * @param coefficientOfRestitution
-     */
-    public void collision(IMovable object1, IMovable object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution){
-        if (isOn()) {
-            if (IPhysicsCollider.class.isAssignableFrom(object1.getClass()))
-                ((IPhysicsCollider)object1).collisionOccurred(object2, angleOfImpact, pointOfImpact, coefficientOfRestitution);
-            if (IPhysicsCollider.class.isAssignableFrom(object2.getClass()))
-                ((IPhysicsCollider)object1).collisionOccurred(object1, angleOfImpact, pointOfImpact, coefficientOfRestitution);
-        }
-    }
 
     /**
      * Calculates the collision based on the masses and velocities of the
@@ -133,17 +107,17 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
      * @param pointOfCollision
      * @param coefficientOfRestitution
      */
-    public void calcOneSideOfCollision(IPhysics thisObject, IPhysics otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
-        if (isOn()) {
+    public void applyCollision(INewtonianPhysical thisObject, INewtonianPhysical otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        if (!super.applyCollision(thisObject, otherObject, angleOfImpact, pointOfImpact, coefficientOfRestitution)) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
             double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);
             double otherParallel = otherObject.getVelocity().getParallelComponent(angleOfImpact);
             double otherPerp = otherObject.getVelocity().getPerpComponent(angleOfImpact);
 
             double parallelNumerator = thisObject.getMass() * myParallel + otherObject.getMass() * otherParallel
-            + otherObject.getMass() * coefficientOfRestitution * (otherParallel - myParallel);
+                    + otherObject.getMass() * coefficientOfRestitution * (otherParallel - myParallel);
             double perpNumerator = thisObject.getMass() * myPerp + otherObject.getMass() * otherPerp
-            + otherObject.getMass() * coefficientOfRestitution * (otherPerp - myPerp);
+                    + otherObject.getMass() * coefficientOfRestitution * (otherPerp - myPerp);
             double denominator = thisObject.getMass() + otherObject.getMass();
 
             Velocity newVelocity = new Velocity(perpNumerator / denominator, parallelNumerator / denominator,
@@ -161,8 +135,8 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
      * @param angleOfImpact
      * @param coefficientOfRestitution
      */
-    public void calcOneSideOfCollision(IPhysics thisObject, IMovable otherObject, Angle angleOfImpact, double coefficientOfRestitution) {
-        if (isOn()) {
+    public void applyCollision(INewtonianPhysical thisObject, INewtonianMovable otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        if (!super.applyCollision(thisObject, otherObject, angleOfImpact, pointOfImpact, coefficientOfRestitution)) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
             double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);
             double otherParallel = otherObject.getVelocity().getParallelComponent(angleOfImpact);
@@ -176,7 +150,6 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
             thisObject.setVelocity(newVelocity);
         }
     }
-
 
     /**
      * Applies a force which causes rotation. <br>
@@ -192,12 +165,12 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
      * @param pointOfApplication
      * @param elapsedTime
      */
-    public void applyRotationalForce(IPhysicsRotate physicalObject, Force force, Point pointOfApplication, long elapsedTime) {
+    public void applyRotationalForce(INewtonianRotate physicalObject, Force force, Point pointOfApplication, long elapsedTime) {
         if (isOn()) {
             MathVector radius = new MathVector(physicalObject.getCenter(), pointOfApplication);
             Angle theta = radius.getVectorAngle(force);
             double deltaOmega = force.getMagnitude() * theta.sin() * elapsedTime / physicalObject.getMass()
-            / radius.getMagnitude();
+                    / radius.getMagnitude();
             physicalObject.setRotationalVelocity(physicalObject.getRotationalVelocity() + deltaOmega);
         }
     }
@@ -212,12 +185,13 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
      */
     public void applyFriction(Object thisObject, Object otherObject, Force force, Angle surfaceTangent, long elapsedTime) {
         if (isOn()) {
-            if (IPhysicsFriction.class.isAssignableFrom(thisObject.getClass())) {
-                double mu = 0; //Coefficient of friction
-                if (IPhysicsFriction.class.isAssignableFrom(otherObject.getClass())) {
-                    //Get max coefficient of friction, otherwise mu = 0 for frictionless
-                    mu = Math.max(((IPhysicsFriction)thisObject).getCoefficientOfFriction(),
-                            ((IPhysicsFriction)otherObject).getCoefficientOfFriction());
+            if (INewtonianFriction.class.isAssignableFrom(thisObject.getClass())) {
+                double mu = 0; // Coefficient of friction
+                if (INewtonianFriction.class.isAssignableFrom(otherObject.getClass())) {
+                    // Get max coefficient of friction, otherwise mu = 0 for
+                    // frictionless
+                    mu = Math.max(((INewtonianFriction) thisObject).getCoefficientOfFriction(),
+                            ((INewtonianFriction) otherObject).getCoefficientOfFriction());
                 }
                 double normalMagnitude = force.getPerpComponent(surfaceTangent);
                 if (normalMagnitude < 0) {
@@ -231,8 +205,8 @@ public class NewtonianPhysicsEngine extends AbstractPhysicsEngine implements IPh
                     surfaceTangent.setNegativeAngle();
                 }
                 Force friction = new Force(normalMagnitude * mu, surfaceTangent);
-                if (IPhysics.class.isAssignableFrom(thisObject.getClass())) {
-                    friction.applyForce((IPhysics)thisObject, elapsedTime);
+                if (INewtonianPhysical.class.isAssignableFrom(thisObject.getClass())) {
+                    friction.applyForce((INewtonianPhysical) thisObject, elapsedTime);
                 }
             }
         }

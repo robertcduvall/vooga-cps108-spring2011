@@ -1,21 +1,37 @@
 package vooga.physics.engine;
 
 import java.util.Collection;
+import java.util.Map;
+import vooga.core.Game;
 import vooga.physics.util.Force;
 import java.awt.Point;
 import java.util.HashSet;
-import vooga.physics.interfaces.IPhysicsCollider;
+import vooga.physics.interfaces.IPhysicsCustomCollide;
+import vooga.physics.interfaces.IPhysicsCustomField;
+import vooga.physics.interfaces.IPhysicsCustomForce;
 import vooga.physics.interfaces.IPointField;
 import vooga.physics.interfaces.IPhysicsToggle;
 import vooga.util.math.Angle;
 
-public abstract class AbstractPhysicsEngine implements IPhysicsToggle {
+public class BasePhysicsEngine implements IPhysicsToggle {
 
+    private static Map<Game, BasePhysicsEngine> myEngines;
+    
     private Collection<Force> worldForces;
     private Collection<IPointField> pointFields;
     private boolean isOn;
+    
+    public static void addEngine(Game currentGame, BasePhysicsEngine desiredEngine){
+        myEngines.put(currentGame, desiredEngine);
+    }
 
-    public AbstractPhysicsEngine() {
+    public static BasePhysicsEngine getEngine(Game game){
+        if (myEngines.containsKey(game))
+            return myEngines.get(game);
+        throw new RuntimeException();//TODO: Throw the correct exception
+    }
+    
+    protected BasePhysicsEngine() {
         worldForces = new HashSet<Force>();
         pointFields = new HashSet<IPointField>();
         isOn = true;
@@ -88,8 +104,12 @@ public abstract class AbstractPhysicsEngine implements IPhysicsToggle {
      * @param field
      * @param elapsedTime
      */
-    public <T> void applyForce(T object, Force f, long elapsedTime){
-        
+    public <T> boolean applyForce(T object, Force force, long elapsedTime) {
+        if (IPhysicsCustomForce.class.isAssignableFrom(object.getClass())) {
+            ((IPhysicsCustomForce) object).applyForce(force, elapsedTime);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -117,8 +137,12 @@ public abstract class AbstractPhysicsEngine implements IPhysicsToggle {
      * @param field
      * @param elapsedTime
      */
-    public <T> void applyField(T object, IPointField field, long elapsedTime){
-        
+    public <T> boolean applyField(T object, IPointField field, long elapsedTime) {
+        if (IPhysicsCustomField.class.isAssignableFrom(object.getClass())) {
+            ((IPhysicsCustomField) object).applyField(field, elapsedTime);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -131,16 +155,30 @@ public abstract class AbstractPhysicsEngine implements IPhysicsToggle {
      * @param angleOfImpact
      * @param coefficientOfRestitution
      */
-    public void collision(Object object1, Object object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution){
-        if (isOn) {
-            if (IPhysicsCollider.class.isAssignableFrom(object1.getClass()))
-                ((IPhysicsCollider)object1).collisionOccurred(object2, angleOfImpact, pointOfImpact, coefficientOfRestitution);
-            if (IPhysicsCollider.class.isAssignableFrom(object2.getClass()))
-                ((IPhysicsCollider)object1).collisionOccurred(object1, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+    public void collision(Object object1, Object object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        if (isOn()) {
+            applyCollision(object1, object2, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+            applyCollision(object2, object1, angleOfImpact, pointOfImpact, coefficientOfRestitution);
         }
     }
+    
+    /**
+     * Applies an external field to an IPhysics object.
+     * 
+     * @param <T>
+     * 
+     * @param physicalObject
+     * @param field
+     * @param elapsedTime
+     */
+    public <T> boolean applyCollision(T thisObject, Object otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        if (IPhysicsCustomCollide.class.isAssignableFrom(thisObject.getClass())) {
+            ((IPhysicsCustomCollide) thisObject).collisionOccurred(otherObject, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+            return true;
+        }
+        return false;
+    }
 
-    @Override
     public boolean isOn() {
         return isOn;
     }

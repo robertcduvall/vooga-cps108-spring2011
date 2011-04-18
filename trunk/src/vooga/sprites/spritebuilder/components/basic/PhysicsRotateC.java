@@ -1,9 +1,11 @@
 package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Point;
-import vooga.physics.interfaces.IPhysics;
-import vooga.physics.interfaces.IPhysicsRotate;
-import vooga.physics.interfaces.IPhysicsCollider;
+import vooga.physics.engine.NewtonianPhysicsEngine;
+import vooga.physics.interfaces.IPhysicsCustomCollide;
+import vooga.physics.interfaces.newtonian.INewtonianMovable;
+import vooga.physics.interfaces.newtonian.INewtonianPhysical;
+import vooga.physics.interfaces.newtonian.INewtonianRotate;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
@@ -12,7 +14,7 @@ import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
-public class PhysicsRotateC extends PhysicsC implements IPhysicsRotate{
+public class PhysicsRotateC extends PhysicsC implements INewtonianRotate{
 
     private Sprite mySprite;
     private double myMass;
@@ -57,7 +59,7 @@ public class PhysicsRotateC extends PhysicsC implements IPhysicsRotate{
      * @param pointOfApplication
      * @param elapsedTime
      */
-    public void applyRotationalForce(IPhysicsRotate physicalObject, Force force, Point pointOfApplication, long elapsedTime) {
+    public void applyRotationalForce(INewtonianRotate physicalObject, Force force, Point pointOfApplication, long elapsedTime) {
         MathVector radius = new MathVector(physicalObject.getCenter(), pointOfApplication);
         Angle theta = radius.getVectorAngle(force);
         double deltaOmega = force.getMagnitude() * theta.sin() * elapsedTime /
@@ -91,32 +93,25 @@ public class PhysicsRotateC extends PhysicsC implements IPhysicsRotate{
             isOn = true;
         
     }
+    
+    @Override
+    public void collisionOccurred(Object otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+        //TODO: implement this
+        
+    }
 
-//    @Override
-//    public void collisionOccurred(Sprite otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
-//        /*TODO: We can't use the "apply rotational force" method, because we don't actually have a force,
-//         * because we don't know how much time elapsed during the collision, so we need to implement this with
-//         * the conservation of rotational momentum theorem.
-//         * TODO: Also, with the currently implemented as ISpriteColliders (extending IPhysics),
-//         * can we actually implement this, because they currently can't get the other object's rotational
-//         * velocity?
-//         */
-//        
-//    }
-//
-//    @Override
-//    public Point getCenter() {
-//        return new Point((int)mySprite.getX(), (int)mySprite.getY());
-//    }
-//
-//    @Override
-//    public Velocity getVelocity() {
-//        return PhysicsEngine.getSpriteVelocity(mySprite);
-//    }
-//
-//    @Override
-//    public void setVelocity(Velocity newVelocity) {
-//        PhysicsEngine.setSpriteVelocity(mySprite, newVelocity);
-//        
-//    }
+    @Override
+    public void collisionOccurred(INewtonianMovable otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+        if (isOn()) {
+          //TODO: implement this
+        }
+        
+    }
+
+    @Override
+    public void collisionOccurred(INewtonianPhysical otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+        if (isOn()) {
+          //TODO: implement this
+        }
+    }
 }
