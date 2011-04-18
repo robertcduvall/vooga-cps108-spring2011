@@ -23,7 +23,7 @@ public class SpriteButton extends JButton
 
     public SpriteButton()
     {
-        myIcon = new ImageIcon("leveleditor/images/space_ship.png");
+        myIcon = new ImageIcon("src/vooga/leveleditor/images/space_ship.png");
         this.setIcon(myIcon);
         this.setPreferredSize(new Dimension(100, 100));
         this.addActionListener(new ClickAction());
