@@ -1,92 +1,64 @@
 package vooga.arcade.parser;
 
-
 import java.awt.Dimension;
+import java.util.HashMap;
+import java.util.Map;
+
+import vooga.core.event.examples.bubblefishbob.util.resources.ResourceManager;
 
 import com.golden.gamedev.Game;
 import com.golden.gamedev.GameLoader;
 
 public class ArcadeGameObject {
-    
-    
-    private String title, author, genre, description, dateCreated, version, price, language;
+
     private Game game;
     private Dimension dimension;
     private String[] highscores;
-    
-    public ArcadeGameObject(Game game, String title,String author, String genre,
-            String description, String dateCreated, String[] highscores,
-            String version, String price, String language, Dimension dimension) {
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.description = description;
-        this.dateCreated = dateCreated;
-        this.version = version;
-        this.price = price;
-        this.language = language;
+    private Map<String, String> dataMap = new HashMap<String, String>();
+    private ResourceManager resourceManager = ResourceManager.getInstance();
+    private String source = "GameInfo";
+
+    public ArcadeGameObject(Game game, String[] data, String[] dimension,
+            String[] highscores) {
+        resourceManager.addResourcesFromFile(source,
+                "vooga.arcade.resources");
         this.game = game;
         this.highscores = highscores;
-        this.dimension = dimension;
-        
+        this.dimension = new Dimension(Integer.parseInt(dimension[0]),
+                Integer.parseInt(dimension[1]));
+        fillMapWithData(data);
+
     }
-    
+
+    private void fillMapWithData(String[] data) {
+        String defaultName = resourceManager.getString("defaultName");
+        for (int i = 0; i < data.length; i++) {
+            dataMap.put(resourceManager.getString(defaultName + '.' + i),
+                    data[i]);
+        }
+    }
+
     /**
      * start the game contained in the game object
      */
-    public void start(){
+    public void start() {
         GameLoader loader = new GameLoader();
         loader.setup(game, dimension, false);
         game.start();
     }
 
     /**
-     * @return the title
+     * return data from the dataMap
+     * 
+     * @param name
+     * @return return data with given name, or return "" if the data doesn't
+     *         exist
      */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @return the genre
-     */
-    public String getGenre() {
-        return genre;
-    }
-
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @return the dateCreated
-     */
-    public String getDateCreated() {
-        return dateCreated;
-    }
-
-    /**
-     * @return the version
-     */
-    public String getVersion() {
-        return version;
-    }
-
-    /**
-     * @return the price
-     */
-    public String getPrice() {
-        return price;
-    }
-
-    /**
-     * @return the language
-     */
-    public String getLanguage() {
-        return language;
+    public String getData(String name) {
+        String s = dataMap.get(name);
+        if (s != null)
+            return s;
+        return "";
     }
 
     /**
@@ -109,4 +81,5 @@ public class ArcadeGameObject {
     public String[] getHighscores() {
         return highscores;
     }
+
 }
