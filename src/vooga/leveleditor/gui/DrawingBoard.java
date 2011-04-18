@@ -32,7 +32,7 @@ public class DrawingBoard extends JPanel
          * Set up test image
          */
         test =  new ImageIcon("src/vooga/leveleditor/images/space_ship.png");
-        DragableImage image = new DragableImage(test);
+       // DragableImage image = new DragableImage(test);
         
 
        
