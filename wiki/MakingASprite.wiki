@@ -11,9 +11,33 @@ In the VOOGA game engine, a sprite is (at the most basic level) a movable image.
 
 =The Component System=
 
-The component system is, in essence, a system designed to allow dynamic exchange of qualities within an object that eliminates the need for a deep and convoluted class or interface hierarchy. The goal of the system is to allow for design of a small, shallow hierarchy that is modified at runtime by components that are placed into a buildable object. It allows for generation of a pseudo-hierarchy without restrictions such as single-class extension or having to re-implement various interface methods in only slightly different classes.
+     The component system is, in essence, a system designed to allow dynamic exchange of qualities within an object that eliminates the need for a deep and convoluted class or interface hierarchy. The goal of the system is to allow for design of a small, shallow hierarchy that is modified at runtime by components that are placed into a buildable object. It allows for generation of a pseudo-hierarchy without restrictions such as single-class extension or having to re-implement various interface methods in only slightly different classes.
 
  == I. What is a component?==
+     Basically, a component is anything that implements the IComponent interface. This interface contributes essential activity to a given class, making it easily modifiable through simple use of reflection and retrieval by class names. Here is the code:
+
+{{{
+ /**
+     * Sets this component to the input qualities characteristics. Must be the
+     * same component class
+     * 
+     * @param c
+     */
+    public abstract void setTo (IComponent c);
+    
+    /**
+     * Sets this component to the input characteristics. Must be the
+     * correct characteristics to satisfy one constructor in the component.
+     * input must be in same order as constructor.
+     * 
+     * @param c
+     */
+    public abstract void setTo (Object ... args);
+
+
+    public abstract boolean equals (IComponent c);
+}}}
+
  == II. Using a Component Builder==
  == III. 	Designing your own components==
 
