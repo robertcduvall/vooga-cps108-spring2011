@@ -31,7 +31,6 @@ public class VoogaViewer extends JFrame implements IView
 
     private PracticeController pc;
 
-
     public VoogaViewer (String title,
                         String prompt,
                         Dimension dim,
