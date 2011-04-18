@@ -1,10 +1,15 @@
 package vooga.arcade.parser;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import vooga.arcade.gui.helper.DrawableData;
+import org.jdom.Element;
+import org.jdom.output.XMLOutputter;
+
 import vooga.core.event.examples.bubblefishbob.util.resources.ResourceManager;
 
 import com.golden.gamedev.Game;
@@ -25,18 +30,24 @@ public class ArcadeGameObject {
     private Map<String, String> dataMap = new HashMap<String, String>();
     private ResourceManager resourceManager = ResourceManager.getInstance();
     private String source = "GameInfo";
-    private DrawableData drawableData;
+    private Image image;
+    private Element root;
+    private String path;
+    private XMLOutputter xmlOutput = new XMLOutputter();
+    
+    
     public ArcadeGameObject(Game game, String[] data, String[] dimension,
-            String[] highscores, DrawableData drawableData) {
+            String[] highscores, Image image, Element root, String path) {
         resourceManager.addResourcesFromFile(source,
                 "vooga.arcade.resources");
         this.game = game;
         this.highscores = highscores;
         this.dimension = new Dimension(Integer.parseInt(dimension[0]),
                 Integer.parseInt(dimension[1]));
-        this.drawableData = drawableData;
+        this.image = image;
+        this.root = root;
+        this.path = path;
         fillMapWithData(data);
-
     }
 
     private void fillMapWithData(String[] data) {
@@ -99,14 +110,29 @@ public class ArcadeGameObject {
     public void putData(String name, String value){
         //TODO: figure out how to write to xml
         dataMap.put(name, value);
+        
+        Element modifiedElement =root.getChild(name);
+        
+        if(modifiedElement!=null){
+            modifiedElement.setText(value);
+        }
+        else{
+            modifiedElement = new Element(name);
+            root.addContent(modifiedElement);
+        }
+        try {
+            xmlOutput.output(root, new FileOutputStream(new File(path)));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
-    
     
     /**
      * @return the drawableData
      */
-    public DrawableData getDrawableData() {
-        return drawableData;
+    public Image getImage() {
+        return image;
     }
-
 }
