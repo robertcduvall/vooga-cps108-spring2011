@@ -1,4 +1,4 @@
-package vooga.arcade;
+package vooga.arcade.controller;
 
 import java.awt.Component;
 
