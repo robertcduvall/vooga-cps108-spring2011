@@ -7,12 +7,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
-public class DragableImage extends JLabel implements MouseMotionListener{
+public class DraggableImage extends JLabel implements MouseMotionListener{
 	private int x,y;
 	private ImageIcon icon;
 	private JLayeredPane parent;
 	
-	public DragableImage(ImageIcon icon, JLayeredPane parent){
+	public DraggableImage(ImageIcon icon, JLayeredPane parent){
 		super(icon);
 		this.icon = icon;
 		this.parent = parent;
