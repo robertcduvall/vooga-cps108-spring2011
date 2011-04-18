@@ -2,7 +2,7 @@ package vooga.arcade;
 
 import java.awt.Component;
 
-import vooga.arcade.gui.helper.DrawableData;
+// import vooga.arcade.gui.helper.DrawableData;
 
 
 /**
@@ -14,7 +14,7 @@ public interface IController
 {
 	public void promptModel(String str);
 
-	public void updateView(DrawableData p);
+	// public void updateView(DrawableData p);
 
 	public void displayError(String s);
 
