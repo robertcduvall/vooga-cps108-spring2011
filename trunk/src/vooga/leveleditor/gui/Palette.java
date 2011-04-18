@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * 
+ * A palette of sprite buttons. To be used with the DrawingBoard.
  */
 public class Palette extends JPanel
 {

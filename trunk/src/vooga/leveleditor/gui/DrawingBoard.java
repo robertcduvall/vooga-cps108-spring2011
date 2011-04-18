@@ -10,6 +10,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+/**
+ * The main rendering and drawing area of the editor. It is composed of the
+ * palette, which is a panel of buttons with pictures of sprites on them, and
+ * the viewport, which is where the level is actually rendered and where the
+ * user can place new sprites.
+ */
 public class DrawingBoard extends JPanel
 {
 
@@ -23,7 +29,7 @@ public class DrawingBoard extends JPanel
     private Palette palette;
     private ImageIcon test;
 
-    private JLayeredPane layers;
+    private Viewport layers;
 
     public DrawingBoard(SwingGUI owner)
     {
@@ -36,14 +42,6 @@ public class DrawingBoard extends JPanel
          * Use a BorderLayout so that we can easily fill all available space.
          */
         this.setLayout(new BorderLayout());
-
-        /*
-         * Set up test image
-         */
-        test =  new ImageIcon("src/vooga/leveleditor/images/space_ship.png");
-        // DragableImage image = new DragableImage(test);
-
-
 
         /*
          * Load the background image so that we know how big the drawing board
@@ -72,14 +70,10 @@ public class DrawingBoard extends JPanel
         greenscreen.setBounds(0, 0, width+200, height+200);
 
         /*
-         * Now we have enough information to create the JLayeredPane.
+         * Now we have enough information to create the JLayeredPane. It is
+         * placed in the center so that it will take all available space.
          */
-        layers = new JLayeredPane();
-        layers.setPreferredSize(new Dimension(width+200, height+200));
-        //layers.add(image);
-        //layers.moveToFront(image);
-        //layers.setLayer(image, 1);
-        layers.addMouseMotionListener(new MouseTracker());
+        layers = new Viewport(this, width+200, height+200);
         JScrollPane layersHolder = new JScrollPane(layers);
         this.add(layersHolder, BorderLayout.CENTER);
 
@@ -93,8 +87,6 @@ public class DrawingBoard extends JPanel
         paletteHolder.setPreferredSize(new Dimension(240, 600));
         add(paletteHolder, BorderLayout.WEST);
 
-
-
         /*
          * Add the greenscreen and the background.
          */
@@ -104,30 +96,10 @@ public class DrawingBoard extends JPanel
         background.setBounds(100, 100, width, height);
         layers.add(background, LAYER_BACKGROUND);
     }
-
-    private class MouseTracker implements MouseMotionListener
-    {   
-        @Override
-        public void mouseDragged(MouseEvent arg0)
-        {
-            return;
-        }
-
-        @Override
-        public void mouseMoved(MouseEvent arg0)
-        {
-            int x = arg0.getX();
-            int y = arg0.getY();
-            owner.setStatusBar(String.format("(%d, %d)", x, y));
-            
-            /*
-            if(currentFloatingSprite != null)
-            {
-                DraggableImage c = DrawingBoard.this.currentFloatingSprite;
-                c.setBounds(x, y, c.getWidth(), c.getHeight());
-            }
-            */
-        }
+    
+    protected void setStatusBar(String message)
+    {
+        owner.setStatusBar(message);
     }
 
 }
