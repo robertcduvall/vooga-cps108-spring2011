@@ -11,5 +11,5 @@ import vooga.arcade.parser.ArcadeGameObject;
  */
 public interface IArcadeGameListFilter
 {
-	List<ArcadeGameObject> getFilteredList(List<ArcadeGameObject> gameList, String tag, String query); 
+	List<ArcadeGameObject> getFilteredList(List<ArcadeGameObject> gameList, String tag, String query[]); 
 }

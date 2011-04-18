@@ -8,12 +8,12 @@ import java.util.List;
 import vooga.arcade.parser.ArcadeGameObject;
 
 /**
- * Silly Linear Search Algorithm for Search Functionality.
+ * Silly Linear Search Algorithm for Individual Game Search Functionality.
  * 
  * @author Ethan Yong-Hui Goh
  * 
  */
-public class SearchByStringFilter implements IArcadeGameListFilter
+public class FindByStringFilter implements IArcadeGameListFilter
 {
 	@Override
 	public List<ArcadeGameObject> getFilteredList(
@@ -25,7 +25,7 @@ public class SearchByStringFilter implements IArcadeGameListFilter
 			String tagName = s.getData(tag);
 			for (String t : query)
 			{
-				if (tagName.startsWith(t))
+				if (tagName.equals(t))
 				{
 					list.add(s);
 				}
