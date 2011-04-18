@@ -1,8 +1,11 @@
 package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Point;
-import vooga.physics.interfaces.IPhysicsFriction;
-import vooga.physics.interfaces.IPhysicsCollider;
+import vooga.physics.interfaces.IPhysicsCustomCollide;
+import vooga.physics.interfaces.newtonian.INewtonianCollider;
+import vooga.physics.interfaces.newtonian.INewtonianFriction;
+import vooga.physics.interfaces.newtonian.INewtonianMovable;
+import vooga.physics.interfaces.newtonian.INewtonianPhysical;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
@@ -14,7 +17,7 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  *
  */
-public class PhysicsFrictionC extends BasicComponent implements IPhysicsFriction, IPhysicsCollider{
+public class PhysicsFrictionC extends BasicComponent implements INewtonianFriction, INewtonianCollider{
 
     private double coefficient = 2;
     private boolean isOn;
@@ -59,7 +62,19 @@ public class PhysicsFrictionC extends BasicComponent implements IPhysicsFriction
 
     @Override
     public void collisionOccurred(Object otherSprite, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
-        // TODO Auto-generated method stub
+        // TODO Implement this
+        
+    }
+
+    @Override
+    public void collisionOccurred(INewtonianMovable otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+        // TODO Implement this
+        
+    }
+
+    @Override
+    public void collisionOccurred(INewtonianPhysical otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
+        // TODO Implement this
         
     }
     

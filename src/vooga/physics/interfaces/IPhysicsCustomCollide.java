@@ -9,7 +9,7 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  *
  */
-public interface IPhysicsCollider{
+public interface IPhysicsCustomCollide{
 
     public void collisionOccurred(Object otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution);
 }

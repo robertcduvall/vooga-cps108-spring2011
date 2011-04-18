@@ -1,13 +1,14 @@
-package vooga.physics.interfaces;
+package vooga.physics.interfaces.newtonian;
 
 import java.awt.Point;
+import vooga.physics.interfaces.IPhysicsToggle;
 
 /**
  * Interface which defines objects that can rotate. See PhyiscsRotateC.
  * @author Nathan Klug
  *
  */
-public interface IPhysicsRotate extends IPhysicsToggle{
+public interface INewtonianRotate extends IPhysicsToggle{
 
     public double getMass();
     

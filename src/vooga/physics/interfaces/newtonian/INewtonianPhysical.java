@@ -1,7 +1,8 @@
-package vooga.physics.interfaces;
+package vooga.physics.interfaces.newtonian;
 
 import java.awt.Point;
 
+import vooga.physics.interfaces.IPhysicsToggle;
 import vooga.physics.util.Velocity;
 
 /**
@@ -11,7 +12,7 @@ import vooga.physics.util.Velocity;
  * @author Nathan Klug
  *
  */
-public interface IPhysics extends IMovable, IPhysicsToggle{
+public interface INewtonianPhysical extends INewtonianMovable, IPhysicsToggle{
     
     public double getMass();
     
