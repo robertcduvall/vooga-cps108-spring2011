@@ -11,7 +11,7 @@ import org.junit.*;
 import com.golden.gamedev.engine.BaseIO;
 import com.golden.gamedev.engine.BaseLoader;
 
-import vooga.core.VoogaGame;
+import vooga.core.Game;
 import vooga.resources.images.ImageLoader;
 
 

@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import vooga.levels.example.resourceManager.ResourceManager;
-import vooga.core.VoogaGame;
+import vooga.core.Game;
 import com.golden.gamedev.Game;
 import com.golden.gamedev.GameLoader;
 import com.golden.gamedev.object.PlayField;
@@ -13,7 +13,7 @@ import com.golden.gamedev.object.background.ImageBackground;
 /** 
  * @author Andrew Patterson
  */
-public class CustomGame extends VoogaGame
+public class CustomGame extends Game
 {
     private PlayField myPlayfield;
     private static CustomGame myInstance;

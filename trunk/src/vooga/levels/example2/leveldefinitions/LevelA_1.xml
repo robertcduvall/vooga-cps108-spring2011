@@ -1,4 +1,10 @@
 <level>
 	<background>a</background>
 	<collision_manager g1=red g2=blue class=colManAB />
-	<sprite group=red class=
+	<sprite group=red class=vooga.levels.example2.sprites.RedSprite>
+		<x>100</x>
+	</sprite>
+	<sprite group=blue class=vooga.levels.example2.sprites.BlueSprite>
+		<y>300</y>
+	</sprite>
+	<instance 
