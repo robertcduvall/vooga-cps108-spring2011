@@ -5,9 +5,9 @@
 In the VOOGA game engine, a sprite is (at the most basic level) a movable image. However, sprites can be used for many different purposes and are the essential components in designing and playing a game. Sprites serve as the core objects in any variety of game or gameplay that is in need of components beyond a frame and a background i.e. nearly every game!
 
 I.	The Component System
-\\t a.	What is a component?
-\\t b.	Using a Component Builder
-\\t c.	Designing your own components
+a.	What is a component?
+b.	Using a Component Builder
+c.	Designing your own components
 II.	Sprite Hierarchy
 III.	Sprite Builder
 IV.	Basic Walkthrough for sprite creation
