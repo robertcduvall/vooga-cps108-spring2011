@@ -18,9 +18,9 @@ public class SwingGUI extends JFrame
     //private XMLDealer xml;
 
     //private ScrollablePicture picture;
-    
+
     private JMenuBar menubar;
-    
+
     private JToolBar toolbar;
 
     private StatusBar statusbar;
@@ -38,23 +38,23 @@ public class SwingGUI extends JFrame
          * Set up the menubar.
          */
         setupMenubar();
-        
+
         /*
          * Set up the toolbar. 
          */
         setupToolbar();
-        
+
         /*
          * Set up the drawing board, which is the main area of action.
          */
-        DrawingBoard db = new DrawingBoard();
+        DrawingBoard db = new DrawingBoard(this);
         add(db, BorderLayout.CENTER);
 
         /*
          * Set up the status bar.
          */
         setupStatusbar();
-        
+
         this.pack();
         this.setVisible(true);
     }
@@ -78,7 +78,7 @@ public class SwingGUI extends JFrame
 
         JMenuItem loadmenuitem = new JMenuItem("Load");
         loadmenuitem.setMnemonic(KeyEvent.VK_L);
-       // loadmenuitem.addActionListener(new LoadAction());
+        // loadmenuitem.addActionListener(new LoadAction());
         filemenu.add(loadmenuitem);
 
         JMenuItem savemenuitem = new JMenuItem("Save");
@@ -103,7 +103,7 @@ public class SwingGUI extends JFrame
 
         }
     }
-/**
+    /**
     private class LoadAction implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -117,7 +117,7 @@ public class SwingGUI extends JFrame
             }
         }
     }
-*/
+     */
     private class SaveAction implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -133,7 +133,7 @@ public class SwingGUI extends JFrame
             System.exit(0);
         }
     }
-    
+
     /**
      * Helper method for the constructor. Sets up the toolbar.
      */
@@ -141,14 +141,14 @@ public class SwingGUI extends JFrame
     {
         toolbar = new JToolBar();
         add(toolbar, BorderLayout.NORTH);
-        
+
         JButton arrowButton = new JButton("Arrow");
         toolbar.add(arrowButton);
-        
+
         JButton grabButton = new JButton("HandScroll");
         toolbar.add(grabButton);
     }
-    
+
     private void setupStatusbar()
     {
         statusbar = new StatusBar();
@@ -168,6 +168,11 @@ public class SwingGUI extends JFrame
             super();
             setText("Ready");
         }
+    }
+
+    protected void setStatusBar(String message)
+    {
+        statusbar.setText(message);
     }
 
     public static void main(String[] args)
