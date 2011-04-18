@@ -13,7 +13,7 @@ public class StatsMain extends Game
     @Override
     public void initResources() 
     {
-        DisplayTracker tracker = DisplayCreator.createOverlays("src/vooga/engine/overlay/OverlayExample.xml");        
+        DisplayTracker tracker = DisplayCreator.createOverlays("src/vooga/stats/resources/statsDisplay.xml");        
         myPlayfield = new PlayField();       
         myPlayfield.addGroup(tracker.getStatsGroup("DisplayGroup"));
     }
