@@ -11,6 +11,7 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 	private int x,y;
 	private ImageIcon icon;
 	private JLayeredPane parent;
+	private boolean myFlag = false;
 	
 	public DraggableImage(ImageIcon icon, JLayeredPane parent){
 		super(icon);
@@ -24,18 +25,27 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {		
-	
+		/*we currently do not need this method, may be used if drag and drop is
+		 * issues
+		 */
+		return;
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		x = arg0.getX();
-		y = arg0.getY();
-		//parent.remove(this);
-		this.setVisible(true);
-		this.setOpaque(true);
-		this.setBounds(x, y, icon.getIconWidth(), icon.getIconWidth());
-		parent.add(this,1);
-		parent.moveToFront(this);
+		if (myFlag){
+			x = arg0.getX();
+			y = arg0.getY();
+			this.setVisible(true);
+			this.setOpaque(true);
+			this.setBounds(x, y, icon.getIconWidth(), icon.getIconWidth());
+			parent.add(this,1);
+			parent.moveToFront(this);
+		}
+		
+	}
+	
+	void setFlag(boolean flag){
+		myFlag = flag;
 	}
 }

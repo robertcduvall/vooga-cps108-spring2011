@@ -13,9 +13,9 @@ public class Palette extends JPanel
     
     private DrawingBoard owner;
 
-    private JLayeredPane pane;
+    private Viewport pane;
     
-    public Palette(JLayeredPane pane)
+    public Palette(Viewport pane)
     {
         super();
         this.pane = pane;
