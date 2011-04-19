@@ -10,6 +10,8 @@ import javax.swing.event.MouseInputListener;
 /**
  * Renders and draws the level. Allows the user to interact with sprites that
  * are on it.
+ * @author Alex Lee
+ * @author Charlie Hatcher
  */
 public class Viewport extends JLayeredPane
 {
@@ -50,8 +52,15 @@ public class Viewport extends JLayeredPane
     }
     private class MouseClick implements MouseListener{
 
+    	/**
+    	 * If the mouse is hovering over the image on the viewport and is clicked,
+    	 * set up that image to become draggable.
+    	 */
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
+			/*
+			 * TODO See if it is possible to get rid of if statements
+			 */
 			if(myImages.size()>0){
 				for(DraggableImage i: myImages){
 					if(((i.getX()-i.getWidth())<x && (i.getX()+i.getWidth())>x)
@@ -66,6 +75,10 @@ public class Viewport extends JLayeredPane
 			return;
 		}
 
+		/**
+		 * the rest of these methods are unneeded, but come standard with the
+		 * MouseListener interface
+		 */
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
 			return;
