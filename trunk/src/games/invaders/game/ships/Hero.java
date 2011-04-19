@@ -78,26 +78,26 @@ public class Hero extends Ship {
 	}
 
 	public void fireMissiles() {
-		if (game.keyDown(KeyEvent.VK_SPACE)) {
-			double missileDisplacement = 7;
-			if (activeMissile == 0) {
-				activeMissile = 1;
-			} else {
-				activeMissile = 0;
-				missileDisplacement *= -1;
-			}
-			Sprite playerMissile = new Sprite(game
-					.getImage("resources/images/pmissle.png"));
-			// TODO: Change getX() below to getCenterX()
-			playerMissile
-					.setLocation(getX() + missileDisplacement, getY() - 15);
-			playerMissile.setVerticalSpeed(-0.50);
-
-			getMissileGroup().add(playerMissile);
-			// **** DISABLE FLAG FOR FIRING ****//
-			playerCanFire = false;
-			playerMissleTimer.refresh();
+		// if (game.keyDown(KeyEvent.VK_SPACE)) {
+		double missileDisplacement = 5;
+		if (activeMissile == 0) {
+			activeMissile = 1;
+		} else {
+			activeMissile = 0;
+			missileDisplacement *= -1;
 		}
+		Sprite playerMissile = new Sprite(game
+				.getImage("resources/images/pmissle.png"));
+		// TODO: Change getX() below to getCenterX()
+		playerMissile.setLocation((getX() + (getWidth() / 2))
+				- (playerMissile.getWidth() / 2) + missileDisplacement, getY());
+		playerMissile.setVerticalSpeed(-0.50);
+
+		getMissileGroup().add(playerMissile);
+		// **** DISABLE FLAG FOR FIRING ****//
+		playerCanFire = false;
+		playerMissleTimer.refresh();
+		// }
 	}
 
 	/**

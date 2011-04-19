@@ -38,7 +38,7 @@ public class InvadersGame extends GameObject {
 	public VolatileSprite explosion;
 	public Hero hero;
 
-	public Timer endTimer = new Timer(3000);
+	public Timer endTimer = new Timer(500);
 	public Timer discoTimer = new Timer((int) Math.round((1000.0 * 60) / 118));
 
 	public BasicCollisionGroup playerMissleToEnemy, enemyMissleToPlayer,
@@ -78,8 +78,6 @@ public class InvadersGame extends GameObject {
 		// Create player hero
 		hero = new Hero(this);
 		// TODO: Why does hero need to be final, and is this bad?
-		hero.setLocation(fieldDimensions.getWidth() / 2, fieldDimensions
-				.getHeight() - 50);
 		enemyGroup = new SpriteGroup("Enemy Group");
 		List<SpriteGroup> addToFormations = new ArrayList<SpriteGroup>();
 		addToFormations.add(enemyGroup);
@@ -151,7 +149,6 @@ public class InvadersGame extends GameObject {
 		SpriteGroup wrapGroup = new SpriteGroup("Wrap group");
 		wrapGroup.add(hero);
 		playfield.addCollisionGroup(wrapGroup, edgeGroup, wrapCollisionGroup);
-		hero.setX(50);
 	}
 
 	@Override
@@ -175,7 +172,6 @@ public class InvadersGame extends GameObject {
 			level.setLevelCompleted(true);
 		}
 		if (level.isComplete()) {
-			hero.setX(50);
 			level = level.loadNext();
 		}
 		if (!hero.isActive()) {
