@@ -22,7 +22,7 @@ public class ButtonBarItem extends JButton {
 	private static final Insets margins = new Insets(0, 0, 0, 0);
 
 	private static ResourceManager buttonsResource = new ResourceManager(
-			"ToolbarButtonsResource");
+			"vooga.arcade.resources.ToolbarButtonsResource");
 
 	private static String className = "ButtonBarItem";
 

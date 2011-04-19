@@ -15,25 +15,19 @@ public class VoogaMiddleFrame extends JPanel{
 	//private VariableTabbedPane middlePanel;
 	private ColumnTextPanes rightPanel;
 
-	private ResourceManager slogoMiddleFrameResource = new ResourceManager(
-			"SlogoMiddleFrameResource");
+	private ResourceManager MiddleFrameResource = new ResourceManager(
+			"vooga.arcade.resources.MiddleFrameResource");
 	
 	public VoogaMiddleFrame(PracticeController pc) {
 		BorderLayout b = new BorderLayout();
 		this.setLayout(b);
-		//middlePanel = new VariableTabbedPane(slogoMiddleFrameResource
-				//.getInteger("MiddlePanelInitialTabs"));
-		rightPanel = new ColumnTextPanes(slogoMiddleFrameResource
-				.getInteger("RightPanelNumber"), slogoMiddleFrameResource
+		rightPanel = new ColumnTextPanes(MiddleFrameResource
+				.getInteger("RightPanelNumber"), MiddleFrameResource
 				.getStringArray("RightPanelLabels"), pc);
 
 		//this.add(middlePanel, BorderLayout.CENTER);
 		this.add(rightPanel, BorderLayout.EAST);
 	}
-
-	//public ImageCanvas getImageCanvas() {
-		//return middlePanel.getActiveCanvas();
-	//}
 	
 	public ColumnTextPanes getRightPanel()
 	{
@@ -44,18 +38,18 @@ public class VoogaMiddleFrame extends JPanel{
 		//return middlePanel.getActiveCanvasSize();
 	//}
 
-	public void addVariable(String str) {
-		rightPanel.addStringToComponent(slogoMiddleFrameResource
-				.getInteger("VariablePanelIndex"), str);
-	}
-
-	public void setCurrentPlayer(String name) {
-		rightPanel.addString(slogoMiddleFrameResource
-				.getInteger("CurrentPlayerIndex"), name);
-	}
-	
-	public void clearVariables() {
-		rightPanel.clearComponent(slogoMiddleFrameResource
-				.getInteger("VariablePanelIndex"));
-	}
+//	public void addVariable(String str) {
+//		rightPanel.addStringToComponent(MiddleFrameResource
+//				.getInteger("VariablePanelIndex"), str);
+//	}
+//
+//	public void setCurrentPlayer(String name) {
+//		rightPanel.addString(MiddleFrameResource
+//				.getInteger("CurrentPlayerIndex"), name);
+//	}
+//	
+//	public void clearVariables() {
+//		rightPanel.clearComponent(MiddleFrameResource
+//				.getInteger("VariablePanelIndex"));
+//	}
 }

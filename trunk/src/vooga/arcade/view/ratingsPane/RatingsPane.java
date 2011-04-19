@@ -22,7 +22,7 @@ public class RatingsPane extends JPanel {
 	private static final int DEFAULT_TEXT_FIELD_HEIGHT = 6;
 
 	private ResourceManager ratingsPaneResource = new ResourceManager(
-			"RatingsPaneResource");
+			"vooga.arcade.resources.RatingsPaneResource");
 
 	private PracticeController pc;
 	private JEditorPane ratingsPane;

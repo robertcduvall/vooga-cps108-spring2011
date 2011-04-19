@@ -16,7 +16,7 @@ import vooga.arcade.view.helper.ResourceManager;
 
 public class ButtonBar {
 	private static ResourceManager buttonBarResource = new ResourceManager(
-			"ToolbarButtonsResource");
+			"vooga.arcade.resources.ToolbarButtonsResource");
 
 	public static JToolBar createButtonToolBar(IController p) {
 		JToolBar toolBar = new JToolBar();
@@ -24,13 +24,13 @@ public class ButtonBar {
 				.getStringArray("ToolBar");
 		toolBar.setFloatable(false);
 		
-		for (int k=0; k<toolBarEntriesImageNames.length; k++) {
+		for (int k=0; k < toolBarEntriesImageNames.length; k++) {
 		    String entry = toolBarEntriesImageNames[k];
 			String buttonName = buttonBarResource.getString(entry);
-			Icon buttonIcon = new ImageIcon("resources/" + buttonName);
+			Icon buttonIcon = new ImageIcon("src/" + buttonName);
 			ButtonBarItem b = new ButtonBarItem(buttonIcon, entry, p);
 			toolBar.add(b);
-			if (k<toolBarEntriesImageNames.length-1)
+			if (k < toolBarEntriesImageNames.length-1)
 			    toolBar.addSeparator(new Dimension(400, 1));
 		}
 		

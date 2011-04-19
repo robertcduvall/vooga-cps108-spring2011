@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class ResourceManager
 {
-	public static final String DEFAULT_SUBPACKAGE = "resources";
+	public static final String DEFAULT_SUBPACKAGE = "vooga.arcade.resources";
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_DELIMITER = ",";
 
