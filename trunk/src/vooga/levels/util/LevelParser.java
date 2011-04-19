@@ -1,21 +1,10 @@
 package vooga.levels.util;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-
-import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.background.ColorBackground;
 
 import vooga.levels.AbstractLevel;
@@ -23,7 +12,6 @@ import vooga.levels.util.tags.BackgroundTag;
 import vooga.levels.util.tags.CollisionManagerTag;
 import vooga.levels.util.tags.InstanceTag;
 import vooga.levels.util.tags.SpriteTag;
-import vooga.resources.xmlparser.ParserException;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
@@ -98,9 +86,4 @@ public class LevelParser extends Parser {
 		return converterRack;
 	}
 
-    public void addRandomSprite ()
-    {
-        // TODO Auto-generated method stub
-        
-    }
 }
