@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdom.Element;
+import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import vooga.core.event.examples.bubblefishbob.util.resources.ResourceManager;
@@ -121,6 +122,7 @@ public class ArcadeGameObject {
             root.addContent(modifiedElement);
         }
         try {
+            xmlOutput.setFormat(Format.getPrettyFormat());
             xmlOutput.output(root, new FileOutputStream(new File(path)));
         }
         catch (Exception e) {
