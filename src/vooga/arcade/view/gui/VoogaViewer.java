@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JToolBar;
-import javax.swing.Popup;
 import javax.swing.UIManager;
 import vooga.arcade.controller.PracticeController;
 import vooga.arcade.view.buttonToolBar.ButtonBar;
@@ -26,8 +24,8 @@ public class VoogaViewer extends JFrame implements IView
     private static final long serialVersionUID = 1L;
     private VoogaMiddleFrame middleFrame;
     private RatingsPane ratingsPane;
-    private ResourceManager slogoMiddleFrameResource =
-        new ResourceManager("SlogoMiddleFrameResource");
+    private ResourceManager middleFrameResource =
+        new ResourceManager("vooga.arcade.resources.MiddleFrameResource");
 
     private PracticeController pc;
 
@@ -77,21 +75,20 @@ public class VoogaViewer extends JFrame implements IView
     }
 
 
-    public void addVariableListEntry (String str)
-    {
-        middleFrame.addVariable(str);
-    }
-
-
-    public void clearVariables ()
-    {
-        middleFrame.clearVariables();
-    }
-
-
-    @Override
+//    public void addVariableListEntry (String str)
+//    {
+//        middleFrame.addVariable(str);
+//    }
+//
+//
+//    public void clearVariables ()
+//    {
+//        middleFrame.clearVariables();
+//    }
+//
+//
+   @Override
     public void updateList (String name)
     {
-        middleFrame.setCurrentPlayer(name);
     }
 }
