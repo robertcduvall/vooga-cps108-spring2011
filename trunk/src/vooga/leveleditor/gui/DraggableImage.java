@@ -45,7 +45,11 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 		
 	}
 	
-	void setFlag(boolean flag){
+	protected void setFlag(boolean flag){
 		myFlag = flag;
+	}
+	
+	protected boolean getFlag(){
+		return myFlag;
 	}
 }

@@ -56,8 +56,10 @@ public class Viewport extends JLayeredPane
 				for(DraggableImage i: myImages){
 					if(((i.getX()-i.getWidth())<x && (i.getX()+i.getWidth())>x)
 							&& ((i.getY()-i.getHeight())<y) &&(i.getY()+i.getHeight())>y){
-						System.out.println("hello");
-						i.setFlag(true);
+						if(i.getFlag()){
+							i.setFlag(false);
+						}
+						else i.setFlag(true);
 					}
 				}
 			}
