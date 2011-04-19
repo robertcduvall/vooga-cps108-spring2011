@@ -1,6 +1,7 @@
 package vooga.resources.test;
 
 import java.awt.Color;
+
 import java.awt.Graphics2D;
 import java.io.File;
 
@@ -11,7 +12,6 @@ import org.junit.*;
 import com.golden.gamedev.engine.BaseIO;
 import com.golden.gamedev.engine.BaseLoader;
 
-import vooga.core.Game;
 import vooga.resources.images.ImageLoader;
 
 
