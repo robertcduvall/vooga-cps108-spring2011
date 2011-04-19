@@ -18,12 +18,15 @@ public class Level2 extends Level {
 	@Override
 	public void loadLevel() {
 		game.hero.setX(50);
+		game.hero.setY(game.getHeight() - 50);
+		game.hero.setVerticalSpeed(0);
+		game.hero.setHorizontalSpeed(0);
 		game.hero.setHitpoints(2);
 		List<SpriteGroup> enemyGroup = new ArrayList<SpriteGroup>();
 		enemyGroup.add(game.enemyGroup);
 		enemyFormation = new GridFormation(game, enemyGroup, 30, 5);
 		enemyFormation.setActive(true);
-		game.discoTimer = new Timer((int) Math.round((1000.0 * 60) / 114 / 4));
+		game.discoTimer = new Timer((int) Math.round((1000.0 * 60) / 114 / 3));
 		game.bsSound.play("resources/audio/level2.wav", 0);
 	}
 

@@ -17,6 +17,10 @@ public class Level1 extends Level {
 
 	@Override
 	public void loadLevel() {
+		game.hero.setX(50);
+		game.hero.setY(game.getHeight() - 50);
+		game.hero.setVerticalSpeed(0);
+		game.hero.setHorizontalSpeed(0);
 		game.hero.setHitpoints(2);
 		List<SpriteGroup> enemyGroup = new ArrayList<SpriteGroup>();
 		enemyGroup.add(game.enemyGroup);
