@@ -15,13 +15,15 @@ public class Invaders extends GameEngine {
 
 	@Override
 	public void initResources() {
-		// nextGameID = TITLE;
-		nextGameID = GAME_MODE;
+		nextGameID = TITLE;
 		// nextGameID = GAME_MODE;
 	}
 
 	@Override
 	public GameObject getGame(int GameID) {
+		bsMusic
+				.setBaseRenderer(new com.golden.gamedev.engine.audio.WaveRenderer());
+		bsMusic.play("resources/audio/theme.wav");
 		switch (GameID) {
 		case TITLE:
 			return new MainMenu(this);

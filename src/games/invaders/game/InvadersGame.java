@@ -65,9 +65,6 @@ public class InvadersGame extends GameObject {
 	@Override
 	public void initResources() {
 		hideCursor();
-		bsMusic
-				.setBaseRenderer(new com.golden.gamedev.engine.audio.WaveRenderer());
-		bsMusic.play("resources/audio/theme.wav");
 		font2 = fontManager
 				.getFont(getImage("resources/images/BitmapFont.png"));
 
