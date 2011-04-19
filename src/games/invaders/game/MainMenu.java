@@ -59,6 +59,7 @@ public class MainMenu extends GameObject {
 				7, 1), 339, 150);
 		redStar.setAnimationTimer(aniTimer);
 		playField.add(redStar);
+		bsSound.play("resources/audio/theme.wav");
 
 	}
 

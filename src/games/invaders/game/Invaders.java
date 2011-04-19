@@ -21,9 +21,13 @@ public class Invaders extends GameEngine {
 
 	@Override
 	public GameObject getGame(int GameID) {
-		bsMusic
+		bsSound
 				.setBaseRenderer(new com.golden.gamedev.engine.audio.WaveRenderer());
-		bsMusic.play("resources/audio/theme.wav");
+		// TODO: fix goldenT's BaseMusic implementation because sound works, but
+		// music doesn't. Why are there even separate BaseMusic and BaseSound
+		// classes? With BaseMusic, this has no effect on the number of audio
+		// files that can be played simultaneously.
+		bsSound.setExclusive(true);
 		switch (GameID) {
 		case TITLE:
 			return new MainMenu(this);
