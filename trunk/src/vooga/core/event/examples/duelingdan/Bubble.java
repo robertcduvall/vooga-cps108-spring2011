@@ -1,6 +1,6 @@
 package vooga.core.event.examples.duelingdan;
 
-import vooga.core.Game;
+import vooga.core.VoogaGame;
 import com.golden.gamedev.object.Sprite;
 
 
@@ -16,11 +16,11 @@ public class Bubble
 
     private static final double SPEED = 0.05;
 
-    private Game myGame;
+    private VoogaGame myGame;
     private Sprite mySprite;
 
 
-    public Bubble (Game game)
+    public Bubble (VoogaGame game)
     {
         myGame = game;
 
