@@ -21,7 +21,7 @@ public class SwingGUI extends JFrame
 
     private JToolBar toolbar;
 
-    private StatusBar statusbar;
+    private JLabel statusbar;
 
     public SwingGUI()
     {
@@ -34,12 +34,13 @@ public class SwingGUI extends JFrame
         /*
          * Set up the menubar.
          */
-        setupMenubar();
+        this.setJMenuBar(new MenuBar());
 
         /*
          * Set up the toolbar.
          */
-        setupToolbar();
+        JToolBar toolbar = new ToolBar();
+        this.add(toolbar, BorderLayout.NORTH);
 
         /*
          * Set up the drawing board, which is the main area of action.
@@ -50,102 +51,8 @@ public class SwingGUI extends JFrame
         /*
          * Set up the status bar.
          */
-        setupStatusbar();
-    }
-
-    /**
-     * Helper method for the constructor. Sets up the menubar.
-     */
-    private void setupMenubar()
-    {
-        menubar = new JMenuBar();
-        setJMenuBar(menubar);
-
-        JMenu filemenu = new JMenu("File");
-        filemenu.setMnemonic(KeyEvent.VK_F);
-        menubar.add(filemenu);
-
-        JMenuItem newmenuitem = new JMenuItem("New");
-        newmenuitem.setMnemonic(KeyEvent.VK_N);
-        newmenuitem.addActionListener(new NewAction());
-        filemenu.add(newmenuitem);
-
-        JMenuItem loadmenuitem = new JMenuItem("Load");
-        loadmenuitem.setMnemonic(KeyEvent.VK_L);
-        loadmenuitem.addActionListener(new LoadAction());
-        filemenu.add(loadmenuitem);
-
-        JMenuItem savemenuitem = new JMenuItem("Save");
-        savemenuitem.setMnemonic(KeyEvent.VK_S);
-        savemenuitem.addActionListener(new SaveAction());
-        filemenu.add(savemenuitem);
-
-        JMenuItem exitmenuitem = new JMenuItem("Exit");
-        exitmenuitem.setMnemonic(KeyEvent.VK_X);
-        exitmenuitem.addActionListener(new ExitAction());
-        filemenu.add(exitmenuitem);
-    }
-
-    /*
-     * The following are all helper classes for the menubar.
-     */
-
-    private class NewAction implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-
-        }
-    }
-
-    private class LoadAction implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-
-        }
-    }
-
-    private class SaveAction implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-
-        }
-    }
-
-    private class ExitAction implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            System.exit(0);
-        }
-    }
-
-    /**
-     * Helper method for the constructor. Sets up the toolbar.
-     */
-    private void setupToolbar()
-    {
-        toolbar = new JToolBar();
-        add(toolbar, BorderLayout.NORTH);
-
-        JButton arrowButton = new JButton("Arrow");
-        toolbar.add(arrowButton);
-
-        JButton grabButton = new JButton("HandScroll");
-        toolbar.add(grabButton);
-    }
-
-    /**
-     * Helper method for the constructor. Sets up the status bar.
-     */
-    private void setupStatusbar()
-    {
-        statusbar = new StatusBar();
-        statusbar.setBorder(BorderFactory.createEtchedBorder(
-                EtchedBorder.RAISED));
-        add(statusbar, BorderLayout.SOUTH);
+        this.statusbar = new StatusBar();
+        this.add(statusbar, BorderLayout.SOUTH);
     }
 
     /**
