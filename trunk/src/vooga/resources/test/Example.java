@@ -1,6 +1,7 @@
 package vooga.resources.test;
 
 import java.awt.Dimension;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,10 +11,10 @@ import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.background.ImageBackground;
 
-import vooga.core.Game;
+import vooga.core.VoogaGame;
 import vooga.resources.images.*;
 
-public class Example extends Game {
+public class Example extends VoogaGame {
 
 	private static final String RESOURCE_XML_FILE = "src/vooga/resources/test/test2.xml";
 	private ImageLoader loader;
