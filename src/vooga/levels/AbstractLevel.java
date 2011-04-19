@@ -93,9 +93,9 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     /**
      * Places all sprites from the initial condition pool onto the playingfield
      */
-    protected void addAllSprites ()
+    protected void addAllSpritesFromPool ()
     {
-        mySpritePool.addAllSprites();
+        mySpritePool.addAllSpritesFromPool();
     }
 
 
@@ -104,35 +104,38 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      * 
      * @param type of sprite to add
      */
-    protected void addAllSprites (String type)
+    protected void addAllSpritesFromPool (String type)
     {
-        mySpritePool.addAllSprites(type);
+        mySpritePool.addAllSpritesFromPool(type);
     }
 
 
     /**
-     * Takes one sprite of the specified type and places it onto the playingfield
+     * Takes one sprite of the specified type from the pool and places it onto the playingfield
      * 
      * @param type of the sprite you wish to initialize
      */
-    protected void addSprite (String type)
+    protected void addSpriteFromPool (String type)
     {
-        mySpritePool.addSprite(type);
+        mySpritePool.addSpriteFromPool(type);
     }
 
 
     /**
      * Creates a new sprite of the specified type, with the specified parameters
      * and places it onto the playingfield. Note that this method does NOT draw
-     * from the sprite pool
+     * from the sprite pool, but instead uses the constructor.
      * 
      * @param type
      * @param paramaters
      */
-    public void addSprite (String type, Object ... paramaters)
+    public void addNewSprite (String type, Object... parameters)
     {
         //TODO
         //myLevelParser.createNewSpriteOfArchetype(spriteArchetype);
+    	for(Object o : parameters) {
+    		o.toString();
+    	}
     }
 
 
@@ -141,7 +144,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      */
     public void addRandomSprite ()
     {
-        myLevelParser.addRandomSprite();
+        mySpritePool.addRandomSprite();
     }
 
 

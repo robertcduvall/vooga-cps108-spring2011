@@ -47,7 +47,14 @@ public class LevelManager
         myLevelOrderMap = new HashMap<Integer, String>();
     }
 
-
+    /**
+     * Loads the first level specified in the level order file.
+     */
+    public void start()
+    {
+    	loadLevel(0);
+    }
+    
     /**
      * Attempts to load level with specified id. Checks to see if the level
      * being loaded is of the same type as the current level. If so, it
@@ -154,9 +161,9 @@ public class LevelManager
      * 
      * @param type of Sprite to add
      */
-    public void addNewSprite (String type)
+    public void addSpriteFromPool (String type)
     {
-        myActiveLevel.addSprite(type);
+        myActiveLevel.addSpriteFromPool(type);
     }
 
 

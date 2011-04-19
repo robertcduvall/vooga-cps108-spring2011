@@ -26,7 +26,7 @@ public class SpritePool
      * Takes all the sprites from this pool, constructs them and
      * lets the sprite constructor add them to the playingfield
      */
-    public void addAllSprites ()
+    public void addAllSpritesFromPool ()
     {
         for(Collection<PoolDeferredConstructor> currentConstructorCollection : mySprites.values())
         {
@@ -42,7 +42,7 @@ public class SpritePool
      * Takes all sprites of a specific type from this pool, constructs them and
      * lets the sprite constructor add them to the playingfield
      */
-    public void addAllSprites(String type)
+    public void addAllSpritesFromPool (String type)
     {
         Collection<PoolDeferredConstructor> constructorsOfType = mySprites.get(type);
         for(PoolDeferredConstructor currentConstructor : constructorsOfType)
@@ -53,10 +53,10 @@ public class SpritePool
     
     
     /**
-     * Takes one sprites of a specific type from this pool, constructs it and
+     * Takes one sprite of a specific type from this pool, constructs it and
      * lets the sprite constructor add it to the playingfield
      */
-    public void addSprite (String type)
+    public void addSpriteFromPool (String type)
     {
         ArrayList<PoolDeferredConstructor> constructorsOfType = mySprites.get(type);
         constructorsOfType.remove(0).construct();
@@ -77,5 +77,17 @@ public class SpritePool
             mySprites.put(spriteType, new ArrayList<PoolDeferredConstructor>());            
         }
         mySprites.get(spriteType).add(poolObject);        
-    }  
+    }
+
+
+    /**
+     * Gets a random sprite constructor from the initial condition pool, constructs it
+     * and adds it to the playfield.
+     */
+	public void addRandomSprite() {
+		Set<String> spriteConstructors = mySprites.keySet();
+		String[] scKey = (String[]) spriteConstructors.toArray();
+		int scIndex = new Random().nextInt(spriteConstructors.size());
+		addSpriteFromPool(scKey[scIndex]);
+	}  
 }
