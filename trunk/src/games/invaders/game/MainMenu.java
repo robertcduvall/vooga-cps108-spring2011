@@ -10,14 +10,12 @@ import com.golden.gamedev.GameObject;
 import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.GameFont;
+import com.golden.gamedev.object.PlayField;
+import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.Timer;
-import com.golden.gamedev.object.background.ImageBackground;
+import com.golden.gamedev.object.background.ColorBackground;
 
 public class MainMenu extends GameObject {
-
-	{
-		hideCursor();
-	}
 
 	GameFont font;
 
@@ -31,7 +29,8 @@ public class MainMenu extends GameObject {
 
 	AnimatedSprite blueStar, redStar;
 
-	Background mainMenuTitle;
+	public Timer discoTimer = new Timer((int) Math.round((1000.0 * 60) / 118));
+	PlayField playField;
 
 	public MainMenu(GameEngine parent) {
 		super(parent);
@@ -42,20 +41,24 @@ public class MainMenu extends GameObject {
 
 		setMaskColor(Color.YELLOW);
 
-		mainMenuTitle = new ImageBackground(
-				getImage("resources/images/title.png"), 320, 240);
+		ColorBackground discoBackground = new ColorBackground(Color.BLACK);
+		playField = new PlayField(discoBackground);
+		Sprite invadersBackground = new Sprite(
+				getImage("resources/images/asi_title.png"));
+		playField.add(invadersBackground);
 
 		arrow = getImage("resources/images/MenuArrow.png");
 
 		font = fontManager.getFont(getImage("resources/images/BitmapFont.png"));
 
 		blueStar = new AnimatedSprite(getImages(
-				"resources/images/BlueStar.png", 7, 1), 26, 22);
-		redStar = new AnimatedSprite(getImages("resources/images/RedStar.png",
-				7, 1), 239, 150);
-
+				"resources/images/BlueStar.png", 7, 1), 126, 22);
 		blueStar.setAnimationTimer(aniTimer);
+		playField.add(blueStar);
+		redStar = new AnimatedSprite(getImages("resources/images/RedStar.png",
+				7, 1), 339, 150);
 		redStar.setAnimationTimer(aniTimer);
+		playField.add(redStar);
 
 	}
 
@@ -110,24 +113,30 @@ public class MainMenu extends GameObject {
 			break;
 
 		}
+		updateBackground(elapsedTime);
+	}
 
+	private void updateBackground(long elapsedTime) {
+		if (discoTimer.action(elapsedTime)) {
+			// Background colorBackground = new ColorBackground(new Color(0));
+			Background colorBackground = new ColorBackground(new Color(
+					(int) (Math.random() * 256 * 256 * 256)));
+			playField.setBackground(colorBackground);
+			discoTimer.refresh();
+		}
 	}
 
 	@Override
 	public void render(Graphics2D g) {
+		playField.render(g);
 
-		mainMenuTitle.render(g);
+		font.drawString(g, "START", 257, 145);
+		font.drawString(g, "EXIT", 257, 165);
 
-		blueStar.render(g);
-		redStar.render(g);
+		// TODO: Do something about this
+		// g.drawString("Copyright (c) 2005 Arbor Games Inc.", 60, 230);
 
-		font.drawString(g, "START", 157, 145);
-		font.drawString(g, "EXIT", 157, 165);
-
-		g.setColor(Color.WHITE);
-		g.drawString("Copyright (c) 2005 Arbor Games Inc.", 60, 230);
-
-		g.drawImage(arrow, 130, 145 + (option * 20), null);
+		g.drawImage(arrow, 230, 145 + (option * 20), null);
 	}
 
 }
