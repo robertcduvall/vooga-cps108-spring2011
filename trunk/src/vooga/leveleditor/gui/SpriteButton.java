@@ -21,9 +21,9 @@ public class SpriteButton extends JButton
 {
 
     private ImageIcon myIcon;
-    private JLayeredPane myPane;
+    private Viewport myPane;
 
-    public SpriteButton(JLayeredPane pane)
+    public SpriteButton(Viewport pane)
     {
     	myPane = pane;
         myIcon = new ImageIcon("src/vooga/leveleditor/images/space_ship.png");
@@ -40,6 +40,7 @@ public class SpriteButton extends JButton
         {
             DraggableImage s = new DraggableImage(myIcon, myPane);
             myPane.addMouseMotionListener(s);
+            myPane.addImage(s);
         }
        
 
