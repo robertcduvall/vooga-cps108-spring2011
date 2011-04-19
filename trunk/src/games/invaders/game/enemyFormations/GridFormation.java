@@ -35,7 +35,7 @@ public class GridFormation extends Formation {
 		double shipDistanceY = game.getHeight() / 3 / formationShipsHigh;
 		for (int i = 0; i < formationShipsHigh; i++) {
 			for (int j = 0; j < formationShipsWide; j++) {
-				int verticalIndex = Math.min(i, lineColors.length);
+				int verticalIndex = Math.min(i, lineColors.length - 1);
 				Sprite enemy = new Enemy(game, lineColors[verticalIndex]);
 				int x = (int) Math.round(centerX + (j - formationShipsWide / 2)
 						* shipDistanceX);

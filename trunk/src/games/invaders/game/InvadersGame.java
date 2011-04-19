@@ -152,7 +152,6 @@ public class InvadersGame extends GameObject {
 		wrapGroup.add(hero);
 		playfield.addCollisionGroup(wrapGroup, edgeGroup, wrapCollisionGroup);
 		hero.setX(50);
-
 	}
 
 	@Override
@@ -178,7 +177,6 @@ public class InvadersGame extends GameObject {
 		if (level.isComplete()) {
 			hero.setX(50);
 			level = level.loadNext();
-			hero.setHitpoints(2);
 		}
 		if (!hero.isActive()) {
 			setEndOfGame(true);
