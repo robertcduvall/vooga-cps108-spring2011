@@ -1,8 +1,9 @@
-package vooga.physics.engine;
+	package vooga.physics.engine;
 
 import java.util.Collection;
+
 import java.util.Map;
-import vooga.core.Game;
+import vooga.core.VoogaGame;
 import vooga.physics.util.Force;
 import java.awt.Point;
 import java.util.HashSet;
@@ -15,17 +16,17 @@ import vooga.util.math.Angle;
 
 public class BasePhysicsEngine implements IPhysicsToggle {
 
-    private static Map<Game, BasePhysicsEngine> myEngines;
+    private static Map<VoogaGame, BasePhysicsEngine> myEngines;
     
     private Collection<Force> worldForces;
     private Collection<IPointField> pointFields;
     private boolean isOn;
     
-    public static void addEngine(Game currentGame, BasePhysicsEngine desiredEngine){
+    public static void addEngine(VoogaGame currentGame, BasePhysicsEngine desiredEngine){
         myEngines.put(currentGame, desiredEngine);
     }
 
-    public static BasePhysicsEngine getEngine(Game game){
+    public static BasePhysicsEngine getEngine(VoogaGame game){
         if (myEngines.containsKey(game))
             return myEngines.get(game);
         throw new RuntimeException();//TODO: Throw the correct exception
