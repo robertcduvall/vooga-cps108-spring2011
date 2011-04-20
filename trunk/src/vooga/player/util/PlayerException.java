@@ -1,5 +1,11 @@
 package vooga.player.util;
 
+/**
+ * @deprecated
+ * @author Andrea
+ *
+ */
+
 @SuppressWarnings("serial")
 public class PlayerException extends RuntimeException
 {

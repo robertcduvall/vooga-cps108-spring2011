@@ -2,6 +2,7 @@ package vooga.player;
 
 
 /**
+ * @deprecated
  * @author Andrea Scripa
  */
 public abstract class HumanPlayerWrapper extends AbstractPlayerWrapper

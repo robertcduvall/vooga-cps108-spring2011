@@ -3,6 +3,7 @@ package vooga.player;
 import vooga.player.Player.PlayerType;
 
 /**
+ * @deprecated
  * @author Andrea Scripa
  * 
  * The superclass of Player's three types of wrappers.  What all these wrappers have in 
