@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<NumDisplay>
+
+<NumStat type="Integer" value="0" name="score" operator="+" step="1000"></NumStat>
+<NumStat type="Double" value="100000" name="health" operator="-" step="1000"></NumStat>
+
+<DisplayGroup name="DisplayGroup">
+<DisplayString x="90" y="100" fontName="Times New Roman" label="Health: " fontSize="36"></DisplayString>
+<DisplayBar x="100" y="100" max="100" stat="health" color="red" backColor="white"></DisplayBar>
+</DisplayGroup>
+
+</NumDisplay>

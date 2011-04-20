@@ -27,7 +27,7 @@ public class DisplayCreator
 {
     private static DisplayTracker myDisplayTracker;
     private static Map<String, String> myClassMap;
-    private static int myDisplayCount;
+    protected static int myDisplayCount;
     private static int myDisplayGroupCount;
 
     /**
