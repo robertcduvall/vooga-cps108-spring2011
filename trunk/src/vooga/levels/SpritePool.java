@@ -1,7 +1,7 @@
 package vooga.levels;
 
 import java.util.*;
-import com.golden.gamedev.object.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 import vooga.levels.util.PoolDeferredConstructor;
 
 

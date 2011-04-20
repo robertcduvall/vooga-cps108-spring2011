@@ -2,7 +2,7 @@ package vooga.levels.util;
 
 import java.util.List;
 
-import com.golden.gamedev.object.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 
 /**
  * Deferred constructor class for sprite objects. Used by the sprite pool in the level
