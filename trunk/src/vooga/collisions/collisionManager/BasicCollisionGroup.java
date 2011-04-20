@@ -81,4 +81,5 @@ public abstract class BasicCollisionGroup extends CollisionManager
      * @param s2 sprite from group 2
      */
     public abstract void collided(Sprite s1, Sprite s2);
+    
 }

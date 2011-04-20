@@ -8,5 +8,6 @@ import java.awt.geom.RectangularShape;
 public interface ITargetable
 {
 
+    //TODO: make this useful?
     
 }

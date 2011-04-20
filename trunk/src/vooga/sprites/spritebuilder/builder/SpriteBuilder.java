@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.TreeSet;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.BuildException;
 import vooga.util.buildable.components.ComponentResources;
@@ -18,11 +19,10 @@ public class SpriteBuilder<T extends Sprite>
 {
 
     
-    private ArrayList<Class<? extends IComponent>> myConstructors;
+    private TreeSet<Class<? extends IComponent>> myConstructors;
     
     public SpriteBuilder(Class<? extends IComponent>...classes){
-        myConstructors = new ArrayList<Class<? extends IComponent>>();
-        myConstructors.addAll(Arrays.asList(classes));
+        myConstructors = new TreeSet<Class<? extends IComponent>>(Arrays.asList(classes));
     }
     
     public T buildSprite(T bs, Object ...in){

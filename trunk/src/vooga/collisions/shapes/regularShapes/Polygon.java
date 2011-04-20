@@ -121,6 +121,7 @@ public class Polygon extends Shape
 		//this.move(60,60);
 		for(Vertex vertex : this.vertices)
 		{
+		    vertex.rotate(point, angle)
 			//lets get the distance to move x first
 			//double hypotenuse = LineMath.length(new Line2D.Double(vertex, this.center));
 			//System.out.println(this.center);
