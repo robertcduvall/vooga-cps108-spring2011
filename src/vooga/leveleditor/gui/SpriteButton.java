@@ -16,6 +16,7 @@ import javax.swing.JLayeredPane;
 
 /**
  * A button that holds a sprite.
+ * 
  */
 public class SpriteButton extends JButton
 {
