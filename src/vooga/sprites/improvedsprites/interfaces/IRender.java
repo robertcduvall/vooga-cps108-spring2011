@@ -2,7 +2,12 @@ package vooga.sprites.improvedsprites.interfaces;
 
 import java.awt.Graphics2D;
 
-
+/**
+ * Renders an object renderable. Uses java.awt.Graphics2D
+ * 
+ * @author Julian
+ *
+ */
 public interface IRender 
 {
 

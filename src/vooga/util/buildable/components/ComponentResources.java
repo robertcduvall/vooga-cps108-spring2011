@@ -54,6 +54,7 @@ public class ComponentResources
             Class<?>[] params = c.getParameterTypes();
             while (firstarg == null && in.hasNext())
                 firstarg = in.next();
+            System.out.println(params[0]);
             if (params.length != 0 && firstarg != null && params[0].isInstance(firstarg))
                 return (Constructor<? extends IComponent>) c;
         }

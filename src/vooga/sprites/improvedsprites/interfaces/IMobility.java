@@ -1,6 +1,11 @@
 package vooga.sprites.improvedsprites.interfaces;
 
-
+/**
+ * Adds various methods which attribute elements of mobility when implemented
+ * 
+ * @author Julian Genkins
+ *
+ */
 public interface IMobility
 {
 
