@@ -22,7 +22,7 @@ public abstract class BasicComponent implements IComponent
     public void setTo (IComponent c)
     {
         this.CheckLikeness(c);
-        this.setFields(((BasicComponent) c).getFields());
+        this.setFieldValues(((BasicComponent) c).getFieldValues());
 
     }
 
@@ -30,7 +30,7 @@ public abstract class BasicComponent implements IComponent
     @Override
     public void setTo (Object ... args)
     {
-        this.setFields(args);
+        this.setFieldValues(args);
     }
 
 
@@ -80,8 +80,8 @@ public abstract class BasicComponent implements IComponent
 
 
     public boolean equals (BasicComponent bc){
-        for (Object t : this.getFields()){
-            for (Object o : bc.getFields()){
+        for (Object t : this.getFieldValues()){
+            for (Object o : bc.getFieldValues()){
                 if(!t.equals(o))
                     return false;
             }
@@ -90,8 +90,8 @@ public abstract class BasicComponent implements IComponent
     }
 
 
-    protected abstract Object[] getFields ();
+    protected abstract Object[] getFieldValues ();
 
-    protected abstract void setFields (Object ... fields);
+    protected abstract void setFieldValues (Object ... fields);
 
 }

@@ -49,14 +49,14 @@ public class TargetableC extends BasicComponent implements IRender
 
 
     @Override
-    protected Object[] getFields ()
+    protected Object[] getFieldValues ()
     {
         return new Object[]{myIndicator, amTargetted};
     }
 
 
     @Override
-    protected void setFields (Object ... fields)
+    protected void setFieldValues (Object ... fields)
     {
         myIndicator = (TargetIndicator) fields[0];
         amTargetted = (Boolean) fields[1];

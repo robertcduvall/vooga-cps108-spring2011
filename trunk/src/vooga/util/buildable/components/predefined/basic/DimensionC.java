@@ -19,14 +19,14 @@ public class DimensionC extends BasicComponent
     }
 
     @Override
-    protected Object[] getFields ()
+    protected Object[] getFieldValues ()
     {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    protected void setFields (Object ... fields)
+    protected void setFieldValues (Object ... fields)
     {
         // TODO Auto-generated method stub
         

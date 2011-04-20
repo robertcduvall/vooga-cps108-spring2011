@@ -26,13 +26,13 @@ public class StringC extends BasicComponent
     }
 
     @Override
-    protected Object[] getFields ()
+    protected Object[] getFieldValues ()
     {
         return new Object[]{myString};
     }
 
     @Override
-    protected void setFields (Object ... fields)
+    protected void setFieldValues (Object ... fields)
     {
         myString = (String) fields[0];
     }

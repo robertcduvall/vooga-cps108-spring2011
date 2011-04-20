@@ -3,12 +3,12 @@ package vooga.util.buildable.components.predefined.basic;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.buildable.components.IComponent;
 
-public class VelocityC  extends BasicComponent
+public class SpeedC  extends BasicComponent 
 {
     
     protected Double[] myVelocities;
     
-    VelocityC( Double ... vs){
+    SpeedC( Double ... vs){
         myVelocities = vs;
     }
     
@@ -27,13 +27,13 @@ public class VelocityC  extends BasicComponent
     @Override
     protected int compareTo (BasicComponent o)
     {
-        return ((Double)this.getAbsoluteVelocity()).compareTo(((VelocityC) o).getAbsoluteVelocity());
+        return ((Double)this.getAbsoluteVelocity()).compareTo(((SpeedC) o).getAbsoluteVelocity());
     }
 
 
 
     @Override
-    protected Object[] getFields ()
+    protected Object[] getFieldValues ()
     {
         return myVelocities;
     }
@@ -41,7 +41,7 @@ public class VelocityC  extends BasicComponent
 
 
     @Override
-    protected void setFields (Object ... fields)
+    protected void setFieldValues (Object ... fields)
     {
         for (int i = 0; i < myVelocities.length; i++){
             myVelocities[i] = (Double) fields[i];

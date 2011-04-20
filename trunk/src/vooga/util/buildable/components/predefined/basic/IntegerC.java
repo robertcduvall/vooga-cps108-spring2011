@@ -24,13 +24,13 @@ public class IntegerC extends BasicComponent
     }
 
     @Override
-    protected Object[] getFields ()
+    protected Object[] getFieldValues ()
     {
         return new Object[]{myInteger};
     }
 
     @Override
-    protected void setFields (Object ... fields)
+    protected void setFieldValues (Object ... fields)
     {
         myInteger = (Integer) fields[0];
     }
