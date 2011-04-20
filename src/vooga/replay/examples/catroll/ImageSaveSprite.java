@@ -42,6 +42,7 @@ public class ImageSaveSprite extends Sprite implements ISaveImage{
 	@Override
 	public void saveImage() {
 		File outputFile = new File(this.imageFile);
+		System.out.println(imageFile);
 		try {
 			ImageIO.write(this.getImage(), "png", outputFile);
 		} catch (IOException e) {

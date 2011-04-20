@@ -44,7 +44,9 @@ public class Level1 extends GameObject {
 		myTable = new StateTable();
 		myField = new PlayField();
 
-		myPlayer = new ImageSaveSprite(image, "vooga/replay/examples/catroll/resourses/images/inGameCat");
+		myPlayer = new ImageSaveSprite(image, System.getProperties()
+				.getProperty("user.dir")
+				+ "/src/vooga/replay/examples/catroll/resources/images/cat.png");
 		PLAYER_GROUP = new SpriteGroup("player group");
 		PLAYER_GROUP.add(myPlayer);
 		myBackground = new ImageBackground(
