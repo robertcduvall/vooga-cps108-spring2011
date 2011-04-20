@@ -7,9 +7,7 @@ import vooga.levels.util.PoolDeferredConstructor;
 
 import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
-import com.golden.gamedev.object.PlayField;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritegroups.SpriteGroup;
 
 
 /**
@@ -19,7 +17,7 @@ import vooga.sprites.spritegroups.SpriteGroup;
  * 
  * @author Andrew Patterson & Wesley Brown
  */
-public abstract class AbstractLevel extends PlayField implements Comparable<AbstractLevel>
+public abstract class AbstractLevel extends VoogaPlayField implements Comparable<AbstractLevel>
 {
     /** The XML parser which is used for reading the level file and creating objects based on the data */
     private LevelParser myLevelParser;
@@ -44,15 +42,13 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
 
     /** This level's players */
     private Collection<Sprite> myPlayers; //TODO: switch back to player (using Sprite is a temporary changed used for testing)
-    
-    /** All of the sprite groups that are currently on the playingfield */
-    private Collection<SpriteGroup> mySpriteGroups;
 
 
     public AbstractLevel (Collection<Sprite> players, Game game)
     {
         myGame = game;
         myPlayers = players;
+        mySpriteGroups = new ArrayList<SpriteGroup>();
     }
 
 
@@ -233,28 +229,6 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     {
         return myId;
     }
-
-
-    /**
-     * If it exists, returns the sprite group of the specified name. If it
-     * doesn't exist, a new sprite group of the specified name is created, added
-     * to the playingfield and returned
-     * 
-     * @return a sprite group of the specified name
-     */
-//    public SpriteGroup getGroup (String groupName)
-//    {
-//        for (SpriteGroup currentGroup : mySpriteGroups)
-//        {
-//            if (currentGroup.getName().equals(groupName))
-//            {
-//                return currentGroup;
-//            }
-//        }
-//        SpriteGroup newGroup = new SpriteGroup(groupName);
-//        //addGroup(newGroup);
-//        return newGroup;
-//    } //TODO Fix
     
     
     /**

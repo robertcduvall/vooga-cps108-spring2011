@@ -8,6 +8,7 @@ import vooga.levels.AbstractLevel;
 import vooga.reflection.Reflection;
 
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
 
 /**
  * Factory class to construct a given sprite given some set of assignments.
@@ -35,7 +36,8 @@ public class SpriteConstructor {
 	 */
 	public Sprite construct(List<String> otherAssignments) {
 		Sprite sprite = constructInstance(otherAssignments);
-		//level.getGroup(spriteGroup).add(sprite); TODO Fix
+		SpriteGroup group = level.getSpriteGroup(spriteGroup);
+		group.add(sprite);
 		return sprite;
 	}
 	
