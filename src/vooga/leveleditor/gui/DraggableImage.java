@@ -6,36 +6,86 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-
+/**
+ * 
+ * @author Charlie Hatcher
+ *
+ */
 public class DraggableImage extends JLabel implements MouseMotionListener{
 	private int x,y;
-	private ImageIcon icon;
-	private JLayeredPane parent;
+	private ImageIcon myIcon;
+	private JLayeredPane myParent;
 	private boolean myFlag = false;
 	
 	public DraggableImage(ImageIcon icon, JLayeredPane parent){
 		super(icon);
-		this.icon = icon;
-		this.parent = parent;
-        parent.add(this,1);
-		this.setVisible(true);
-		this.setOpaque(true);
-		this.setBounds(500, 500, icon.getIconWidth(), icon.getIconWidth());
+		this.myIcon = icon;
+		this.myParent = parent;
+		setAllValuesForDraggableImage(icon, parent, 500, 500);
 	}
+	
+	/**
+	 * Moves the DraggableImage if the image is selected, if the DraggableImage is
+	 * currently selected, and the user clicks, the image will drop. If the user clicks
+	 * on the screen and the mouse's position is not in the image, the image does not
+	 * move.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	protected boolean moveIfSelected(int x, int y){
 		if(myFlag){
-			if(checkIfSelected(x, y)){
-				myFlag = false;
-			}	
+			setFlagOnClick(x, y, false);	
 		}
 		else if(!myFlag){
-			if(checkIfSelected(x, y)){
-				myFlag = true;
-			}
+			setFlagOnClick(x,y, true);
 		}
 		return myFlag;
 	}
+
 	/**
+	 * If the DraggableImage is selected, set the DraggableImage's x and y coordinates
+	 * to the x and y value of the mouse.
+	 */
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		if (myFlag){
+			x = arg0.getX();
+			y = arg0.getY();
+			setAllValuesForDraggableImage(myIcon, myParent, x, y);
+		}
+	}
+	
+	/**
+	 * 
+	 * Sets all the necessary parameters to the DraggableImage in order to see it on
+	 * the viewport. Moves the new Image to the front of layeredpane.
+	 * @param icon
+	 * @param parent
+	 */
+	private void setAllValuesForDraggableImage(ImageIcon icon,
+			JLayeredPane parent, int x, int y) {
+        parent.add(this,1);
+		this.setVisible(true);
+		this.setOpaque(true);
+		this.setBounds(x, y, icon.getIconWidth(), icon.getIconWidth());
+		parent.moveToFront(this);
+	}
+	
+	/**
+	 * Checks to see if the DraggableImage is selected, sets the flag on the click.
+	 * @param x
+	 * @param y
+	 * @param boolean resulting_flag
+	 */
+	private void setFlagOnClick(int x, int y, boolean resulting_flag) {
+		if(checkIfSelected(x, y)){
+			myFlag = resulting_flag;
+		}
+	}
+	
+	/**
+	 * Checks to see if the mouse's position is inside the DraggableImage.
 	 * @param x
 	 * @param y
 	 * @return
@@ -44,27 +94,9 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 		return ((this.getX()-this.getWidth())<x && (this.getX()+this.getWidth())>x)
 				&& ((this.getY()-this.getHeight())<y) &&(this.getY()+this.getHeight())>y;
 	}
-
+	
 	@Override
 	public void mouseDragged(MouseEvent arg0) {		
-		/*we currently do not need this method, may be used if drag and drop is
-		 * issues
-		 */
-		return;
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		if (myFlag){
-			x = arg0.getX();
-			y = arg0.getY();
-			this.setVisible(true);
-			this.setOpaque(true);
-			this.setBounds(x, y, icon.getIconWidth(), icon.getIconWidth());
-			parent.add(this,1);
-			parent.moveToFront(this);
-		}
 		
 	}
-	
 }
