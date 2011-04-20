@@ -38,7 +38,7 @@ public class ServerListener implements Runnable
 				
 				client.output.flush();
 				client.output.writeObject(ConnectionControl.INFORMATION);
-				client.output.writeObject(engine.getMyConnectInfo());
+				client.output.writeObject(engine.getMyInfo());
 				client.output.flush();
 				
 				client.input  = new ObjectInputStream(client.socket.getInputStream());
@@ -47,7 +47,6 @@ public class ServerListener implements Runnable
 					client.output.writeObject(ConnectionControl.CREATEHOST);
 					client.output.flush();
 				}
-//				System.out.println("request form: "+client.userName+". number of connections: "+connection.size());
 				receiveRunnable = new ReceiveRunnable(client, engine);
 				(new Thread(receiveRunnable)).start();
 			} catch (IOException e) {

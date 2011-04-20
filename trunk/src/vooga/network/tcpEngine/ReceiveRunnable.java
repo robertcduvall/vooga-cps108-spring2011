@@ -60,7 +60,6 @@ public class ReceiveRunnable implements Runnable
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// System.out.println("server receiver ends. remaining connections: "+connectionList.size());
 	}
 
 }
