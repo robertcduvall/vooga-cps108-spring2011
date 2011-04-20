@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.golden.gamedev.Game;
-import com.golden.gamedev.object.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 
 import vooga.reflection.Reflection;
 

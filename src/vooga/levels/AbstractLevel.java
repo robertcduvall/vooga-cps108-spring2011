@@ -8,8 +8,8 @@ import vooga.levels.util.PoolDeferredConstructor;
 import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
-import com.golden.gamedev.object.Sprite;
-import com.golden.gamedev.object.SpriteGroup;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
 
 
 /**
@@ -44,6 +44,9 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
 
     /** This level's players */
     private Collection<Sprite> myPlayers; //TODO: switch back to player (using Sprite is a temporary changed used for testing)
+    
+    /** All of the sprite groups that are currently on the playingfield */
+    private Collection<SpriteGroup> mySpriteGroups;
 
 
     public AbstractLevel (Collection<Sprite> players, Game game)
@@ -239,21 +242,19 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      * 
      * @return a sprite group of the specified name
      */
-    @Override
-    public SpriteGroup getGroup (String groupName)
-    {
-        SpriteGroup[] allGroups = getGroups();
-        for (SpriteGroup currentGroup : allGroups)
-        {
-            if (currentGroup.getName().equals(groupName))
-            {
-                return currentGroup;
-            }
-        }
-        SpriteGroup newGroup = new SpriteGroup(groupName);
-        addGroup(newGroup);
-        return newGroup;
-    }
+//    public SpriteGroup getGroup (String groupName)
+//    {
+//        for (SpriteGroup currentGroup : mySpriteGroups)
+//        {
+//            if (currentGroup.getName().equals(groupName))
+//            {
+//                return currentGroup;
+//            }
+//        }
+//        SpriteGroup newGroup = new SpriteGroup(groupName);
+//        //addGroup(newGroup);
+//        return newGroup;
+//    } //TODO Fix
     
     
     /**
