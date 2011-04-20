@@ -22,6 +22,28 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 		this.setOpaque(true);
 		this.setBounds(500, 500, icon.getIconWidth(), icon.getIconWidth());
 	}
+	protected boolean moveIfSelected(int x, int y){
+		if(myFlag){
+			if(checkIfSelected(x, y)){
+				myFlag = false;
+			}	
+		}
+		else if(!myFlag){
+			if(checkIfSelected(x, y)){
+				myFlag = true;
+			}
+		}
+		return myFlag;
+	}
+	/**
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private boolean checkIfSelected(int x, int y) {
+		return ((this.getX()-this.getWidth())<x && (this.getX()+this.getWidth())>x)
+				&& ((this.getY()-this.getHeight())<y) &&(this.getY()+this.getHeight())>y;
+	}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {		
@@ -45,11 +67,4 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 		
 	}
 	
-	protected void setFlag(boolean flag){
-		myFlag = flag;
-	}
-	
-	protected boolean getFlag(){
-		return myFlag;
-	}
 }

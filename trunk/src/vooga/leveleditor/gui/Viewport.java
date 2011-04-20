@@ -58,18 +58,18 @@ public class Viewport extends JLayeredPane
     	 */
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			/*
-			 * TODO See if it is possible to get rid of if statements
-			 */
+			moveSelectedImage();
+		}
+
+		/*
+		 * BUGBUG: Sometimes takes more than one click to register drop and pick up
+		 * FIXME: iterate through the for loop backwards not sure if this is needed
+		 * anymore
+		 */
+		private void moveSelectedImage() {
 			if(myImages.size()>0){
 				for(DraggableImage i: myImages){
-					if(((i.getX()-i.getWidth())<x && (i.getX()+i.getWidth())>x)
-							&& ((i.getY()-i.getHeight())<y) &&(i.getY()+i.getHeight())>y){
-						if(i.getFlag()){
-							i.setFlag(false);
-						}
-						else i.setFlag(true);
-					}
+					if(i.moveIfSelected(x, y));
 				}
 			}
 			return;
