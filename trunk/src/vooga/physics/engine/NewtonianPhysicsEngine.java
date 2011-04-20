@@ -14,9 +14,7 @@ import vooga.util.math.MathVector;
 
 public class NewtonianPhysicsEngine extends BasePhysicsEngine {
 
-    private static NewtonianPhysicsEngine myInstance;
-
-    private NewtonianPhysicsEngine() {
+    public NewtonianPhysicsEngine() {
         super();
     }
 
@@ -210,12 +208,6 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
                 }
             }
         }
-    }
-
-    public static NewtonianPhysicsEngine getInstance() {
-        if (myInstance == null)
-            myInstance = new NewtonianPhysicsEngine();
-        return myInstance;
     }
 
 }

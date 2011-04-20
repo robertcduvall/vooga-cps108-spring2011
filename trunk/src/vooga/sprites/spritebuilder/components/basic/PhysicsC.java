@@ -81,7 +81,7 @@ public class PhysicsC extends BasicComponent implements INewtonianPhysical, ISpr
 
     @Override
     public void update(Sprite s, long elapsedTime) {
-        if (isOn())
-            NewtonianPhysicsEngine.getInstance().applyWorldForces(this, elapsedTime);
+        if (isOn())//TODO: Get access to engine
+            VoogaPhysicsMediator.getInstance().getEngine(null).applyWorldForces(this, elapsedTime);
     }
 }

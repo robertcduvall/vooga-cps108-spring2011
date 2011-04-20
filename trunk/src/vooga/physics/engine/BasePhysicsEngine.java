@@ -1,7 +1,6 @@
-	package vooga.physics.engine;
+package vooga.physics.engine;
 
 import java.util.Collection;
-
 import java.util.Map;
 import vooga.core.VoogaGame;
 import vooga.physics.util.Force;
@@ -16,23 +15,11 @@ import vooga.util.math.Angle;
 
 public class BasePhysicsEngine implements IPhysicsToggle {
 
-    private static Map<VoogaGame, BasePhysicsEngine> myEngines;
-    
     private Collection<Force> worldForces;
     private Collection<IPointField> pointFields;
     private boolean isOn;
-    
-    public static void addEngine(VoogaGame currentGame, BasePhysicsEngine desiredEngine){
-        myEngines.put(currentGame, desiredEngine);
-    }
 
-    public static BasePhysicsEngine getEngine(VoogaGame game){
-        if (myEngines.containsKey(game))
-            return myEngines.get(game);
-        throw new RuntimeException();//TODO: Throw the correct exception
-    }
-    
-    protected BasePhysicsEngine() {
+    public BasePhysicsEngine() {
         worldForces = new HashSet<Force>();
         pointFields = new HashSet<IPointField>();
         isOn = true;
@@ -150,8 +137,6 @@ public class BasePhysicsEngine implements IPhysicsToggle {
      * General collision method. Tells the two physical objects that a collision
      * occurred.
      * 
-     * BUG: If someone implements more than one interface, this will generate compilation errors.
-     * 
      * @param object1
      * @param object2
      * @param pointOfCollision
@@ -159,13 +144,21 @@ public class BasePhysicsEngine implements IPhysicsToggle {
      * @param coefficientOfRestitution
      */
     public void collision(Object object1, Object object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
-        if (isOn()) {//TODO: Loop over interfaces by casting so the proper methods get called?
-            //Class<?>[] interfaces = object1.getClass().getInterfaces();
-            applyCollision(object1, object2, angleOfImpact, pointOfImpact, coefficientOfRestitution);
-            applyCollision(object2, object1, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+        if (isOn()) {
+            Class<?>[] firstObjectInterfaces = object1.getClass().getInterfaces();
+            Class<?>[] secondObjectInterfaces = object2.getClass().getInterfaces();
+            
+            for (Class c : firstObjectInterfaces) {
+                applyCollision(c.getClass().cast(object1), object2, angleOfImpact, pointOfImpact,
+                        coefficientOfRestitution);
+            }
+            for (Class c : secondObjectInterfaces) {
+                applyCollision(c.getClass().cast(object2), object1, angleOfImpact, pointOfImpact,
+                        coefficientOfRestitution);
+            }
         }
     }
-    
+
     /**
      * Applies an external field to an IPhysics object.
      * 
@@ -177,7 +170,8 @@ public class BasePhysicsEngine implements IPhysicsToggle {
      */
     public <T> boolean applyCollision(T thisObject, Object otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         if (IPhysicsCustomCollide.class.isAssignableFrom(thisObject.getClass())) {
-            ((IPhysicsCustomCollide) thisObject).collisionOccurred(otherObject, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+            ((IPhysicsCustomCollide) thisObject).collisionOccurred(otherObject, angleOfImpact, pointOfImpact,
+                    coefficientOfRestitution);
             return true;
         }
         return false;
