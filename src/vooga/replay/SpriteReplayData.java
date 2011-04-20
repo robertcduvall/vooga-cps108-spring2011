@@ -14,11 +14,11 @@ import com.golden.gamedev.object.Sprite;
 public class SpriteReplayData implements Serializable {
 
 	private Point2D.Double myPoint;
-	private BufferedImage myImage;
+	private BufferedImageSerialData myImage;
 
 	public SpriteReplayData(Sprite s) {
 		myPoint = new Point2D.Double(s.getX(), s.getY());
-		myImage = s.getImage();
+		myImage = new BufferedImageSerialData(s.getImage());
 	}
 
 	public SpriteReplayData(Sprite s, double x, double y) {
@@ -35,7 +35,7 @@ public class SpriteReplayData implements Serializable {
 	}
 
 	public BufferedImage getImage() {
-		return myImage;
+		return myImage.getImage();
 	}
 
 }

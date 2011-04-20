@@ -6,9 +6,6 @@ import java.awt.image.BufferedImage;
 
 import vooga.replay.StateTable;
 import vooga.replay.StateTableFileManager;
-import vooga.sprites.improvedsprites.*;
-import vooga.sprites.spritegroups.*;
-import vooga.sprites.spritebuilder.builder.SpriteBuilder;
 
 import com.golden.gamedev.GameObject;
 ///import com.golden.gamedev.engine.audio.JavaLayerMp3Renderer;
@@ -24,7 +21,7 @@ public class Level1 extends GameObject {
 	private StateTableFileManager stfm = new StateTableFileManager();
 
 	private StateTable myTable;
-	private ImageSaveSprite myPlayer;
+	private Sprite myPlayer;
 	private Background myBackground;
 	private int angle = 0;
 	private BufferedImage image = getImage("resources/images/cat.png");
@@ -44,29 +41,25 @@ public class Level1 extends GameObject {
 		myTable = new StateTable();
 		myField = new PlayField();
 
-		myPlayer = new ImageSaveSprite(image, System.getProperties()
-				.getProperty("user.dir")
-				+ "/src/vooga/replay/examples/catroll/resources/images/cat.png");
+		myPlayer = new Sprite(image);
+		
 		PLAYER_GROUP = new SpriteGroup("player group");
 		PLAYER_GROUP.add(myPlayer);
 		myBackground = new ImageBackground(
 				getImage("resources/images/background.png"));
-		PLAYER_GROUP.setBackground(myBackground);
-		/*myField.addGroup(PLAYER_GROUP);
-		myField.setBackground(myBackground);*/
+
+		myField.addGroup(PLAYER_GROUP);
+		myField.setBackground(myBackground);
 
 	}
 
 	@Override
 	public void render(Graphics2D g) {
 		myField.render(g);
-		PLAYER_GROUP.render(g);
-		myBackground.render(g);
 	}
 
 	@Override
 	public void update(long elapsedTime) {
-		myField.update(elapsedTime);
 		if (keyDown(KeyEvent.VK_D)) {
 			myPlayer.moveX(.08 * elapsedTime);
 			angle += elapsedTime;
@@ -97,8 +90,10 @@ public class Level1 extends GameObject {
 			parent.nextGame = new CatReplay(parent, myTable);
 			finish();
 		}
-		myTable.record(myField);
+		
+		myField.update(elapsedTime);
 
+		myTable.record(myField);
 	}
 
 }

@@ -2,19 +2,14 @@ package vooga.replay;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
-
-import vooga.replay.examples.catroll.ImageSaveSprite;
-
 import com.golden.gamedev.object.*;
+import com.golden.gamedev.object.background.ImageBackground;
 
 /**
  * Records all the sprites and background that were updated in the game. Used as
@@ -30,14 +25,14 @@ public class StateTable implements Serializable {
 	// private StateTable parent;
 	// private ArrayList<StateTable> children;
 	protected Map<Sprite, ArrayList<SpriteReplayData>> myMap;
-	protected List<Background> backgroundList;
-	protected Background myBackground;
+	protected List<BufferedImageSerialData> backgroundList;
+	protected ImageBackground myBackground;
 	protected int time;
 	protected SerialPlayField lastPlayField;
 
 	public StateTable() {
 		myMap = new HashMap<Sprite, ArrayList<SpriteReplayData>>();
-		backgroundList = new ArrayList<Background>();
+		backgroundList = new ArrayList<BufferedImageSerialData>();
 		time = 0;
 		lastPlayField = new SerialPlayField();
 	}
@@ -62,7 +57,8 @@ public class StateTable implements Serializable {
 	 *            - PlayField passed to the StateTable to be recorded.
 	 */
 	public void updateStateTable(PlayField field) {
-		backgroundList.add(field.getBackground());
+		//System.out.println(((ImageBackground)field.getBackground()).getImage());
+		backgroundList.add(new BufferedImageSerialData(((ImageBackground)field.getBackground()).getImage()));
 		for (SpriteGroup s : field.getGroups()) {
 			updateHelper(s.getSprites());
 		}
@@ -95,11 +91,6 @@ public class StateTable implements Serializable {
 	public void render(Graphics2D g) {
 		myBackground.render(g);
 		for (Sprite s : myMap.keySet()) {
-			try {
-				s.setImage(ImageIO.read(new File(((ImageSaveSprite)s).getImageFileName())));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			s.render(g);
 		}
 	}
@@ -113,7 +104,7 @@ public class StateTable implements Serializable {
 	 *            - Time, location in time relative to "StateTable indices"
 	 */
 	public void transformSprite(int t) {
-		myBackground = backgroundList.get(t);
+		myBackground = new ImageBackground(backgroundList.get(t).getImage());
 		for (Sprite s : myMap.keySet()) {
 			SpriteReplayData sData = myMap.get(s).get(t);
 			s.setLocation(sData.getX(), sData.getY());
@@ -141,8 +132,8 @@ public class StateTable implements Serializable {
 	 */
 	public void record(PlayField field) {
 		updateStateTable(field);
-		if (field != null)
-			lastPlayField.setPlayField(field);
+		//if (field != null)
+			//lastPlayField.setPlayField(field);
 	}
 
 	public void record(Sprite s) {
