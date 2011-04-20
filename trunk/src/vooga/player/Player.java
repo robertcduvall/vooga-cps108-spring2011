@@ -5,6 +5,8 @@ import vooga.core.GameEntity;
 
 
 /**
+ * @deprecated
+ * =(
  * A developer can make one or more specialized players for his game (ex: PacManPlayer),
  * which should extend this abstract class.
  * 
