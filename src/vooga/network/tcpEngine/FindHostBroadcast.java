@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Broadcast extends Thread {
+public class FindHostBroadcast extends Thread {
 	
 	public void run(){
 		
@@ -26,15 +26,13 @@ public class Broadcast extends Thread {
 			
 			boardCastSocket = new DatagramSocket();
 			boardCastSocket.setBroadcast(true);
-			InetAddress[] onlineNode = getAllOnline();
+			//InetAddress[] onlineNode = getAllOnline();
 			int i = 0;
 			while (i++ < Constants.BroadcastTimes){
-				for (InetAddress addr : onlineNode) {
-					DatagramPacket packet = new DatagramPacket(data, data.length, addr, Constants.BroadcastPort);
-					System.out.println(addr);
-					boardCastSocket.send(packet); 
-					sleep(100);
-				}
+				DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName("255.255.255.255"), Constants.BroadcastPort);
+				//System.out.println(addr);
+				boardCastSocket.send(packet); 
+				sleep(300);
 			}
 			
 		}catch (Exception e) {
@@ -42,12 +40,18 @@ public class Broadcast extends Thread {
 		} 
 	}
 	
+	//TODO: delete
 	public static InetAddress[] getAllOnline() {
+		
+//		for (InetAddress addr : onlineNode) {
+//		DatagramPacket packet = new DatagramPacket(data, data.length, addr, Constants.BroadcastPort);
+//		System.out.println(addr);
+//		boardCastSocket.send(packet); 
+//		sleep(100);
+//	}
+	
 		List<InetAddress> v = new ArrayList<InetAddress>(50);
 		try {
-			// Process process1 =
-			// Runtime.getRuntime().exec("ping -w 2 -n 1 192.168.1.%i");
-			// process1.destroy();
 			Process process = Runtime.getRuntime().exec("arp -a");
 			InputStreamReader inputStr = new InputStreamReader(process
 					.getInputStream());

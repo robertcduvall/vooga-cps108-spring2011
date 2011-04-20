@@ -41,8 +41,10 @@ public class RequestHandler extends Thread {
 						return;
 					String prefix = incomingMsg.split(",")[0];
 					String hostIP = incomingMsg.split(",")[1];
-					if (prefix.equals(Constants.CreateHostPrefix))
+					if (prefix.equals(Constants.CreateHostPrefix)){
 						availableServers.add(hostIP);
+						System.out.println("add host to server: " + hostIP);
+					}
 					if (prefix.equals(Constants.DisconnectHostPrefix))
 						availableServers.remove(hostIP);
 					client.close();

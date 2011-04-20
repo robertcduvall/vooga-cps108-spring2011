@@ -4,14 +4,16 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.List;
 
+import vooga.network.INetworkEngine;
+
 public class ReceiveRunnable implements Runnable
 {
 	Connection client;
 	List<Object> receivedList;
 	List<Connection> connectionList;
-	TCPNetworkEngine engine;
+	AbstractNetworkEngine engine;
 
-	public ReceiveRunnable(Connection client, TCPNetworkEngine e)
+	public ReceiveRunnable(Connection client, AbstractNetworkEngine e)
 	{
 		this.client = client;
 		this.engine = e;
@@ -34,7 +36,7 @@ public class ReceiveRunnable implements Runnable
 						engine.connect(str);
 					} else if (obj == ConnectionControl.CREATEHOST) {
 						System.out.println("received build host command");
-						engine.createLocalHost(false);
+						engine.createHost(false);
 					} else if (obj == ConnectionControl.INFORMATION) {
 						client.info = (ConnectInfo) client.input.readObject();
 					} else

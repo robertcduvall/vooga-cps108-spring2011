@@ -8,7 +8,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 
 
-public class BroadcastListener extends Thread {
+public class FindHostBroadcastListener extends Thread {
 	byte[] buffer = new byte[65507];
 	DatagramSocket server = null;
 	DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
@@ -24,6 +24,8 @@ public class BroadcastListener extends Thread {
 			while (true) {
 				server.receive(packet);
 				String message = new String(packet.getData(), 0, packet.getLength());
+				
+				System.out.println(message);
 				
 				if (message.split(",").length < 2)
 					continue;
