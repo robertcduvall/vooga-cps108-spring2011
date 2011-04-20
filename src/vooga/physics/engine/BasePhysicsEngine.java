@@ -150,6 +150,8 @@ public class BasePhysicsEngine implements IPhysicsToggle {
      * General collision method. Tells the two physical objects that a collision
      * occurred.
      * 
+     * BUG: If someone implements more than one interface, this will generate compilation errors.
+     * 
      * @param object1
      * @param object2
      * @param pointOfCollision
@@ -157,7 +159,8 @@ public class BasePhysicsEngine implements IPhysicsToggle {
      * @param coefficientOfRestitution
      */
     public void collision(Object object1, Object object2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
-        if (isOn()) {
+        if (isOn()) {//TODO: Loop over interfaces by casting so the proper methods get called?
+            //Class<?>[] interfaces = object1.getClass().getInterfaces();
             applyCollision(object1, object2, angleOfImpact, pointOfImpact, coefficientOfRestitution);
             applyCollision(object2, object1, angleOfImpact, pointOfImpact, coefficientOfRestitution);
         }
