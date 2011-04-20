@@ -19,11 +19,9 @@ public class SpriteConstructor {
 	private String spriteGroup;
 	private List<String> partialAssignments;
 	private ConverterRack converterRack;
-	private AbstractLevel level;
 	
-	public SpriteConstructor(AbstractLevel level, ConverterRack converterRack, 
+	public SpriteConstructor(ConverterRack converterRack, 
 			String className, String spriteGroup, List<String> partialAssignments) {
-		this.level = level;
 		this.converterRack = converterRack;
 		this.className = className;
 		this.partialAssignments = partialAssignments;
