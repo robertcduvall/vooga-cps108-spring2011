@@ -165,7 +165,7 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 		return rtn;
 	}
 
-	public ConnectInfo getMyConnectInfo()
+	public ConnectInfo getMyInfo()
 	{
 
 		return myInfo;
@@ -235,12 +235,10 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 	}
 
 	public boolean isGameStarted() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public void setGameStarted(boolean v) {
-		// TODO Auto-generated method stub
 		
 	}
 	

@@ -252,8 +252,9 @@ public class MainGUI extends JFrame implements ActionListener
 
 		if (obj == userItem || obj == createServerButton) {
 			if (networkEngine == null) {
-				networkEngine = new InternetNetworkEngine(port);
-				//networkEngine.setUserName(userName);
+				// networkEngine = new InternetNetworkEngine(port);
+				networkEngine = new LocalNetworkEngine(port);
+				networkEngine.getMyInfo().setName(userName);
 			}
 			if (networkEngine.createHost(false)) {
 				messageShow.append("fail to build the server\n");
@@ -271,73 +272,63 @@ public class MainGUI extends JFrame implements ActionListener
 
 		} else if (obj == joinItem || obj == joinButton) {
 			if (networkEngine == null) {
-				networkEngine = new InternetNetworkEngine(port);
-				//networkEngine.setUserName(userName);
+				// networkEngine = new InternetNetworkEngine(port);
+				networkEngine = new LocalNetworkEngine(port);
+				networkEngine.getMyInfo().setName(userName);
 			}
-			 List<ConnectInfo> result = networkEngine.searchHost();
-			 if (result != null){
-			 if (result.size() == 0)
-			 JOptionPane.showMessageDialog(null, "Host Not Found", "Alert",
-			 JOptionPane.ERROR_MESSAGE);
-			 else {
-			 String[] foundServer = new String[result.size()];
-			 for (int i = 0; i < result.size(); i++)
-			 foundServer[i] = result.get(i).getIPaddress();
-			 Object selectedValue = JOptionPane.showInputDialog(null,
-			 "Choose one Server", "Input",
-			 JOptionPane.INFORMATION_MESSAGE, null, foundServer,
-			 foundServer[0]);
-			 //System.out.println((String) selectedValue);
-			 if ((String) selectedValue != null){
-			 if (networkEngine.connect((String) selectedValue)) {
-			 messageShow.append("fail to build the connection\n");
-			 } else {
-			 //set buttons
-			 joinButton.setEnabled(false);
-			 createServerButton.setEnabled(false);
-			 exitButton.setEnabled(true);
-			
-			 //start thread
-			 (new Thread(new UserReceiveRunnable(this, networkEngine)))
-			 .start();
-			 messageShow.append("build the connection successfully\n");
-			 }
-			 }
-			 }
-			 }else{
-			 JOptionPane.showMessageDialog(null,
-			 "Server not found, check server connectivity", "Alert",
-			 JOptionPane.ERROR_MESSAGE);
-			 }
+			List<ConnectInfo> result = networkEngine.searchHost();
+			if (result != null) {
+				if (result.size() == 0)
+					JOptionPane.showMessageDialog(null, "Host Not Found",
+							"Alert", JOptionPane.ERROR_MESSAGE);
+				else {
+					String[] foundServer = new String[result.size()];
+					for (int i = 0; i < result.size(); i++)
+						foundServer[i] = result.get(i).getIPaddress();
+					Object selectedValue = JOptionPane.showInputDialog(null,
+							"Choose one Server", "Input",
+							JOptionPane.INFORMATION_MESSAGE, null, foundServer,
+							foundServer[0]);
+					// System.out.println((String) selectedValue);
+					if ((String) selectedValue != null) {
+						if (networkEngine.connect((String) selectedValue)) {
+							messageShow
+									.append("fail to build the connection\n");
+						} else {
+							// set buttons
+							joinButton.setEnabled(false);
+							createServerButton.setEnabled(false);
+							exitButton.setEnabled(true);
 
-			
-			// for testing, connect to this computer only
-//			if (networkEngine.connect("127.0.0.1")) {
-//				messageShow.append("fail to build the connection\n");
-//			} else {
-//				(new Thread(new UserReceiveRunnable(this, networkEngine)))
-//						.start();
-//				messageShow.append("build the connection successfully\n");
-//
-//				(new Thread(new UpdateConnectionInfo(this, networkEngine)))
-//						.start();
-//				joinButton.setEnabled(false);
-//				createServerButton.setEnabled(false);
-//				exitButton.setEnabled(true);
-//			}
+							// start thread
+							(new Thread(new UserReceiveRunnable(this,
+									networkEngine))).start();
+							(new Thread(new UpdateConnectionInfo(this,
+									networkEngine))).start();
+							messageShow
+									.append("build the connection successfully\n");
+						}
+					}
+				}
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Server not found, check server connectivity", "Alert",
+						JOptionPane.ERROR_MESSAGE);
+			}
 
 		} else if (obj == userNameItem || obj == usernameButton) {
 			UserConf userConf = new UserConf(this, userName);
 			userConf.setVisible(true);
 			userName = userConf.userInputName;
 			nameLabel.setText("User Name: " + userName);
-			//networkEngine.setUserName(userName);
+			networkEngine.getMyInfo().setName(userName);
+			networkEngine.getMyInfo().setName(userName);
 
 		} else if (obj == startgameItem || obj == startgameButton) {
-//			networkEngine.setStartGame(true);
+			
 		} else if (obj == clientMessage || obj == clientMessageButton) {
 			String message = clientMessage.getText();
-			networkEngine.send(userName+" : "+message);
+			networkEngine.send(userName + " : " + message);
 			clientMessage.setText("");
 
 		} else if (obj == exitButton || obj == exitItem) {
@@ -361,6 +352,5 @@ public class MainGUI extends JFrame implements ActionListener
 	public static void main(String[] args)
 	{
 		MainGUI app = new MainGUI();
-		//INetworkEngine e = new LocalNetworkEngine();
 	}
 }
