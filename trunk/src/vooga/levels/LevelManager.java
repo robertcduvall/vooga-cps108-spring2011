@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.golden.gamedev.Game;
 
-import vooga.levels.example.reflection.Reflection;
+import vooga.reflection.Reflection;
 import vooga.sprites.improvedsprites.Sprite;
 
 
@@ -69,7 +69,7 @@ public class LevelManager
         String levelFileName = myLevelOrderMap.get(id);
 
         // 1st item is the class type of the level
-        // 2nd is the user defined name which is a comment
+        // 2nd is the user defined name which in essence is a comment        
         String[] levelDef = levelFileName.split("\\_");
         String activeLevelClass = myActiveLevel.getClass().getName();
         activeLevelClass = activeLevelClass.substring(0, activeLevelClass.indexOf(".")); //Gets rid of ".class"
