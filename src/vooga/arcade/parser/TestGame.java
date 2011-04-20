@@ -13,6 +13,12 @@ import com.golden.gamedev.Game;
 public class TestGame extends Game {
 
     @Override
+    protected void notifyExit()
+    {
+        
+    }
+    
+    @Override
     public void initResources() {
         // TODO Auto-generated method stub
 
