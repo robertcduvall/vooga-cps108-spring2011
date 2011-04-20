@@ -8,7 +8,7 @@ import java.util.TreeSet;
 import vooga.collisions.CollisionException;
 import vooga.collisions.shapes.regularShapes.IShape;
 import vooga.collisions.shapes.regularShapes.Shape;
-import vooga.levels.example.reflection.Reflection;
+import vooga.reflection.Reflection;
 
 public class IntersectionFactory 
 {

@@ -93,7 +93,8 @@ public class PhysicsRotateC extends PhysicsC implements INewtonianRotate{
             isOn = true;
         
     }
-    
+/*  
+BUGBUG: No longer needed?  
     @Override
     public void collisionOccurred(Object otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
         //TODO: implement this
@@ -114,4 +115,5 @@ public class PhysicsRotateC extends PhysicsC implements INewtonianRotate{
           //TODO: implement this
         }
     }
+*/
 }
