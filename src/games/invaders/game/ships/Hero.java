@@ -52,6 +52,8 @@ public class Hero extends Ship {
 		// }
 		// TODO: For demo only, Restore this for springiness in actual game
 		double verticalAcceleration = 0;
+		// TODO: Spring force physics
+		// Vertical movement component
 		verticalAcceleration += (equilibriumHeight - getY()) * 0.00003;
 		if (game.keyDown(KeyEvent.VK_UP)) {
 			verticalAcceleration -= 0.0004;
@@ -63,6 +65,7 @@ public class Hero extends Ship {
 				(verticalAcceleration > 0) ? 8 : -8);
 		setVerticalSpeed(getVerticalSpeed()
 				* Math.pow(2, -(elapsedTime) / 1200D));
+		// Horizontal movement component
 		setHorizontalSpeed(getHorizontalSpeed()
 				* Math.pow(2, -elapsedTime / 1200D));
 		// Fire missile -- Uses "timer" to set fire rate
