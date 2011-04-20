@@ -1,4 +1,4 @@
-#summary This Page provide an overview for the NetworkEngine Package
+#summary This Page provide an overview for how the NetworkEngine Package works
 
 = Introduction =
 
