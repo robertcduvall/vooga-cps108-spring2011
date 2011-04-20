@@ -10,7 +10,7 @@ import vooga.user.model.LoginTemplate;
 /**
  * Interface for the Controller in the MVC pattern for the login structure
  * 
- * @author Conrad
+ * @author Conrad.
  */
 public interface ILoginController
 {
