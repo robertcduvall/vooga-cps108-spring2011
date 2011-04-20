@@ -33,10 +33,12 @@ public class SpriteConstructor {
 	/**
 	 * Constructs a sprite, adding it to the appropriate sprite in the level.
 	 * @param otherAssignments the assignments to finish the assignment.
+	 * @return 
 	 */
-	public void construct(List<String> otherAssignments) {
+	public Sprite construct(List<String> otherAssignments) {
 		Sprite sprite = constructInstance(otherAssignments);
 		level.getGroup(spriteGroup).add(sprite);
+		return sprite;
 	}
 	
 	/**

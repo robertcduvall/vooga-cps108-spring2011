@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.golden.gamedev.Game;
+import com.golden.gamedev.object.Sprite;
 
 import vooga.reflection.Reflection;
-import vooga.sprites.improvedsprites.Sprite;
 
 
 /**
@@ -149,9 +149,9 @@ public class LevelManager
     /**
      * Adds a random sprite from the lowest running level pool
      */
-    public void addRandomSprite ()
+    public Sprite addRandomSprite ()
     {
-        myActiveLevel.addRandomSprite();
+        return myActiveLevel.addRandomSprite();
     }
 
 
@@ -161,9 +161,9 @@ public class LevelManager
      * 
      * @param type of Sprite to add
      */
-    public void addSpriteFromPool (String type)
+    public Sprite addSpriteFromPool (String type)
     {
-        myActiveLevel.addSpriteFromPool(type);
+        return myActiveLevel.addSpriteFromPool(type);
     }
 
 
