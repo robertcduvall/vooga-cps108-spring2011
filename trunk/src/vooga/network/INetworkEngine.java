@@ -7,19 +7,19 @@ import java.util.List;
 import vooga.network.tcpEngine.ConnectInfo;
 import vooga.network.tcpEngine.Connection;
 
-public interface INetworkEngine
-{
+public interface INetworkEngine {
 	/**
-	 * connects to a server with ip IP
-	 * d
+	 * connects to a server with ip IP d
+	 * 
 	 * @param IP
 	 * @return false if successfully created
 	 */
 	boolean connect(String IP);
 
 	/**
-	 * Create a local host, if the argument is true, then there will be
-	 * connections between clients. The default argument should be false.
+	 * Create a host, if the argument is true, then there will be connections
+	 * between each clients connecting to this host. The default argument should
+	 * be false.
 	 * 
 	 * @param name
 	 * @return false if successfully created
@@ -28,17 +28,16 @@ public interface INetworkEngine
 
 	/**
 	 * 
-	 * @return the list of object received since last update
+	 * @return the list of object received from the network since last update
 	 */
 	List<Object> update();
 
 	/**
-	 * Search for the hosts on local area network
+	 * Search for the hosts on the network
 	 * 
 	 * @return
 	 */
 	List<ConnectInfo> searchHost();
-
 
 	/**
 	 * Disconnect from all connections.
@@ -46,7 +45,7 @@ public interface INetworkEngine
 	void disconnect();
 
 	/**
-	 * Send an serializable obj after the connection is established
+	 * Send an serializable obj to all its connections
 	 * 
 	 * @param obj
 	 * @return
@@ -56,7 +55,7 @@ public interface INetworkEngine
 	/**
 	 * check whether currently is in connection or disconnected
 	 * 
-	 * @return
+	 * @return true if currently connecting to other computers
 	 */
 	boolean isConnected();
 
@@ -66,11 +65,10 @@ public interface INetworkEngine
 	 * @return
 	 */
 	List<ConnectInfo> getConnectionInfo();
-	
+
 	/**
-	 * Return the user information.
+	 * Return information of this computer.
 	 * 
-	 * @param userName
 	 */
 	ConnectInfo getMyInfo();
 }
