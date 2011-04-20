@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.Queue;
 import vooga.levels.util.LevelParser;
 import vooga.levels.util.PoolDeferredConstructor;
-import vooga.sprites.improvedsprites.Sprite;
 
 import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
+import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 
 
@@ -119,10 +119,11 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      * Takes one sprite of the specified type from the pool and places it onto the playingfield
      * 
      * @param type of the sprite you wish to initialize
+     * @return 
      */
-    protected void addSpriteFromPool (String type)
+    protected Sprite addSpriteFromPool (String type)
     {
-        mySpritePool.addSpriteFromPool(type);
+        return mySpritePool.addSpriteFromPool(type);
     }
 
 
@@ -134,22 +135,24 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      * @param type
      * @param paramaters
      */
-    public void addNewSprite (String type, Object... parameters)
+    public Sprite addNewSprite (String type, Object... parameters)
     {
         //TODO
         //myLevelParser.createNewSpriteOfArchetype(spriteArchetype);
     	for(Object o : parameters) {
     		o.toString();
     	}
+    	return null;
     }
 
 
     /**
      * Takes a random sprite from the pool and places it onto the playingfield
+     * @return 
      */
-    public void addRandomSprite ()
+    public Sprite addRandomSprite ()
     {
-        mySpritePool.addRandomSprite();
+        return mySpritePool.addRandomSprite();
     }
 
 

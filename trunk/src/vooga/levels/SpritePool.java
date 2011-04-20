@@ -1,6 +1,7 @@
 package vooga.levels;
 
 import java.util.*;
+import com.golden.gamedev.object.Sprite;
 import vooga.levels.util.PoolDeferredConstructor;
 
 
@@ -55,11 +56,12 @@ public class SpritePool
     /**
      * Takes one sprite of a specific type from this pool, constructs it and
      * lets the sprite constructor add it to the playingfield
+     * @return 
      */
-    public void addSpriteFromPool (String type)
+    public Sprite addSpriteFromPool (String type)
     {
         ArrayList<PoolDeferredConstructor> constructorsOfType = mySprites.get(type);
-        constructorsOfType.remove(0).construct();
+        return constructorsOfType.remove(0).construct();
     }
     
     
@@ -83,11 +85,12 @@ public class SpritePool
     /**
      * Gets a random sprite constructor from the initial condition pool, constructs it
      * and adds it to the playfield.
+     * @return 
      */
-	public void addRandomSprite() {
+	public Sprite addRandomSprite() {
 		Set<String> spriteConstructors = mySprites.keySet();
 		String[] scKey = (String[]) spriteConstructors.toArray();
 		int scIndex = new Random().nextInt(spriteConstructors.size());
-		addSpriteFromPool(scKey[scIndex]);
+		return addSpriteFromPool(scKey[scIndex]);
 	}  
 }
