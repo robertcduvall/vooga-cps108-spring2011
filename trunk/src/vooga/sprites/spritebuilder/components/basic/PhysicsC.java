@@ -27,7 +27,7 @@ public class PhysicsC extends VelocityC implements INewtonianPhysical, ISpriteUp
 
     @Override
     protected int compareTo(BasicComponent o) {
-        // TODO: do we use this to compare whether a component is more specific
+        // TODO: do we use this to compare whether a component is more specific.
         // for physics than another
         return 0;
     }
