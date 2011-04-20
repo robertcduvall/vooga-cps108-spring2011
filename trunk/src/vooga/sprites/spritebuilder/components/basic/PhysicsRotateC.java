@@ -93,27 +93,5 @@ public class PhysicsRotateC extends PhysicsC implements INewtonianRotate{
             isOn = true;
         
     }
-/*  
-BUGBUG: No longer needed?  
-    @Override
-    public void collisionOccurred(Object otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
-        //TODO: implement this
-        
-    }
 
-    @Override
-    public void collisionOccurred(INewtonianMovable otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
-        if (isOn()) {
-          //TODO: implement this
-        }
-        
-    }
-
-    @Override
-    public void collisionOccurred(INewtonianPhysical otherObject, Angle angleOfImpact, Point pointOfCollision, double coefficientOfRestitution) {
-        if (isOn()) {
-          //TODO: implement this
-        }
-    }
-*/
 }
