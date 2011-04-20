@@ -5,6 +5,8 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.util.List;
 
+import vooga.network.INetworkEngine;
+
 
 public class ServerListener implements Runnable
 {
@@ -13,10 +15,10 @@ public class ServerListener implements Runnable
 	List<Connection> connection;
 	ReceiveRunnable receiveRunnable;
 	List<Object> receivedList;
-	TCPNetworkEngine engine;
+	AbstractNetworkEngine engine;
 	boolean fullyConnect;
 
-	public ServerListener(ServerSocket server, TCPNetworkEngine e, boolean fullyConnect){
+	public ServerListener(ServerSocket server, AbstractNetworkEngine e, boolean fullyConnect){
 		this.server = server;
 		this.engine = e;
 		this.connection = e.getConnectionList();

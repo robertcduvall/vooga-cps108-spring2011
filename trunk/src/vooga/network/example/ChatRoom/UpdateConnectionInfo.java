@@ -2,14 +2,14 @@ package vooga.network.example.ChatRoom;
 
 import java.util.List;
 
-import vooga.network.NetworkEngine;
+import vooga.network.INetworkEngine;
 import vooga.network.tcpEngine.ConnectInfo;
 
 public class UpdateConnectionInfo implements Runnable
 {
 	private MainGUI gui;
-	private NetworkEngine engine;
-	public UpdateConnectionInfo(MainGUI gui, NetworkEngine e){
+	private INetworkEngine engine;
+	public UpdateConnectionInfo(MainGUI gui, INetworkEngine e){
 		this.gui = gui;
 		this.engine = e;
 	}
@@ -17,7 +17,7 @@ public class UpdateConnectionInfo implements Runnable
 	@Override
 	public void run()
 	{
-		while(!engine.isClosed()){
+		while(engine.isConnected()){
 			try {
 				Thread.sleep(3000);
 				List<ConnectInfo> list = engine.getConnectionInfo();

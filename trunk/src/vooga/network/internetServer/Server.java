@@ -1,11 +1,10 @@
 package vooga.network.internetServer;
 import javax.swing.*;
 
-
 import vooga.network.exceptions.NetworkException;
+
 import vooga.network.tcpEngine.ConnectInfo;
 import vooga.network.tcpEngine.Constants;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,10 +26,11 @@ public class Server implements ActionListener{
 	
 	private Set<String> availableServers;
 	ServerSocket serverSocket;
+	boolean threadStop = false;
 	
 	Server(){
 		init();
-		availableServers = new HashSet<String>();
+		
 	}
 	
 	public static void main(String[] args){
@@ -63,13 +64,19 @@ public class Server implements ActionListener{
 		startServer.setEnabled(false);
 		stopServer.setEnabled(true);
 		status.setText("Server started!");
+		
+		availableServers = Collections.synchronizedSet(new HashSet<String>());
+		threadStop = false;
 		try {
+			
+			
 			//server listen to the port, if host connect, add IP to the list, if client query, return the list
 			serverSocket = new ServerSocket(Constants.ServerPort, 10);
-			ServerListener listener = new ServerListener(serverSocket, availableServers);
-			listener.start();
+			ServerListener requestListenerThread = new ServerListener(serverSocket, availableServers,this);
+			requestListenerThread.start();
 			
-			
+			CheckConnectivity checkConnectivityThread = new CheckConnectivity(availableServers,this);
+			checkConnectivityThread.start();
 			
 		} catch (IOException e) {
 			throw NetworkException.FAIL_TO_CREATE_HOST;
@@ -80,7 +87,12 @@ public class Server implements ActionListener{
 		startServer.setEnabled(true);
 		stopServer.setEnabled(false);
 		status.setText("Server stopped!");
-		
+		threadStop = true;
+		try{
+			serverSocket.close();
+		}catch (Exception e){
+			
+		}
 	}
 
 	private void init(){

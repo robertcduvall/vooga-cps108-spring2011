@@ -13,21 +13,24 @@ public class ServerListener extends Thread {
 	ServerSocket serverSocket;
 	Set<String> availableServers;
 	Socket client;
+	Server server;
 	
 	
-	ServerListener(ServerSocket serverSocket, Set<String> availableServers){
+	ServerListener(ServerSocket serverSocket, Set<String> availableServers, Server server){
 		this.serverSocket = serverSocket;
 		this.availableServers = availableServers;
+		this.server = server;
 	}
 	
 	public void run(){
 		try {
-			while(true){
+			while(!server.threadStop){
 				client = serverSocket.accept();
 				RequestHandler handler = new RequestHandler(client, availableServers);
 				handler.start();
 			}
 		} catch (IOException e) {
+			//TODO: exception
 		}
 	}
 }

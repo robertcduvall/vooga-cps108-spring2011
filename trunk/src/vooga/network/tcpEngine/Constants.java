@@ -10,14 +10,18 @@ public class Constants {
 	public static String RequestAvailableHostPrefix = "Request Available Hosts";
 	public static String ResponseAvailableHostPrefix = "Available Hosts";
 	static int BroadcastTimes = 3;
-	static int SearchServerTimeOut = 5000;
+	static int SearchHostTimeOut = 3000;
+	static int SearchServerTimeOut = 3000;
+	static int TCPConnectionBacklogLimit = 20;
 	
 	public static int ServerPort = 5140;
-	static String ServerIP = "10.180.122.138";
+	static String ServerIP = "152.3.194.20";
+	
+	public static int HostRemainConnectivityPort = 5141;
 	
 	static int HostPort = 5150;
 	
 	public static int getSearchServerTimeOut(){
-		return SearchServerTimeOut;
+		return SearchHostTimeOut;
 	}
 }

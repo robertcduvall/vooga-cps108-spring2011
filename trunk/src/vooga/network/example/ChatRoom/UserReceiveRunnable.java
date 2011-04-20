@@ -5,14 +5,13 @@ import java.net.SocketException;
 import java.util.List;
 
 
-import vooga.network.NetworkEngine;
-import vooga.network.tcpEngine.TCPNetworkEngine;
+import vooga.network.INetworkEngine;
 
 public class UserReceiveRunnable implements Runnable
 {
 	private MainGUI gui;
-	private NetworkEngine engine;
-	public UserReceiveRunnable(MainGUI gui, NetworkEngine e){
+	private INetworkEngine engine;
+	public UserReceiveRunnable(MainGUI gui, INetworkEngine e){
 		this.gui = gui;
 		this.engine = e;
 	}
@@ -21,7 +20,7 @@ public class UserReceiveRunnable implements Runnable
 	public void run()
 	{
 		List<Object> received;
-		while(!engine.isClosed()){
+		while(engine.isConnected()){
 			received = engine.update();
 			for(Object object : received){
 				try{
