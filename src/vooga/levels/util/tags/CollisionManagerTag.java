@@ -4,8 +4,8 @@ import org.w3c.dom.Element;
 
 import com.golden.gamedev.object.CollisionManager;
 
-import vooga.levels.example.reflection.Reflection;
 import vooga.levels.util.LevelParser;
+import vooga.reflection.Reflection;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 

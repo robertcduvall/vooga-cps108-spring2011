@@ -25,7 +25,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     private LevelParser myLevelParser;
 
     /** The vooga game for which this is a level for */
-    private Game myGame; //TODO: switch to voogagame
+    private Game myGame; //TODO: switch to voogagame (using Game is a temporary changed used for testing)
 
     /** The goal which this level must reach in order to progress */
     private IGoal myGoal;
@@ -43,7 +43,7 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     private int myId;
 
     /** This level's players */
-    private Collection<Sprite> myPlayers; //TODO: switch back to player
+    private Collection<Sprite> myPlayers; //TODO: switch back to player (using Sprite is a temporary changed used for testing)
 
 
     public AbstractLevel (Collection<Sprite> players, Game game)
@@ -56,6 +56,11 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
     /**
      * The key method that the LevelManager will call when loading a level. The
      * implementation of this method will determine how a level initializes.
+     * When writing this method, the convenience of the AbstractLevel class
+     * should be called in order to ensure that objects are properly added to
+     * the playingfield. For example, addAllSprites() and addBackground() should
+     * be called if a level requires all the sprites to be initialized from the
+     * pool and if the first background is desired.
      */
     public abstract void loadLevel ();
 
@@ -153,7 +158,10 @@ public abstract class AbstractLevel extends PlayField implements Comparable<Abst
      */
     protected void addMusic ()
     {
-        myGame.playMusic(myMusic.remove());
+        if(myMusic.size() > 0)
+        {
+            myGame.playMusic(myMusic.remove());
+        }
     }
     
     
