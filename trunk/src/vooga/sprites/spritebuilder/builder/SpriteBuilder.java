@@ -25,7 +25,7 @@ public class SpriteBuilder<T extends Sprite>
         myConstructors = new TreeSet<Class<? extends IComponent>>(Arrays.asList(classes));
     }
     
-    public T buildSprite(T bs, Object ...in){
+    public T buildSprite(T spriteBase, Object ...in){
         Iterator<Class<? extends IComponent>> iter1 = myConstructors.iterator();
         Queue<Object> input = new LinkedList<Object>(Arrays.asList(in));
 
@@ -37,7 +37,7 @@ public class SpriteBuilder<T extends Sprite>
             {
                Constructor<? extends IComponent> c = ComponentResources.findConstructor(iter1.next(), input); //find constructor
                Object[] args = getConstructorArgs(c, input); //get arguements for constructor
-               bs.addComponent((IComponent) c.newInstance(args));
+               spriteBase.addComponent((IComponent) c.newInstance(args));
             }
             catch (Exception e)
             {
@@ -47,7 +47,7 @@ public class SpriteBuilder<T extends Sprite>
         }
         
         
-        return bs;
+        return spriteBase;
         
         
     }
