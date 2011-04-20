@@ -34,7 +34,7 @@ import vooga.util.buildable.IBuildable;
 import vooga.util.buildable.components.ComponentResources;
 import vooga.util.buildable.components.ComponentSet;
 import vooga.util.buildable.components.IComponent;
-import vooga.util.buildable.components.predefined.basic.Velocity2DC;
+import vooga.util.buildable.components.predefined.basic.Speed2DC;
 import vooga.util.math.LineMath;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.collision.CollisionShape;
@@ -133,8 +133,17 @@ public class Sprite extends BaseSprite
 
         this.background = Background.getDefaultBackground();
         myComponents = new ComponentSet<IComponent>();
-        myComponents.add(new Velocity2DC());
+        myComponents.add(new Speed2DC());
     }
+    
+//    /**
+//     * Constuctor used to clone a sprite
+//     * @param s
+//     */
+//    public Sprite(Sprite s){
+//        this(s.getImage(), s.getX(), s.getY());
+//        s.setComponents(s.getComponents().toArray());
+//    }
 
 
     /**
@@ -246,7 +255,7 @@ public class Sprite extends BaseSprite
     
     @Override
     public void addSpeed(long elapsedTime, double accel, double direction, double max){
-        this.getComponent(Velocity2DC.class);
+        this.getComponent(Speed2DC.class);
     }
 
 
@@ -430,7 +439,7 @@ public class Sprite extends BaseSprite
     @Override
     public double getHorizontalSpeed ()
     {
-        return this.getComponent(Velocity2DC.class).getXVelocity();
+        return this.getComponent(Speed2DC.class).getXVelocity();
     }
 
 
@@ -441,7 +450,7 @@ public class Sprite extends BaseSprite
     @Override
     public double getVerticalSpeed ()
     {
-        return this.getComponent(Velocity2DC.class).getYVelocity();
+        return this.getComponent(Speed2DC.class).getYVelocity();
     }
 
 
@@ -704,7 +713,7 @@ public class Sprite extends BaseSprite
     @Override
     public void setSpeed (double vx, double vy)
     {
-        this.setComponent(Velocity2DC.class, vx, vy);
+        this.setComponent(Speed2DC.class, vx, vy);
     }
 
 

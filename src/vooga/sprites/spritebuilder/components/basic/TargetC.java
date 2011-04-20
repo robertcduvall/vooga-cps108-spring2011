@@ -27,13 +27,13 @@ public class TargetC extends BasicComponent
     }
 
     @Override
-    protected Object[] getFields ()
+    protected Object[] getFieldValues ()
     {
         return new Object[]{myTarget};
     }
 
     @Override
-    protected void setFields (Object ... fields)
+    protected void setFieldValues (Object ... fields)
     {
         myTarget = (ITargetable) fields[0];
     }

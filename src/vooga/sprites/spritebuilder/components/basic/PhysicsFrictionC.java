@@ -45,13 +45,13 @@ public class PhysicsFrictionC extends BasicComponent implements INewtonianFricti
     }
 
     @Override
-    protected Object[] getFields() {
+    protected Object[] getFieldValues() {
         
         return new Object[]{coefficient, isOn};
     }
 
     @Override
-    protected void setFields(Object... fields) {
+    protected void setFieldValues(Object... fields) {
         coefficient = (Double) fields[0];
         if (fields.length > 1)
             isOn = (Boolean) fields[1];

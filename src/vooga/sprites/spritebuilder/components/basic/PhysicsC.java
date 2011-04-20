@@ -20,8 +20,8 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  * 
  */
-public class PhysicsC extends BasicComponent implements INewtonianPhysical, ISpriteUpdater{
-    private Sprite mySprite;
+public class PhysicsC extends VelocityC implements INewtonianPhysical, ISpriteUpdater{
+ 
     private double myMass;
     private boolean isOn;
 
@@ -33,13 +33,13 @@ public class PhysicsC extends BasicComponent implements INewtonianPhysical, ISpr
     }
 
     @Override
-    protected Object[] getFields() {
-        return this.getClass().getFields();
+    protected Object[] getFieldValues() {
+        return new Object[]{mySprite, myMass, isOn}; //TODO: this is not going to return the field values, just the fields
     }
 
     @Override
-    protected void setFields(Object... fields) {
-        mySprite = (Sprite) fields[0];
+    protected void setFieldValues(Object... fields) {
+        super.setFieldValues(fields);
         myMass = (Double) fields[1];
         if (fields.length > 2)
             isOn = (Boolean) fields[2];
@@ -57,17 +57,6 @@ public class PhysicsC extends BasicComponent implements INewtonianPhysical, ISpr
         return new Point((int) mySprite.getCenterX(), (int) mySprite.getCenterY());
     }
 
-    @Override
-    public Velocity getVelocity() {
-        return new Velocity(mySprite.getHorizontalSpeed(), -mySprite.getVerticalSpeed());
-    }
-
-    @Override
-    public void setVelocity(Velocity newVelocity) {
-        mySprite.setHorizontalSpeed(newVelocity.getXComponent());
-        mySprite.setVerticalSpeed(-newVelocity.getYComponent());
-
-    }
 
     @Override
     public boolean isOn() {

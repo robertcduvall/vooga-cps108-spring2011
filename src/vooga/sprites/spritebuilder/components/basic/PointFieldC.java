@@ -30,12 +30,12 @@ public class PointFieldC extends BasicComponent implements IPointField{
     }
 
     @Override
-    protected Object[] getFields() {
+    protected Object[] getFieldValues() {
         return new Object[]{mySprite, myMagnitude, immovable, isOn};
     }
 
     @Override
-    protected void setFields(Object... fields) {
+    protected void setFieldValues(Object... fields) {
         mySprite = (Sprite) fields[0];
         myMagnitude = (Double) fields[1];
         if (fields.length > 2)

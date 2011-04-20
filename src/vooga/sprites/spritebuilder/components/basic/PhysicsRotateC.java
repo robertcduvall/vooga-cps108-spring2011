@@ -79,12 +79,12 @@ public class PhysicsRotateC extends PhysicsC implements INewtonianRotate{
     }
 
     @Override
-    protected Object[] getFields() {
+    protected Object[] getFieldValues() {
         return new Object[]{mySprite, myMass, isOn};
     }
 
     @Override
-    protected void setFields(Object... fields) {
+    protected void setFieldValues(Object... fields) {
         mySprite = (Sprite) fields[0];
         myMass = (Double) fields[1];
         if (fields.length > 2)
