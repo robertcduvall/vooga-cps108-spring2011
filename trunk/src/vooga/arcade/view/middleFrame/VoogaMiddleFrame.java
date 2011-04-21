@@ -1,6 +1,7 @@
 package vooga.arcade.view.middleFrame;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
@@ -22,7 +23,8 @@ public class VoogaMiddleFrame extends JPanel{
 		BorderLayout b = new BorderLayout();
 		this.setLayout(b);
 		
-		middlePanel = new ThumbnailPanel();
+		ArrayList<JPanel> allGames = pc.queryModel(null);
+		middlePanel = new ThumbnailPanel(allGames);
 		rightPanel = new ColumnTextPanes(MiddleFrameResource
 				.getInteger("RightPanelNumber"), MiddleFrameResource
 				.getStringArray("RightPanelLabels"), pc);

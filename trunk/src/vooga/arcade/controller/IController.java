@@ -2,6 +2,8 @@ package vooga.arcade.controller;
 
 import java.awt.Component;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import javax.swing.JPanel;
 
 // import vooga.arcade.gui.helper.DrawableData;
 
@@ -15,7 +17,7 @@ public interface IController
 {
 	public void displayError(String s);
 	
-	public void queryModel(String s);
+	public ArrayList<JPanel> queryModel(String s);
 	
 
     public void sortInModel (String s)

@@ -3,6 +3,8 @@ package vooga.arcade.controller;
 import java.awt.Dimension;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import javax.swing.JPanel;
 import vooga.arcade.model.ArcadeModel;
 import vooga.arcade.view.gui.VoogaViewer;
 
@@ -38,9 +40,9 @@ public class ArcadeController implements IController
 
 
     @Override
-    public void queryModel (String query)
+    public ArrayList<JPanel> queryModel (String query)
     {
-
+        return null;
     }
     
     @Override
