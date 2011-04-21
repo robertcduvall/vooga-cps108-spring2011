@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import vooga.arcade.controller.PracticeController;
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
 
 
@@ -35,7 +35,7 @@ public class ColumnTextPanes extends JPanel
 
     public ColumnTextPanes (final int numPanels,
                             String[] names,
-                            final PracticeController pc)
+                            final ArcadeController pc)
     {
         for (int i = 0; i < numPanels; i++)
         {

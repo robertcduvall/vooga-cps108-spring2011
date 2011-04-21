@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import vooga.arcade.controller.PracticeController;
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.buttonToolBar.ButtonBar;
 import vooga.arcade.view.helper.ResourceManager;
 import vooga.arcade.view.iView.IView;
@@ -27,12 +27,12 @@ public class VoogaViewer extends JFrame implements IView
     private ResourceManager middleFrameResource =
         new ResourceManager("vooga.arcade.resources.MiddleFrameResource");
 
-    private PracticeController pc;
+    private ArcadeController pc;
 
     public VoogaViewer (String title,
                         String prompt,
                         Dimension dim,
-                        PracticeController p)
+                        ArcadeController p)
     {
         try
         {
@@ -63,7 +63,7 @@ public class VoogaViewer extends JFrame implements IView
                         String prompt,
                         int dimx,
                         int dimy,
-                        PracticeController p)
+                        ArcadeController p)
     {
         this(title, prompt, new Dimension(dimx, dimy), p);
     }

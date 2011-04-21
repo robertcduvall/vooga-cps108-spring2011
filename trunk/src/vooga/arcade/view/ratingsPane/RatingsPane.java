@@ -12,7 +12,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import vooga.arcade.controller.PracticeController;
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
 import vooga.arcade.view.middleFrame.VoogaMiddleFrame;
 
@@ -24,11 +24,11 @@ public class RatingsPane extends JPanel {
 	private ResourceManager ratingsPaneResource = new ResourceManager(
 			"vooga.arcade.resources.RatingsPaneResource");
 
-	private PracticeController pc;
+	private ArcadeController pc;
 	private JEditorPane ratingsPane;
 	private JScrollPane scrollPane;
 
-	public RatingsPane(PracticeController p) {
+	public RatingsPane(ArcadeController p) {
 		this(DEFAULT_TEXT_FIELD_WIDTH, DEFAULT_TEXT_FIELD_HEIGHT);
 		pc = p;
 	}

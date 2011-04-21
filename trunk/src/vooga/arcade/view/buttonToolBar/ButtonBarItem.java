@@ -28,9 +28,9 @@ public class ButtonBarItem extends JButton {
 
 	public ButtonBarItem(Icon icon, String buttonName, IController p) {
 		super(icon);
-		//ActionListener aa = ActionFactory.createAction(className + buttonName,
-				//p);
-		//this.addActionListener(aa);
+		ActionListener aa = ActionFactory.createAction(className + buttonName,
+				p);
+		this.addActionListener(aa);
 
 		setMargin(margins);
 		setVerticalTextPosition(BOTTOM);
