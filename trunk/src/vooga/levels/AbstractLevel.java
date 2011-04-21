@@ -252,6 +252,14 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     }
     
     
+    @Override
+    public void update (long elapsedTime)
+    {
+        super.update(elapsedTime);
+        checkCompletion();      
+    }
+    
+    
     /**
      * Compares a level based on its id
      */

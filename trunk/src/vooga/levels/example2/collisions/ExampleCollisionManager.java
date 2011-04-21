@@ -3,7 +3,7 @@ package vooga.levels.example2.collisions;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
-public class ColManAB extends BasicCollisionGroup {
+public class ExampleCollisionManager extends BasicCollisionGroup {
 
 	@Override
 	public void collided(Sprite s1, Sprite s2) {
