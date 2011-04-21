@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.ResourceBundle;
 import java.util.Set;
 import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
 import vooga.core.event.examples.VoogaExampleGame;
+import vooga.resources.KeyMap;
 import com.golden.gamedev.GameLoader;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Sprite;
@@ -231,6 +233,8 @@ public class DuelingDan extends VoogaExampleGame
 
         initializeEventHandlers();
         initializeNonPlayerCharacters();
+        
+        setKeyMap(new KeyMap(ResourceBundle.getBundle("vooga.core.event.examples.duelingdan.resources.DefaultKeyMap")));
 
         getEventManager().pushFilter(); // Checkpoint the initial system state
 
