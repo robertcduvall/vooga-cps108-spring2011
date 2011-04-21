@@ -17,7 +17,7 @@ import vooga.arcade.view.helper.ResourceManager;
  */
 public class ActionFactory {
 	private static ResourceManager factoryResources = new ResourceManager(
-			"ActionFactoryResource");
+			"vooga.arcade.resources.ActionFactoryResource");
 
 	public static ActionListener createAction(String objName, IController p) {
 		// reflect on method/class name
