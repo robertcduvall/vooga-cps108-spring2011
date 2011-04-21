@@ -17,12 +17,12 @@ public class Viewport extends JLayeredPane
 {
     private int x,y;
     private DrawingBoard owner;
-    private ArrayList<DraggableImage> myImages;
+    private ArrayList<DraggableImage> mySprites;
     
     public Viewport(DrawingBoard owner, int width, int height)
     {
         super();
-        myImages = new ArrayList<DraggableImage>();
+        mySprites = new ArrayList<DraggableImage>();
         this.owner = owner;
         setPreferredSize(new Dimension(width, height));
         addMouseMotionListener(new MouseTracker());
@@ -30,7 +30,7 @@ public class Viewport extends JLayeredPane
     }
     
     void addImage(DraggableImage i){
-    	myImages.add(i);
+    	mySprites.add(i);
     }
     
     /**
@@ -58,23 +58,50 @@ public class Viewport extends JLayeredPane
     	 */
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			moveSelectedImage();
+			/*if(!arg0.isControlDown()){
+				moveSelectedSprite();
+			}
+			if(arg0.isControlDown()){
+				editSelectedSprite();
+			}*/
+			for(int i=0; i<mySprites.size();i++){
+				if(!arg0.isControlDown()){
+					if(mySprites.get(i).moveIfSelected(x, y));
+				}
+				if(arg0.isControlDown()){
+					mySprites.get(i).setSpriteProperties(x, y);
+				}
+			}
 		}
 
+		/**
+		 * Brings up a new internal frame that serves as a popup to allow the user to
+		 * edit the sprites properties in a text file.
+		 * 
+		 * Currently unused
+		 */
 		/*
-		 * BUGBUG: Sometimes takes more than one click to register drop and pick up
+		private void editSelectedSprite() {
+			for(int i=0; i<mySprites.size();i++){
+				mySprites.get(i).setSpriteProperties(x, y);
+			}
+		}
+		*/
+		/*
 		 * FIXME: iterate through the for loop backwards not sure if this is needed
 		 * anymore
+		 * 
+		 * currently unused
 		 */
-		private void moveSelectedImage() {
-			if(myImages.size()>0){
-				for(DraggableImage i: myImages){
+		/*
+		private void moveSelectedSprite() {
+			if(mySprites.size()>0){
+				for(DraggableImage i: mySprites){
 					if(i.moveIfSelected(x, y));
 				}
 			}
-			return;
 		}
-
+		*/
 		/**
 		 * the rest of these methods are unneeded, but come standard with the
 		 * MouseListener interface
