@@ -7,11 +7,11 @@ package vooga.stats;
  *  @author Yin Xiao
  */
 
-public class Stat<T> 
+public abstract class AbstractStat<T> 
 {	
 	private T myStat;
 	
-	public Stat(T t)
+	public AbstractStat(T t)
 	{
 		myStat = t;
 	}
@@ -21,8 +21,10 @@ public class Stat<T>
 		return myStat;
 	}
 	
-	public void setStat(T t)
+	public void cheat(T t)
 	{
 		myStat = t;
 	}
+	
+	public abstract T update();
 }

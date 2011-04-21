@@ -9,8 +9,11 @@ import java.util.Set;
 import vooga.stats.operators.AbstractArithmeticOperator;
 import vooga.reflection.Reflection;
 
-public class NumStat<T> extends Stat {
+public class NumStat<T> extends AbstractStat {
 	
+	/**
+	 * These are keywords that help define arithmetic operators.
+	 */
 	public final static String PLUS = "+";
 	public final static String MINUS = "-";
 	public final static String TIMES = "*";
@@ -21,7 +24,6 @@ public class NumStat<T> extends Stat {
 	private T myStat;
 	private T myStep;
 	private AbstractArithmeticOperator myOperator;
-	
 	
 	public NumStat(T iniVal) {
 		this(iniVal, null, new String());
@@ -35,6 +37,13 @@ public class NumStat<T> extends Stat {
 		this(iniVal, step, token, new HashMap<String, String>());
 	}
 	
+	/**
+	 * Create instance of NumStat based on all given parameters
+	 * @param iniVal
+	 * @param step
+	 * @param token
+	 * @param operators
+	 */
 	public NumStat(T iniVal, T step, String token, Map<String, String> operators)
 	{
 		super(iniVal);
@@ -62,8 +71,9 @@ public class NumStat<T> extends Stat {
 	 * @param initial
 	 * @param eventName
 	 */
+	// TODO: is it necessary?
 	public void setInitialValue(T initial) {
-		super.setStat(initial);
+		super.cheat(initial);
 	}
 	
 	/**
@@ -75,16 +85,30 @@ public class NumStat<T> extends Stat {
 		myStep = step;
 	}
 	
+	/**
+	 * Manually change statistical information
+	 * @param stat
+	 */
+	/*
 	public void cheat(T stat) {
 		myStat = stat;
 	}
+	*/
 	
+	/**
+	 * Update stat by current step and operator
+	 * @return
+	 */
+	@Override
 	public T update() {
 		cheat((T) myOperator.evaluateSafe(Double.valueOf(myStat.toString()), 
 				Double.valueOf(myStep.toString())));
 		return myStat;
 	}
 	
+	/**
+	 * Convert stat to a string
+	 */
 	public String toString() {
 		return String.valueOf(myStat);
 	}

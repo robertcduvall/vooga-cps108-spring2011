@@ -22,7 +22,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.golden.gamedev.object.SpriteGroup;
-
+/**
+ * A class reads in all numerical statistics from xml file
+ * All statistics are stored in tracker
+ * @author Yin
+ *
+ */
 public class NumDisplayCreator { // extends DisplayCreator {
 	
 	private DisplayTracker myDisplayTracker;
@@ -35,6 +40,10 @@ public class NumDisplayCreator { // extends DisplayCreator {
     	createOverlays(xmlLocation);
     }
     
+    /**
+     * Get tracker for statistics
+     * @return
+     */
     public DisplayTracker getTracker() {
     	return myDisplayTracker;
     }
@@ -68,6 +77,9 @@ public class NumDisplayCreator { // extends DisplayCreator {
         return myDisplayTracker;
     }
     
+    /**
+     * Initialize display properties
+     */
     private void initializeClassMap() {
         Properties props = new Properties();
         try {
@@ -83,7 +95,7 @@ public class NumDisplayCreator { // extends DisplayCreator {
     }
     
     /**
-	 * Initialize operatiors in a map
+	 * Initialize operator properties
 	 */
 	private Map<String, String> initializeOperators() {
 		Properties props = new Properties();
@@ -100,6 +112,11 @@ public class NumDisplayCreator { // extends DisplayCreator {
         return myOperators;
 	}
 	
+	/**
+	 * Get operator token by given keyword
+	 * @param keyword
+	 * @return
+	 */
 	public String getOperatorToken(String keyword) {
 		return myOperators.get(keyword);
 	}

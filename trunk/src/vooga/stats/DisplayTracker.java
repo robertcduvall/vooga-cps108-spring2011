@@ -14,13 +14,13 @@ public class DisplayTracker
 {
     private Map<String, SpriteGroup> myStatsGroup;
     private Map<String, Display> myDisplays;
-    private Map<String, Stat> myStats;
+    private Map<String, AbstractStat> myStats;
     
     public DisplayTracker() 
     {
         myStatsGroup = new HashMap<String, SpriteGroup>();
         myDisplays = new HashMap<String, Display>();
-        myStats = new HashMap<String, Stat>();
+        myStats = new HashMap<String, AbstractStat>();
     }
     
     /**
@@ -42,7 +42,7 @@ public class DisplayTracker
     /**
      * get Stat
      */
-    public Stat getStat(String name)
+    public AbstractStat getStat(String name)
     {
         return myStats.get(name);
     }
@@ -66,7 +66,7 @@ public class DisplayTracker
     /**
      * add Stat into game
      */
-    public void putStat(String name, Stat s)
+    public void putStat(String name, AbstractStat s)
     {
         myStats.put(name, s);
     }
