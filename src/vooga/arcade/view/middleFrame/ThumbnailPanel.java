@@ -2,6 +2,7 @@ package vooga.arcade.view.middleFrame;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import vooga.arcade.controller.*;
 
 /**
  * @author Andrea
@@ -13,6 +14,7 @@ import javax.swing.JScrollPane;
 public class ThumbnailPanel extends JPanel
 {
     private static final long serialVersionUID = 1L;
+    IController myCont;
     
     public ThumbnailPanel(ArrayList<JPanel> thumbnails)
     {
@@ -27,11 +29,5 @@ public class ThumbnailPanel extends JPanel
         }
     
         this.add(scrollPane);
-    }
-    
-    public ThumbnailPanel()
-    {
-        // TODO: Get current arrangement
-        super();
     }
 }
