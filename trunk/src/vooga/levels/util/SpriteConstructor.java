@@ -36,8 +36,9 @@ public class SpriteConstructor {
 	 */
 	public Sprite construct(List<String> otherAssignments) {
 		Sprite sprite = constructInstance(otherAssignments);
-		SpriteGroup group = level.getSpriteGroup(spriteGroup);
-		group.add(sprite);
+		// TODO get level so that correct sprite group can be grabbed
+		//SpriteGroup group = level.getSpriteGroup(spriteGroup);
+		//group.add(sprite);
 		return sprite;
 	}
 	

@@ -1,13 +1,16 @@
 package vooga.levels;
 
-import java.util.Collection;
-import java.util.Queue;
+import java.util.*;
 import vooga.levels.util.LevelParser;
 import vooga.levels.util.PoolDeferredConstructor;
 
 import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
+import vooga.util.buildable.components.BasicComponent;
+import vooga.collisions.collisionManager.CollisionManager;
+
 
 
 /**
@@ -41,7 +44,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     private int myId;
 
     /** This level's players */
-    private Collection<Sprite> myPlayers; //TODO: switch back to player (using Sprite is a temporary changed used for testing)
+    private Collection<Sprite> myPlayers;
 
 
     public AbstractLevel (Collection<Sprite> players, Game game)
@@ -49,6 +52,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         myGame = game;
         myPlayers = players;
         mySpriteGroups = new ArrayList<SpriteGroup>();
+        myCollisionManagers = new ArrayList<CollisionManager>();
     }
 
 
@@ -69,12 +73,14 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * Will be called by level manager before loadLevel is called
      * 
      * @param name of XML file for this level
+     * @param id of the level whose file you want to read
      */
-    public void parseXMLFile (String fileName)
+    public void parseXMLFile (String fileName, int id)
     {
         myLevelParser = new LevelParser(this);
         mySpritePool = new SpritePool();
         myLevelParser.parse(fileName);
+        myId = id;
     }
     
 
@@ -118,7 +124,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * Takes one sprite of the specified type from the pool and places it onto the playingfield
      * 
      * @param type of the sprite you wish to initialize
-     * @return 
+     * @return the sprite which was just added to the playingfield
      */
     protected Sprite addSpriteFromPool (String type)
     {
@@ -131,23 +137,23 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * and places it onto the playingfield. Note that this method does NOT draw
      * from the sprite pool, but instead uses the constructor.
      * 
-     * @param type
-     * @param paramaters
+     * @param archetype of the sprite that you wish to create
+     * @param desired x coordinate of the sprite
+     * @param desired y coordinate of the sprite
+     * @param desired components for the sprite
+     * @return the newly created sprite
      */
-    public Sprite addNewSprite (String type, Object... parameters)
+    public Sprite addNewSprite (String type, int x, int y, BasicComponent... components)
     {
-        //TODO
         //myLevelParser.createNewSpriteOfArchetype(spriteArchetype);
-    	for(Object o : parameters) {
-    		o.toString();
-    	}
     	return null;
     }
 
 
     /**
      * Takes a random sprite from the pool and places it onto the playingfield
-     * @return 
+     * 
+     * @return the sprite which was just added to the playingfield
      */
     public Sprite addRandomSprite ()
     {
@@ -184,7 +190,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * 
      * @param player to add
      */
-    protected void addPlayer (Sprite p) //TODO: change back to player
+    protected void addPlayer (Sprite p)
     {
         myPlayers.add(p);
     }
@@ -200,6 +206,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         mySpritePool.addToPool(poolObject);
     }
 
+    
     /**
      * Sets the background queue for this level
      * Called by LevelParser
@@ -211,15 +218,18 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         myBackgrounds = backgrounds;
     }
 
+    
     /**
      * Sets the music queue for this level; called by LevelParser
-     * @param music files for this leve
+     * 
+     * @param music files for this level
      */
     public void setMusicPool (Queue<String> music)
     {
         myMusic = music;
     }
 
+    
     /**
      * Returns this level's id
      * 
@@ -240,8 +250,8 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     {
         return myPlayers;
     }
-
-
+    
+    
     /**
      * Compares a level based on its id
      */

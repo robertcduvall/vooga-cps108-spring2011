@@ -85,12 +85,22 @@ public class SpritePool
     /**
      * Gets a random sprite constructor from the initial condition pool, constructs it
      * and adds it to the playfield.
-     * @return 
+     * @return the newly created sprite
      */
-	public Sprite addRandomSprite() {
+	public Sprite addRandomSprite() 
+	{
 		Set<String> spriteConstructors = mySprites.keySet();
 		String[] scKey = (String[]) spriteConstructors.toArray();
 		int scIndex = new Random().nextInt(spriteConstructors.size());
 		return addSpriteFromPool(scKey[scIndex]);
 	}  
+	
+	
+	/**
+	 * Clears the sprite pool
+	 */
+	public void clear()
+	{
+	    mySprites.clear();
+	}
 }
