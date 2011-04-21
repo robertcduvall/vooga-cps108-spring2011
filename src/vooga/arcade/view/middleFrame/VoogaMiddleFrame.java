@@ -12,7 +12,7 @@ import vooga.arcade.view.helper.ResourceManager;
 public class VoogaMiddleFrame extends JPanel{
 	private static final long serialVersionUID = 1L;
 
-	//private VariableTabbedPane middlePanel;
+	private ThumbnailPanel middlePanel;
 	private ColumnTextPanes rightPanel;
 
 	private ResourceManager MiddleFrameResource = new ResourceManager(
@@ -21,11 +21,13 @@ public class VoogaMiddleFrame extends JPanel{
 	public VoogaMiddleFrame(PracticeController pc) {
 		BorderLayout b = new BorderLayout();
 		this.setLayout(b);
+		
+		middlePanel = new ThumbnailPanel();
 		rightPanel = new ColumnTextPanes(MiddleFrameResource
 				.getInteger("RightPanelNumber"), MiddleFrameResource
 				.getStringArray("RightPanelLabels"), pc);
 
-		//this.add(middlePanel, BorderLayout.CENTER);
+		this.add(middlePanel, BorderLayout.CENTER);
 		this.add(rightPanel, BorderLayout.EAST);
 	}
 	
@@ -33,23 +35,11 @@ public class VoogaMiddleFrame extends JPanel{
 	{
 		return rightPanel;
 	}
-
-	//public Dimension getActiveCanvasSize() {
-		//return middlePanel.getActiveCanvasSize();
-	//}
-
-//	public void addVariable(String str) {
-//		rightPanel.addStringToComponent(MiddleFrameResource
-//				.getInteger("VariablePanelIndex"), str);
-//	}
-//
-//	public void setCurrentPlayer(String name) {
-//		rightPanel.addString(MiddleFrameResource
-//				.getInteger("CurrentPlayerIndex"), name);
-//	}
-//	
-//	public void clearVariables() {
-//		rightPanel.clearComponent(MiddleFrameResource
-//				.getInteger("VariablePanelIndex"));
-//	}
+	
+	public void updateThumbnails(ThumbnailPanel newPanel)
+	{
+	    this.remove(middlePanel);
+	    middlePanel = newPanel;
+	    this.add(middlePanel, BorderLayout.CENTER);
+	}
 }
