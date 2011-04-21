@@ -6,7 +6,7 @@ import vooga.user.controller.ILoginController;
 import vooga.user.view.gui.middleFrame.FieldPanel;
 
 
-public class RegisterButton extends AbstractSlogoAction{
+public class RegisterButton extends AbstractLoginAction{
 
 	FieldPanel panel;
 	ILoginController pc;

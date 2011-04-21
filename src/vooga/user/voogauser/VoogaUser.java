@@ -15,10 +15,11 @@ import java.util.Map;
 public class VoogaUser {
 
 	public static final String DEFAULT_NAME = "User";
+	public static final String DEFAULT_PASS = "Password";
 	public static List<UserPreference> preferences;
 	public HashMap<String, ArrayList<AbstractGamePreference>> gameInfo = new HashMap<String, ArrayList<AbstractGamePreference>>();
 	public List<String> allGames = new ArrayList<String>();
-	public String myName;
+	public String myUsername, myPassword;
 	public VoogaUser myUser;
 	
 	
@@ -26,14 +27,15 @@ public class VoogaUser {
 	 * This is the generic constructor for a VoogaUser with all default preferences
 	 */
 	public VoogaUser(){
-		myUser = new VoogaUser(DEFAULT_NAME, preferences);
+		myUser = new VoogaUser(DEFAULT_NAME, DEFAULT_PASS, preferences);
 		preferences = new ArrayList<UserPreference>();	
 		createGameMapping();
 	}
 
-	public VoogaUser(String name, List<UserPreference> list){
+	public VoogaUser(String username, String password, List<UserPreference> list){
 		preferences = list;
-		myName = name;
+		myUsername = username;
+		myPassword = password;
 		createGameMapping();
 	}
 	
@@ -58,5 +60,10 @@ public class VoogaUser {
 	public List<UserPreference> getPreferenceList(){
 		return preferences;
 	}
+	
+	public void removeAllPreferences(){
+		preferences.clear();
+	}
+	
 
 }

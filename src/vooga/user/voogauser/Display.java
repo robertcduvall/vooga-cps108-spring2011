@@ -31,7 +31,7 @@ import vooga.user.main.ResourceManager;
 */
 
 public class Display {
-	private ResourceManager guiResource = new ResourceManager("GUIResource");
+	private ResourceManager guiResource = new ResourceManager("vooga.user.resources.GUIResource");
 	public static final Dimension DEFAULT_SIZE = new Dimension(640, 480);
 	public static final Color DEFAULT_COLOR = Color.WHITE;
 	public static final String DEFAULT_NAME = "Default";

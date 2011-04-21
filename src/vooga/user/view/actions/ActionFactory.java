@@ -32,7 +32,7 @@ public class ActionFactory {
 			Constructor<?> ctr = cls
 					.getDeclaredConstructor(new Class[] { ILoginController.class });
 			// return new ActionMethod(obj,m);
-			return (AbstractSlogoAction) ctr.newInstance(p);
+			return (AbstractLoginAction) ctr.newInstance(p);
 
 		} catch (Exception e) {
 			e.printStackTrace();

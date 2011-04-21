@@ -17,8 +17,8 @@ import javax.swing.UIManager;
 import vooga.user.controller.LoginController;
 import vooga.user.main.ResourceManager;
 import vooga.user.model.LoginTemplate;
+import vooga.user.controller.*;
 import vooga.user.view.actions.PasswordLogin;
-import vooga.user.view.gui.menuBar.MenuBar;
 import vooga.user.view.gui.middleFrame.SlogoMiddleFrame;
 import vooga.user.voogauser.Display;
 

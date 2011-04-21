@@ -1,4 +1,4 @@
-package vooga.user.model;
+package vooga.user.model.parser;
 
 import java.util.HashMap;
 import java.util.List;

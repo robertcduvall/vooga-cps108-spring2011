@@ -6,7 +6,7 @@ import vooga.user.controller.ILoginController;
 import vooga.user.view.gui.middleFrame.FieldPanel;
 
 
-public class EnterArcadeButton extends AbstractSlogoAction{
+public class EnterArcadeButton extends AbstractLoginAction{
 
 	FieldPanel panel;
 	ILoginController pc;

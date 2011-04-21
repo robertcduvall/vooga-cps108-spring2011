@@ -13,10 +13,10 @@ import javax.swing.ImageIcon;
 import vooga.user.controller.ILoginController;
 
 
-public abstract class AbstractSlogoAction implements ActionListener {
+public abstract class AbstractLoginAction implements ActionListener {
 	protected ILoginController controller;
 
-	public AbstractSlogoAction(ILoginController p) {
+	public AbstractLoginAction(ILoginController p) {
 		controller = p;
 	}
 
