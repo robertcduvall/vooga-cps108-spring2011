@@ -121,15 +121,6 @@ public class LevelManager
 
 
     /**
-     * Checks if the current level is complete
-     */
-    public void checkLevelCompletion ()
-    {
-        if (myActiveLevel.checkCompletion()) myNumOfLevelsCompleted++;
-    }
-
-
-    /**
      * Retrieves the highest running level's id
      */
     public int getCurrentLevel ()
