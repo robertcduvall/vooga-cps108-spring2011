@@ -2,8 +2,11 @@ package vooga.replay;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,25 +28,26 @@ public class StateTable implements Serializable {
 	// private StateTable parent;
 	// private ArrayList<StateTable> children;
 	protected Map<Sprite, ArrayList<SpriteReplayData>> myMap;
-	protected List<BufferedImageSerialData> backgroundList;
-	protected ImageBackground myBackground;
+	//protected List<BufferedImageSerialData> backgroundList;
+	protected BufferedImageSerialData myBackgroundImageData;
+	protected Background myBackground;
 	protected int time;
 	protected SerialPlayField lastPlayField;
 
 	public StateTable() {
 		myMap = new HashMap<Sprite, ArrayList<SpriteReplayData>>();
-		backgroundList = new ArrayList<BufferedImageSerialData>();
-		time = 0;
 		lastPlayField = new SerialPlayField();
+		//backgroundList = new ArrayList<BufferedImageSerialData>();
+		time = 0;
 	}
 
 	public Map<Sprite, ArrayList<SpriteReplayData>> getTable() {
 		return myMap;
 	}
 
-	public Background getBackground() {
+	/*public Background getBackground() {
 		return myBackground;
-	}
+	}*/
 
 	public int getTime() {
 		return time;
@@ -57,32 +61,33 @@ public class StateTable implements Serializable {
 	 *            - PlayField passed to the StateTable to be recorded.
 	 */
 	public void updateStateTable(PlayField field) {
+		myBackgroundImageData  = new BufferedImageSerialData(((ImageBackground)field.getBackground()).getImage());
 		//System.out.println(((ImageBackground)field.getBackground()).getImage());
-		backgroundList.add(new BufferedImageSerialData(((ImageBackground)field.getBackground()).getImage()));
+		//backgroundList.add(new BufferedImageSerialData(((ImageBackground)field.getBackground()).getImage()));
 		for (SpriteGroup s : field.getGroups()) {
 			updateHelper(s.getSprites());
 		}
 		for (Sprite a : myMap.keySet()) {
 			if (!(myMap.get(a).size() == time + 1)) {
-				myMap.get(a).add(new SpriteReplayData(a, -1, -1));
+				myMap.get(a).add(new SpriteReplayData(a, false));
 			}
 		}
 		time++;
 	}
-
+	
 	/**
 	 * Update helper method.
 	 */
 	private void updateHelper(Sprite[] sprites) {
 		for (Sprite a : sprites) {
-			if (a != null) {
+			if (a != null && a.isActive()) {
 				if (!myMap.containsKey(a)) {
 					myMap.put(a, new ArrayList<SpriteReplayData>());
 					for (int decrement = time; decrement > 0; decrement--) {
-						myMap.get(a).add(new SpriteReplayData(a, -1, -1));
+						myMap.get(a).add(new SpriteReplayData(a, false));
 					}
 				}
-				myMap.get(a).add(new SpriteReplayData(a));
+				myMap.get(a).add(new SpriteReplayData(a, a.isActive()));
 			}
 		}
 
@@ -91,7 +96,7 @@ public class StateTable implements Serializable {
 	public void render(Graphics2D g) {
 		myBackground.render(g);
 		for (Sprite s : myMap.keySet()) {
-			s.render(g);
+			if(s.isActive()) s.render(g);
 		}
 	}
 
@@ -104,16 +109,18 @@ public class StateTable implements Serializable {
 	 *            - Time, location in time relative to "StateTable indices"
 	 */
 	public void transformSprite(int t) {
-		myBackground = new ImageBackground(backgroundList.get(t).getImage());
+		//myBackground = new ImageBackground(backgroundList.get(t).getImage());
+		myBackground = new ImageBackground(myBackgroundImageData.getImage());
 		for (Sprite s : myMap.keySet()) {
 			SpriteReplayData sData = myMap.get(s).get(t);
 			s.setLocation(sData.getX(), sData.getY());
+			s.setActive(sData.isActive());
 			s.setImage(sData.getImage());
 			s.setBackground(myBackground);
 		}
 
 	}
-	/**
+	/*
 	 * This is for saving/resuming purposes. When resuming the game from the save file 
 	 * this method will retrieve the last PlayField from the StateTable and start the game 
 	 * from this PlayField.
