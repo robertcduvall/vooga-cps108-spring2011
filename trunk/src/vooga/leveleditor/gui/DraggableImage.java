@@ -1,11 +1,18 @@
 package vooga.leveleditor.gui;
 
+import java.awt.TextComponent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 /**
  * 
  * @author Charlie Hatcher
@@ -24,6 +31,13 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 		setAllValuesForDraggableImage(icon, parent, 500, 500);
 	}
 	
+	protected void setSpriteProperties(int x,int y){
+		if(checkIfSelected(x, y)){
+			PopupFrame frame = new PopupFrame(x,y);
+			myParent.add(frame);
+		}
+	}
+	
 	/**
 	 * Moves the DraggableImage if the image is selected, if the DraggableImage is
 	 * currently selected, and the user clicks, the image will drop. If the user clicks
@@ -35,10 +49,12 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 	 */
 	protected boolean moveIfSelected(int x, int y){
 		if(myFlag){
-			setFlagOnClick(x, y, false);	
+			setFlagOnClick(x, y, false);
 		}
 		else if(!myFlag){
 			setFlagOnClick(x,y, true);
+			
+			
 		}
 		return myFlag;
 	}
