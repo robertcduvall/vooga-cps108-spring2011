@@ -1,5 +1,7 @@
 package vooga.arcade.view.middleFrame;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import vooga.arcade.controller.*;
@@ -16,7 +18,7 @@ public class ThumbnailPanel extends JPanel
     private static final long serialVersionUID = 1L;
     ArcadeController myCont;
     
-    public ThumbnailPanel(ArrayList<JPanel> thumbnails)
+    public ThumbnailPanel(List<JPanel> thumbnails)
     {
         JPanel thumbPanel = new JPanel();
         JScrollPane scrollPane = new JScrollPane(thumbPanel);

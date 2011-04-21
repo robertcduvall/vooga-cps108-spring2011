@@ -35,6 +35,7 @@ public class ArcadeGameFinder
 
 	private static void recurseFileSystem(File file)
 	{
+		System.out.println(file.getAbsolutePath());
 		if (file.isDirectory())
 		{
 			File allFiles[] = file.listFiles();

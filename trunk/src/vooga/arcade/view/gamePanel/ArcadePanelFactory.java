@@ -1,24 +1,39 @@
 package vooga.arcade.view.gamePanel;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JPanel;
+
 import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.parser.ArcadeUserObject;
 import vooga.arcade.parser.gameObject.ArcadeObject;
 
+/**
+ * Generates Panels for the Arcade Frame based on Raw Data obtained from the model.
+ * TODO: Use Reflection (ugh) to generalize this method. Its gonna be ugly.
+ * @author Ethan Goh
+ *
+ */
 public class ArcadePanelFactory
 {
-	public static ArcadePanel generateAracdePanel(ArcadeObject ao)
+	public static List<JPanel> generateArcadeGamePanels(List<ArcadeGameObject> aoList)
 	{
-		/**
-		 * REFLECTION IS TOO SLOW. I CODED THIS IN 30 SECONDS.
-		 */
-		if (ao instanceof ArcadeGameObject)
+		List<JPanel> toReturn = new ArrayList<JPanel>();
+		for (ArcadeGameObject ao : aoList)
 		{
-			return new ArcadeGamePanel((ArcadeGameObject) ao);
+			toReturn.add(new ArcadeGamePanel(ao));
 		}
-		else if (ao instanceof ArcadeUserObject)
-		{
-			return new ArcadeUserPanel((ArcadeUserObject) ao);
-		}
-		return null;
+		return toReturn;
 	}
+//	
+//	public static List<JPanel> generateAracdeUserPanels(List<ArcadeUserObject> aoList)
+//	{
+//		List<JPanel> toReturn = new ArrayList<JPanel>();
+//		for (ArcadeUserObject ao : aoList)
+//		{
+//			toReturn.add(new ArcadeUserPanel(ao));
+//		}
+//		return toReturn;
+//	}
 }

@@ -1,16 +1,23 @@
 package vooga.arcade.view.middleFrame;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
+
 import vooga.arcade.controller.ArcadeController;
+import vooga.arcade.parser.ArcadeGameObject;
+import vooga.arcade.view.gamePanel.ArcadePanelFactory;
 import vooga.arcade.view.helper.ResourceManager;
 
 /**
  * Connects the GUI Components to create the Middle Frame in the Vooga Project.
+ * @author Andrea Scripa
+ * @author Ethan Goh
  * 
  */
-public class VoogaMiddleFrame extends JPanel{
+public class VoogaMiddleFrame extends JPanel
+{
 	private static final long serialVersionUID = 1L;
 
 	private ThumbnailPanel middlePanel;
@@ -18,31 +25,35 @@ public class VoogaMiddleFrame extends JPanel{
 
 	private ResourceManager MiddleFrameResource = new ResourceManager(
 			"vooga.arcade.resources.MiddleFrameResource");
-	
-	public VoogaMiddleFrame(ArcadeController pc) {
+
+	public VoogaMiddleFrame(ArcadeController pc)
+	{
 		BorderLayout b = new BorderLayout();
 		this.setLayout(b);
-		
-//TODO:
-		/*ArrayList<JPanel> allGames = pc.queryModel(null);
-		middlePanel = new ThumbnailPanel(allGames);*/
-		rightPanel = new ColumnTextPanes(MiddleFrameResource
-				.getInteger("RightPanelNumber"), MiddleFrameResource
-				.getStringArray("RightPanelLabels"), pc);
+
+		List<ArcadeGameObject> gameList = pc.queryModel("title", null);
+
+		List<JPanel> allGames = ArcadePanelFactory
+				.generateArcadeGamePanels(gameList);
+
+		middlePanel = new ThumbnailPanel(allGames);
+		rightPanel = new ColumnTextPanes(
+				MiddleFrameResource.getInteger("RightPanelNumber"),
+				MiddleFrameResource.getStringArray("RightPanelLabels"), pc);
 
 		this.add(middlePanel, BorderLayout.CENTER);
 		this.add(rightPanel, BorderLayout.EAST);
 	}
-	
+
 	public ColumnTextPanes getRightPanel()
 	{
 		return rightPanel;
 	}
-	
+
 	public void updateThumbnails(ThumbnailPanel newPanel)
 	{
-	    this.remove(middlePanel);
-	    middlePanel = newPanel;
-	    this.add(middlePanel, BorderLayout.CENTER);
+		this.remove(middlePanel);
+		middlePanel = newPanel;
+		this.add(middlePanel, BorderLayout.CENTER);
 	}
 }
