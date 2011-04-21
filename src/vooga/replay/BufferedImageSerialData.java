@@ -2,6 +2,12 @@ package vooga.replay;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.golden.gamedev.object.Background;
 
 public class BufferedImageSerialData implements Serializable {
 
@@ -22,5 +28,6 @@ public class BufferedImageSerialData implements Serializable {
 		bi.setRGB(0, 0, width, height, pixels, 0, width);
 		return bi;
 	}
-
+	
 }
+

@@ -74,15 +74,23 @@ public class Level1 extends GameObject {
 		}
 		if (keyDown(KeyEvent.VK_S)) {
 			myPlayer.moveY(.08 * elapsedTime);
-			elapsedTime = right ? elapsedTime : -elapsedTime;
-			angle += elapsedTime;
+			long melapsedTime = right ? elapsedTime : -elapsedTime;
+			angle += melapsedTime;
 			myPlayer.setImage(ImageUtil.rotate(image, angle));
 		}
 		if (keyDown(KeyEvent.VK_W)) {
 			myPlayer.moveY(-.08 * elapsedTime);
-			elapsedTime = right ? elapsedTime : -elapsedTime;
-			angle += elapsedTime;
+			long melapsedTime = right ? elapsedTime : -elapsedTime;
+			angle += melapsedTime;
 			myPlayer.setImage(ImageUtil.rotate(image, angle));
+		}
+		
+		if(keyDown(KeyEvent.VK_P)){
+			Sprite dogSprite = new Sprite(getImage("resources/images/dog.png"));
+			dogSprite.setBackground(myBackground);
+			this.myField.add(dogSprite);
+			dogSprite.setLocation(myPlayer.getX(), myPlayer.getY());
+			dogSprite.setMovement(elapsedTime*.005, elapsedTime*.5);
 		}
 
 		if (keyDown(KeyEvent.VK_ESCAPE)) {
@@ -93,7 +101,7 @@ public class Level1 extends GameObject {
 		
 		myField.update(elapsedTime);
 
-		myTable.record(myField);
+	myTable.record(myField);
 	}
 
 }
