@@ -3,6 +3,7 @@ package vooga.arcade.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import vooga.arcade.parser.ArcadeGameFinder;
 import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.search.AlphabeticalSort;
 import vooga.arcade.search.IArcadeGameListFilter;
@@ -16,7 +17,7 @@ public class ArcadeModel
 
 	private List<ArcadeGameObject> currentGameList;
 	private List<ArcadeGameObject> currentFavoritesList;
-	
+
 	// private VoogaUser currentUser;
 
 	private IArcadeGameListSort currentSort;
@@ -30,28 +31,38 @@ public class ArcadeModel
 		currentGameList = new ArrayList<ArcadeGameObject>();
 		currentSort = new AlphabeticalSort();
 		currentFilter = new SearchByStringFilter();
-		filterArcadeGameList("", new String[1]);
-		filterFavoritesList("", new String[1]);
+		loadGameList();
+		filterArcadeGameList("title", null);
+		filterFavoritesList("title", null);
 	}
 
-	public void filterArcadeGameList(String tag,
-			String[] query)
+	private void loadGameList()
 	{
-		if (query == null)
-			query = new String[1];
-		currentGameList = currentSort.getSortedList(
-				currentFilter.getFilteredList(masterArcadeGameList, tag, query), tag);
+		// TODO: Change the Path thing!
+		masterArcadeGameList = ArcadeGameFinder
+				.findAllArcadeGames("src/vooga/arcade/parser");
 	}
-	
-	public void filterFavoritesList(String tag,
-			String[] query)
+
+	public void filterArcadeGameList(String tag, String[] query)
 	{
+		String[] ar = { "" };
 		if (query == null)
-			query = new String[1];
+			query = ar;
+		currentGameList = currentSort
+				.getSortedList(currentFilter.getFilteredList(
+						masterArcadeGameList, tag, query), tag);
+	}
+
+	public void filterFavoritesList(String tag, String[] query)
+	{
+		String[] ar = { "" };
+		if (query == null)
+			query = ar;
 		currentFavoritesList = currentSort.getSortedList(
-				currentFilter.getFilteredList(masterFavoritesList, tag, query), tag);
+				currentFilter.getFilteredList(masterFavoritesList, tag, query),
+				tag);
 	}
-	
+
 	public List<ArcadeGameObject> getCurrentGameList()
 	{
 		return currentGameList;
@@ -61,7 +72,5 @@ public class ArcadeModel
 	{
 		return currentFavoritesList;
 	}
-	
-	
 
 }
