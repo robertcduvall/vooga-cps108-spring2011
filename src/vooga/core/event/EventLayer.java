@@ -201,14 +201,17 @@ public class EventLayer
 		myParentLayer = newParentFilter;
 	}
 
-	public void swapEventQueues()
-	{
-		LinkedList<IFiredEvent> temp = myCurrentEventQueue;
+    public void swapEventQueues ()
+    {
+        // Move all un-run events to beginning of myNextEventQueue
+        myNextEventQueue.addAll(0, myCurrentEventQueue);
+        myCurrentEventQueue.clear();
 
-		myCurrentEventQueue = myNextEventQueue;
-		// for memory efficiency, recycle the old queue
-		myNextEventQueue = temp;
-		myNextEventQueue.clear();
+        LinkedList<IFiredEvent> temp = myCurrentEventQueue;
 
-	}
+        myCurrentEventQueue = myNextEventQueue;
+        // for memory efficiency, recycle the old queue
+        myNextEventQueue = temp;
+        myNextEventQueue.clear();
+    }
 }
