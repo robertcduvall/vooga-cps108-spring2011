@@ -2,7 +2,7 @@ package vooga.arcade.parser;
 
 import javax.swing.JFrame;
 
-import vooga.arcade.view.helper.GameIcon;
+import vooga.arcade.view.gameIcon.GameIcon;
 
 
 public class Main {

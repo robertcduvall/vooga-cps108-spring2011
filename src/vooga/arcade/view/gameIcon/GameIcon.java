@@ -1,7 +1,7 @@
 /**
  * 
  */
-package vooga.arcade.view.helper;
+package vooga.arcade.view.gameIcon;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
