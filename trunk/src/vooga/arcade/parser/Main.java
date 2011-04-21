@@ -2,7 +2,7 @@ package vooga.arcade.parser;
 
 import javax.swing.JFrame;
 
-import vooga.arcade.view.gameIcon.GameIcon;
+import vooga.arcade.view.gamePanel.ArcadeGamePanel;
 
 
 public class Main {
@@ -14,7 +14,7 @@ public class Main {
         //System.out.println("lololol");
         
         JFrame frame = new JFrame();
-        frame.getContentPane().add(new GameIcon(ob));
+        frame.getContentPane().add(new ArcadeGamePanel(ob));
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
