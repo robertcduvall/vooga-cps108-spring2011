@@ -1,7 +1,7 @@
 package vooga.arcade.view.actions;
 
 import java.awt.event.ActionEvent;
-import vooga.arcade.controller.IController;
+import vooga.arcade.controller.ArcadeController;
 
 
 /**
@@ -12,7 +12,7 @@ import vooga.arcade.controller.IController;
  */
 
 public class MenuFileQuit extends AbstractVoogaAction {
-	public MenuFileQuit(IController p) {
+	public MenuFileQuit(ArcadeController p) {
 		super(p);
 	}
 

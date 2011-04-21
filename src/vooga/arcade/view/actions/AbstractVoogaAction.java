@@ -8,14 +8,14 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import vooga.arcade.controller.IController;
+import vooga.arcade.controller.ArcadeController;
 
 
 public abstract class AbstractVoogaAction implements ActionListener
 {
-	protected IController controller;
+	protected ArcadeController controller;
 
-	public AbstractVoogaAction(IController p)
+	public AbstractVoogaAction(ArcadeController p)
 	{
 		controller = p;
 	}

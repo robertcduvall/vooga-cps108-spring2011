@@ -23,8 +23,9 @@ public class VoogaMiddleFrame extends JPanel{
 		BorderLayout b = new BorderLayout();
 		this.setLayout(b);
 		
-		ArrayList<JPanel> allGames = pc.queryModel(null);
-		middlePanel = new ThumbnailPanel(allGames);
+//TODO:
+		/*ArrayList<JPanel> allGames = pc.queryModel(null);
+		middlePanel = new ThumbnailPanel(allGames);*/
 		rightPanel = new ColumnTextPanes(MiddleFrameResource
 				.getInteger("RightPanelNumber"), MiddleFrameResource
 				.getStringArray("RightPanelLabels"), pc);
