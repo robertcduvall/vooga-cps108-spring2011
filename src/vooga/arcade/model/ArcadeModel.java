@@ -30,6 +30,8 @@ public class ArcadeModel
 		currentGameList = new ArrayList<ArcadeGameObject>();
 		currentSort = new AlphabeticalSort();
 		currentFilter = new SearchByStringFilter();
+		filterArcadeGameList("", new String[1]);
+		filterFavoritesList("", new String[1]);
 	}
 
 	public void filterArcadeGameList(String tag,

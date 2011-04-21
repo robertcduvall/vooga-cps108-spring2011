@@ -11,6 +11,7 @@ import org.jdom.Element;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import vooga.arcade.parser.gameObject.ArcadeObject;
 import vooga.core.event.examples.bubblefishbob.util.resources.ResourceManager;
 
 import com.golden.gamedev.Game;
@@ -22,8 +23,8 @@ import com.golden.gamedev.GameLoader;
  * 
  * @author KevinWang
  *
- */
-public class ArcadeGameObject {
+ */	
+public class ArcadeGameObject extends ArcadeObject{
 
     private Game game;
     private Dimension dimension;    
@@ -31,23 +32,20 @@ public class ArcadeGameObject {
     private Map<String, String> dataMap = new HashMap<String, String>();
     private ResourceManager resourceManager = ResourceManager.getInstance();
     private String source = "GameInfo";
-    private Image image;
     private Element root;
-    private String path;
     private XMLOutputter xmlOutput = new XMLOutputter();
     
     
     public ArcadeGameObject(Game game, String[] data, String[] dimension,
             String[] highscores, Image image, Element root, String path) {
+    	super(image, path);
         resourceManager.addResourcesFromFile(source,
                 "vooga.arcade.resources");
         this.game = game;
         this.highscores = highscores;
         this.dimension = new Dimension(Integer.parseInt(dimension[0]),
                 Integer.parseInt(dimension[1]));
-        this.image = image;
         this.root = root;
-        this.path = path;
         fillMapWithData(data);
     }
 
@@ -123,18 +121,11 @@ public class ArcadeGameObject {
         }
         try {
             xmlOutput.setFormat(Format.getPrettyFormat());
-            xmlOutput.output(root, new FileOutputStream(new File(path)));
+            xmlOutput.output(root, new FileOutputStream(new File(super.getName())));
         }
         catch (Exception e) {
             e.printStackTrace();
         }
         
-    }
-    
-    /**
-     * @return the drawableData
-     */
-    public Image getImage() {
-        return image;
     }
 }
