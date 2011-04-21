@@ -14,7 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 import vooga.user.controller.LoginController;
+import vooga.user.main.ResourceManager;
 import vooga.user.main.XmlWriter;
+import vooga.user.model.parser.PasswordParser;
+import vooga.user.model.parser.RegXParser;
 import vooga.user.voogauser.UserPreference;
 import vooga.user.voogauser.VoogaUser;
 
@@ -29,11 +32,13 @@ public class LoginModel
 	private VoogaUser user;
 	private LoginController controller;
 	private Map<String, String> keyMap;
-	private vooga.user.main.ResourceManager registrationResource = new vooga.user.main.ResourceManager("Registration");
+	private RegXParser myRegEx;
+	private ResourceManager registrationResource = new ResourceManager("vooga.user.resources.Registration");
 	
 	public LoginModel(LoginController pc){
 		user = new VoogaUser();
 		controller = pc;
+		myRegEx =new RegXParser();
 		buildPasswordMap();
 	}
 
@@ -54,10 +59,17 @@ public class LoginModel
  */
 	public void process(String[] prompt, String[] text) {
 		for(int i = 0; i < text.length; i++){
-			UserPreference pref = new UserPreference(prompt[i],text[i]);
-			user.add(pref);
-			System.out.println("size " + user.getPreferenceList().size());
-			update();
+				if(myRegEx.verifyRegex(prompt[i], text[i])){
+					UserPreference pref = new UserPreference(prompt[i],text[i]);
+					user.add(pref);
+					System.out.println("size " + user.getPreferenceList().size());
+					update();
+				}
+				else{
+				controller.displayError("Incorrect Input Error " + prompt[i]);
+				user.removeAllPreferences();
+				break;
+				}
 		}
 	}
 
@@ -97,7 +109,7 @@ public class LoginModel
 					e.printStackTrace();
 				}
 			}
-			System.out.println(user.myName);
+			System.out.println(user.myUsername);
 		} else {
 			controller.displayError("Incorrect Password");
 		}
@@ -105,8 +117,8 @@ public class LoginModel
 	
 	public LoginTemplate[] createDefaultDisplay() {
 		String[] one = {"Username","Password"}; String[] two = {};
-		String image = "resources/Turtle.gif";
-		LoginTemplate[] log = {new LoginTemplate("Login", one,image,2), new LoginTemplate("New User",two,image,3)};
+		String image = "doc/resources/Turtle.gif";
+		LoginTemplate[] log = {new LoginTemplate("Login", one,image,1), new LoginTemplate("New User",two,image,2)};
 		return log;
 	}
 	
@@ -119,8 +131,8 @@ public class LoginModel
 		List<String> fileLines = new ArrayList<String>();
 		FileInputStream inputStream = null;
 		try {
-			inputStream = new FileInputStream("resources/PasswordResource.txt");
-		} catch (FileNotFoundException e) {
+			inputStream = new FileInputStream("doc/resources/PasswordResource.txt");
+			} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		DataInputStream in = new DataInputStream(inputStream);

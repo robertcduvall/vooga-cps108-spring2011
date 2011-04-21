@@ -5,10 +5,9 @@ import java.awt.event.ActionListener;
 
 import vooga.user.controller.ILoginController;
 import vooga.user.view.gui.middleFrame.FieldPanel;
-import vooga.user.view.gui.middleFrame.FieldPanel1;
 
 
-public class PasswordLogin extends AbstractSlogoAction{
+public class PasswordLogin extends AbstractLoginAction{
 
 	FieldPanel panel;
 	public PasswordLogin(ILoginController p, FieldPanel fieldPanel) {

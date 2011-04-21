@@ -6,10 +6,9 @@ import javax.swing.JOptionPane;
 
 import vooga.user.controller.ILoginController;
 import vooga.user.view.gui.middleFrame.FieldPanel;
-import vooga.user.view.gui.middleFrame.FieldPanel1;
 
 
-public class SubmitButton extends AbstractSlogoAction {
+public class SubmitButton extends AbstractLoginAction {
 
 	FieldPanel panel;
 	ILoginController pc;

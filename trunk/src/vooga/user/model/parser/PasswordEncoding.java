@@ -1,4 +1,4 @@
-package vooga.user.model;
+package vooga.user.model.parser;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
