@@ -5,7 +5,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-import vooga.arcade.controller.IController;
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
 
@@ -18,7 +18,7 @@ public class ButtonBar {
 	private static ResourceManager buttonBarResource = new ResourceManager(
 			"vooga.arcade.resources.ToolbarButtonsResource");
 
-	public static JToolBar createButtonToolBar(IController p) {
+	public static JToolBar createButtonToolBar(ArcadeController p) {
 		JToolBar toolBar = new JToolBar();
 		String[] toolBarEntriesImageNames = buttonBarResource
 				.getStringArray("ToolBar");

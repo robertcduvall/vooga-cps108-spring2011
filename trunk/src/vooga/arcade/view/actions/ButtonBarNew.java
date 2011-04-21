@@ -3,7 +3,7 @@ package vooga.arcade.view.actions;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JFileChooser;
-import vooga.arcade.controller.IController;
+import vooga.arcade.controller.ArcadeController;
 
 
 /**
@@ -15,7 +15,7 @@ import vooga.arcade.controller.IController;
  * 
  */
 public class ButtonBarNew extends AbstractVoogaAction {
-	public ButtonBarNew(IController p) {
+	public ButtonBarNew(ArcadeController p) {
 		super(p);
 	}
 

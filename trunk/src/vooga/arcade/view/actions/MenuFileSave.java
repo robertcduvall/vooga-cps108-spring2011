@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.swing.JFileChooser;
-import vooga.arcade.controller.IController;
+import vooga.arcade.controller.ArcadeController;
 
 
 /**
@@ -19,7 +19,7 @@ import vooga.arcade.controller.IController;
  */
 
 public class MenuFileSave extends AbstractVoogaAction {
-	public MenuFileSave(IController p) {
+	public MenuFileSave(ArcadeController p) {
 		super(p);
 	}
 

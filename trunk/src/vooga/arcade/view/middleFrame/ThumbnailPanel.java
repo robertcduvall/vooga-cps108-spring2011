@@ -14,7 +14,7 @@ import vooga.arcade.controller.*;
 public class ThumbnailPanel extends JPanel
 {
     private static final long serialVersionUID = 1L;
-    IController myCont;
+    ArcadeController myCont;
     
     public ThumbnailPanel(ArrayList<JPanel> thumbnails)
     {

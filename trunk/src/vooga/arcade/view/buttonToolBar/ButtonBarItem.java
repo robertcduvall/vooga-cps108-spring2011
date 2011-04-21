@@ -8,7 +8,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import vooga.arcade.controller.IController;
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
 import vooga.arcade.view.actions.ActionFactory;
 
@@ -26,7 +26,7 @@ public class ButtonBarItem extends JButton {
 
 	private static String className = "ButtonBarItem";
 
-	public ButtonBarItem(Icon icon, String buttonName, IController p) {
+	public ButtonBarItem(Icon icon, String buttonName, ArcadeController p) {
 		super(icon);
 		ActionListener aa = ActionFactory.createAction(className + buttonName,
 				p);
@@ -37,7 +37,7 @@ public class ButtonBarItem extends JButton {
 		setHorizontalTextPosition(CENTER);
 	}
 
-	public ButtonBarItem(String buttonName, IController p) {
+	public ButtonBarItem(String buttonName, ArcadeController p) {
 		this(new ImageIcon(buttonsResource.getString(buttonName)), buttonName,
 				p);
 	}

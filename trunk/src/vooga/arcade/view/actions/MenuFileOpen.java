@@ -3,7 +3,7 @@ package vooga.arcade.view.actions;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
-import vooga.arcade.controller.IController;
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.controller.ArcadeController;
 
 /**
@@ -17,7 +17,7 @@ public class MenuFileOpen extends AbstractVoogaAction {
 
 	ArcadeController pc = new ArcadeController();
 
-	public MenuFileOpen(IController p) {
+	public MenuFileOpen(ArcadeController p) {
 		super(p);
 	}
 

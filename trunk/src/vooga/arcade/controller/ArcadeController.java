@@ -4,8 +4,13 @@ import java.awt.Dimension;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 import vooga.arcade.model.ArcadeModel;
+import vooga.arcade.parser.ArcadeGameObject;
+import vooga.arcade.parser.ArcadeUserObject;
+import vooga.arcade.parser.gameObject.ArcadeObject;
 import vooga.arcade.view.gui.VoogaViewer;
 
 
@@ -15,7 +20,7 @@ import vooga.arcade.view.gui.VoogaViewer;
  * @author Andrea Scripa
  */
 
-public class ArcadeController implements IController
+public class ArcadeController
 {
     private VoogaViewer view;
     private ArcadeModel model;
@@ -31,21 +36,22 @@ public class ArcadeController implements IController
     public ArcadeController ()
     {}
 
-
-    @Override
     public void displayError (String s)
     {
         view.showError(s);
     }
 
-
-    @Override
-    public ArrayList<JPanel> queryModel (String query)
+    public List<ArcadeGameObject> queryModel (String tag, String[] query)
     {
-        return null;
+    	model.filterArcadeGameList(tag, query);
+        return model.getCurrentGameList();
     }
     
-    @Override
+//    public List<ArcadeUserObject> queryModel (String[] query)
+//    {
+//    	model.f
+//    }
+    
     public void login()
     {
         // TODO: Call Conrad's login thingy.  Replace login button with user button.
@@ -55,7 +61,6 @@ public class ArcadeController implements IController
      * Uses reflection to call the correct sorting algorithm in the model based on what was selected in 
      * the drop-down menu.
      */
-    @Override
     @SuppressWarnings("unchecked")
     public void sortInModel (String sort)
         throws SecurityException,
