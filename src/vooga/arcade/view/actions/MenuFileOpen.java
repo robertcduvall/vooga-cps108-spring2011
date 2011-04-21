@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
 import vooga.arcade.controller.IController;
-import vooga.arcade.controller.PracticeController;
+import vooga.arcade.controller.ArcadeController;
 
 /**
  * The action associated with clicking the File -> Open menu bar. Opens a
@@ -15,7 +15,7 @@ import vooga.arcade.controller.PracticeController;
  */
 public class MenuFileOpen extends AbstractVoogaAction {
 
-	PracticeController pc = new PracticeController();
+	ArcadeController pc = new ArcadeController();
 
 	public MenuFileOpen(IController p) {
 		super(p);

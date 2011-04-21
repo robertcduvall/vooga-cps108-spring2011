@@ -2,7 +2,7 @@ package vooga.arcade.view.middleFrame;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import vooga.arcade.controller.PracticeController;
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
 
 /**
@@ -18,7 +18,7 @@ public class VoogaMiddleFrame extends JPanel{
 	private ResourceManager MiddleFrameResource = new ResourceManager(
 			"vooga.arcade.resources.MiddleFrameResource");
 	
-	public VoogaMiddleFrame(PracticeController pc) {
+	public VoogaMiddleFrame(ArcadeController pc) {
 		BorderLayout b = new BorderLayout();
 		this.setLayout(b);
 		

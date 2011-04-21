@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import vooga.arcade.controller.IController;
-import vooga.arcade.controller.PracticeController;
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
 
 /**
