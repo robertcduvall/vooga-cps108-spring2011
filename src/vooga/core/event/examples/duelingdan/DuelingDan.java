@@ -45,8 +45,9 @@ public class DuelingDan extends VoogaExampleGame
         // TODO initialize stats, play field
         myDan.moveToCenter();
         myDan.getShotsSpriteGroup().reset();
-        for (Bubble bubble : myBubbles)
+        while(!myBubbles.isEmpty())
         {
+            Bubble bubble = myBubbles.get(0);
             bubble.destroy();
             myBubbles.remove(bubble);
         }
