@@ -1,12 +1,11 @@
 package vooga.levels;
 
 import java.awt.Graphics2D;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import com.golden.gamedev.Game;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.util.buildable.components.BasicComponent;
 
 import vooga.reflection.Reflection;
 
@@ -38,6 +37,9 @@ public class LevelManager
     /** The current, active level for this game */
     private AbstractLevel myActiveLevel;
 
+    /** Past playingfields that have been used in the game */
+    private Collection<AbstractLevel> myPastLevels;
+
     /**
      * Maps level names/classes to level order
      */
@@ -45,6 +47,7 @@ public class LevelManager
     {
         myGame = game;
         myLevelOrderMap = new HashMap<Integer, String>();
+        myPastLevels = new HashSet<AbstractLevel>();
     }
 
     /**
@@ -52,9 +55,9 @@ public class LevelManager
      */
     public void start()
     {
-    	loadLevel(0);
+        loadLevel(0);
     }
-    
+
     /**
      * Attempts to load level with specified id. Checks to see if the level
      * being loaded is of the same type as the current level. If so, it
@@ -71,23 +74,30 @@ public class LevelManager
         // 1st item is the class type of the level
         // 2nd is the user defined name which in essence is a comment        
         String[] levelDef = levelFileName.split("\\_");
-        String activeLevelClass = myActiveLevel.getClass().getName();
-        activeLevelClass = activeLevelClass.substring(0, activeLevelClass.indexOf(".")); //Gets rid of ".class"
-        if (activeLevelClass.equals(levelDef[0]))
+
+        // Cycle through all past levels and see if any of them are of the requested type
+        for(AbstractLevel pastLevel : myPastLevels)
         {
-            myActiveLevel.loadLevel();
+            String pastLevelClass = pastLevel.getClass().getName();
+            pastLevelClass = pastLevelClass.substring(0, pastLevelClass.indexOf(".")); //Gets rid of ".class"
+            if(pastLevelClass.equals(levelDef[0]))
+            {
+                pastLevel.loadLevel();
+                myActiveLevel = pastLevel;
+                return;
+            }
         }
-        else
+        
+        //If no pre-existing level of the correct type exists, create a new instance
+        try
         {
-            try
-            {
-                myActiveLevel = ((AbstractLevel) Reflection.createInstance(levelDef[0], myPlayers, myGame));
-                myActiveLevel.loadLevel();
-            }
-            catch (Exception e)
-            {
-                throw LevelException.LEVEL_LOADING_ERROR;
-            }
+            myActiveLevel = ((AbstractLevel) Reflection.createInstance(levelDef[0], myPlayers, myGame));
+            myActiveLevel.loadLevel();
+            myPastLevels.add(myActiveLevel);
+        }
+        catch (Exception e)
+        {
+            throw LevelException.LEVEL_LOADING_ERROR;
         }
     }
 
@@ -148,6 +158,8 @@ public class LevelManager
 
     /**
      * Adds a random sprite from the lowest running level pool
+     * 
+     * @return the sprite which was just added to the playingfield
      */
     public Sprite addRandomSprite ()
     {
@@ -160,10 +172,25 @@ public class LevelManager
      * taken from the lowest running level sprite pool.
      * 
      * @param type of Sprite to add
+     * @return the sprite which was just added to the playingfield
      */
     public Sprite addSpriteFromPool (String type)
     {
         return myActiveLevel.addSpriteFromPool(type);
+    }
+
+    /**
+     * Creates a sprite based on an archetype, and additional components
+     * 
+     * @param archetype of the sprite that you wish to create
+     * @param x coordinate of the sprite
+     * @param y coordinate of the sprite
+     * @param Additional components for this sprite
+     * @return the newly created sprite
+     */
+    public Sprite addSpriteArchetype(String type, int x, int y, BasicComponent... components)
+    {
+        return myActiveLevel.addNewSprite(type, x, y, components);
     }
 
 
@@ -185,10 +212,10 @@ public class LevelManager
     {
         myActiveLevel.addMusic();
     }
-    
-    
+
+
     /**
-     * 
+     * Adds a maping of level number to level file
      */
     public void addToLevelMap(int levelNumber, String levelFilePath)
     {
@@ -207,9 +234,11 @@ public class LevelManager
         myActiveLevel.update(elapsedTime);
     }
 
-    
+
     /**
      * Renders the level (which is a playingfield)
+     * 
+     * @param The graphics which will be used to render
      */
     public void render (Graphics2D g)
     {
