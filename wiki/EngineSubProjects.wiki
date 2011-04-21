@@ -144,11 +144,11 @@ You may add new packages to the list below, but they must have the same basic in
      * Core Responsibilities: Develop multi-faceted user interface with back and front end, allow users to choose an avatar with saved preferences, and create easy log-in system for players to reach certain avatars 
      * Collaborates With: Stats Team, Level Editor & Menu Team (for Swing GTGE interface advice, Replay Team (for info about the resume game table), Rouge, and Arcade Team
      * Extensions: Possible Extension of a Database
-  # Rogue Programmer
-     * Claimed by: DJ Sharkey
+  # Program Manager
+     * Claimed by: DJ Sharkey, Ethan Goh
      * Description: Trying to make this system fit together.
      * Design Goals: Build a game
-     * Core Responsibilities: Be a PM. :D
+     * Core Responsibilities: Ugh.
      * Collaborates With: Everyone.
      * Extensions: 
   # Mod Environment
