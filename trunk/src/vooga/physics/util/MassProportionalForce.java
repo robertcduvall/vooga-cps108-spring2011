@@ -2,7 +2,6 @@ package vooga.physics.util;
 
 import vooga.physics.interfaces.newtonian.INewtonianMovable;
 import vooga.physics.interfaces.newtonian.INewtonianPhysical;
-import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.math.Angle;
 
 /**

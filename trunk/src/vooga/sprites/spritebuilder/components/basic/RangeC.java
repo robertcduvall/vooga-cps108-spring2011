@@ -1,7 +1,6 @@
 package vooga.sprites.spritebuilder.components.basic;
 
 import vooga.util.buildable.components.predefined.basic.DoubleC;
-import vooga.util.buildable.components.predefined.basic.IntegerC;
 
 public class RangeC extends DoubleC
 {

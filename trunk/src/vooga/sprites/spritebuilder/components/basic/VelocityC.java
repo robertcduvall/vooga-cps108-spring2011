@@ -1,13 +1,17 @@
 package vooga.sprites.spritebuilder.components.basic;
 
+import vooga.physics.interfaces.IPhysicsToggle;
 import vooga.physics.interfaces.newtonian.INewtonianMovable;
+import vooga.physics.mediators.VoogaPhysicsMediator;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.components.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 
-public class VelocityC extends BasicComponent implements INewtonianMovable
+public class VelocityC extends BasicComponent implements INewtonianMovable, ISpriteUpdater, IPhysicsToggle
 {
 
+    private boolean isOn;
     protected Sprite mySprite;
     
     @Override
@@ -26,7 +30,8 @@ public class VelocityC extends BasicComponent implements INewtonianMovable
     protected int compareTo (BasicComponent o)
     {
         //TODO: Need a comparable in velocity? should be there...
-        return this.getVelocity().compareTo(((INewtonianMovable) o).getVelocity());
+        //return this.getVelocity().compareTo(((INewtonianMovable) o).getVelocity());
+        return 0;
     }
 
 
@@ -41,6 +46,24 @@ public class VelocityC extends BasicComponent implements INewtonianMovable
     protected void setFieldValues (Object ... fields)
     {
         mySprite = (Sprite) fields[0];
+    }
+
+    @Override
+    public void update(Sprite s, long elapsedTime) {
+        if (isOn())
+            VoogaPhysicsMediator.getInstance().getEngine(null).applyWorldForces(this, elapsedTime);
+        
+    }
+
+    @Override
+    public void turnPhysicsOnOff(boolean isOn) {
+        this.isOn = isOn;
+        
+    }
+
+    @Override
+    public boolean isOn() {
+        return isOn;
     }
 
 

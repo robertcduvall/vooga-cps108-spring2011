@@ -1,12 +1,10 @@
 package vooga.sprites.spritebuilder.components.basic;
 
 import java.awt.Point;
-import vooga.physics.interfaces.IPhysicsCustomCollide;
 import vooga.physics.interfaces.newtonian.INewtonianCollider;
 import vooga.physics.interfaces.newtonian.INewtonianFriction;
 import vooga.physics.interfaces.newtonian.INewtonianMovable;
 import vooga.physics.interfaces.newtonian.INewtonianPhysical;
-import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
 
