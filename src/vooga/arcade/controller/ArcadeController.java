@@ -12,6 +12,7 @@ import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.parser.ArcadeUserObject;
 import vooga.arcade.parser.gameObject.ArcadeObject;
 import vooga.arcade.view.gui.VoogaViewer;
+import vooga.user.controller.LoginController;
 
 
 /**
@@ -52,9 +53,23 @@ public class ArcadeController
 //    	model.f
 //    }
     
+    public void sortInModel()
+    {
+        // TODO: Get the text from the search panel and call queryModel??
+    }
+    
     public void login()
     {
-        // TODO: Call Conrad's login thingy.  Replace login button with user button.
+        // Give Conrad a list of game titles
+        //LoginController start = new LoginController("VOOGA GAME LOGIN", "", 640, 480);  
+        //start.toString();
+        
+     // TODO: Replace login button with user button.
+    }
+    
+    public void userProperties()
+    {
+        // TODO: Create the actionPerformed for the user button that pops up in login's place.
     }
 
     /**

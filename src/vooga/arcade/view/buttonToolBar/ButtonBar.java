@@ -38,4 +38,9 @@ public class ButtonBar {
 		toolBar.add(searchField);
 		return toolBar;
 	}
+	
+	public static void swapButtons(ArcadeController p)
+	{
+	    // TODO: Make a generalized way to swap the login and user buttons
+	}
 }
