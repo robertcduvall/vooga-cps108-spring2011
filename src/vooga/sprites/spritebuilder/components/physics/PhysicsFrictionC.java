@@ -1,4 +1,4 @@
-package vooga.sprites.spritebuilder.components.basic;
+package vooga.sprites.spritebuilder.components.physics;
 
 import java.awt.Point;
 import vooga.physics.interfaces.newtonian.INewtonianCollider;
