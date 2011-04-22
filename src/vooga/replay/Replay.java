@@ -24,11 +24,11 @@ public class Replay extends GameObject {
 	 * @param start - A flag point denoting where in the StateTable Replay will begin to read
 	 * @param stop - A flag point denoting where in the StateTable Replay will finish reading from the StateTable
 	 */
-	public Replay(GameEngine ge, StateTable table, int start, int stop) {
+	private Replay(GameEngine ge, StateTable table, int start, int stop, int time) {
 		super(ge);
 		this.myTable = table;
 		this.start = start;
-		this.stop = (stop <= table.getTime()) ? stop : table.getTime();
+		this.stop = (stop <= time) ? stop : time;
 		time = start;
 	}
 	/**
@@ -38,8 +38,8 @@ public class Replay extends GameObject {
 	 * @param ge
 	 * @param table
 	 */
-	public Replay(GameEngine ge, StateTable table) {
-		this(ge, table, 0, table.getTime() - 1);
+	public Replay(GameEngine ge, StateTable table, int time) {
+		this(ge, table, 0, time - 1, time);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class Replay extends GameObject {
 	@Override
 	public void update(long elapsedTime) {
 		if (inRange(time) && !(keyDown(KeyEvent.VK_P))) {
-			myTable.transformSprite(time);
+			myTable.transformSpritesToState(time);
 			time = keyDown(KeyEvent.VK_Q) ? Math.max(--time,start) : Math.min(++time,stop);
 		}
 	}

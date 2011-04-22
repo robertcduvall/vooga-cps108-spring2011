@@ -2,6 +2,7 @@ package vooga.replay.examples.catroll;
 
 import java.awt.Dimension;
 
+import vooga.replay.Replay;
 import vooga.replay.StateTableFileManager;
 
 import com.golden.gamedev.GameEngine;
@@ -21,7 +22,7 @@ public class CatRollGame extends GameEngine {
 			return new Level1(this);
 		case 2:
 			try {
-				return new CatReplay(this, stfm.returnStateTableFromFile("st"));
+				return stfm.returnStateTableFromFile("st").replayTable(this);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

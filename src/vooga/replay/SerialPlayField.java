@@ -7,7 +7,7 @@ import com.golden.gamedev.object.*;
 /**
  * Serializable PlayField Object. The State table will store the sprites in this PlayField.
  * 
- * @author Josue, Chris
+ * @author Josue
  */
 
 @SuppressWarnings("serial")

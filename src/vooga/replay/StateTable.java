@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.object.*;
 import com.golden.gamedev.object.background.ImageBackground;
 
@@ -32,10 +33,10 @@ public class StateTable implements Serializable {
 		time = 0;
 	}
 
-	public int getTime() {
-		return time;
+	
+	public Replay replayTable(GameEngine parent){
+		return new Replay(parent, this, time);
 	}
-
 	/**
 	 * Using the play field, this will record the SpriteReplayData and the
 	 * background at that point in time.
@@ -89,16 +90,12 @@ public class StateTable implements Serializable {
 	 * @param t
 	 *            - Time, location in time relative to "StateTable indices"
 	 */
-	public void transformSprite(int t) {
+	public void transformSpritesToState(int t) {
 		myBackground = new ImageBackground(myBackgroundImageData.getImage());
 		for (Sprite s : myMap.keySet()) {
-			SpriteReplayData sData = myMap.get(s).get(t);
-			s.setLocation(sData.getX(), sData.getY());
-			s.setActive(sData.isActive());
-			s.setImage(sData.getImage());
+			s = myMap.get(s).get(t).transformSprite(s);
 			s.setBackground(myBackground);
 		}
-
 	}
 
 	/**
