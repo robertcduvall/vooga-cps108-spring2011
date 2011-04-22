@@ -1,6 +1,4 @@
 <level>
-	<background>a</background>
-	
 	<collision_manager g1=red g2=blue class=vooga.levels.example2.collisions.ExampleCollisionManager />
 	
 	<sprite group=red class=vooga.levels.example2.sprites.RedSprite name=redEnemy>

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import vooga.core.VoogaGame;
 import vooga.levels.LevelManager;
+import vooga.resources.ResourceManager;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
@@ -31,7 +32,7 @@ public class Example2 extends VoogaGame {
 	    SpriteGroup players = new SpriteGroup("player group");
 	    Sprite player = new Sprite(getImage("Ship1.png"));
 	    players.add(player);
-
+	    //myResourceManager = new ResourceManager("");
 		myLevelManager = new LevelManager(this, players);
 		myLevelManager.start();
 	}
