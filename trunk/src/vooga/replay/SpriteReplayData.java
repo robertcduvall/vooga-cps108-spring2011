@@ -25,20 +25,14 @@ public class SpriteReplayData implements Serializable {
 		this.isActive = isActive;
 	}
 
-	public double getX() {
-		return myPoint.getX();
-	}
-	
-	public boolean isActive(){
-		return isActive;
-	}
-
-	public double getY() {
-		return myPoint.getY();
-	}
-
 	public BufferedImage getImage() {
 		return myImage.getImage();
 	}
 
+	public Sprite transformSprite(Sprite s) {
+		s.setLocation(myPoint.getX(), myPoint.getY());
+		s.setActive(isActive);
+		s.setImage(getImage());
+		return s;
+	}
 }

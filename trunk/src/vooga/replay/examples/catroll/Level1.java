@@ -95,7 +95,7 @@ public class Level1 extends GameObject {
 
 		if (keyDown(KeyEvent.VK_ESCAPE)) {
 			stfm.writeToNewSaveFile(myTable, "st");
-			parent.nextGame = new CatReplay(parent, myTable);
+			parent.nextGame = myTable.replayTable(parent);
 			finish();
 		}
 		
