@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
-//import net.miginfocom.swing.MigLayout;
+import net.miginfocom.swing.MigLayout;
 
 import vooga.user.controller.ILoginController;
 import vooga.user.model.LoginTemplate;
@@ -34,7 +34,7 @@ public class FieldPanel extends JPanel{
 	 * This is the constructor for a Field Panel JPanel that is constructed section by section
 	 */
 	public FieldPanel(LoginTemplate[] log, ILoginController controller) {
-		//this.setLayout(new MigLayout());
+		this.setLayout(new MigLayout());
 		
 		for (LoginTemplate login : log) {
 			addSection(login.getHeader(), login.getPrompts());
