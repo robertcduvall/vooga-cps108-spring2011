@@ -4,7 +4,6 @@ import java.util.*;
 import vooga.levels.util.LevelParser;
 import vooga.levels.util.PoolDeferredConstructor;
 
-import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Background;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
@@ -44,7 +43,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     /** This level's current id; could change each time a new XML file is read */
     private int myId;
 
-
+    
     public AbstractLevel (SpriteGroup players, VoogaGame game)
     {
         myGame = game;

@@ -4,8 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.golden.gamedev.Game;
-
 import vooga.core.VoogaGame;
 import vooga.resources.images.ImageLoader;
 
@@ -60,7 +58,7 @@ public class ConverterRack {
 		}
 	}
 	
-	public ConverterRack(Game g) {
+	public ConverterRack(VoogaGame g) {
 		conversionMap = new HashMap<Class<?>, Converter<?>>();
 		
 		addConverter(String.class, new StringConverter());
