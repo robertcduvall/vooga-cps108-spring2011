@@ -10,5 +10,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="GTGE_GUI_0_1_0.jar"/>
 	<classpathentry kind="lib" path="jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="miglayout-3.5.6.jar"/>
+	<classpathentry kind="lib" path="sqlitejdbc-v056.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
