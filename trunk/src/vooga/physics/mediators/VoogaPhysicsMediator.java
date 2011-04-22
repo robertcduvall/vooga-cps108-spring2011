@@ -6,7 +6,7 @@ import java.util.Map;
 import vooga.core.VoogaGame;
 import vooga.physics.engine.BasePhysicsEngine;
 import vooga.physics.engine.NewtonianPhysicsEngine;
-import vooga.physics.interfaces.newtonian.INewtonianMovable;
+import vooga.physics.newtonianInterfaces.INewtonianMovable;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.physics.PhysicsC;
 import vooga.sprites.spritebuilder.components.physics.VelocityC;

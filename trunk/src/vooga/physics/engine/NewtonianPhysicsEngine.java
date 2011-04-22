@@ -1,12 +1,13 @@
 package vooga.physics.engine;
 
-import vooga.physics.interfaces.IPointField;
+import vooga.physics.IPointField;
 import vooga.physics.util.Force;
 import java.awt.Point;
-import vooga.physics.interfaces.newtonian.INewtonianMovable;
-import vooga.physics.interfaces.newtonian.INewtonianPhysical;
-import vooga.physics.interfaces.newtonian.INewtonianFriction;
-import vooga.physics.interfaces.newtonian.INewtonianRotate;
+
+import vooga.physics.newtonianInterfaces.INewtonianFriction;
+import vooga.physics.newtonianInterfaces.INewtonianMovable;
+import vooga.physics.newtonianInterfaces.INewtonianPhysical;
+import vooga.physics.newtonianInterfaces.INewtonianRotate;
 import vooga.physics.util.MassProportionalForce;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;

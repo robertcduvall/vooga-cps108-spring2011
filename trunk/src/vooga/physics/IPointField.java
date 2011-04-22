@@ -1,4 +1,4 @@
-package vooga.physics.interfaces;
+package vooga.physics;
 
 import java.awt.Point;
 import vooga.physics.util.Velocity;

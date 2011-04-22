@@ -1,7 +1,8 @@
-package vooga.physics.interfaces.newtonian;
+package vooga.physics.newtonianInterfaces;
 
 import java.awt.Point;
-import vooga.physics.interfaces.IPhysicsCustomCollide;
+
+import vooga.physics.IPhysicsCustomCollide;
 import vooga.util.math.Angle;
 
 /**

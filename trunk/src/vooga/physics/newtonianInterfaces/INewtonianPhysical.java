@@ -1,8 +1,8 @@
-package vooga.physics.interfaces.newtonian;
+package vooga.physics.newtonianInterfaces;
 
 import java.awt.Point;
 
-import vooga.physics.interfaces.IPhysicsToggle;
+import vooga.physics.IPhysicsToggle;
 
 /**
  * Interface which defines basic methods that all objects using physics should implement.
