@@ -34,13 +34,13 @@ instanceOfPhysicsEngine.addGlobalPointField(this, elapsedTime);
 
 2. The effect of collisions on the colliding objects. This works similarly to the above. For the given implemention of sprites in Vooga, there exists a VoogaPhysicsMediator, which has a method “collision” which takes two sprites, and some other essential information about the collision which should be provided by the collisions team. To implement physics for collisions:
 
-1. Make sure to call instanceOfVoogaPhysicsMediator (perhaps to be implemented as a singleton?).collision(…) inside of the collisionManager, when the collision occurs (this should already be done by the collisions team).
+   1. Make sure to call instanceOfVoogaPhysicsMediator (perhaps to be implemented as a singleton?).collision(…) inside of the collisionManager, when the collision occurs (this should already be done by the collisions team).
 
-2. Make sure to implement a PhysicsC component (making sure to specify the mass) on the objects you want to collide properly (no need to specify it for walls or other such objects), or else they won’t work properly.
+   2. Make sure to implement a PhysicsC component (making sure to specify the mass) on the objects you want to collide properly (no need to specify it for walls or other such objects), or else they won’t work properly.
 
 
 Besides those two major things, we also wanted to provide lots of customizable behavior, but also a lot of defaults so you have less code to write. This means a couple of things:
 
-1.	To specify default Newtonian collisions and force application, use a NewtonianPhysicsEngine. If the default behavior is not overridden (see 2), it will calculate based on Newtonian physics
+   1. To specify default Newtonian collisions and force application, use a NewtonianPhysicsEngine. If the default behavior is not overridden (see 2), it will calculate based on Newtonian physics
 
-2.	To customize the reaction of an object to an applied force, an applied field, or a collision, implement IPhysicsCustomForce, IPhysicsCustomField, or IPhysicsCustomCollision within the component you would like to use to calculate the result of this force/field/collision. In the case of Newtonian Physics, to implement a custom collision, it might be convenient to extend INewtonianCollider (which extends IPhysicsCustomCollision) instead.
+   2. To customize the reaction of an object to an applied force, an applied field, or a collision, implement IPhysicsCustomForce, IPhysicsCustomField, or IPhysicsCustomCollision within the component you would like to use to calculate the result of this force/field/collision. In the case of Newtonian Physics, to implement a custom collision, it might be convenient to extend INewtonianCollider (which extends IPhysicsCustomCollision) instead.
