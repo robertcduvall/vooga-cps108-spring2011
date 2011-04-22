@@ -6,6 +6,11 @@ import vooga.util.math.LineMath;
 
 public class CircleCircleFinder extends IntersectionFinder {
 
+	
+	public CircleCircleFinder()
+	{
+		
+	}
 	@Override
 	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2)
 	{
@@ -56,7 +61,7 @@ public class CircleCircleFinder extends IntersectionFinder {
 
 	@Override
 	public int compareTo(Object o) {
-		return this.hashCode() - arg0.hashCode();
+		return this.hashCode() - o.hashCode();
 	}
 
 

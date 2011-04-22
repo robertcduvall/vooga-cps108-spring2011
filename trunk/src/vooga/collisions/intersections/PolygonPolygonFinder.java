@@ -7,6 +7,11 @@ import vooga.util.math.LineMath;
 public class PolygonPolygonFinder extends IntersectionFinder
 {
 
+	public PolygonPolygonFinder()
+	{
+		
+	}
+	
 	@Override
 	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2) {
 		if (c1.isInstance(Polygon.class) && c2.isInstance(Polygon.class))
