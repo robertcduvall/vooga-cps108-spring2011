@@ -1,4 +1,4 @@
-package vooga.sprites.spritebuilder.components.basic;
+package vooga.sprites.spritebuilder.components.physics;
 
 import vooga.physics.interfaces.IPhysicsToggle;
 import vooga.physics.interfaces.newtonian.INewtonianMovable;

@@ -12,12 +12,24 @@ import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
+/**
+ * A physics engine defining default behavior for physics based on newtonian mechanics.
+ * 
+ * @author Nathan Klug
+ *
+ */
 public class NewtonianPhysicsEngine extends BasePhysicsEngine {
 
     public NewtonianPhysicsEngine() {
         super();
     }
 
+    /**
+     * Provides default behavior for the application of force to an INewtonianPhysics object
+     * @param object
+     * @param force
+     * @param elapsedTime
+     */
     public void applyForce(INewtonianPhysical object, Force force, long elapsedTime) {
         if (!super.applyForce(object, force, elapsedTime))
             if (force.getClass() == Force.class)
@@ -25,6 +37,12 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
             
     }
 
+    /**
+     * Provides default behavior for the application of force to an INewtonianMovable object
+     * @param object
+     * @param force
+     * @param elapsedTime
+     */
     public void applyForce(INewtonianMovable object, MassProportionalForce force, long elapsedTime) {
         if (!super.applyForce(object, force, elapsedTime)) {
             if (force.getClass() == MassProportionalForce.class)
@@ -33,9 +51,11 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
     }
 
     /**
-     * Applies an external field to an object.
+     * Provides default behavior for the application of a field to the given object which has a field
      * 
-     * @param physicalObject
+     * TODO: Ensure that the two fields are of the same type
+     * 
+     * @param object
      * @param field
      * @param elapsedTime
      */

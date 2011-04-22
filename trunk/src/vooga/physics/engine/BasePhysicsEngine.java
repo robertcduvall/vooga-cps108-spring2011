@@ -11,6 +11,13 @@ import vooga.physics.interfaces.IPointField;
 import vooga.physics.interfaces.IPhysicsToggle;
 import vooga.util.math.Angle;
 
+/**
+ * The base of all other physics engines. Provides a structure for defining custom behavior
+ * in response to forces, fields, and collisions
+ * 
+ * @author Nathan Klug
+ *
+ */
 public class BasePhysicsEngine implements IPhysicsToggle {
 
     private Collection<Force> worldForces;
@@ -60,13 +67,7 @@ public class BasePhysicsEngine implements IPhysicsToggle {
     }
 
     /**
-     * Applies all of the worldwide forces to a sprite. This only applies the
-     * MassProportionalForces, such as gravity, which do not need physical
-     * properties like mass. Do not use this method if your sprite has a
-     * physical nature, or else these forces will be applied twice
-     * 
-     * TODO: should we change it so applying the world forces to a physical
-     * object does not apply the mass proportional forces?
+     * Applies all of the worldwide forces to an object, using the applyForce method
      * 
      * @param <T>
      * 
@@ -82,13 +83,15 @@ public class BasePhysicsEngine implements IPhysicsToggle {
     }
 
     /**
-     * Applies an external force to an object.
+     * Determines if an object defines custom behavior for responding to the given force.
      * 
      * @param <T>
      * 
      * @param physicalObject
      * @param field
      * @param elapsedTime
+     * 
+     * @return a boolean representing if custom behavior was used
      */
     public <T> boolean applyForce(T object, Force force, long elapsedTime) {
         if (IPhysicsCustomForce.class.isAssignableFrom(object.getClass())) {
@@ -99,8 +102,7 @@ public class BasePhysicsEngine implements IPhysicsToggle {
     }
 
     /**
-     * Applies all of the worldwide point fields to something which has that
-     * same field
+     * Applies all of the worldwide point fields to an object
      * 
      * @param <T>
      * @param affectedObject
@@ -115,13 +117,15 @@ public class BasePhysicsEngine implements IPhysicsToggle {
     }
 
     /**
-     * Applies an external field to an IPhysics object.
+     * Determines if an object defines custom behavior for responding to the given field.
      * 
      * @param <T>
      * 
      * @param physicalObject
      * @param field
      * @param elapsedTime
+     * 
+     * @return a boolean representing if custom behavior was used
      */
     public <T> boolean applyField(T object, IPointField field, long elapsedTime) {
         if (IPhysicsCustomField.class.isAssignableFrom(object.getClass())) {
@@ -134,6 +138,10 @@ public class BasePhysicsEngine implements IPhysicsToggle {
     /**
      * General collision method. Tells the two physical objects that a collision
      * occurred.
+     * 
+     * TODO: define a default interface to use for the other object in the collision,
+     * similar to in VoogaPhysicsMediator. Otherwise, may generate compile-time errors,
+     * due to ambiguous method calls.
      * 
      * @param object1
      * @param object2
@@ -159,13 +167,17 @@ public class BasePhysicsEngine implements IPhysicsToggle {
     }
 
     /**
-     * Applies an external field to an IPhysics object.
+     * Determines if an object defines custom behavior for responding to the given collision.
      * 
      * @param <T>
      * 
-     * @param physicalObject
-     * @param field
-     * @param elapsedTime
+     * @param thisObject the object for which we are calculating the result of the collision
+     * @param otherObject the other object in the collision
+     * @param angleOfImpact the angle that the collision is occurring at. The angle representing the tangent vector to the point of intersection.
+     * @param pointOfImpact the point at which the collision occurs
+     * @param coefficientOfRestitution the cofficient representing the elasticity of the collision. 0 = inelastic, 1 = elastic
+     * 
+     * @return a boolean representing if custom behavior was used
      */
     public <T> boolean applyCollision(T thisObject, Object otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         if (IPhysicsCustomCollide.class.isAssignableFrom(thisObject.getClass())) {
@@ -176,10 +188,16 @@ public class BasePhysicsEngine implements IPhysicsToggle {
         return false;
     }
 
+    /**
+     * Is physics on?
+     */
     public boolean isOn() {
         return isOn;
     }
 
+    /**
+     * set physics on or off based on the parameter
+     */
     @Override
     public void turnPhysicsOnOff(boolean isOn) {
         this.isOn = isOn;
