@@ -54,13 +54,6 @@ public class GoalTag extends XMLTag {
 			params[i] = out;
 		}
 		
-		
-		
-		for(int i = 0; i < types.length; i++) {
-			Object out = parser.getConverterRack().convert(types[i], args.get(i));
-			params[i] = out;
-		}
-		
 		// Use reflection to create a new instance of the goal class and add it to the level.
 		parser.setGoal((IGoal) Reflection.createInstance(className, params));
 	}
