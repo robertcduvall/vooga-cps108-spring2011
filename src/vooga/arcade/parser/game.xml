@@ -1,6 +1,6 @@
 <game>
-  <title>1</title>
-  <path>vooga.arcade.parser.TestGame</path>
+  <title>DuelingDan</title>
+  <path>vooga.core.event.examples.duelingdan.DuelingDan</path>
   <genre>3</genre>
   <author>4</author>
   <description>5</description>
@@ -15,10 +15,10 @@
   <language>12</language>
   <dimension>
     <width>800</width>
-    <height>800</height>
+    <height>600</height>
   </dimension>
   <rating>yhg is wtf</rating>
   <favorite>0</favorite>
   <comment>?</comment>
-  <image>./src/vooga/arcade/resources/rcd.jpg</image>
+  <image>./src/vooga/arcade/resources/kea.jpg</image>
 </game>
