@@ -1,10 +1,7 @@
 package vooga.levels.example2;
 
-import java.util.Collection;
-import com.golden.gamedev.Game;
 import vooga.core.VoogaGame;
 import vooga.levels.AbstractLevel;
-import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
 /**

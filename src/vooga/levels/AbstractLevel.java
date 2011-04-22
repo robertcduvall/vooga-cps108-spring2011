@@ -47,8 +47,8 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     public AbstractLevel (SpriteGroup players, VoogaGame game)
     {
         myGame = game;
-        addGroup(players);
         mySpriteGroups = new ArrayList<SpriteGroup>();
+        addGroup(players);
         myCollisionManagers = new ArrayList<CollisionManager>();
     }
 
