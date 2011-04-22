@@ -20,13 +20,15 @@ public class SpriteConstructor {
 	private String spriteGroup;
 	private List<String> partialAssignments;
 	private ConverterRack converterRack;
+	private AbstractLevel level;
 	
-	public SpriteConstructor(ConverterRack converterRack, 
+	public SpriteConstructor(AbstractLevel level, ConverterRack converterRack, 
 			String className, String spriteGroup, List<String> partialAssignments) {
 		this.converterRack = converterRack;
 		this.className = className;
 		this.partialAssignments = partialAssignments;
 		this.spriteGroup = spriteGroup;
+		this.level = level;
 	}
 	
 	/**
@@ -37,8 +39,8 @@ public class SpriteConstructor {
 	public Sprite construct(List<String> otherAssignments) {
 		Sprite sprite = constructInstance(otherAssignments);
 		// TODO get level so that correct sprite group can be grabbed
-		//SpriteGroup group = level.getSpriteGroup(spriteGroup);
-		//group.add(sprite);
+		SpriteGroup group = level.getSpriteGroup(spriteGroup);
+		group.add(sprite);
 		return sprite;
 	}
 	
