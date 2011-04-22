@@ -6,6 +6,12 @@ import vooga.collisions.shapes.regularShapes.*;
 public class PolygonCircleFinder extends IntersectionFinder
 {
 
+	
+	public PolygonCircleFinder()
+	{
+		
+	}
+	
 	@Override
 	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2) {
 		if (c1.isInstance(Polygon.class) && c2.isInstance(Circle.class))
