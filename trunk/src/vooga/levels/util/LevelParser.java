@@ -12,6 +12,7 @@ import vooga.levels.AbstractLevel;
 import vooga.levels.IGoal;
 import vooga.levels.util.tags.*;
 import vooga.resources.xmlparser.Parser;
+import vooga.resources.xmlparser.ParserException;
 import vooga.resources.xmlparser.XMLTag;
 
 /**
@@ -78,7 +79,9 @@ public class LevelParser extends Parser {
 	 * Returns the sprite constructor associated with the given archetype.
 	 */
 	public SpriteConstructor getSpriteConstructor(String type) {
-		return spriteFactoryMap.get(type);
+		SpriteConstructor constructor = spriteFactoryMap.get(type);
+		if(constructor == null) throw ParserException.SYNTAX_ERROR;
+		return constructor;
 	}
 	
 	/**
