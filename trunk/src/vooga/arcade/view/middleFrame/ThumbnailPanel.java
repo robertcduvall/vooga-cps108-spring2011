@@ -1,4 +1,5 @@
 package vooga.arcade.view.middleFrame;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +21,8 @@ public class ThumbnailPanel extends JPanel
     
     public ThumbnailPanel(List<JPanel> thumbnails)
     {
-        JPanel thumbPanel = new JPanel();
+        JPanel thumbPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JScrollPane scrollPane = new JScrollPane(thumbPanel);
-        
-        // TODO: Specify the layout?
         
         for (JPanel thumbnail : thumbnails)
         {
