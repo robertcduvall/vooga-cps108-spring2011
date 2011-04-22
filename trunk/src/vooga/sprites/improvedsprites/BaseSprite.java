@@ -7,7 +7,7 @@ import vooga.sprites.improvedsprites.interfaces.ISpriteBase;
 import vooga.sprites.improvedsprites.interfaces.ITargetable;
 import com.golden.gamedev.object.Background;
 
-public class BaseSprite implements ISpriteBase, IRender, ITargetable
+public abstract class BaseSprite implements ISpriteBase, IRender, ITargetable
 {
  // /////// optimization /////////
     // private final Rectangle collisionOffset = new Rectangle(0,0,0,0); //
