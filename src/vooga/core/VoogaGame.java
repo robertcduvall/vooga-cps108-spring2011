@@ -7,6 +7,7 @@ import vooga.core.event.ISimpleEventManager;
 import vooga.resources.KeyMap;
 import vooga.resources.ResourceManager;
 import vooga.resources.images.ImageLoader;
+import vooga.sprites.spritegroups.SpriteGroup;
 
 import com.golden.gamedev.Game;
 
@@ -15,17 +16,42 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
 {
     private EventManager myEventManager;
     protected ResourceManager myResourceManager;
+    // This is needed by LevelManager, so consequently it's needed by ResourceManager.
+    // FIXME: What to parameterize this with?
+    private SpriteGroup myPlayerSpriteGroup;
     private KeyMap myKeyMap;
 
-
+    /**
+     * @deprecated
+     * Need to specify a resource file eventually.
+     */
     public VoogaGame ()
     {
         super();
         myEventManager = new EventManager();
         initializeEventHandlers();
     }
+    
+    /**
+     * Initialize the VoogaGame from the given resource file.
+     * @param resourceFile the path of the XML resource file for all resources in the game.
+     */
+    public VoogaGame(String resourceFile) {
+    	super();
+    	myEventManager = new EventManager();
+    	initializeEventHandlers();
+    	myResourceManager = new ResourceManager(resourceFile, this);
+    }
 
-
+    /**
+     * 
+     * @return the sprite group containing player sprites.
+     */
+    // FIXME: What do we parameterize this with?!
+    public SpriteGroup getPlayerGroup() {
+    	return myPlayerSpriteGroup;
+    }
+    
     @Override
     public void addEveryTurnEvent (String eventName, IEventHandler eventHandler)
     {
@@ -141,7 +167,9 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
 
 
     @Override
-    public abstract void initResources ();
+    public void initResources () {
+    	myResourceManager.init();
+    }
 
 
     @Override

@@ -20,10 +20,10 @@ import com.golden.gamedev.util.ImageUtil;
 public class ImageParser extends Parser
 {
     private static final String
-    	RESOURCES = "resources",
+    	RESOURCES = "images",
         IMAGE = "image",
         NAME = "name",
-        SOURCE = "source",
+        PATH = "path",
         WIDTH = "width",
         HEIGHT = "height",
         ROWS = "rows",
@@ -59,7 +59,7 @@ public class ImageParser extends Parser
         }
     }
     private class SourceTag extends XMLTag {
-        public String getTagName() {return SOURCE;}
+        public String getTagName() {return PATH;}
         public void parse(Parser context, Element xmlElement) {
             sourceImage = bsLoader.getImage(getValue(xmlElement));
             tileCols = 1;

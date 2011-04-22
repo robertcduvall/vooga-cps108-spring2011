@@ -5,6 +5,7 @@ import vooga.levels.LevelManager;
 import vooga.resources.images.ImageLoader;
 import vooga.resources.managertags.*;
 import vooga.resources.xmlparser.Parser;
+import vooga.resources.xmlparser.XMLTag;
 
 /**
  * Mega-class that manages all resources.
@@ -17,20 +18,32 @@ public class ResourceManager extends Parser {
 	private ImageLoader imageLoader;
 	private LevelManager levelManager;
 	private VoogaGame game;
+	private String xmlFilename;
+	
+	public class RootTag extends XMLTag {
+		@Override
+		public String getTagName() {
+				return "resources";
+		}
+	}
 	
 	/**
 	 * Constructs a resource manager given the root game class, and a filename.
 	 * @param game the root game class.
-	 * @param filename the name of the XML file defining all resources.
+	 * @param xmlFilename the name of the XML file defining all resources.
 	 */
-	public ResourceManager(String filename, VoogaGame game) {
+	public ResourceManager(String xmlFilename, VoogaGame game) {
 		super();
 		
+		this.xmlFilename = xmlFilename;
 		this.game = game;
 		
-		addDefinitions(new ImageResourceTag(this), new LevelTag(this));
+		addDefinitions(	new RootTag(),
+						new ImageResourceTag(this),
+						new LevelTag(this));
 		
-		parse(filename);
+		levelManager = new LevelManager(game, game.getPlayerGroup());
+		
 	}
 
 	public VoogaGame getGame() {
@@ -46,5 +59,16 @@ public class ResourceManager extends Parser {
 	 */
 	public ImageLoader getImageLoader() {
 		return imageLoader;
+	}
+	
+	public LevelManager getLevelManager() {
+		return levelManager;
+	}
+
+	/**
+	 * Parse the resource file.
+	 */
+	public void init() {
+		parse(xmlFilename);
 	}
 }

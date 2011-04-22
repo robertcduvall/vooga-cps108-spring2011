@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<images>
+	<image name="ship">
+		<path>src/vooga/resources/test/images/ship.gif</path>
+	</image>
+	<image name="space">
+		<path>src/vooga/resources/test/images/space.jpg</path>
+	</image>
+</images>

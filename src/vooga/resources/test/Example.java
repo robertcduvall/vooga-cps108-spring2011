@@ -14,20 +14,29 @@ import com.golden.gamedev.object.background.ImageBackground;
 import vooga.core.VoogaGame;
 import vooga.resources.images.*;
 
+/**
+ * Example program to demonstrate resource loading.
+ * @author Sterling Dorminey
+ *
+ */
 public class Example extends VoogaGame {
 
-	private static final String RESOURCE_XML_FILE = "src/vooga/resources/test/test2.xml";
-	private ImageLoader loader;
+	private static final String RESOURCE_XML_FILE =
+		"src/vooga/resources/test/example_main_rsrc.xml";
 	private PlayField playfield;
 	private static final int WIDTH = 640;
 	private static final int HEIGHT = 480;
 	
+	public Example() {
+		super(RESOURCE_XML_FILE);
+	}
+	
 	@Override
 	public void initResources() {
-		loader = new ImageLoader(new File(RESOURCE_XML_FILE), bsLoader);
+		super.initResources();
 		playfield = new PlayField();
-		BufferedImage ship = loader.getImage("ship");
-		BufferedImage bg = loader.getImage("space");
+		BufferedImage ship = getImageLoader().getImage("ship");
+		BufferedImage bg = getImageLoader().getImage("space");
 		playfield.setBackground(new ImageBackground(bg));
 		Sprite testSprite = new Sprite(ship, WIDTH/2, HEIGHT/2);
 		playfield.add(testSprite);
