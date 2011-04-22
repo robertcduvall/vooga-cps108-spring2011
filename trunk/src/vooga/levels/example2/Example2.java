@@ -27,7 +27,7 @@ public class Example2 extends Game {
 		myPlayers = new ArrayList<Sprite>(); 
 		myPlayers.add(new Sprite());
 		myLevelManager = new LevelManager(this, myPlayers);
-		myLevelManager.loadLevel(0);
+		myLevelManager.start();
 	}
 
 	@Override
@@ -39,7 +39,6 @@ public class Example2 extends Game {
 	@Override
 	public void render(Graphics2D g) {
 		myLevelManager.render(g);
-
 	}
 
 }
