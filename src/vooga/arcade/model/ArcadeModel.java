@@ -3,6 +3,7 @@ package vooga.arcade.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import vooga.arcade.parser.ArcadeGameFinder;
 import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.search.AlphabeticalSort;

@@ -4,7 +4,9 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.jdom.Element;
@@ -25,107 +27,84 @@ import com.golden.gamedev.GameLoader;
  *
  */	
 public class ArcadeGameObject extends ArcadeObject{
-
-    private Game game;
-    private Dimension dimension;    
-    private String[] highscores;
-    private Map<String, String> dataMap = new HashMap<String, String>();
-    private ResourceManager resourceManager = ResourceManager.getInstance();
-    private String source = "GameInfo";
-    private Element root;
-    private XMLOutputter xmlOutput = new XMLOutputter();
     
-    
-    public ArcadeGameObject(Game game, String[] data, String[] dimension,
-            String[] highscores, Image image, Element root, String path) {
-    	super(image, path);
-        resourceManager.addResourcesFromFile(source,
-                "vooga.arcade.resources");
-        this.game = game;
-        this.highscores = highscores;
-        this.dimension = new Dimension(Integer.parseInt(dimension[0]),
-                Integer.parseInt(dimension[1]));
-        this.root = root;
-        fillMapWithData(data);
+    protected Game game;
+    protected Dimension dimension;
+    public ArcadeGameObject(Element root, String path) {
+    	
+        super(root,path);
+        this.dimension = getDimension();        
     }
 
-    private void fillMapWithData(String[] data) {
-        String defaultName = resourceManager.getString("defaultName");
-        for (int i = 0; i < data.length; i++) {
-            dataMap.put(resourceManager.getString(defaultName + '.' + i),
-                    data[i]);
-        }
-    }
 
     /**
      * start the game contained in the game object
      */
     public void start() {
+        createGame();        
         GameLoader loader = new GameLoader();
         loader.setup(game, dimension, false);
         game.start();
     }
-
+    
     /**
-     * return data from the dataMap
-     * 
-     * @param name
-     * @return return data with given name, or return "" if the data doesn't
-     *         exist
+     * Creates the game instance
      */
-    public String getData(String name) {
-        String s = dataMap.get(name);
-        if (s != null)
-            return s;
-        return "";
+    private void createGame() {
+        Class cls = null;
+
+        try {
+            cls = Class.forName(root.getChildText("path"));
+            game = (Game) (cls.newInstance());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-    /**
-     * @return the game
-     */
-    public Game getGame() {
-        return game;
+    
+    public String getData(String name){
+        return root.getChildText(name);
     }
 
     /**
      * @return the dimension
      */
     public Dimension getDimension() {
+        List<String> dimensionList = getList("dimension");
+        Dimension dimension = new Dimension(Integer.parseInt(dimensionList.get(0)),Integer.parseInt(dimensionList.get(1)));
+        
         return dimension;
     }
 
     /**
-     * @return the highscores
+     * @return data in a list
      */
-    public String[] getHighscores() {
-        return highscores;
+    public List<String> getListData(String name) {
+        return getList(name);
+    }
+    
+    private List<String> getList(String name){
+        ArrayList<String> result = new ArrayList<String>();
+        List<Element> elementList = root.getChild(name).getChildren();
+        for(Element e : elementList){
+            result.add(e.getText());
+        }
+        
+        return result;
     }
     
     /**
-     * Allow users to dynamically add data into these object
+     * 
      * @param name
-     * @param value
+     * @param data
      */
-    public void putData(String name, String value){
-        //TODO: figure out how to write to xml
-        dataMap.put(name, value);
-        
-        Element modifiedElement =root.getChild(name);
-        
-        if(modifiedElement!=null){
-            modifiedElement.setText(value);
+    public void writeData(String name, String value){
+        if(root.getChildText(name)==null){
+            root.addContent(new Element(name));
         }
-        else{
-            modifiedElement = new Element(name);
-            root.addContent(modifiedElement);
-        }
-        try {
-            xmlOutput.setFormat(Format.getPrettyFormat());
-            xmlOutput.output(root, new FileOutputStream(new File(super.getName())));
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        root.getChild(name).setText(value);
+        XmlIO.writeToXml(root, path);
         
     }
+
 }
