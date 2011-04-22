@@ -1,6 +1,6 @@
-package vooga.physics.interfaces.newtonian;
+package vooga.physics.newtonianInterfaces;
 
-import vooga.physics.interfaces.IPhysicsToggle;
+import vooga.physics.IPhysicsToggle;
 
 /**
  * Interface that should be implemented for objects using friction. See PhysicsFrictionC

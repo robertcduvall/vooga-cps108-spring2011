@@ -1,6 +1,6 @@
 package vooga.physics.util;
 
-import vooga.physics.interfaces.newtonian.INewtonianPhysical;
+import vooga.physics.newtonianInterfaces.INewtonianPhysical;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 

@@ -1,4 +1,4 @@
-package vooga.physics.interfaces;
+package vooga.physics;
 
 import vooga.physics.util.Force;
 /**
