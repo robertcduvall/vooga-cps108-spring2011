@@ -84,9 +84,9 @@ public class DisplayCreator
                     name = "Statistic " + s + 1;
                 }
                 if (type.toLowerCase().equals("integer")) {
-                    myDisplayTracker.putStat(name , new Stat<Integer>(Integer.valueOf(value)));
+                    myDisplayTracker.putStat(name , new NumStat(Integer.valueOf(value)));
                 } else if (type.toLowerCase().equals("string")) {
-                    myDisplayTracker.putStat(name , new Stat<String>(value));
+                    myDisplayTracker.putStat(name , new StringStat<String>(value));
                 } else {
                     return false;
                 }

@@ -20,6 +20,7 @@ public class NumStat<T> extends AbstractStat {
 	public final static String DIVIDE = "/";
 	public final static String MAX = "max";
 	public final static String MIN = "min";
+	public final static String REPLACE = "replace";
 	
 	private T myStat;
 	private T myStep;
@@ -101,7 +102,7 @@ public class NumStat<T> extends AbstractStat {
 	 */
 	@Override
 	public T update() {
-		cheat((T) myOperator.evaluateSafe(Double.valueOf(myStat.toString()), 
+		super.cheat((T) myOperator.evaluateSafe(Double.valueOf(myStat.toString()), 
 				Double.valueOf(myStep.toString())));
 		return myStat;
 	}

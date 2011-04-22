@@ -17,7 +17,7 @@ public class DisplayBar extends Display
 	private static final Color DEFAULT_FILLCOLOR = Color.WHITE;
 	private static final Color DEFAULT_BACKGROUNDCOLOR = Color.GREEN;
 
-	private Stat<Integer> myStat;
+	private NumStat<Integer> myStat;
 	private int myMaxScore;
 	private int myMaxLength = DEFAULT_MAXLENGTH;
 	private Color myColor = DEFAULT_FILLCOLOR;
@@ -33,7 +33,7 @@ public class DisplayBar extends Display
 	 *            The maximum value of the statistic.
 	 */
 	
-	public DisplayBar(Stat<Integer> stat, int maxScore) 
+	public DisplayBar(NumStat<Integer> stat, int maxScore) 
 	{
 		myStat = stat;
 		myMaxScore = maxScore;
@@ -44,7 +44,7 @@ public class DisplayBar extends Display
 		String strMax = map.get("max");
 		myMaxScore =  Integer.parseInt(strMax);
 		String statLoc = map.get("stat");
-		myStat = (Stat<Integer>)tracker.getStat(statLoc);	
+		myStat = (NumStat<Integer>)tracker.getStat(statLoc);	
 		String strLength = map.get("length");
 		if(strLength !=null){
 			setMaxLength(Integer.parseInt(strLength));
@@ -85,7 +85,7 @@ public class DisplayBar extends Display
 		g2d.setColor(myBackgroundColor);
 		g2d.fillRect(0, 0, myMaxLength, myHeight);
 		
-		double ratio = (double) myStat.getStat() / (double) myMaxScore;
+		double ratio = (Double) myStat.getStat() / (double) myMaxScore;
 
 		//only draw the bar when score > 0
 		if (ratio > 0) {
@@ -137,7 +137,7 @@ public class DisplayBar extends Display
 	/**
 	 * get Stat in the bar
 	 */
-	public Stat<Integer> getStat() 
+	public NumStat<Integer> getStat() 
 	{
 		return myStat;
 	}
@@ -146,7 +146,7 @@ public class DisplayBar extends Display
 	/**
 	 * set new Stat in the bar
 	 */
-	public void setStat(Stat<Integer> stat) 
+	public void setStat(NumStat<Integer> stat) 
 	{
 		if(stat != null)  myStat = stat;
 	}
