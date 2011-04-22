@@ -1,5 +1,6 @@
 package vooga.user.controller;
 import java.awt.Dimension;
+import java.util.List;
 
 import vooga.user.main.XmlWriter;
 import vooga.user.model.LoginModel;

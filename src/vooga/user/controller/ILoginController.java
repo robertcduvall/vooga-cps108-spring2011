@@ -1,12 +1,4 @@
-//package vooga.user.controller;
-
-import java.util.List;
-
-import javax.swing.JTextField;
-
-import vooga.user.model.LoginTemplate;
-
-
+package vooga.user.controller;
 /**
  * Interface for the Controller in the MVC pattern for the login structure.
  * 
