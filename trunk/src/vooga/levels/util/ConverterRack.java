@@ -1,7 +1,13 @@
 package vooga.levels.util;
 
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.golden.gamedev.Game;
+
+import vooga.core.VoogaGame;
+import vooga.resources.images.ImageLoader;
 
 /**
  * An extendible class that allows conversion of strings to specified types.
@@ -40,13 +46,28 @@ public class ConverterRack {
 		}
 	}
 	
-	public ConverterRack() {
+	// How do we know string is to an image?
+	private class ImageConverter extends Converter<BufferedImage> {
+		private ImageLoader loader;
+		
+		public ImageConverter(ImageLoader loader) {
+			this.loader = loader;
+		}
+		
+		@Override
+		public BufferedImage convert(String input) {
+			return loader.getImage(input);
+		}
+	}
+	
+	public ConverterRack(Game g) {
 		conversionMap = new HashMap<Class<?>, Converter<?>>();
 		
 		addConverter(String.class, new StringConverter());
 		addConverter(Integer.class, new IntegerConverter());
 		addConverter(Boolean.class, new BooleanConverter());
 		addConverter(Double.class, new DoubleConverter());
+		addConverter(ImageConverter.class, new ImageConverter(g.getImageLoader()));
 	}
 	
 	/**

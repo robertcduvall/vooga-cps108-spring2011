@@ -77,7 +77,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      */
     public void parseXMLFile (String fileName, int id)
     {
-        myLevelParser = new LevelParser(this);
+        myLevelParser = new LevelParser(this, myGame);
         mySpritePool = new SpritePool();
         myLevelParser.parse(fileName);
         myId = id;
@@ -229,6 +229,15 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         myMusic = music;
     }
 
+    /**
+     * Sets the current goal for the level
+     * @param goal Goal object defined in the XML file
+     */
+    public void setGoal (IGoal goal)
+    {
+    	myGoal = goal;
+    }
+    
     
     /**
      * Returns this level's id
