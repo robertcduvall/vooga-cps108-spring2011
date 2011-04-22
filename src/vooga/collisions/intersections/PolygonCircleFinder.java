@@ -14,12 +14,7 @@ public class PolygonCircleFinder extends IntersectionFinder
 	
 	@Override
 	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2) {
-		if (c1.isInstance(Polygon.class) && c2.isInstance(Circle.class))
-		{
-			return true;
-		}
-		
-		return false;
+		return c1.isInstance(Polygon.class) && c2.isInstance(Circle.class);
 	}
 
     @Override
