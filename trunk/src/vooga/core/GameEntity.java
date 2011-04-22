@@ -5,6 +5,7 @@ import vooga.sprites.improvedsprites.Sprite;
 
 /**
  * @author Andrea Scripa
+ * @deprecated
  * 
  * GameEntity adds a level of abstraction between Player and its Sprites.  This prevents
  * Sprite from making decisions about input it receives (Sprites should be followers; not
