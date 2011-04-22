@@ -15,7 +15,7 @@ import com.golden.gamedev.object.SpriteGroup;
 public class ActiveMino extends Observable
 {
 	private static ResourceManager resources = new ResourceManager(
-			"TetrisResource");
+			"games.tetris.TetrisResource");
 
 	private AbstractTetroMino currentMino;
 	private AbstractTetroMino ghostMino;

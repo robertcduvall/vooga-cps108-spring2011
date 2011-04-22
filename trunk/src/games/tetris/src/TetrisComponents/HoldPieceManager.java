@@ -19,9 +19,9 @@ import com.golden.gamedev.object.SpriteGroup;
 public class HoldPieceManager
 {
 	private static ResourceManager resources = new ResourceManager(
-			"TetrisResource");
+			"games.tetris.TetrisResource");
 	private static ResourceManager tetrominoResources = new ResourceManager(
-			"TetrominoResource");
+			"games.tetris.TetrominoResource");
 	private int holdSpawnX;
 	private int holdSpawnY;
 	private int tetrisBlockSize;

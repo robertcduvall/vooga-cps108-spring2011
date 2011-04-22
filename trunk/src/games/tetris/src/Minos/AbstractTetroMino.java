@@ -6,9 +6,9 @@ import games.tetris.src.Main.TetrisMatrix;
 public abstract class AbstractTetroMino extends AbstractMino
 {
 	private static ResourceManager rotationResources = new ResourceManager(
-			"TetrominoRotationResource");
+			"games.tetris.TetrominoRotationResource");
 	protected static ResourceManager tetrominoResources = new ResourceManager(
-			"TetrominoResource");
+			"games.tetris.TetrominoResource");
 
 	private int rotationPosition = 0;
 

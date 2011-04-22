@@ -12,9 +12,9 @@ import java.util.Random;
 public class TetrominoFactory
 {
 	private static ResourceManager resources = new ResourceManager(
-			"TetrisResource");
+			"games.tetris.TetrisResource");
 
-	private static final String packagePath = "Minos.Tetrominos.";
+	private static final String packagePath = "games.tetris.src.Minos.Tetrominos.";
 	private static Random rand = new TetrominoRandomGenerator();
 
 	public static AbstractTetroMino generateTetromino()
@@ -35,6 +35,7 @@ public class TetrominoFactory
 		}
 		catch (Exception e)
 		{
+			System.err.println(e);
 		}
 		return null;
 	}
