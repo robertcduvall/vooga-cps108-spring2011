@@ -20,18 +20,30 @@ public abstract class AbstractGamePreference extends UserPreference{
 		super(preferenceType, value);
 	}
 	
+	/**
+	 * Currently favorite is entered as a boolean value, i.e. a game is or is not a favorite
+	 */
 	public AbstractGamePreference(Boolean favorite){
 		myFavorite = favorite;
 	}
 
+	/**
+	 * This method, when called, returns the user input for a specific game preference
+	 */
 	public String getInput() { 
 		return super.getInput();
 	}
 	
+	/**
+	 * For a specific game preference the information can be editedd or changed using this method
+	 */
 	public void editInput(String newInput) {
 		super.editInput(newInput);
 	}
-	
+
+	/**
+	 * This button toggles on and off the favorite feature
+	 */
 	public void toggleBoolean(){
 		if(myFavorite == false){
 			myFavorite = true;

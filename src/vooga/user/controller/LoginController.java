@@ -12,11 +12,13 @@ public class LoginController implements ILoginController
 {
 	private LoginViewer view;
 	public LoginModel model;
+	public List<String> gameReferences;
 
-	public LoginController(String string, String string2, int i, int j)
+	public LoginController(String string, String string2, int i, int j, List<String> arcadeGames)
 	{
 		model = new LoginModel(this);
 		view = new LoginViewer(string, string2, new Dimension(i, j), this);
+		gameReferences = arcadeGames;
 	}
 
 	public LoginController(){}
@@ -46,6 +48,13 @@ public class LoginController implements ILoginController
  */
 	public LoginTemplate[] getDefaultTemplate(){
 		return model.createDefaultDisplay();
+	}
+	
+/**
+ * 	This method returns a list of all the games present in the game arcade;
+ */
+	public List<String> getGameReferences(){
+		return gameReferences;
 	}
 	
 	@Override
