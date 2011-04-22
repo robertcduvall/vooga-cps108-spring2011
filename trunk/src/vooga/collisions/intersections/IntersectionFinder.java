@@ -3,7 +3,8 @@ package vooga.collisions.intersections;
 import vooga.collisions.shapes.regularShapes.IShape;
 import vooga.collisions.shapes.regularShapes.Shape;
 
-public abstract class IntersectionFinder {
+public abstract class IntersectionFinder implements Comparable
+{
 	
 	abstract boolean canApply(Class<? extends IShape> class1, Class<? extends IShape> class2) ;
 	
