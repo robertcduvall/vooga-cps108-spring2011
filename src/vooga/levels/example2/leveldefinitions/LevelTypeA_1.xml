@@ -1,7 +1,7 @@
 <level>
 	<collision_manager g1=red g2=blue class=vooga.levels.example2.collisions.ExampleCollisionManager />
 	
-	<sprite group=red class=vooga.levels.example2.sprites.RedSprite name=redEnemy>
+	<sprite group=red class=vooga.levels.example2.sprites.RedSprite name=redEnemy image=src.jpg>
 		<x>100</x>
 	</sprite>
 	

@@ -16,6 +16,7 @@ public class SpriteTag extends XMLTag {
 	private static final String CLASS = "class";
 	private static final String NAME = "name";
 	private static final String SPRITE = "sprite";
+	private static final String IMAGE = "image";
 	
 	private LevelParser parser;
 	
@@ -33,15 +34,17 @@ public class SpriteTag extends XMLTag {
 		String className = xmlElement.getAttribute(CLASS);
 		String name = xmlElement.getAttribute(NAME);
 		String spriteGroup = xmlElement.getAttribute(GROUP);
+		String image = xmlElement.getAttribute(IMAGE);
 		
 		// Get the list of children and use them for constructor arguments.
-		NodeList children = xmlElement.getChildNodes();
-		List<String> args = new ArrayList<String>(children.getLength());
-		for(int i = 0; i < children.getLength(); i++) {
-			args.add(getValue((Element) children.item(i)));
-		}
+//		NodeList children = xmlElement.getChildNodes();
+		List<String> args = new ArrayList<String>();
+		args.add(image);
+//		for(int i = 0; i < children.getLength(); i++) {
+//			args.add(getValue((Element) children.item(i)));
+//		}
 		
-		parser.addSpriteArchetype(name, new SpriteConstructor(
+		parser.addSpriteArchetype(name, new SpriteConstructor(parser.getLevel(), 
 				parser.getConverterRack(),
 				className, spriteGroup, args));
 	}
