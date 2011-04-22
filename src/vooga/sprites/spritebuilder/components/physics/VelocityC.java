@@ -14,6 +14,16 @@ public class VelocityC extends BasicComponent implements INewtonianMovable, ISpr
     private boolean isOn;
     protected Sprite mySprite;
     
+    public VelocityC(Sprite sprite){
+        this(sprite, true);
+        
+    }
+    
+    public VelocityC(Sprite sprite, boolean isOn){
+        mySprite = sprite;
+        this.isOn = isOn;
+    }
+    
     @Override
     public Velocity getVelocity() {
         return new Velocity(mySprite.getHorizontalSpeed(), -mySprite.getVerticalSpeed());
@@ -38,7 +48,7 @@ public class VelocityC extends BasicComponent implements INewtonianMovable, ISpr
     @Override
     protected Object[] getFieldValues ()
     {
-        return new Object[]{mySprite};
+        return new Object[]{mySprite, isOn};
     }
 
 
@@ -46,6 +56,10 @@ public class VelocityC extends BasicComponent implements INewtonianMovable, ISpr
     protected void setFieldValues (Object ... fields)
     {
         mySprite = (Sprite) fields[0];
+        if (fields.length > 1)
+            isOn = (Boolean) fields[1];
+        else
+            isOn = true;
     }
 
     @Override
