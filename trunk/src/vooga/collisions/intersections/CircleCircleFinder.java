@@ -54,5 +54,10 @@ public class CircleCircleFinder extends IntersectionFinder {
         return (((Circle) s1).getRadius() + ((Circle) s2).getRadius()) > s1.getCenter().distance(s2.getCenter());
     }
 
+	@Override
+	public int compareTo(Object o) {
+		return this.hashCode() - arg0.hashCode();
+	}
+
 
 }
