@@ -22,8 +22,7 @@ public class ActionFactory {
 	public static ActionListener createAction(String objName, ArcadeController p) {
 		// reflect on method/class name
 		String className = factoryResources.getString(objName);
-		System.out.println("AWER");
-		
+	
 		Class<?> cls = null;
 		try {
 			cls = Class.forName("view.actions." + className);
