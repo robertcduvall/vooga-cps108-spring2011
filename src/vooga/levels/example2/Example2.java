@@ -2,15 +2,19 @@ package vooga.levels.example2;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 
+import vooga.core.VoogaGame;
 import vooga.levels.LevelManager;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
 
 import com.golden.gamedev.Game;
 import com.golden.gamedev.GameLoader;
 
-public class Example2 extends Game {
+public class Example2 extends VoogaGame {
 
 	private LevelManager myLevelManager;
 	private ArrayList<Sprite> myPlayers;
@@ -24,9 +28,11 @@ public class Example2 extends Game {
 	
 	@Override
 	public void initResources() {
-		myPlayers = new ArrayList<Sprite>(); 
-		myPlayers.add(new Sprite());
-		myLevelManager = new LevelManager(this, myPlayers);
+	    SpriteGroup players = new SpriteGroup("player group");
+	    Sprite player = new Sprite(getImage("src/vooga/example2/Ship1.png"));
+	    players.add(player);
+
+		myLevelManager = new LevelManager(this, players);
 		myLevelManager.start();
 	}
 
@@ -40,5 +46,12 @@ public class Example2 extends Game {
 	public void render(Graphics2D g) {
 		myLevelManager.render(g);
 	}
+
+    @Override
+    public void updatePlayField (long elapsedTime)
+    {
+        // TODO Auto-generated method stub
+        
+    }
 
 }
