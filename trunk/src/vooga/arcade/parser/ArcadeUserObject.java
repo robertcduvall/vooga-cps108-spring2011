@@ -3,7 +3,10 @@ package vooga.arcade.parser;
 import java.awt.Image;
 import java.util.List;
 
+import org.jdom.Element;
+
 import vooga.arcade.parser.gameObject.ArcadeObject;
+
 
 /**
  * Object containing an instance of a user and information associated with it.
@@ -16,12 +19,8 @@ public class ArcadeUserObject extends ArcadeObject
 {
 	private List<ArcadeGameObject> favorites;
 
-	// private VoogaUser
-	// private List<Friends>();
-
-	public ArcadeUserObject(Image i, String n, List<ArcadeGameObject> fav)
+	public ArcadeUserObject(Element root, String path)
 	{
-		super(i, n);
-		favorites = fav;
+		super(root, path);
 	}
 }

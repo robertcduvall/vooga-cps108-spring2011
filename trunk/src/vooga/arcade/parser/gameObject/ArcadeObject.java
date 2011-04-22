@@ -1,28 +1,49 @@
 package vooga.arcade.parser.gameObject;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.imageio.ImageIO;
+
+import org.jdom.Element;
+/**
+ * 
+ * @author Yong-Hui Goh
+ *
+ */
 public abstract class ArcadeObject
 {
-	private Image image;
-	private String name;
-
-	public ArcadeObject(Image i, String n)
+	protected Image image;
+	protected Element root;
+	protected String path;
+	
+	
+	public ArcadeObject(Element root, String path)
 	{
-		image = i;
-		name = n;
+	    this.root = root;
+	    this.path = path;
 	}
 
 	/**
 	 * @return the drawableData
 	 */
-	public Image getImage()
-	{
-		return image;
-	}
+	protected Image getImage() {
+        if(image!= null) return image;
+        
+        try {
+            image = ImageIO.read(new File(root.getChildText("image")));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
 
 	public String getName()
 	{
-		return name;
+		return root.getChildText("name");
 	}
 }

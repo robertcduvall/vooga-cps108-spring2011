@@ -11,5 +11,6 @@ public class PracticeMain
 		ArcadeController start = new ArcadeController(
 				"VOOGA", "", 860, 730);
 		start.toString();
+		System.out.println("!@$!@$");
 	}
 }
