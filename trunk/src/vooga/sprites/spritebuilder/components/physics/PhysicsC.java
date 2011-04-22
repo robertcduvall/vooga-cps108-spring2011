@@ -9,8 +9,7 @@ import vooga.sprites.spritebuilder.components.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 
 /**
- * Physics Component of a Sprite, extends BasicComponent and implements
- * IPhysics.
+ * Physics Component of a Sprite.
  * 
  * @author Nathan Klug
  * 
@@ -18,8 +17,16 @@ import vooga.util.buildable.components.BasicComponent;
 public class PhysicsC extends VelocityC implements INewtonianPhysical, ISpriteUpdater{
  
     private double myMass;
-    private boolean isOn;
 
+    public PhysicsC(Sprite sprite, double mass){
+        this(sprite, mass, true);
+    }
+    
+    public PhysicsC(Sprite sprite, double mass, boolean isOn){
+        super(sprite, isOn);
+        myMass = mass;
+    }
+    
     @Override
     protected int compareTo(BasicComponent o) {
         // TODO: do we use this to compare whether a component is more specific.
@@ -29,17 +36,17 @@ public class PhysicsC extends VelocityC implements INewtonianPhysical, ISpriteUp
 
     @Override
     protected Object[] getFieldValues() {
-        return new Object[]{mySprite, myMass, isOn}; //TODO: this is not going to return the field values, just the fields
+        return new Object[]{mySprite, myMass, isOn()}; //TODO: this is not going to return the field values, just the fields
     }
 
     @Override
     protected void setFieldValues(Object... fields) {
-        super.setFieldValues(fields);
+        super.setFieldValues(fields[0]);
         myMass = (Double) fields[1];
         if (fields.length > 2)
-            isOn = (Boolean) fields[2];
+            turnPhysicsOnOff((Boolean) fields[2]);
         else
-            isOn = true;
+            turnPhysicsOnOff(true);
     }
 
     @Override
@@ -50,17 +57,6 @@ public class PhysicsC extends VelocityC implements INewtonianPhysical, ISpriteUp
     @Override
     public Point getCenter() {
         return new Point((int) mySprite.getCenterX(), (int) mySprite.getCenterY());
-    }
-
-
-    @Override
-    public boolean isOn() {
-        return isOn;
-    }
-
-    @Override
-    public void turnPhysicsOnOff(boolean isOn) {
-        this.isOn = isOn;
     }
 
     @Override

@@ -6,21 +6,30 @@ import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.BasicComponent;
 
-public class PointFieldC extends BasicComponent implements IPointField{
-    
+/**
+ * Component used to specify if a sprite has a point field.
+ * 
+ * @author Nathan Klug
+ * 
+ */
+public class PointFieldC extends VelocityC implements IPointField {
+
     private Sprite mySprite;
     private double myMagnitude;
-    private boolean immovable;
     private boolean isOn;
-    
-    @Override
-    public double getPointMagnitude() {
-        return myMagnitude;
+
+    public PointFieldC(Sprite sprite, double magnitude) {
+        this(sprite, magnitude, true);
+    }
+
+    public PointFieldC(Sprite sprite, double magnitude, boolean isOn) {
+        super(sprite, isOn);
+        myMagnitude = magnitude;
     }
 
     @Override
-    public boolean isOn() {
-        return isOn;
+    public double getPointMagnitude() {
+        return myMagnitude;
     }
 
     @Override
@@ -31,7 +40,7 @@ public class PointFieldC extends BasicComponent implements IPointField{
 
     @Override
     protected Object[] getFieldValues() {
-        return new Object[]{mySprite, myMagnitude, immovable, isOn};
+        return new Object[] { mySprite, myMagnitude, isOn };
     }
 
     @Override
@@ -39,38 +48,15 @@ public class PointFieldC extends BasicComponent implements IPointField{
         mySprite = (Sprite) fields[0];
         myMagnitude = (Double) fields[1];
         if (fields.length > 2)
-            immovable = (Boolean) fields[2];
-        else
-            immovable = false;
-        if (fields.length > 3)
-            isOn = (Boolean) fields[3];
+            isOn = (Boolean) fields[2];
         else
             isOn = true;
-        
-    }
 
-    @Override
-    public void turnPhysicsOnOff(boolean isOn) {
-        this.isOn = isOn;
-        
     }
 
     @Override
     public Point getCenter() {
-        return new Point((int)mySprite.getCenterX(), (int)mySprite.getCenterY());
-    }
-
-    @Override
-    public Velocity getVelocity() {
-        return new Velocity(mySprite.getHorizontalSpeed(), mySprite.getVerticalSpeed());
-    }
-
-    @Override
-    public void setVelocity(Velocity spriteVelocity) {
-        if (!immovable){
-            mySprite.setHorizontalSpeed(spriteVelocity.getXComponent());
-            mySprite.setVerticalSpeed(spriteVelocity.getYComponent());
-        }
+        return new Point((int) mySprite.getCenterX(), (int) mySprite.getCenterY());
     }
 
 }

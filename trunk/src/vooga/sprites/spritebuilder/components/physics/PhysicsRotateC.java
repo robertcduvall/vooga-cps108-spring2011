@@ -8,7 +8,22 @@ import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
+/**
+ * Class used to implement the physics of rotation.
+ * 
+ * TODO: find out how sprites handle rotation now
+ * 
+ * @author Nathan Klug
+ *
+ */
 public class PhysicsRotateC extends PhysicsC implements INewtonianRotate{
+
+    public PhysicsRotateC(Sprite sprite, double mass) {
+        this(sprite, mass, true);
+    }
+    public PhysicsRotateC(Sprite sprite, double mass, boolean isOn) {
+        super(sprite, mass, isOn);
+    }
 
     private Sprite mySprite;
     private double myMass;

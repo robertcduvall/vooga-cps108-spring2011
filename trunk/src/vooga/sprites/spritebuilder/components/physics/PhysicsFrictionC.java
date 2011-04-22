@@ -19,6 +19,15 @@ public class PhysicsFrictionC extends BasicComponent implements INewtonianFricti
 
     private double coefficient = 2;
     private boolean isOn;
+    //TODO: do we need a sprite?
+    public PhysicsFrictionC(double coefficient){
+        this(coefficient, true);
+    }
+    
+    public PhysicsFrictionC(double coefficient, boolean isOn){
+        this.coefficient = coefficient;
+        this.isOn = isOn;
+    }
     
     @Override
     public double getCoefficientOfFriction() {
