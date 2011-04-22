@@ -1,7 +1,6 @@
 package vooga.gui.examplegame;
 
-import java.awt.Dimension; 
-import java.awt.Graphics;
+import java.awt.Dimension;  
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -25,7 +24,7 @@ public class ExampleUI extends UIPane{
 	@Override
 	public void init() {
 		//create the frame
-		BufferedImage image = parent.getImage("gui/game/images/userInterfaceBase2.gif");
+		BufferedImage image = parent.getImage("/vooga/gui/game/images/userInterfaceBase2.gif");
 		uiBase=new Sprite(image, 
 				parent.getWidth()/2-image.getWidth()/2, 
 				parent.getHeight()/2-image.getHeight()/2);
@@ -34,7 +33,7 @@ public class ExampleUI extends UIPane{
 		score=new NumberDisplay(240, 460, parent);
 		
 		//create menu button
-		image = parent.getImage("gui/game/images/menuButton.gif");
+		image = parent.getImage("/vooga/gui/game/images/menuButton.gif");
 		menuButton=new VoogaButton(image, "menu", 
 				new Dimension(parent.getWidth()-image.getWidth()-2, 
 						parent.getHeight()-image.getHeight()-2) 

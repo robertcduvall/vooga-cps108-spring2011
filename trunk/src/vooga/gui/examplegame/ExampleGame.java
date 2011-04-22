@@ -1,12 +1,10 @@
 package vooga.gui.examplegame;
 
-import vooga.gui.VoogaGame;  
+import vooga.gui.VoogaGame;
 import vooga.gui.interfaces.IPaneManager;
 import vooga.gui.panes.InfoPane;
 import vooga.gui.panes.MenuPane;
 import vooga.gui.panes.PopoverPane;
-import vooga.gui.util.NumberDisplay;
-import vooga.gui.util.ScrollingSpriteDisplay;
 import vooga.gui.util.VoogaButton;
 
 import java.awt.Color;
@@ -17,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import com.golden.gamedev.GameEngine;
-import com.golden.gamedev.object.Sprite;
 
 
 
@@ -41,26 +38,26 @@ public class ExampleGame extends VoogaGame implements IPaneManager {
 		myPanes=new ArrayList<PopoverPane>();
 		
 		//Create a menu from a premade list of VoogaButtons
-		BufferedImage image= getImage("gui/resources/generic/button.gif");
+		BufferedImage image= getImage("/vooga/gui/resources/generic/button.gif");
 		ArrayList<VoogaButton> premadeList = new ArrayList<VoogaButton>();
 		VoogaButton b=new VoogaButton(image, "cat", new Dimension(400,400));
 		premadeList.add(b);
-		image= getImage("gui/resources/generic/button.gif");
+		image= getImage("/vooga/gui/resources/generic/button.gif");
 		b=new VoogaButton(image, "dog", new Dimension(400,400));
 		premadeList.add(b);
-		image= getImage("gui/resources/generic/button.gif");
+		image= getImage("/vooga/gui/resources/generic/button.gif");
 		b=new VoogaButton(image, "armadillo", new Dimension(400,400));
 		premadeList.add(b);
 		
 		//Create MenuPane from premadeList with a seed of 10
 		MenuPane m = new MenuPane(premadeList, 10, this);
-		m.addHeader(getImage("/gui/resources/generic/title.gif"));
+		m.addHeader(getImage("/vooga/gui/resources/generic/title.gif"));
 		mainPane=m;
 
 		//Assemble your menu on the fly
-	    BufferedImage image2 = getImage("/gui/resources/generic/header.gif");
+	    BufferedImage image2 = getImage("/vooga/gui/resources/generic/header.gif");
 		MenuPane l = new MenuPane(new ArrayList<VoogaButton>(), 5, this);
-		l.addHeader(getImage("/gui/resources/generic/title.gif"));
+		l.addHeader(getImage("/vooga/gui/resources/generic/title.gif"));
 		VoogaButton b2=new VoogaButton(image2, "nancy", new Dimension(200,200));
 		l.addMenuOption(b2);
 		b2=new VoogaButton(image2, "scott", new Dimension(200,200));
@@ -76,11 +73,11 @@ public class ExampleGame extends VoogaGame implements IPaneManager {
 		BufferedImage[] instructions = new BufferedImage[10];
 		int slide=0;
 		while (slide<10){
-			image = getImage("gui/resources/number"+slide+".gif");
+			image = getImage("/vooga/gui/resources/number"+slide+".gif");
 			instructions[slide]=image;
 			slide++;
 		}
-		image= getImage("gui/resources/generic/header.gif");
+		image= getImage("/vooga/gui/resources/generic/header.gif");
 		i=new InfoPane(this, instructions, image);
 		myPanes.add(i);
 		myInfo=i;
