@@ -48,7 +48,7 @@ public class VoogaPlayField extends PlayField
      */
     public void addGroup(SpriteGroup group)
     {
-        // Overrite old sprite group if one of the same name exists
+        // Overwrite old sprite group if one of the same name exists
         mySpriteGroups.add(group);
     }
     

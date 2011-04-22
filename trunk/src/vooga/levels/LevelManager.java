@@ -105,6 +105,7 @@ public class LevelManager
             if(pastLevelClass.equals(levelDef[0]))
             {
                 pastLevel.loadLevel();
+                myActiveLevel.parseXMLFile("vooga/levels/example2/"+levelFileName, id);
                 myActiveLevel = pastLevel;
                 return;
             }
@@ -114,6 +115,7 @@ public class LevelManager
 //        try
 //        {
             myActiveLevel = ((AbstractLevel) Reflection.createInstance("vooga.levels.example2."+levelDef[0], myPlayers, myGame));
+            myActiveLevel.parseXMLFile("vooga/levels/example2/"+levelFileName, id);
             myActiveLevel.loadLevel();
             myPastLevels.add(myActiveLevel);
 //        }
