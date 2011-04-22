@@ -1,4 +1,4 @@
-package vooga.user.controller;
+//package vooga.user.controller;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import vooga.user.model.LoginTemplate;
 
 
 /**
- * Interface for the Controller in the MVC pattern for the login structure
+ * Interface for the Controller in the MVC pattern for the login structure.
  * 
  * @author Conrad.
  */
