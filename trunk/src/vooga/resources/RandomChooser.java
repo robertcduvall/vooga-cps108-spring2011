@@ -105,6 +105,14 @@ public class RandomChooser<T>
     }
     
     /**
+     * Constructs a random chooser with no elements.
+     */
+    public RandomChooser()
+    {
+        this(new ArrayList<T>());
+    }
+    
+    /**
      * If a fairness mode is turned on, clears the history
      * of which objects have been returned.
      */
