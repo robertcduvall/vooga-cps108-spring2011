@@ -22,6 +22,6 @@ public class LevelTag extends XMLTag {
 	@Override
 	public void parse(Parser context, Element element) {
 		String levelFilename = getValue(element);
-		//TODO
+		// TODO: Integrate into ResourceManager.
 	}
 }

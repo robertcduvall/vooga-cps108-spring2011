@@ -1,0 +1,5 @@
+<resources>
+	<images>
+		<source>src/vooga/resources/test/image_resources.xml</source>
+	</images>
+</resources>
