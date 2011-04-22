@@ -50,8 +50,8 @@ public class LoginModel
  */
 	private void buildPasswordMap(){
 		List<String> passwords = new ArrayList<String>();
-		passwords = new PasswordEncoding().readFile(new File("resources/PasswordResource.txt"));
-		keyMap = new PasswordParser().parse(passwords);
+		//passwords = new PasswordEncoding().readFile(new File("resources/PasswordResource.txt"));
+	//	keyMap = new PasswordParser().parse(passwords);
 		
 	}
 
@@ -136,7 +136,7 @@ public class LoginModel
 	public LoginTemplate[] createDefaultDisplay() {
 		String[] loginPrompt = registrationResource.getStringArray("DefaultLoginPrompt");
 		String[] one = {loginPrompt[0],loginPrompt[1]}; String[] two = {};
-		String image = "doc/resources/Turtle.gif";
+		String image = "src/vooga/user/resources/Turtle.gif";
 		LoginTemplate[] log = {new LoginTemplate(loginPrompt[2], one,image,1), new LoginTemplate(loginPrompt[3],two,image,2)};
 		return log;
 	}
