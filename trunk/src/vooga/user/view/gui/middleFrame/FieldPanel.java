@@ -26,40 +26,31 @@ import vooga.user.view.actions.SubmitButton;
  */
 public class FieldPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
-	//private JTextField user;
-	private List<JTextField> inputFields = new ArrayList<JTextField>();;
-	private String[] inputText, textArray; 
+	private List<JTextField> inputFields = new ArrayList<JTextField>();
 	private List<String> promptText = new ArrayList<String>();
+	private String[] inputText; 
+	
 	/**
 	 * This is the constructor for a Field Panel JPanel that is constructed section by section
 	 */
-	public FieldPanel(LoginTemplate[] log, ILoginController controller){
+	public FieldPanel(LoginTemplate[] log, ILoginController controller) {
 		this.setLayout(new MigLayout());
-		for(LoginTemplate login : log){
-		addSection(login.getHeader(), login.getPrompts());
-		System.out.println("input size aft main"+ inputFields.size());
-		if(login.getImageURL()!=null){
-			addImage(login.getImageURL());
-		}
-		AbstractLoginAction[] buttons = {new PasswordLogin(controller, this), new SubmitButton(controller, this), 
-				new RegisterButton(controller, this)};
 		
-		//put the classes into an array and then access by index()
-		if(login.myButton > 0){
-		addButton(buttons[login.myButton]);
-		}
-		
-//		if(login.myButton == 2){
-//			System.out.println("input size in if()"+ inputFields.size());
-//			addButton(new PasswordLogin(controller, this));
-//		}
-//		if(login.myButton == 1){
-//			addButton(new SubmitButton(controller,this));
-//		}
-//		if(login.myButton == 3){
-//			addButton(new RegisterButton(controller, this));
-//		}
-		
+		for (LoginTemplate login : log) {
+			addSection(login.getHeader(), login.getPrompts());
+			
+			if (login.getImageURL() != null) {
+				addImage(login.getImageURL());
+			}
+			AbstractLoginAction[] buttons = {
+					new PasswordLogin(controller, this),
+					new SubmitButton(controller, this),
+					new RegisterButton(controller, this) };
+
+			// accesses a specific button class action based on it's index in the array
+			if (login.myButton > 0) {
+				addButton(buttons[login.myButton]);
+			}
 		}
 	}
 
@@ -68,19 +59,18 @@ public class FieldPanel extends JPanel{
 	 */
 	public void addSection(String sectionTitle, String[] request) {
 		addSeparator(this, sectionTitle);	
-		//inputFields = 
 		for(String r : request){
 			promptText.add(r);
 		}		
 		// The for loop creates each prompt that the operator wants to ask
-			for (int i = 0; i < request.length; i++) {
-				JTextField user = new JTextField(30);
-				this.add(new JLabel(request[i]), "gap para");
-				System.out.println(request[i]);
-				inputFields.add(user);
-				System.out.println("input size "+ inputFields.size());
-				this.add(user, "span, growx, wrap");	
-			}
+		for (int i = 0; i < request.length; i++) {
+			JTextField user = new JTextField(30);
+			this.add(new JLabel(request[i]), "gap para");
+			//System.out.println(request[i]);
+			inputFields.add(user);
+			//System.out.println("input size " + inputFields.size());
+			this.add(user, "span, growx, wrap");
+		}
 		}	
 	/**
 	 * This method retrieves the results of all the input fields

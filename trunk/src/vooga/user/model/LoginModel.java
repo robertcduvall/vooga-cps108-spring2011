@@ -5,10 +5,10 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +16,7 @@ import java.util.Map;
 import vooga.user.controller.LoginController;
 import vooga.user.main.ResourceManager;
 import vooga.user.main.XmlWriter;
+import vooga.user.model.parser.PasswordEncoding;
 import vooga.user.model.parser.PasswordParser;
 import vooga.user.model.parser.RegXParser;
 import vooga.user.voogauser.UserPreference;
@@ -33,6 +34,7 @@ public class LoginModel
 	private LoginController controller;
 	private Map<String, String> keyMap;
 	private RegXParser myRegEx;
+	private SQLite database;
 	private ResourceManager registrationResource = new ResourceManager("vooga.user.resources.Registration");
 	
 	public LoginModel(LoginController pc){
@@ -48,29 +50,43 @@ public class LoginModel
  */
 	private void buildPasswordMap(){
 		List<String> passwords = new ArrayList<String>();
-		passwords = readFile(new File("resources/PasswordResource.txt"));
-		PasswordParser p = new PasswordParser();
-		keyMap = p.parse(passwords);
+		passwords = new PasswordEncoding().readFile(new File("resources/PasswordResource.txt"));
+		keyMap = new PasswordParser().parse(passwords);
 		
 	}
 
 /**
  * Process is a method called by the controller that evaluates the information inputed by the user
  */
-	public void process(String[] prompt, String[] text) {
-		for(int i = 0; i < text.length; i++){
-				if(myRegEx.verifyRegex(prompt[i], text[i])){
-					UserPreference pref = new UserPreference(prompt[i],text[i]);
-					user.add(pref);
-					System.out.println("size " + user.getPreferenceList().size());
-					update();
-				}
-				else{
+	public void process(String[] prompt, String[] text){
+		for (int i = 0; i < text.length; i++) {
+			if (myRegEx.verifyRegex(prompt[i], text[i])) {
+				user.add(new UserPreference(prompt[i], text[i]));
+				update();
+			} else {
 				controller.displayError("Incorrect Input Error " + prompt[i]);
 				user.removeAllPreferences();
 				break;
-				}
+			}
 		}
+		try {
+			database = new SQLite();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			database.update("fatbat", prompt, text);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			database.retrieveTableStats("fatbat", prompt);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 /**
@@ -81,8 +97,7 @@ public class LoginModel
 		String[] headerSections = registrationResource.getStringArray("Section");
 		LoginTemplate[] updateInformation = new LoginTemplate[headerSections.length];
 		for (int p = 0; p < headerSections.length; p++) {
-			String[] sectionTitle = registrationResource
-					.getStringArray(headerSections[p]);
+			String[] sectionTitle = registrationResource.getStringArray(headerSections[p]);
 			String[] text = new String[sectionTitle.length];
 			if (p == headerSections.length - 1) {
 				x = 1;
@@ -114,38 +129,21 @@ public class LoginModel
 			controller.displayError("Incorrect Password");
 		}
 	}
-	
+
+	/**
+	 * This method creates the default log in sequence for this gui
+	 */
 	public LoginTemplate[] createDefaultDisplay() {
-		String[] one = {"Username","Password"}; String[] two = {};
+		String[] loginPrompt = registrationResource.getStringArray("DefaultLoginPrompt");
+		String[] one = {loginPrompt[0],loginPrompt[1]}; String[] two = {};
 		String image = "doc/resources/Turtle.gif";
-		LoginTemplate[] log = {new LoginTemplate("Login", one,image,1), new LoginTemplate("New User",two,image,2)};
+		LoginTemplate[] log = {new LoginTemplate(loginPrompt[2], one,image,1), new LoginTemplate(loginPrompt[3],two,image,2)};
 		return log;
 	}
 	
 	public VoogaUser getVoogaUser(){
 		VoogaUser copy = user;
 		return copy;
-	}
-	
-	private List<String> readFile(File file) {
-		List<String> fileLines = new ArrayList<String>();
-		FileInputStream inputStream = null;
-		try {
-			inputStream = new FileInputStream("doc/resources/PasswordResource.txt");
-			} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		DataInputStream in = new DataInputStream(inputStream);
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		String line = "";
-		try {
-			while ((line = reader.readLine()) != null) {
-				fileLines.add(line);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return fileLines;
 	}
 	
 	public void writeFile(String filename, String text) throws IOException {

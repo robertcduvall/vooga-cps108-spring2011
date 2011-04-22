@@ -24,16 +24,18 @@ public class PanelInitializer extends JPanel {
 	private ResourceManager guiResource = new ResourceManager("vooga.user.resources.GUIResource");
 	private LoginTemplate[] loginInfo;
 
-	public PanelInitializer(ILoginController controller, LoginTemplate[] construct) {
+	/**
+	 * This default constructor for the panelInitializer basical sets up the Gui display and layout - 
+	 * through adding all the components in
+	 */
+	public PanelInitializer(ILoginController controller,LoginTemplate[] construct) {
+		loginInfo = construct;
 		this.setPreferredSize(new Dimension(640, 480));
 		this.setLayout(new GridLayout());
 		this.add(new ImageCanvas(guiResource.getString("DefaultSplashImage")));
-		loginInfo = construct;
-		FieldPanel field = new FieldPanel(loginInfo,controller);
+		FieldPanel field = new FieldPanel(loginInfo, controller);
 		this.add(field);
-		this.add(new ImageCanvas(guiResource
-				.getString("DefaultSplashImage")));
-		
+		this.add(new ImageCanvas(guiResource.getString("DefaultSplashImage")));
 	}
 
 	public PanelInitializer(Dimension d) {

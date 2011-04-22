@@ -23,10 +23,10 @@ import vooga.user.view.gui.middleFrame.SlogoMiddleFrame;
 import vooga.user.voogauser.Display;
 
 /**
- * This is the Actual GUI for the Picassa project - layout modeled after MATLAB.
+ * This is the Actual GUI for the Picassa project - layout modeled after MATLAB - then adjusted for UserLogin.
  * 
+ * @author Conrad Haynes
  * @author Ethan Yong-Hui Goh
- * author Conrad Haynes
  */
 
 public class LoginViewer extends JFrame implements IView {
@@ -52,9 +52,7 @@ public class LoginViewer extends JFrame implements IView {
 		this.setVisible(true);
 		this.update(new Display());
 	}
-
-	private void update(Display display) {}
-
+	
 	public LoginViewer(String title, String prompt, int dimx, int dimy,
 			LoginController p) {
 		this(title, prompt, new Dimension(dimx, dimy), p);
@@ -68,10 +66,16 @@ public class LoginViewer extends JFrame implements IView {
 		JOptionPane.showMessageDialog(middleFrame, str);
 	}
 	
+	/**
+	 * This update method simply adds a new panel to the MiddleFrame in the GUI with the appropriate prompts.
+	 * (much simplified from the previous Matlab or Picassa implementation) 
+	 */
 	@Override
 	public void update(LoginTemplate[] template) {
 		this.remove(middleFrame);
 		this.add(new SlogoMiddleFrame(pc, template), BorderLayout.CENTER);
 		this.setVisible(true);
 	}
+	
+	private void update(Display display) {}
 }

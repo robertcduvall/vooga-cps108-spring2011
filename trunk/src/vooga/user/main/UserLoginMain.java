@@ -13,7 +13,7 @@ public class UserLoginMain
 	public static void main(String[] args)
 	{
 		LoginController start = new LoginController(
-				"VOOGA GAME ARCADE","", 640, 480);
+				"VOOGA GAME LOGIN","", 640, 480, gameUserReferences);
 		start.toString();
 	}
 }
