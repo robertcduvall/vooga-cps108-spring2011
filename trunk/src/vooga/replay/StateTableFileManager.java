@@ -30,7 +30,6 @@ public class StateTableFileManager {
 			out.writeObject(st);
 			out.flush();
 			out.close();
-			// fout.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -57,9 +56,8 @@ public class StateTableFileManager {
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			st = (StateTable) in.readObject();
 			in.close();
-			// fileIn.close();
 		} catch (IOException e) {
-
+			e.printStackTrace();
 		}
 		return st;
 	}
