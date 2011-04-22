@@ -11,6 +11,7 @@ import com.golden.gamedev.object.Sprite;
  * 
  * @author Josue, Chris
  */
+@SuppressWarnings("serial")
 public class SpriteReplayData implements Serializable {
 
 	

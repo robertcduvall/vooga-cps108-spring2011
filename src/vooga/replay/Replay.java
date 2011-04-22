@@ -1,6 +1,7 @@
 package vooga.replay;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameObject;
@@ -55,9 +56,9 @@ public class Replay extends GameObject {
 	 */
 	@Override
 	public void update(long elapsedTime) {
-		if (inRange(time)) {
+		if (inRange(time) && !(keyDown(KeyEvent.VK_P))) {
 			myTable.transformSprite(time);
-			time++;
+			time = keyDown(KeyEvent.VK_Q) ? Math.max(--time,start) : Math.min(++time,stop);
 		}
 	}
 
