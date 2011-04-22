@@ -14,8 +14,8 @@
 	<price>11</price>
 	<language>12</language>
 	<dimension>
-		<width>1024</width>
-		<height>768</height>
+		<width>800</width>
+		<height>600</height>
 	</dimension>
 	<rating>0</rating>
 	<favorite>0</favorite>
