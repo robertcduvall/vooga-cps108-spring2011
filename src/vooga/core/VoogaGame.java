@@ -14,7 +14,7 @@ import com.golden.gamedev.Game;
 public abstract class VoogaGame extends Game implements ISimpleEventManager
 {
     private EventManager myEventManager;
-    private ResourceManager myResourceManager;
+    protected ResourceManager myResourceManager;
     private KeyMap myKeyMap;
 
 
