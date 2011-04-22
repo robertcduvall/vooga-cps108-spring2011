@@ -1,7 +1,8 @@
 package vooga.sprites.spritebuilder.components.physics;
 
 import java.awt.Point;
-import vooga.physics.interfaces.newtonian.INewtonianRotate;
+
+import vooga.physics.newtonianInterfaces.INewtonianRotate;
 import vooga.physics.util.Force;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.BasicComponent;

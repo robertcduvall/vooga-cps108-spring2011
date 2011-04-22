@@ -1,10 +1,11 @@
 package vooga.sprites.spritebuilder.components.physics;
 
 import java.awt.Point;
-import vooga.physics.interfaces.newtonian.INewtonianCollider;
-import vooga.physics.interfaces.newtonian.INewtonianFriction;
-import vooga.physics.interfaces.newtonian.INewtonianMovable;
-import vooga.physics.interfaces.newtonian.INewtonianPhysical;
+
+import vooga.physics.newtonianInterfaces.INewtonianCollider;
+import vooga.physics.newtonianInterfaces.INewtonianFriction;
+import vooga.physics.newtonianInterfaces.INewtonianMovable;
+import vooga.physics.newtonianInterfaces.INewtonianPhysical;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.math.Angle;
 

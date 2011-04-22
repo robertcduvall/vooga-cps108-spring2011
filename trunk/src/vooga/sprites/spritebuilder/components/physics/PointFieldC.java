@@ -1,8 +1,8 @@
 package vooga.sprites.spritebuilder.components.physics;
 
 import java.awt.Point;
-import vooga.physics.interfaces.IPointField;
-import vooga.physics.util.Velocity;
+
+import vooga.physics.IPointField;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.BasicComponent;
 
