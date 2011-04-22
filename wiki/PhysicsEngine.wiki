@@ -2,9 +2,13 @@ This is a very basic overview of the physics engine. It will be updated at a lat
 
 There are a couple different things that we feel that the Physics Engine should handle:
 1. Forces which affect all objects in the game world, such as gravity and “point forces,” such as magnets. There are currently three such types of these forces:
+
 	a. Constant forces: These forces affects an object based on the object’s mass. As such, it only affects objects which implement IPhysics (or, in the case of Vooga, contain an IPhysics component).
+
 	b. Mass Proportional forces: These are essentially forces which act proportionally to the object’s mass, meaning that the mass is irrelevant. This is how gravity is implemented. This will be integrated with force type (a) in a more general force which takes parameters in the next version. These affect all objects equally. 
+
 	c. Point force: This is a force which either attracts or repulses forces of the same type, such as point gravitation or electric charge. These affect other objects which implement the same IPointForce interface. To represent two different types of point forces (such as gravitation and magnetism), create two different components, each of which implements an interface extending IPointForce (for example, create IMagnetic extends IPoint force, and have a MagneticC implement IMagnetic).
+
 All three of these types are held by the PhysicsEngine itself. To add one of these, simply call instanceOfPhysicsEngine.addWorldForce/Field(Force/Field f). The affects of these forces are calculated at each update. If the proper components (listed above) are contained in the sprite, this should automatically occur. 
 
 Example 1: Basic Gravity:
