@@ -5,13 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.golden.gamedev.Game;
 import com.golden.gamedev.object.background.ColorBackground;
 
 import vooga.levels.AbstractLevel;
-import vooga.levels.util.tags.BackgroundTag;
-import vooga.levels.util.tags.CollisionManagerTag;
-import vooga.levels.util.tags.InstanceTag;
-import vooga.levels.util.tags.SpriteTag;
+import vooga.levels.IGoal;
+import vooga.levels.util.tags.*;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
@@ -34,17 +33,20 @@ public class LevelParser extends Parser {
 		}
 		
 	}
-	public LevelParser(AbstractLevel level) {
+	public LevelParser(AbstractLevel level, Game game) {
 		super();
 		
 		this.level = level;
 		
 		spriteFactoryMap = new HashMap<String, SpriteConstructor>();
-		converterRack = new ConverterRack();
+		converterRack = new ConverterRack(game);
 		
-		super.addDefinitions(new LevelTag(), new BackgroundTag(this),
-								new SpriteTag(this), new CollisionManagerTag(this),
-								new InstanceTag(this));
+		super.addDefinitions(	new LevelTag(), 
+								new BackgroundTag(this),
+								new SpriteTag(this), 
+								new CollisionManagerTag(this),
+								new InstanceTag(this),
+								new GoalTag(this));
 	}
 	
 	public AbstractLevel getLevel() {
@@ -54,6 +56,10 @@ public class LevelParser extends Parser {
 	public void setBackground(String background) {
 		//FIXME
 		level.setBackground(new ColorBackground(Color.black));
+	}
+	
+	public void setGoal(IGoal goal) {
+		level.setGoal(goal);
 	}
 	
 	public void addSpriteArchetype(String name, SpriteConstructor factory) {
