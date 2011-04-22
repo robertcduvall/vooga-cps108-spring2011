@@ -44,10 +44,10 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     private int myId;
 
     
-    public AbstractLevel (SpriteGroup players, VoogaGame game)
+    public AbstractLevel (SpriteGroup<Sprite> players, VoogaGame game)
     {
         myGame = game;
-        mySpriteGroups = new ArrayList<SpriteGroup>();
+        mySpriteGroups = new ArrayList<SpriteGroup<Sprite>>();
         addGroup(players);
         myCollisionManagers = new ArrayList<CollisionManager>();
     }

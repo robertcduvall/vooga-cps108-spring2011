@@ -3,6 +3,7 @@ package vooga.levels;
 import java.awt.Graphics2D;
 import java.util.Collection;
 import vooga.collisions.collisionManager.CollisionManager;
+import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import com.golden.gamedev.object.PlayField;
 
@@ -13,7 +14,7 @@ import com.golden.gamedev.object.PlayField;
 public class VoogaPlayField extends PlayField
 {
     /** All of the sprite groups that are currently on the playingfield */
-    protected Collection<SpriteGroup> mySpriteGroups;
+    protected Collection<SpriteGroup<Sprite>> mySpriteGroups;
     
     /** All of the collision managers that are part of the playingfield */
     protected Collection<CollisionManager> myCollisionManagers;
@@ -26,16 +27,16 @@ public class VoogaPlayField extends PlayField
      * 
      * @return a sprite group of the specified name
      */
-    public SpriteGroup getSpriteGroup (String groupName)
+    public SpriteGroup<Sprite> getSpriteGroup (String groupName)
     {
-        for (SpriteGroup<?> currentGroup : mySpriteGroups)
+        for (SpriteGroup<Sprite> currentGroup : mySpriteGroups)
         {
             if (currentGroup.getName().equals(groupName))
             {
                 return currentGroup;
             }
         }
-        SpriteGroup newGroup = new SpriteGroup(groupName);
+        SpriteGroup<Sprite> newGroup = new SpriteGroup<Sprite>(groupName);
         addGroup(newGroup);
         return newGroup;
     } 
@@ -46,7 +47,7 @@ public class VoogaPlayField extends PlayField
      * 
      * @param SpriteGroup to add
      */
-    public void addGroup(SpriteGroup group)
+    public void addGroup(SpriteGroup<Sprite> group)
     {
         // Overwrite old sprite group if one of the same name exists
         mySpriteGroups.add(group);
@@ -69,7 +70,7 @@ public class VoogaPlayField extends PlayField
      */
     public void clear()
     {
-        for(SpriteGroup currentGroup : mySpriteGroups)
+        for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
         {
             currentGroup.clear();
         }
@@ -85,7 +86,7 @@ public class VoogaPlayField extends PlayField
     public void update(long elapsedTime)
     {
         super.update(elapsedTime);
-        for(SpriteGroup currentGroup : mySpriteGroups)
+        for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
         {
             currentGroup.update(elapsedTime);
         }
@@ -105,7 +106,7 @@ public class VoogaPlayField extends PlayField
     public void render(Graphics2D g)
     {
         super.render(g);
-        for(SpriteGroup currentGroup : mySpriteGroups)
+        for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
         {
             currentGroup.render(g);
         }  

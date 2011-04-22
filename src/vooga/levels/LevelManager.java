@@ -34,7 +34,7 @@ public class LevelManager
     private int myNumOfLevelsCompleted;
 
     /** The players for this level */
-    private SpriteGroup myPlayers;
+    private SpriteGroup<Sprite> myPlayers;
 
     /** The current running game */
     private VoogaGame myGame;
@@ -48,7 +48,7 @@ public class LevelManager
     /**
      * Maps level names/classes to level order
      */
-    public LevelManager (VoogaGame game, SpriteGroup players)
+    public LevelManager (VoogaGame game, SpriteGroup<Sprite> players)
     {
         myGame = game;
         myLevelOrderMap = new HashMap<Integer, String>();
