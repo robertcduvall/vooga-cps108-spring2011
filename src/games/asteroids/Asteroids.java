@@ -11,7 +11,7 @@ import com.golden.gamedev.object.collision.BasicCollisionGroup;
 import vooga.core.*;
 import vooga.core.event.IEventHandler;
 
-public class Asteroids extends Game {
+public class Asteroids extends VoogaGame {
 	private PlayField myPlayfield;
     private Background mBackground;
     private SpriteGroup myShip;
