@@ -50,7 +50,7 @@ public final class GameXMLParser {
         String[][] results = getListData(root);     
         Image image = createImage(root);
 
-        return new ArcadeGameObject(game, dataArray, results[0], results[1], image, root, path);
+        return new ArcadeGameObject(root, path);
     }
 
     /**

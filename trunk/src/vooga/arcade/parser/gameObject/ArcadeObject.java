@@ -30,7 +30,7 @@ public abstract class ArcadeObject
 	/**
 	 * @return the drawableData
 	 */
-	protected Image getImage() {
+	public Image getImage() {
         if(image!= null) return image;
         
         try {
