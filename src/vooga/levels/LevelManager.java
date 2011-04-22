@@ -1,6 +1,8 @@
 package vooga.levels;
 
 import java.awt.Graphics2D;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 import vooga.sprites.improvedsprites.Sprite;
@@ -20,6 +22,8 @@ import vooga.reflection.Reflection;
  */
 public class LevelManager
 {
+    private static final String LEVEL_ORDER_FILE = "src/vooga/levels/example2/resources/levelorder.txt";
+    
     /** A map of level number to the associated XML file */
     private Map<Integer, String> myLevelOrderMap;
 
@@ -50,6 +54,22 @@ public class LevelManager
         myLevelOrderMap = new HashMap<Integer, String>();
         myPastLevels = new HashSet<AbstractLevel>();
         myPlayers = players;
+        
+        try
+        {
+            Scanner in = new Scanner(new File(LEVEL_ORDER_FILE));
+            int levelNumber = 0;
+            while(in.hasNextLine())
+            {
+                myLevelOrderMap.put(levelNumber,in.nextLine());
+                myNumOfLevels ++;
+                levelNumber ++;
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            throw LevelException.NON_EXISTANT_LEVEL_ORDER;
+        }
     }
 
     /**
@@ -91,16 +111,16 @@ public class LevelManager
         }
         
         //If no pre-existing level of the correct type exists, create a new instance
-        try
-        {
-            myActiveLevel = ((AbstractLevel) Reflection.createInstance(levelDef[0], myPlayers, myGame));
+//        try
+//        {
+            myActiveLevel = ((AbstractLevel) Reflection.createInstance("vooga.levels.example2."+levelDef[0], myPlayers, myGame));
             myActiveLevel.loadLevel();
             myPastLevels.add(myActiveLevel);
-        }
-        catch (Exception e)
-        {
-            throw LevelException.LEVEL_LOADING_ERROR;
-        }
+//        }
+//        catch (Exception e)
+//        {
+//            throw LevelException.LEVEL_LOADING_ERROR;
+//        }
     }
 
 
@@ -204,16 +224,6 @@ public class LevelManager
     public void useNextMusic ()
     {
         myActiveLevel.addMusic();
-    }
-
-
-    /**
-     * Adds a maping of level number to level file
-     */
-    public void addToLevelMap(int levelNumber, String levelFilePath)
-    {
-        myLevelOrderMap.put(levelNumber, levelFilePath);
-        myNumOfLevels++;
     }
     
     

@@ -29,7 +29,7 @@ public class Example2 extends VoogaGame {
 	@Override
 	public void initResources() {
 	    SpriteGroup players = new SpriteGroup("player group");
-	    Sprite player = new Sprite(getImage("src/vooga/example2/Ship1.png"));
+	    Sprite player = new Sprite(getImage("Ship1.png"));
 	    players.add(player);
 
 		myLevelManager = new LevelManager(this, players);
@@ -39,7 +39,6 @@ public class Example2 extends VoogaGame {
 	@Override
 	public void update(long elapsedTime) {
 		myLevelManager.update(elapsedTime);
-
 	}
 
 	@Override
@@ -50,8 +49,7 @@ public class Example2 extends VoogaGame {
     @Override
     public void updatePlayField (long elapsedTime)
     {
-        // TODO Auto-generated method stub
-        
+        myLevelManager.update(elapsedTime);
     }
 
 }
