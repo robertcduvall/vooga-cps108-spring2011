@@ -26,8 +26,10 @@ After defining all these parameters, all you need to do is to register update me
 The _NumDisplayCreator_ and _DisplayTracker_ are very useful tools for management of many numerical statistics. While _NumDisplayCreator_ reads statistical properties from xml file and store them in _DisplayTracer_, all stored statistics can be updated and read in _DisplayTracker_.
 If we define score in a game as integers starting at zero with step 1000, and health for player starting at 100000 with step 1000, core of xml file is written as
 
+{{{
 <NumStat type="Integer" value="0" name="score" operator="+" step="1000"></NumStat>
 <NumStat type="Double" value="100000" name="health" operator="-" step="1000"></NumStat>
+}}}
 
 By passing in the location of this xml, _NumStatCreator_ creates two instances of _NumStat_ containing integer and double for score and health, respectively. This statistical information is stored in a _DisplayTracker_ which can be returned from _NumStatCreator_. _NumStats_ are distinguished by their names in _DisplayTracker_. Now you can update all statistics and get them in your game.
 
