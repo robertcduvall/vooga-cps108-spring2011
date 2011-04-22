@@ -42,5 +42,10 @@ public class PolygonPolygonFinder extends IntersectionFinder
         return false;
     }
 
+	@Override
+	public int compareTo(Object arg0) {
+		return this.hashCode() - arg0.hashCode();
+	}
+
 
 }
