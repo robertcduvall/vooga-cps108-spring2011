@@ -24,87 +24,113 @@ import com.golden.gamedev.GameLoader;
  * This is used to transport game and its data around
  * 
  * @author KevinWang
- *
- */	
-public class ArcadeGameObject extends ArcadeObject{
-    
-    protected Game game;
-    protected Dimension dimension;
-    public ArcadeGameObject(Element root, String path) {
-    	
-        super(root,path);
-        this.dimension = getDimension();        
-    }
+ * @author Ethan Goh
+ * 
+ */
+public class ArcadeGameObject extends ArcadeObject
+{
 
+	protected Game game;
+	protected Dimension dimension;
 
-    /**
-     * start the game contained in the game object
-     */
-    public void start() {
-        createGame();        
-        GameLoader loader = new GameLoader();
-        loader.setup(game, dimension, false);
-        game.start();
-    }
-    
-    /**
-     * Creates the game instance
-     */
-    private void createGame() {
-        Class cls = null;
+	public ArcadeGameObject(Element root, String path)
+	{
 
-        try {
-            cls = Class.forName(root.getChildText("path"));
-            game = (Game) (cls.newInstance());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public String getData(String name){
-        return root.getChildText(name);
-    }
+		super(root, path);
+		this.dimension = getDimension();
+	}
 
-    /**
-     * @return the dimension
-     */
-    public Dimension getDimension() {
-        List<String> dimensionList = getList("dimension");
-        Dimension dimension = new Dimension(Integer.parseInt(dimensionList.get(0)),Integer.parseInt(dimensionList.get(1)));
-        
-        return dimension;
-    }
+	/**
+	 * start the game contained in the game object
+	 */
+	public void start()
+	{
+		createGame();
+		Runnable r = new Runnable()
+		{
 
-    /**
-     * @return data in a list
-     */
-    public List<String> getListData(String name) {
-        return getList(name);
-    }
-    
-    private List<String> getList(String name){
-        ArrayList<String> result = new ArrayList<String>();
-        List<Element> elementList = root.getChild(name).getChildren();
-        for(Element e : elementList){
-            result.add(e.getText());
-        }
-        
-        return result;
-    }
-    
-    /**
-     * 
-     * @param name
-     * @param data
-     */
-    public void writeData(String name, String value){
-        if(root.getChildText(name)==null){
-            root.addContent(new Element(name));
-        }
-        root.getChild(name).setText(value);
-        XmlIO.writeToXml(root, path);
-        
-    }
+			@Override
+			public void run()
+			{
+				GameLoader loader = new GameLoader();
+				loader.setup(game, dimension, false);
+				game.start();
+			}
+		};
+
+		Thread t = new Thread(r);
+		t.start();
+	}
+
+	/**
+	 * Creates the game instance
+	 */
+	private void createGame()
+	{
+		Class cls = null;
+
+		try
+		{
+			cls = Class.forName(root.getChildText("path"));
+			game = (Game) (cls.newInstance());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public String getData(String name)
+	{
+		return root.getChildText(name);
+	}
+
+	/**
+	 * @return the dimension
+	 */
+	public Dimension getDimension()
+	{
+		List<String> dimensionList = getList("dimension");
+		Dimension dimension = new Dimension(Integer.parseInt(dimensionList
+				.get(0)), Integer.parseInt(dimensionList.get(1)));
+
+		return dimension;
+	}
+
+	/**
+	 * @return data in a list
+	 */
+	public List<String> getListData(String name)
+	{
+		return getList(name);
+	}
+
+	private List<String> getList(String name)
+	{
+		ArrayList<String> result = new ArrayList<String>();
+		List<Element> elementList = root.getChild(name).getChildren();
+		for (Element e : elementList)
+		{
+			result.add(e.getText());
+		}
+
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @param data
+	 */
+	public void writeData(String name, String value)
+	{
+		if (root.getChildText(name) == null)
+		{
+			root.addContent(new Element(name));
+		}
+		root.getChild(name).setText(value);
+		XmlIO.writeToXml(root, path);
+
+	}
 
 }
