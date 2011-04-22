@@ -40,7 +40,7 @@ public class NumberDisplay {
 		myY=y;
 		
 		//Sets the number path to default
-		myNumberFilePath="/vooga/gui/resources/number";
+		myNumberFilePath="/resources/gui/images/number";
 		myNumberFiletype=".gif";
 		
 		//Funky Group constructor stuff:

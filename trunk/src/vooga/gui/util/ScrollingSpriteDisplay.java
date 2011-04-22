@@ -87,10 +87,10 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	 * constructor helper
 	 */
 	private void makeArrows(){
-		BufferedImage image = myParent.getImage("/vooga/gui/resources/left_arrow.gif");
+		BufferedImage image = myParent.getImage("/resources/gui/images/left_arrow.gif");
 		myLeftArrow = new Sprite(image, myX-image.getWidth()-5,myY+(myHeight/2-image.getHeight()/2));
 		
-		image = myParent.getImage("/vooga/gui/resources/right_arrow.gif");
+		image = myParent.getImage("/resources/gui/images/right_arrow.gif");
 		myRightArrow = new Sprite(image, myX+myWidth+5,myY+(myHeight/2-image.getHeight()/2));
 	}
 	
