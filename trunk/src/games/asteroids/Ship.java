@@ -4,11 +4,12 @@ package games.asteroids;
  * @author Charlie Hatcher, Conrad Haynes, Yin Xiao, Lingzhao Xie
  */
 import java.awt.Graphics2D;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import vooga.core.Game;
+import vooga.core.VoogaGame;
 import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
 import vooga.core.event.examples.VoogaExampleGame;
@@ -34,7 +35,7 @@ public class Ship extends Sprite {
     private BufferedImage ImageShot;
     private Weapon myCurrentWeapon;
     private int myDirection;
-    private Game myGame;
+    private VoogaGame myGame;
     private SpriteGroup myShots;
     private Sprite mySprite;
     
