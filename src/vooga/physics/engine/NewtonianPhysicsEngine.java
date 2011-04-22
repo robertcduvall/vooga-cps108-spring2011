@@ -20,7 +20,9 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
 
     public void applyForce(INewtonianPhysical object, Force force, long elapsedTime) {
         if (!super.applyForce(object, force, elapsedTime))
-            force.applyForce(object, elapsedTime);
+            if (force.getClass() == Force.class)
+                force.applyForce(object, elapsedTime);
+            
     }
 
     public void applyForce(INewtonianMovable object, MassProportionalForce force, long elapsedTime) {

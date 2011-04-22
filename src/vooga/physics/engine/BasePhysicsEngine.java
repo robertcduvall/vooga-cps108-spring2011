@@ -1,8 +1,6 @@
 package vooga.physics.engine;
 
 import java.util.Collection;
-import java.util.Map;
-import vooga.core.VoogaGame;
 import vooga.physics.util.Force;
 import java.awt.Point;
 import java.util.HashSet;
@@ -148,11 +146,12 @@ public class BasePhysicsEngine implements IPhysicsToggle {
             Class<?>[] firstObjectInterfaces = object1.getClass().getInterfaces();
             Class<?>[] secondObjectInterfaces = object2.getClass().getInterfaces();
             
-            for (Class c : firstObjectInterfaces) {
+            for (Class<?> c : firstObjectInterfaces) {
                 applyCollision(c.getClass().cast(object1), object2, angleOfImpact, pointOfImpact,
                         coefficientOfRestitution);
             }
-            for (Class c : secondObjectInterfaces) {
+            
+            for (Class<?> c : secondObjectInterfaces) {
                 applyCollision(c.getClass().cast(object2), object1, angleOfImpact, pointOfImpact,
                         coefficientOfRestitution);
             }

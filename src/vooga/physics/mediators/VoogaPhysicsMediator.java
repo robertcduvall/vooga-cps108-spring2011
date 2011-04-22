@@ -3,13 +3,13 @@ package vooga.physics.mediators;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
-import com.golden.gamedev.Game;
 import vooga.core.VoogaGame;
 import vooga.physics.engine.BasePhysicsEngine;
 import vooga.physics.engine.NewtonianPhysicsEngine;
 import vooga.physics.interfaces.newtonian.INewtonianMovable;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.basic.PhysicsC;
+import vooga.sprites.spritebuilder.components.basic.VelocityC;
 import vooga.util.buildable.components.IComponent;
 import vooga.util.math.Angle;
 
@@ -77,7 +77,7 @@ public class VoogaPhysicsMediator {
         if (sprite.carriesComponent(PhysicsC.class))
             return sprite.getComponent(PhysicsC.class);
         else
-            return spriteToMovable(sprite);//TODO: Will sprite be an Imovable?
+            return sprite.getComponent(VelocityC.class);
     }
 
     public static INewtonianMovable spriteToMovable(Sprite otherObject) {

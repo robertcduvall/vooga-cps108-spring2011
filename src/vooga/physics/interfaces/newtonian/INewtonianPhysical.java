@@ -3,7 +3,6 @@ package vooga.physics.interfaces.newtonian;
 import java.awt.Point;
 
 import vooga.physics.interfaces.IPhysicsToggle;
-import vooga.physics.util.Velocity;
 
 /**
  * Interface which defines basic methods that all objects using physics should implement.
