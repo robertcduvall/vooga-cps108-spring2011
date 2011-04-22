@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
 import vooga.core.event.ISimpleEventManager;
-import vooga.levels.LevelManager;
 import vooga.resources.KeyMap;
 import vooga.resources.ResourceManager;
 import vooga.resources.images.ImageLoader;
@@ -16,7 +15,6 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
 {
     private EventManager myEventManager;
     private ResourceManager myResourceManager;
-    private LevelManager myLevelManager;
     private KeyMap myKeyMap;
 
 
@@ -136,7 +134,7 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
                                                 public void handleEvent (Object o)
                                                 {
                                                     long elapsedTime = (Long) o;
-                                                    myLevelManager.update(elapsedTime);
+                                                    updatePlayField(elapsedTime);
                                                 }
                                             });
     }
@@ -191,8 +189,9 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     public void update (long elapsedTime)
     {
         myEventManager.update(elapsedTime);
-        myLevelManager.update(elapsedTime);
     }
+    
+    public abstract void updatePlayField (long elapsedTime);
 
     public ImageLoader getImageLoader() {
     	return myResourceManager.getImageLoader();
