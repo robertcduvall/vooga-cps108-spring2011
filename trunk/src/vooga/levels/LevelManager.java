@@ -3,7 +3,6 @@ package vooga.levels;
 import java.awt.Graphics2D;
 import java.util.*;
 
-import com.golden.gamedev.Game;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.buildable.components.BasicComponent;
@@ -215,6 +214,18 @@ public class LevelManager
     {
         myLevelOrderMap.put(levelNumber, levelFilePath);
         myNumOfLevels++;
+    }
+    
+    
+    /**
+     * Adds a player to the player group
+     * Change will immediately be refelcted on the playingfield
+     * 
+     * @param player sprite to add
+     */
+    public void addPlayer(Sprite player)
+    {
+        myPlayers.add(player);
     }
 
 

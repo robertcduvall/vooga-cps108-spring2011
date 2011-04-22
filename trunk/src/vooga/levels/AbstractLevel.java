@@ -182,17 +182,6 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         }
     }
 
-    
-    /**
-     * Adds a player onto this level
-     * 
-     * @param player to add
-     */
-    protected void addPlayer (Sprite p)
-    {
-        myPlayers.add(p);
-    }
-
 
     /**
      * Sets this level's sprite pool; called by LevelParser
@@ -245,17 +234,6 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     public int getId ()
     {
         return myId;
-    }
-    
-    
-    /**
-     * Returns this level's players
-     * 
-     * @return all the players for this level
-     */
-    public Collection<Sprite> getPlayers()
-    {
-        return myPlayers;
     }
     
     
