@@ -1,10 +1,8 @@
-#summary One-sentence summary of this page.
-
-This Stats package provides convenient tools to hold and update your statistical information in a game. 
+#summary This Stats package provides convenient tools to hold and update your statistical information in a game.
 
 = Introduction =
 
-For purpose of extensibility, there is an abstract class, _AbstractStat_, by which you can define your own statistical information for your game. Besides getting statistical information, there is a _cheat_ method for setting statistical information manually. When you extends _AbstractStat_ you must implement _update_ method and register it with event manager or _update_ method in game loop.
+Basically any kind of information can be statistics. For purpose of extensibility, there is an abstract class, _AbstractStat_, by which you can define your own statistical information for your game. Besides getting statistical information, there is a _cheat_ method for setting statistical information manually. When you extends _AbstractStat_ you must implement _update_ method and register it with event manager or _update_ method in game loop.
 
 = Numerical Statistics =
 
