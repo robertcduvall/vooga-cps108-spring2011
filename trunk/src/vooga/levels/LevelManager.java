@@ -5,8 +5,10 @@ import java.util.*;
 
 import com.golden.gamedev.Game;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.buildable.components.BasicComponent;
 
+import vooga.core.VoogaGame;
 import vooga.reflection.Reflection;
 
 
@@ -29,10 +31,10 @@ public class LevelManager
     private int myNumOfLevelsCompleted;
 
     /** The players for this level */
-    private Collection<Sprite> myPlayers; //TODO: change to sprite
+    private SpriteGroup myPlayers;
 
     /** The current running game */
-    private Game myGame; // TODO: change to voogagame
+    private VoogaGame myGame;
 
     /** The current, active level for this game */
     private AbstractLevel myActiveLevel;
@@ -43,11 +45,12 @@ public class LevelManager
     /**
      * Maps level names/classes to level order
      */
-    public LevelManager (Game game, Collection<Sprite> players)
+    public LevelManager (VoogaGame game, SpriteGroup players)
     {
         myGame = game;
         myLevelOrderMap = new HashMap<Integer, String>();
         myPastLevels = new HashSet<AbstractLevel>();
+        myPlayers = players;
     }
 
     /**

@@ -10,6 +10,7 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.collisions.collisionManager.CollisionManager;
+import vooga.core.VoogaGame;
 
 
 
@@ -26,7 +27,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     private LevelParser myLevelParser;
 
     /** The vooga game for which this is a level for */
-    private Game myGame; //TODO: switch to voogagame (using Game is a temporary changed used for testing)
+    private VoogaGame myGame;
 
     /** The goal which this level must reach in order to progress */
     private IGoal myGoal;
@@ -43,14 +44,11 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     /** This level's current id; could change each time a new XML file is read */
     private int myId;
 
-    /** This level's players */
-    private Collection<Sprite> myPlayers;
 
-
-    public AbstractLevel (Collection<Sprite> players, Game game)
+    public AbstractLevel (SpriteGroup players, VoogaGame game)
     {
         myGame = game;
-        myPlayers = players;
+        addGroup(players);
         mySpriteGroups = new ArrayList<SpriteGroup>();
         myCollisionManagers = new ArrayList<CollisionManager>();
     }

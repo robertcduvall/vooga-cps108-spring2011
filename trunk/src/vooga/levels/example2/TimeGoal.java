@@ -5,8 +5,8 @@ import vooga.levels.LevelManager;
 
 public class TimeGoal implements IGoal
 {
-    double myStartOfLevelTime;
-    LevelManager myLevelManager;
+    private double myStartOfLevelTime;
+    private LevelManager myLevelManager;
     
     public TimeGoal()
     {
