@@ -22,7 +22,7 @@ public class ArcadeGameFinder
 		List<ArcadeGameObject> arcadeList = new ArrayList<ArcadeGameObject>();
 		for (String s : fileList)
 		{
-			arcadeList.add(GameXMLParser.getGameData(s));
+			arcadeList.add(XmlIO.getArcadeGameObject(s));
 		}
 
 		return arcadeList;
