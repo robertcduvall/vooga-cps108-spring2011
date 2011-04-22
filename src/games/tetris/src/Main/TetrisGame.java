@@ -34,9 +34,9 @@ import com.golden.gamedev.object.background.ColorBackground;
 
 public class TetrisGame extends Game implements ITetrisContext
 {
-	private ResourceManager resources = new ResourceManager("TetrisResource");
+	private ResourceManager resources = new ResourceManager("games.tetris.TetrisResource");
 	private ResourceManager keypressResource = new ResourceManager(
-			"KeypressResource");
+			"games.tetris.KeypressResource");
 
 	private Map<Integer, IKeyAction> keyMapping;
 

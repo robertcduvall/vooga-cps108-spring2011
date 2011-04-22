@@ -13,7 +13,7 @@ import com.golden.gamedev.object.SpriteGroup;
 public abstract class AbstractMino
 {
 	protected ResourceManager gameResources = new ResourceManager(
-			"TetrisResource");
+			"games.tetris.TetrisResource");
 	protected List<Monomino> minos;
 	protected int[] spawnLocation = gameResources
 			.getIntegerArray("MinoSpawnLocation");

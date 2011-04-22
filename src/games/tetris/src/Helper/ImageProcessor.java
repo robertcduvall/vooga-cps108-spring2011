@@ -15,7 +15,9 @@ public class ImageProcessor
 	{
 		try
 		{
-			return ImageIO.read(new File(imageFullPath));
+			File f = new File(imageFullPath);
+			System.out.println(f.getAbsolutePath());
+			return ImageIO.read(f);
 		}
 		catch (IOException e)
 		{

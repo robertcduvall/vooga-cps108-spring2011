@@ -18,7 +18,7 @@ public class TetrisMatrix
 	private int matrixMaxHeight;
 	private int matrixValidHeight;
 
-	private ResourceManager resources = new ResourceManager("TetrisResource");
+	private ResourceManager resources = new ResourceManager("games.tetris.TetrisResource");
 
 	public TetrisMatrix()
 	{

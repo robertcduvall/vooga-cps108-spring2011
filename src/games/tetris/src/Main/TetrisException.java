@@ -7,7 +7,7 @@ public class TetrisException extends Exception
 	private static final long serialVersionUID = 1L;
 
 	private static ResourceBundle stringsResource = ResourceBundle
-			.getBundle("TetrisExceptionResource");
+			.getBundle("games.tetris.TetrisExceptionResource");
 
 	public static TetrisException NONEXISTANT_MINO = new TetrisException(
 			stringsResource.getString("NONEXISTANT_MINO"));

@@ -15,7 +15,7 @@ import com.golden.gamedev.object.Sprite;
 
 public class Monomino
 {
-	private ResourceManager resources = new ResourceManager("TetrisResource");
+	private ResourceManager resources = new ResourceManager("games.tetris.TetrisResource");
 
 	private int xPos;
 	private int yPos;
