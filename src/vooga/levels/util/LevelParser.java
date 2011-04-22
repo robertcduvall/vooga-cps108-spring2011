@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.golden.gamedev.Game;
 import com.golden.gamedev.object.background.ColorBackground;
 
+import vooga.core.VoogaGame;
 import vooga.levels.AbstractLevel;
 import vooga.levels.IGoal;
 import vooga.levels.util.tags.*;
@@ -33,7 +33,7 @@ public class LevelParser extends Parser {
 		}
 		
 	}
-	public LevelParser(AbstractLevel level, Game game) {
+	public LevelParser(AbstractLevel level, VoogaGame game) {
 		super();
 		
 		this.level = level;
