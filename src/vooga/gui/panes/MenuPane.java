@@ -1,6 +1,6 @@
 package vooga.gui.panes;
 
-import java.awt.Dimension; 
+import java.awt.Dimension;  
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.golden.gamedev.object.Sprite;
 
-import vooga.gui.VoogaGame;
+import vooga.core.VoogaGame;
 import vooga.gui.util.VoogaButton;
 
 /**
@@ -21,14 +21,12 @@ import vooga.gui.util.VoogaButton;
  */
 public class MenuPane extends PopoverPane{
 	Sprite myHeader;
-	int mySeed;
 	List<VoogaButton> myMenuOptions=new ArrayList<VoogaButton>();
 
 	public MenuPane(List<VoogaButton> buttonList, int seed, VoogaGame parent){
 		super(parent);
 		myMenuOptions=buttonList;
 		myButtons.addAll(myMenuOptions); //so that super.sendClick handles them
-		mySeed=Math.abs(seed);
 		// what if "seed" is negative???
 	}
 	
@@ -89,50 +87,7 @@ public class MenuPane extends PopoverPane{
 	 */
 	public void render(Graphics2D g){
 		placeComponents();
-		for (VoogaButton b: myMenuOptions)
-			b.render(g);
 		super.render(g);
 	}
-
-//	/**Returns the clicked button's int*/
-//	public int sendClick(double mouseX, double mouseY){
-//
-//		VoogaButton clicked=super.sendClick(mouseX, mouseY);
-//
-//		if(clicked!=null){
-//			int count=0;
-//			for (VoogaButton test: myButtonList){
-//				if(test==clicked){
-//					return mySeed*10+count;
-//				}
-//				count++;
-//			}
-//		}
-//
-//		return -1;
-//	}
-
-
-
-	/**Sends the correct action to myParent. Returns the sprite
-	 * as well, if parent wants to do something with it- they can.
-	 * But you should just handle the action that is returned.*/
-	public VoogaButton sendClick(double mouseX, double mouseY){
-
-		VoogaButton clicked=super.sendClick(mouseX, mouseY);
-		if(clicked!=null){
-			int count=0;
-			for (VoogaButton test: myMenuOptions){
-				if(test.equals(clicked)){
-					myParent.sendAction(mySeed*10+count);
-				}
-				count++;
-			}
-		}
-		
-	return clicked;
-	}
 	
-
-
 }

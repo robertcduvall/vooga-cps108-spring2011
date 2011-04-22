@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import vooga.core.VoogaGame;
+
 import com.golden.gamedev.GameObject;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
@@ -27,7 +29,7 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	T myActiveSprite;
 	int myHeight, myWidth, myStart, myNumberSpritesDisplayed;
 	double myX, myY;
-	GameObject myParent;
+	VoogaGame myParent;
 	
 	
 	//Constructors
@@ -46,7 +48,7 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	 * @param numDisplayedSprites the number of sprites to display at any one time
 	 * @param parent this object's parent
 	 */
-	public ScrollingSpriteDisplay(double x, double y, int width, int height, int numDisplayedSprites, GameObject parent){
+	public ScrollingSpriteDisplay(double x, double y, int width, int height, int numDisplayedSprites, VoogaGame parent){
 		//Initialize "easy" values
 		initValues(x, y, width, height, numDisplayedSprites);
 		

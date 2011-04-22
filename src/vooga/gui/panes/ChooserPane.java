@@ -1,6 +1,6 @@
 package vooga.gui.panes;
 
-import vooga.gui.VoogaGame;
+import vooga.core.VoogaGame;
 
 /**
  * Type of popover that allows a user to select from a group of displayed sprites. Uses

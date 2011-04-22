@@ -1,6 +1,6 @@
 package vooga.gui.panes;
 
-import vooga.gui.VoogaGame; 
+import vooga.core.VoogaGame; 
 import vooga.gui.util.VoogaButton;
 
 import java.awt.Color;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
+import com.golden.gamedev.object.background.ColorBackground;
 
 /**
  * Completely customizable Pane that can draw itself. Add buttons and other images, set
@@ -39,18 +40,18 @@ public class PopoverPane {
 		myButtons = new ArrayList<VoogaButton>();
 		
 		
-		BufferedImage img = parent.getImage("/vooga/gui/resources/menu_btn_small.gif");
+		BufferedImage img = parent.getImage("/resources/gui/images/menu_btn_small.gif");
 		Dimension position = new Dimension(parent.getWidth()-img.getWidth()-3, parent.getHeight()-img.getHeight());
 		menuButton=new VoogaButton(img, "Menu", position);
 		
 
-		img = parent.getImage("/vooga/gui/resources/back_btn_small.gif");
+		img = parent.getImage("/resources/gui/images/back_btn_small.gif");
 		position = new Dimension(3, parent.getHeight()-img.getHeight());
 		backButton=new VoogaButton(img, "Back", position);
 		
 		
 		IMAGE_GROUP=new SpriteGroup("Info and Supplements");
-		IMAGE_GROUP.setBackground(parent.myBackground);
+		IMAGE_GROUP.setBackground(new ColorBackground(Color.BLUE, 1024,768));
 		myBGcolor=Color.LIGHT_GRAY;
 		
 		menuButtonDisabled=false;
@@ -65,23 +66,15 @@ public class PopoverPane {
 	 * @param mouseY
 	 * @return the button that was hit, or null if none was hit.
 	 */
-	public VoogaButton sendClick(double mouseX, double mouseY){
-		//Checks if our 'default' exit buttons are hit
-		if(!menuButtonDisabled){
-			if(menuButton.hitBy(mouseX, mouseY)) myParent.mainMenu();
-		}
-		if(!backButtonDisabled){
-			if(backButton.hitBy(mouseX, mouseY)) myParent.closePanes();
-		}
-		
-		//Checks if any user-added buttons are hit
+	public void sendClick(double mouseX, double mouseY){		
+		//Checks if any buttons are hit, fires events accordingly.
 		for (int i=0;i<myButtons.size();i++){
-			if(myButtons.get(i).hitBy(mouseX, mouseY)){
-				return myButtons.get(i);
+			VoogaButton current=myButtons.get(i);
+			if(current.hitBy(mouseX, mouseY)){
+				myParent.fireEvent(this, "GUI."+current.getTitle());
+				break;
 			}
 		}
-		
-		return null;
 	}
 	
 	/**

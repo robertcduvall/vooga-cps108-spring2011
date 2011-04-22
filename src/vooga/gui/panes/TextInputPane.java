@@ -1,6 +1,6 @@
 package vooga.gui.panes;
 
-import vooga.gui.VoogaGame;
+import vooga.core.VoogaGame;
 
 /**
  * Type of popover that allows a user to input a value, and when 'accept' button

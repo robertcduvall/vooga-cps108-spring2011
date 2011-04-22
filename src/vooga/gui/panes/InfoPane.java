@@ -1,15 +1,14 @@
 package vooga.gui.panes;
 
 
-import java.awt.Graphics2D; 
+import java.awt.Graphics2D;  
 import java.awt.image.BufferedImage;
 
 import com.golden.gamedev.object.Sprite;
 
 
-import vooga.gui.VoogaGame;
+import vooga.core.VoogaGame;
 import vooga.gui.util.ScrollingSpriteDisplay;
-import vooga.gui.util.VoogaButton;
 
 /**
  * Type of popover that displays a single piece of information at a time by making use of the
@@ -57,10 +56,10 @@ public class InfoPane extends PopoverPane {
 	 * NEEDS TO BE IN THE UPDATE METHOD OF THIS OBJECT'S PARENT. [ ie: 
 	 * if (click()) sendClick(); ] This is how the panel responds to user input.
 	 */
-	public VoogaButton sendClick(double mouseX, double mouseY){
-		VoogaButton vb = super.sendClick(mouseX, mouseY);
+	public void sendClick(double mouseX, double mouseY){
+		super.sendClick(mouseX, mouseY);
 		myDisplay.sendClick(mouseX, mouseY);
-		return vb;
+		
 	}
 	
 	/**
