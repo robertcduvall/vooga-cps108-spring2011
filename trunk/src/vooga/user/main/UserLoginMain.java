@@ -1,5 +1,8 @@
 package vooga.user.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import vooga.user.controller.LoginController;
 
 /**
@@ -12,8 +15,9 @@ public class UserLoginMain
 {
 	public static void main(String[] args)
 	{
+		List<String> gameUserReferences = new ArrayList<String>();
 		LoginController start = new LoginController(
-				"VOOGA GAME LOGIN","", 640, 480, gameUserReferences);
+				"VOOGA GAME LOGIN","", 640, 480, gameUserReferences );
 		start.toString();
 	}
 }

@@ -34,7 +34,7 @@ public class FieldPanel extends JPanel{
 	 * This is the constructor for a Field Panel JPanel that is constructed section by section
 	 */
 	public FieldPanel(LoginTemplate[] log, ILoginController controller) {
-		this.setLayout(new MigLayout());
+		//this.setLayout(new MigLayout());
 		
 		for (LoginTemplate login : log) {
 			addSection(login.getHeader(), login.getPrompts());
