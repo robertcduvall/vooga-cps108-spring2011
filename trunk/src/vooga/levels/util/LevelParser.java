@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.background.ColorBackground;
 
 import vooga.core.VoogaGame;
@@ -43,7 +44,7 @@ public class LevelParser extends Parser {
 		converterRack = new ConverterRack(game);
 		
 		super.addDefinitions(	new LevelTag(), 
-								new BackgroundTag(this),
+								new BackgroundTag(this, game.getImageLoader()),
 								new SpriteTag(this), 
 								new CollisionManagerTag(this),
 								new InstanceTag(this),
@@ -54,9 +55,8 @@ public class LevelParser extends Parser {
 		return level;
 	}
 	
-	public void setBackground(String background) {
-		//FIXME
-		level.setBackground(new ColorBackground(Color.black));
+	public void setBackground(Background background) {
+		level.setBackground(background);
 	}
 	
 	public void setGoal(IGoal goal) {
