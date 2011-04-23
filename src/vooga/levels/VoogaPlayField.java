@@ -18,16 +18,24 @@ import com.golden.gamedev.object.PlayField;
 public class VoogaPlayField extends PlayField
 {
     /** All of the sprite groups that are currently on the playingfield */
-    protected Collection<SpriteGroup<Sprite>> mySpriteGroups;
+    private Collection<SpriteGroup<Sprite>> mySpriteGroups;
 
     /** All of the collision managers that are part of the playingfield */
-    protected Collection<CollisionManager> myCollisionManagers;
+    private Collection<CollisionManager> myCollisionManagers;
+    
+    /** All other objects which are updatable */
+    private Collection<IUpdatable> myUpdatables;
+    
+    /** All other objects which are renderable */
+    private Collection<IRenderable> myRenderables;
 
     public VoogaPlayField()
     {
         super();
         mySpriteGroups = new ArrayList<SpriteGroup<Sprite>>();
         myCollisionManagers = new ArrayList<CollisionManager>();
+        myUpdatables = new ArrayList<IUpdatable>();
+        myRenderables = new ArrayList<IRenderable>();
     }
 
     /**
@@ -82,8 +90,30 @@ public class VoogaPlayField extends PlayField
     {
         myCollisionManagers.add(manager);
     }
+    
+    
+    /**
+     * Adds an IUpdatable to this playingfield
+     * 
+     * @param IUpdatable to add
+     */
+    public void addIUpdatable(IUpdatable updatable)
+    {
+        myUpdatables.add(updatable);
+    }
+    
+    
+    /**
+     * Adds an IRenderable to this playingfield
+     * 
+     * @param IRenderable to add
+     */
+    public void addIUpdatable(IRenderable renderable)
+    {
+        myRenderables.add(renderable);
+    }
 
-
+    
     /**
      * Clears all sprites from the playingfield
      */
@@ -97,7 +127,7 @@ public class VoogaPlayField extends PlayField
 
 
     /**
-     * Updates all the sprite groups and checks all collision managers
+     * Updates all the sprite groups, collision managers and IUpdatables
      * 
      * @param elapsedTime
      */
@@ -106,18 +136,16 @@ public class VoogaPlayField extends PlayField
     {
         super.update(elapsedTime);
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
-        {
             currentGroup.update(elapsedTime);
-        }
         for(CollisionManager currentManager : myCollisionManagers)
-        {
             currentManager.checkCollision();
-        }
+        for(IUpdatable currentUpdatable : myUpdatables)
+            currentUpdatable.update(elapsedTime);
     }
 
 
     /**
-     * Renders all sprite groups and the background
+     * Renders all sprite groups, the background and IRenderables
      * 
      * @param Graphics2D g
      */
@@ -126,8 +154,8 @@ public class VoogaPlayField extends PlayField
     {
         super.render(g);
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
-        {
             currentGroup.render(g);
-        }  
+        for(IRenderable currentRenderable : myRenderables)
+            currentRenderable.render(g);
     }
 }

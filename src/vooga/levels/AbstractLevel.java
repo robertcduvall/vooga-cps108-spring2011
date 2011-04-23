@@ -251,6 +251,11 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     }
    
     
+    /**
+     * Updates the level and checks for goal completion
+     * 
+     * @param elapsedTime
+     */
     @Override
     public void update (long elapsedTime)
     {
