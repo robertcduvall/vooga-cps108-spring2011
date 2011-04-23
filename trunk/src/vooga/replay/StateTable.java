@@ -46,12 +46,12 @@ public class StateTable implements Serializable {
 	 */
 	public void updateStateTable(PlayField field) {
 		myBackgroundImageData  = new BufferedImageSerialData(((ImageBackground)field.getBackground()).getImage());
-		for (SpriteGroup s : field.getGroups()) {
-			updateHelper(s.getSprites());
+		for (SpriteGroup spriteGroup : field.getGroups()) {
+			updateHelper(spriteGroup.getSprites());
 		}
-		for (Sprite a : myMap.keySet()) {
-			if (!(myMap.get(a).size() == time + 1)) {
-				myMap.get(a).add(new SpriteReplayData(a, false));
+		for (Sprite sprite : myMap.keySet()) {
+			if (!(myMap.get(sprite).size() == time + 1)) {
+				addFiller(sprite);
 			}
 		}
 		time++;
@@ -61,20 +61,22 @@ public class StateTable implements Serializable {
 	 * Update helper method.
 	 */
 	private void updateHelper(Sprite[] sprites) {
-		for (Sprite a : sprites) {
-			if (a != null && a.isActive()) {
-				if (!myMap.containsKey(a)) {
-					myMap.put(a, new ArrayList<SpriteReplayData>());
+		for (Sprite sprite : sprites) {
+			if (sprite != null && sprite.isActive()) {
+				if (!myMap.containsKey(sprite)) {
+					myMap.put(sprite, new ArrayList<SpriteReplayData>());
 					for (int decrement = time; decrement > 0; decrement--) {
-						myMap.get(a).add(new SpriteReplayData(a, false));
+						addFiller(sprite);
 					}
 				}
-				myMap.get(a).add(new SpriteReplayData(a, a.isActive()));
+				myMap.get(sprite).add(new SpriteReplayData(sprite, sprite.isActive()));
 			}
 		}
 
 	}
-
+	private void addFiller(Sprite sprite){
+		myMap.get(sprite).add(new SpriteReplayData(sprite, false));
+	}
 	public void render(Graphics2D g) {
 		myBackground.render(g);
 		for (Sprite s : myMap.keySet()) {
