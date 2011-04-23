@@ -1,12 +1,10 @@
-package vooga.physics.mediators;
+package vooga.physics;
 
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 import vooga.core.VoogaGame;
-import vooga.physics.engine.BasePhysicsEngine;
-import vooga.physics.engine.NewtonianPhysicsEngine;
-import vooga.physics.newtonianInterfaces.INewtonianMovable;
+import vooga.physics.newtonianProperties.INewtonianMovable;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.physics.PhysicsC;
 import vooga.sprites.spritebuilder.components.physics.VelocityC;

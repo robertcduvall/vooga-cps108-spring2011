@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import vooga.physics.newtonianInterfaces.INewtonianPhysical;
+import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;

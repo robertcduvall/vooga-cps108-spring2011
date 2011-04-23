@@ -1,13 +1,13 @@
-package vooga.physics.engine;
+package vooga.physics;
 
 import java.util.Collection;
 
-import vooga.physics.IPhysicsCustomCollide;
-import vooga.physics.IPhysicsCustomField;
-import vooga.physics.IPhysicsCustomForce;
-import vooga.physics.IPhysicsToggle;
-import vooga.physics.IPointField;
+import vooga.physics.customBehavior.IPhysicsCustomCollide;
+import vooga.physics.customBehavior.IPhysicsCustomField;
+import vooga.physics.customBehavior.IPhysicsCustomForce;
 import vooga.physics.util.Force;
+import vooga.physics.util.IPhysicsToggle;
+import vooga.physics.util.IPointField;
 import java.awt.Point;
 import java.util.HashSet;
 import vooga.util.math.Angle;

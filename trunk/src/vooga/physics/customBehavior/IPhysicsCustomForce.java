@@ -1,4 +1,4 @@
-package vooga.physics;
+package vooga.physics.customBehavior;
 
 import vooga.physics.util.Force;
 /**

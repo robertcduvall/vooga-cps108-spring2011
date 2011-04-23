@@ -1,4 +1,4 @@
-package vooga.physics;
+package vooga.physics.customBehavior;
 
 import java.awt.Point;
 import vooga.util.math.Angle;
