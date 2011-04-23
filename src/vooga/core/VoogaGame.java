@@ -176,13 +176,6 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
         myEventManager.removeEventHandlers(glob);
     }
 
-
-    @Override
-    public void render (Graphics2D g)
-    {
-        myLevelManager.render(g);
-    }
-
     /**
      * Renders graphics based on state of advancedGraphics
      * Pass modified graphics context to LevelManager
