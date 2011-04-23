@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 
 
 /**
- * Implements scaling for BufferedImages.
+ * Implements scaling for BufferedImages. Can choose to scale via absolute or to keep the ratio.
  * 
- * @author Julian
+ * @author Julian @author Dave
  */
 public class BufferedImageModifier
 {
@@ -42,6 +42,50 @@ public class BufferedImageModifier
         graphics2D.dispose();
         return scaledImage;
     }
+    
+    
+	/**
+	 * Resizes a BufferedImage to fit the given Width and Height.
+	 * Keeps the ratio of width/height the same so there's no
+	 * change in shape.
+	 * 
+	 * @param maxWidth the maximum width you will allow the image to be
+	 * @param maxHeight the maximum height you will allow your image to be
+	 */
+	public static BufferedImage getRatioScaledInstance(double maxWidth, 
+					double maxHeight, BufferedImage img){
+		int imgHeight=img.getHeight();
+		int imgWidth=img.getWidth();
+		double dFactor;
+
+		//Width relatively greater than height, Width=maxWidth, height adjusts
+		//by the same factor as width to keep our image looking good.
+		if ((imgWidth/maxWidth)>(imgHeight/maxHeight)){
+			dFactor=maxWidth/imgWidth;
+			imgWidth=(int) maxWidth;
+			imgHeight=(int) (imgHeight*dFactor);
+		}
+		//Height relatively greater than width, Height=maxHeight, width adjusts
+		//by the same factor as width to keep our image looking good.
+		else if ((imgHeight/maxHeight)>(imgWidth/maxWidth)){
+			dFactor=maxHeight/imgHeight;
+			imgWidth=(int) (imgWidth*dFactor);
+			imgHeight=(int) maxHeight;
+		}
+		//There is no difference. Set both to max.
+		else {
+			imgWidth= (int) maxHeight;
+			imgHeight= (int) maxWidth;
+		}
+		//Makes new BufferedImage, of type "ARGB" where A is alpha, so list
+		//displays transparency correctly
+		BufferedImage resizedImage = new BufferedImage(imgWidth, imgHeight, 
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics2D graphics = resizedImage.createGraphics();
+		graphics.drawImage(img, 0, 0, imgWidth, imgHeight, null);
+		graphics.dispose();
+		return resizedImage;
+	}
 
 
     public static BufferedImage getCenterSection (BufferedImage buf,
@@ -49,10 +93,11 @@ public class BufferedImageModifier
                                                   int height)
     {
 
-        if (buf.getWidth() >= width && buf.getHeight() >= height) return buf.getSubimage((buf.getWidth() - width) / 2,
-                                                                                         (buf.getHeight() - height) / 2,
-                                                                                         width,
-                                                                                         height);
+        if (buf.getWidth() >= width && buf.getHeight() >= height) 
+        	return buf.getSubimage((buf.getWidth() - width) / 2,
+                                   (buf.getHeight() - height) / 2,
+                                   width,
+                                   height);
         return buf;
     }
 
