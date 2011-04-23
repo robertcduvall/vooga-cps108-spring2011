@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
-import vooga.collisions.CollisionCheckers.ICollidable;
+import vooga.collisions.ICollidable;
 import vooga.collisions.shapes.Vertex;
 import vooga.collisions.shapes.collisionShapes.CollisionQuadrilateral;
 import vooga.collisions.shapes.collisionShapes.ICollisionShape;
@@ -159,6 +159,10 @@ public class Sprite extends BaseSprite
         this(null, x, y);
     }
 
+    public Sprite (BufferedImage image, double x, double y, IComponent...comps){
+        this(image,x,y);
+        this.addComponents(comps);
+    }
 
     /**
      * Adds a default version of this component to this Container
