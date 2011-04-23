@@ -7,7 +7,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.golden.gamedev.GameObject;
+import vooga.user.main.ResourceManager;
+
+import com.golden.gamedev.Game;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.object.background.ColorBackground;
@@ -24,9 +26,11 @@ public class NumberDisplay {
 	private String myString;
 	private double myX;
 	private double myY;
-	GameObject myParent;
+	Game myParent;
 	private boolean showCommas=false;
 	private String myNumberFilePath, myNumberFiletype;
+	private ResourceManager defaultResources = new ResourceManager("resources.gui.Defaults");
+	
 
 	//Constructor
 	/**
@@ -34,14 +38,14 @@ public class NumberDisplay {
 	 * @param x the number's x position, it will grow right.
 	 * @param y the number's y position
 	 */
-	public NumberDisplay(double x, double y, GameObject parent){
+	public NumberDisplay(double x, double y, Game parent){
 		myParent=parent;
 		myX=x;
 		myY=y;
 		
 		//Sets the number path to default
-		myNumberFilePath="/resources/gui/images/number";
-		myNumberFiletype=".gif";
+		myNumberFilePath=defaultResources.getString("NumberFilepath");
+		myNumberFiletype=defaultResources.getString("NumberFiletype");
 		
 		//Funky Group constructor stuff:
 		mySprites=new SpriteGroup("Displayed Sprites Group");
@@ -108,19 +112,21 @@ public class NumberDisplay {
 		BufferedImage image;
 		for (int i=0;i<myString.length();i++){
 			if(myString.charAt(i)==','){
-				image = myParent.getImage(myNumberFilePath+"comma.gif"+myNumberFiletype);
+				image = myParent.getImage(myNumberFilePath+"comma"+myNumberFiletype);
 				mySprites.add(new Sprite(image, myX+i*image.getWidth(), myY));
 			}else{
-				image = myParent.getImage(myNumberFilePath+myString.charAt(i)+myNumberFiletype);
+				image = myParent.getImage(myNumberFilePath+"number"+myString.charAt(i)+myNumberFiletype);
 				mySprites.add(new Sprite(image, myX+i*image.getWidth(), myY));
 			}
 		}
 	}
 	
 	/**
-	 * Sets the path to grab number images from. (Default "/vooga/gui/resources/number" and ".gif")
+	 * Sets the path to grab number images from. (Default "/resources/gui/images/" and ".gif")
 	 * 
-	 * You will need images in that folder named 'filePath/[0-9].filetype' and 'filePath/comma.filetype'
+	 * You will need images in that folder named 'filePath+"number"+[0-9]+filetype' 
+	 * and 'filePath+comma+filetype'
+	 * 
 	 * @param filePath the path you want to set the finder to.
 	 * @param filetype the file type of your images
 	 */

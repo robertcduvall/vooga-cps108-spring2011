@@ -25,9 +25,8 @@ public class MenuPane extends PopoverPane{
 
 	public MenuPane(List<VoogaButton> buttonList, int seed, VoogaGame parent){
 		super(parent);
-		myMenuOptions=buttonList;
+		myMenuOptions=buttonList; //so that I can manage how they're arranged
 		myButtons.addAll(myMenuOptions); //so that super.sendClick handles them
-		// what if "seed" is negative???
 	}
 	
 	public void addMenuOption(VoogaButton v){
