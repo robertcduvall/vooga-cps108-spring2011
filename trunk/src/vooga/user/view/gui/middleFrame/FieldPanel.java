@@ -1,7 +1,11 @@
 package vooga.user.view.gui.middleFrame;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,6 +16,7 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 import vooga.user.controller.ILoginController;
+import vooga.user.main.ResourceManager;
 import vooga.user.model.LoginTemplate;
 import vooga.user.view.actions.AbstractLoginAction;
 import vooga.user.view.actions.PasswordLogin;
@@ -29,6 +34,7 @@ public class FieldPanel extends JPanel{
 	private List<JTextField> inputFields = new ArrayList<JTextField>();
 	private List<String> promptText = new ArrayList<String>();
 	private String[] inputText; 
+	private ResourceManager guiResource = new ResourceManager("vooga.user.resources.GUIResource");
 	
 	/**
 	 * This is the constructor for a Field Panel JPanel that is constructed section by section
@@ -53,9 +59,17 @@ public class FieldPanel extends JPanel{
 			}
 		}
 	}
+	
+	 public void paintComponent(Graphics g) {
+		 String[] images = guiResource.getStringArray("LoginImageArray");
+		 Random rand = new Random();
+		 Image img = new ImageIcon("src/vooga/user/resources/" + 
+				 guiResource.getString(images[rand.nextInt(images.length)])).getImage();
+		    g.drawImage(img, 0, 0, 640,480, null);
+		  }
 
 	/**
-	 *This method adds a fill-in section to the gui when passed in a section title and fill-in prompts
+	 *This method adds a fill-in section to the gui when passed in a section title and; fill-in prompts
 	 */
 	public void addSection(String sectionTitle, String[] request) {
 		addSeparator(this, sectionTitle);	
