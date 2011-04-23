@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
 import vooga.core.event.ISimpleEventManager;
+import vooga.levels.LevelManager;
 import vooga.resources.KeyMap;
 import vooga.resources.ResourceManager;
 import vooga.resources.images.ImageLoader;
@@ -16,40 +17,16 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
 {
     private EventManager myEventManager;
     protected ResourceManager myResourceManager;
-    // This is needed by LevelManager, so consequently it's needed by ResourceManager.
-    // FIXME: What to parameterize this with?
-    private SpriteGroup myPlayerSpriteGroup;
     private KeyMap myKeyMap;
+    private LevelManager myLevelManager;
 
-    /**
-     * @deprecated
-     * Need to specify a resource file eventually.
-     */
     public VoogaGame ()
     {
         super();
         myEventManager = new EventManager();
+//        myResourceManager = new ResourceManager(this.getClass());
+        myLevelManager = new LevelManager(this);
         initializeEventHandlers();
-    }
-    
-    /**
-     * Initialize the VoogaGame from the given resource file.
-     * @param resourceFile the path of the XML resource file for all resources in the game.
-     */
-    public VoogaGame(String resourceFile) {
-    	super();
-    	myEventManager = new EventManager();
-    	initializeEventHandlers();
-    	myResourceManager = new ResourceManager(resourceFile, this);
-    }
-
-    /**
-     * 
-     * @return the sprite group containing player sprites.
-     */
-    // FIXME: What do we parameterize this with?!
-    public SpriteGroup getPlayerGroup() {
-    	return myPlayerSpriteGroup;
     }
     
     @Override
@@ -140,6 +117,16 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     {
         return myKeyMap;
     }
+    
+    public LevelManager getLevelManager()
+    {
+        return myLevelManager;
+    }
+    
+    public ResourceManager getResourceManager()
+    {
+        return myResourceManager;
+    }
 
 
     private void initializeEventHandlers ()
@@ -221,6 +208,11 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     
     public abstract void updatePlayField (long elapsedTime);
 
+    /**
+     * Use getResourceManager() and ResourceManager#getImageLoader().
+     * @deprecated
+     * @return
+     */
     public ImageLoader getImageLoader() {
     	return myResourceManager.getImageLoader();
     }
