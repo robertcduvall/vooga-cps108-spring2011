@@ -1,7 +1,6 @@
 package vooga.user.controller;
 import java.awt.Dimension;
 import java.util.List;
-
 import vooga.arcade.controller.*;
 import vooga.user.model.LoginModel;
 import vooga.user.model.LoginTemplate;
@@ -60,17 +59,19 @@ public class LoginController implements ILoginController
 		return gameReferences;
 	}
 	
+
+/**
+ * This method exits the loginButton and 
+ */
 	@Override
 	public void exitLogin() throws Exception{
 		VoogaUser user = model.getVoogaUser();
-		String text = "";
+		String username = "";
 		for(UserPreference p : user.getPreferenceList()){
-			if(p.getPrompt().equals("UserName")){text = p.getPrompt();}
-			if(p.getPrompt().equals("Password")){}//text = text + p.getInput();}
+			if(p.getPrompt().equals("UserName")){username = p.getInput();}
 		}
-		arcadeController.swapToolbarButton(text);
-		//XmlWriter.writeXML(user,"resources/first.xml");
-		//model.writeFile("resources/PasswordResource.txt", text);
+		System.out.println(username);
+		arcadeController.swapToolbarButton(username);
 		System.out.close();
 	}
 
