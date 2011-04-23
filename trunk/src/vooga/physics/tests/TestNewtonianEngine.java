@@ -58,11 +58,12 @@ public class TestNewtonianEngine {
     public void testCollision(){
         INewtonianPhysical eastTrain50MPH = new TestingNewtonianObject(new Point(0, 0), new Velocity(50, new Angle(0)), 100);
         INewtonianPhysical westTrain70MPH = new TestingNewtonianObject(new Point(0, 0), new Velocity(70, new Angle(Math.PI)), 100);
-        engine.elasticCollision(eastTrain50MPH, westTrain70MPH, new Angle(0), new Point(0,0));
+        engine.elasticCollision(eastTrain50MPH, westTrain70MPH, new Angle(Math.PI/2), new Point(0,0));
         Velocity trainA = eastTrain50MPH.getVelocity();
         Velocity trainB = westTrain70MPH.getVelocity();
         assertEquals("Elastic - Train A magnitude", 50, trainA.getMagnitude(), 0);
         assertEquals("Elastic - Train B magnitude", 70, trainB.getMagnitude(), 0);
-        
+        assertEquals("Elastic - Train A angle", Math.PI, trainA.getAngle().getRadians(), 0);
+        assertEquals("Elastic - Train B angle", 0, trainB.getAngle().getRadians(), 0);
     }
 }
