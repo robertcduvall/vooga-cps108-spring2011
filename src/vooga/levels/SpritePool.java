@@ -8,7 +8,7 @@ import vooga.levels.util.PoolDeferredConstructor;
 /**
  * A storage area for sprite constructors which will eventually be added to the
  * level. All sprite constructors in this pool have been fully defined in the
- * XML file
+ * XML file.
  * 
  * @author Andrew Patterson
  */
