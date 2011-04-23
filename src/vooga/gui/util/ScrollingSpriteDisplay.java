@@ -1,13 +1,13 @@
 package vooga.gui.util;
 
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import vooga.core.VoogaGame;
+import vooga.user.main.ResourceManager;
 
-import com.golden.gamedev.GameObject;
 import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.object.background.ColorBackground;
@@ -30,6 +30,7 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	int myHeight, myWidth, myStart, myNumberSpritesDisplayed;
 	double myX, myY;
 	VoogaGame myParent;
+	private ResourceManager defaultResources = new ResourceManager("resources.gui.Defaults");
 	
 	
 	//Constructors
@@ -87,10 +88,12 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	 * constructor helper
 	 */
 	private void makeArrows(){
-		BufferedImage image = myParent.getImage("/resources/gui/images/left_arrow.gif");
+		String leftArrowImage=defaultResources.getString("LeftArrowFilepath");
+		BufferedImage image = myParent.getImage(leftArrowImage);
 		myLeftArrow = new Sprite(image, myX-image.getWidth()-5,myY+(myHeight/2-image.getHeight()/2));
-		
-		image = myParent.getImage("/resources/gui/images/right_arrow.gif");
+
+		String rightArrowImage=defaultResources.getString("RightArrowFilepath");
+		image = myParent.getImage(rightArrowImage);
 		myRightArrow = new Sprite(image, myX+myWidth+5,myY+(myHeight/2-image.getHeight()/2));
 	}
 	
@@ -153,7 +156,6 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	 * Changes our display to reflect the left arrow being clicked.
 	 */
 	private void goLeft(){
-		System.out.println("Going left...");
 		if (!(myStart-myNumberSpritesDisplayed<0)){
 			myStart -= myNumberSpritesDisplayed;
 		}
@@ -167,7 +169,6 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	 * Changes our display to reflect the right arrow being clicked.
 	 */
 	private void goRight(){
-		System.out.println("Going right...");
 		int maxStart=mySprites.size()-myNumberSpritesDisplayed;
 		if (maxStart<0) maxStart=0;
 		
@@ -225,11 +226,9 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	 * @param displayStart
 	 */
 	private void setDisplayed(int displayStart){
-		System.out.println("setting displayed, starting at: "+displayStart);
 		myDisplayedSprites.clear();
 		for(int i=displayStart;i<displayStart+myNumberSpritesDisplayed;i++){
 			if(i<mySprites.size()){
-				System.out.println("Adding sprite with index: "+i);
 				T temp = mySprites.get(i);
 				temp.setX(myX+((i-displayStart)*(myWidth/myNumberSpritesDisplayed)+5));
 				temp.setY(myY+(myHeight/2-temp.getImage().getHeight()/2));
@@ -247,8 +246,6 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	 * @param start
 	 */
 	public void setStart(int start){
-		System.out.println("Current: "+myStart+" Proposed:"+start+"  And now for something completely different: "
-				+(mySprites.size()-myNumberSpritesDisplayed));
 		if(start>=0&&start<mySprites.size()-myNumberSpritesDisplayed) myStart=start;
 		setDisplayed(myStart);
 		

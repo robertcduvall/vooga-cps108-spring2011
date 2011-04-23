@@ -38,7 +38,7 @@ public class InfoPane extends PopoverPane {
 		myHeader=new Sprite(header, 5, 5);
 		
 		//Create the scrolling display which shows 1 image at a time
-		myDisplay=new ScrollingSpriteDisplay<Sprite>(30, header.getHeight()+10, parent.getWidth()-60, 
+		myDisplay=new ScrollingSpriteDisplay<Sprite>(40, header.getHeight()+10, parent.getWidth()-85, 
 				parent.getHeight()-header.getHeight(), 1, parent);
 		
 		if(infoSlides!=null&&infoSlides.length>0){

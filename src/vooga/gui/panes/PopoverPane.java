@@ -2,6 +2,7 @@ package vooga.gui.panes;
 
 import vooga.core.VoogaGame; 
 import vooga.gui.util.VoogaButton;
+import vooga.user.main.ResourceManager;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,14 +23,18 @@ import com.golden.gamedev.object.background.ColorBackground;
 public class PopoverPane {
 	public static int MENU_BUTTON=1;
 	public static int BACK_BUTTON=2;
-	protected VoogaGame myParent;
-	protected ArrayList<VoogaButton> myButtons;
-	private boolean menuButtonDisabled, backButtonDisabled;
-	private SpriteGroup IMAGE_GROUP;
-	private Color myBGcolor;
-	private Sprite myBGimage;
 	protected VoogaButton menuButton;
 	protected VoogaButton backButton;
+	private boolean menuButtonDisabled, backButtonDisabled;
+	
+	protected VoogaGame myParent;
+	private ResourceManager defaultResources = new ResourceManager("resources.gui.Defaults");
+	
+	protected ArrayList<VoogaButton> myButtons;
+	private SpriteGroup IMAGE_GROUP;
+	
+	private Color myBGcolor;
+	private Sprite myBGimage;
 	
 	/**
 	 * Creates a new customizable popoverPane.
@@ -39,16 +44,17 @@ public class PopoverPane {
 		myParent=parent;
 		myButtons = new ArrayList<VoogaButton>();
 		
-		
-		BufferedImage img = parent.getImage("/resources/gui/images/menu_btn_small.gif");
+
+		String menubuttonpath=defaultResources.getString("MenuButtonFilepath");
+		BufferedImage img = parent.getImage(menubuttonpath);
 		Dimension position = new Dimension(parent.getWidth()-img.getWidth()-3, parent.getHeight()-img.getHeight());
 		menuButton=new VoogaButton(img, "Menu", position);
 		
 
-		img = parent.getImage("/resources/gui/images/back_btn_small.gif");
+		String backbuttonpath=defaultResources.getString("BackButtonFilepath");
+		img = parent.getImage(backbuttonpath);
 		position = new Dimension(3, parent.getHeight()-img.getHeight());
-		backButton=new VoogaButton(img, "Back", position);
-		
+		backButton=new VoogaButton(img, "Back", position);		
 		
 		IMAGE_GROUP=new SpriteGroup("Info and Supplements");
 		IMAGE_GROUP.setBackground(new ColorBackground(Color.BLUE, 1024,768));
@@ -68,10 +74,19 @@ public class PopoverPane {
 	 */
 	public void sendClick(double mouseX, double mouseY){		
 		//Checks if any buttons are hit, fires events accordingly.
+
+		if(backButton.hitBy(mouseX, mouseY)){
+			myParent.getEventManager().fireEvent(this, ("GUI."+backButton.getTitle()));
+		}
+		if(menuButton.hitBy(mouseX, mouseY)){
+			myParent.getEventManager().fireEvent(this, ("GUI."+menuButton.getTitle()));
+		}
+		
+		
 		for (int i=0;i<myButtons.size();i++){
 			VoogaButton current=myButtons.get(i);
 			if(current.hitBy(mouseX, mouseY)){
-				myParent.fireEvent(this, "GUI."+current.getTitle());
+				myParent.getEventManager().fireEvent(this, ("GUI."+current.getTitle()));
 				break;
 			}
 		}

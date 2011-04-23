@@ -1,5 +1,6 @@
 package vooga.gui.examplegame;
-import java.awt.Dimension; 
+
+import java.awt.Dimension;
 
 import com.golden.gamedev.GameEngine;
 import com.golden.gamedev.GameLoader;
@@ -15,7 +16,6 @@ import com.golden.gamedev.GameObject;
 
     public GameObject getGame(int GameID) {
        switch (GameID) {
-          case 0: return new ExampleGame(this);
        }
 
        return null;
@@ -24,7 +24,7 @@ import com.golden.gamedev.GameObject;
     public static void main(String[] args) {
        // GameEngine class creation is equal with Game class creation
        GameLoader game = new GameLoader();
-       game.setup(new MenuGameEngine(), new Dimension(680,500), false);
+       game.setup(new ExampleGame(), new Dimension(680,500), false);
        game.start();
     }
 
