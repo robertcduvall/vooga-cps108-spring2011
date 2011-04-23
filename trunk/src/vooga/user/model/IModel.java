@@ -2,25 +2,19 @@ package vooga.user.model;
 
 /**
  * Model Interface for the MVC pattern.
- * 
- * @author Ethan Yong-Hui Goh
+ * @Conrad Haynes
  * 
  */
 public interface IModel
 {
 	/**
-	 * Initialize the model
-	 * 
-	 * @param o
+	 * This method updates the view with the appropriates prompts
 	 */
-	public void initialize();
+	public LoginTemplate[] update();
 
 	/**
-	 * Process the Object.
-	 * 
-	 * @param o
-	 *            the Object processed by this model.
+	 * Processes the input into a VoogaUser Profile
 	 */
-	public void evaluate(String s);
+	public boolean process(String[] prompt, String[] text);
 
 }

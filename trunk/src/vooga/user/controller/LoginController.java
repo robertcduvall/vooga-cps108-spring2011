@@ -67,7 +67,7 @@ public class LoginController implements ILoginController
 			if(p.getPrompt().equals("Password")){text = text + p.getInput();}
 		}
 		//XmlWriter.writeXML(user,"resources/first.xml");
-		model.writeFile("resources/PasswordResource.txt", text);
+		//model.writeFile("resources/PasswordResource.txt", text);
 		System.out.close();
 	}
 
