@@ -16,15 +16,17 @@ import vooga.reflection.Reflection;
 /**
  * A manger that facilitates movement between levels, stores information
  * regarding the overall state of the levels and maintains the user’s position/
- * progress in the game.
+ * progress in the game. Additionally, this provides convenience methods in order
+ * to easily modify the current playingfield.
  * 
  * @author Andrew Patterson & Wesley Brown
  */
 public class LevelManager
 {
     private static final String LEVEL_ORDER_FILE = "src/vooga/levels/example2/resources/levelorder.txt";
+    private static final String LEVEL_CLASS_PATH_PREFIX = "vooga.levels.example2.";
     
-    /** A map of level number to the associated XML file */
+    /** A map of level number to the associated XML file; initially set during level manager construction */
     private Map<Integer, String> myLevelOrderMap;
 
     /** The total number of levels */
@@ -33,10 +35,10 @@ public class LevelManager
     /** The total number of levels completed */
     private int myNumOfLevelsCompleted;
 
-    /** The players for this level */
+    /** The players for this game */
     private SpriteGroup<Sprite> myPlayers;
 
-    /** The current running game */
+    /** The currently running game */
     private VoogaGame myGame;
 
     /** The current, active level for this game */
@@ -45,8 +47,12 @@ public class LevelManager
     /** Past playingfields that have been used in the game */
     private Collection<AbstractLevel> myPastLevels;
 
+    
     /**
-     * Maps level names/classes to level order
+     * Sets the level map, players and vooga game
+     * 
+     * @param voogaGame whose levels this is managing
+     * @param players for this game (persistent)
      */
     public LevelManager (VoogaGame game, SpriteGroup<Sprite> players)
     {
@@ -55,6 +61,7 @@ public class LevelManager
         myPastLevels = new HashSet<AbstractLevel>();
         myPlayers = players;
         
+        // Reads in and sets the level order
         try
         {
             Scanner in = new Scanner(new File(LEVEL_ORDER_FILE));
@@ -72,19 +79,22 @@ public class LevelManager
         }
     }
 
+    
     /**
      * Loads the first level specified in the level order file.
+     * This is the same as calling loadLevel(0)
      */
     public void start()
     {
         loadLevel(0);
     }
 
+
     /**
      * Attempts to load level with specified id. Checks to see if the level
-     * being loaded is of the same type as the current level. If so, it
-     * maintains the current instance and populates the instance with the new
-     * level content.
+     * being loaded is of the same type any previously played levels. If so, the
+     * old level's playingfield is used so that level managers and collision
+     * groups do not have to be re-specified in the XML file.
      * 
      * @param id representing level to load
      */
@@ -95,17 +105,18 @@ public class LevelManager
 
         // 1st item is the class type of the level
         // 2nd is the user defined name which in essence is a comment        
-        String[] levelDef = levelFileName.split("\\_");
+        String[] filePathArray = levelFileName.split("\\_");
+        String desiredLevelType = filePathArray[0];
 
         // Cycle through all past levels and see if any of them are of the requested type
         for(AbstractLevel pastLevel : myPastLevels)
         {
             String pastLevelClass = pastLevel.getClass().getName();
             pastLevelClass = pastLevelClass.substring(0, pastLevelClass.indexOf(".")); //Gets rid of ".class"
-            if(pastLevelClass.equals(levelDef[0]))
+            if(pastLevelClass.equals(desiredLevelType))
             {
                 pastLevel.loadLevel();
-                myActiveLevel.parseXMLFile("vooga/levels/example2/"+levelFileName, id);
+                myActiveLevel.parseXMLFile(levelFileName, id);
                 myActiveLevel = pastLevel;
                 return;
             }
@@ -114,7 +125,7 @@ public class LevelManager
         //If no pre-existing level of the correct type exists, create a new instance
 //        try
 //        {
-            myActiveLevel = ((AbstractLevel) Reflection.createInstance("vooga.levels.example2."+levelDef[0], myPlayers, myGame));
+            myActiveLevel = ((AbstractLevel) Reflection.createInstance(LEVEL_CLASS_PATH_PREFIX + desiredLevelType, myPlayers, myGame));
             myActiveLevel.parseXMLFile("vooga/levels/example2/"+levelFileName, id);
             myActiveLevel.loadLevel();
             myPastLevels.add(myActiveLevel);
@@ -231,7 +242,7 @@ public class LevelManager
     
     /**
      * Adds a player to the player group
-     * Change will immediately be refelcted on the playingfield
+     * Change will immediately be reflected on the playingfield
      * 
      * @param player sprite to add
      */
@@ -239,6 +250,18 @@ public class LevelManager
     {
         myPlayers.add(player);
     }
+    
+    
+    /**
+     * Sets the level order map
+     * 
+     * @param the new level order mapping level number to the associated XML file path
+     */
+    public void setLevelOrder(Map<Integer,String> levelOrder)
+    {
+        myLevelOrderMap = levelOrder;
+    }
+    
 
 
     /**
@@ -261,6 +284,4 @@ public class LevelManager
     {
         myActiveLevel.render(g);
     }
-    
-    //TODO: get level order, set level order, add sprite group, add collision group / manager
 }
