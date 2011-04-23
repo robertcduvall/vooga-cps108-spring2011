@@ -11,6 +11,7 @@ import vooga.arcade.model.ArcadeModel;
 import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.parser.ArcadeUserObject;
 import vooga.arcade.parser.gameObject.ArcadeObject;
+import vooga.arcade.view.buttonToolBar.ButtonBar;
 import vooga.arcade.view.gui.VoogaViewer;
 import vooga.user.controller.LoginController;
 
@@ -58,23 +59,6 @@ public class ArcadeController
         // TODO: Get the text from the search panel and call queryModel??
     }
     
-    public void login()
-    {
-        List<String> gameTitles = new ArrayList<String>();
-        
-        List<ArcadeGameObject> allGames = this.queryModel("title", null);
-        for (ArcadeGameObject game : allGames)
-        {
-            String currentTitle = game.getData("title");
-            gameTitles.add(currentTitle);
-        }
-        
-        LoginController start = new LoginController("VOOGA GAME LOGIN", "", 640, 480, gameTitles);  
-        start.toString();
-        
-     // TODO: Replace login button with user button.
-    }
-    
     public void userProperties()
     {
         // TODO: Create the actionPerformed for the user button that pops up in login's place.
@@ -98,6 +82,10 @@ public class ArcadeController
         sortBy.invoke(new ArcadeController(), parameters);
     }
 
+    public void swapToolbarButton(String name)
+    {
+        ButtonBar.swapButtons(name);
+    }
 
     public void sortByTitle ()
     {
