@@ -52,7 +52,8 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
     }
 
     /**
-     * Provides default behavior for the application of a field to the given object which has a field
+     * Provides default behavior for the application of a field to the given object which has a field.
+     * Creates a Force from the field and applies that with applyFieldForce.
      * 
      * TODO: Ensure that the two fields are of the same type
      * 
@@ -69,6 +70,13 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
         }
     }
 
+    /**
+     * Applies a force derived from a vector field to a physical object.
+     * 
+     * @param physicalObject
+     * @param force
+     * @param elapsedTime
+     */
     private void applyFieldForce(IPointField physicalObject, Force force, long elapsedTime) {
         Velocity deltaVelocity = new Velocity(force.getMagnitude() * elapsedTime / physicalObject.getPointMagnitude(),
                 force.getAngle());

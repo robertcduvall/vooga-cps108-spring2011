@@ -176,7 +176,7 @@ public class BasePhysicsEngine implements IPhysicsToggle {
      * @param otherObject the other object in the collision
      * @param angleOfImpact the angle that the collision is occurring at. The angle representing the tangent vector to the point of intersection.
      * @param pointOfImpact the point at which the collision occurs
-     * @param coefficientOfRestitution the cofficient representing the elasticity of the collision. 0 = inelastic, 1 = elastic
+     * @param coefficientOfRestitution the coefficient representing the elasticity of the collision. 0 = inelastic, 1 = elastic
      * 
      * @return a boolean representing if custom behavior was used
      */
