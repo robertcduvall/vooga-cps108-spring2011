@@ -42,32 +42,32 @@ public class LoginModel
 		user = new VoogaUser();
 		controller = pc;
 		myRegEx =new RegXParser();
-		buildPasswordMap();
+	//	buildPasswordMap();
 	}
-
-/**
- * Build password map is called every time a model is initialized and it is used to read-in all the passwords and usernames
- * from a given file and create a map that evaluates these log-ins
- */
-	private void buildPasswordMap(){
-		List<String> passwords = new ArrayList<String>();
-		passwords = new PasswordEncoding().readFile(new File("src/vooga/user/resources/PasswordResource.txt"));
-	 	keyMap = new PasswordParser().parse(passwords);
-		
-	}
+//Soon to be unnecessary
+///**
+// * Build password map is called every time a model is initialized and it is used to read-in all the passwords and usernames
+// * from a given file and create a map that evaluates these log-ins
+// */
+//	private void buildPasswordMap(){
+//		List<String> passwords = new ArrayList<String>();
+//		passwords = new PasswordEncoding().readFile(new File("src/vooga/user/resources/PasswordResource.txt"));
+//	 	keyMap = new PasswordParser().parse(passwords);
+//		
+//	}
 
 /**
  * Process is a method called by the controller that evaluates the information inputed by the user
  */
-	public void process(String[] prompt, String[] text){
+	public boolean process(String[] prompt, String[] text){
 		for (int i = 0; i < text.length; i++) {
-			if (myRegEx.verifyRegex(prompt[i], text[i])) {
+			if (myRegEx.verifyRegex(prompt[i], text[i], text)) {
 				user.add(new UserPreference(prompt[i], text[i]));
 				update();
 			} else {
 				controller.displayError("Incorrect Input Error " + regExResource.getString(prompt[i] + "X"));
 				user.removeAllPreferences();
-				break;
+				return false;
 			}
 		}
 		try {
@@ -87,7 +87,7 @@ public class LoginModel
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		return true;
 	}
 
 /**
@@ -146,16 +146,5 @@ public class LoginModel
 		VoogaUser copy = user;
 		return copy;
 	}
-	
-	public void writeFile(String filename, String text) throws IOException {
-		try{BufferedWriter out = new BufferedWriter(new FileWriter(
-		          filename, true));
-		      out.write(text + "/n");
-		      out.newLine();
-		      out.close();
-		      System.out.println("String is appended.");
-		    } catch (IOException e) {
-		    }
-		  }
 	}
 

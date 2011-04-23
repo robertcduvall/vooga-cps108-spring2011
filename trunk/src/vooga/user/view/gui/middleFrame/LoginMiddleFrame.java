@@ -17,7 +17,7 @@ import vooga.user.view.gui.*;
  * Note this class, although very much simplified, can easily be expanded
  * @author Conrad Haynes, Ethan Yong-Hui Goh
  */
-public class SlogoMiddleFrame extends JPanel{
+public class LoginMiddleFrame extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private PanelInitializer middlePanel;
 	private LoginTemplate[] log;
@@ -25,7 +25,7 @@ public class SlogoMiddleFrame extends JPanel{
 	/**
 	 * This simplified method simply constructs a middleFrame in the GUI from which we create our (Login)Panel
 	 */
-	public SlogoMiddleFrame(LoginController pc, LoginTemplate[] construct) {
+	public LoginMiddleFrame(LoginController pc, LoginTemplate[] construct) {
 		BorderLayout b = new BorderLayout();
 		this.setLayout(b);
 		log = construct;

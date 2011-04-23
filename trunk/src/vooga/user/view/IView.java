@@ -1,6 +1,5 @@
-package vooga.user.view.gui;
+package vooga.user.view;
 import vooga.user.model.LoginTemplate;
-import vooga.user.voogauser.Display;
 
 /**
  * Generic View Interface in the MVC pattern.
@@ -9,21 +8,14 @@ import vooga.user.voogauser.Display;
  * 
  */
 public interface IView {
-	/**
-	 * Clears the display.
-	 */
-	public void clear();
-
-	/**
-	 * Updates the view appropriately
-	 */
-
+	
 	/**
 	 * Handles a particular error message in a dump specifically for errors.
-	 * 
-	 * @param s
 	 */
 	public void showError(String s);
-
+		
+	/**
+	 * This common I-view method is used to update any view with the appropriate input prompts
+	 */
 	void update(LoginTemplate[] template);
 }

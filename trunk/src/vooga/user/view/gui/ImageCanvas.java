@@ -1,16 +1,8 @@
 package vooga.user.view.gui;
-
 import java.awt.Dimension;
 import java.awt.Graphics;
-
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-
-import vooga.user.model.LoginTemplate;
-import vooga.user.voogauser.Display;
-
-
-
 
 /**
  * A container that contains all the information associated with the Image
@@ -21,7 +13,6 @@ import vooga.user.voogauser.Display;
 public class ImageCanvas extends JPanel {
 	// used for serialization
 	private static final long serialVersionUID = 1L;
-	private Display myPixelViewer;
 	private String evaluatedExpression;
 
 	/**
@@ -29,32 +20,24 @@ public class ImageCanvas extends JPanel {
 	 */
 	public ImageCanvas(Dimension size) {
 		this.setBorder(BorderFactory.createLoweredBevelBorder());
-		myPixelViewer = new Display(size);
 		this.setToolTipText(evaluatedExpression);
 		this.repaint();
 	}
 
 	public ImageCanvas(String file) {
 		this.setBorder(BorderFactory.createLoweredBevelBorder());
-		myPixelViewer = new Display(file);
 		this.setToolTipText(evaluatedExpression);
 		this.repaint();
 	}
 
 	/**
-	 * Draws the picture.
+	 * This method is called automatically to update the underground image of the GUI. currently added for extensibility
 	 */
 	@Override
 	public void paintComponent(Graphics pen) {
 		super.paintComponent(pen);
-		myPixelViewer.paint(pen);
-		setText();
 	}
-
-	private void setText() {
-			
-	}
-
+	
 	/**
 	 * Changes the size of the Canvas.
 	 */
@@ -62,25 +45,6 @@ public class ImageCanvas extends JPanel {
 	public void setSize(Dimension size) {
 		setPreferredSize(size);
 		setMinimumSize(size);
-	}
-	/**
-	 * Changes the underlying image to be drawn.
-	 * 
-	 * @param p
-	 */
-	public void setImage(Display p) {
-		myPixelViewer = p;
-	}
-	
-	/**
-	 * Sets the Expression String.
-	 */
-	public void setExpression(String str) {
-		evaluatedExpression = str;
-	}
-	
-	public void clear() {
-		myPixelViewer = new Display(getSize());
 	}
 
 }

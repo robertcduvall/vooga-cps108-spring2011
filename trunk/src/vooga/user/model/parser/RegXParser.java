@@ -1,6 +1,5 @@
 package vooga.user.model.parser;
 import java.util.regex.Pattern;
-
 import vooga.user.main.ResourceManager;
 
 /**
@@ -24,8 +23,7 @@ public class RegXParser {
 	         */
 	        public boolean verifyRegex(String prompt, String input){
 	        	for(String regexTerm : specialRegularExpressions){
-	        		if(regexTerm.equals(prompt)){
-	        			
+	        		if(regexTerm.equals(prompt)){	
 	        			return Pattern.matches(regExResource.getString(regexTerm),input);
 	        		}
 	        	}
