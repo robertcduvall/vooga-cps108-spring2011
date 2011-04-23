@@ -1,5 +1,8 @@
 package vooga.resources;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import vooga.core.VoogaGame;
 import vooga.levels.LevelManager;
 import vooga.resources.images.ImageLoader;
@@ -20,6 +23,8 @@ public class ResourceManager extends Parser {
 	private VoogaGame game;
 	private String xmlFilename;
 	
+	private Map<Integer, String[]> levelMap;
+	
 	public class RootTag extends XMLTag {
 		@Override
 		public String getTagName() {
@@ -37,6 +42,8 @@ public class ResourceManager extends Parser {
 		
 		this.xmlFilename = xmlFilename;
 		this.game = game;
+		
+		levelMap = new HashMap<Integer, String[]>();
 		
 		addDefinitions(	new RootTag(),
 						new ImageResourceTag(this),
@@ -70,5 +77,9 @@ public class ResourceManager extends Parser {
 	 */
 	public void init() {
 		parse(xmlFilename);
+	}
+
+	public Map<Integer, String[]> getLevelMap() {
+		return levelMap;
 	}
 }
