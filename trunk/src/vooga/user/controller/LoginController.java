@@ -45,7 +45,7 @@ public class LoginController implements ILoginController
 	}
 	
 /**
- * This ad-hoc method returns the default initial screen that is shown to the user upon launch of the login screen
+ * This ad-hoc method returns the default initial screen that is shown to the user upon launch of the login screen.
  */
 	public LoginTemplate[] getDefaultTemplate(){
 		return model.createDefaultDisplay();
