@@ -115,25 +115,25 @@ public class LevelManager
             pastLevelClass = pastLevelClass.substring(0, pastLevelClass.indexOf(".")); //Gets rid of ".class"
             if(pastLevelClass.equals(desiredLevelType))
             {
-                pastLevel.loadLevel();
-                myActiveLevel.parseXMLFile(levelFileName, id);
                 myActiveLevel = pastLevel;
+                myActiveLevel.clearUnusedObjects();
+                myActiveLevel.parseXMLFile(levelFileName, id);
+                myActiveLevel.loadLevel();
                 return;
             }
         }
         
         //If no pre-existing level of the correct type exists, create a new instance
-//        try
-//        {
-            myActiveLevel = ((AbstractLevel) Reflection.createInstance(LEVEL_CLASS_PATH_PREFIX + desiredLevelType, myPlayers, myGame));
-            myActiveLevel.parseXMLFile("vooga/levels/example2/"+levelFileName, id);
-            myActiveLevel.loadLevel();
-            myPastLevels.add(myActiveLevel);
-//        }
-//        catch (Exception e)
-//        {
-//            throw LevelException.LEVEL_LOADING_ERROR;
-//        }
+          try { 
+              myActiveLevel = ((AbstractLevel) Reflection.createInstance(LEVEL_CLASS_PATH_PREFIX + desiredLevelType, myPlayers, myGame)); }
+          catch (Exception e) { throw LevelException.LEVEL_CREATION_ERROR; }
+          try { 
+              myActiveLevel.parseXMLFile(levelFileName, id); } 
+          catch (Exception e) { throw LevelException.LEVEL_PARSING_ERROR; }
+          try {
+              myActiveLevel.loadLevel(); 
+              myPastLevels.add(myActiveLevel); }
+          catch (Exception e) { throw LevelException.LEVEL_LOADING_ERROR; }
     }
 
 
@@ -214,9 +214,9 @@ public class LevelManager
      * @param Additional components for this sprite
      * @return the newly created sprite
      */
-    public Sprite addSpriteArchetype(String type, int x, int y, BasicComponent... components)
+    public Sprite addArchetypeSprite(String type, int x, int y, BasicComponent... components)
     {
-        return myActiveLevel.addNewSprite(type, x, y, components);
+        return myActiveLevel.addArchetypeSprite(type, x, y, components);
     }
 
 

@@ -40,7 +40,7 @@ public class InstanceTag extends XMLTag {
 		PoolDeferredConstructor poolObject = new PoolDeferredConstructor(
 				parser.getSpriteConstructor(type), args);
 		
-		parser.getLevel().addToPool(poolObject);
+		parser.getLevel().addToSpritePool(poolObject);
 		
 	}
 }

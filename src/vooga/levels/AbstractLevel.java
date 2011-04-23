@@ -11,10 +11,8 @@ import vooga.util.buildable.components.BasicComponent;
 import vooga.collisions.collisionManager.CollisionManager;
 import vooga.core.VoogaGame;
 
-
-
 /**
- * A basic level object which gets the majority of its contents from an
+ * An abstract level object which gets its contents from an
  * associated XML file. More complex level initializations can be accomplished
  * by writing the loadLevel() method.
  * 
@@ -22,7 +20,7 @@ import vooga.core.VoogaGame;
  */
 public abstract class AbstractLevel extends VoogaPlayField implements Comparable<AbstractLevel>
 {
-    /** The XML parser which is used for reading the level file and creating objects based on the data */
+    /** The XML parser that is used for reading the level file and creating objects based on the data */
     private LevelParser myLevelParser;
 
     /** The vooga game for which this is a level for */
@@ -50,6 +48,8 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         mySpriteGroups = new ArrayList<SpriteGroup<Sprite>>();
         addGroup(players);
         myCollisionManagers = new ArrayList<CollisionManager>();
+        myBackgrounds = new LinkedList<Background>();
+        myMusic = new LinkedList<String>();
     }
 
 
@@ -67,7 +67,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
 
     /**
      * Parses the XML file, storing its contents within the level
-     * Will be called by level manager before loadLevel is called
+     * Will be called by level manager before loadLevel() is called
      * 
      * @param name of XML file for this level
      * @param id of the level whose file you want to read
@@ -75,11 +75,22 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     public void parseXMLFile (String fileName, int id)
     {
         myLevelParser = new LevelParser(this, myGame);
-        mySpritePool = new SpritePool();
         myLevelParser.parse(fileName);
         myId = id;
     }
     
+
+    /**
+     * Clears unused objects from the music, background and sprite pool so that
+     * they do not persist across levels. Will be called by level manager before
+     * parseXML(...) is called.
+     */
+    public void clearUnusedObjects ()
+    {
+        mySpritePool = new SpritePool();
+        myBackgrounds = new LinkedList<Background>();
+        myMusic = new LinkedList<String>();
+    }
 
     /**
      * Checks if the current level's goal has been achieved
@@ -98,7 +109,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
 
 
     /**
-     * Places all sprites from the initial condition pool onto the playingfield
+     * Places all sprites from the pool onto the playingfield
      */
     protected void addAllSpritesFromPool ()
     {
@@ -140,8 +151,9 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * @param desired components for the sprite
      * @return the newly created sprite
      */
-    public Sprite addNewSprite (String type, int x, int y, BasicComponent... components)
+    public Sprite addArchetypeSprite (String type, int x, int y, BasicComponent... components)
     {
+        //TODO
         //myLevelParser.createNewSpriteOfArchetype(spriteArchetype);
     	return null;
     }
@@ -183,25 +195,24 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
 
 
     /**
-     * Sets this level's sprite pool; called by LevelParser
+     * Sets this level's sprite pool. Called by LevelParser
      * 
      * @param spritePool for this level
      */
-    public void addToPool (PoolDeferredConstructor poolObject)
+    public void addToSpritePool (PoolDeferredConstructor poolObject)
     {
         mySpritePool.addToPool(poolObject);
     }
 
     
     /**
-     * Sets the background queue for this level
-     * Called by LevelParser
+     * Sets the background queue for this level. Called by LevelParser.
      * 
      * @param background files for this level
      */
-    public void setBackgroundPool (Queue<Background> backgrounds)
+    public void addToBackgroundPool (Background background)
     {
-        myBackgrounds = backgrounds;
+        myBackgrounds.add(background);
     }
 
     
@@ -210,11 +221,12 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * 
      * @param music files for this level
      */
-    public void setMusicPool (Queue<String> music)
+    public void addToMusicPool (String music)
     {
-        myMusic = music;
+        myMusic.add(music);
     }
 
+    
     /**
      * Sets the current goal for the level
      * @param goal Goal object defined in the XML file
@@ -234,7 +246,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     {
         return myId;
     }
-    
+   
     
     @Override
     public void update (long elapsedTime)
@@ -268,4 +280,6 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         if (other != null && other instanceof AbstractLevel) return myId == ((AbstractLevel) other).getId();
         else return false;
     }
+    
+    //when to use myNumOfLevelsCompleted
 }
