@@ -7,6 +7,11 @@ import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.parser.ArcadeGameObject;
 import vooga.user.controller.LoginController;
 
+/**
+ * 
+ * @author Andrea
+ *
+ */
 public class Login extends AbstractViewAction
 {
     public Login (ArcadeController c)
