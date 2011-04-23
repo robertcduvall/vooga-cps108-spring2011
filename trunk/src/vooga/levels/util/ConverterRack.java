@@ -44,7 +44,6 @@ public class ConverterRack {
 		}
 	}
 	
-	// How do we know string is to an image?
 	private class ImageConverter extends Converter<BufferedImage> {
 		private ImageLoader loader;
 		

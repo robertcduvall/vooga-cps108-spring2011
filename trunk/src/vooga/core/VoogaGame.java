@@ -188,7 +188,6 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
 
     /**
      * Use getResourceManager() and ResourceManager#getImageLoader().
-     * @deprecated
      * @return
      */
     public ImageLoader getImageLoader() {

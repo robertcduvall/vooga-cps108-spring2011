@@ -36,16 +36,8 @@ public class SpriteTag extends XMLTag {
 		String spriteGroup = xmlElement.getAttribute(GROUP);
 		String image = xmlElement.getAttribute(IMAGE);
 		
-		// Get the list of children and use them for constructor arguments.
-//		NodeList children = xmlElement.getChildNodes();
-		List<String> args = new ArrayList<String>();
-		args.add(image);
-//		for(int i = 0; i < children.getLength(); i++) {
-//			args.add(getValue((Element) children.item(i)));
-//		}
-		
 		parser.addSpriteArchetype(name, new SpriteConstructor(parser.getLevel(), 
 				parser.getConverterRack(),
-				className, spriteGroup, args));
+				className, spriteGroup, image));
 	}
 }
