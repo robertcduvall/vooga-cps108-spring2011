@@ -14,7 +14,7 @@ import vooga.arcade.controller.ArcadeController;
  * @author Ethan Yong-Hui Goh
  * 
  */
-public class ButtonBarNew extends AbstractVoogaAction {
+public class ButtonBarNew extends AbstractViewAction {
 	public ButtonBarNew(ArcadeController p) {
 		super(p);
 	}
