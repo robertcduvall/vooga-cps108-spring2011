@@ -36,6 +36,7 @@ public class LoginModel
 	private RegXParser myRegEx;
 	private SQLite database;
 	private ResourceManager registrationResource = new ResourceManager("vooga.user.resources.Registration");
+	private ResourceManager regExResource = new ResourceManager("vooga.user.resources.RegularExpressionResource"); 
 	
 	public LoginModel(LoginController pc){
 		user = new VoogaUser();
@@ -50,8 +51,8 @@ public class LoginModel
  */
 	private void buildPasswordMap(){
 		List<String> passwords = new ArrayList<String>();
-		//passwords = new PasswordEncoding().readFile(new File("resources/PasswordResource.txt"));
-	//	keyMap = new PasswordParser().parse(passwords);
+		passwords = new PasswordEncoding().readFile(new File("src/vooga/user/resources/PasswordResource.txt"));
+	 	keyMap = new PasswordParser().parse(passwords);
 		
 	}
 
@@ -64,7 +65,7 @@ public class LoginModel
 				user.add(new UserPreference(prompt[i], text[i]));
 				update();
 			} else {
-				controller.displayError("Incorrect Input Error " + prompt[i]);
+				controller.displayError("Incorrect Input Error " + regExResource.getString(prompt[i] + "X"));
 				user.removeAllPreferences();
 				break;
 			}
@@ -136,7 +137,7 @@ public class LoginModel
 	public LoginTemplate[] createDefaultDisplay() {
 		String[] loginPrompt = registrationResource.getStringArray("DefaultLoginPrompt");
 		String[] one = {loginPrompt[0],loginPrompt[1]}; String[] two = {};
-		String image = "src/vooga/user/resources/Turtle.gif";
+		String image = "src/vooga/user/resources/DefaultLoginImage.png";
 		LoginTemplate[] log = {new LoginTemplate(loginPrompt[2], one,image,1), new LoginTemplate(loginPrompt[3],two,image,2)};
 		return log;
 	}

@@ -33,7 +33,7 @@ public class PasswordEncoding {
 		    // command line parameter
 		    FileInputStream inputStream = null;
 			try {
-				inputStream = new FileInputStream("doc/resources/PasswordResource.txt");
+				inputStream = new FileInputStream("src/vooga/user/resources/PasswordResource.txt");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
