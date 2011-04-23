@@ -31,8 +31,5 @@ public class Login extends AbstractViewAction
         
         LoginController start = new LoginController("VOOGA GAME LOGIN", "", 640, 480, gameTitles);  
         start.toString();
-        
-        // TODO: Replace login button with user button.
     }
-    
 }

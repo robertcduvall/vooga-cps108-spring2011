@@ -39,7 +39,7 @@ public class ButtonBar {
 		return toolBar;
 	}
 	
-	public static void swapButtons(ArcadeController p)
+	public static void swapButtons(String name)
 	{
 	    // TODO: Make a generalized way to swap the login and user buttons
 	}
