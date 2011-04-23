@@ -6,17 +6,23 @@ import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
 
+/**
+ * Test object class which implements the necessary interfaces for testing.
+ * 
+ * @author Anne Weng
+ *
+ */
 public class TestingNewtonianObject implements INewtonianPhysical {
     private boolean isOn;
     private Point center;
     private Velocity velocity;
     private double mass;
     
-    public TestingNewtonianObject() {
-        isOn = false;
-        center = new Point(0,0);
-        velocity = new Velocity(0, new Angle(0));
-        mass = 100;
+    public TestingNewtonianObject(Point center, Velocity velocity, double mass) {
+        isOn = true;
+        this.center = center;
+        this.velocity = velocity;
+        this.mass = mass;
     }
 
     @Override
