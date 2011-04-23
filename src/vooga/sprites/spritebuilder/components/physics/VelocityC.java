@@ -1,8 +1,8 @@
 package vooga.sprites.spritebuilder.components.physics;
 
-import vooga.physics.IPhysicsToggle;
-import vooga.physics.mediators.VoogaPhysicsMediator;
-import vooga.physics.newtonianInterfaces.INewtonianMovable;
+import vooga.physics.VoogaPhysicsMediator;
+import vooga.physics.newtonianProperties.INewtonianMovable;
+import vooga.physics.util.IPhysicsToggle;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.ISpriteUpdater;

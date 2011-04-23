@@ -2,7 +2,7 @@ package vooga.physics.tests;
 
 import java.awt.Point;
 
-import vooga.physics.newtonianInterfaces.INewtonianPhysical;
+import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
 

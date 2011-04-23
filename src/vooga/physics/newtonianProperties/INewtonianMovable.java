@@ -1,4 +1,4 @@
-package vooga.physics.newtonianInterfaces;
+package vooga.physics.newtonianProperties;
 
 import vooga.physics.util.Velocity;
 

@@ -1,7 +1,6 @@
-package vooga.physics;
+package vooga.physics.util;
 
 import java.awt.Point;
-import vooga.physics.util.Velocity;
 
 /**
  * Interface which defines methods needed by objects which exert a vector field

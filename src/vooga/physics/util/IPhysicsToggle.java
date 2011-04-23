@@ -1,4 +1,4 @@
-package vooga.physics;
+package vooga.physics.util;
 
 /**
  * Allows for standardized way of toggling physics components off and on.

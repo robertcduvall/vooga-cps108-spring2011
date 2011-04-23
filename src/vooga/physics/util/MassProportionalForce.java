@@ -1,7 +1,7 @@
 package vooga.physics.util;
 
-import vooga.physics.newtonianInterfaces.INewtonianMovable;
-import vooga.physics.newtonianInterfaces.INewtonianPhysical;
+import vooga.physics.newtonianProperties.INewtonianMovable;
+import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.util.math.Angle;
 
 /**
