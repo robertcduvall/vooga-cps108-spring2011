@@ -1,7 +1,7 @@
 package vooga.levels.util;
 
+import java.awt.image.BufferedImage;
 import java.lang.reflect.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import vooga.levels.AbstractLevel;
@@ -18,17 +18,17 @@ import vooga.sprites.spritegroups.SpriteGroup;
 public class SpriteConstructor {
 	private String className;
 	private String spriteGroup;
-	private List<String> partialAssignments;
+	private String imageName;
 	private ConverterRack converterRack;
 	private AbstractLevel level;
 	
 	public SpriteConstructor(AbstractLevel level, ConverterRack converterRack, 
-			String className, String spriteGroup, List<String> partialAssignments) {
+			String className, String spriteGroup, String imageName) {
 		this.converterRack = converterRack;
 		this.className = className;
-		this.partialAssignments = partialAssignments;
 		this.spriteGroup = spriteGroup;
 		this.level = level;
+		this.imageName = imageName;
 	}
 	
 	/**
@@ -47,18 +47,13 @@ public class SpriteConstructor {
 	/**
 	 * Construct a sprite given other assignments to complete the constructor args.
 	 */
-	private Sprite constructInstance(List<String> otherAssignments) {
+	private Sprite constructInstance(List<String> assignments) {
 		Class<?> spriteClass;
 		try {
 			spriteClass = Class.forName(className);
 		} catch (ClassNotFoundException e) {
 			return null;
 		}
-		
-		// Merge partial assignments and other assignments.
-		List<String> assignments = new ArrayList<String>();
-		assignments.addAll(partialAssignments);
-		assignments.addAll(otherAssignments);
 		
 		// Get the constructor for the sprite class (assume there's only one for now.)
 		// TODO: Handle multiple constructors.
@@ -73,8 +68,18 @@ public class SpriteConstructor {
 			params[i] = out;
 		}
 		
+		BufferedImage image = (BufferedImage) converterRack.convert(BufferedImage.class, imageName);
+		
 		// Use reflection to create a new instance of the sprite class.
-		Sprite sprite = (Sprite) Reflection.createInstance(className, params);
+		Sprite sprite = (Sprite) Reflection.createInstance(className, image, params);
+		
+		return sprite;
+	}
+	
+	public Sprite construct(Object ... assignments) {
+		BufferedImage image = (BufferedImage) converterRack.convert(BufferedImage.class, imageName);
+
+		Sprite sprite = (Sprite) Reflection.createInstance(className, image, assignments);
 		
 		return sprite;
 	}

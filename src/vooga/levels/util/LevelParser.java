@@ -70,9 +70,14 @@ public class LevelParser extends Parser {
 	/**
 	 * Construct a sprite given the name of its archetype and other assignments for it.
 	 */
-	public void makeSprite(String name, List<String> otherAssignments) {
+	public void makeSprite(String name, List<String> assignments) {
 		SpriteConstructor factory = spriteFactoryMap.get(name);
-		factory.construct(otherAssignments);
+		factory.construct(assignments);
+	}
+	
+	public void makeSprite(String name, Object ... assignments) {
+		SpriteConstructor factory = spriteFactoryMap.get(name);
+		factory.construct(assignments);
 	}
 	
 	/**
