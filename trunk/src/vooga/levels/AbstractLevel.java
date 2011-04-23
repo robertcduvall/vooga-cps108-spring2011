@@ -101,7 +101,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      */
     public boolean checkCompletion ()
     {
-        if (myGoal.checkCompletion())
+        if (myGoal.checkCompletion(myGame.getLevelManager()))
         {
             myGoal.progress();
             myGame.getLevelManager().updateNumOfLevelsCompleted();

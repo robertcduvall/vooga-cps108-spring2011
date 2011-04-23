@@ -11,9 +11,10 @@ public interface IGoal
     /**
      * Checks the goal's completion status.
      * 
+     * @param levelManager 
      * @return level completion status
      */
-    public boolean checkCompletion ();
+    public boolean checkCompletion (LevelManager levelManager);
 
 
     /**
