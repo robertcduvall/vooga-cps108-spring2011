@@ -8,13 +8,15 @@ import vooga.levels.LevelManager;
 import vooga.resources.KeyMap;
 import vooga.resources.ResourceManager;
 import vooga.resources.images.ImageLoader;
-import com.golden.gamedev.Game;
+
 import vooga.view.graphics.AdvancedGraphics;
+import vooga.view.graphics.GraphicsGame;
+
 import java.awt.geom.AffineTransform;
 import java.util.List;
 import vooga.view.function.AbstractGraphicsFunction;
 
-public abstract class VoogaGame extends Game implements ISimpleEventManager
+public abstract class VoogaGame extends GraphicsGame implements ISimpleEventManager
 {
     private EventManager myEventManager;
     private ResourceManager myResourceManager;
