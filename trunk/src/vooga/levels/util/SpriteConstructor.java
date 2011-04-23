@@ -2,6 +2,7 @@ package vooga.levels.util;
 
 import java.awt.image.BufferedImage;
 import java.lang.reflect.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import vooga.levels.AbstractLevel;
@@ -9,6 +10,7 @@ import vooga.reflection.Reflection;
 
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
+import vooga.util.buildable.components.IComponent;
 
 /**
  * Factory class to construct a given sprite given some set of assignments.
@@ -21,6 +23,7 @@ public class SpriteConstructor {
 	private String imageName;
 	private ConverterRack converterRack;
 	private AbstractLevel level;
+	private List<IComponent> spriteComponents;
 	
 	public SpriteConstructor(AbstractLevel level, ConverterRack converterRack, 
 			String className, String spriteGroup, String imageName) {
@@ -29,50 +32,23 @@ public class SpriteConstructor {
 		this.spriteGroup = spriteGroup;
 		this.level = level;
 		this.imageName = imageName;
+		
+		spriteComponents = new ArrayList<IComponent>();
 	}
 	
 	/**
-	 * Constructs a sprite, adding it to the appropriate sprite in the level.
-	 * @param otherAssignments the assignments to finish the assignment.
-	 * @return 
+	 * Construct the sprite and add it to the sprite group.
+	 * @param assignments the list of constructor arguments as a string.
+	 * @return
 	 */
-	public Sprite construct(List<String> otherAssignments) {
-		Sprite sprite = constructInstance(otherAssignments);
-		// TODO get level so that correct sprite group can be grabbed
+	//FIXME: Refactor into single method.
+	public Sprite construct(List<String> assignments) {
+		Sprite sprite = converterRack.constructInstance(className, assignments);
+		for(IComponent component : spriteComponents) {
+			sprite.addComponent(component);
+		}
 		SpriteGroup group = level.getSpriteGroup(spriteGroup);
 		group.add(sprite);
-		return sprite;
-	}
-	
-	/**
-	 * Construct a sprite given other assignments to complete the constructor args.
-	 */
-	private Sprite constructInstance(List<String> assignments) {
-		Class<?> spriteClass;
-		try {
-			spriteClass = Class.forName(className);
-		} catch (ClassNotFoundException e) {
-			return null;
-		}
-		
-		// Get the constructor for the sprite class (assume there's only one for now.)
-		// TODO: Handle multiple constructors.
-		Constructor<?> spriteConstructor = spriteClass.getConstructors()[0];
-		
-		// Iterate over types and convert them.
-		Class<?>[] types = spriteConstructor.getParameterTypes();
-		Object[] params = new Object[types.length];
-		
-		for(int i = 0; i < types.length; i++) {
-			Object out = converterRack.convert(types[i], assignments.get(i));
-			params[i] = out;
-		}
-		
-		BufferedImage image = (BufferedImage) converterRack.convert(BufferedImage.class, imageName);
-		
-		// Use reflection to create a new instance of the sprite class.
-		Sprite sprite = (Sprite) Reflection.createInstance(className, image, params);
-		
 		return sprite;
 	}
 	
@@ -80,7 +56,11 @@ public class SpriteConstructor {
 		BufferedImage image = (BufferedImage) converterRack.convert(BufferedImage.class, imageName);
 
 		Sprite sprite = (Sprite) Reflection.createInstance(className, image, assignments);
-		
+		for(IComponent component : spriteComponents) {
+			sprite.addComponent(component);
+		}
+		SpriteGroup group = level.getSpriteGroup(spriteGroup);
+		group.add(sprite);
 		return sprite;
 	}
 
@@ -90,5 +70,9 @@ public class SpriteConstructor {
 
 	public String getSpriteGroup() {
 		return spriteGroup;
+	}
+
+	public void addComponent(IComponent component) {
+		spriteComponents.add(component);
 	}
 }

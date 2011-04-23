@@ -1,11 +1,15 @@
 package vooga.levels.util;
 
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import vooga.core.VoogaGame;
+import vooga.reflection.Reflection;
 import vooga.resources.images.ImageLoader;
+import vooga.sprites.improvedsprites.Sprite;
 
 /**
  * An extendible class that allows conversion of strings to specified types.
@@ -82,5 +86,52 @@ public class ConverterRack {
 	
 	public void addConverter(Class<?> target, Converter<?> converter) {
 		conversionMap.put(target, converter);
+	}
+	
+	/**
+	 * Multiple convert. Sort of a utility function.
+	 * @param targets class types.
+	 * @param strings strings to convert.
+	 * @return an array of converted objects.
+	 */
+	public Object[] convert(List<Class<?>> targets, List<String> strings) {
+		Object[] objects = new Object[strings.size()];
+		
+		for(int i = 0; i < strings.size(); i++) {
+			objects[i] = convert(targets.get(i), strings.get(i));
+		}
+		
+		return objects;
+	}
+	
+	/**
+	 * Construct an object given string assignments.
+	 */
+	public<T> T constructInstance(String className, List<String> assignments) {
+		Class<?> spriteClass;
+		try {
+			spriteClass = Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			return null;
+		}
+		
+		// Get the constructor for the target class (assume there's only one for now.)
+		// TODO: Handle multiple constructors.
+		Constructor<?> spriteConstructor = spriteClass.getConstructors()[0];
+		
+		// Iterate over types and convert them.
+		Class<?>[] types = spriteConstructor.getParameterTypes();
+		Object[] params = new Object[types.length];
+		
+		for(int i = 0; i < types.length; i++) {
+			Object out = convert(types[i], assignments.get(i));
+			params[i] = out;
+		}
+				
+		// Use reflection to create a new instance of the target class.
+		@SuppressWarnings("unchecked")
+		T targetObject = (T) Reflection.createInstance(className, params);
+		
+		return targetObject;
 	}
 }

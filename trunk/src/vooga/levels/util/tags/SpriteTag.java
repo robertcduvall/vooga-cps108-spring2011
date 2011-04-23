@@ -14,7 +14,7 @@ import vooga.resources.xmlparser.XMLTag;
 public class SpriteTag extends XMLTag {
 	private static final String GROUP = "group";
 	private static final String CLASS = "class";
-	private static final String NAME = "name";
+	public static final String NAME = "name";
 	private static final String SPRITE = "sprite";
 	private static final String IMAGE = "image";
 	
