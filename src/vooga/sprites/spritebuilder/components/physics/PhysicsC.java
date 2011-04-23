@@ -4,7 +4,7 @@ import java.awt.Point;
 import vooga.physics.VoogaPhysicsMediator;
 import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.ISpriteUpdater;
+import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 
 /**
