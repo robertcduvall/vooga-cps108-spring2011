@@ -29,7 +29,7 @@ public interface ILoginController
 	public void updateWithInput();
 	
 /**
- * This method saves the VoogaUser information and logs out of the system
+ * This method saves the VoogaUser information and exits the Login of the system
 */
-	public void logOut() throws Exception;
+	void exitLogin() throws Exception;
 }
