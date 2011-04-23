@@ -8,6 +8,7 @@ import javax.swing.JToolBar;
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
+import vooga.user.voogauser.VoogaUser;
 
 /**
  * Creates the entire component that represents the ButtonToolBar with search area.
