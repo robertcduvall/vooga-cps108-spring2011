@@ -1,0 +1,15 @@
+Problems:
+
+1. List possible collision pairs (which is gross)
+	Maybe can fix with reflection?
+	Check if method exists?
+	Catch exceptions?
+2. Swappable components
+3. Double application of collisions because of looping
+	Define interface preferences
+4. Local Forces
+
+Thoughts:
+
+1. dv
+2. changing parameters to not interfaces
