@@ -14,6 +14,7 @@ import vooga.arcade.parser.gameObject.ArcadeObject;
 import vooga.arcade.view.buttonToolBar.ButtonBar;
 import vooga.arcade.view.gui.VoogaViewer;
 import vooga.user.controller.LoginController;
+import vooga.user.voogauser.VoogaUser;
 
 
 /**
@@ -26,7 +27,7 @@ public class ArcadeController
 {
     private VoogaViewer view;
     private ArcadeModel model;
-
+    private VoogaUser currentUser;
 
     public ArcadeController (String string, String string2, int i, int j)
     {
@@ -82,11 +83,18 @@ public class ArcadeController
         sortBy.invoke(new ArcadeController(), parameters);
     }
 
-    public void swapToolbarButton(String name)
+    public void swapToolbarButton(VoogaUser user)
     {
+        currentUser = user;
+        String name = user.getUsername();
         ButtonBar.swapButtons(name);
     }
 
+    public VoogaUser getUser()
+    {
+        return currentUser;
+    }
+    
     public void sortByTitle ()
     {
 
