@@ -1,7 +1,7 @@
 package vooga.levels;
 
 /**
- * Represents an exceptional situation specific to levels.
+ * Represents an exception situation specific to levels.
  * 
  * @author Andrew Patterson
  * @author Robert C. Duvall
@@ -21,9 +21,13 @@ public class LevelException extends RuntimeException
     public static LevelException LEVEL_LOADING_ERROR =
         new LevelException("There was an error loading the level");
     
-    /** Throw when a level sprite is attempted to be called which does not exist */
-    public static LevelException NON_EXISTANT_SPRITE =
-        new LevelException("The specified sprite does not exist");
+    /** Throw when there is a general error parsing a level file */
+    public static LevelException LEVEL_PARSING_ERROR =
+        new LevelException("There was an error parsing the level file");
+    
+    /** Throw when there is a general error parsing a level file */
+    public static LevelException LEVEL_CREATION_ERROR =
+        new LevelException("There was a reflection error while attempting to create the level");
 
 
     /**
