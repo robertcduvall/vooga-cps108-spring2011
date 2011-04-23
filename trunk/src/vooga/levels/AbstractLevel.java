@@ -8,7 +8,6 @@ import com.golden.gamedev.object.Background;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.buildable.components.BasicComponent;
-import vooga.collisions.collisionManager.CollisionManager;
 import vooga.core.VoogaGame;
 
 /**
@@ -42,14 +41,17 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     private int myId;
 
     
-    public AbstractLevel (SpriteGroup<Sprite> players, VoogaGame game)
+    public AbstractLevel (Collection<SpriteGroup<Sprite>> players, VoogaGame game)
     {
+        super();
         myGame = game;
-        mySpriteGroups = new ArrayList<SpriteGroup<Sprite>>();
-        addGroup(players);
-        myCollisionManagers = new ArrayList<CollisionManager>();
+        for(SpriteGroup<Sprite> currentPlayer : players)
+        {
+            addGroup(currentPlayer);
+        }
         myBackgrounds = new LinkedList<Background>();
         myMusic = new LinkedList<String>();
+        mySpritePool = new SpritePool();
     }
 
 
@@ -72,10 +74,10 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * @param name of XML file for this level
      * @param id of the level whose file you want to read
      */
-    public void parseXMLFile (int id)
+    public void parseXMLFile (String fileName, int id)
     {
         myLevelParser = new LevelParser(this, myGame);
-        myLevelParser.parse(id);
+        myLevelParser.parse(fileName);
         myId = id;
     }
     

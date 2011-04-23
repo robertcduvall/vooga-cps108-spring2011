@@ -1,6 +1,7 @@
 package vooga.levels;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import java.util.Collection;
 import vooga.collisions.collisionManager.CollisionManager;
 import vooga.sprites.improvedsprites.Sprite;
@@ -22,6 +23,12 @@ public class VoogaPlayField extends PlayField
     /** All of the collision managers that are part of the playingfield */
     protected Collection<CollisionManager> myCollisionManagers;
 
+    public VoogaPlayField()
+    {
+        super();
+        mySpriteGroups = new ArrayList<SpriteGroup<Sprite>>();
+        myCollisionManagers = new ArrayList<CollisionManager>();
+    }
 
     /**
      * If it exists, returns the sprite group of the specified name. If it

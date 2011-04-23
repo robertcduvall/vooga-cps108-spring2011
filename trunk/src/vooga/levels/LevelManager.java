@@ -1,8 +1,6 @@
 package vooga.levels;
 
 import java.awt.Graphics2D;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 import vooga.sprites.improvedsprites.Sprite;
@@ -25,9 +23,9 @@ public class LevelManager
 {
     private static final String LEVEL_CLASS_PATH_PREFIX = "vooga.levels.example2.";
     private static final String PLAYER_GROUP_NAME = "player group";
-    
-    /** A map of level number to the associated XML file; initially set during level manager construction */
-    private Map<Integer, String> myLevelOrderMap;
+
+    /** A map of level number to array of [levelFilePath, levelType ] */
+    private Map<Integer, String[]> myLevelOrderMap;
 
     /** The total number of levels */
     private int myNumOfLevels;
@@ -36,7 +34,7 @@ public class LevelManager
     private int myNumOfLevelsCompleted;
 
     /** The players for this game */
-    private SpriteGroup<Sprite> myPlayers;
+    private Collection<SpriteGroup<Sprite>> myPlayers;
 
     /** The currently running game */
     private VoogaGame myGame;
@@ -47,7 +45,7 @@ public class LevelManager
     /** Past playingfields that have been used in the game */
     private Collection<AbstractLevel> myPastLevels;
 
-    
+
     /**
      * Sets the level map, players and vooga game
      * 
@@ -57,13 +55,14 @@ public class LevelManager
     public LevelManager (VoogaGame game)
     {
         myGame = game;
-        myLevelOrderMap = new HashMap<Integer, String>();
+        myLevelOrderMap = myGame.getResourceManager().getLevelMap();
+        myNumOfLevels = myLevelOrderMap.size();
         myPastLevels = new HashSet<AbstractLevel>();
-        myPlayers = new SpriteGroup<Sprite>(PLAYER_GROUP_NAME);
-        myNumOfLevels = myGame.getResourceManager().getNumOfLevels();
+        myPlayers = new ArrayList<SpriteGroup<Sprite>>();
+        myPlayers.add(new SpriteGroup<Sprite>(PLAYER_GROUP_NAME));
     }
 
-    
+
     /**
      * Loads the first level specified in the level order file.
      * This is the same as calling loadLevel(0)
@@ -85,9 +84,8 @@ public class LevelManager
     public void loadLevel (int id)
     {
         if (!(myLevelOrderMap.containsKey(id))) throw LevelException.NON_EXISTANT_LEVEL;
-        String levelFileName = myLevelOrderMap.get(id);
-
-        String desiredLevelType = myGame.getResourceManager().getLevelType(id);
+        String desiredLevelPath = myLevelOrderMap.get(id)[0];
+        String desiredLevelType = myLevelOrderMap.get(id)[1];
 
         // Cycle through all past levels and see if any of them are of the requested type
         for(AbstractLevel pastLevel : myPastLevels)
@@ -98,23 +96,23 @@ public class LevelManager
             {
                 myActiveLevel = pastLevel;
                 myActiveLevel.clearUnusedObjects();
-                myActiveLevel.parseXMLFile(id);
+                myActiveLevel.parseXMLFile(desiredLevelPath, id);
                 myActiveLevel.loadLevel();
                 return;
             }
         }
-        
+
         //If no pre-existing level of the correct type exists, create a new instance
-          try { 
-              myActiveLevel = ((AbstractLevel) Reflection.createInstance(LEVEL_CLASS_PATH_PREFIX + desiredLevelType, myPlayers, myGame)); }
-          catch (Exception e) { throw LevelException.LEVEL_CREATION_ERROR; }
-          try { 
-              myActiveLevel.parseXMLFile(id); } 
-          catch (Exception e) { throw LevelException.LEVEL_PARSING_ERROR; }
-          try {
-              myActiveLevel.loadLevel(); 
-              myPastLevels.add(myActiveLevel); }
-          catch (Exception e) { throw LevelException.LEVEL_LOADING_ERROR; }
+        try { 
+            myActiveLevel = ((AbstractLevel) Reflection.createInstance(LEVEL_CLASS_PATH_PREFIX + desiredLevelType, myPlayers, myGame)); }
+        catch (Exception e) { throw LevelException.LEVEL_CREATION_ERROR; }
+        try { 
+            myActiveLevel.parseXMLFile(desiredLevelPath,id); } 
+        catch (Exception e) { throw LevelException.LEVEL_PARSING_ERROR; }
+        try {
+            myActiveLevel.loadLevel(); 
+            myPastLevels.add(myActiveLevel); }
+        catch (Exception e) { throw LevelException.LEVEL_LOADING_ERROR; }
     }
 
 
@@ -141,6 +139,7 @@ public class LevelManager
      */
     public int getCurrentLevel ()
     {
+        if(myActiveLevel == null) return -1;
         return myActiveLevel.getId();
     }
 
@@ -152,8 +151,8 @@ public class LevelManager
     {
         return myNumOfLevelsCompleted;
     }
-    
-    
+
+
     /**
      * Adds 1 to myNumOfLevelsCompleted 
      */
@@ -177,7 +176,8 @@ public class LevelManager
      * @return the sprite which was just added to the playingfield
      */
     public Sprite addRandomSprite ()
-    {
+    {   
+        if(myActiveLevel == null) return null;
         return myActiveLevel.addRandomSprite();
     }
 
@@ -191,6 +191,7 @@ public class LevelManager
      */
     public Sprite addSpriteFromPool (String type)
     {
+        if(myActiveLevel == null) return null;
         return myActiveLevel.addSpriteFromPool(type);
     }
 
@@ -205,6 +206,7 @@ public class LevelManager
      */
     public Sprite addArchetypeSprite(String type, int x, int y, BasicComponent... components)
     {
+        if(myActiveLevel == null) return null;
         return myActiveLevel.addArchetypeSprite(type, x, y, components);
     }
 
@@ -215,7 +217,10 @@ public class LevelManager
      */
     public void useNextBackground ()
     {
-        myActiveLevel.addBackground();
+        if(myActiveLevel != null)
+        {
+            myActiveLevel.addBackground();
+        }
     }
 
 
@@ -225,32 +230,34 @@ public class LevelManager
      */
     public void useNextMusic ()
     {
-        myActiveLevel.addMusic();
+        if(myActiveLevel != null)
+        {
+            myActiveLevel.addMusic();
+        }    
     }
-    
-    
+
+
     /**
      * Adds a player to the player group
      * Change will immediately be reflected on the playingfield
      * 
-     * @param player sprite to add
+     * @param player sprite group to add
      */
-    public void addPlayer(Sprite player)
+    public void addPlayer(SpriteGroup<Sprite> player)
     {
         myPlayers.add(player);
     }
-    
-    
+
+
     /**
      * Sets the level order map
      * 
      * @param the new level order mapping level number to the associated XML file path
      */
-    public void setLevelOrder(Map<Integer,String> levelOrder)
+    public void setLevelOrder(Map<Integer,String[]> levelOrder)
     {
         myLevelOrderMap = levelOrder;
     }
-    
 
 
     /**
@@ -260,7 +267,10 @@ public class LevelManager
      */
     public void update (long elapsedTime)
     {
-        myActiveLevel.update(elapsedTime);
+        if(myActiveLevel != null)
+        {
+            myActiveLevel.update(elapsedTime);
+        }    
     }
 
 
@@ -271,6 +281,9 @@ public class LevelManager
      */
     public void render (Graphics2D g)
     {
-        myActiveLevel.render(g);
+        if(myActiveLevel != null)
+        {
+            myActiveLevel.render(g);
+        }    
     }
 }
