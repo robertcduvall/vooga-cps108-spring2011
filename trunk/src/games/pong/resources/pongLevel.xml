@@ -1,5 +1,5 @@
 <level>
-	<collision_manager g1=red g2=blue class=vooga.levels.example2.collisions.ExampleCollisionManager />
+	<collision_manager g1=ball g2=AIPaddle g3=PlayerPaddle class=vooga.games.pong.collisions.BallAndPaddleCollisions />
 	
 	<sprite group=ball class=vooga.games.pong.sprites.ball name=ball>
 		<image>ball_image</image>

@@ -4,11 +4,10 @@ import java.awt.image.BufferedImage;
 
 import vooga.sprites.improvedsprites.Sprite;
 
-public class Ball extends Sprite{
+public class PlayerPaddle extends Sprite{
 
-	public Ball(BufferedImage image, double x, double y) {
+	public PlayerPaddle(BufferedImage image, double x, double y) {
 		super(image, x, y);
 	}
-
 
 }

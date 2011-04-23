@@ -16,11 +16,7 @@ public class BallAndPaddleCollision extends BasicCollisionGroup{
 
 	private void bounce(Sprite s) {
 		s.setHorizontalSpeed(-s.getHorizontalSpeed());
-		//reverse horizontal velocity
-		
-		s.setVerticalSpeed(-s.getVerticalSpeed());
-		//reflect vertical velocity
-		
+		//reverse horizontal velocity		
 	}
 
 }
