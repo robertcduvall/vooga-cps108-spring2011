@@ -60,9 +60,17 @@ public class ArcadeController
     
     public void login()
     {
-        // Give Conrad a list of game titles
-        //LoginController start = new LoginController("VOOGA GAME LOGIN", "", 640, 480);  
-        //start.toString();
+        List<String> gameTitles = new ArrayList<String>();
+        
+        List<ArcadeGameObject> allGames = this.queryModel("title", null);
+        for (ArcadeGameObject game : allGames)
+        {
+            String currentTitle = game.getData("title");
+            gameTitles.add(currentTitle);
+        }
+        
+        LoginController start = new LoginController("VOOGA GAME LOGIN", "", 640, 480, gameTitles);  
+        start.toString();
         
      // TODO: Replace login button with user button.
     }

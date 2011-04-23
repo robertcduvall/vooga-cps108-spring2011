@@ -3,6 +3,7 @@ package vooga.arcade.view.actions;
 
 import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
 
@@ -25,13 +26,13 @@ public class ActionFactory {
 	
 		Class<?> cls = null;
 		try {
-			cls = Class.forName("view.actions." + className);
-			// Method m = cls.getDeclaredMethod(methodName, null);
+			cls = Class.forName("vooga.arcade.view.actions." + className);
+			//Method m = cls.getDeclaredMethod(methodName, null);
 
 			Constructor<?> ctr = cls
 					.getDeclaredConstructor(new Class[] { ArcadeController.class });
-			// return new ActionMethod(obj,m);
-			return (AbstractVoogaAction) ctr.newInstance(p);
+			//return new ActionMethod(obj,m);
+			return (AbstractViewAction) ctr.newInstance(p);
 
 		} catch (Exception e) {
 			e.printStackTrace();

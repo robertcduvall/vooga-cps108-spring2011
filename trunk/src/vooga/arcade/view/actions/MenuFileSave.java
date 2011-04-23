@@ -18,7 +18,7 @@ import vooga.arcade.controller.ArcadeController;
  * 
  */
 
-public class MenuFileSave extends AbstractVoogaAction {
+public class MenuFileSave extends AbstractViewAction {
 	public MenuFileSave(ArcadeController p) {
 		super(p);
 	}

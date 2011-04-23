@@ -11,7 +11,7 @@ import vooga.arcade.controller.ArcadeController;
  * 
  */
 
-public class MenuFileQuit extends AbstractVoogaAction {
+public class MenuFileQuit extends AbstractViewAction {
 	public MenuFileQuit(ArcadeController p) {
 		super(p);
 	}

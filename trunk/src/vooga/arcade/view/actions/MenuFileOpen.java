@@ -13,7 +13,7 @@ import vooga.arcade.controller.ArcadeController;
  * 
  * 
  */
-public class MenuFileOpen extends AbstractVoogaAction {
+public class MenuFileOpen extends AbstractViewAction {
 
 	ArcadeController pc = new ArcadeController();
 
