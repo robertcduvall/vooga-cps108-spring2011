@@ -4,6 +4,7 @@ import java.util.Collection;
 import vooga.physics.customBehavior.IPhysicsCustomCollide;
 import vooga.physics.customBehavior.IPhysicsCustomField;
 import vooga.physics.customBehavior.IPhysicsCustomForce;
+import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.physics.util.Force;
 import vooga.physics.util.IPhysicsToggle;
 import vooga.physics.util.IPointField;
@@ -159,17 +160,12 @@ public class BasePhysicsEngine implements IPhysicsToggle {
         if (isOn()) {
             Class<?>[] firstObjectInterfaces = object1.getClass().getInterfaces();
             Class<?>[] secondObjectInterfaces = object2.getClass().getInterfaces();
-            System.out.println("Object1 class: "+object1.getClass().toString());
 
-            for (Class<?> c : firstObjectInterfaces) {
-                System.out.println("Current interface: "+c.toString());
-                applyCollision(c.getClass().cast(object1), object2, angleOfImpact, pointOfImpact,
-                        coefficientOfRestitution);
-            }
-
-            for (Class<?> c : secondObjectInterfaces) {
-                applyCollision(c.getClass().cast(object2), object1, angleOfImpact, pointOfImpact,
-                        coefficientOfRestitution);
+            for (Class<?> c1 : firstObjectInterfaces) {
+                for (Class<?> c2 : secondObjectInterfaces) {
+//                    applyCollision(c1.cast(object1), c2.cast(object2), angleOfImpact, pointOfImpact,
+//                           coefficientOfRestitution);
+                }
             }
         }
     }
@@ -201,19 +197,19 @@ public class BasePhysicsEngine implements IPhysicsToggle {
         thisObject.collisionOccurred(otherObject, angleOfImpact, pointOfImpact, coefficientOfRestitution);
         return true;
     }
-    
-    /**
-     * Determines if an object defines custom behavior for responding to the
-     * given collision.
-     * 
-     * @param <T>
-     * @param <S>
-     * 
-     * @return a boolean representing if custom behavior was used
-     */
-    public <S, T> boolean applyCollision(T thisObject, S otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
-        return false;
-    }
+
+//    /**
+//     * Determines if an object defines custom behavior for responding to the
+//     * given collision.
+//     * 
+//     * @param <T>
+//     * @param <S>
+//     * 
+//     * @return a boolean representing if custom behavior was used
+//     */
+//    public <S, T> boolean applyCollision(T thisObject, S otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+//        return false;
+//    }
 
     /**
      * Is physics on?

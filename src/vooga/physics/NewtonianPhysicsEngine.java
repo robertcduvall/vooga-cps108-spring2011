@@ -138,8 +138,9 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
      * @param pointOfCollision
      * @param coefficientOfRestitution
      */
-    public void applyCollision(INewtonianPhysical thisObject, INewtonianPhysical otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
-        if (!super.applyCollision(thisObject, otherObject, angleOfImpact, pointOfImpact, coefficientOfRestitution)) {
+    public boolean applyCollision(INewtonianPhysical thisObject, INewtonianPhysical otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        System.out.println("Newtonian happens");
+//        if (!super.applyCollision(thisObject, otherObject, angleOfImpact, pointOfImpact, coefficientOfRestitution)) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
             double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);
             double otherParallel = otherObject.getVelocity().getParallelComponent(angleOfImpact);
@@ -154,7 +155,8 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
             Velocity newVelocity = new Velocity(perpNumerator / denominator, parallelNumerator / denominator,
                     angleOfImpact);
             thisObject.setVelocity(newVelocity);
-        }
+//        }
+        return false;
     }
 
     /**
@@ -167,7 +169,7 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
      * @param coefficientOfRestitution
      */
     public void applyCollision(INewtonianPhysical thisObject, INewtonianMovable otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
-        if (!super.applyCollision(thisObject, otherObject, angleOfImpact, pointOfImpact, coefficientOfRestitution)) {
+//        if (!super.applyCollision(thisObject, otherObject, angleOfImpact, pointOfImpact, coefficientOfRestitution)) {
             double myParallel = thisObject.getVelocity().getParallelComponent(angleOfImpact);
             double myPerp = thisObject.getVelocity().getPerpComponent(angleOfImpact);
             double otherParallel = otherObject.getVelocity().getParallelComponent(angleOfImpact);
@@ -179,7 +181,7 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
             Velocity newVelocity = new Velocity(-myParallel * coefficientOfRestitution + otherParallel, -myPerp
                     * coefficientOfRestitution + otherPerp, angleOfImpact);
             thisObject.setVelocity(newVelocity);
-        }
+//        }
     }
 
     /**
