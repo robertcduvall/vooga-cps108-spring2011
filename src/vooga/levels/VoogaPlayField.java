@@ -7,19 +7,22 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import com.golden.gamedev.object.PlayField;
 
+
 /**
- * Serve 
+ * Serves as a container for sprites, sprite groups and collision managers in
+ * which objects gets updated and renders if needed.
+ * 
  * @author Andrew Patterson
  */
 public class VoogaPlayField extends PlayField
 {
     /** All of the sprite groups that are currently on the playingfield */
     protected Collection<SpriteGroup<Sprite>> mySpriteGroups;
-    
+
     /** All of the collision managers that are part of the playingfield */
     protected Collection<CollisionManager> myCollisionManagers;
-    
-    
+
+
     /**
      * If it exists, returns the sprite group of the specified name. If it
      * doesn't exist, a new sprite group of the specified name is created, added
@@ -40,20 +43,29 @@ public class VoogaPlayField extends PlayField
         addGroup(newGroup);
         return newGroup;
     } 
-    
-    
+
+
     /**
-     * Adds a sprite group to this playfield
+     * Adds a sprite group to this playfield. If the new sprite group and an
+     * existing sprite group have the same names, then the exisiting sprite
+     * group is overriden.
      * 
      * @param SpriteGroup to add
      */
     public void addGroup(SpriteGroup<Sprite> group)
     {
-        // Overwrite old sprite group if one of the same name exists
+        for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
+        {
+            if(currentGroup.getName().equals(group.getName()))
+            {
+                mySpriteGroups.remove(currentGroup);
+                break;
+            }
+        }
         mySpriteGroups.add(group);
     }
-    
-    
+
+
     /**
      * Adds a collision manager to this playfield
      * 
@@ -63,8 +75,8 @@ public class VoogaPlayField extends PlayField
     {
         myCollisionManagers.add(manager);
     }
-    
-    
+
+
     /**
      * Clears all sprites from the playingfield
      */
@@ -75,8 +87,8 @@ public class VoogaPlayField extends PlayField
             currentGroup.clear();
         }
     }
-    
-    
+
+
     /**
      * Updates all the sprite groups and checks all collision managers
      * 
@@ -95,8 +107,8 @@ public class VoogaPlayField extends PlayField
             currentManager.checkCollision();
         }
     }
-    
-    
+
+
     /**
      * Renders all sprite groups and the background
      * 

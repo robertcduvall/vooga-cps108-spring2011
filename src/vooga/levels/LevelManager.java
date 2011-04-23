@@ -25,6 +25,7 @@ public class LevelManager
 {
     private static final String LEVEL_ORDER_FILE = "src/vooga/levels/example2/resources/levelorder.txt";
     private static final String LEVEL_CLASS_PATH_PREFIX = "vooga.levels.example2.";
+    private static final String PLAYER_GROUP_NAME = "player group";
     
     /** A map of level number to the associated XML file; initially set during level manager construction */
     private Map<Integer, String> myLevelOrderMap;
@@ -54,12 +55,12 @@ public class LevelManager
      * @param voogaGame whose levels this is managing
      * @param players for this game (persistent)
      */
-    public LevelManager (VoogaGame game, SpriteGroup<Sprite> players)
+    public LevelManager (VoogaGame game)
     {
         myGame = game;
         myLevelOrderMap = new HashMap<Integer, String>();
         myPastLevels = new HashSet<AbstractLevel>();
-        myPlayers = players;
+        myPlayers = new SpriteGroup<Sprite>(PLAYER_GROUP_NAME);
         
         // Reads in and sets the level order
         try
@@ -171,7 +172,15 @@ public class LevelManager
     {
         return myNumOfLevelsCompleted;
     }
-
+    
+    
+    /**
+     * Adds 1 to myNumOfLevelsCompleted 
+     */
+    public void updateNumOfLevelsCompleted()
+    {
+        myNumOfLevelsCompleted++;
+    }
 
     /**
      * Returns the total number of levels
