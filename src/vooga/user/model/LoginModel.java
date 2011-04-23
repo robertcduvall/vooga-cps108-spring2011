@@ -35,6 +35,7 @@ public class LoginModel
 	private Map<String, String> keyMap;
 	private RegXParser myRegEx;
 	private SQLite database;
+	
 	private ResourceManager registrationResource = new ResourceManager("vooga.user.resources.Registration");
 	private ResourceManager regExResource = new ResourceManager("vooga.user.resources.RegularExpressionResource"); 
 	
@@ -61,7 +62,7 @@ public class LoginModel
  */
 	public boolean process(String[] prompt, String[] text){
 		for (int i = 0; i < text.length; i++) {
-			if (myRegEx.verifyRegex(prompt[i], text[i], text)) {
+			if (myRegEx.verifyRegex(prompt[i], text[i])) {
 				user.add(new UserPreference(prompt[i], text[i]));
 				update();
 			} else {
@@ -143,8 +144,9 @@ public class LoginModel
 	}
 	
 	public VoogaUser getVoogaUser(){
-		VoogaUser copy = user;
-		return copy;
+		return user;
+		//VoogaUser copy = user;
+		//return copy;
 	}
 	}
 
