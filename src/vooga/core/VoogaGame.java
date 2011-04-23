@@ -9,7 +9,10 @@ import vooga.resources.KeyMap;
 import vooga.resources.ResourceManager;
 import vooga.resources.images.ImageLoader;
 import com.golden.gamedev.Game;
-
+import vooga.view.graphics.AdvancedGraphics;
+import java.awt.geom.AffineTransform;
+import java.util.List;
+import vooga.view.function.AbstractGraphicsFunction;
 
 public abstract class VoogaGame extends Game implements ISimpleEventManager
 {
@@ -17,6 +20,7 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     private ResourceManager myResourceManager;
     private KeyMap myKeyMap;
     private LevelManager myLevelManager;
+    protected AdvancedGraphics myAdvancedGraphics;
 
     public VoogaGame ()
     {
@@ -126,11 +130,23 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     }
 
 
+    
+    /**
+     * Creates advancedGraphics object to manage graphics state
+     */
     @Override
-    public void initResources () {
-    	myResourceManager.init();
+    public void initResources()
+    {
+        myResourceManager.init();
+        myAdvancedGraphics = new AdvancedGraphics(this);
+        this.initializeResources();
     }
 
+    /**
+     * Must be implemented to initialize game resources in game that extends VoogaGame.
+     */
+    public abstract void initializeResources();
+    
 
     @Override
     protected void notifyExit ()
@@ -167,6 +183,22 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
         myLevelManager.render(g);
     }
 
+    /**
+     * Renders graphics based on state of advancedGraphics
+     * Pass modified graphics context to LevelManager
+     */
+    @Override
+    public void render(Graphics2D g)
+    {
+        if (myAdvancedGraphics.getFunctionState() != null)
+        {
+            AffineTransform old = g.getTransform();
+            g.setTransform(myAdvancedGraphics.getFunctionState());
+            transformedRender(g);
+            g.setTransform(old);
+        }
+        myLevelManager.render(g);
+    }
 
     public void setKeyMap (KeyMap keyMap)
     {
@@ -192,5 +224,29 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
      */
     public ImageLoader getImageLoader() {
     	return myResourceManager.getImageLoader();
+    }
+    
+    /**
+     * User specifies what type of functions required.
+     * @return List of functions maintained in advancedGraphics
+     */
+    public abstract List<AbstractGraphicsFunction> graphicsFunctions();
+    
+    /**
+     * Convenience method for setting advancedGraphics state
+     * @param bool
+     */
+    public void setGraphicsActivityState(boolean bool)
+    {
+        myAdvancedGraphics.setActivityState(bool);
+    }
+    
+    /**
+     * Convenience method for getting advancedGraphics activity state
+     * @return boolean
+     */
+    public boolean getGraphicsActivityState()
+    {
+        return myAdvancedGraphics.getActivityState();
     }
 }
