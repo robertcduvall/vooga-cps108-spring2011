@@ -33,7 +33,7 @@ public class Example2 extends VoogaGame {
 	    Sprite player = new Sprite(getImage("Ship1.png"));
 	    players.add(player);
 	    //myResourceManager = new ResourceManager("");
-		myLevelManager = new LevelManager(this, players);
+		myLevelManager = new LevelManager(this);
 		myLevelManager.start();
 	}
 
