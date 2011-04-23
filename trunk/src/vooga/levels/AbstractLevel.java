@@ -213,7 +213,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * 
      * @param background files for this level
      */
-    public void addToBackgroundPool (Background background)
+    public void addToBackgroundQueue (Background background)
     {
         myBackgrounds.add(background);
     }
@@ -224,7 +224,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * 
      * @param music files for this level
      */
-    public void addToMusicPool (String music)
+    public void addToMusicQueue (String music)
     {
         myMusic.add(music);
     }
@@ -288,4 +288,6 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         if (other != null && other instanceof AbstractLevel) return myId == ((AbstractLevel) other).getId();
         else return false;
     }
+    
+    // Give goal a level manager
 }
