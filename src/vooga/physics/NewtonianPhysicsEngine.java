@@ -94,7 +94,7 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
      * @param pointOfCollision
      * @param angleOfImpact
      */
-    public void elasticCollision(Object object1, Object object2, Angle angleOfImpact, Point pointOfImpact) {
+    public <T, S> void elasticCollision(T object1, S object2, Angle angleOfImpact, Point pointOfImpact) {
         collision(object1, object2, angleOfImpact, pointOfImpact, 1);
     }
 
@@ -106,19 +106,21 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
      * @param pointOfCollision
      * @param angleOfImpact
      */
-    public void inelasticCollision(Object object1, Object object2, Angle angleOfImpact, Point pointOfImpact) {
+    public <T, S> void inelasticCollision(T object1, S object2, Angle angleOfImpact, Point pointOfImpact) {
         collision(object1, object2, angleOfImpact, pointOfImpact, 0);
     }
 
     /**
      * If no coefficient of restitution is given, default is elastic collision.
+     * @param <T>
+     * @param <S>
      * 
      * @param object1
      * @param object2
      * @param angleOfImpact
      * @param pointOfImpact
      */
-    public void collision(Object object1, Object object2, Angle angleOfImpact, Point pointOfImpact) {
+    public <T, S> void collision(T object1, S object2, Angle angleOfImpact, Point pointOfImpact) {
         elasticCollision(object1, object2, angleOfImpact, pointOfImpact);
     }
 
