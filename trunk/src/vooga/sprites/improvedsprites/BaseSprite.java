@@ -463,12 +463,4 @@ public abstract class BaseSprite implements ISpriteBase, IRender, ITargetable
     }
 
 
-
-    
-    // private static int garbagecount = 0;
-    // protected void finalize() throws Throwable {
-    // System.out.println("Total sprite garbaged = " + (++garbagecount) + " = "
-    // + this);
-    // super.finalize();
-    // }
 }
