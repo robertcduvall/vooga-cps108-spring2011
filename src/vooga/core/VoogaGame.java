@@ -8,15 +8,13 @@ import vooga.levels.LevelManager;
 import vooga.resources.KeyMap;
 import vooga.resources.ResourceManager;
 import vooga.resources.images.ImageLoader;
-import vooga.sprites.spritegroups.SpriteGroup;
-
 import com.golden.gamedev.Game;
 
 
 public abstract class VoogaGame extends Game implements ISimpleEventManager
 {
     private EventManager myEventManager;
-    protected ResourceManager myResourceManager;
+    private ResourceManager myResourceManager;
     private KeyMap myKeyMap;
     private LevelManager myLevelManager;
 
@@ -24,9 +22,8 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     {
         super();
         myEventManager = new EventManager();
-//        myResourceManager = new ResourceManager(this.getClass());
+        myResourceManager = new ResourceManager(this.getClass());
         myLevelManager = new LevelManager(this);
-        initializeEventHandlers();
     }
     
     @Override
@@ -129,30 +126,6 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     }
 
 
-    private void initializeEventHandlers ()
-    {
-        myEventManager.registerEventHandler("EveryTurn.CheckInput",
-                                            new IEventHandler()
-                                            {
-                                                public void handleEvent (Object o)
-                                                {
-                                                    // TODO Game Resources Team: Poll all mapped inputs
-                                                    // (keys, mouse, etc.) and fire associated events
-                                                }
-                                            });
-        myEventManager.registerEventHandler("EveryTurn.UpdatePlayField",
-                                            new IEventHandler()
-                                            {
-                                                @Override
-                                                public void handleEvent (Object o)
-                                                {
-                                                    long elapsedTime = (Long) o;
-                                                    updatePlayField(elapsedTime);
-                                                }
-                                            });
-    }
-
-
     @Override
     public void initResources () {
     	myResourceManager.init();
@@ -189,7 +162,10 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
 
 
     @Override
-    public abstract void render (Graphics2D g);
+    public void render (Graphics2D g)
+    {
+        myLevelManager.render(g);
+    }
 
 
     public void setKeyMap (KeyMap keyMap)
@@ -204,6 +180,8 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     public void update (long elapsedTime)
     {
         myEventManager.update(elapsedTime);
+        myLevelManager.update(elapsedTime);
+        updatePlayField(elapsedTime);
     }
     
     public abstract void updatePlayField (long elapsedTime);
