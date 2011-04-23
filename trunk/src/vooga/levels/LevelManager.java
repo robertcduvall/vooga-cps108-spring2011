@@ -23,7 +23,6 @@ import vooga.reflection.Reflection;
  */
 public class LevelManager
 {
-    private static final String LEVEL_ORDER_FILE = "src/vooga/levels/example2/resources/levelorder.txt";
     private static final String LEVEL_CLASS_PATH_PREFIX = "vooga.levels.example2.";
     private static final String PLAYER_GROUP_NAME = "player group";
     
@@ -61,23 +60,7 @@ public class LevelManager
         myLevelOrderMap = new HashMap<Integer, String>();
         myPastLevels = new HashSet<AbstractLevel>();
         myPlayers = new SpriteGroup<Sprite>(PLAYER_GROUP_NAME);
-        
-        // Reads in and sets the level order
-        try
-        {
-            Scanner in = new Scanner(new File(LEVEL_ORDER_FILE));
-            int levelNumber = 0;
-            while(in.hasNextLine())
-            {
-                myLevelOrderMap.put(levelNumber,in.nextLine());
-                myNumOfLevels ++;
-                levelNumber ++;
-            }
-        }
-        catch (FileNotFoundException e)
-        {
-            throw LevelException.NON_EXISTANT_LEVEL_ORDER;
-        }
+        myNumOfLevels = myGame.getResourceManager().getNumOfLevels();
     }
 
     
@@ -104,10 +87,7 @@ public class LevelManager
         if (!(myLevelOrderMap.containsKey(id))) throw LevelException.NON_EXISTANT_LEVEL;
         String levelFileName = myLevelOrderMap.get(id);
 
-        // 1st item is the class type of the level
-        // 2nd is the user defined name which in essence is a comment        
-        String[] filePathArray = levelFileName.split("\\_");
-        String desiredLevelType = filePathArray[0];
+        String desiredLevelType = myGame.getResourceManager().getLevelType(id);
 
         // Cycle through all past levels and see if any of them are of the requested type
         for(AbstractLevel pastLevel : myPastLevels)
@@ -118,7 +98,7 @@ public class LevelManager
             {
                 myActiveLevel = pastLevel;
                 myActiveLevel.clearUnusedObjects();
-                myActiveLevel.parseXMLFile(levelFileName, id);
+                myActiveLevel.parseXMLFile(id);
                 myActiveLevel.loadLevel();
                 return;
             }
@@ -129,7 +109,7 @@ public class LevelManager
               myActiveLevel = ((AbstractLevel) Reflection.createInstance(LEVEL_CLASS_PATH_PREFIX + desiredLevelType, myPlayers, myGame)); }
           catch (Exception e) { throw LevelException.LEVEL_CREATION_ERROR; }
           try { 
-              myActiveLevel.parseXMLFile(levelFileName, id); } 
+              myActiveLevel.parseXMLFile(id); } 
           catch (Exception e) { throw LevelException.LEVEL_PARSING_ERROR; }
           try {
               myActiveLevel.loadLevel(); 
