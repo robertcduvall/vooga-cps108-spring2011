@@ -1,6 +1,8 @@
 package vooga.levels.util.tags;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -30,30 +32,14 @@ public class GoalTag extends XMLTag {
 	@Override
 	public void parse(Parser context, Element xmlElement) {
 		String className = xmlElement.getAttribute(CLASS);
-		Class<?> goalClass = null;
-		try {
-			goalClass = Class.forName(className);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 		
-		// Get the constructor for the sprite class (assume there's only one for now.)
-		// TODO: Handle multiple constructors.
-		Constructor<?> goalConstructor = goalClass.getConstructors()[0];
-		
-		// Iterate over types and convert them.
-		Class<?>[] types = goalConstructor.getParameterTypes();
-		Object[] params = new Object[types.length];
-		
-		// Get the list of children and use them for constructor arguments.
 		NodeList children = xmlElement.getChildNodes();
+		List<String> args = new ArrayList<String>();
 		for(int i = 0; i < children.getLength(); i++) {
-			Object out = parser.getConverterRack().convert(types[i], getValue((Element) children.item(i)));
-			params[i] = out;
+			args.add(getValue((Element) children.item(i)));
 		}
 		
-		// Use reflection to create a new instance of the goal class and add it to the level.
-		parser.setGoal((IGoal) Reflection.createInstance(className, params));
+		IGoal goal = (IGoal) parser.getConverterRack().constructInstance(className, args);
+		parser.setGoal(goal);
 	}
-
 }
