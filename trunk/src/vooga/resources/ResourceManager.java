@@ -2,11 +2,10 @@ package vooga.resources;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import vooga.core.VoogaGame;
-import vooga.levels.LevelManager;
 import vooga.resources.images.ImageLoader;
-import vooga.resources.managertags.*;
+import vooga.resources.managertags.ImageResourceTag;
+import vooga.resources.managertags.LevelTag;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
@@ -18,10 +17,9 @@ import vooga.resources.xmlparser.XMLTag;
  */
 public class ResourceManager extends Parser {
 	
-	private ImageLoader imageLoader;
-	private LevelManager levelManager;
-	private VoogaGame game;
-	private String xmlFilename;
+	private static final String RESOURCE_FILENAME = "resources.xml";
+    private ImageLoader imageLoader;
+    private String myFilename;
 	
 	private Map<Integer, String[]> levelMap;
 	
@@ -31,31 +29,22 @@ public class ResourceManager extends Parser {
 				return "resources";
 		}
 	}
-	
-	/**
-	 * Constructs a resource manager given the root game class, and a filename.
-	 * @param game the root game class.
-	 * @param xmlFilename the name of the XML file defining all resources.
-	 */
-	public ResourceManager(String xmlFilename, VoogaGame game) {
-		super();
-		
-		this.xmlFilename = xmlFilename;
-		this.game = game;
-		
-		levelMap = new HashMap<Integer, String[]>();
-		
-		addDefinitions(	new RootTag(),
-						new ImageResourceTag(this),
-						new LevelTag(this));
-		
-		levelManager = new LevelManager(game, game.getPlayerGroup());
-		
-	}
 
-	public VoogaGame getGame() {
-		return game;
-	}
+
+	public ResourceManager (Class<? extends VoogaGame> gameClass)
+    {
+	    this(gameClass.getResource(RESOURCE_FILENAME).getPath());
+    }
+	
+	public ResourceManager (String resourceFilePath)
+	{
+        super();
+        myFilename = resourceFilePath;
+        levelMap = new HashMap<Integer, String[]>();
+        addDefinitions( new RootTag(),
+                        new ImageResourceTag(this),
+                        new LevelTag(this));
+    }
 	
 	public void setImageLoader(ImageLoader imageLoader)	{
 		this.imageLoader = imageLoader;
@@ -67,16 +56,12 @@ public class ResourceManager extends Parser {
 	public ImageLoader getImageLoader() {
 		return imageLoader;
 	}
-	
-	public LevelManager getLevelManager() {
-		return levelManager;
-	}
 
 	/**
 	 * Parse the resource file.
 	 */
 	public void init() {
-		parse(xmlFilename);
+		parse(myFilename);
 	}
 
 	public Map<Integer, String[]> getLevelMap() {
