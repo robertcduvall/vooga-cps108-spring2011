@@ -288,6 +288,4 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         if (other != null && other instanceof AbstractLevel) return myId == ((AbstractLevel) other).getId();
         else return false;
     }
-    
-    // Give goal a level manager
 }
