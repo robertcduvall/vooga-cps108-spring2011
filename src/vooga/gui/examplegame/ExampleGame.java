@@ -7,6 +7,7 @@ import vooga.gui.panes.InfoPane;
 import vooga.gui.panes.MenuPane;
 import vooga.gui.panes.PopoverPane;
 import vooga.gui.util.VoogaButton;
+import vooga.view.function.AbstractGraphicsFunction;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +15,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -28,11 +30,11 @@ public class ExampleGame extends VoogaGame{
 	EventManager myEvents=getEventManager();
 
 	public ExampleGame() {
-		super("Resources");
+		super();
 	}
 
 	@Override
-	public void initResources() {
+	public void initializeResources() {
 		createEventHandler();
 
 		//Just an example- store however you like.
@@ -208,6 +210,18 @@ public class ExampleGame extends VoogaGame{
 	public void updatePlayField(long elapsedTime) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List<AbstractGraphicsFunction> graphicsFunctions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void transformedRender(Graphics2D graphics) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
