@@ -13,9 +13,10 @@ public interface ILoginController
 	public void displayError(String s);
 	
 /**
- * Process information is called by the view to evaluate the input entered in the GUI panel
+ * Process information is called by the view to evaluate the input entered in the GUI panel.
+ * Method also returns an optional boolean of whether or not the file can be processed
  */
-	public void processInformation(String[] prompt, String[] text);
+	public boolean processInformation(String[] prompt, String[] text);
 
 /**
  * This method verifys that a log-in password and username exist in a given password bank or database

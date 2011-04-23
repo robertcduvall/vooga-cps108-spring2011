@@ -18,7 +18,6 @@ package vooga.user.model;
 		public void update(String tableName, String[] components, String[] inputs) throws SQLException{
 			initialize(tableName,components);
 			int[] columns = new int[components.length];
-			//String[] col = {"0","1","2","3","4","5","6","7","8","9","10"};
 			for(int x =0; x< components.length; x++){
 				columns[x] = x+1;
 			}

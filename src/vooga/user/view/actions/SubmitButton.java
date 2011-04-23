@@ -20,12 +20,13 @@ public class SubmitButton extends AbstractLoginAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		pc.processInformation(panel.getPromptText(),panel.getInputFields());
+		if(pc.processInformation(panel.getPromptText(),panel.getInputFields())){
 		try {
 			pc.logOut();
 		} catch (Exception e) {
 			System.out.println("no");
 			e.printStackTrace();
+		}
 		}
 	}
 

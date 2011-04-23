@@ -5,7 +5,7 @@ import java.util.List;
 import vooga.user.main.XmlWriter;
 import vooga.user.model.LoginModel;
 import vooga.user.model.LoginTemplate;
-import vooga.user.view.gui.LoginViewer;
+import vooga.user.view.LoginViewer;
 import vooga.user.voogauser.UserPreference;
 import vooga.user.voogauser.VoogaUser;
 
@@ -35,8 +35,8 @@ public class LoginController implements ILoginController
 	}
 	
 	@Override
-	public void processInformation(String[] prompt ,String[] text) {
-		model.process(prompt,text);
+	public boolean processInformation(String[] prompt ,String[] text) {
+		 return model.process(prompt,text);
 	}
 	
 	@Override
@@ -69,10 +69,6 @@ public class LoginController implements ILoginController
 		//XmlWriter.writeXML(user,"resources/first.xml");
 		model.writeFile("resources/PasswordResource.txt", text);
 		System.out.close();
-	}
-	
-	public void clearAll(){		
-		view.clear();
 	}
 
 
