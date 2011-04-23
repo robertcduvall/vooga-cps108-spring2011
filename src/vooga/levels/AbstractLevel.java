@@ -72,10 +72,10 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * @param name of XML file for this level
      * @param id of the level whose file you want to read
      */
-    public void parseXMLFile (String fileName, int id)
+    public void parseXMLFile (int id)
     {
         myLevelParser = new LevelParser(this, myGame);
-        myLevelParser.parse(fileName);
+        myLevelParser.parse(id);
         myId = id;
     }
     
@@ -281,6 +281,4 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         if (other != null && other instanceof AbstractLevel) return myId == ((AbstractLevel) other).getId();
         else return false;
     }
-    
-    //when to use myNumOfLevelsCompleted
 }
