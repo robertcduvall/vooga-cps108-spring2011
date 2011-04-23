@@ -5,7 +5,7 @@ import vooga.physics.newtonianProperties.INewtonianMovable;
 import vooga.physics.util.IPhysicsToggle;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.ISpriteUpdater;
+import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 
 public class VelocityC extends BasicComponent implements INewtonianMovable, ISpriteUpdater, IPhysicsToggle

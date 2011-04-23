@@ -6,7 +6,7 @@ import vooga.util.buildable.components.BasicComponent;
 public class TargetC extends BasicComponent
 {
 
-    ITargetable myTarget;
+    protected ITargetable myTarget;
     
     
     public TargetC()
