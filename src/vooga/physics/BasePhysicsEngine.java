@@ -154,8 +154,10 @@ public class BasePhysicsEngine implements IPhysicsToggle {
         if (isOn()) {
             Class<?>[] firstObjectInterfaces = object1.getClass().getInterfaces();
             Class<?>[] secondObjectInterfaces = object2.getClass().getInterfaces();
+            System.out.println("Object1 class: "+object1.getClass().toString());
             
             for (Class<?> c : firstObjectInterfaces) {
+                System.out.println("Current interface: "+c.toString());
                 applyCollision(c.getClass().cast(object1), object2, angleOfImpact, pointOfImpact,
                         coefficientOfRestitution);
             }
