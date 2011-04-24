@@ -53,15 +53,31 @@ public class ImageProcessor
 
 	public static BufferedImage padImageToSquare(BufferedImage b, int width)
 	{
-		if(b.getWidth() < b.getHeight())
+		AffineTransform xform = new AffineTransform();
+
+		if (b.getWidth() > width || b.getHeight() > width)
 		{
-			
+			if (b.getWidth() > b.getHeight())
+			{
+				xform.scale((double) width / (double) b.getWidth(),
+						(double) width / (double) b.getWidth());
+			}
+			else
+			{
+				xform.scale((double) width / (double) b.getHeight(),
+						(double) width / (double) b.getHeight());
+			}
+		}
+		
+		if(b.getWidth() != b.getHeight())
+		{
+			xform.translate((b.getWidth() - width),
+					 0);
 		}
 		BufferedImage scaledImage = new BufferedImage(width, width,
 				BufferedImage.TYPE_INT_RGB);
 		Graphics2D graphics2D = scaledImage.createGraphics();
-		AffineTransform xform = AffineTransform.getTranslateInstance(
-				(width - b.getWidth()) / 2.0, (width - b.getHeight()) / 2.0);
+
 		graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
 				RenderingHints.VALUE_INTERPOLATION_BICUBIC);
 		graphics2D.drawImage(b, xform, null);

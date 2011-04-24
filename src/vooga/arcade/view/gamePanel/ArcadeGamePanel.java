@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import vooga.arcade.helper.ImageProcessor;
 import vooga.arcade.parser.ArcadeGameObject;
 
 /**
@@ -32,14 +33,14 @@ public class ArcadeGamePanel extends ArcadePanel
 
 	public ArcadeGamePanel(ArcadeGameObject gameObject)
 	{
-		super(new ImageIcon(gameObject.getImage()), gameObject.getData("title"));
+		super(new ImageIcon(ImageProcessor.padImageToSquare(gameObject.getImage(),100)), gameObject.getData("title"));
 		this.gameObject = gameObject;
 		addPlayButton();
 	}
 
 	private void addPlayButton()
 	{
-		JButton playButton = new JButton("Play");
+		JButton playButton = new JButton(title);
 		playButton.addActionListener(new ActionListener()
 		{
 			@Override
@@ -49,6 +50,6 @@ public class ArcadeGamePanel extends ArcadePanel
 
 			}
 		});
-		this.add(playButton, BorderLayout.WEST);
+		this.add(playButton, BorderLayout.CENTER);
 	}
 }

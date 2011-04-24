@@ -27,11 +27,11 @@ public class ThumbnailPanel extends JPanel
 		JPanel thumbPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
 		// Size of the Frame itself (Determines scroll length)
-		thumbPanel.setPreferredSize(new Dimension(620, 1000));
+		thumbPanel.setPreferredSize(new Dimension(620, 500));
 		JScrollPane scrollPane = new JScrollPane(thumbPanel);
 
 		// Size of the Panel inside the frame.
-		scrollPane.setPreferredSize(new Dimension(640, 600));
+		scrollPane.setPreferredSize(new Dimension(640, 460));
 		for (JPanel thumbnail : thumbnails)
 		{
 			thumbPanel.add(thumbnail);
