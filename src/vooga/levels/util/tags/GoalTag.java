@@ -1,6 +1,5 @@
 package vooga.levels.util.tags;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import org.w3c.dom.NodeList;
 
 import vooga.levels.IGoal;
 import vooga.levels.util.LevelParser;
-import vooga.reflection.Reflection;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 

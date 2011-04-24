@@ -1,7 +1,6 @@
 package vooga.levels.util;
 
 import java.awt.image.BufferedImage;
-import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class SpriteConstructor {
 		for(IComponent component : spriteComponents) {
 			sprite.addComponent(component);
 		}
-		SpriteGroup group = level.getSpriteGroup(spriteGroup);
+		SpriteGroup<Sprite> group = level.getSpriteGroup(spriteGroup);
 		group.add(sprite);
 		return sprite;
 	}
@@ -59,7 +58,7 @@ public class SpriteConstructor {
 		for(IComponent component : spriteComponents) {
 			sprite.addComponent(component);
 		}
-		SpriteGroup group = level.getSpriteGroup(spriteGroup);
+		SpriteGroup<Sprite> group = level.getSpriteGroup(spriteGroup);
 		group.add(sprite);
 		return sprite;
 	}

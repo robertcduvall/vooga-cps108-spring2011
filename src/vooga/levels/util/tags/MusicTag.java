@@ -1,21 +1,26 @@
 package vooga.levels.util.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
-import vooga.levels.IGoal;
 import vooga.levels.util.LevelParser;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
+/**
+ * 
+ * @author WesleyBrown
+ *
+ */
 public class MusicTag extends XMLTag {
 
 	private static final String MUSIC = "music";
+	private static final String FILE = "file";
 	
 	private LevelParser parser;
+	
+	public MusicTag(LevelParser parser) {
+		this.parser = parser;
+	}
 	
 	@Override
 	public String getTagName() {
@@ -24,16 +29,9 @@ public class MusicTag extends XMLTag {
 	
 	@Override
 	public void parse(Parser context, Element xmlElement) {
-		String className = xmlElement.getAttribute(CLASS);
+		String filename = xmlElement.getAttribute(FILE);
 		
-		NodeList children = xmlElement.getChildNodes();
-		List<String> args = new ArrayList<String>();
-		for(int i = 0; i < children.getLength(); i++) {
-			args.add(getValue((Element) children.item(i)));
-		}
-		
-		IGoal goal = (IGoal) parser.getConverterRack().constructInstance(className, args);
-		parser.setGoal(goal);
+		parser.addToMusicQueue(filename);
 	}
 
 }

@@ -11,6 +11,7 @@ import vooga.levels.util.PoolDeferredConstructor;
  * XML file.
  * 
  * @author Andrew Patterson
+ * @author WesleyBrown
  */
 public class SpritePool
 {
