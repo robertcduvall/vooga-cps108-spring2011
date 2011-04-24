@@ -14,9 +14,9 @@ ResourceManager is responsible for reading the central resource.xml file for eac
     <images>
         <source>images.xml</source>
     </images>
+    <level id=0>level0.xml</level>
     <level id=1>level1.xml</level>
-    <level id=2>level2.xml</level>
-     ....
+    <source>keymap.xml</source>
 </resources>
 }}}
 
@@ -45,3 +45,14 @@ The `<strings>` tag encloses key-value pairs of strings. For instance, _foo_ wou
 }}}
 
 In the above images.xml file, the _name_ attribute specifies the common name of the image resource, and the path its path.
+
+== Example keymap.xml (from Asteroids) ==
+{{{
+<keymap>
+	<key_event event="Input.User.TurnLeft" sensitivity="Level" key="LEFT"/>
+	<key_event event="Input.User.TurnRight" sensitivity="Level" key="RIGHT"/>
+	<key_event event="Input.User.Shoot" sensitivity="Edge" key="SPACE"/>
+</keymap>
+}}}
+
+So the keymap defines key_events, which have an event to fire, a sensitivity (whether to fire only once or as long as the button is pressed down), and the associated key (from KeyEvent.VK_*)
