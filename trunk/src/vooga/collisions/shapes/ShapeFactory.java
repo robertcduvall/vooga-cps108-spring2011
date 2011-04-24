@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
@@ -33,9 +34,27 @@ public class ShapeFactory
 	public static Circle makeCircle(Point2D c, double r){
         return new Circle(c,r);
     }
+	
+	public static Polygon makeShapeFromGeneralPath(GeneralPath path)
+	{
+		ArrayList<double[]> polyCoords = new ArrayList<double[]>();
+		double[] coords = new double[6]; //needs to be 6 for the path iterator
+		
+		PathIterator pathIterator = path.getPathIterator(null);
+		
+		while(!pathIterator.isDone())
+		{
+			pathIterator.currentSegment(coords);
+			double[] addList = coords.clone();
+			
+			polyCoords.add(addList);
+			pathIterator.next();
+		}
+		return new Polygon(polyCoords, 64, 64);
+	}
 
 
-	private java.awt.Shape makeShape (BufferedImage image)
+	public static java.awt.Shape makeShape (BufferedImage image)
 	{
 		int h = image.getHeight();
 		int w = image.getWidth();
