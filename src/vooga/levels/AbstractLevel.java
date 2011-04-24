@@ -8,6 +8,7 @@ import com.golden.gamedev.object.Background;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.buildable.components.BasicComponent;
+import vooga.util.buildable.components.IComponent;
 import vooga.core.VoogaGame;
 
 /**
@@ -154,7 +155,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      * @param desired components for the sprite
      * @return the newly created sprite
      */
-    public Sprite addArchetypeSprite (String type, int x, int y, BasicComponent... components)
+    public Sprite addArchetypeSprite (String type, int x, int y, IComponent... components)
     {
         //TODO
         //myLevelParser.createNewSpriteOfArchetype(spriteArchetype);

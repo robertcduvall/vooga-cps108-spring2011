@@ -1,6 +1,9 @@
 package vooga.core;
 
 import java.awt.Graphics2D;
+import java.util.HashMap;
+import java.util.Map;
+
 import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
 import vooga.core.event.ISimpleEventManager;
@@ -21,7 +24,8 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     private ResourceManager myResourceManager;
     private KeyMap myKeyMap;
     private LevelManager myLevelManager;
-    private VoogaState myStates;
+    private VoogaState myState;
+    private Map<Integer, VoogaState> myStates;
 
     public VoogaGame ()
     {
@@ -29,6 +33,7 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
         myEventManager = new EventManager();
         myResourceManager = new ResourceManager(this.getClass());
         myLevelManager = new LevelManager(this);
+        myStates = new HashMap<Integer, VoogaState>();
     }
     
     @Override
@@ -132,7 +137,7 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     
     public void startLevel(int id) 
     {
-    	myState = myStates.get(GAME); //FIXME
+    	myState = myStates.get(GAME);
     	myLevelManager.loadLevel(id);
     }
 

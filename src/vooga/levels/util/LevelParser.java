@@ -56,8 +56,8 @@ public class LevelParser extends Parser {
 		return level;
 	}
 	
-	public void setBackground(Background background) {
-		level.setBackground(background);
+	public void addToBackgroundQueue(Background background) {
+		level.addToBackgroundQueue(background);
 	}
 	
 	public void setGoal(IGoal goal) {
