@@ -31,10 +31,12 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     private LevelManager myLevelManager;
     private VoogaState myState;
     private Map<Integer, VoogaState> myStates;
-
-    public VoogaGame ()
+    
+    @Override
+    protected void initEngine()
     {
-        super();
+        super.initEngine();
+        
         myResourceManager = new ResourceManager(this);
         myLevelManager = new LevelManager(this);
         myStates = new HashMap<Integer, VoogaState>();
