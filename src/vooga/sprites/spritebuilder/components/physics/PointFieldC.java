@@ -59,4 +59,10 @@ public class PointFieldC extends VelocityC implements IPointField {
         return new Point((int) mySprite.getCenterX(), (int) mySprite.getCenterY());
     }
 
+    @Override
+    public double getConstant() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 }
