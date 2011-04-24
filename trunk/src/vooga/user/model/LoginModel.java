@@ -32,9 +32,9 @@ public class LoginModel
 {
 	private VoogaUser user;
 	private LoginController controller;
-	private Map<String, String> keyMap;
 	private RegXParser myRegEx;
 	private SQLite database;
+	private final static String USER_TABLE = "user";
 	
 	private ResourceManager registrationResource = new ResourceManager("vooga.user.resources.Registration");
 	private ResourceManager regExResource = new ResourceManager("vooga.user.resources.RegularExpressionResource"); 
@@ -43,19 +43,8 @@ public class LoginModel
 		user = new VoogaUser();
 		controller = pc;
 		myRegEx =new RegXParser();
-	//	buildPasswordMap();
 	}
-//Soon to be unnecessary
-///**
-// * Build password map is called every time a model is initialized and it is used to read-in all the passwords and usernames
-// * from a given file and create a map that evaluates these log-ins
-// */
-//	private void buildPasswordMap(){
-//		List<String> passwords = new ArrayList<String>();
-//		passwords = new PasswordEncoding().readFile(new File("src/vooga/user/resources/PasswordResource.txt"));
-//	 	keyMap = new PasswordParser().parse(passwords);
-//		
-//	}
+
 
 /**
  * Process is a method called by the controller that evaluates the information inputed by the user
@@ -71,23 +60,9 @@ public class LoginModel
 				return false;
 			}
 		}
-		try {
-			database = new SQLite();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			database.update("fatbat", prompt, text);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			database.retrieveTableStats("fatbat", prompt);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		database = new SQLite();	
+		database.addNewUser(USER_TABLE, prompt[0], text);
+		database.close();
 		return true;
 	}
 
@@ -95,7 +70,7 @@ public class LoginModel
  * The update method reads in a resource file and composes the prompt questions in the GUI layout
  */
 	public LoginTemplate[] update() {
-		int x = 0;
+		int x = -1;
 		String[] headerSections = registrationResource.getStringArray("Section");
 		LoginTemplate[] updateInformation = new LoginTemplate[headerSections.length];
 		for (int p = 0; p < headerSections.length; p++) {
@@ -115,21 +90,9 @@ public class LoginModel
 	/**
 	 * This method uses the password map to determine if the user has a pre-existing VoogaUser account to operate through
 	 */
-	public void verifyPassword(String user2, String password) {
-		if (keyMap.containsKey(user2)) {
-			String correctPassword = keyMap.get(user2);
-			if (correctPassword.equals(password)) {
-				System.out.print("Correct");
-				try {
-					user = XmlWriter.readXML("resources/first.xml");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			System.out.println(user.myUsername);
-		} else {
-			controller.displayError("Incorrect Password");
-		}
+	public boolean verifyPassword(String user, String password) {
+				database = new SQLite();
+		return password.matches(database.retrieveExactEntry(USER_TABLE, user, "Password"));
 	}
 
 	/**
@@ -139,14 +102,12 @@ public class LoginModel
 		String[] loginPrompt = registrationResource.getStringArray("DefaultLoginPrompt");
 		String[] one = {loginPrompt[0],loginPrompt[1]}; String[] two = {};
 		String image = "src/vooga/user/resources/DefaultLoginImage.png";
-		LoginTemplate[] log = {new LoginTemplate(loginPrompt[2], one,image,1), new LoginTemplate(loginPrompt[3],two,image,2)};
+		LoginTemplate[] log = {new LoginTemplate(loginPrompt[2], one,image,0), new LoginTemplate(loginPrompt[3],two,image,2)};
 		return log;
 	}
 	
 	public VoogaUser getVoogaUser(){
 		return user;
-		//VoogaUser copy = user;
-		//return copy;
 	}
 	}
 

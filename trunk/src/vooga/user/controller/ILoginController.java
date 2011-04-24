@@ -21,7 +21,7 @@ public interface ILoginController
 /**
  * This method verifys that a log-in password and username exist in a given password bank or database
  */
-	public void approveLogin(String user, String password);
+	public boolean approveLogin(String user, String password);
 
 /**
  * Update with input is called by the model to update the prompt questions in the view. Uber helpful

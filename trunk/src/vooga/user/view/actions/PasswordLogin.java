@@ -16,14 +16,23 @@ public class PasswordLogin extends AbstractLoginAction{
 		panel = fieldPanel;
 	}
 
-	@SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		String[] input = panel.getInputFields();
 		System.out.println("size " + input.length);
 		String username = input[0];
 		String password = input[1];
-		controller.approveLogin(username, password);
+		if(!controller.approveLogin(username, password)){
+			controller.displayError("Incorrect Username & Password");
+		}else{
+			try {
+			controller.exitLogin();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("WELCOME!!");
+		}
 
 	}
 
