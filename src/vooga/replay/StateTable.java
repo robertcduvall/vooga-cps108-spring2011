@@ -24,19 +24,19 @@ public class StateTable implements Serializable {
 	protected Map<Integer, Map<Sprite, SpriteReplayData>> myMap;
 	protected BufferedImageSerialData myBackgroundImageData;
 	protected Background myBackground;
-	protected int time;
+	protected int gameTime;
 	protected int replayTime;
 	protected SerialPlayField lastPlayField;
 
 	public StateTable() {
 		myMap = new HashMap<Integer, Map<Sprite, SpriteReplayData>>();
 		lastPlayField = new SerialPlayField();
-		time = 0;
+		gameTime = 0;
 	}
 
 	
 	public Replay replayTable(GameEngine parent){
-		return new Replay(parent, this, time);
+		return new Replay(parent, this, gameTime);
 	}
 	/**
 	 * Using the play field, this will record the SpriteReplayData and the
@@ -53,8 +53,8 @@ public class StateTable implements Serializable {
 		{
 			updateHelper(spriteGroup.getSprites(), tempMap);
 		}
-		myMap.put(time, tempMap);
-		time++;
+		myMap.put(gameTime, tempMap);
+		gameTime++;
 	}
 	
 	/**
