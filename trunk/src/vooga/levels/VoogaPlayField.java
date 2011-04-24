@@ -271,6 +271,8 @@ public class VoogaPlayField
      */
     public void render(Graphics2D g)
     {
+        // Background
+        myBackground.render(g);
         // Sprite Groups
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
             if(currentGroup.isActive())
@@ -278,7 +280,5 @@ public class VoogaPlayField
         // Renderables
         for(IRenderable currentRenderable : myRenderables)
             currentRenderable.render(g);
-        // Background
-        myBackground.render(g);
     }
 }
