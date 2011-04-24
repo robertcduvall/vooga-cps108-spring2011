@@ -34,7 +34,7 @@ public class Example2 extends VoogaGame {
 	    players.add(player);
 	    //myResourceManager = new ResourceManager("");
 		myLevelManager = new LevelManager(this);
-		myLevelManager.start();
+		myLevelManager.loadLevel(0);
 	}
 
 	@Override
