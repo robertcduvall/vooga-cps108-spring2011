@@ -8,6 +8,9 @@ ResourceManager is responsible for reading the central resource.xml file for eac
 
 {{{
 <resources>
+    <strings>
+        <foo>bar</foo>
+    </strings>
     <images>
         <source>images.xml</source>
     </images>
@@ -18,8 +21,13 @@ ResourceManager is responsible for reading the central resource.xml file for eac
 }}}
 
 In the above example, you see that the root tag is `<resources>`, and it includes all other tags. `<images>` is the enclosing tag for image resources, and the contents of this tag define image resources.
+
 The `<source>...</source>` tag is essentially an include directive.
+
 The `<level>` tag defines levels in the game. the _id_ attribute is the id of the given level, and the enclosed string is the filename of the level.
+
+The `<strings>` tag encloses key-value pairs of strings. For instance, _foo_ would be the key to value _bar_ in the example above. These are accessed via the Bundle object returned by the `getBundle()` method of ResourceManager.
+
 
 == Example images.xml (from Asteroids) ==
 {{{
