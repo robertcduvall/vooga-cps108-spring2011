@@ -14,6 +14,7 @@ import vooga.arcade.view.helper.ResourceManager;
  * Connects the GUI Components to create the Middle Frame in the Vooga Project.
  * @author Andrea Scripa
  * @author Ethan Goh
+ * @author KevinWang
  * 
  */
 public class VoogaMiddleFrame extends JPanel
@@ -50,10 +51,10 @@ public class VoogaMiddleFrame extends JPanel
 		return rightPanel;
 	}
 
-	public void updateThumbnails(ThumbnailPanel newPanel)
+	public void updateThumbnails(List<ArcadeGameObject> ao, String searchQuery)
 	{
-		this.remove(middlePanel);
-		middlePanel = newPanel;
-		this.add(middlePanel, BorderLayout.CENTER);
+		middlePanel.addNewCard(ArcadePanelFactory
+                .generateArcadeGamePanels(ao), searchQuery);
+		middlePanel.show(searchQuery);
 	}
 }

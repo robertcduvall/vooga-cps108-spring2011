@@ -82,7 +82,8 @@ public class ArcadeGameObject extends ArcadeObject
 
 	public String getData(String name)
 	{
-		return root.getChildText(name);
+		//:TODO return empty string
+	    return root.getChildText(name);
 	}
 
 	/**

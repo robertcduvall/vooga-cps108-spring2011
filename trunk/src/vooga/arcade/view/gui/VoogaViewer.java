@@ -2,11 +2,14 @@ package vooga.arcade.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import vooga.arcade.controller.ArcadeController;
+import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.view.buttonToolBar.ButtonBar;
 import vooga.arcade.view.helper.ResourceManager;
 import vooga.arcade.view.iView.IView;
@@ -91,4 +94,8 @@ public class VoogaViewer extends JFrame implements IView
     public void updateList (String name)
     {
     }
+   
+   public void updateGameObjectList(List<ArcadeGameObject> arcadeGameList, String searchQuery){
+       middleFrame.updateThumbnails(arcadeGameList, searchQuery);
+   }
 }

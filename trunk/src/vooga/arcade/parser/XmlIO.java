@@ -54,6 +54,5 @@ public class XmlIO{
             writer = new XMLOutputter();
             writer.setFormat(Format.getPrettyFormat());
         }
-        
     }
 }

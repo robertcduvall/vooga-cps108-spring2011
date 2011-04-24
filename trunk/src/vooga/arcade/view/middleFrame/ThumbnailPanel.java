@@ -1,5 +1,6 @@
 package vooga.arcade.view.middleFrame;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
@@ -24,20 +25,31 @@ public class ThumbnailPanel extends JPanel
 
 	public ThumbnailPanel(List<JPanel> thumbnails)
 	{
-		JPanel thumbPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
-		// Size of the Frame itself (Determines scroll length)
-		thumbPanel.setPreferredSize(new Dimension(620, 500));
-		JScrollPane scrollPane = new JScrollPane(thumbPanel);
-
-		// Size of the Panel inside the frame.
-		scrollPane.setPreferredSize(new Dimension(640, 460));
-		for (JPanel thumbnail : thumbnails)
-		{
-			thumbPanel.add(thumbnail);
-		}
-		scrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		this.add(scrollPane);
+	    super(new CardLayout());
+	    addNewCard(thumbnails, "init");
 	}
+    
+    public void addNewCard(List<JPanel> thumbnails, String name){
+        JPanel thumbPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        // Size of the Frame itself (Determines scroll length)
+        thumbPanel.setPreferredSize(new Dimension(620, 500));
+        for (JPanel thumbnail : thumbnails)
+        {
+            thumbPanel.add(thumbnail);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(thumbPanel);
+        
+        // Size of the Panel inside the frame.
+        scrollPane.setPreferredSize(new Dimension(640, 460));
+        
+        scrollPane
+                .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.add(scrollPane, name);
+    }
+    
+    public void show (String name){
+        CardLayout cl = (CardLayout)(this.getLayout());
+        cl.show(this, name);
+    }
 }
