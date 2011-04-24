@@ -1,6 +1,7 @@
 package vooga.arcade.parser.gameObject;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import org.jdom.Element;
  */
 public abstract class ArcadeObject
 {
-	protected Image image;
+	protected BufferedImage image;
 	protected Element root;
 	protected String path;
 	
@@ -30,7 +31,7 @@ public abstract class ArcadeObject
 	/**
 	 * @return the drawableData
 	 */
-	public Image getImage() {
+	public BufferedImage getImage() {
         if(image!= null) return image;
         
         try {
