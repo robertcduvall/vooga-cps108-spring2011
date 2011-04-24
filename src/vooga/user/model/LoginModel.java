@@ -61,7 +61,7 @@ public class LoginModel
 			}
 		}
 		database = new SQLite();	
-		database.addNewUser(USER_TABLE, prompt[0], text);
+		database.addNewUser(USER_TABLE, text);
 		database.close();
 		return true;
 	}
