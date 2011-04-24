@@ -11,7 +11,7 @@ import vooga.resources.xmlparser.XMLTag;
 
 public class CollisionManagerTag extends XMLTag {
 	private static final String TAG_NAME = "collision_manager";
-	private static final String CLASS_NAME = "class_name";
+	private static final String CLASS = "class";
 	private static final String G1_ATTR = "g1";
 	private static final String G2_ATTR = "g2";
 	
@@ -30,7 +30,7 @@ public class CollisionManagerTag extends XMLTag {
 	public void parse(Parser context, Element xmlElement) {
 		// Grab the name of the first and second sprite groups, and the class to
 		// instantiate.
-		String className = xmlElement.getAttribute(CLASS_NAME);
+		String className = xmlElement.getAttribute(CLASS);
 		String group1 = xmlElement.getAttribute(G1_ATTR);
 		String group2 = xmlElement.getAttribute(G2_ATTR);
 		
