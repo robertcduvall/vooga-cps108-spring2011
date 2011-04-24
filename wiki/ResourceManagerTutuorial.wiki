@@ -11,16 +11,15 @@ ResourceManager is responsible for reading the central resource.xml file for eac
     <images>
         <source>images.xml</source>
     </images>
-    <levels>
-        <level id=1>level1.xml</level>
-        <level id=2>level2.xml</level>
-         ....
-    </levels>
+    <level id=1>level1.xml</level>
+    <level id=2>level2.xml</level>
+     ....
 </resources>
 }}}
 
-In the above example, you see that the root tag is <resources>, and it includes all other tags. <images> is the enclosing tag for image resources, and the contents of this tag define image resources.
-The {{{<source>...</source>}}} tag is essentially an include directive.
+In the above example, you see that the root tag is `<resources>`, and it includes all other tags. `<images>` is the enclosing tag for image resources, and the contents of this tag define image resources.
+The `<source>...</source>` tag is essentially an include directive.
+The `<level>` tag defines levels in the game. the _id_ attribute is the id of the given level, and the enclosed string is the filename of the level.
 
 == Example images.xml (from Asteroids) ==
 {{{
@@ -36,3 +35,5 @@ The {{{<source>...</source>}}} tag is essentially an include directive.
 	</image>
 </images>
 }}}
+
+In the above images.xml file, the _name_ attribute specifies the common name of the image resource, and the path its path.
