@@ -11,7 +11,8 @@ import java.awt.image.BufferedImage;
 public class VoogaButton {
 	//State
     private BufferedImage image;
-    private Dimension imageSizes;
+    @SuppressWarnings("unused")
+	private Dimension imageSizes;
     private Dimension position;
     private String title;
     

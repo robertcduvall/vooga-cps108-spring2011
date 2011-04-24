@@ -1,0 +1,11 @@
+<images>
+	<image name="ship">
+		<path>src/games/asteroids/resources/images/ship.gif</path>
+	</image>
+	<image name="bullet">
+		<path>src/games/asteroids/resources/images/green_bullet.gif</path>
+	</image>
+	<image name="asteroid">
+		<path>src/games/asteroids/resources/images/asteroid.gif</path>
+	</image>
+</images>

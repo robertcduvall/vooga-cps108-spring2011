@@ -1,13 +1,14 @@
 package vooga.gui.panes;
 
 
-import java.awt.Graphics2D;  
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import com.golden.gamedev.object.Sprite;
 
 
-import vooga.core.VoogaGame;
+import vooga.core.event.IEventHandler;
+import vooga.gui.PaneManager;
 import vooga.gui.util.ScrollingSpriteDisplay;
 
 /**
@@ -20,8 +21,10 @@ import vooga.gui.util.ScrollingSpriteDisplay;
  */
 public class InfoPane extends PopoverPane {
 	Sprite myHeader;
+	String myName;
 	ScrollingSpriteDisplay<Sprite> myDisplay;
 	int lastIndex;
+	boolean reset;
 	
 	/**
 	 * Create a pane that displays info such as instructions 1 at a time. These instructions
@@ -31,7 +34,7 @@ public class InfoPane extends PopoverPane {
 	 * @param infoSlides the instructions you want to display
 	 * @param header a header image you want to display above the information.
 	 */
-	public InfoPane(VoogaGame parent, BufferedImage[] infoSlides, BufferedImage header) {
+	public InfoPane(PaneManager parent, BufferedImage[] infoSlides, BufferedImage header) {
 		super(parent);
 
 		//Make a sprite from our header
@@ -39,7 +42,7 @@ public class InfoPane extends PopoverPane {
 		
 		//Create the scrolling display which shows 1 image at a time
 		myDisplay=new ScrollingSpriteDisplay<Sprite>(40, header.getHeight()+10, parent.getWidth()-85, 
-				parent.getHeight()-header.getHeight(), 1, parent);
+				parent.getHeight()-header.getHeight(), 1, parent.getParent());
 		
 		if(infoSlides!=null&&infoSlides.length>0){
 			hideButton(MENU_BUTTON, true);
@@ -50,6 +53,14 @@ public class InfoPane extends PopoverPane {
 		}
 		lastIndex=infoSlides.length-1;
 		
+		myName="Default";
+		myParent.getEventManager().registerEventHandler("ResetInfoPane."+myName, new IEventHandler(){
+			@Override
+			public void handleEvent(Object o) {
+				reset();
+			}
+			
+		});
 	}
 	
 	/**
@@ -83,6 +94,26 @@ public class InfoPane extends PopoverPane {
 		Boolean b = !(myDisplay.getDisplayStart()==lastIndex);
 //		hideButton(MENU_BUTTON, b);
 		hideButton(BACK_BUTTON, b);
+	}
+	
+	/**
+	 * Set the name of this infoPane, important if you want to reset this pane- fire the event
+	 * "ResetInfoPane.[myName]" to start it from 0.
+	 * @param newName the string you want to change this pane's name to.
+	 */
+	public void setName(String newName){
+		if(newName!=null){
+			myParent.getEventManager().removeEventHandler("ResetInfoPane."+myName);
+			myName=newName;
+			myParent.getEventManager().registerEventHandler("ResetInfoPane."+myName, new IEventHandler(){
+				@Override
+				public void handleEvent(Object o) {
+					reset();
+				}
+			});
+		}else{
+			System.out.println("New name is null... keeping current one instead.");
+		}
 	}
 
 }

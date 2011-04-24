@@ -10,6 +10,7 @@ import vooga.gui.panes.UIPane;
 import vooga.gui.util.NumberDisplay;
 import vooga.gui.util.VoogaButton;
 
+@Deprecated
 public class ExampleUI extends UIPane{
 	ExampleGame parent;
 	Sprite uiBase;
@@ -52,7 +53,8 @@ public class ExampleUI extends UIPane{
 
 	@Override
 	public void update() {
-		score.setNumber(parent.getScore());
+		//Commented out to remove that red x from the package.
+//		score.setNumber(parent.getScore());
 		
 	}
 
