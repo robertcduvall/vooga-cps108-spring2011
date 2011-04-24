@@ -39,6 +39,7 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
         
         myResourceManager = new ResourceManager(this);
         myLevelManager = new LevelManager(this);
+        myResourceManager.parse();
         myStates = new HashMap<Integer, VoogaState>();
         myState = new VoogaState()
         {

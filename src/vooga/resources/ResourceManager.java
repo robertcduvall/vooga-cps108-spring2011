@@ -42,14 +42,6 @@ public class ResourceManager extends Parser {
         addDefinitions( new RootTag(),
                         new ImageResourceTag(this),
                         new LevelTag(this));
-        try
-        {
-            parse(new File(game.getClass().getResource(RESOURCE_FILENAME).toURI()).getAbsolutePath());
-        }
-        catch (URISyntaxException e)
-        {
-            e.printStackTrace();
-        }
     }
 	
 	public void setImageLoader(ImageLoader imageLoader)	{
@@ -72,6 +64,22 @@ public class ResourceManager extends Parser {
 //	{
 //	    this.soundLoader = soundLoader;
 //	}
+
+	/**
+	 * Parse the resources.xml file.
+	 */
+	public void parse() {
+        try
+        {
+            parse(new File(myGame.getClass().getResource(RESOURCE_FILENAME).toURI()).getAbsolutePath());
+        }
+        catch (URISyntaxException e)
+        {
+            e.printStackTrace();
+        }
+        // Set level order once we've loaded all the level tags.
+        myGame.getLevelManager().setLevelOrder(levelMap);
+	}
 	
 	public KeyMap getKeyMap() {
 	    return myKeyMap;
