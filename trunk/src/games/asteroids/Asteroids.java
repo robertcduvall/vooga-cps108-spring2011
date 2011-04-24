@@ -24,11 +24,11 @@ public class Asteroids extends VoogaGame
         myShip.setY(150);
         getLevelManager().addPlayer(new SpriteGroup<Sprite>("Ship", myShip));
         
-        // TODO Manually set levelOrder until ResourceManager does this
-        Map<Integer, String[]> levelOrder = new HashMap<Integer, String[]>();
-        levelOrder.put(0, new String[]{"src/games/asteroids/resources/levels/level0.xml", "games.asteroids.Level"});
-        getLevelManager().setLevelOrder(levelOrder);
-        
+//        // TODO Manually set levelOrder until ResourceManager does this
+//        Map<Integer, String[]> levelOrder = new HashMap<Integer, String[]>();
+//        levelOrder.put(0, new String[]{"src/games/asteroids/resources/levels/level0.xml", "games.asteroids.Level"});
+//        getLevelManager().setLevelOrder(levelOrder);
+//        
         getLevelManager().loadLevel(0);
     }
 
