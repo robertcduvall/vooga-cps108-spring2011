@@ -92,7 +92,9 @@ public class Level1 extends GameObject {
 			dogSprite.setLocation(myPlayer.getX(), myPlayer.getY());
 			dogSprite.setMovement(elapsedTime*.005, elapsedTime*.5);
 		}
-
+		if(keyDown(KeyEvent.VK_G)){
+			myPlayer.setActive(!myPlayer.isActive());
+		}
 		if (keyDown(KeyEvent.VK_ESCAPE)) {
 			stfm.writeToNewSaveFile(myTable, "st");
 			parent.nextGame = myTable.replayTable(parent);
