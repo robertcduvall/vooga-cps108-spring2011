@@ -16,6 +16,10 @@ public class MovableCollisionBehavior extends EmptyCollisionBehavior{
     public Velocity getVelocity() {
         return myVelocity;
     }
+    
+    public void updateVelocity(Velocity newVelocity){
+        myVelocity = newVelocity;
+    }
 
     public Velocity collisionToVelocityChange(MovableCollisionBehavior otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         double myParallel = this.getVelocity().getParallelComponent(angleOfImpact);
