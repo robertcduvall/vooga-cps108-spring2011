@@ -21,7 +21,7 @@ import vooga.reflection.Reflection;
  * @author Andrew Patterson & Wesley Brown
  */
 public class LevelManager implements VoogaState {
-	private static final String LEVEL_CLASS_PATH_PREFIX = "vooga.levels.example2.";
+	private static final String LEVEL_CLASS_PATH_PREFIX = "";
 	private static final String PLAYER_GROUP_NAME = "player";
 
 	/** A map of level number to array of [levelFilePath, levelType ] */

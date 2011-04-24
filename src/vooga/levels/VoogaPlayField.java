@@ -134,7 +134,8 @@ public class VoogaPlayField extends PlayField
     @Override
     public void update(long elapsedTime)
     {
-        super.update(elapsedTime);
+//        super.update(elapsedTime);
+        this.updateBackground(elapsedTime);
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
             currentGroup.update(elapsedTime);
         for(CollisionManager currentManager : myCollisionManagers)
