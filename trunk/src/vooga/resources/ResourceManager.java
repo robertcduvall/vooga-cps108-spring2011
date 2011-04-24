@@ -7,6 +7,7 @@ import java.util.Map;
 import vooga.core.VoogaGame;
 import vooga.resources.images.ImageLoader;
 import vooga.resources.managertags.ImageResourceTag;
+import vooga.resources.managertags.KeyMapTag;
 import vooga.resources.managertags.LevelTag;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;

@@ -13,9 +13,9 @@ import vooga.resources.xmlparser.XMLTag;
 public class KeyMapParser extends Parser {
 	
 	private class KeyTag extends XMLTag {
-		private static final String TAG_NAME = "key";
-		private static final String SENSITIVE_ATTR = "sensitive";
-		private static final String NAME_ATTR = "name";
+		private static final String TAG_NAME = "key_event";
+		private static final String SENSITIVE_ATTR = "sensitivity";
+		private static final String NAME_ATTR = "key";
 		private static final String EVENT_ATTR = "event";
 		
 		private KeyMap keyMap;

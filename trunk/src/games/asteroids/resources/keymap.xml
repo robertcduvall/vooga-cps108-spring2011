@@ -1,28 +1,8 @@
 <keymap>
-	<key_event>
-		<event>Input.User.Thrust</event>
-		<sensitivity>Level</sensitivity>
-		<key>UP</key>
-	</key_event>
-	<key_event>
-		<event>Input.User.TurnLeft</event>
-		<sensitivity>Level</sensitivity>
-		<key>LEFT</key>
-	</key_event>
-	<key_event>
-		<event>Input.User.TurnRight</event>
-		<sensitivity>Level</sensitivity>
-		<key>RIGHT</key>
-	</key_event>
-	<key_event>
-		<event>Input.User.Shoot</event>
-		<sensitivity>Edge</sensitivity>
-		<key>SPACE</key>
-	</key_event>
-	<key_event>
-		<event>Input.User.Cheat</event>
-		<sensitivity>Edge</sensitivity>
-		<key>X</key>
-	</key_event>
+	<key_event event="Input.User.Thrust" sensitivity="Level" key="UP" />
+	<key_event event="Input.User.TurnLeft" sensitivity="Level" key="LEFT"/>
+	<key_event event="Input.User.TurnRight" sensitivity="Level" key="RIGHT"/>
+	<key_event event="Input.User.Shoot" sensitivity="Edge" key="SPACE"/>
+	<key_event event="Input.User.Cheat" sensitivity="Edge" key="X"/>
 	<!-- TODO figure out mouse event firing -->
 </keymap>
