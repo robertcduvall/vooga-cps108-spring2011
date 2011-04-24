@@ -66,9 +66,12 @@ public class ConverterRack {
 		
 		addConverter(String.class, new StringConverter());
 		addConverter(Integer.class, new IntegerConverter());
+		addConverter(int.class, new IntegerConverter());
 		addConverter(Boolean.class, new BooleanConverter());
+		addConverter(boolean.class, new BooleanConverter());
 		addConverter(Double.class, new DoubleConverter());
-		addConverter(ImageConverter.class, new ImageConverter(g.getImageLoader()));
+		addConverter(double.class, new DoubleConverter());
+		addConverter(BufferedImage.class, new ImageConverter(g.getResourceManager().getImageLoader()));
 	}
 	
 	/**
@@ -129,9 +132,11 @@ public class ConverterRack {
 		}
 				
 		// Use reflection to create a new instance of the target class.
-		@SuppressWarnings("unchecked")
-		T targetObject = (T) Reflection.createInstance(className, params);
-		
-		return targetObject;
+		if(params.length > 0)
+		{
+		    return (T) Reflection.createInstance(className, params);
+		} else {
+            return (T) Reflection.createInstance(className);
+		}
 	}
 }
