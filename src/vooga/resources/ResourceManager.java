@@ -1,5 +1,7 @@
 package vooga.resources;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import vooga.core.VoogaGame;
@@ -19,9 +21,10 @@ public class ResourceManager extends Parser {
 	
 	private static final String RESOURCE_FILENAME = "resources.xml";
     private ImageLoader imageLoader;
-    private String myFilename;
 	
 	private Map<Integer, String[]> levelMap;
+    private VoogaGame myGame;
+    private KeyMap myKeyMap;
 	
 	public class RootTag extends XMLTag {
 		@Override
@@ -31,19 +34,22 @@ public class ResourceManager extends Parser {
 	}
 
 
-	public ResourceManager (Class<? extends VoogaGame> gameClass)
+	public ResourceManager (VoogaGame game)
     {
-	    this(gameClass.getResource(RESOURCE_FILENAME).getPath());
-    }
-	
-	public ResourceManager (String resourceFilePath)
-	{
         super();
-        myFilename = resourceFilePath;
+        myGame = game;
         levelMap = new HashMap<Integer, String[]>();
         addDefinitions( new RootTag(),
                         new ImageResourceTag(this),
                         new LevelTag(this));
+        try
+        {
+            parse(new File(game.getClass().getResource(RESOURCE_FILENAME).toURI()).getAbsolutePath());
+        }
+        catch (URISyntaxException e)
+        {
+            e.printStackTrace();
+        }
     }
 	
 	public void setImageLoader(ImageLoader imageLoader)	{
@@ -56,15 +62,32 @@ public class ResourceManager extends Parser {
 	public ImageLoader getImageLoader() {
 		return imageLoader;
 	}
-
-	/**
-	 * Parse the resource file.
-	 */
-	public void init() {
-		parse(myFilename);
+	
+//	TODO: SoundLoader
+//	public SoundLoader getSoundLoader() {
+//	    return soundLoader;
+//	}
+//	
+//	public void setSoundLoader(SoundLoader soundLoader)
+//	{
+//	    this.soundLoader = soundLoader;
+//	}
+	
+	public KeyMap getKeyMap() {
+	    return myKeyMap;
+	}
+	
+	public void setKeyMap(KeyMap keyMap)
+	{
+	    myKeyMap = keyMap;
 	}
 
 	public Map<Integer, String[]> getLevelMap() {
 		return levelMap;
 	}
+
+    public VoogaGame getGame ()
+    {
+        return myGame;
+    }
 }
