@@ -47,7 +47,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         myGame = game;
         for(SpriteGroup<Sprite> currentPlayer : players)
         {
-            addGroup(currentPlayer);
+            addSpriteGroup(currentPlayer);
         }
         myBackgrounds = new LinkedList<Background>();
         myMusic = new LinkedList<String>();
