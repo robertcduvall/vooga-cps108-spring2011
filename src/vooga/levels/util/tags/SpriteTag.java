@@ -10,7 +10,7 @@ import vooga.resources.xmlparser.XMLTag;
 public class SpriteTag extends XMLTag {
 	private static final String GROUP = "group";
 	private static final String CLASS = "class";
-	public static final String NAME = "name";
+	public static final String TYPE = "type";
 	private static final String SPRITE = "sprite";
 	private static final String IMAGE = "image";
 	
@@ -28,7 +28,7 @@ public class SpriteTag extends XMLTag {
 	@Override
 	public void parse(Parser context, Element xmlElement) {
 		String className = xmlElement.getAttribute(CLASS);
-		String name = xmlElement.getAttribute(NAME);
+		String name = xmlElement.getAttribute(TYPE);
 		String spriteGroup = xmlElement.getAttribute(GROUP);
 		String image = xmlElement.getAttribute(IMAGE);
 		
