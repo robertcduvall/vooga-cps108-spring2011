@@ -15,33 +15,32 @@ import javax.swing.*;
  * palette, which is a panel of buttons with pictures of sprites on them, and
  * the viewport, which is where the level is actually rendered and where the
  * user can place new sprites.
+ * @author Alex Lee
+ * @author Charlie Hatcher
  */
 public class DrawingBoard extends JPanel
 {
 
-    public static final int LAYER_GREENSCREEN = -100;
-    public static final int LAYER_BACKGROUND = 0;
-    public static final int LAYER_SPRITES = 100;
-    public static final int LAYER_DRAG = 500;
-
     private SwingGUI owner;
 
     private Palette palette;
-    private ImageIcon test;
 
     private Viewport layers;
+
+    private JLabel statusbar;
 
     public DrawingBoard(SwingGUI owner)
     {
         /*
+         * User a BorderLayout so that we can easily fill all available space
+         * with the viewport.
+         */
+        super(new BorderLayout());
+
+        /*
          * Associate this with the controller.
          */
         this.owner = owner;
-
-        /*
-         * Use a BorderLayout so that we can easily fill all available space.
-         */
-        this.setLayout(new BorderLayout());
 
         /*
          * Load the background image so that we know how big the drawing board
@@ -56,24 +55,12 @@ public class DrawingBoard extends JPanel
         {
             e.printStackTrace();
         }
-        int width = bgimage.getWidth();
-        int height = bgimage.getHeight();
-
-        /*
-         * Construct the greenscreen. This shows the user where the end of the
-         * level is, and it extends 100 pixels each side past the boundaries
-         * of the background image.
-         */
-        JLabel greenscreen = new JLabel();
-        greenscreen.setBackground(Color.GREEN);
-        greenscreen.setOpaque(true);
-        greenscreen.setBounds(0, 0, width+200, height+200);
 
         /*
          * Now we have enough information to create the JLayeredPane. It is
          * placed in the center so that it will take all available space.
          */
-        layers = new Viewport(this, width+200, height+200);
+        layers = new Viewport(this, bgimage);
         JScrollPane layersHolder = new JScrollPane(layers);
         this.add(layersHolder, BorderLayout.CENTER);
 
@@ -88,18 +75,14 @@ public class DrawingBoard extends JPanel
         add(paletteHolder, BorderLayout.WEST);
 
         /*
-         * Add the greenscreen and the background.
+         * Create the statusbar.
          */
-        layers.add(greenscreen, LAYER_GREENSCREEN);
-        JLabel background = new JLabel(new ImageIcon(bgimage));
-        background.setOpaque(true);
-        background.setBounds(100, 100, width, height);
-        layers.add(background, LAYER_BACKGROUND);
+        this.statusbar = new StatusBar();
     }
-    
+
     protected void setStatusBar(String message)
     {
-        owner.setStatusBar(message);
+        statusbar.setText(message);
     }
 
 }
