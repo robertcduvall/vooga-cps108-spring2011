@@ -20,16 +20,16 @@ public class VoogaPlayField
 {
     /** The background for this playingfield that will be rendered each time the playingfield is rendered */
     private Background myBackground;
-    
+
     /** All of the sprite groups that are currently on the playingfield */
     private Collection<SpriteGroup<Sprite>> mySpriteGroups;
 
     /** All of the collision managers that are part of the playingfield */
     private Collection<CollisionManager> myCollisionManagers;
-    
+
     /** All other objects which are updatable */
     private Collection<IUpdatable> myUpdatables;
-    
+
     /** All other objects which are renderable */
     private Collection<IRenderable> myRenderables;
 
@@ -39,9 +39,10 @@ public class VoogaPlayField
         myCollisionManagers = new ArrayList<CollisionManager>();
         myUpdatables = new ArrayList<IUpdatable>();
         myRenderables = new ArrayList<IRenderable>();
+        myBackground = Background.getDefaultBackground();
     }
 
-    
+
     /**
      * If it exists, returns the sprite group of the specified name. If it
      * doesn't exist, a new sprite group of the specified name is created, added
@@ -83,8 +84,8 @@ public class VoogaPlayField
         }
         mySpriteGroups.add(group);
     }
-    
-    
+
+
     /**
      * Gets all of the sprite groups for this playingfield
      * 
@@ -94,8 +95,8 @@ public class VoogaPlayField
     {
         return mySpriteGroups;
     }
-    
-    
+
+
     /**
      * Removes a specified sprite group from the playingfield (and if necessary
      * all of its associated collision managers)
@@ -129,7 +130,7 @@ public class VoogaPlayField
     {
         myCollisionManagers.add(manager);
     }
-    
+
 
     /**
      * Removes the specified collision manager from the playingfield (if it
@@ -148,8 +149,8 @@ public class VoogaPlayField
             }
         }
     }
-     
-    
+
+
     /**
      * Adds an IUpdatable to this playingfield
      * 
@@ -159,8 +160,8 @@ public class VoogaPlayField
     {
         myUpdatables.add(updatable);
     }
-    
-    
+
+
     /**
      * Adds an IRenderable to this playingfield
      * 
@@ -171,7 +172,7 @@ public class VoogaPlayField
         myRenderables.add(renderable);
     }
 
-    
+
     /**
      * Clears all sprites from the playingfield
      */
@@ -182,8 +183,8 @@ public class VoogaPlayField
             currentGroup.clear();
         }
     }
-    
-    
+
+
     /**
      * Sets the background for this playingfield
      * 
@@ -191,10 +192,11 @@ public class VoogaPlayField
      */
     public void setBackground(Background b)
     {
-        myBackground = b;
+        if(b == null) myBackground = Background.getDefaultBackground();
+        else myBackground = b;
     }
-    
-    
+
+
     /**
      * Checks collisions for all collision managers on this playingfield
      */
@@ -203,7 +205,7 @@ public class VoogaPlayField
         for(CollisionManager currentManager : myCollisionManagers)
             currentManager.checkCollision();
     }
-    
+
 
     /**
      * Inserts a sprite directly into the playingfield without explicitly giving
@@ -215,8 +217,8 @@ public class VoogaPlayField
     {
         getSpriteGroup("").add(extra);
     }
-    
-    
+
+
     /**
      * Gets the background for this playingfield
      * 
@@ -226,8 +228,8 @@ public class VoogaPlayField
     {
         return myBackground;
     }
-    
-    
+
+
     /**
      * Gets the collision managers for this playingfield
      * 
@@ -237,8 +239,8 @@ public class VoogaPlayField
     {
         return myCollisionManagers;
     }
-    
-    
+
+
     /**
      * Updates all the sprite groups, collision managers and IUpdatables
      * 
@@ -246,14 +248,19 @@ public class VoogaPlayField
      */
     public void update(long elapsedTime)
     {
+        // Sprite Groups
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
-            currentGroup.update(elapsedTime);
+            if(currentGroup.isActive())
+                currentGroup.update(elapsedTime);
+        // Collision Managers
         for(CollisionManager currentManager : myCollisionManagers)
-            currentManager.checkCollision();
+            if(currentManager.isActive())
+                currentManager.checkCollision();
+        // Updatables
         for(IUpdatable currentUpdatable : myUpdatables)
             currentUpdatable.update(elapsedTime);
-        if(myBackground != null)
-            myBackground.update(elapsedTime);
+        // Background
+        myBackground.update(elapsedTime);
     }
 
 
@@ -264,11 +271,14 @@ public class VoogaPlayField
      */
     public void render(Graphics2D g)
     {
+        // Sprite Groups
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
-            currentGroup.render(g);
+            if(currentGroup.isActive())
+                currentGroup.render(g);
+        // Renderables
         for(IRenderable currentRenderable : myRenderables)
             currentRenderable.render(g);
-        if (myBackground != null)
-            myBackground.render(g);
+        // Background
+        myBackground.render(g);
     }
 }
