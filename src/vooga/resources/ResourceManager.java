@@ -40,6 +40,7 @@ public class ResourceManager extends Parser {
         super();
         myGame = game;
         levelMap = new HashMap<Integer, String[]>();
+        myKeyMap = new KeyMap();
         addDefinitions( new RootTag(),
                         new ImageResourceTag(this),
                         new LevelTag(this),

@@ -156,9 +156,9 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      */
     public Sprite addArchetypeSprite (String type, int x, int y, IComponent... components)
     {
-        //TODO
-        //myLevelParser.createNewSpriteOfArchetype(spriteArchetype);
-    	return null;
+    	Sprite sprite = myLevelParser.makeSprite(type, x, y);
+    	sprite.addComponents(components);
+    	return sprite;
     }
 
 

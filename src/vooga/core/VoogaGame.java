@@ -66,6 +66,8 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
         };
         myStates.put(DEFAULT, myState);
         myStates.put(GAME, myLevelManager);
+        // Register keyboard input checking event handler.
+        myResourceManager.getKeyMap().registerEventHandler(this);
     }
     
     @Override

@@ -58,7 +58,13 @@ public class SpriteConstructor {
 	public Sprite construct(Object ... assignments) {
 		BufferedImage image = (BufferedImage) converterRack.convert(BufferedImage.class, imageName);
 
-		Sprite sprite = (Sprite) Reflection.createInstance(className, image, assignments);
+		// Put image and the rest of the assignments into a single array.
+		Object[] arguments = new Object[assignments.length+1];
+		arguments[0] = image;
+		for(int i = 0; i < assignments.length; i++) {
+			arguments[i+1] = assignments[i];
+		}
+		Sprite sprite = (Sprite) Reflection.createInstance(className, arguments);
 		for(IComponent component : spriteComponents) {
 			sprite.addComponent(component);
 		}

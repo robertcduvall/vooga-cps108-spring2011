@@ -13,6 +13,7 @@ import vooga.levels.util.tags.*;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.ParserException;
 import vooga.resources.xmlparser.XMLTag;
+import vooga.sprites.improvedsprites.Sprite;
 
 /**
  * XML Level Parser
@@ -74,14 +75,14 @@ public class LevelParser extends Parser {
 	/**
 	 * Construct a sprite given the name of its archetype and other assignments for it.
 	 */
-	public void makeSprite(String name, List<String> assignments) {
+	public Sprite makeSprite(String name, List<String> assignments) {
 		SpriteConstructor factory = spriteFactoryMap.get(name);
-		factory.construct(assignments);
+		return factory.construct(assignments);
 	}
 	
-	public void makeSprite(String name, Object ... assignments) {
+	public Sprite makeSprite(String name, Object ... assignments) {
 		SpriteConstructor factory = spriteFactoryMap.get(name);
-		factory.construct(assignments);
+		return factory.construct(assignments);
 	}
 	
 	/**
