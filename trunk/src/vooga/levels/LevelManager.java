@@ -8,6 +8,8 @@ import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.buildable.components.BasicComponent;
 
 import vooga.core.VoogaGame;
+import vooga.core.VoogaState;
+import vooga.core.event.EventManager;
 import vooga.reflection.Reflection;
 
 
@@ -19,7 +21,7 @@ import vooga.reflection.Reflection;
  * 
  * @author Andrew Patterson & Wesley Brown
  */
-public class LevelManager
+public class LevelManager implements VoogaState
 {
     private static final String LEVEL_CLASS_PATH_PREFIX = "vooga.levels.example2.";
     private static final String PLAYER_GROUP_NAME = "player group";
@@ -44,6 +46,9 @@ public class LevelManager
 
     /** Past playingfields that have been used in the game */
     private Collection<AbstractLevel> myPastLevels;
+    
+    /** Event manager to handle all events that occur during the game. */
+    private EventManager myEventManager;
 
 
     /**
@@ -55,6 +60,8 @@ public class LevelManager
     public LevelManager (VoogaGame game)
     {
         myGame = game;
+        myEventManager = new EventManager();
+        myEventManager.setKeyMap(game.getResourceManager().getKeyMap()); // FIXME
         myLevelOrderMap = myGame.getResourceManager().getLevelMap();
         myNumOfLevels = myLevelOrderMap.size();
         myPastLevels = new HashSet<AbstractLevel>();
@@ -62,6 +69,14 @@ public class LevelManager
         myPlayers.add(new SpriteGroup<Sprite>(PLAYER_GROUP_NAME));
     }
 
+    /**
+     * Provides the event manager for game state. 
+     */
+	@Override
+	public EventManager getEventManager() {
+		return myEventManager;
+	}
+	
 
     /**
      * Loads the first level specified in the level order file.

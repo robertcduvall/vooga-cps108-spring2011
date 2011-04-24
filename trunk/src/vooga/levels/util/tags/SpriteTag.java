@@ -37,7 +37,6 @@ public class SpriteTag extends XMLTag {
 		String image = xmlElement.getAttribute(IMAGE);
 		
 		parser.addSpriteArchetype(name, new SpriteConstructor(parser.getLevel(), 
-				parser.getConverterRack(),
-				className, spriteGroup, image));
+				parser.getConverterRack(), className, spriteGroup, image));
 	}
 }

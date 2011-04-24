@@ -13,10 +13,15 @@ import com.golden.gamedev.Game;
 
 public abstract class VoogaGame extends Game implements ISimpleEventManager
 {
+	private final static int DEFAULT = 0;
+	private final static int MENU = 1;
+	private final static int GAME = 2;
+	
     private EventManager myEventManager;
     private ResourceManager myResourceManager;
     private KeyMap myKeyMap;
     private LevelManager myLevelManager;
+    private VoogaState myStates;
 
     public VoogaGame ()
     {
@@ -124,6 +129,12 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     {
         return myResourceManager;
     }
+    
+    public void startLevel(int id) 
+    {
+    	myState = myStates.get(GAME); //FIXME
+    	myLevelManager.loadLevel(id);
+    }
 
 
     @Override
@@ -184,6 +195,7 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
         updatePlayField(elapsedTime);
     }
     
+    @Deprecated // Implementing game states which will replace this 
     public abstract void updatePlayField (long elapsedTime);
 
     /**
