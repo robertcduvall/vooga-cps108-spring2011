@@ -60,9 +60,33 @@ public class LoginModel
 				return false;
 			}
 		}
-		database = new SQLite();	
-		database.addNewUser(USER_TABLE, text);
-		database.close();
+		try {
+			database = new SQLite();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+//		try {
+//			database.update(USER_TABLE, prompt, text);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		try {
+//			database.retrieveTableStats(USER_TABLE, prompt);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+		try {
+			database.addNewUser(USER_TABLE, text);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			database.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return true;
 	}
 
@@ -91,8 +115,19 @@ public class LoginModel
 	 * This method uses the password map to determine if the user has a pre-existing VoogaUser account to operate through
 	 */
 	public boolean verifyPassword(String user, String password) {
-				database = new SQLite();
-		return password.matches(database.retrieveExactEntry(USER_TABLE, user, "Password"));
+				try {
+					database = new SQLite();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+		try {
+			return password.matches(database.retrieveExactEntry(USER_TABLE, user, "Password"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**

@@ -12,24 +12,11 @@ package vooga.user.model;
 		public static Connection myConn;
 		public static Statement myStat;
 		
-		public SQLite(){
-			try {
-				Class.forName("org.sqlite.JDBC");
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} //standard - need every time
-		    Connection conn = null;
-			try {
-				conn = DriverManager.getConnection("jdbc:sqlite:test.db");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		public SQLite() throws SQLException, ClassNotFoundException{
+				Class.forName("org.sqlite.JDBC");//standard - need every time
+		    Connection conn =DriverManager.getConnection("jdbc:sqlite:test1.db");
 		    Statement stat = null;
-			try {
 				stat = conn.createStatement();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		    myStat = stat;
 		    myConn = conn;
 		}
@@ -38,8 +25,9 @@ package vooga.user.model;
 		 * This update method initializes a database and the appropriate input
 		 * @param tableName - name of desired database table
 		 * @param components - name of respective columns in table
+		 * @throws SQLException 
 		 */
-		public void update(String tableName, String[] components, String[] inputs){
+		public void update(String tableName, String[] components, String[] inputs) throws SQLException{
 			initialize(tableName,components);
 			int[] columns = new int[components.length];
 			for(int x =0; x< components.length; x++){
@@ -55,35 +43,30 @@ package vooga.user.model;
 		 * @param key - specific username for which you desire to update information
 		 * @param prompt - column of information you desire to change
 		 * @param newInput - what input you want to replace the current information with
+		 * @throws SQLException 
 		 */
-		public void updateInfoInDatabase(String tableName, String key, String prompt, String newInput){
-			try {
+		public void updateInfoInDatabase(String tableName, String key, String prompt, String newInput) throws SQLException{
 				myStat.execute("update '" + tableName+ "' set '" +prompt+ "'="+ newInput +" where "+"UserName=" + key);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		/**
 		 * This method removes a specific user or game from the table
 		 * @param key - specific user or game you want to remove
 		 * @param prompt - should alway equal UserName or GameName - pointer to key
+		 * @throws SQLException 
 		 */
-		public void removeRowFromDatabase(String tableName, String key, String prompt){
-			try {
+		public void removeRowFromDatabase(String tableName, String key, String prompt) throws SQLException{
 				myStat.execute("delete from "+ tableName + " where "+ prompt + " = '" + key + "'");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		/**
 		 * This method adds a newUser to the database
 		 * @param input - a list of all the user-set preferences (including the username)
+		 * @throws SQLException 
 		 */
-		public void addNewUser(String tableName, String[] input){
+		public void addNewUser(String tableName, String[] input) throws SQLException{
 			StringBuilder sb = new StringBuilder("Insert into " + tableName + " values('");
-			try {
+		
 				for(String s : input){
 					sb.append(s);
 					sb.append("','");
@@ -92,21 +75,15 @@ package vooga.user.model;
 			s = s + ");";
 			
 				myStat.execute(s);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 
 		/**
 		 * This method creates a new table based off of the respective tableComponents
 		 * @param tableComponents - represents the columns to be created within the tables
+		 * @throws SQLException 
 		 */
-		public void initialize(String tableName, String[] tableComponents){
-			try {
+		public void initialize(String tableName, String[] tableComponents) throws SQLException{
 				myStat.executeUpdate("drop table if exists " + tableName + ";");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 			StringBuilder options = new StringBuilder("");
 			StringBuilder placeholder = new StringBuilder("");
 			options.append("create table " + tableName +" (");
@@ -115,18 +92,9 @@ package vooga.user.model;
 				placeholder.append("?, ");
 			}
 			String temp = trimString(options);
-		    try {
 				myStat.executeUpdate(temp + ");");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		    String prePrep = trimString(placeholder);
-		    PreparedStatement prep = null;
-			try {
-				prep = myConn.prepareStatement("insert into " + tableName + " values ("+ prePrep +");");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		    PreparedStatement prep = myConn.prepareStatement("insert into " + tableName + " values ("+ prePrep +");");
 		    myPrep = prep;
 		}
 		
@@ -142,122 +110,68 @@ package vooga.user.model;
 		 * Utilized by the update method, this method actually adds user input into a batch before submitting to the database
 		 * @param columns - columnTitles
 		 * @param inputs - corresponding user input
+		 * @throws SQLException 
 		 */
-		private void addToBatch(int[] columns, String[] inputs){
+		private void addToBatch(int[] columns, String[] inputs) throws SQLException{
 			  for(int i = 0; i < inputs.length; i++){
-				  try {
 					myPrep.setString(columns[i], inputs[i]);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} 
 			  }
-			    try {
 					myPrep.addBatch();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 		}
 		
 		/**
 		 * This method submits all information from the batch to the database
+		 * @throws SQLException 
 		 */
-		public void submitBatch(){
-			try {
-				myConn.setAutoCommit(false);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} //this generic - copy format
-		    try {
+		public void submitBatch() throws SQLException{
+				myConn.setAutoCommit(false);//this generic - copy format
 				myPrep.executeBatch();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		    try {
 				myConn.setAutoCommit(true);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		/**
 		 * This method retrieves all information from within a table - tableName
 		 * @param tableComponents - all columns within Table, that the user wants displayed
+		 * @throws SQLException 
 		 */
-		public void retrieveTableStats(String tableName, String[] tableComponents){
-			ResultSet rs = null;
-			try {
-				rs = myStat.executeQuery("select * from " + tableName + ";");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		    try {
+		public void retrieveTableStats(String tableName, String[] tableComponents) throws SQLException{
+			ResultSet rs = myStat.executeQuery("select * from " + tableName + ";");
+		    
 				while (rs.next()) {
 					for(int j = 0; j < tableComponents.length; j++){
 						System.out.println(tableComponents[j]+" = " + rs.getString(tableComponents[j]));
 					}
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		    try {
 				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		    try {
 				myConn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		/**
 		 * Retrieves specific information from a database table 
 		 * @param username - the user or game for which the information is requested
 		 * @param promptRequest - the column for wwhich the information is stored
+		 * @throws SQLException 
 		 */
-		public String retrieveExactEntry(String tableName, String username, String promptRequest){
-			ResultSet rs = null;
-			try {
-				rs = myStat.executeQuery("SELECT "+ promptRequest + " FROM " +tableName+" WHERE " + "UserName"+" = "+"'"+username+"'");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		public String retrieveExactEntry(String tableName, String username, String promptRequest) throws SQLException{
+		
+				ResultSet rs = myStat.executeQuery("SELECT "+ promptRequest + " FROM " +tableName+" WHERE " + "UserName"+" = "+"'"+username+"'");
+			
 			String s = "empty";
-			try {
 				while ( rs.next() ) {
-				    try {
 						s = rs.getString(promptRequest);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
 				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		    try {
 				myConn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		    
 			return s;
 		}
 
 		/**
 		 * A very important method, this code closes the connection to the database 
 		 * - database must be closed after each submission
+		 * @throws SQLException 
 		 */
-		public void close(){
-			try {
+		public void close() throws SQLException{
 				myConn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 	}
+	
