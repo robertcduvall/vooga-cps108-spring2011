@@ -1,6 +1,6 @@
 package vooga.gui.panes;
 
-import java.awt.Dimension;  
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.golden.gamedev.object.Sprite;
 
-import vooga.core.VoogaGame;
+import vooga.gui.PaneManager;
 import vooga.gui.util.VoogaButton;
 
 /**
@@ -23,7 +23,7 @@ public class MenuPane extends PopoverPane{
 	Sprite myHeader;
 	List<VoogaButton> myMenuOptions=new ArrayList<VoogaButton>();
 
-	public MenuPane(List<VoogaButton> buttonList, int seed, VoogaGame parent){
+	public MenuPane(List<VoogaButton> buttonList, PaneManager parent){
 		super(parent);
 		myMenuOptions=buttonList; //so that I can manage how they're arranged
 		myButtons.addAll(myMenuOptions); //so that super.sendClick handles them

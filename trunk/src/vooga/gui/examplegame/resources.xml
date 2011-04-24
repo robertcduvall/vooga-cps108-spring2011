@@ -1,0 +1,16 @@
+<resources>
+	<images>
+		<source>src/vooga/gui/examplegame/resources/images.xml</source>
+	</images>
+	<!--
+	<sounds>
+		<source>resources/sounds.xml</source>
+	</sounds>
+	<levels>
+		<level id="1">src/games/asteroids/resources/levels/level1.xml</level>
+		<level id="2">src/games/asteroids/resources/levels/level2.xml</level>
+		<level id="3">src/games/asteroids/resources/levels/level3.xml</level>
+	</levels>
+	<keymap>src/games/asteroids/resources/keymap.xml</keymap>
+	-->
+</resources>

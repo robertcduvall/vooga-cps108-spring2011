@@ -1,6 +1,6 @@
 package vooga.gui.panes;
 
-import vooga.core.VoogaGame;
+import vooga.gui.PaneManager;
 
 /**
  * Type of popover that allows a user to select from a group of displayed sprites. Uses
@@ -11,7 +11,7 @@ import vooga.core.VoogaGame;
  */
 public class ChooserPane extends PopoverPane {
 
-	public ChooserPane(VoogaGame parent) {
+	public ChooserPane(PaneManager parent) {
 		super(parent);
 		// TODO ...Stuff
 	}
