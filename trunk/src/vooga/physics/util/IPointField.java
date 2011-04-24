@@ -11,7 +11,7 @@ import java.awt.Point;
  */
 public interface IPointField extends IPhysicsToggle {
 
-    public static double constant = 0;
+    public double getConstant();
 
     public double getPointMagnitude();
 

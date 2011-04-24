@@ -4,7 +4,6 @@ import java.awt.Point;
 
 import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.physics.util.Velocity;
-import vooga.util.math.Angle;
 
 /**
  * Test object class which implements the necessary interfaces for testing.
@@ -12,13 +11,13 @@ import vooga.util.math.Angle;
  * @author Anne Weng
  *
  */
-public class TestingNewtonianObject implements INewtonianPhysical {
+public class NewtonianTestingObject implements INewtonianPhysical {
     private boolean isOn;
     private Point center;
     private Velocity velocity;
     private double mass;
     
-    public TestingNewtonianObject(Point center, Velocity velocity, double mass) {
+    public NewtonianTestingObject(Point center, Velocity velocity, double mass) {
         isOn = true;
         this.center = center;
         this.velocity = velocity;
