@@ -1,23 +1,23 @@
 package games.asteroids.collisions;
 
+import vooga.collisions.collisionManager.BasicCollisionGroup;
+import vooga.sprites.improvedsprites.Sprite;
 
-import games.asteroids.Asteroid;
-import games.asteroids.Ship;
-
-import com.golden.gamedev.object.Sprite;
-import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
 public class AsteroidShipCollision extends BasicCollisionGroup
 {
 
     @Override
-    public void collided (Sprite asteroid, Sprite ship)
+    public void collided (Sprite s1, Sprite s2)
     {
-        Asteroid myasteroid = (Asteroid) asteroid;
-        myasteroid.explode();
-        
-        Ship myship = (Ship) ship;
-        myship.damage();
+        // TODO Auto-generated method stub
+
     }
 
+
+    @Override
+    public boolean areCollide (Sprite s1, Sprite s2)
+    {
+        return false;
+    }
 }

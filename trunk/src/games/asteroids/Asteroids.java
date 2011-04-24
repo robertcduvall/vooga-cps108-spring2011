@@ -1,79 +1,40 @@
 package games.asteroids;
 
-import java.awt.Graphics2D;
+import java.awt.Dimension;
+import java.util.HashMap;
+import java.util.Map;
+import vooga.core.VoogaGame;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
 
-import com.golden.gamedev.object.Background;
-import com.golden.gamedev.object.PlayField;
-import com.golden.gamedev.object.Sprite;
-import com.golden.gamedev.object.SpriteGroup;
-import com.golden.gamedev.object.collision.BasicCollisionGroup;
-
-import vooga.core.*;
-import vooga.core.event.IEventHandler;
-
-public class Asteroids extends VoogaGame {
-	private PlayField myPlayfield;
-    private Background mBackground;
-    private SpriteGroup myShip;
-    private SpriteGroup myAsteriods;
-    private BasicCollisionGroup playerMissileToAsteroid, playerToAsteroid;
-    private int score;
-
-    private void setup()
+public class Asteroids extends VoogaGame
+{
+    public static void main (String[] args)
     {
-        myPlayfield = new PlayField(); // Background from resources
-        playerMissileToAsteroid = new BasicCollisionGroup()
-        {
-            @Override
-            public void collided(Sprite s1, Sprite s2)
-            {
-                s1.setActive(false);
-                s2.setActive(false);
-                score++;
-            }
-        };
-        playerToAsteroid = new BasicCollisionGroup()
-        {
-
-            @Override
-            public void collided(Sprite s1, Sprite s2)
-            {
-                s1.setActive(false);
-                s2.setActive(false);
-            }
-        };
-
+        launchGame(new Asteroids(), new Dimension(640, 480), false);
     }
-	
-	
-	@Override
-	public void initResources() {
-		//TODO: Setup team fill this in.
-		this.setup();
-		//fire Event to start menu
-		super.fireEvent(this, "start.menu");
-		//fire event to start level
-		super.fireEvent(this, "start.level");
-		super.registerEventHandler("level.complete", new IEventHandler() {
-			@Override
-			public void handleEvent(Object o) {
-				onLevelComplete();
-			}
-		});
-	}
 
-	private void onLevelComplete() {
-		super.fireEvent(this, "level.change");
-	}
+    private Ship myShip;
+    
+    @Override
+    public void initResources ()
+    {
+        myShip = new Ship(this);
+        myShip.setX(150);
+        myShip.setY(150);
+        getLevelManager().addPlayer(new SpriteGroup<Sprite>("Ship", myShip));
+        
+        // TODO Manually set levelOrder until ResourceManager does this
+        Map<Integer, String[]> levelOrder = new HashMap<Integer, String[]>();
+        levelOrder.put(0, new String[]{"src/games/asteroids/resources/levels/level0.xml", "games.asteroids.Level"});
+        getLevelManager().setLevelOrder(levelOrder);
+        
+        getLevelManager().loadLevel(0);
+    }
 
-	@Override
-	public void render(Graphics2D g) {
-		myPlayfield.render(g);
-	}
-
-	@Override
-	public void updatePlayField(long elapsedTime) {
-		myPlayfield.update(elapsedTime);
-	}
-
+    @Override
+    public void updatePlayField (long elapsedTime)
+    {
+        return;
+    }
 }
