@@ -4,10 +4,12 @@ import java.util.Collection;
 import vooga.physics.customBehavior.IPhysicsCustomCollide;
 import vooga.physics.customBehavior.IPhysicsCustomField;
 import vooga.physics.customBehavior.IPhysicsCustomForce;
+import vooga.physics.forceBehavior.EmptyForceBehavior;
 import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.physics.util.Force;
 import vooga.physics.util.IPhysicsToggle;
 import vooga.physics.util.IPointField;
+import vooga.physics.util.Velocity;
 import java.awt.Point;
 import java.util.HashSet;
 import vooga.util.math.Angle;
@@ -78,10 +80,20 @@ public class BasePhysicsEngine implements IPhysicsToggle {
      */
     public <T> void applyWorldForces(T object, long elapsedTime) {
         if (isOn) {
-            for (Force f : worldForces) {
-                applyForce(object, f, elapsedTime);
+            for (Force force : worldForces) {
+                applyForce(object, force, elapsedTime);
             }
         }
+    }
+    
+    public <T> Velocity worldForceToVelocity(EmptyForceBehavior object, double mass, long elapsedTime) {
+        Velocity newVelocity = new Velocity(0,new Angle());
+        if (isOn) {
+            for (Force force : worldForces) {
+                //newVelocity.addVector(object.forceToVelocityChange(mass, force, elapsedTime));
+            }
+        }
+        return newVelocity;
     }
 
     /**

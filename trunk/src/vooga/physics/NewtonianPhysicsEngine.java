@@ -63,10 +63,11 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
      */
     public void applyField(IPointField object, IPointField field, long elapsedTime) {
         if (!super.applyField(object, field, elapsedTime)) {
-            MathVector radius = new MathVector(object.getCenter(), field.getCenter());
-            double magnitude = field.getPointMagnitude() * field.getConstant() * object.getPointMagnitude()
-                    / radius.getMagnitude();
-            applyFieldForce(object, new Force(magnitude, radius.getAngle()), elapsedTime);
+//            MathVector radius = new MathVector(object.getCenter(), field.getCenter());
+//            double magnitude = field.getPointMagnitude() * field.getConstant() * object.getPointMagnitude()
+//                    / radius.getMagnitude();
+//            applyFieldForce(object, new Force(magnitude, radius.getAngle()), elapsedTime);
+
         }
     }
 
