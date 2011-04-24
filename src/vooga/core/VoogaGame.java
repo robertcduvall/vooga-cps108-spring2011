@@ -1,28 +1,33 @@
 package vooga.core;
 
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.util.HashMap;
 import java.util.Map;
-
 import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
 import vooga.core.event.ISimpleEventManager;
 import vooga.levels.LevelManager;
-import vooga.resources.KeyMap;
 import vooga.resources.ResourceManager;
 import vooga.resources.images.ImageLoader;
 import com.golden.gamedev.Game;
+import com.golden.gamedev.GameLoader;
 
 
 public abstract class VoogaGame extends Game implements ISimpleEventManager
 {
+    public static void launchGame(VoogaGame game, Dimension dimension, boolean fullScreen)
+    {
+        GameLoader loader = new GameLoader();
+        loader.setup(game, dimension, fullScreen);
+        loader.start();
+    }
+    
 	private final static int DEFAULT = 0;
 	private final static int MENU = 1;
 	private final static int GAME = 2;
 	
-    private EventManager myEventManager;
     private ResourceManager myResourceManager;
-    private KeyMap myKeyMap;
     private LevelManager myLevelManager;
     private VoogaState myState;
     private Map<Integer, VoogaState> myStates;
@@ -30,16 +35,40 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     public VoogaGame ()
     {
         super();
-        myEventManager = new EventManager();
-        myResourceManager = new ResourceManager(this.getClass());
+        myResourceManager = new ResourceManager(this);
         myLevelManager = new LevelManager(this);
         myStates = new HashMap<Integer, VoogaState>();
+        myState = new VoogaState()
+        {
+            private EventManager myEventManager = new EventManager();
+            @Override
+            public void update (long elapsedTime)
+            {
+                return;
+            }
+            
+        
+            @Override
+            public void render (Graphics2D g)
+            {
+                return;
+            }
+            
+        
+            @Override
+            public EventManager getEventManager ()
+            {
+                return myEventManager;
+            }
+        };
+        myStates.put(DEFAULT, myState);
+        myStates.put(GAME, myLevelManager);
     }
     
     @Override
     public void addEveryTurnEvent (String eventName, IEventHandler eventHandler)
     {
-        myEventManager.addEveryTurnEvent(eventName, eventHandler);
+        getEventManager().addEveryTurnEvent(eventName, eventHandler);
     }
 
 
@@ -48,7 +77,7 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
                                   long interval,
                                   String eventName)
     {
-        myEventManager.addPeriodicTimer(timerName, interval, eventName);
+        getEventManager().addPeriodicTimer(timerName, interval, eventName);
     }
 
 
@@ -58,14 +87,14 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
                                   String eventName,
                                   Object arg)
     {
-        myEventManager.addPeriodicTimer(timerName, interval, eventName, arg);
+        getEventManager().addPeriodicTimer(timerName, interval, eventName, arg);
     }
 
 
     @Override
     public void addTimer (String timerName, long delay, String eventName)
     {
-        myEventManager.addTimer(timerName, delay, eventName);
+        getEventManager().addTimer(timerName, delay, eventName);
     }
 
 
@@ -75,54 +104,57 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
                           String eventName,
                           Object arg)
     {
-        myEventManager.addTimer(timerName, delay, eventName, arg);
+        getEventManager().addTimer(timerName, delay, eventName, arg);
     }
 
 
     @Override
     public void fireEvent (Object source, String eventName)
     {
-        myEventManager.fireEvent(source, eventName);
+        getEventManager().fireEvent(source, eventName);
     }
 
 
     @Override
     public void fireEvent (Object source, String eventName, Object arg)
     {
-        myEventManager.fireEvent(source, eventName, arg);
+        getEventManager().fireEvent(source, eventName, arg);
     }
 
 
     @Override
     public void fireEvents (Object source, String glob)
     {
-        myEventManager.fireEvents(source, glob);
+        getEventManager().fireEvents(source, glob);
     }
 
 
     @Override
     public void fireEvents (Object source, String glob, Object arg)
     {
-        myEventManager.fireEvents(source, glob, arg);
+        getEventManager().fireEvents(source, glob, arg);
     }
 
 
     @Override
     public void forwardEvent (String eventName, String nextEventName)
     {
-        myEventManager.forwardEvent(eventName, nextEventName);
+        getEventManager().forwardEvent(eventName, nextEventName);
     }
 
 
     public EventManager getEventManager ()
     {
-        return myEventManager;
+        return myState.getEventManager();
     }
 
 
-    public KeyMap getKeyMap ()
-    {
-        return myKeyMap;
+    /**
+     * Use getResourceManager() and ResourceManager#getImageLoader().
+     * @return
+     */
+    public ImageLoader getImageLoader() {
+    	return myResourceManager.getImageLoader();
     }
     
     public LevelManager getLevelManager()
@@ -143,12 +175,6 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
 
 
     @Override
-    public void initResources () {
-    	myResourceManager.init();
-    }
-
-
-    @Override
     protected void notifyExit ()
     {
         // TODO: Deinitialize everything here
@@ -159,21 +185,21 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     public void registerEventHandler (String eventName,
                                       IEventHandler eventHandler)
     {
-        myEventManager.registerEventHandler(eventName, eventHandler);
+        getEventManager().registerEventHandler(eventName, eventHandler);
     }
 
 
     @Override
     public IEventHandler removeEventHandler (String eventName)
     {
-        return myEventManager.removeEventHandler(eventName);
+        return getEventManager().removeEventHandler(eventName);
     }
 
 
     @Override
     public void removeEventHandlers (String glob)
     {
-        myEventManager.removeEventHandlers(glob);
+        getEventManager().removeEventHandlers(glob);
     }
 
 
@@ -184,30 +210,14 @@ public abstract class VoogaGame extends Game implements ISimpleEventManager
     }
 
 
-    public void setKeyMap (KeyMap keyMap)
-    {
-        if (keyMap == null) throw new NullPointerException("Must load a valid KeyMap!");
-        if (myKeyMap == null) KeyMap.registerEventHandler(this);
-        myKeyMap = keyMap;
-    }
-
-
     @Override
     public void update (long elapsedTime)
     {
-        myEventManager.update(elapsedTime);
+        getEventManager().update(elapsedTime);
         myLevelManager.update(elapsedTime);
         updatePlayField(elapsedTime);
     }
-    
+
     @Deprecated // Implementing game states which will replace this 
     public abstract void updatePlayField (long elapsedTime);
-
-    /**
-     * Use getResourceManager() and ResourceManager#getImageLoader().
-     * @return
-     */
-    public ImageLoader getImageLoader() {
-    	return myResourceManager.getImageLoader();
-    }
 }
