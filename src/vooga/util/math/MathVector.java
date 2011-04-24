@@ -82,19 +82,27 @@ public class MathVector {
      * Sets myAngle to be newAngle.
      * @param newAngle
      */
-    public void setAngle(Angle newAngle) {
+    public MathVector setAngle(Angle newAngle) {
 	myAngle = newAngle;
+	return this;
+    }
+    
+    /**
+     * Negates the angle of the vector so it points 180 degrees opposite.
+     */
+    public MathVector negateAngle(){
+        myAngle = myAngle.setNegativeAngle();
+        return this;
     }
     
     /**
      * Subtracts from this vector the other vector.
      * @param otherVector
      */
-    public void subtractVector(MathVector otherVector){
-        Angle negateAngle = otherVector.getAngle();
-        negateAngle.setNegativeAngle();
-        MathVector negateVector = new MathVector(otherVector.getMagnitude(), negateAngle);
+    public MathVector subtractVector(MathVector otherVector){
+        MathVector negateVector = otherVector.negateAngle();
         addVector(negateVector);
+        return this;
     }
 
     /**

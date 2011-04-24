@@ -73,9 +73,10 @@ public class Angle implements Comparable<Angle> {
      * Changes the angle its negative, 180 degrees away.
      * @return
      */
-    public void setNegativeAngle() {
+    public Angle setNegativeAngle() {
 	myRadians = myRadians + Math.PI;
 	wrap();
+	return this;
     }
 
     /**
