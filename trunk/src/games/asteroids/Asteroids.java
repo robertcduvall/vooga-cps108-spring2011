@@ -7,6 +7,7 @@ import vooga.core.VoogaGame;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
+
 public class Asteroids extends VoogaGame
 {
     public static void main (String[] args)
@@ -15,7 +16,8 @@ public class Asteroids extends VoogaGame
     }
 
     private Ship myShip;
-    
+
+
     @Override
     public void initResources ()
     {
@@ -23,14 +25,10 @@ public class Asteroids extends VoogaGame
         myShip.setX(150);
         myShip.setY(150);
         getLevelManager().addPlayer(new SpriteGroup<Sprite>("Ship", myShip));
-        
-//        // TODO Manually set levelOrder until ResourceManager does this
-//        Map<Integer, String[]> levelOrder = new HashMap<Integer, String[]>();
-//        levelOrder.put(0, new String[]{"src/games/asteroids/resources/levels/level0.xml", "games.asteroids.Level"});
-//        getLevelManager().setLevelOrder(levelOrder);
-//        
+
         getLevelManager().loadLevel(0);
     }
+
 
     @Override
     public void updatePlayField (long elapsedTime)
