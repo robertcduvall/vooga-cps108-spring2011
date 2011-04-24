@@ -22,7 +22,7 @@ import vooga.reflection.Reflection;
  */
 public class LevelManager implements VoogaState {
 	private static final String LEVEL_CLASS_PATH_PREFIX = "vooga.levels.example2.";
-	private static final String PLAYER_GROUP_NAME = "players";
+	private static final String PLAYER_GROUP_NAME = "player";
 
 	/** A map of level number to array of [levelFilePath, levelType ] */
 	private Map<Integer, String[]> myLevelOrderMap;

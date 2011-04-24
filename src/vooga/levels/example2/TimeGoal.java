@@ -12,16 +12,6 @@ public class TimeGoal implements IGoal
     {
         myStartOfLevelTime = System.currentTimeMillis();
     }
-    
-    
-    /**
-     * The level completes 10 seconds after it begins
-     */
-    @Override
-    public boolean checkCompletion ()
-    {
-        return ((System.currentTimeMillis() - myStartOfLevelTime)/1000.0 >= 10);
-    }
 
     
     /**
@@ -32,5 +22,11 @@ public class TimeGoal implements IGoal
     {
         myLevelManager.loadNextLevel();
     }
+
+
+	@Override
+	public boolean checkCompletion(LevelManager levelManager) {
+		 return ((System.currentTimeMillis() - myStartOfLevelTime)/1000.0 >= 10);
+	}
 
 }
