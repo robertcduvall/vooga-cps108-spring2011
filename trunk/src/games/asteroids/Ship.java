@@ -15,7 +15,7 @@ public class Ship extends Sprite
     {
         myGame = game;
         // TODO setImage(game.getImageLoader().getImage("ship"));
-        setImage(game.getImage("resources/images/ship.gif")); // FIXME
+        setImage(game.getImageLoader().getImage("ship"));
         bindKeys();
         // TODO addComponent(new HealthComponent());
     }
