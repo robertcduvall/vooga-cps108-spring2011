@@ -3,20 +3,24 @@ package vooga.levels;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collection;
+import com.golden.gamedev.object.Background;
 import vooga.collisions.collisionManager.CollisionManager;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
-import com.golden.gamedev.object.PlayField;
 
 
 /**
  * Serves as a container for sprites, sprite groups and collision managers in
- * which objects gets updated and renders if needed.
+ * which objects gets updated and renders if needed. Note that this playingfield does not
+ * need to be used in conjuction with the level API.
  * 
  * @author Andrew Patterson
  */
-public class VoogaPlayField extends PlayField
+public class VoogaPlayField
 {
+    /** The background for this playingfield that will be rendered each time the playingfield is rendered */
+    private Background myBackground;
+    
     /** All of the sprite groups that are currently on the playingfield */
     private Collection<SpriteGroup<Sprite>> mySpriteGroups;
 
@@ -31,13 +35,13 @@ public class VoogaPlayField extends PlayField
 
     public VoogaPlayField()
     {
-        super();
         mySpriteGroups = new ArrayList<SpriteGroup<Sprite>>();
         myCollisionManagers = new ArrayList<CollisionManager>();
         myUpdatables = new ArrayList<IUpdatable>();
         myRenderables = new ArrayList<IRenderable>();
     }
 
+    
     /**
      * If it exists, returns the sprite group of the specified name. If it
      * doesn't exist, a new sprite group of the specified name is created, added
@@ -55,7 +59,7 @@ public class VoogaPlayField extends PlayField
             }
         }
         SpriteGroup<Sprite> newGroup = new SpriteGroup<Sprite>(groupName);
-        addGroup(newGroup);
+        addSpriteGroup(newGroup);
         return newGroup;
     } 
 
@@ -67,7 +71,7 @@ public class VoogaPlayField extends PlayField
      * 
      * @param SpriteGroup to add
      */
-    public void addGroup(SpriteGroup<Sprite> group)
+    public void addSpriteGroup(SpriteGroup<Sprite> group)
     {
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
         {
@@ -78,6 +82,41 @@ public class VoogaPlayField extends PlayField
             }
         }
         mySpriteGroups.add(group);
+    }
+    
+    
+    /**
+     * Gets all of the sprite groups for this playingfield
+     * 
+     * @return a collection of all the current sprite groups
+     */
+    public Collection<SpriteGroup<Sprite>> getAllSpriteGroups()
+    {
+        return mySpriteGroups;
+    }
+    
+    
+    /**
+     * Removes a specified sprite group from the playingfield (and if necessary
+     * all of its associated collision managers)
+     * 
+     * @param Sprite group to remove
+     */
+    public void removeSpriteGroup(SpriteGroup<Sprite> group)
+    {
+        String groupName = group.getName();
+        for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
+        {
+            if(groupName.equals(currentGroup.getName()))
+            {
+                mySpriteGroups.remove(currentGroup);
+                break;
+            }
+        }
+        for(CollisionManager currentManager : myCollisionManagers)
+        {
+            currentManager.removeGroupByName(group.getName());
+        }
     }
 
 
@@ -91,6 +130,25 @@ public class VoogaPlayField extends PlayField
         myCollisionManagers.add(manager);
     }
     
+
+    /**
+     * Removes the specified collision manager from the playingfield (if it
+     * exists)
+     * 
+     * @param Collision manager that is to be removed
+     */
+    public void removeCollisionManager (CollisionManager managerToRemove)
+    {
+        for (CollisionManager currentManager : myCollisionManagers)
+        {
+            if (currentManager.equals(managerToRemove))
+            {
+                myCollisionManagers.remove(currentManager);
+                break;
+            }
+        }
+    }
+     
     
     /**
      * Adds an IUpdatable to this playingfield
@@ -117,31 +175,85 @@ public class VoogaPlayField extends PlayField
     /**
      * Clears all sprites from the playingfield
      */
-    public void clear()
+    public void clearPlayField()
     {
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
         {
             currentGroup.clear();
         }
     }
+    
+    
+    /**
+     * Sets the background for this playingfield
+     * 
+     * @param Background to use
+     */
+    public void setBackground(Background b)
+    {
+        myBackground = b;
+    }
+    
+    
+    /**
+     * Checks collisions for all collision managers on this playingfield
+     */
+    public void checkCollisions()
+    {
+        for(CollisionManager currentManager : myCollisionManagers)
+            currentManager.checkCollision();
+    }
+    
 
-
+    /**
+     * Inserts a sprite directly into the playingfield without explicitly giving
+     * it a sprite group.
+     * 
+     * @param Sprite to add
+     */
+    public void add(Sprite extra)
+    {
+        getSpriteGroup("").add(extra);
+    }
+    
+    
+    /**
+     * Gets the background for this playingfield
+     * 
+     * @return the current background
+     */
+    public Background getBackground()
+    {
+        return myBackground;
+    }
+    
+    
+    /**
+     * Gets the collision managers for this playingfield
+     * 
+     * @return a collection of the currently defined collision managers
+     */
+    public Collection<CollisionManager> getCollisionManagers()
+    {
+        return myCollisionManagers;
+    }
+    
+    
     /**
      * Updates all the sprite groups, collision managers and IUpdatables
      * 
      * @param elapsedTime
      */
-    @Override
     public void update(long elapsedTime)
     {
-//        super.update(elapsedTime);
-        this.updateBackground(elapsedTime);
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
             currentGroup.update(elapsedTime);
         for(CollisionManager currentManager : myCollisionManagers)
             currentManager.checkCollision();
         for(IUpdatable currentUpdatable : myUpdatables)
             currentUpdatable.update(elapsedTime);
+        if(myBackground != null)
+            myBackground.update(elapsedTime);
     }
 
 
@@ -150,13 +262,13 @@ public class VoogaPlayField extends PlayField
      * 
      * @param Graphics2D g
      */
-    @Override
     public void render(Graphics2D g)
     {
-        super.render(g);
         for(SpriteGroup<Sprite> currentGroup : mySpriteGroups)
             currentGroup.render(g);
         for(IRenderable currentRenderable : myRenderables)
             currentRenderable.render(g);
+        if (myBackground != null)
+            myBackground.render(g);
     }
 }
