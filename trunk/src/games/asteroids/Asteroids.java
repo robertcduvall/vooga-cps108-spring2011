@@ -1,8 +1,6 @@
 package games.asteroids;
 
 import java.awt.Dimension;
-import java.util.HashMap;
-import java.util.Map;
 import vooga.core.VoogaGame;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;

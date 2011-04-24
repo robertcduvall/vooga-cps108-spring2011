@@ -21,7 +21,7 @@ import vooga.reflection.Reflection;
  */
 public class LevelManager implements VoogaState
 {
-    private static final String PLAYER_GROUP_NAME = "player";
+    private static final String DEFAULT_PLAYER_GROUP_NAME = "default player";
 
     /** A map of level number to array of [levelFilePath, levelType ] */
     private Map<Integer, String[]> myLevelOrderMap;
@@ -53,16 +53,26 @@ public class LevelManager implements VoogaState
      * 
      * @param voogaGame whose levels this is managing
      */
+    @SuppressWarnings("unchecked")
     public LevelManager (VoogaGame game)
     {
+        this(game, new SpriteGroup<Sprite>(DEFAULT_PLAYER_GROUP_NAME));
+    }
+
+    
+    /**
+     * Sets the level map, vooga game AND players
+     */
+    public LevelManager(VoogaGame game, SpriteGroup<Sprite>... players)
+    {
         myGame = game;
+        myPlayers = new ArrayList<SpriteGroup<Sprite>>();
+        myPlayers.addAll(Arrays.asList(players));
         myEventManager = new EventManager();
         //myEventManager.setKeyMap(game.getResourceManager().getKeyMap()); // FIXME
         myLevelOrderMap = myGame.getResourceManager().getLevelMap();
         myNumOfLevels = myLevelOrderMap.size();
         myPastLevels = new HashSet<AbstractLevel>();
-        myPlayers = new ArrayList<SpriteGroup<Sprite>>();
-        myPlayers.add(new SpriteGroup<Sprite>(PLAYER_GROUP_NAME));
     }
 
 
@@ -250,6 +260,7 @@ public class LevelManager implements VoogaState
      */
     public void addPlayer (SpriteGroup<Sprite> player)
     {
+        if(player == null) return;
         myPlayers.add(player);
     }
 
