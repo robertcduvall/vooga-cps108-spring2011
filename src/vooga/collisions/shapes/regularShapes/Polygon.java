@@ -171,7 +171,7 @@ public class Polygon extends Shape
 		this.rotate(angle - this.angle);
 	}
 
-	public Point2D[] getPoints()
+	public Point2D.Double[] getPoints()
 	{
 		return vertices;
 	}
@@ -190,56 +190,56 @@ public class Polygon extends Shape
 
 	@Override
 	public boolean contains(double x, double y) {
-		// TODO Auto-generated method stub
+		// TODO not used
 		return false;
 	}
 
 	@Override
 	public boolean contains(double x, double y, double w, double h) {
-		// TODO Auto-generated method stub
+		// TODO not used
 		return false;
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
+		// TODO not used
 		return null;
 	}
 
 	@Override
 	public Rectangle2D getBounds2D() {
-		// TODO Auto-generated method stub
+		// TODO not used
 		return null;
 	}
 
 	@Override
 	public PathIterator getPathIterator(AffineTransform at) {
-		// TODO Auto-generated method stub
+		// TODO not used
 		return null;
 	}
 
 	@Override
 	public PathIterator getPathIterator(AffineTransform at, double flatness) {
-		// TODO Auto-generated method stub
+		// TODO not used
 		return null;
 	}
 
 	@Override
 	public boolean intersects(Rectangle2D r) {
-		// TODO Auto-generated method stub
+		// TODO not used
 		return false;
 	}
 
 	@Override
 	public boolean intersects(double x, double y, double w, double h) {
-		// TODO Auto-generated method stub
+		// TODO not used
 		return false;
 	}
 
 	@Override
 	public void rotate (double degrees)
 	{
-		// TODO Auto-generated method stub
+		// TODO not used
 
 	}
 
