@@ -1,0 +1,36 @@
+<level>
+	<background type="color">red</background>
+	<collision_manager g1="asteroid" g2="bullet" class="games.asteroids.collisions.AsteroidBulletCollision" />
+	<collision_manager g1="asteroid" g2="player" class="games.asteroids.collisions.AsteroidShipCollision" />
+	
+	
+	<sprite group="asteroid" class="games.asteroids.Asteroid" type="asteroid" image="asteroid" />
+	<sprite group="bullet" class="games.asteroids.Bullet" type="bullet" image="bullet" />
+
+	<goal class="games.asteroids.AllAsteroidsDestroyed" />
+
+	<instance type="asteroid">
+		<x>100</x>
+		<y>100</y>
+	</instance>
+	
+	<instance type="bullet">
+		<x>100</x>
+		<y>100</y>
+	</instance>
+	
+	<instance type="bullet">
+		<x>100</x>
+		<y>200</y>
+	</instance>
+	
+	<instance type="asteroid">
+		<x>200</x>
+		<y>100</y>
+	</instance>
+	
+	<instance type="bullet">
+		<x>200</x>
+		<y>200</y>
+	</instance>
+</level>

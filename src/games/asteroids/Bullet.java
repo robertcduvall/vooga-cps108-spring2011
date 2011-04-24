@@ -1,12 +1,23 @@
 package games.asteroids;
 
-import com.golden.gamedev.object.Sprite;
+import java.awt.image.BufferedImage;
+import vooga.sprites.improvedsprites.Sprite;
 
-public class Bullet extends Sprite {
 
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
+public class Bullet extends Sprite
+{
+    private static final long serialVersionUID = 1L;
+
+    public Bullet(BufferedImage image, int x, int y)
+    {
+        super(image, x, y);
+        setVerticalSpeed(0.001);
+    }
+    
+    public void destroy ()
+    {
+        // TODO Auto-generated method stub
+
+    }
 
 }

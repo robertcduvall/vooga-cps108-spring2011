@@ -1,23 +1,31 @@
 package games.asteroids.collisions;
 
-import games.asteroids.Asteroid;
-import games.asteroids.Bullet;
+import vooga.collisions.collisionManager.BasicCollisionGroup;
+import vooga.collisions.intersections.PolygonPolygonFinder;
+import vooga.sprites.improvedsprites.Sprite;
 
-import com.golden.gamedev.object.Sprite;
-import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
 public class AsteroidBulletCollision extends BasicCollisionGroup
 {
 
     @Override
-    public void collided (Sprite asteroid, Sprite bullet)
+    public void collided (Sprite s1, Sprite s2)
     {
-        Asteroid myasteroid = (Asteroid) asteroid;
-        myasteroid.explode();
-        
-        Bullet mybullet = (Bullet) bullet;
-        mybullet.destroy();
-
+        System.out.println("Collided!"+s1+" "+s2);
+        s1.setActive(false);
+        s2.setActive(false);
     }
 
+
+    @Override
+    public boolean areCollide (Sprite s1, Sprite s2)
+    {
+        if (s1.isActive() && s2.isActive() && s1 != s2) // FIXME
+        {
+            PolygonPolygonFinder finder = new PolygonPolygonFinder();
+            return finder.areIntersecting(s1.getCollisionShape(),
+                                          s2.getCollisionShape());
+        }
+        return false;
+    }
 }
