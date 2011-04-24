@@ -48,7 +48,8 @@ public class LevelParser extends Parser {
 								new SpriteTag(this), 
 								new CollisionManagerTag(this),
 								new InstanceTag(this),
-								new GoalTag(this));
+								new GoalTag(this),
+								new ComponentTag(this));
 	}
 	
 	public AbstractLevel getLevel() {

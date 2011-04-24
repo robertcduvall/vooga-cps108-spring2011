@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import vooga.levels.util.LevelParser;
