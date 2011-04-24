@@ -82,6 +82,9 @@ public class VoogaUser {
 		myUsername =  s;
 	}
 
+	/**
+	 * returns the name of the VoogaUser
+	 */
 	public String getUsername(){
 		return myUsername;
 	}

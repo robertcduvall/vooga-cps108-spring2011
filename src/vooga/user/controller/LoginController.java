@@ -41,8 +41,8 @@ public class LoginController implements ILoginController
 	}
 	
 	@Override
-	public void approveLogin(String user, String password) {
-		model.verifyPassword(user, password);		
+	public boolean approveLogin(String user, String password) {
+		return model.verifyPassword(user, password);		
 	}
 	
 /**
@@ -72,7 +72,7 @@ public class LoginController implements ILoginController
 		}
 		System.out.println(username);
 		arcadeController.swapToolbarButton(username);
-		System.out.close();
+		System.out.println("I need indication!!!!!!");
 	}
 
 

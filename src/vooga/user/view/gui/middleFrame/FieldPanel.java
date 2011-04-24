@@ -54,7 +54,7 @@ public class FieldPanel extends JPanel{
 					new RegisterButton(controller, this) };
 
 			// accesses a specific button class action based on it's index in the array
-			if (login.myButton > 0) {
+			if (login.myButton >= 0) {
 				addButton(buttons[login.myButton]);
 			}
 		}
