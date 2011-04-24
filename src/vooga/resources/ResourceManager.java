@@ -41,7 +41,8 @@ public class ResourceManager extends Parser {
         levelMap = new HashMap<Integer, String[]>();
         addDefinitions( new RootTag(),
                         new ImageResourceTag(this),
-                        new LevelTag(this));
+                        new LevelTag(this),
+                        new KeyMapTag(this));
     }
 	
 	public void setImageLoader(ImageLoader imageLoader)	{
