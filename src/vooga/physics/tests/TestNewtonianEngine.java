@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import vooga.physics.NewtonianPhysicsEngine;
 import vooga.physics.newtonianProperties.INewtonianPhysical;
+import vooga.physics.newtonianProperties.INewtonianRotate;
 import vooga.physics.util.Force;
 import vooga.physics.util.IPointField;
 import vooga.physics.util.Velocity;
@@ -75,32 +76,6 @@ public class TestNewtonianEngine {
     
     @Test
     /**
-     * Testing if world forces correctly affect objects.
-     * !!!!!!!!!!!!!! Running into the same problem with generics here
-     */
-    public void testWorldForce() {
-        INewtonianPhysical testObject = new NewtonianTestingObject(new Point(0,0), new Velocity(0, new Angle(0)), 100);
-        //TestObject at (0,0) with mass 100 and velocity 0
-        Force gravity = new Force(10, new Angle(3*Math.PI/2));
-        engine.addGlobalForce(gravity);
-        engine.applyWorldForces(testObject, 1);
-        Velocity objectVelocity = testObject.getVelocity();
-        assertEquals("Magnitude after first application", 0.1, objectVelocity.getMagnitude(), 0);
-        assertEquals("Angle after first application", 3*Math.PI/2, objectVelocity.getAngle().getRadians(), 0);
-        
-        testObject.setVelocity(new Velocity(0, new Angle(0))); 
-        //Reset testObject velocity
-        Force eastGravity = new Force(10, new Angle(0));
-        engine.addGlobalForce(eastGravity);
-        engine.applyWorldForces(testObject, 1);
-        objectVelocity = testObject.getVelocity();
-        assertEquals("Magnitude after second application", 0.1*Math.sqrt(2), objectVelocity.getMagnitude(),0);
-        assertEquals("Angle after second application", 7*Math.PI/4, objectVelocity.getAngle().getRadians(), 0);
-    }
-    
-    
-    @Test
-    /**
      * Testing if point fields function correctly.
      */
     public void testPointField(){
@@ -125,6 +100,60 @@ public class TestNewtonianEngine {
     
     @Test
     /**
+     * Testing rotational effects.
+     */
+    public void testRotational(){
+        INewtonianRotate testObject = new RotationalTestingObject(new Point(0,0), 0, 100);
+        //testObject at point (0,0) with 0 rotational velocity and mass of 100
+        Force westForce = new Force(10, new Angle(Math.PI));
+        Point topPoint = new Point(0, 1);
+        engine.applyRotationalForce(testObject, westForce, topPoint, 1);
+        double rotVelocity = testObject.getRotationalVelocity();
+        assertEquals("Rotational velocity counterclockwise", 0.1, rotVelocity, 0);
+        
+        testObject.setRotationalVelocity(0);
+        //reset testObject
+        Force eastForce = new Force(10, new Angle(0));
+        engine.applyRotationalForce(testObject, eastForce, topPoint, 1);
+        rotVelocity = testObject.getRotationalVelocity();
+        assertEquals("Rotational velocity clockwise", -0.1, rotVelocity, 0);
+    }
+    
+    @Test
+    /**
+     * Testing if world forces correctly affect objects.
+     * !!!!!!!!!!!!!! Running into the same problem with generics here
+     */
+    public void testWorldForce() {
+        INewtonianPhysical testObject = new NewtonianTestingObject(new Point(0,0), new Velocity(0, new Angle(0)), 100);
+        //TestObject at (0,0) with mass 100 and velocity 0
+        Force gravity = new Force(10, new Angle(3*Math.PI/2));
+        engine.addGlobalForce(gravity);
+        engine.applyWorldForces(testObject, 1);
+        Velocity objectVelocity = testObject.getVelocity();
+        assertEquals("Magnitude after first application", 0.1, objectVelocity.getMagnitude(), 0);
+        assertEquals("Angle after first application", 3*Math.PI/2, objectVelocity.getAngle().getRadians(), 0);
+        
+        testObject.setVelocity(new Velocity(0, new Angle(0))); 
+        //Reset testObject velocity
+        Force eastGravity = new Force(10, new Angle(0));
+        engine.addGlobalForce(eastGravity);
+        engine.applyWorldForces(testObject, 1);
+        objectVelocity = testObject.getVelocity();
+        assertEquals("Magnitude after second application", 0.1*Math.sqrt(2), objectVelocity.getMagnitude(),0);
+        assertEquals("Angle after second application", 7*Math.PI/4, objectVelocity.getAngle().getRadians(), 0);
+    }
+
+    @Test
+    /**
+     * Testing friction effects.
+     */
+    public void testFriction(){
+        //TODO: The friction method needs to be redone first.
+    }
+
+    @Test
+    /**
      * Testing if collisions work between two INewtonianPhysical objects.
      * Current fails because of generics.
      */
@@ -138,15 +167,6 @@ public class TestNewtonianEngine {
         assertEquals("Elastic - Train B magnitude", 70, trainB.getMagnitude(), 0);
         assertEquals("Elastic - Train A angle", Math.PI, trainA.getAngle().getRadians(), 0);
         assertEquals("Elastic - Train B angle", 0, trainB.getAngle().getRadians(), 0);
-    }
-    
-    
-    @Test
-    /**
-     * Testing friction effects.
-     */
-    public void testFriction(){
-        //TODO: The friction method needs to be redone first.
     }
     
     
