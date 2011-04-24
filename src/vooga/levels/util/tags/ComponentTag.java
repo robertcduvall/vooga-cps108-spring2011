@@ -36,7 +36,7 @@ public class ComponentTag extends XMLTag {
 	public void parse(Parser context, Element xmlElement) {
 		Element parent = (Element) xmlElement.getParentNode();
 		String className = xmlElement.getAttribute(CLASS_ATTR);
-		String parentArchetype = parent.getAttribute(SpriteTag.NAME);
+		String parentArchetype = parent.getAttribute(SpriteTag.TYPE);
 		
 		// Get arguments.
 		List<String> args = new ArrayList<String>();
