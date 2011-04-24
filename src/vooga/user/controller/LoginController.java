@@ -71,9 +71,7 @@ public class LoginController implements ILoginController
 			if(p.getPrompt().equals("UserName")){username = p.getInput();}
 		}
 		System.out.println(username);
-		arcadeController.swapToolbarButton(username);
+		arcadeController.swapToolbarButton(user);
 		System.out.println("I need indication!!!!!!");
 	}
-
-
 }
