@@ -11,5 +11,6 @@ Problems:
 
 Thoughts:
 
-1. dv
+1. dv <= force, length of time of application
+	dv collision <= another object's collision behavior
 2. changing parameters to not interfaces

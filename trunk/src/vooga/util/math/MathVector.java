@@ -85,6 +85,17 @@ public class MathVector {
     public void setAngle(Angle newAngle) {
 	myAngle = newAngle;
     }
+    
+    /**
+     * Subtracts from this vector the other vector.
+     * @param otherVector
+     */
+    public void subtractVector(MathVector otherVector){
+        Angle negateAngle = otherVector.getAngle();
+        negateAngle.setNegativeAngle();
+        MathVector negateVector = new MathVector(otherVector.getMagnitude(), negateAngle);
+        addVector(negateVector);
+    }
 
     /**
      * Adds the current MathVector to another MathVector and returns the result.

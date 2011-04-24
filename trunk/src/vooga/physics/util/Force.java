@@ -30,6 +30,11 @@ public class Force extends MathVector {
         super.addVector(otherVector);
         return this;
     }
+    
+    public Force subtractVector(Force otherVector){
+        super.subtractVector(otherVector);
+        return this;
+    }
 
     public Force scalarMultiply(double scalar) {
         super.scalarMultiply(scalar);
