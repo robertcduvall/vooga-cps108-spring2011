@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.controller.ArcadeController;
+import vooga.arcade.view.actions.ActionFactory;
 import vooga.arcade.view.helper.ResourceManager;
 import vooga.user.voogauser.VoogaUser;
 
@@ -36,6 +37,7 @@ public class ButtonBar {
 		}
 		
 		JTextField searchField = new JTextField();
+		searchField.addActionListener(ActionFactory.createAction("ButtonBarSearchAction", p));
 		toolBar.add(searchField);
 		return toolBar;
 	}

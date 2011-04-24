@@ -1,10 +1,10 @@
-package vooga.arcade;
+package vooga.arcade.view.practiceMain;
 import vooga.arcade.controller.ArcadeController;
 
 /**
  * 
  */
-public class VoogaArcadeMain
+public class PracticeMain
 {
     
 	public static void main(String[] args)

@@ -129,4 +129,8 @@ public class ArcadeController
     {
 
     }
+    
+    public void updateGameObjects(List<ArcadeGameObject> arcadeGameList, String searchQuery){
+        view.updateGameObjectList(arcadeGameList, searchQuery);
+    }
 }
