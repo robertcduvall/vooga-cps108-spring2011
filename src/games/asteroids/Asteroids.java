@@ -25,6 +25,8 @@ public class Asteroids extends VoogaGame
         myShip.setX(150);
         myShip.setY(150);
         getLevelManager().addPlayer(new SpriteGroup<Sprite>("Ship", myShip));
+        
+        // TODO getResourceManager().getKeyMap().registerEventHandler(this);
 
         getLevelManager().loadLevel(0);
     }
