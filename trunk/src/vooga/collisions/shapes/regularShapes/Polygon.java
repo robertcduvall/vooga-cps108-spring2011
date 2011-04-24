@@ -196,7 +196,7 @@ public class Polygon extends Shape
 
 	@Override
 	public boolean contains(double x, double y, double w, double h) {
-		// TODO not used
+		// TODO not used.
 		return false;
 	}
 
