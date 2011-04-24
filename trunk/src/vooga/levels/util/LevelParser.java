@@ -1,12 +1,10 @@
 package vooga.levels.util;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.golden.gamedev.object.Background;
-import com.golden.gamedev.object.background.ColorBackground;
 
 import vooga.core.VoogaGame;
 import vooga.levels.AbstractLevel;
@@ -49,7 +47,8 @@ public class LevelParser extends Parser {
 								new CollisionManagerTag(this),
 								new InstanceTag(this),
 								new GoalTag(this),
-								new ComponentTag(this));
+								new ComponentTag(this),
+								new MusicTag(this));
 	}
 	
 	public AbstractLevel getLevel() {
@@ -58,6 +57,10 @@ public class LevelParser extends Parser {
 	
 	public void addToBackgroundQueue(Background background) {
 		level.addToBackgroundQueue(background);
+	}
+	
+	public void addToMusicQueue(String music) {
+		level.addToMusicQueue(music);
 	}
 	
 	public void setGoal(IGoal goal) {

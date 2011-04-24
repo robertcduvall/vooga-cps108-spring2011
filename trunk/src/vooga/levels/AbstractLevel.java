@@ -7,7 +7,6 @@ import vooga.levels.util.PoolDeferredConstructor;
 import com.golden.gamedev.object.Background;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
-import vooga.util.buildable.components.BasicComponent;
 import vooga.util.buildable.components.IComponent;
 import vooga.core.VoogaGame;
 
