@@ -3,7 +3,6 @@ package vooga.resources;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.KeyStroke;
 import vooga.core.VoogaGame;
@@ -36,34 +35,29 @@ public class KeyMap
     private Map<Integer, Entry> myKeys;
 
 
-    public KeyMap (ResourceBundle bundle)
+    public KeyMap ()
     {
         myKeys = new HashMap<Integer, Entry>();
-        for (String event : bundle.keySet())
-        {
-            String value = bundle.getString(event);
-
-            String edgeLevelSensitive = value.split("[.]")[0];
-            KeyMap.Sensitivity sensitivity = null;
-            if (edgeLevelSensitive.equalsIgnoreCase("Edge")) sensitivity =
-                Sensitivity.EDGE;
-            if (edgeLevelSensitive.equalsIgnoreCase("Level")) sensitivity =
-                Sensitivity.LEVEL;
-
-            String keyName = value.split("[.]")[1];
-            int keyCode = getKeyCode(keyName);
-
-            if (!myKeys.containsKey(keyCode)) myKeys.put(keyCode,
-                                                         new Entry(keyCode,
-                                                                   sensitivity));
-            myKeys.get(keyCode).events.add(event);
-        }
     }
 
 
-    public Set<Map.Entry<Integer, Entry>> entrySet ()
+    public void addKeyEvent (String event,
+                             String edgeLevelSensitive,
+                             String keyName)
     {
-        return myKeys.entrySet();
+        KeyMap.Sensitivity sensitivity = null;
+        if (edgeLevelSensitive.equalsIgnoreCase("Edge")) sensitivity =
+            Sensitivity.EDGE;
+        if (edgeLevelSensitive.equalsIgnoreCase("Level")) sensitivity =
+            Sensitivity.LEVEL;
+
+        int keyCode = getKeyCode(keyName);
+
+        if (!myKeys.containsKey(keyCode)) myKeys.put(keyCode,
+                                                     new Entry(keyCode,
+                                                               sensitivity));
+        // TODO 2 entries, same key, different sensitivities
+        myKeys.get(keyCode).events.add(event);
     }
 
 
@@ -73,9 +67,9 @@ public class KeyMap
     }
 
 
-    public static void pollForInput (VoogaGame game)
+    public void pollForInput (VoogaGame game)
     {
-        for (Map.Entry<Integer, KeyMap.Entry> mapEntry : game.getKeyMap().entrySet())
+        for (Map.Entry<Integer, KeyMap.Entry> mapEntry : myKeys.entrySet())
         {
             KeyMap.Entry entry = mapEntry.getValue();
             if ((entry.sensitivity == KeyMap.Sensitivity.LEVEL && game.bsInput.isKeyDown(entry.keyCode)) ||
@@ -83,16 +77,14 @@ public class KeyMap
             {
                 for (String eventName : entry.events)
                 {
-                    game.getEventManager().fireEvent(game.getKeyMap(),
-                                                     eventName,
-                                                     entry);
+                    game.getEventManager().fireEvent(this, eventName, entry);
                 }
             }
         }
     }
 
 
-    public static void registerEventHandler (final VoogaGame game)
+    public void registerEventHandler (final VoogaGame game)
     {
         game.getEventManager().registerEventHandler("EveryTurn.CheckInput",
                                                     new IEventHandler()
