@@ -35,7 +35,7 @@ public class ShapeFactory
         return new Circle(c,r);
     }
 	
-	public static Polygon makeShapeFromGeneralPath(GeneralPath path)
+	public static Polygon makeShapeFromGeneralPath(GeneralPath path, int width, int height)
 	{
 		ArrayList<double[]> polyCoords = new ArrayList<double[]>();
 		double[] coords = new double[6]; //needs to be 6 for the path iterator
@@ -50,7 +50,7 @@ public class ShapeFactory
 			polyCoords.add(addList);
 			pathIterator.next();
 		}
-		return new Polygon(polyCoords, 64, 64);
+		return new Polygon(polyCoords, width, height);
 	}
 
 
