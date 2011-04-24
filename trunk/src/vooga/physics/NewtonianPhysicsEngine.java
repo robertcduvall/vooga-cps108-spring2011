@@ -202,7 +202,7 @@ public class NewtonianPhysicsEngine extends BasePhysicsEngine {
         if (isOn()) {
             MathVector radius = new MathVector(physicalObject.getCenter(), pointOfApplication);
             Angle theta = radius.getVectorAngle(force);
-            double deltaOmega = force.getMagnitude() * theta.sin() * elapsedTime / physicalObject.getMass()
+            double deltaOmega = force.getMagnitude() * -theta.sin() * elapsedTime / physicalObject.getMass()
                     / radius.getMagnitude();
             physicalObject.setRotationalVelocity(physicalObject.getRotationalVelocity() + deltaOmega);
         }
