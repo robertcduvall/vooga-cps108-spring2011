@@ -1,7 +1,6 @@
 package vooga.levels.util.tags;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,6 +59,8 @@ public class BackgroundTag extends XMLTag {
 			return new ColorBackground(color);
 		}
 	}
+	
+	
 	public BackgroundTag(LevelParser parser, ImageLoader imageLoader) {
 		this.parser = parser;
 		if(constructorMap == null) {
@@ -80,6 +81,6 @@ public class BackgroundTag extends XMLTag {
 		String type = xmlElement.getAttribute(TYPE_ATTR);
 		
 		Background background = constructorMap.get(type).create(value);
-		parser.setBackground(background);
+		parser.addToBackgroundQueue(background);
 	}
 }

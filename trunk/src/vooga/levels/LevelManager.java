@@ -6,6 +6,7 @@ import java.util.*;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.buildable.components.BasicComponent;
+import vooga.util.buildable.components.IComponent;
 
 import vooga.core.VoogaGame;
 import vooga.core.VoogaState;
@@ -24,7 +25,7 @@ import vooga.reflection.Reflection;
 public class LevelManager implements VoogaState
 {
     private static final String LEVEL_CLASS_PATH_PREFIX = "vooga.levels.example2.";
-    private static final String PLAYER_GROUP_NAME = "player group";
+    private static final String PLAYER_GROUP_NAME = "players";
 
     /** A map of level number to array of [levelFilePath, levelType ] */
     private Map<Integer, String[]> myLevelOrderMap;
@@ -82,6 +83,7 @@ public class LevelManager implements VoogaState
      * Loads the first level specified in the level order file.
      * This is the same as calling loadLevel(0)
      */
+	@Deprecated
     public void start()
     {
         loadLevel(0);
@@ -219,7 +221,7 @@ public class LevelManager implements VoogaState
      * @param Additional components for this sprite
      * @return the newly created sprite
      */
-    public Sprite addArchetypeSprite(String type, int x, int y, BasicComponent... components)
+    public Sprite addArchetypeSprite(String type, int x, int y, IComponent... components)
     {
         if(myActiveLevel == null) return null;
         return myActiveLevel.addArchetypeSprite(type, x, y, components);
