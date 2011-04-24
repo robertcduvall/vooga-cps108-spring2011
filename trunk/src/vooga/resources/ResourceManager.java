@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import vooga.core.VoogaGame;
+import vooga.resources.bundle.Bundle;
 import vooga.resources.images.ImageLoader;
 import vooga.resources.managertags.ImageResourceTag;
 import vooga.resources.managertags.KeyMapTag;
@@ -26,6 +27,7 @@ public class ResourceManager extends Parser {
 	private Map<Integer, String[]> levelMap;
     private VoogaGame myGame;
     private KeyMap myKeyMap;
+    private Bundle bundle;
 	
 	public class RootTag extends XMLTag {
 		@Override
@@ -41,6 +43,7 @@ public class ResourceManager extends Parser {
         myGame = game;
         levelMap = new HashMap<Integer, String[]>();
         myKeyMap = new KeyMap();
+        bundle = new Bundle();
         addDefinitions( new RootTag(),
                         new ImageResourceTag(this),
                         new LevelTag(this),
@@ -93,6 +96,10 @@ public class ResourceManager extends Parser {
 	    myKeyMap = keyMap;
 	}
 
+	public Bundle getBundle() {
+		return bundle;
+	}
+	
 	public Map<Integer, String[]> getLevelMap() {
 		return levelMap;
 	}
