@@ -1,4 +1,6 @@
 package vooga.arcade.view.middleFrame;
+
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
 
@@ -7,27 +9,35 @@ import javax.swing.JScrollPane;
 import vooga.arcade.controller.*;
 
 /**
+ * Makes the main panel of game thumbnails (or any other type of thumbnail,
+ * represented as a JPanel).
+ * 
  * @author Andrea
- * Makes the main panel of game thumbnails (or any other type of thumbnail, represented as
- * a JPanel).
- *
+ * @author Ethan Goh
+ * 
  */
 
 public class ThumbnailPanel extends JPanel
 {
-    private static final long serialVersionUID = 1L;
-    ArcadeController myCont;
-    
-    public ThumbnailPanel(List<JPanel> thumbnails)
-    {
-        JPanel thumbPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JScrollPane scrollPane = new JScrollPane(thumbPanel);
-        
-        for (JPanel thumbnail : thumbnails)
-        {
-            thumbPanel.add(thumbnail);
-        }
-    
-        this.add(scrollPane);
-    }
+	private static final long serialVersionUID = 1L;
+	private ArcadeController myCont;
+
+	public ThumbnailPanel(List<JPanel> thumbnails)
+	{
+		JPanel thumbPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+		// Size of the Frame itself (Determines scroll length)
+		thumbPanel.setPreferredSize(new Dimension(620, 1000));
+		JScrollPane scrollPane = new JScrollPane(thumbPanel);
+
+		// Size of the Panel inside the frame.
+		scrollPane.setPreferredSize(new Dimension(640, 600));
+		for (JPanel thumbnail : thumbnails)
+		{
+			thumbPanel.add(thumbnail);
+		}
+		scrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(scrollPane);
+	}
 }
