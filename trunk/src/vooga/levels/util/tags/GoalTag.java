@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import vooga.levels.IGoal;
@@ -34,6 +35,7 @@ public class GoalTag extends XMLTag {
 		NodeList children = xmlElement.getChildNodes();
 		List<String> args = new ArrayList<String>();
 		for(int i = 0; i < children.getLength(); i++) {
+		    if(children.item(i).getNodeType() != Node.ELEMENT_NODE) continue;
 			args.add(getValue((Element) children.item(i)));
 		}
 		
