@@ -2,8 +2,7 @@ package vooga.levels.util.tags;
 
 import org.w3c.dom.Element;
 
-import com.golden.gamedev.object.CollisionManager;
-
+import vooga.collisions.collisionManager.CollisionManager;
 import vooga.levels.util.LevelParser;
 import vooga.reflection.Reflection;
 import vooga.resources.xmlparser.Parser;
@@ -36,9 +35,9 @@ public class CollisionManagerTag extends XMLTag {
 		
 //		FIXME: Add support for other kinds of constructors?
 		CollisionManager collisionManager = (CollisionManager) Reflection.createInstance(className);
-		
-		parser.getLevel().addCollisionGroup(parser.getLevel().getGroup(group1),
-				parser.getLevel().getGroup(group2), collisionManager);
+		collisionManager.setCollisionGroup(parser.getLevel().getSpriteGroup(group1),
+		                                   parser.getLevel().getSpriteGroup(group2));
+		parser.getLevel().addCollisionManager(collisionManager);
 	}
 
 }
