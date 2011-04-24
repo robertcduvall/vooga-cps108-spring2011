@@ -30,6 +30,11 @@ public class Velocity extends MathVector {
         return this;
     }
     
+    public Velocity subtractVector(Velocity otherVector) {
+        super.subtractVector(otherVector);
+        return this;
+    }
+    
     public Velocity scalarMultiply(double scalar){
         super.scalarMultiply(scalar);
         return this;

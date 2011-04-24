@@ -55,7 +55,7 @@ public class TestNewtonianEngine {
         cancelForce.applyForce(testObject, 1);
         objectVelocity = testObject.getVelocity();
         assertEquals("Magnitude after third force", 0, objectVelocity.getMagnitude(), Math.pow(10, -16));
-        assertEquals("Angle after third force", 0, objectVelocity.getAngle().getRadians(), 2);
+        assertEquals("Angle after third force", 0, objectVelocity.getAngle().getRadians(), Math.PI/2);
         //In this case, Angle is not quite accurate but this is only because of roundoff errors.
         //The X component of the resulting velocity is 0 while the Y component is 10^-17 so it gets an "angle"
     }
@@ -142,14 +142,6 @@ public class TestNewtonianEngine {
         objectVelocity = testObject.getVelocity();
         assertEquals("Magnitude after second application", 0.1*Math.sqrt(2), objectVelocity.getMagnitude(),0);
         assertEquals("Angle after second application", 7*Math.PI/4, objectVelocity.getAngle().getRadians(), 0);
-    }
-
-    @Test
-    /**
-     * Testing friction effects.
-     */
-    public void testFriction(){
-        //TODO: The friction method needs to be redone first.
     }
 
     @Test
