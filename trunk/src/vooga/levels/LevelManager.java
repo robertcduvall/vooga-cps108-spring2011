@@ -56,7 +56,7 @@ public class LevelManager implements VoogaState
     @SuppressWarnings("unchecked")
     public LevelManager (VoogaGame game)
     {
-        //this(game, new SpriteGroup<Sprite>(game.getResourceManager().getBundle().getString("foo")));
+        this(game, new SpriteGroup<Sprite>(game.getResourceManager().getBundle().getString("foo")));
     }
 
     
@@ -109,7 +109,8 @@ public class LevelManager implements VoogaState
         // If no pre-existing level of the correct type exists, create a new
         // instance
         try { 
-            myActiveLevel = ((AbstractLevel) Reflection.createInstance( desiredLevelType, myPlayers, myGame));
+            System.out.println(desiredLevelType);
+            myActiveLevel = ((AbstractLevel) Reflection.createInstance(desiredLevelType, myPlayers, myGame));
         } catch (Exception e) {
             throw LevelException.LEVEL_CREATION_ERROR;
         }
