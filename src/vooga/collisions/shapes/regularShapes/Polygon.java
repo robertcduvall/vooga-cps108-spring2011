@@ -180,19 +180,22 @@ public class Polygon extends Shape
 
 	@Override
 	public boolean contains(double x, double y) {
-		// TODO Auto-generated method stub
+		// TODO figure out how a polygon contains a point
 		return false;
 	}
 
 	@Override
 	public double getAngle() {
-		// TODO Auto-generated method stub
+		//TODO how do you get the "angle" of the shape?
 		return 0;
 	}
 
 	@Override
 	public double rotate(double dAngle) {
-		// TODO Auto-generated method stub
+		
+		for (Vertex v: this.vertices)
+			v.rotateAround(this.getCenter(), dAngle);
+		
 		return 0;
 	}
 
