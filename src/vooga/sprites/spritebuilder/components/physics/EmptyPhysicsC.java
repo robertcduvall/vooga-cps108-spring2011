@@ -1,7 +1,7 @@
 package vooga.sprites.spritebuilder.components.physics;
 
 import java.awt.Point;
-import java.util.List;
+import java.util.Collection;
 import vooga.physics.collisionBehavior.EmptyCollisionBehavior;
 import vooga.physics.fieldBehavior.EmptyFieldBehavior;
 import vooga.physics.forceBehavior.EmptyForceBehavior;
@@ -20,11 +20,11 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  * 
  */
-public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPhysicsToggle{
+public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPhysicsToggle {
 
     protected boolean isOn;
     protected Velocity deltaVelocity;
-    
+
     protected EmptyForceBehavior myForceBehavior;
     protected EmptyFieldBehavior myFieldBehavior;
     protected EmptyCollisionBehavior myCollisionBehavior;
@@ -35,14 +35,16 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
 
     public EmptyPhysicsC(boolean isOn) {
         this(new EmptyForceBehavior(), new EmptyFieldBehavior(), new EmptyCollisionBehavior(), isOn);
-        
+
     }
-    
-    public EmptyPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior){
+
+    public EmptyPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior,
+            EmptyCollisionBehavior collisionBehavior) {
         this(forceBehavior, fieldBehavior, collisionBehavior, true);
     }
-    
-    public EmptyPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior, boolean isOn){
+
+    public EmptyPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior,
+            EmptyCollisionBehavior collisionBehavior, boolean isOn) {
         myForceBehavior = forceBehavior;
         myFieldBehavior = fieldBehavior;
         myCollisionBehavior = collisionBehavior;
@@ -58,10 +60,7 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
 
     @Override
     protected Object[] getFieldValues() {
-        return new Object[] {myForceBehavior, myFieldBehavior, myCollisionBehavior, isOn()}; // TODO: this is not
-                                                          // going to return the
-                                                          // field values, just
-                                                          // the fields
+        return new Object[] { myForceBehavior, myFieldBehavior, myCollisionBehavior, isOn() };
     }
 
     @Override
@@ -75,28 +74,33 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
             turnPhysicsOnOff(true);
     }
 
-    public void applyForce(Force force, long lengthOfApplication){
+    public void applyForce(Force force, long lengthOfApplication) {
         deltaVelocity.addVector(myForceBehavior.forceToVelocityChange(force, lengthOfApplication));
     }
-    
-    public void applyForces(List<Force> forces, long lengthOfApplication) {
+
+    public void applyForces(Collection<Force> forces, long lengthOfApplication) {
         for (Force force : forces) {
             applyForce(force, lengthOfApplication);
         }
     }
-    
-    public void applyField(VectorField field, long lengthOfApplication){
+
+    public void applyField(VectorField field, long lengthOfApplication) {
         deltaVelocity.addVector(myFieldBehavior.fieldToVelocityChange(field, lengthOfApplication));
     }
-    
-    public void applyFields(List<VectorField> fields, long lengthOfApplication){
-        for (VectorField field : fields){
+
+    public void applyFields(Collection<VectorField> fields, long lengthOfApplication) {
+        for (VectorField field : fields) {
             applyField(field, lengthOfApplication);
         }
     }
-    
-    public void applyCollision(EmptyCollisionBehavior otherCollisionBehavior, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution){
-        myCollisionBehavior.collisionToVelocityChange(otherCollisionBehavior, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+
+    public EmptyCollisionBehavior getCollisionBehavior() {
+        return myCollisionBehavior;
+    }
+
+    public void applyCollision(EmptyCollisionBehavior otherCollisionBehavior, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        myCollisionBehavior.collisionToVelocityChange(otherCollisionBehavior, angleOfImpact, pointOfImpact,
+                coefficientOfRestitution);
     }
 
     @Override
@@ -104,14 +108,14 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
         Velocity oldVelocity = getSpriteVelocityForPhysics(s);
         oldVelocity.addVector(deltaVelocity);
         setSpriteVelocityForPhysics(s, oldVelocity);
-        deltaVelocity = new Velocity(0,0);
+        deltaVelocity = new Velocity(0, 0);
     }
-    
-    public Velocity getSpriteVelocityForPhysics(Sprite sprite){
+
+    public Velocity getSpriteVelocityForPhysics(Sprite sprite) {
         return new Velocity(sprite.getHorizontalSpeed(), -sprite.getVerticalSpeed());
     }
-    
-    public void setSpriteVelocityForPhysics(Sprite sprite, Velocity newVelocity){
+
+    public void setSpriteVelocityForPhysics(Sprite sprite, Velocity newVelocity) {
         sprite.setHorizontalSpeed(newVelocity.getXComponent());
         sprite.setVerticalSpeed(-newVelocity.getYComponent());
     }
@@ -119,7 +123,7 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
     @Override
     public void turnPhysicsOnOff(boolean isOn) {
         this.isOn = isOn;
-        
+
     }
 
     @Override

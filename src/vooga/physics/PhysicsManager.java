@@ -24,14 +24,14 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  * 
  */
-public class WorldForceManager {
+public class PhysicsManager {
 
     private Set<Force> worldForces;
     private Set<VectorField> vectorFields;
     private Set<Force> activeForces;
     private Set<VectorField> activeFields;
 
-    public WorldForceManager() {
+    public PhysicsManager() {
         worldForces = new HashSet<Force>();
         vectorFields = new HashSet<VectorField>();
         activeForces = new HashSet<Force>();
