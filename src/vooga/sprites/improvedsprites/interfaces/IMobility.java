@@ -6,7 +6,7 @@ package vooga.sprites.improvedsprites.interfaces;
  * @author Julian Genkins
  *
  */
-public interface IMobility
+public interface IMobility extends IRotation
 {
 
     /**
@@ -164,11 +164,5 @@ public interface IMobility
      * sprite is moving to top.
      */
     public abstract double getVerticalSpeed ();
-
-
-
-
-
-    
     
 }

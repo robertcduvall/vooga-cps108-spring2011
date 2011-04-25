@@ -35,7 +35,8 @@ import vooga.util.buildable.IBuildable;
 import vooga.util.buildable.components.ComponentResources;
 import vooga.util.buildable.components.ComponentSet;
 import vooga.util.buildable.components.IComponent;
-import vooga.util.buildable.components.predefined.basic.Speed2DC;
+import vooga.util.buildable.components.predefined.movement.HeadingC;
+import vooga.util.buildable.components.predefined.movement.Speed2DC;
 import vooga.util.math.LineMath;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.collision.CollisionShape;
@@ -122,7 +123,7 @@ public class Sprite extends BaseSprite
         // init variables
         this.x = this.oldX = x;
         this.y = this.oldY = y;
-        myComponents = new ComponentSet<IComponent>();
+        myComponents = new ComponentSet<IComponent>(Arrays.asList(new IComponent[]{new Speed2DC(), new HeadingC()}));
         // sprite image
         if (image != null)
         {
@@ -132,8 +133,6 @@ public class Sprite extends BaseSprite
         }
 
         this.background = Background.getDefaultBackground();
-        myComponents = new ComponentSet<IComponent>();
-        myComponents.add(new Speed2DC());
     }
     
 //    /**
@@ -365,8 +364,8 @@ public class Sprite extends BaseSprite
         try
         {
             return this.getClass()
-                       .getConstructor(TreeSet.class)
-                       .newInstance(myComponents.toArray());//this needs to be an array
+                       .getConstructor(BufferedImage.class, double.class, double.class, TreeSet.class)
+                       .newInstance(this.getImage(), this.getX(), this.getY(), myComponents.toArray());//this needs to be an array
         }
         catch (Exception e)
         {
@@ -623,15 +622,6 @@ public class Sprite extends BaseSprite
     }
 
 
-    /*
-     * (non-Javadoc)
-     * @see util.buildable.IBuildable#reset()
-     */
-    @Override
-    public void reset ()
-    {
-
-    }
 
 
     /*
@@ -783,6 +773,24 @@ public class Sprite extends BaseSprite
         this.move(this.getHorizontalSpeed() * elapsedTime, this.getVerticalSpeed() *
                                                       elapsedTime);
     }
+
+
+	@Override
+	public void setHeading(double angle) {
+		this.getComponent(HeadingC.class).setHeading(angle);
+	}
+
+
+	@Override
+	public double getHeading() {
+		return this.getComponent(HeadingC.class).getHeading();
+	}
+
+
+	@Override
+	public double rotate(double dAngle) {
+		return this.getComponent(HeadingC.class).rotate(dAngle);
+	}
 
 
 

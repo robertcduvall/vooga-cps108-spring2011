@@ -1,4 +1,4 @@
-package vooga.util.buildable.components.predefined.basic;
+package vooga.util.buildable.components.predefined.movement;
 
 public class Speed3DC extends SpeedC
 {

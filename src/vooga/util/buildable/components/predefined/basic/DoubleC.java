@@ -17,7 +17,7 @@ public class DoubleC extends BasicComponent
         return this.getDouble().compareTo(((DoubleC) o).getDouble());
     }
 
-    private Double getDouble ()
+    protected Double getDouble ()
     {
         return myDouble;
     }
