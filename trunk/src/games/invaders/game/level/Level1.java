@@ -15,6 +15,7 @@ public class Level1 extends Level {
 		this.game = game;
 	}
 
+	// TODO: Abstract level to Misha's level loader.
 	@Override
 	public void loadLevel() {
 		game.hero.setX(50);
