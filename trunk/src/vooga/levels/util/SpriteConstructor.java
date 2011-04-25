@@ -51,7 +51,7 @@ public class SpriteConstructor {
 			sprite.addComponent(component);
 		}
 		SpriteGroup<Sprite> group = level.getSpriteGroup(spriteGroup);
-		group.add(sprite);
+		group.addSprites(sprite);
 		return sprite;
 	}
 	
@@ -69,7 +69,7 @@ public class SpriteConstructor {
 			sprite.addComponent(component);
 		}
 		SpriteGroup<Sprite> group = level.getSpriteGroup(spriteGroup);
-		group.add(sprite);
+		group.addSprites(sprite);
 		return sprite;
 	}
 

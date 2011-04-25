@@ -29,9 +29,9 @@ public class Example2 extends VoogaGame {
 	
 	@Override
 	public void initResources() {
-	    SpriteGroup players = new SpriteGroup("player group");
+	    SpriteGroup<Sprite> players = new SpriteGroup<Sprite>("player group");
 	    Sprite player = new Sprite(getImage("Ship1.png"));
-	    players.add(player);
+	    players.addSprites(player);
 	    //myResourceManager = new ResourceManager("");
 		myLevelManager = new LevelManager(this);
 		myLevelManager.loadLevel(0);

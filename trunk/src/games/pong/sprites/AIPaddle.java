@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.PongTargetC;
 
-public class AIPaddle extends Sprite{
+public class AIPaddle extends Paddle{
 
 	public AIPaddle(BufferedImage image, double x, double y, Sprite ball) {
 		super(image, x, y);

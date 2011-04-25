@@ -10,9 +10,13 @@ import vooga.collisions.shapes.collisionShapes.ICollisionShape;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
-public abstract class BasicCollisionGroup extends CollisionManager
+public abstract class BasicCollisionGroup<T extends Sprite, S extends Sprite> extends CollisionManager<T,S>
 {
 	
+	public BasicCollisionGroup(SpriteGroup<T> s1, SpriteGroup<S> s2) {
+		super(s1, s2);
+	}
+
 	private ShapeFactory shapeFactory = new ShapeFactory();
 	
 	public boolean pixelPerfectCollision;
@@ -22,27 +26,15 @@ public abstract class BasicCollisionGroup extends CollisionManager
     /** ************************************************************************* */
     
     public void checkCollision() {
-        for(int i = 0; i < myGroups.size(); i++){
-            for (int j = i; j < myGroups.size(); j++){
-                this.checkCollisions(myGroups.get(i), myGroups.get(j));
-            }
-        }
-    }
-    
-    private void checkCollisions (SpriteGroup<?> sg1,
-                                         SpriteGroup<?> sg2)
-    {
-        if (!sg1.isActive() || !sg2.isActive())
-            return;
-        
-        for(Sprite s1: sg1){
-            for (Sprite s2: sg2){
-                if(this.areCollide(s1, s2)){
+        for(T s1: Group1.getSprites()){
+            for (S s2: Group2.getSprites()){
+            	if(s1.isActive() && s2.isActive() && this.areCollide(s1, s2) ){
                     this.collided(s1, s2);
                 }
             }
         }
     }
+    
 
     /**
      * Performs collision check between Sprite <code>s1</code> and Sprite
@@ -58,7 +50,7 @@ public abstract class BasicCollisionGroup extends CollisionManager
      * @param shape2 bounding box of sprite 2
      * @return true, if the sprites is collided one another.
      */
-    public boolean areCollide(Sprite s1, Sprite s2){
+    public boolean areCollide(T s1, S s2){
         if (!this.pixelPerfectCollision) {
             return (IntersectionFactory.areIntersecting(s1.getCollisionShape(), s2.getCollisionShape()));
             
@@ -80,6 +72,6 @@ public abstract class BasicCollisionGroup extends CollisionManager
      * @param s1 sprite from group 1
      * @param s2 sprite from group 2
      */
-    public abstract void collided(Sprite s1, Sprite s2);
+    public abstract void collided(T s1, S s2);
     
 }

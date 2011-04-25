@@ -3,7 +3,7 @@ package vooga.collisions.shapes.collisionShapes;
 import vooga.collisions.shapes.Vertex;
 import vooga.collisions.shapes.regularShapes.Quadrilateral;
 
-public class CollisionQuadrilateral extends Quadrilateral implements ICollisionShape
+public class CollisionQuadrilateral extends CollisionPolygon implements ICollisionShape
 {
 
 	public CollisionQuadrilateral(Vertex v1, Vertex v2, Vertex v3, Vertex v4) {

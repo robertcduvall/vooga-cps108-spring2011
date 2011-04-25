@@ -70,7 +70,7 @@ import com.golden.gamedev.util.Utility;
  * @see com.golden.gamedev.object.PlayField
  * @see com.golden.gamedev.object.collision.CollisionGroup
  */
-public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
+public class SpriteGroup<T extends Sprite> {
     
     /** *********************** GROUP SPRITE FACTOR ***************************** */
     
@@ -84,7 +84,9 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
     
     private Background background;
     
-    private Comparator comparator; // comparator for sorting sprite
+    private Comparator<T> comparator; // comparator for sorting sprite
+
+	private ArrayList<T> mySprites;
     
     /** ****************** SPRITES THAT BELONG TO THIS GROUP ******************** */
     
@@ -97,11 +99,11 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
      * Creates a new sprite group, with specified name. Name is used for group
      * identifier only.
      */
-    @SuppressWarnings("unchecked")
     public SpriteGroup(String name, T ... sprites) {
         this.name = name;
         this.background = Background.getDefaultBackground();
-        this.addAll(Arrays.asList(sprites));
+        this.mySprites = new ArrayList<T>();
+        this.addSprites(sprites);
     }
     
    
@@ -109,7 +111,16 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
     
     
  
-    /** ************************************************************************* */
+    public void addSprites(T ... sprites) {
+    	mySprites.addAll(Arrays.asList(sprites));
+	}
+
+
+
+
+
+
+	/** ************************************************************************* */
     /** ************************* UPDATE THIS GROUP ***************************** */
     /** ************************************************************************* */
     
@@ -119,9 +130,8 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
      * 
      * @see #getScanFrequence()
      */
-    @SuppressWarnings("unchecked")
     public void update(long elapsedTime) {
-        for (T sprite: this) {
+        for (T sprite: this.mySprites) {
             if (sprite.isActive()) {
                 sprite.update(elapsedTime);
             }
@@ -166,7 +176,7 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
     
     private void removeSprites(boolean removeImmutable) {
         ArrayList<T> temp = new ArrayList<T>();
-        for (T sprite: this) {
+        for (T sprite: this.mySprites) {
             if (!sprite.isActive()) {
                 if (!sprite.isImmutable() || removeImmutable == true){
                     temp.add(sprite);
@@ -175,7 +185,7 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
                 
             
         }
-        this.removeAll(temp);
+        this.mySprites.removeAll(temp);
         
     }
     
@@ -196,7 +206,7 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
             this.sort(this.comparator);
         }
         
-        for (T sprite : this) {
+        for (T sprite : this.mySprites) {
             if (sprite.isActive()) {
                 // renders only active sprite
                 sprite.render(g);
@@ -215,7 +225,7 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
      * @see #setComparator(Comparator)
      */
     public void sort(Comparator<T> c) {
-        Collections.sort(this, c);
+        Collections.sort(mySprites, c);
     }
     
     /** ************************************************************************* */
@@ -262,7 +272,7 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
         }
         
         // force all sprites to use a same background
-        for (T sprite: this) {
+        for (T sprite: this.mySprites) {
             sprite.setBackground(this.background);
         }
     }
@@ -292,7 +302,7 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
      * 
      * @see #setComparator(Comparator)
      */
-    public Comparator getComparator() {
+    public Comparator<T> getComparator() {
         return this.comparator;
     }
     
@@ -328,7 +338,7 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
      * @see java.util.Arrays#sort(java.lang.Object[], int, int,
      *      java.util.Comparator)
      */
-    public void setComparator(Comparator c) {
+    public void setComparator(Comparator<T> c) {
         this.comparator = c;
     }
     
@@ -364,9 +374,9 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
      * @see com.golden.gamedev.object.Sprite#setActive(boolean)
      */
     public T getActiveSprite() {
-        for (T sprite: this) {
+        for (T sprite: this.mySprites) {
             if (sprite.isActive()) {
-                return (T) sprite;
+                return sprite;
             }
         }
         
@@ -436,8 +446,8 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
      *         sprite in this group.
      * @see com.golden.gamedev.object.Sprite#setImmutable(boolean)
      */
-    public Sprite getInactiveSprite() {
-        for (T sprite: this) {
+    public T getInactiveSprite() {
+        for (T sprite: mySprites) {
             if (!sprite.isActive()) {
                 sprite.setActive(true);
                 return sprite;
@@ -472,9 +482,29 @@ public class SpriteGroup<T extends Sprite> extends ArrayList<T>{
     
     public String toString() {
         return super.toString() + " " + "[name=" + this.name + ", active="
-                + this.size() + ", total="
+                + this.mySprites.size() + ", total="
                 + ", member=" + this.getActiveSprite() + ", background="
                 + this.background + "]";
     }
+
+
+    public Iterable<T> getSprites(){
+    	return mySprites;
+    }
+
+
+
+	public int size() {
+		return mySprites.size();
+	}
+
+
+
+
+
+
+	public void clear() {
+		mySprites.clear();
+	}
     
 }

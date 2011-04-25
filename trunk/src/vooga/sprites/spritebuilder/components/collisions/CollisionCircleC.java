@@ -6,7 +6,7 @@ import vooga.collisions.shapes.Vertex;
 import vooga.collisions.shapes.collisionShapes.CollisionCircle;
 import vooga.collisions.shapes.collisionShapes.ICollisionShape;
 
-public class CollisionCircleC extends CollisionShapeC {
+public class CollisionCircleC extends CollisionShapeC<CollisionCircle> {
 
 	
 	public CollisionCircleC (Point2D center, double radius)

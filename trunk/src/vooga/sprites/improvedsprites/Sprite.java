@@ -29,6 +29,7 @@ import vooga.sprites.improvedsprites.interfaces.IMobility;
 import vooga.sprites.improvedsprites.interfaces.IRenderXY;
 import vooga.sprites.improvedsprites.interfaces.ISprite;
 import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
+import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionShapeC;
 import vooga.util.buildable.BuildException;
 import vooga.util.buildable.IBuildable;
@@ -123,7 +124,8 @@ public class Sprite extends BaseSprite
         // init variables
         this.x = this.oldX = x;
         this.y = this.oldY = y;
-        myComponents = new ComponentSet<IComponent>(Arrays.asList(new IComponent[]{new Speed2DC(), new HeadingC()}));
+        myComponents = new ComponentSet<IComponent>();
+        myComponents.addAll(Arrays.asList(new IComponent[]{new Speed2DC(), new HeadingC()}));
         // sprite image
         if (image != null)
         {
@@ -373,24 +375,21 @@ public class Sprite extends BaseSprite
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see sprites.oldsprites.ISprite#getCollisionShape()
-     */
+    
     @Override
-    public ICollisionShape getCollisionShape ()
+    public <T extends ICollisionShape> T getCollisionShape ()
     {
         if (this.getComponent(CollisionShapeC.class) == null)
         {
         	
-            this.addComponent(new CollisionShapeC(
+            this.addComponent(new CollisionPolygonC(
             		new CollisionQuadrilateral(new Vertex(this.getX(),this.getY()),
                                   new Vertex(this.getX()+this.getHeight(), this.getY()),
                                   new Vertex(this.getX(),this.getY() + this.getHeight()),
                                   new Vertex(this.getX()+this.getHeight(),this.getY() + this.getHeight()))));
         }
 
-        return this.getComponent(CollisionShapeC.class).getCollisionShape();
+        return (T) this.getComponent(CollisionShapeC.class).getCollisionShape();
     }
 
 
