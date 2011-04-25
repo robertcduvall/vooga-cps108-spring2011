@@ -1,4 +1,5 @@
 package vooga.user.main;
+
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -25,5 +26,5 @@ public class XmlWriter {
         VoogaUser o = (VoogaUser)decoder.readObject();
         decoder.close();
         return o;
-    }
+    } 
 }

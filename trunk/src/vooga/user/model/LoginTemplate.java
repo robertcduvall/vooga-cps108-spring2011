@@ -58,7 +58,6 @@ public class LoginTemplate {
 	/**
 	 * Retrieves a button action for a specific button - if implemented
 	 */int getButtonListener(){
-		//return myButtonListener;
 		return myButton;
 	}
 

@@ -46,8 +46,7 @@ public class FieldPanel extends JPanel{
 		
 		for (LoginTemplate login : log) {
 			mySectionType = login.getSectionType();
-			mySectionType.addSection(login.getHeader(), login.getPrompts(), this);
-			
+			addSection(login.getHeader(), login.getPrompts(), this);
 			if (login.getImageURL() != null) {
 				addImage(login.getImageURL());
 			}
@@ -63,6 +62,20 @@ public class FieldPanel extends JPanel{
 			}
 		}
 	}
+	
+	private void addSection(String header, String[] prompts,
+			FieldPanel fieldPanel) {
+		for(String r : prompts){
+			fieldPanel.getPrompts().add(r);
+		}	
+		for (int i = 0; i < prompts.length; i++) {
+			mySectionType = new InputSection();	
+			if(prompts[i].equals("Password") || prompts[i].equals("Passwordconfirm")){
+				mySectionType = new PasswordInputSection();}
+				mySectionType.addSection(header, prompts[i], this);
+		}
+	}
+	
 	
 	public void paintComponent(Graphics g) {
 		 String[] images = guiResource.getStringArray("LoginImageArray");
