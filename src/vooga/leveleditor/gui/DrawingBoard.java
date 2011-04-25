@@ -110,7 +110,7 @@ public class DrawingBoard extends JPanel
             for(int i = 0; i < sprites.getLength(); i++)
             {
                 Element sprite = (Element)sprites.item(i);
-                SpriteLabel newSprite = new SpriteLabel(viewport, sprite);
+                DraggableImage newSprite = new DraggableImage(viewport, sprite);
                 palette.addButton(sprite);
             }
         }
@@ -121,7 +121,7 @@ public class DrawingBoard extends JPanel
         }
     }
 
-    public void safeFile(File f)
+    public void saveFile(File f)
     {
 
     }

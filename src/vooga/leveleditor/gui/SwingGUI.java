@@ -57,7 +57,7 @@ public class SwingGUI extends JFrame
     
     public void saveFile(File f)
     {
-        board.safeFile(f);
+        board.saveFile(f);
     }
 
 }
