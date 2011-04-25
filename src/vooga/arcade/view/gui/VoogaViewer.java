@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.parser.ArcadeGameObject;
@@ -27,6 +28,7 @@ public class VoogaViewer extends JFrame implements IView
     private static final long serialVersionUID = 1L;
     private VoogaMiddleFrame middleFrame;
     private RatingsPane ratingsPane;
+    private JToolBar toolbar;
     private ResourceManager middleFrameResource =
         new ResourceManager("vooga.arcade.resources.MiddleFrameResource");
 
@@ -49,7 +51,8 @@ public class VoogaViewer extends JFrame implements IView
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         this.setTitle(title);
-        this.add(ButtonBar.createButtonToolBar(p), BorderLayout.PAGE_START);
+        toolbar = ButtonBar.createButtonToolBar(p);
+        this.add(toolbar, BorderLayout.PAGE_START);
         this.setResizable(false);
   
         middleFrame = new VoogaMiddleFrame(pc);
@@ -75,6 +78,13 @@ public class VoogaViewer extends JFrame implements IView
     public void showError (String str)
     {
         JOptionPane.showMessageDialog(middleFrame, str);
+    }
+    
+    public void switchToolBar(JToolBar newBar)
+    {
+        this.remove(toolbar);
+        toolbar = newBar;
+        this.add(toolbar, BorderLayout.PAGE_START);
     }
 
 
