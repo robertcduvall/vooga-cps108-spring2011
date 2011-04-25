@@ -13,8 +13,11 @@ public class AsteroidBulletCollision extends BasicCollisionGroup<Asteroid, Bulle
 {
 
 
+    public AsteroidBulletCollision() {
+		super();
+	}
 
-    public AsteroidBulletCollision(SpriteGroup<Asteroid> s1,
+	public AsteroidBulletCollision(SpriteGroup<Asteroid> s1,
 			SpriteGroup<Bullet> s2) {
 		super(s1, s2);
 	}

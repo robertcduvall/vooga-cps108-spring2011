@@ -4,13 +4,15 @@ import vooga.collisions.shapes.Vertex;
 import vooga.collisions.shapes.collisionShapes.CollisionCircle;
 import vooga.collisions.shapes.regularShapes.Circle;
 import vooga.collisions.shapes.regularShapes.IShape;
+import vooga.collisions.shapes.regularShapes.Polygon;
 import vooga.util.math.LineMath;
 
 public class CircleCircleFinder extends IntersectionFinder<Circle, Circle> {
 
 	public CircleCircleFinder()
 	{
-		
+		c1 = Circle.class;
+		c2 = Circle.class;
 	}
 
     @Override

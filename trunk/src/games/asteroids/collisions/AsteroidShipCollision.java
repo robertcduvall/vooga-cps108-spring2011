@@ -10,7 +10,11 @@ import vooga.sprites.spritegroups.SpriteGroup;
 public class AsteroidShipCollision extends BasicCollisionGroup<Asteroid, Ship>
 {
 
-    public AsteroidShipCollision(SpriteGroup<Asteroid> s1, SpriteGroup<Ship> s2) {
+    public AsteroidShipCollision() {
+		super();
+	}
+
+	public AsteroidShipCollision(SpriteGroup<Asteroid> s1, SpriteGroup<Ship> s2) {
 		super(s1, s2);
 	}
 
