@@ -26,7 +26,7 @@ public class LoginController implements ILoginController
 		model = new LoginModel(this);
 		view = new LoginViewer(string, string2, new Dimension(i, j), this);
 		gameReferences = arcadeGames;
-		//factory = new GameDatabaseFactory(gameReferences,this);
+		factory = new GameDatabaseFactory(gameReferences,this);
 		
 	}
 
