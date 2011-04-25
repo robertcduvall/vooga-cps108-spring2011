@@ -39,6 +39,7 @@ public class TextInputPane extends PopoverPane
         textInputPaneFrame = new FrameWork(myParent.getParent().bsInput, myParent.getWidth(), myParent.getHeight());
         tTextBox = new TTextField("", myParent.getWidth()/2-50, myParent.getHeight()/2+20, 110, 25);
         textInputPaneFrame.add(tTextBox);
+        //test comment
     }
    
     @Override
