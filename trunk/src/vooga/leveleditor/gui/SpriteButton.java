@@ -28,9 +28,10 @@ public class SpriteButton extends JButton
     private String myImageLocation;
     private Element SpriteProperties;
 
-    public SpriteButton(Viewport pane)
+    public SpriteButton(Viewport pane, Element spritedata)
     {
     	myPane = pane;
+    	SpriteProperties = spritedata;
     	setImageLocation();
         myIcon = new ImageIcon(myImageLocation);
         this.setIcon(myIcon);
