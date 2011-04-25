@@ -10,11 +10,13 @@ import javax.swing.border.EtchedBorder;
 public class StatusBar extends JLabel
 {
 
-    public StatusBar()
+    private static final String STATUS_BAR_MESSAGE = "Ready";
+
+	public StatusBar()
     {
         super();
         this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-        this.setText("Ready");
+        this.setText(STATUS_BAR_MESSAGE);
     }
 
 }
