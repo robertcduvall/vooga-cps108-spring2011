@@ -12,9 +12,12 @@ In order to implement physics, this is what needs to happen:
     # Call "VoogaPhysicsMediator.applyForces(/Fields)ToSprites(...)"
   # Inside of any collision group you have, call "VoogaPhysicsMediator.collision(...)", passing in the information that the method requires.
 
+----
+----
+----
 
-
-This section may be outdated. If you actually need any of the info that is in it, ask Nathan:
+This section is outdated. If you actually need any of the info that is in it, ask Nathan.
+----
 There are a couple different things that we feel that the Physics Engine should handle:
 1. Forces which affect all objects in the game world, such as gravity and “point forces,” such as magnets. There are currently three such types of these forces:
 
