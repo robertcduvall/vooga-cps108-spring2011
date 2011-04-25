@@ -1,10 +1,10 @@
 package vooga.user.model;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import vooga.user.controller.LoginController;
 import vooga.user.main.ResourceManager;
+import vooga.user.model.database.SQLite;
+import vooga.user.model.database.UserDatabase;
 import vooga.user.model.parser.RegXParser;
 import vooga.user.view.gui.middleFrame.ISectionAddable;
 import vooga.user.view.gui.middleFrame.InputSection;
@@ -49,24 +49,32 @@ public class LoginModel
 			}
 		}
 		try {
-			database = new SQLite();
+			database = new UserDatabase();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-//		try {
-//			database.update(USER_TABLE, prompt, text);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			database.retrieveTableStats(USER_TABLE, prompt);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+
+		try {
+			if(database.retrieveTableColumn(USER_TABLE, "UserName").contains(text[0])){
+				controller.displayError("Username already in use");
+				user.removeAllPreferences();
+				database.close();
+				return false;
+			}
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+		
 		try {
 			database.addNewUser(USER_TABLE, text);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			user.setUsername(database.retrieveExactEntry(USER_TABLE, text[0], "UserName"));
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -102,18 +110,12 @@ public class LoginModel
 	
 	public void startEditPage(){
 		try {
-			database = new SQLite();
+			database = new UserDatabase();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-//		try {
-//			return password.matches(database.retrieveExactEntry(USER_TABLE, user, "Password"));
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**
@@ -121,7 +123,7 @@ public class LoginModel
 	 */
 	public boolean verifyPassword(String user, String password) {
 				try {
-					database = new SQLite();
+					database = new UserDatabase();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
@@ -151,8 +153,9 @@ public class LoginModel
 	public VoogaUser getVoogaUser(){
 		return user;
 	}
-
-
-
-
+	
+	public void logOut() {
+		user.removeAllPreferences();	
+	}
+	
 	}

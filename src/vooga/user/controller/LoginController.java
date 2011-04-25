@@ -2,6 +2,7 @@ package vooga.user.controller;
 import java.awt.Dimension;
 import java.util.List;
 import vooga.arcade.controller.*;
+import vooga.user.model.GameDatabaseFactory;
 import vooga.user.model.LoginModel;
 import vooga.user.model.LoginTemplate;
 import vooga.user.view.LoginViewer;
@@ -17,6 +18,7 @@ public class LoginController implements ILoginController
 	public ArcadeController arcadeController;
 	public LoginModel model;
 	public List<String> gameReferences;
+	public GameDatabaseFactory factory;
 
 	public LoginController(String string, String string2, int i, int j, List<String> arcadeGames)
 	{
@@ -24,6 +26,8 @@ public class LoginController implements ILoginController
 		model = new LoginModel(this);
 		view = new LoginViewer(string, string2, new Dimension(i, j), this);
 		gameReferences = arcadeGames;
+		//factory = new GameDatabaseFactory(gameReferences,this);
+		
 	}
 
 	public LoginController(){}
@@ -82,8 +86,13 @@ public class LoginController implements ILoginController
 			if(p.getPrompt().equals("UserName")){username = p.getInput();}
 		}
 		System.out.println(username);
-		arcadeController.swapToolbarButton(user);
+		//arcadeController.swapToolbarButton(user);
 		System.out.println("I need indication!!!!!!");
+		view.setVisible(false);
+	}
+	@Override
+	public void logOut(){
+		model.logOut();
 		view.setVisible(false);
 	}
 }

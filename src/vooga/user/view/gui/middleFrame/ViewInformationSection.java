@@ -4,7 +4,8 @@ import java.sql.SQLException;
 
 import javax.swing.JLabel;
 
-import vooga.user.model.SQLite;
+import vooga.user.model.database.SQLite;
+import vooga.user.model.database.UserDatabase;
 
 public class ViewInformationSection implements ISectionAddable {
 	SQLite database;
@@ -21,7 +22,7 @@ public class ViewInformationSection implements ISectionAddable {
 	public String getDatabaseMapping(String request){
 		String s = "";
 		try {
-			database = new SQLite();
+			database = new UserDatabase();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

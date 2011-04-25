@@ -78,7 +78,7 @@ public class VoogaUser {
 	/**
 	 * This method accesses the current username and changes it to the String passed in 
 	 */
-	public void resetUsername(String s){
+	public void setUsername(String s){
 		myUsername =  s;
 	}
 

@@ -1,12 +1,14 @@
-package vooga.user.model;
+package vooga.user.model.database;
 	import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 	/**
 	 * @author Conrad Haynes
 	 *This SQLite class, although somewhat cluttered, contains all the method calls to access, change, or utilize the 
 	 *SQLite database. 
 	 */
-	public class SQLite {
+	public abstract class SQLite {
 		
 		public static PreparedStatement myPrep;
 		public static Connection myConn;
@@ -14,7 +16,7 @@ package vooga.user.model;
 		
 		public SQLite() throws SQLException, ClassNotFoundException{
 				Class.forName("org.sqlite.JDBC");//standard - need every time
-		    Connection conn =DriverManager.getConnection("jdbc:sqlite:test1.db");
+		    Connection conn =DriverManager.getConnection("jdbc:sqlite:test.db");
 		    Statement stat = null;
 				stat = conn.createStatement();
 		    myStat = stat;
@@ -81,27 +83,14 @@ package vooga.user.model;
 		 * This method creates a new table based off of the respective tableComponents
 		 * @param tableComponents - represents the columns to be created within the tables
 		 * @throws SQLException 
+		 * @throws SQLException 
 		 */
-		public void initialize(String tableName, String[] tableComponents) throws SQLException{
-				myStat.executeUpdate("drop table if exists " + tableName + ";");
-			StringBuilder options = new StringBuilder("");
-			StringBuilder placeholder = new StringBuilder("");
-			options.append("create table " + tableName +" (");
-			for(String component : tableComponents){
-				options.append(component + ", ");
-				placeholder.append("?, ");
-			}
-			String temp = trimString(options);
-				myStat.executeUpdate(temp + ");");
-		    String prePrep = trimString(placeholder);
-		    PreparedStatement prep = myConn.prepareStatement("insert into " + tableName + " values ("+ prePrep +");");
-		    myPrep = prep;
-		}
+		public abstract void initialize(String tableName, String[] tableComponents) throws SQLException;
 		
 		/**
 		 * Removes the last two characters off the end of a StringBuilder - used multiple times with this class
 		 */
-		private String trimString(StringBuilder s){
+		protected String trimString(StringBuilder s){
 			String p = s.substring(0, s.length()-2);
 			return p;
 		}
@@ -145,6 +134,28 @@ package vooga.user.model;
 				rs.close();
 				myConn.close();
 		}
+		
+
+		/**
+		 * This method retrieves all information from a specific column of a table
+		 * @param tableComponents - a column within a Table, that the user wants displayed
+		 * @return 
+		 * @throws SQLException 
+		 */
+		public List<String> retrieveTableColumn(String tableName, String tableComponent) throws SQLException{
+			ResultSet rs = myStat.executeQuery("select " + tableComponent + " from " + tableName + ";");
+		    List<String> list = new ArrayList<String>();
+			String s = "";
+				while (rs.next()) {
+					s = rs.getString(tableComponent);
+					System.out.println(tableComponent+" = " + s);
+					list.add(s);
+				}
+				rs.close();
+				myConn.close();
+				return list;
+		}
+		
 		
 		public String retrieveTopRow(String tableName, String tableComponent) throws SQLException{
 			String result = null;

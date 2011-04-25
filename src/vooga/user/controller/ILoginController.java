@@ -37,4 +37,6 @@ public interface ILoginController
  * This method saves the VoogaUser information and exits the Login of the system
 */
 	void exitLogin() throws Exception;
+	
+	void logOut();
 }

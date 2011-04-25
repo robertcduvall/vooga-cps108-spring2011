@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import vooga.user.controller.ILoginController;
-import vooga.user.model.SQLite;
+import vooga.user.model.database.SQLite;
+import vooga.user.model.database.UserDatabase;
 import vooga.user.view.gui.middleFrame.FieldPanel;
 
 
@@ -26,7 +27,7 @@ public class EditButton extends AbstractLoginAction {
 		pc.updateWithInput();
 		
 		try {
-			database = new SQLite();
+			database = new UserDatabase();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
