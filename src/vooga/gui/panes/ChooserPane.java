@@ -38,7 +38,7 @@ public class ChooserPane extends PopoverPane
    
     public void initResetAction()
     {
-        myName = "Default";
+    	myName = "Default"; // move method to top level later
         myParent.getEventManager().registerEventHandler("ResetInfoPane."+myName, new IEventHandler()
         {
             @Override
