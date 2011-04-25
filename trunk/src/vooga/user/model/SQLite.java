@@ -146,6 +146,21 @@ package vooga.user.model;
 				myConn.close();
 		}
 		
+		public String retrieveTopRow(String tableName, String tableComponent) throws SQLException{
+			String result = null;
+				ResultSet rs = myStat.executeQuery("select " + tableComponent +" from " + tableName + " limit 1;");
+		
+				while (rs.next()) {
+						result = rs.getString(tableComponent);
+						System.out.println(tableComponent+" = " + result);
+						
+			}
+				rs.close();
+				myConn.close();
+				
+				return result;
+		}
+		
 		/**
 		 * Retrieves specific information from a database table 
 		 * @param username - the user or game for which the information is requested
