@@ -1,5 +1,7 @@
 package vooga.user.model;
 
+import java.util.List;
+
 import vooga.user.view.gui.middleFrame.ISectionAddable;
 
 //import java.awt.event.ActionListener;
@@ -11,7 +13,7 @@ public class LoginTemplate {
 	
 	public String[] myInputs, myPrompts;
 	public String myHeader, myImageURL;
-	public int myButton;
+	public int[] myButtons;
 	public ISectionAddable mySectionType;
 	
 	/**
@@ -22,11 +24,11 @@ public class LoginTemplate {
 	 * @param imageURL - the location of an image the user want to include in their layout
 	 * @param buttonAction - create a button based on the action you want it to perform
 	 */
-	public LoginTemplate(String header, String[]prompts, String imageURL, int button, ISectionAddable section){	
+	public LoginTemplate(String header, String[]prompts, String imageURL, int[] buttons, ISectionAddable section){	
 		myPrompts = prompts;
 		myHeader = header;
 		myImageURL = imageURL;
-		myButton = button;
+		myButtons = buttons;
 		mySectionType=section;
 	}
 	
@@ -57,8 +59,9 @@ public class LoginTemplate {
 	
 	/**
 	 * Retrieves a button action for a specific button - if implemented
-	 */int getButtonListener(){
-		return myButton;
+	 */
+	public int[] getButtonListener(){
+		return myButtons;
 	}
 
 	public ISectionAddable getSectionType() {

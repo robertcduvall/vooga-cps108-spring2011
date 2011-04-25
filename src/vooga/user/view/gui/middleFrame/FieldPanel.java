@@ -19,6 +19,7 @@ import vooga.user.controller.ILoginController;
 import vooga.user.main.ResourceManager;
 import vooga.user.model.LoginTemplate;
 import vooga.user.view.actions.AbstractLoginAction;
+import vooga.user.view.actions.EditButton;
 import vooga.user.view.actions.PasswordLogin;
 import vooga.user.view.actions.RegisterButton;
 import vooga.user.view.actions.SubmitButton;
@@ -35,7 +36,7 @@ public class FieldPanel extends JPanel{
 	private List<JTextField> inputFields = new ArrayList<JTextField>();
 	private List<String> promptText = new ArrayList<String>();
 	private String[] inputText; 
-	private static ISectionAddable mySectionType;
+	private static ISectionAddable mySectionType,currentSectionType;
 	private ResourceManager guiResource = new ResourceManager("vooga.user.resources.GUIResource");
 	
 	/**
@@ -43,8 +44,10 @@ public class FieldPanel extends JPanel{
 	 */
 	public FieldPanel(LoginTemplate[] log, ILoginController controller) {
 		this.setLayout(new MigLayout());
+		String[] buttonNames = guiResource.getStringArray("ButtonReferences");
 		
 		for (LoginTemplate login : log) {
+			currentSectionType = login.getSectionType();
 			mySectionType = login.getSectionType();
 			addSection(login.getHeader(), login.getPrompts(), this);
 			if (login.getImageURL() != null) {
@@ -54,25 +57,33 @@ public class FieldPanel extends JPanel{
 					new PasswordLogin(controller, this),
 					new SubmitButton(controller, this),
 					new RegisterButton(controller, this), 
-					new ViewInputButton(controller,this)};
+					new ViewInputButton(controller,this),
+					new EditButton(controller,this),
+					};
 
 			// accesses a specific button class action based on it's index in the array
-			if (login.myButton >= 0) {
-				addButton(buttons[login.myButton]);
-			}
-		}
+			int count = 0;
+			for(Integer i : login.getButtonListener()){
+				count++;
+				System.out.println("inside i "+ " " + count + " " + i);
+			if (i >= 0) {
+				System.out.println(buttons[i]);
+				addButton(buttons[i],buttonNames[i]);}}
+	}
 	}
 	
 	private void addSection(String header, String[] prompts,
 			FieldPanel fieldPanel) {
+		addSeparator(this, header);
 		for(String r : prompts){
 			fieldPanel.getPrompts().add(r);
 		}	
 		for (int i = 0; i < prompts.length; i++) {
-			mySectionType = new InputSection();	
+			currentSectionType = mySectionType;	
 			if(prompts[i].equals("Password") || prompts[i].equals("Passwordconfirm")){
-				mySectionType = new PasswordInputSection();}
-				mySectionType.addSection(header, prompts[i], this);
+				currentSectionType = new PasswordInputSection();}
+			
+				currentSectionType.addSection(header, prompts[i], this);
 		}
 	}
 	
@@ -102,9 +113,9 @@ public class FieldPanel extends JPanel{
 	/**
 	 * This method adds a button to the fill-in section to advance us to the appropriate window
 	 */
-	public void addButton(ActionListener listener) {
-		JButton button = new JButton("NEXT");
-		this.add(button, "wrap para, wrap para");
+	public void addButton(ActionListener listener, String name) {
+		JButton button = new JButton(name);
+		this.add(button, "wrap para, gap para");
 		button.addActionListener(listener);
 	}
 
@@ -117,6 +128,16 @@ public class FieldPanel extends JPanel{
 			this.add(imageLabel);
 		}
 	 
+	
+	/**
+	 * This method is utilized by the add Section method to create different sections to the game
+	 */
+	 private void addSeparator(JPanel panel, String text)
+	   {
+	      panel.add(new JLabel(text), "gapbottom 1, span, split 2, aligny center");
+	      panel.add(new JSeparator(), "gapleft rel, growx");
+	   }
+	
 	/**
 	* This method retrieves the results of all the input fields as a String[]
 	*/

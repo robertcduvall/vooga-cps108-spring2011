@@ -5,6 +5,7 @@ import vooga.arcade.controller.*;
 import vooga.user.model.LoginModel;
 import vooga.user.model.LoginTemplate;
 import vooga.user.view.LoginViewer;
+import vooga.user.view.gui.middleFrame.ViewInformationSection;
 import vooga.user.view.gui.middleFrame.InputSection;
 import vooga.user.view.gui.middleFrame.TextSection;
 import vooga.user.voogauser.UserPreference;
@@ -34,11 +35,11 @@ public class LoginController implements ILoginController
 
 	@Override
 	public void updateWithInput(){
-		view.update(model.update());	
+		view.update(model.update(new InputSection()));	
 	}
 	
 	public void updateWithInformationPanel(){
-		view.update(model.update());
+		view.update(model.update(new ViewInformationSection()));
 	}
 	
 	@Override
@@ -63,6 +64,10 @@ public class LoginController implements ILoginController
  */
 	public List<String> getGameReferences(){
 		return gameReferences;
+	}
+	
+	public VoogaUser getVooga(){
+		return model.getVoogaUser();
 	}
 	
 
