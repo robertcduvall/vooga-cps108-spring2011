@@ -21,10 +21,9 @@ public class Circle extends Shape
 
     protected double radius;
 
-
     public Circle (Vertex center, double radius)
     {
-        this.center = center;
+        super.center = center;
         this.radius = radius;
     }
     
@@ -36,7 +35,7 @@ public class Circle extends Shape
 
     public Circle (Circle c)
     {
-        this.center = new Vertex(c.getCenter());
+        super.center = new Vertex(c.getCenter());
         this.radius = c.getRadius();
     }
 

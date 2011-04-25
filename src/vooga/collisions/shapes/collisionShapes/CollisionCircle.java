@@ -12,7 +12,4 @@ public class CollisionCircle extends Circle implements Shape, ICollisionShape
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
-
 }
