@@ -5,7 +5,7 @@ import vooga.physics.util.Velocity;
 
 public class NewtonianForceBehavior extends EmptyForceBehavior {
 
-    private double myMass;
+    protected double myMass;
     
     public NewtonianForceBehavior(double mass){
         myMass = mass;
