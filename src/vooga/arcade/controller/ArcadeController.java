@@ -135,6 +135,10 @@ public class ArcadeController
         view.updateGameObjectList(arcadeGameList, searchQuery);
     }
     
+    public void updateColumnText(String s, int index){
+        view.getMiddleFrame().getTextPanes().addStringToComponent(index, s);
+    }
+    
     public void updateButtonBar(JToolBar newBar)
     {
         view.switchToolBar(newBar);

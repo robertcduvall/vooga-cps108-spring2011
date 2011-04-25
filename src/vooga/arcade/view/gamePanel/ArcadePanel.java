@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import vooga.arcade.helper.ImageProcessor;
 import vooga.arcade.parser.ArcadeGameObject;
+import vooga.arcade.view.actions.ActionFactory;
 
 /**
  * @author KevinWang
@@ -30,20 +31,22 @@ public abstract class ArcadePanel extends JPanel
 	private static final long serialVersionUID = 1L;
 	protected ImageIcon icon;
 	protected String title;
+	protected JButton imageButton;
 	
 	public ArcadePanel(ImageIcon i, String t)
 	{
 		icon = i; 
 		title = t;
 		this.setLayout(new BorderLayout(10, 10));
-		addIcon();
-//		addTitle();
+		addImageButton();
+		//addTitle();
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	}
 	
-	private void addIcon()
+	private void addImageButton()
 	{
-		this.add(new JLabel(icon), BorderLayout.NORTH);
+	    imageButton = new JButton(icon);
+	    this.add(imageButton, BorderLayout.NORTH);
 	}
 	
 	private void addTitle()

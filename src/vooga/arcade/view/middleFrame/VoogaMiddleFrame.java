@@ -23,6 +23,7 @@ public class VoogaMiddleFrame extends JPanel
 
 	private ThumbnailPanel middlePanel;
 	private ColumnTextPanes rightPanel;
+	private ArcadeController arcadeController;
 
 	private ResourceManager MiddleFrameResource = new ResourceManager(
 			"vooga.arcade.resources.MiddleFrameResource");
@@ -35,13 +36,15 @@ public class VoogaMiddleFrame extends JPanel
 		List<ArcadeGameObject> gameList = pc.queryModel("title", null);
 
 		List<JPanel> allGames = ArcadePanelFactory
-				.generateArcadeGamePanels(gameList);
+				.generateArcadeGamePanels(gameList, pc);
 
+		arcadeController = pc;
 		middlePanel = new ThumbnailPanel(allGames);
 		rightPanel = new ColumnTextPanes(
 				MiddleFrameResource.getInteger("RightPanelNumber"),
-				MiddleFrameResource.getStringArray("RightPanelLabels"), pc);
-
+				MiddleFrameResource.getStringArray("RightPanelLabels"), arcadeController);
+		
+		
 		this.add(middlePanel, BorderLayout.CENTER);
 		this.add(rightPanel, BorderLayout.EAST);
 	}
@@ -54,7 +57,11 @@ public class VoogaMiddleFrame extends JPanel
 	public void updateThumbnails(List<ArcadeGameObject> ao, String searchQuery)
 	{
 		middlePanel.addNewCard(ArcadePanelFactory
-                .generateArcadeGamePanels(ao), searchQuery);
+                .generateArcadeGamePanels(ao,arcadeController), searchQuery);
 		middlePanel.show(searchQuery);
+	}
+	
+	public ColumnTextPanes getTextPanes(){
+	    return rightPanel;
 	}
 }

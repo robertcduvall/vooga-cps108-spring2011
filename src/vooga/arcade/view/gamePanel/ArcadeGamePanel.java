@@ -18,8 +18,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.helper.ImageProcessor;
 import vooga.arcade.parser.ArcadeGameObject;
+import vooga.arcade.view.actions.ActionFactory;
 
 /**
  * @author KevinWang
@@ -30,13 +32,15 @@ public class ArcadeGamePanel extends ArcadePanel
 
 	private static final long serialVersionUID = 1L;
 	private ArcadeGameObject gameObject;
-	
+	private ArcadeController arcadeController;
+
 	private static int iconSize = 130;
-	
-	public ArcadeGamePanel(ArcadeGameObject gameObject)
+
+	public ArcadeGamePanel(ArcadeGameObject gameObject, ArcadeController pc)
 	{
 		super(new ImageIcon(ImageProcessor.padImageToSquare(gameObject.getImage(),iconSize)), gameObject.getData("title"));
 		this.gameObject = gameObject;
+		this.arcadeController = pc;
 		addPlayButton();
 	}
 
@@ -55,6 +59,16 @@ public class ArcadeGamePanel extends ArcadePanel
 		this.add(playButton, BorderLayout.CENTER);
 	}
 	
+	private void addListenerToButton(ArcadeController pc){
+	    imageButton.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                //arcadeController.
+            }
+        });
+	}
+
 	private void setIconSize(int i)
 	{
 		iconSize = i;
