@@ -71,6 +71,7 @@ public class Circle extends Shape
     @Override
     public boolean contains (Point2D p)
     {
+    	double dist = p.distance(center);
         return p.distance(center) <= radius;
     }
 
