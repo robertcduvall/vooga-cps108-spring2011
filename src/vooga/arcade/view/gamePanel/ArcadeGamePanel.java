@@ -30,10 +30,12 @@ public class ArcadeGamePanel extends ArcadePanel
 
 	private static final long serialVersionUID = 1L;
 	private ArcadeGameObject gameObject;
-
+	
+	private static int iconSize = 130;
+	
 	public ArcadeGamePanel(ArcadeGameObject gameObject)
 	{
-		super(new ImageIcon(ImageProcessor.padImageToSquare(gameObject.getImage(),100)), gameObject.getData("title"));
+		super(new ImageIcon(ImageProcessor.padImageToSquare(gameObject.getImage(),iconSize)), gameObject.getData("title"));
 		this.gameObject = gameObject;
 		addPlayButton();
 	}
@@ -51,5 +53,10 @@ public class ArcadeGamePanel extends ArcadePanel
 			}
 		});
 		this.add(playButton, BorderLayout.CENTER);
+	}
+	
+	private void setIconSize(int i)
+	{
+		iconSize = i;
 	}
 }
