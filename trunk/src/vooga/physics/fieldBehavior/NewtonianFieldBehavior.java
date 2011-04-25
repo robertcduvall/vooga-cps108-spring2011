@@ -4,6 +4,12 @@ import vooga.physics.util.VectorField;
 import vooga.physics.util.Velocity;
 import vooga.util.math.MathVector;
 
+/**
+ * Defines field behavior which is standard for Newtonian physics
+ * 
+ * @author Nathan Klug
+ *
+ */
 public class NewtonianFieldBehavior extends EmptyFieldBehavior {
 
     private VectorField myVectorField;

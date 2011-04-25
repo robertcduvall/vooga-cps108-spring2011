@@ -3,6 +3,12 @@ package vooga.physics.forceBehavior;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 
+/**
+ * Defines the standard Newtonian behavior for responding to a force.
+ * 
+ * @author Nathan Klug
+ *
+ */
 public class NewtonianForceBehavior extends EmptyForceBehavior {
 
     protected double myMass;
