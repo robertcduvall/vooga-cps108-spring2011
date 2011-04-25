@@ -92,7 +92,7 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 	 */
 	private void setJLabelValuesForDraggableImage(ImageIcon icon,
 			Viewport parent, int x, int y) {
-        parent.add(this,parent.LAYER_SPRITES);
+        parent.add(this, 1);
 		this.setVisible(true);
 		this.setBounds(x, y, icon.getIconWidth(), icon.getIconWidth());
 		parent.moveToFront(this);
