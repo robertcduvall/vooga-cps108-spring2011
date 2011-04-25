@@ -3,6 +3,7 @@ package games.asteroids;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.util.buildable.components.predefined.movement.Speed2DC;
 
 
 public class Ship extends Sprite
@@ -74,18 +75,18 @@ public class Ship extends Sprite
 
     public void thrust ()
     {
-        // TODO applyForce(0.01, getAngle());
+        super.accelerate(-.01, 10);
     }
 
 
     public void turnLeft ()
     {
-        // TODO setAngle(getAngle() - 1);
+       this.setAngle(getAngle() + 1);
     }
 
 
     public void turnRight ()
     {
-        // TODO setAngle(getAngle() + 1);
+        setAngle(getAngle() - 1);
     }
 }

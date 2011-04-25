@@ -137,7 +137,7 @@ public interface IMobility extends IRotation
                                            double maxSpeed);
 
 
-    void addSpeed (long elapsedTime, double accel, double direction, double max);
+    double addSpeed (long elapsedTime, double accel, double direction, double max);
 
 
     /**
@@ -164,5 +164,12 @@ public interface IMobility extends IRotation
      * sprite is moving to top.
      */
     public abstract double getVerticalSpeed ();
+
+    /**
+     * Accelerate this object by a given amount
+     * @param i
+     * @return
+     */
+	double accelerate(double accel, double max);
     
 }
