@@ -3,12 +3,12 @@ package vooga.util.buildable.components.predefined.basic;
 public class Speed2DC extends SpeedC 
 {
 
-    public Speed2DC(double x, double y){
+    public Speed2DC(Double x, Double y){
         super (x,y);
     }
     
     public Speed2DC(){
-        this(0,0);
+        this(0.0,0.0);
     }
     
     public double getYVelocity(){

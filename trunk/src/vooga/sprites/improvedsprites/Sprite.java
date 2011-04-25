@@ -459,6 +459,7 @@ public class Sprite extends BaseSprite
     @Override
     public double getVerticalSpeed ()
     {
+    	
         return this.getComponent(Speed2DC.class).getYVelocity();
     }
 
@@ -733,6 +734,7 @@ public class Sprite extends BaseSprite
     @Override
     public void setVerticalSpeed (double vy)
     {
+    	
         this.setSpeed(this.getHorizontalSpeed(), vy);
     }
 
