@@ -108,4 +108,8 @@ public class VoogaViewer extends JFrame implements IView
    public void updateGameObjectList(List<ArcadeGameObject> arcadeGameList, String searchQuery){
        middleFrame.updateThumbnails(arcadeGameList, searchQuery);
    }
+   
+   public VoogaMiddleFrame getMiddleFrame(){
+       return middleFrame;
+   }
 }

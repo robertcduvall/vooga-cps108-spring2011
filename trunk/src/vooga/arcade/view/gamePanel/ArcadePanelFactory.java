@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.parser.ArcadeUserObject;
 import vooga.arcade.parser.gameObject.ArcadeObject;
@@ -18,12 +19,12 @@ import vooga.arcade.parser.gameObject.ArcadeObject;
  */
 public class ArcadePanelFactory
 {
-	public static List<JPanel> generateArcadeGamePanels(List<ArcadeGameObject> aoList)
+	public static List<JPanel> generateArcadeGamePanels(List<ArcadeGameObject> aoList, ArcadeController pc)
 	{
 		List<JPanel> toReturn = new ArrayList<JPanel>();
 		for (ArcadeGameObject ao : aoList)
 		{
-			toReturn.add(new ArcadeGamePanel(ao));
+			toReturn.add(new ArcadeGamePanel(ao, pc));
 		}
 		return toReturn;
 	}
