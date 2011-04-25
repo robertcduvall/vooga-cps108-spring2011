@@ -1,4 +1,7 @@
 package vooga.user.controller;
+
+import vooga.user.view.gui.middleFrame.TextSection;
+
 /**
  * Interface for the Controller in the MVC pattern for the login structure.
  * 
@@ -27,6 +30,8 @@ public interface ILoginController
  * Update with input is called by the model to update the prompt questions in the view. Uber helpful
  */
 	public void updateWithInput();
+	
+	public void updateWithInformationPanel();
 	
 /**
  * This method saves the VoogaUser information and exits the Login of the system

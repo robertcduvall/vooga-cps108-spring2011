@@ -16,6 +16,7 @@ import javax.swing.UIManager;
 
 import vooga.user.controller.LoginController;
 import vooga.user.model.LoginTemplate;
+import vooga.user.view.gui.middleFrame.InputSection;
 import vooga.user.view.gui.middleFrame.LoginMiddleFrame;
 
 /**
