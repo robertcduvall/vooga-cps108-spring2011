@@ -10,6 +10,7 @@ import vooga.resources.images.ImageLoader;
 import vooga.resources.managertags.ImageResourceTag;
 import vooga.resources.managertags.KeyMapTag;
 import vooga.resources.managertags.LevelTag;
+import vooga.resources.managertags.StringsTag;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
@@ -47,7 +48,8 @@ public class ResourceManager extends Parser {
         addDefinitions( new RootTag(),
                         new ImageResourceTag(this),
                         new LevelTag(this),
-                        new KeyMapTag(this));
+                        new KeyMapTag(this),
+                        new StringsTag(this));
     }
 	
 	public void setImageLoader(ImageLoader imageLoader)	{
