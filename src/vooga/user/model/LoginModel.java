@@ -1,27 +1,10 @@
 package vooga.user.model;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import vooga.user.controller.LoginController;
 import vooga.user.main.ResourceManager;
-import vooga.user.main.XmlWriter;
-import vooga.user.model.parser.PasswordEncoding;
-import vooga.user.model.parser.PasswordParser;
 import vooga.user.model.parser.RegXParser;
-import vooga.user.view.gui.middleFrame.ISectionAddable;
 import vooga.user.view.gui.middleFrame.InputSection;
-import vooga.user.view.gui.middleFrame.TextSection;
 import vooga.user.voogauser.UserPreference;
 import vooga.user.voogauser.VoogaUser;
 

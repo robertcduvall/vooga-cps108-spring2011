@@ -5,11 +5,8 @@ import javax.swing.JLabel;
 public class TextSection implements ISectionAddable {
 
 	@Override
-	public void addSection(String sectionTitle, String[] sectionInformation,
+	public void addSection(String sectionTitle, String request,
 			FieldPanel panel) {
-		for(int j =0 ; j < sectionInformation.length; j++){
-			panel.add(new JLabel(sectionInformation[j]), "gap para, span, growx, wrap");
-		}
+			panel.add(new JLabel(request), "gap para, span, growx, wrap");		
 	}
-
 }
