@@ -5,6 +5,8 @@ import vooga.levels.util.LevelParser;
 import vooga.levels.util.PoolDeferredConstructor;
 
 import com.golden.gamedev.object.Background;
+
+import vooga.resources.bundle.Bundle;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.buildable.components.IComponent;
@@ -40,6 +42,8 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     /** This level's current id; could change each time a new XML file is read */
     private int myId;
 
+    /** The local string bundle for the level. */
+    private Bundle myBundle;
     
     public AbstractLevel (Collection<SpriteGroup<Sprite>> players, VoogaGame game)
     {
@@ -52,6 +56,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         myBackgrounds = new LinkedList<Background>();
         myMusic = new LinkedList<String>();
         mySpritePool = new SpritePool();
+        myBundle = new Bundle();
     }
 
 
@@ -250,6 +255,12 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         return myId;
     }
    
+    /**
+     * Returns the string bundle associated with this level.
+     */
+    public Bundle getBundle() {
+    	return myBundle;
+    }
     
     /**
      * Updates the level and checks for goal completion
