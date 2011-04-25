@@ -262,7 +262,7 @@ public class Sprite extends BaseSprite
     
     @Override
     public void addSpeed(long elapsedTime, double accel, double direction, double max){
-        this.getComponent(Speed2DC.class);
+        this.getComponent(Speed2DC.class).setSpeed((this.getComponent(Speed2DC.class).getAbsoluteVelocity()+elapsedTime*accel), direction, max);
     }
 
 
@@ -391,11 +391,11 @@ public class Sprite extends BaseSprite
                                   new Vertex(this.getX()+this.getHeight(),this.getY() + this.getHeight()))));
         }
 
-        return (T) this.getComponentsSubclassing(CollisionShapeC.class).get(0).getCollisionShape();
+        return (T) this.getComponentsWhichSubclass(CollisionShapeC.class).get(0).getCollisionShape();
     }
 
 
-    private <T extends IComponent> ArrayList<T> getComponentsSubclassing(Class<T> clazz) {
+    public <T extends IComponent> ArrayList<T> getComponentsWhichSubclass(Class<T> clazz) {
     	ArrayList<T> comps = new ArrayList<T>();
     	for (IComponent comp: myComponents){
     		if (comp.getClass().getSuperclass().equals(clazz)){
@@ -438,10 +438,6 @@ public class Sprite extends BaseSprite
         return (T) this.getComponent(comp.getClass());
     }
     
-    //TODO: Julian, write this!
-    public <T> List<T> getComponentsWhichSubclass(Class<T> cls){
-        return null;
-    }
 
 
     /*

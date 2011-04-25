@@ -18,4 +18,10 @@ public class PongGame extends VoogaGame{
 		
 	}
 
+	@Override
+	public void initResources() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
