@@ -61,7 +61,7 @@ public class GameDatabaseFactory {
 			e1.printStackTrace();
 		}
 		for(String user : allUsers){
-			if(!currentUsers.contains(user)){
+			if(currentUsers == null || currentUsers.contains(user)){
 				String[] temp = registrationResource.getStringArray("DefaultGamePreference");
 				
 				try {
@@ -70,6 +70,7 @@ public class GameDatabaseFactory {
 					e.printStackTrace();
 				}
 			}
+			
 		}
 		}
 	}
