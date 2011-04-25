@@ -14,7 +14,7 @@ public class PolygonPolygonFinder extends IntersectionFinder
 	
 	@Override
 	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2) {
-		return c1.isInstance(Polygon.class) && c2.isInstance(Polygon.class);
+		return c1.isAssignableFrom(Polygon.class) && c2.isAssignableFrom(Polygon.class);
 	}
 
     @Override

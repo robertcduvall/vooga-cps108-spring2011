@@ -1,12 +1,13 @@
 package vooga.collisions.intersections;
 
 import vooga.collisions.shapes.Vertex;
-import vooga.collisions.shapes.regularShapes.*;
+import vooga.collisions.shapes.collisionShapes.CollisionCircle;
+import vooga.collisions.shapes.regularShapes.Circle;
+import vooga.collisions.shapes.regularShapes.IShape;
 import vooga.util.math.LineMath;
 
 public class CircleCircleFinder extends IntersectionFinder {
 
-	
 	public CircleCircleFinder()
 	{
 		
@@ -14,7 +15,7 @@ public class CircleCircleFinder extends IntersectionFinder {
 	@Override
 	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2)
 	{
-		return c1.isInstance(Circle.class) && c2.isInstance(Circle.class);
+		return c1.isAssignableFrom(Circle.class) && c2.isAssignableFrom(Circle.class);
 	}
 
     @Override
@@ -50,7 +51,6 @@ public class CircleCircleFinder extends IntersectionFinder {
     @Override
     public boolean areIntersecting (IShape s1, IShape s2)
     {
-        
         return (((Circle) s1).getRadius() + ((Circle) s2).getRadius()) > s1.getCenter().distance(s2.getCenter());
     }
 

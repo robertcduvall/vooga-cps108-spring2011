@@ -23,11 +23,9 @@ public class Intersection
         }
         return new Point2D.Double(x,y);
     }
-    
 
     public void addIntersectingPoints (Point2D ... intersects)
     {
         myIntersections.addAll(Arrays.asList(intersects));
-    }
-        
+    }        
 }

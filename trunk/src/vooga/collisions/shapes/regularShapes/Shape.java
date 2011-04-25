@@ -40,9 +40,9 @@ public abstract class Shape implements  IShape
      * @see vooga.collisions.shapes.regularShapes.IShape#setCenter(java.awt.geom.Point2D)
      */
     @Override
-    public void setCenter (Point2D center)
+    public void setCenter (Point2D.Double center)
     {
-        this.center.setLocation(center);
+    	this.center = new Vertex(center);
     }
 
 }

@@ -33,6 +33,6 @@ public interface IShape extends java.awt.Shape
     public abstract boolean contains (double x1, double y1, double x2, double y2);
 
 
-    public abstract void setCenter (Point2D center);
+    public abstract void setCenter (Point2D.Double center);
 
 }

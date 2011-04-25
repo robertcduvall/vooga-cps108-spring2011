@@ -14,7 +14,7 @@ public class PolygonCircleFinder extends IntersectionFinder
 	
 	@Override
 	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2) {
-		return c1.isInstance(Polygon.class) && c2.isInstance(Circle.class);
+		return c1.isAssignableFrom(Polygon.class) && c2.isAssignableFrom(Circle.class);
 	}
 
     @Override
@@ -31,10 +31,16 @@ public class PolygonCircleFinder extends IntersectionFinder
     @Override
     public boolean areIntersecting (IShape s1, IShape s2)
     {
+        if(((Polygon)s1).contains(((Circle)s2).getCenter()))
+        	return true;
+        	
         for(Line2D l: ((Polygon) s1).getSides()){
             if(((Circle)s2).intersects(l))
                 return true;
+            if(((Circle)s2).contains(l));
+            	return true;
         }
+        
         return false;
     }
 
