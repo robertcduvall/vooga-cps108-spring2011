@@ -1,4 +1,4 @@
-package vooga.util.buildable.components.predefined.basic;
+package vooga.util.buildable.components.predefined.movement;
 
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.buildable.components.IComponent;

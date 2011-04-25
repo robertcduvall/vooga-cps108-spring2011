@@ -379,14 +379,6 @@ public abstract class BuildableObject extends Observable
     }
 
 
-    /* (non-Javadoc)
-     * @see util.buildable.IBuildable#reset()
-     */
-    @Override
-    public void reset ()
-    {
-
-    }
 
 
     /* (non-Javadoc)

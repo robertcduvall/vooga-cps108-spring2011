@@ -8,7 +8,19 @@ import java.util.TreeSet;
 public class ComponentSet<IComponent> extends TreeSet<IComponent>
 {
 
-    public ComponentSet ()
+    public ComponentSet(Collection<? extends IComponent> arg0) {
+		super(arg0);
+	}
+
+	public ComponentSet(Comparator<? super IComponent> arg0) {
+		super(arg0);
+	}
+
+	public ComponentSet(SortedSet<IComponent> arg0) {
+		super(arg0);
+	}
+
+	public ComponentSet ()
     {
         super(new Comparator<IComponent>()
         {

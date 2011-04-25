@@ -175,12 +175,6 @@ public interface IBuildable extends Cloneable
 
 
     /**
-     * Resets this buildable object to its default version (from empty constructor)
-     */
-    public abstract void reset ();
-
-
-    /**
      * removes all components from this wrapper
      * 
      * @return
