@@ -3,14 +3,14 @@
 <!-- Be VERY careful with show="all" -->
 
 <Field>
-	<Object name="Debugger.TestGame">
-		<FieldName name="Debugger.Player" />
+	<Object name="vooga.debugger.TestGame">
+		<FieldName name="vooga.debugger.Player" />
 		<FieldName name="int" />
 		<FieldName name="java.lang.String" />
 		<FieldName name="java.util.ArrayList" />
 	</Object>
 	<Object name="java.lang.String" />
-	<Object name="Debugger.Player">
+	<Object name="vooga.debugger.Player">
 		<FieldName name="int" />
 		<FieldName name="java.lang.String">myName</FieldName>
 	</Object>

@@ -2,13 +2,20 @@ package vooga.debugger;
 
 import java.lang.reflect.Field;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import vooga.debugger.model.DebuggerModel;
 import vooga.debugger.model.GameField;
 import vooga.debugger.view.DebuggerToolbar;
 import vooga.debugger.view.DebuggerView;
 import vooga.debugger.view.GameTreeNode;
+import vooga.debugger.view.ScopeGameField;
+import vooga.debugger.view.grapher.GraphGameField;
+
 
 import com.golden.gamedev.Game;
 
@@ -20,15 +27,13 @@ import com.golden.gamedev.Game;
  * @author Ethan Goh
  */
 public class Debugger
-{
-	// TODO: need to load in some values from resources for init sizes of components
-	
+{	
 	private Game myGame;
 
 	private DebuggerView myView;
-	private DebuggerModel myModel;
+	public DebuggerModel myModel;
 	
-	private boolean showAll;
+	public boolean showAll;
 
 	private Debugger.DebugLevel debugLevel;
 
@@ -49,9 +54,9 @@ public class Debugger
 	/**
 	 * Update the debugger system. Includes updating the game fields being displayed in real-time.
 	 */
-	public void update()
+	public void update(long deltaTime)
 	{
-		myModel.update();
+		myModel.update(deltaTime);
 	}
 
 	// Test method
@@ -73,22 +78,31 @@ public class Debugger
 			myView.myHistoryPanel.println(getMethodCaller() + " " + s);
 	}
 
+	/**
+	 * Start the vooga game
+	 */
 	public void playGame()
 	{
 		myView.myToolbar.playButton.setEnabled(false);
 		myView.myToolbar.stopButton.setEnabled(true);
-
+	
 		// myGame.start();
 	}
 
+	/**
+	 * Stop the vooga game
+	 */
 	public void stopGame()
 	{
 		myView.myToolbar.playButton.setEnabled(true);
 		myView.myToolbar.stopButton.setEnabled(false);
 
-		// myGame.stop();
+		//myGame.stop();
 	}
 
+	/**
+	 * Restart the vooga game
+	 */
 	public void restartGame()
 	{
 		// restart game
@@ -105,6 +119,14 @@ public class Debugger
 	}
 	
 	/**
+	 * Sets Vooga Grapher frame visibility to true
+	 */
+	public void showGrapher()
+	{
+		myView.myGrapher.setVisible(true);
+	}
+	
+	/**
 	 * Get Game Tree of game system. Lays out fields of game classes in hierarchical structure
 	 * 
 	 * @return root node of Game Tree
@@ -115,22 +137,60 @@ public class Debugger
 	}
 
 	/**
+	 * Add a field to the grapher
+	 * 
+	 * @param fieldNode
+	 */
+	public void recordField(GameTreeNode fieldNode)
+	{
+		Field [] pathToGameField = castObjectPath(fieldNode.getUserObjectPath());
+		
+		Field gameField = pathToGameField[pathToGameField.length - 1];
+		if(gameField.getType().isPrimitive())
+			this.addField(new GraphGameField(pathToGameField, this, myView.myGrapher));
+		else
+			println("Could not record Field: " + gameField.getName() + 
+					". Vooga Grapher cannot record fields that are not primitives.", DebugLevel.INFO); 
+	}
+	
+	/**
+	 * 
+	 * @param fieldNode
+	 * @param viewOption
+	 */
+	public void setViewPreference(GameTreeNode fieldNode, String viewOption)
+	{
+		String className = fieldNode.getField().getType().getName();
+		if(myModel.myParser.fieldMap.containsKey(className))
+		{
+			Element eField = (Element)myModel.myParser.fieldMap.get(className);
+			eField.setAttribute("show", viewOption);
+			myModel.myParser.fieldMap.put(className,(Node)eField);
+		}
+		myModel.getFields(fieldNode.getField().getType(), fieldNode, showAll, true);
+		DefaultTreeModel treeModel = (DefaultTreeModel)myView.myGameTreePanel.getTree().getModel();
+		treeModel.reload(fieldNode);
+	}
+	
+	/**
+	 * 
+	 * @param fieldNode
+	 */
+	public void scopeField(GameTreeNode fieldNode)
+	{
+		Field [] pathToGameField = castObjectPath(fieldNode.getUserObjectPath());
+		
+		this.addField(new ScopeGameField(pathToGameField, this));
+	}
+	
+	/**
 	 * Add Game Field to system. Takes particular field and updates GUI with values of corresponding object in system
 	 * @param fieldNode - tree node with data of member field
 	 */
-	public void addField(GameTreeNode fieldNode)
+	public void addField(GameField gf)
 	{
-		// Convert Object[] to Field[]
-		Object[] objPath = fieldNode.getUserObjectPath();
-		Field[] fieldPath = new Field[objPath.length];
-		for (int i = 0; i < objPath.length; i++)
-		{
-			fieldPath[i] = (Field) objPath[i];
-		}
-
 		// Try adding new GameField
-		GameField gf = new GameField(fieldPath, this); // DebuggerParser.createGameField(gameObj);
-		if (!myModel.isFieldAlreadyLive(gf))
+		if (!myModel.doesGameFieldExist(gf))
 		{
 			myView.addFieldToView(gf);
 			myModel.addField(gf);
@@ -144,8 +204,22 @@ public class Debugger
 	public void removeField(GameField field)
 	{
 		myView.removeFieldFromView(field);
+		
 		myModel.removeField(field);
-
+	}
+	
+	/**
+	 * @param fieldNode
+	 */
+	private Field[] castObjectPath(Object [] objPath) 
+	{
+		Field[] fieldPath = new Field[objPath.length];
+		for (int i = 0; i < objPath.length; i++)
+		{
+			fieldPath[i] = (Field) objPath[i];
+		}
+		
+		return fieldPath;
 	}
 
 	public DebugLevel getDebugLevel()

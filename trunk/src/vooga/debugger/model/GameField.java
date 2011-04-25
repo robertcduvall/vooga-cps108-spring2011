@@ -1,21 +1,6 @@
 package vooga.debugger.model;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+
 import java.lang.reflect.Field;
-
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import vooga.debugger.Debugger;
-
-import vooga.debugger.util.MethodAction;
-
 
 /**
  * Class that holds data for field in game as well as gui components
@@ -23,36 +8,18 @@ import vooga.debugger.util.MethodAction;
  * @author Troy Ferrell
  * @author Austin Benesh
  */
-public class GameField extends JPanel
+public class GameField
 {
-	private Field [] reflectionPath;
-	private String myFieldName;
+	protected Field [] reflectionPath;
+	protected String myFieldName;
 	
-	public JLabel myFieldNameLabel;
-	public JLabel myFieldGetLabel;
+	protected boolean active = true;
 	
-	private boolean active = true;
-	
-	public GameField(Field [] path, Debugger debug)
+	public GameField(Field [] path)
 	{
 		reflectionPath = path;
 	
 		myFieldName = path[path.length -1].getName();
-		
-		myFieldNameLabel = new JLabel(myFieldName + ": ");
-		myFieldGetLabel = new JLabel("NA");
-		
-		this.add(myFieldNameLabel, BorderLayout.WEST);
-		this.add(myFieldGetLabel, BorderLayout.EAST);
-		
-		JButton removeButton = new JButton();
-		ImageIcon img = new ImageIcon("src/resources/CloseButton.png");
-		removeButton.setIcon(img);
-		removeButton.setPreferredSize(new Dimension(img.getIconWidth(), img.getIconHeight()));
-		removeButton.addActionListener(new MethodAction(debug, "removeField", this));
-		this.add(removeButton, BorderLayout.SOUTH);
-		
-		this.setMaximumSize(new Dimension(2000, 45));
 	}
 	
 	/**
@@ -87,15 +54,19 @@ public class GameField extends JPanel
 	 */
 	public void deactivate()
 	{	
-		myFieldGetLabel.setText("NOT FOUND");
-		
 		active = false;
 	}
 	
-	public void update(Object fieldInstance)
+	/**
+	 * This method updates the GameField with the actual object instance
+	 * corresponding to this field based on it's path
+	 * 
+	 * @param deltaTime - time since last update
+	 * @param fieldInstance
+	 */
+	protected void updateField(long deltaTime, Object fieldInstance)
 	{	
-		if(active)
-			myFieldGetLabel.setText(String.valueOf(fieldInstance));
+		
 	}
 	
 	/**
@@ -105,7 +76,6 @@ public class GameField extends JPanel
 	 */
 	public boolean areFieldsEqual(GameField gf)
 	{
-	
 		Field field1 = this.getField();
 		Field field2 = gf.getField();
 		

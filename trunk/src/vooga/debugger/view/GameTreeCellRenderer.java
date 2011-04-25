@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package vooga.debugger.view;
 
 import java.awt.Component;
@@ -9,6 +7,8 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 /**
+ * Class in charge of GUI modifications of GameTree. 
+ * 
  * @author Troy
  * @author usman - http://usmansaleem.blogspot.com/2006/08/setting-custom-icon-for-individual.html
  */
@@ -21,10 +21,6 @@ public class GameTreeCellRenderer extends DefaultTreeCellRenderer
 		 {
 			 setIcon(((GameTreeNode)value).getIcon());
 		 }
-
-		//we can not call super.getTreeCellRendererComponent method, since it overrides our setIcon call and cause rendering of labels to '...' when node expansion is done
-
-		//so, we copy (and modify logic little bit) from super class method:
 
 		 String stringValue = tree.convertValueToText(value, sel, expanded, leaf, row, hasFocus);
 

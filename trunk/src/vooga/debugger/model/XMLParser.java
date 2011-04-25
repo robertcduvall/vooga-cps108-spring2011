@@ -20,10 +20,9 @@ import org.w3c.dom.NodeList;
  * The XML Parser Class reads an XML file, builds a TreeMap of Classname Strings to corresponding XML nodes,
  * and allows the user to view either all Fields in a certain class or fields specified in the XML file.
  */
-public class XMLParser implements DebuggerParser
+public class XMLParser extends DebuggerParser
 {
-	private TreeMap<String, Node> fieldMap;
-	private final String FILE_PATH = "src/resources/GameFields.xml";
+	private final String FILE_PATH = "src/vooga/debugger/resources/GameFields.xml";
 	
 	/**
 	 * Default Constructor. Parses document and builds Field Map.
@@ -68,41 +67,61 @@ public class XMLParser implements DebuggerParser
 	private List<Field> getFields(String className)
 	{
 		List<Field> list = new ArrayList<Field>();
-		try {
-			Node nNode = fieldMap.get(className);
-			Element eField = (Element) nNode; 
-			if(eField == null)
-				return list;
-			NodeList nl = eField.getElementsByTagName("FieldName");
-			Field[] allFields = Class.forName(className).getFields();
-			
-			//Allows show="all" in xml
-			if(eField.hasAttribute("show"))
-				for(Field f : allFields)
-					list.add(f);
-			else for(int i=0; i<nl.getLength(); i++)
-			{
-				Node curNode = nl.item(i);
-				if(curNode.hasChildNodes())
-					list.addAll(populateChildren(allFields,curNode));
-				else
-					list.addAll(populateAllOfType(allFields,curNode));
-			}
-		}
-		catch(Exception e)
+		Node nNode = fieldMap.get(className);
+		Element eField = (Element) nNode; 
+		if(eField == null)
+			return list;
+		NodeList nl = eField.getElementsByTagName("FieldName");
+		
+		List<Field> allFields = loadAvailableFields(className, eField, false);
+					
+		//Allows show="all" in xml
+		String showPref = eField.getAttribute("show");
+		if(showPref.equals("all") || showPref.equals("declared"))
+			for(Field f : allFields)
+				list.add(f);
+		else for(int i=0; i<nl.getLength(); i++)
 		{
-			e.printStackTrace();
+			Node curNode = nl.item(i);
+			if(curNode.hasChildNodes())
+				list.addAll(populateChildren(allFields,curNode));
+			else
+				list.addAll(populateAllOfType(allFields,curNode));
 		}
 		return list;
 
 	}
-	
+	/**
+	 * Populates a list of all available fields, allows for show all override
+	 * @param className
+	 * @param eField
+	 * @param overrideShowAll
+	 * @return
+	 */
+	private List<Field> loadAvailableFields(String className, Element eField, boolean overrideShowAll)
+	{
+		List<Field> toRet = new ArrayList<Field>();
+		try{
+			if(overrideShowAll || !eField.getAttribute("show").equals("declared"))
+				for(Field f : Class.forName(className).getFields())
+					if(!toRet.contains(f))	
+						toRet.add(f);
+			for(Field f : Class.forName(className).getDeclaredFields())
+				if(!toRet.contains(f))	
+					toRet.add(f);
+		}
+		catch(Exception e)
+		{
+			System.err.println(e);
+		}
+		return toRet;
+	}
 	/**
 	 * @param allFields Array of all Fields to be checked
 	 * @param curNode Current object node being read
 	 * @return List of Fields for Objects when Field display is limited by name
 	 */
-	private List<Field> populateChildren(Field[] allFields, Node curNode)
+	private List<Field> populateChildren(List<Field> allFields, Node curNode)
 	{
 		ArrayList<Field> list = new ArrayList<Field>();
 		
@@ -125,7 +144,7 @@ public class XMLParser implements DebuggerParser
 	 * @param curNode Current object node being read
 	 * @return List of Fields with all Objects of type curNode
 	 */
-	private List<Field> populateAllOfType(Field[] allFields, Node curNode)
+	private List<Field> populateAllOfType(List<Field> allFields, Node curNode)
 	{
 		ArrayList<Field> list = new ArrayList<Field>();
 		String type = ((Element)curNode).getAttribute("name");
@@ -152,12 +171,12 @@ public class XMLParser implements DebuggerParser
 	 * @param showAllVariables If true, returns all Fields; if false (default), parses XML for Fields to display
 	 * @return Field array of all valid Fields for a corresponding class
 	 */
-	public Field[] getValidFieldsFor(Class<?> testClass, boolean showAllVariables)
+	public Field[] getValidFieldsFor(Class<?> testClass, boolean showAllVars)
 	{		
-		if(fieldMap.containsKey(testClass.getName()) && !showAllVariables)
+		if(fieldMap.containsKey(testClass.getName()) && !showAllVars)
 			return asArray(getFields(testClass.getName()));
 		else if(!testClass.isPrimitive())
-			return testClass.getFields();
+			return asArray(loadAvailableFields(testClass.getName(),null,true));
 		return new Field[]{};
 	}
 	

@@ -61,6 +61,7 @@ public class MethodAction implements 	ActionListener,
     {
         try
         {
+        	myMethod.setAccessible(true);
             myMethod.invoke(myReceiver, myArgs);
         }
         catch (Exception e)

@@ -1,4 +1,5 @@
 package vooga.debugger.view;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -8,24 +9,25 @@ import javax.swing.JSplitPane;
 import vooga.debugger.Debugger;
 import vooga.debugger.model.DebuggerModel;
 import vooga.debugger.model.GameField;
+import vooga.debugger.view.grapher.DebuggerGrapher;
+import vooga.debugger.view.grapher.GraphGameField;
 
 /**
  * Class that initializes and manages all view components systems
  * 
  * @author Troy Ferrell
- * @author Ethan Goh
  * @author Austin Benesh
  */
 public class DebuggerView extends JFrame 
-{	
-	//private DebuggerMenuBar myMenuBar;
-	
+{		
 	public DebuggerToolbar myToolbar;
 	
 	public GameTreePanel myGameTreePanel;
 	public LiveGameFieldsPanel myLiveFieldsPanel;
 	
 	public DebuggerConsole myHistoryPanel;
+	
+	public DebuggerGrapher myGrapher;
 	
 	private Debugger myDebugger;
 	private DebuggerModel myModel;
@@ -34,6 +36,8 @@ public class DebuggerView extends JFrame
 	{
 		myDebugger = debug;
 		myModel = model;
+		
+		myGrapher = new DebuggerGrapher();
 		
 		addGUIComponents();
 		
@@ -71,7 +75,10 @@ public class DebuggerView extends JFrame
 	 */
 	public void addFieldToView(GameField field)
 	{
-		myLiveFieldsPanel.addField(field);
+		if(field instanceof ScopeGameField)
+			myLiveFieldsPanel.addField((ScopeGameField)field);
+		else if(field instanceof GraphGameField)
+			myGrapher.addField((GraphGameField)field);
 	}
 	
 	/**
@@ -81,7 +88,10 @@ public class DebuggerView extends JFrame
 	 */
 	public void removeFieldFromView(GameField field)
 	{
-		myLiveFieldsPanel.removeField(field);
+		if(field instanceof ScopeGameField)
+			myLiveFieldsPanel.removeField((ScopeGameField)field);
+		else if(field instanceof GraphGameField)
+			myGrapher.removeField((GraphGameField)field);
 	}
 	
 }
