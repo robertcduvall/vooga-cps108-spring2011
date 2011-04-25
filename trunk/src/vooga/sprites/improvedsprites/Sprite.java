@@ -261,8 +261,8 @@ public class Sprite extends BaseSprite
     }
     
     @Override
-    public void addSpeed(long elapsedTime, double accel, double direction, double max){
-        this.getComponent(Speed2DC.class).setSpeed((this.getComponent(Speed2DC.class).getAbsoluteVelocity()+elapsedTime*accel), direction, max);
+    public double addSpeed(long elapsedTime, double accel, double direction, double max){
+        return this.getComponent(Speed2DC.class).setSpeed((this.getComponent(Speed2DC.class).getAbsoluteVelocity()+elapsedTime*accel), direction, max);
     }
 
 
@@ -800,6 +800,11 @@ public class Sprite extends BaseSprite
 	@Override
 	public double rotate(double dAngle) {
 		return this.getComponent(HeadingC.class).rotate(dAngle);
+	}
+
+	@Override
+	public double accelerate(double d, double max) {
+		return this.addSpeed(1, d, this.getAngle(), max);
 	}
 
 
