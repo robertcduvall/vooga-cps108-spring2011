@@ -1,29 +1,22 @@
+
 package vooga.debugger.view;
-
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import vooga.debugger.Debugger;
-
 import vooga.debugger.util.MethodAction;
+
+
 
 /**
  * The toolbar for Debugger system
  * 
  * @author Troy Ferrell
  */
+
 public class DebuggerToolbar extends JPanel 
 {
 	private static final String SCANNER_DELIMITTER = "\\s+";
@@ -33,37 +26,40 @@ public class DebuggerToolbar extends JPanel
 	// Toolbar buttons
 	public JButton playButton;
 	public JButton stopButton;
-	public JButton restartButton;
-	public JButton showAllButton;
 	
 	public DebuggerToolbar(Debugger debug )
 	{
 		myDebugger = debug;
 		
-		initToolbar(); //RESOURCE_FILE
+		initToolbar();
 		
 		this.setAlignmentX(CENTER_ALIGNMENT);
 	}
+	
 	private void initToolbar()
 	{
 		JToolBar toolBar = new JToolBar();
 		
-		playButton = new JButton(new ImageIcon("src/resources/Debugger_PlayButton.png"));
+		playButton = new JButton(new ImageIcon("src/vooga/debugger/resources/Debugger_PlayButton.png"));
 		playButton.addActionListener(new MethodAction(myDebugger, "playGame"));
 		playButton.setEnabled(false);
 		toolBar.add(playButton );
 		
-		stopButton = new JButton(new ImageIcon("src/resources/Debugger_StopButton.png"));
+		stopButton = new JButton(new ImageIcon("src/vooga/debugger/resources/Debugger_StopButton.png"));
 		stopButton.addActionListener(new MethodAction(myDebugger, "stopGame"));
 		toolBar.add(stopButton );
 		
-		restartButton = new JButton(new ImageIcon("src/resources/Debugger_RestartButton.png"));
+		JButton restartButton = new JButton(new ImageIcon("src/vooga/debugger/resources/Debugger_RestartButton.png"));
 		restartButton.addActionListener(new MethodAction(myDebugger, "restartGame"));
 		toolBar.add(restartButton );
 		
-		showAllButton = new JButton(new ImageIcon("src/resources/Debugger_ShowAllButton.png"));
+		JButton showAllButton = new JButton(new ImageIcon("src/vooga/debugger/resources/Debugger_ShowAllButton.png"));
 		showAllButton.addActionListener(new MethodAction(myDebugger,"showAllFields"));
 		toolBar.add(showAllButton );
+		
+		JButton showGrapherButton = new JButton(new ImageIcon("src/vooga/debugger/resources/Debugger_ShowGrapherButton.png"));
+		showGrapherButton.addActionListener(new MethodAction(myDebugger,"showGrapher"));
+		toolBar.add(showGrapherButton );
 		
 		this.add(toolBar);
 	}

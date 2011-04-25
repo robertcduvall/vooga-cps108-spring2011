@@ -1,128 +1,77 @@
 package vooga.debugger.view.grapher;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 /**
- * WIP class - going to be used for recording values over time in game and displaying graphically
+ * Core class for organizing framework for Grapher component of Vooga Debugger
  * 
  * @author Troy Ferrell
  */
 public class DebuggerGrapher extends JFrame
 {
-	// private JPanel myCanvas;
-	 
-	private ArrayList<GraphField> myGraphFields = new ArrayList<GraphField>();
+	private GrapherPanel myGraphPanel;
+	private GraphToolset myToolSet;
 	
-	private GraphPanel myGraphPanel;
+	private GraphFieldListPanel myGraphListPanel;
 	
-	private JPanel myGraphListPanel;
-	private JPanel myFunctionPanel;
+	public ArrayList<GraphGameField> myGraphFields = new ArrayList<GraphGameField>();
 	
 	public DebuggerGrapher()
 	{
-		initFunctionPanel();
+		this.setVisible(true);
+		this.setSize(new Dimension(800, 500));
+		this.setTitle("VOOGA Debugger Grapher");
 		
-		myGraphListPanel = new JPanel();
+		myGraphListPanel = new GraphFieldListPanel(this);
 		
-		myGraphPanel = new GraphPanel();
+		myToolSet = new GraphToolset();
 		
-		JSplitPane sideVerticalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-		sideVerticalSplitPane.setTopComponent(myGraphListPanel);
-		sideVerticalSplitPane.setBottomComponent(myFunctionPanel);
+		myGraphPanel = new GrapherPanel(myToolSet, this);
+		
+		myToolSet.setGrapherPanel(myGraphPanel);
 		
 		JSplitPane horzSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		horzSplitPane.setResizeWeight(1.0);
 		horzSplitPane.setTopComponent(myGraphPanel);
-		horzSplitPane.setBottomComponent(sideVerticalSplitPane);
+		horzSplitPane.setBottomComponent(myGraphListPanel);
 		
-		this.setVisible(true);
+		this.getContentPane().add(myToolSet, BorderLayout.NORTH);
+		this.getContentPane().add(horzSplitPane, BorderLayout.CENTER);
 	}
-	
-	public void initFunctionPanel()
-	{
-		myFunctionPanel = new JPanel();
-		myFunctionPanel.setLayout(new GridLayout(2,2));
-		
-		JButton selectAllButton = new JButton("Select All");
-		selectAllButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{
-				for(GraphField gf : myGraphFields)
-					gf.setSelected(true);
-			}
-		});
-		myFunctionPanel.add(selectAllButton);
-		
-		JButton deselectAllButton = new JButton("Deselect All");
-		deselectAllButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{
-				for(GraphField gf : myGraphFields)
-					gf.setSelected(false);
-			}
-		});
-		myFunctionPanel.add(deselectAllButton);
-		
-		
-		JButton zoomInButton = new JButton("Zoom IN");
-		zoomInButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{
-				myGraphPanel.zoomIn();
-			}
-		});
-		myFunctionPanel.add(zoomInButton);
-		
-		JButton zoomOutButton = new JButton("Zoom Out");
-		zoomOutButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{
-				myGraphPanel.zoomOut();
-			}
-		});
-		myFunctionPanel.add(zoomOutButton);
-	}
-	
-	public void udpate(long deltaTime)
-	{		
-		// handle recording here for max time
-		
-		super.repaint();
-	}
-
 	
 	/**
-	 * Method in charge of drawing scene onto JPanel(aka canvas)
-	 * 
-	 * @param g - Graphics object passed by java system to help with drawing
+	 * Add Field to Grapher
+	 * @param gf
 	 */
-	public void paint(Graphics g)
+	public void addField(GraphGameField gf)
 	{
-		// draw lines
+		myGraphFields.add(gf);
+		myGraphListPanel.addField(gf);
 		
-		for(GraphField gf : myGraphFields)
-		{
-			if(gf.isSelected())
-			{
-				
-				
-			}
-		}
+		this.repaint();
 	}
 	
-	public static void main(String [] args)
+	/**
+	 * Remove Field from Grapher
+	 * @param gf
+	 */
+	public void removeField(GraphGameField gf)
 	{
-		DebuggerGrapher grapher = new DebuggerGrapher();
-		grapher.setVisible(true);
+		myGraphFields.remove(gf);
+		myGraphListPanel.removeField(gf);
 		
-		
+		this.repaint();
 	}
 }

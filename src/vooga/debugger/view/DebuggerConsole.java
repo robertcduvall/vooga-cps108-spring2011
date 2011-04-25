@@ -16,18 +16,15 @@ public class DebuggerConsole extends JPanel
 {
 	private JTextArea myConsoleTextArea;
 	
-	private static final int DEFAULT_TEXT_FIELD_WIDTH = 90;
-	private static final int DEFAULT_TEXT_FIELD_HEIGHT = 6;
-	
 	public DebuggerConsole()
 	{
-		myConsoleTextArea = new JTextArea(); //DEFAULT_TEXT_FIELD_HEIGHT, DEFAULT_TEXT_FIELD_WIDTH);
+		myConsoleTextArea = new JTextArea();
 		myConsoleTextArea.setEditable(false);
 		myConsoleTextArea.setLineWrap(true);
 		myConsoleTextArea.setWrapStyleWord(true);
 		
 		JScrollPane scrollPane = new JScrollPane(myConsoleTextArea);
-		// Temp
+		// TODO: need to get rid of hardcoded values
 		scrollPane.setMinimumSize(new Dimension(150, 35));
 		scrollPane.setPreferredSize(new Dimension(550, 100));
 		

@@ -20,7 +20,7 @@ public class DebuggerModel
 	private Collection<GameField> myFields;
 	private Game myGame;
 	private Field gameField;
-	private DebuggerParser myParser;
+	public DebuggerParser myParser;
 	
 	public boolean showAllVariables;
 	
@@ -42,10 +42,6 @@ public class DebuggerModel
 		}
 	}
 	
-	// ************
-	// TEST CODE
-	// ************
-	
 	/**
 	 * Builds a tree of GameFields using recursive helper method getFields
 	 * @param showAll 
@@ -54,41 +50,47 @@ public class DebuggerModel
 	public GameTreeNode getGameTree(boolean showAll)
 	{
 		GameTreeNode gameRoot = new GameTreeNode( gameField );
-		getFields(myGame.getClass(),gameRoot,showAll);
+		getFields(myGame.getClass(),gameRoot,showAll, true);
 		return gameRoot;
 	}
 	
-	private void getFields(Class<?> rootClass,  GameTreeNode root, boolean showAll)
+	public void getFields(Class<?> rootClass, GameTreeNode root, boolean showAll, boolean isParent)
 	{
 		try 
 		{
+			root.removeAllChildren();
 			Field [] validFields = myParser.getValidFieldsFor(rootClass, showAll);
-			for(int i = 0; i < validFields.length; i++)
+			for(Field validField : validFields)
 			{
-				Class<?> fieldClass = validFields[i].getType();
-				GameTreeNode node = new GameTreeNode( validFields[i] );
-				getFields(fieldClass, node, showAll);
+				Class<?> fieldClass = validField.getType();
+				GameTreeNode node = new GameTreeNode( validField );
+				if(isParent)
+					getFields(fieldClass, node, showAll, false);
 				root.add(node);
 			}
 		  }
 		  catch (Throwable e) 
 		  {
-		     System.err.println(e);
+		     System.err.println(rootClass.getName()+":"+ e);
 		  }
 	}
+	
 	/**
 	 * Returns if an input GameField already exists to prevent repetition
 	 * @param gf Gamefield to check
 	 * @return boolean
 	 */
-	public boolean isFieldAlreadyLive(GameField gf)
+	public boolean doesGameFieldExist(GameField gf)
 	{
 		for(GameField gameField : myFields)
-			if(gameField.areFieldsEqual(gf))
+		{
+			if(gameField.areFieldsEqual(gf) && gameField.getClass().equals(gf.getClass()))
 				return true;
+		}
 		
 		return false;
 	}
+	
 	/**
 	 * Add a GameField
 	 * @param gf
@@ -98,6 +100,7 @@ public class DebuggerModel
 		if(gf != null)
 			myFields.add(gf);
 	}
+	
 	/**
 	 * Remove a GameField
 	 * @param gf
@@ -106,10 +109,11 @@ public class DebuggerModel
 	{
 		myFields.remove(gf);
 	}
+	
 	/**
 	 * Updates tree and corresponding GameFields
 	 */
-	public void update()
+	public void update(long deltaTime)
 	{	
 		try
 		{		
@@ -124,7 +128,8 @@ public class DebuggerModel
 					if(fieldInstance != null)
 						fieldInstance = fieldPath[i].get(fieldInstance);
 				}
-				gf.update(fieldInstance);
+				
+				gf.updateField(deltaTime, fieldInstance);
 			}
 			
 		}catch(IllegalAccessException e)
@@ -134,9 +139,7 @@ public class DebuggerModel
 		catch(ConcurrentModificationException e)
 		{
 			e.printStackTrace();
-		}
-		
-		
+		}	
 	}
 	
 }

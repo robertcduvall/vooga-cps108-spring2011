@@ -19,6 +19,11 @@ public class GameTreeNode extends DefaultMutableTreeNode
 		super(f);
 	}
 	
+	public Field getField()
+	{
+		return (Field)this.getUserObject();
+	}
+	
 	public String toString()
 	{
 		Field myField = (Field)this.getUserObject();
@@ -31,7 +36,7 @@ public class GameTreeNode extends DefaultMutableTreeNode
 	 */
 	 public Icon getIcon() 
 	 {
-			 /*
+		 /* Code for extension later
 		 Field f = (Field)this.getUserObject();
 		 
 		 ImageIcon imgIcon = new ImageIcon("src/resources/" + f.getType().getSimpleName() + "_CellImg.png");
@@ -41,8 +46,7 @@ public class GameTreeNode extends DefaultMutableTreeNode
 		 return imgIcon; 
 		 */
 		 
-		// for testing 
-		return new ImageIcon("src/resources/Field_White.png");
+		return new ImageIcon("src/vooga/debugger/resources/Field_White.png");
 	 }
 }
 
