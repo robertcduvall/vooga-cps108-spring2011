@@ -13,6 +13,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
+
+import org.w3c.dom.Element;
 /**
  * 
  * @author Charlie Hatcher
@@ -21,14 +23,23 @@ import javax.swing.PopupFactory;
 public class DraggableImage extends JLabel implements MouseMotionListener{
 	private int x,y;
 	private ImageIcon myIcon;
-	private JLayeredPane myParent;
+	private Viewport myParent;
+	private Element myProperties;
 	private boolean myFlag = false;
 	
-	public DraggableImage(ImageIcon icon, JLayeredPane parent){
+	public DraggableImage(ImageIcon icon, Viewport parent, Element data){
 		super(icon);
-		this.myIcon = icon;
-		this.myParent = parent;
-		setAllValuesForDraggableImage(icon, parent, 500, 500);
+		this.myProperties=data;
+		String name = myProperties.getElementsByTagName("name").item(0).getTextContent();
+        String xs = myProperties.getElementsByTagName("x").item(0).getTextContent();
+        String ys = myProperties.getElementsByTagName("y").item(0).getTextContent();
+        String imgs = myProperties.getElementsByTagName("image").item(0).getTextContent();
+        x = new Integer(xs);
+        y = new Integer(ys);
+        this.myIcon = new ImageIcon(imgs);
+        this.myParent = parent;
+        this.setIcon(myIcon);
+		setJLabelValuesForDraggableImage(icon, parent, x, y);
 	}
 	
 	protected void setSpriteProperties(int x,int y){
@@ -68,7 +79,7 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 		if (myFlag){
 			x = arg0.getX();
 			y = arg0.getY();
-			setAllValuesForDraggableImage(myIcon, myParent, x, y);
+			setJLabelValuesForDraggableImage(myIcon, myParent, x, y);
 		}
 	}
 	
@@ -79,9 +90,9 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 	 * @param icon
 	 * @param parent
 	 */
-	private void setAllValuesForDraggableImage(ImageIcon icon,
-			JLayeredPane parent, int x, int y) {
-        parent.add(this,1);
+	private void setJLabelValuesForDraggableImage(ImageIcon icon,
+			Viewport parent, int x, int y) {
+        parent.add(this,parent.LAYER_SPRITES);
 		this.setVisible(true);
 		this.setBounds(x, y, icon.getIconWidth(), icon.getIconWidth());
 		parent.moveToFront(this);
