@@ -35,4 +35,10 @@ public class MovableCollisionBehavior extends EmptyCollisionBehavior{
         
         return newVelocity.subtractVector(this.getVelocity());
     }
+    
+    @Override
+    public void updateBehavior(Object... newValues){
+        if (newValues.length != 0)
+            myVelocity = (Velocity) newValues[0];
+    }
 }
