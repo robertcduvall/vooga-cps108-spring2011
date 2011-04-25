@@ -1,9 +1,7 @@
 package vooga.sprites.spritebuilder.components.physics;
 
-import vooga.physics.collisionBehavior.EmptyCollisionBehavior;
 import vooga.physics.collisionBehavior.PhysicalCollisionBehavior;
 import vooga.physics.fieldBehavior.EmptyFieldBehavior;
-import vooga.physics.forceBehavior.EmptyForceBehavior;
 import vooga.physics.forceBehavior.NewtonianForceBehavior;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
@@ -16,21 +14,7 @@ import vooga.util.buildable.components.BasicComponent;
  * @author Nathan Klug
  * 
  */
-public class BasicPhysicsC extends EmptyPhysicsC{
-    
-    /**
-     * Constructor has been made private to mask the parent constructor.
-     */
-    @SuppressWarnings("unused")
-    private BasicPhysicsC() {
-    }
-    
-    /**
-     * Constructor has been made private to mask the parent constructor.
-     */
-    @SuppressWarnings("unused")
-    private BasicPhysicsC(boolean isOn) {
-    }
+public class BasicPhysicsC extends GeneralPhysicsC{
 
     /**
      * Creates a BasicPhysicsC with given velocity and mass and the default 'on' state.
@@ -48,22 +32,7 @@ public class BasicPhysicsC extends EmptyPhysicsC{
      * @param isOn
      */
     public BasicPhysicsC(Velocity velocity, double mass, boolean isOn) {
-        this(new NewtonianForceBehavior(mass),new EmptyFieldBehavior(), new PhysicalCollisionBehavior(velocity, mass), isOn);
-    }
-    
-    /**
-     * Constructor has been made private to mask the parent constructor.
-     */
-    @SuppressWarnings("unused")
-    private BasicPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior){
-        this(forceBehavior, fieldBehavior, collisionBehavior, true);
-    }
-    
-    /**
-     * Constructor has been made private to mask the parent constructor.
-     */
-    private BasicPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior, boolean isOn){
-        super(forceBehavior, fieldBehavior, collisionBehavior, isOn);
+        super(new NewtonianForceBehavior(mass),new EmptyFieldBehavior(), new PhysicalCollisionBehavior(velocity, mass), isOn);
     }
 
     @Override

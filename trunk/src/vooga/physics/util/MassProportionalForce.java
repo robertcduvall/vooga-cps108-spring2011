@@ -6,6 +6,7 @@ import vooga.util.math.Angle;
 
 /**
  * Implementation of a force which is proportional to mass, such as gravity.
+ * 
  * @author Nathan Klug
  *
  */
