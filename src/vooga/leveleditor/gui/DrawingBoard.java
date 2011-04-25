@@ -65,19 +65,23 @@ public class DrawingBoard extends JPanel
          * Now we have enough information to create the JLayeredPane. It is
          * placed in the center so that it will take all available space.
          */
-        viewport = new Viewport(this, bgimage);
+        
+        viewport = new Viewport(this);
         JScrollPane layersHolder = new JScrollPane(viewport);
         this.add(layersHolder, BorderLayout.CENTER);
+        
 
         /*
          * Create the palette on the left.
          */
+        
         palette = new Palette(viewport);
         JScrollPane paletteHolder = new JScrollPane(palette,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         paletteHolder.setPreferredSize(new Dimension(240, 600));
         add(paletteHolder, BorderLayout.WEST);
+        
 
         /*
          * Create the statusbar.
@@ -97,6 +101,11 @@ public class DrawingBoard extends JPanel
         {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse("src/vooga/leveleditor/resource/samplelevel.xml");
+            
+            String bgpath = doc.getElementsByTagName("background").item(0).getTextContent();
+            BufferedImage bgimage = ImageIO.read(new File(bgpath));
+            viewport.load(bgimage);
+            
             NodeList sprites = doc.getElementsByTagName("sprite");
             for(int i = 0; i < sprites.getLength(); i++)
             {

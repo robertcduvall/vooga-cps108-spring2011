@@ -26,10 +26,18 @@ public class Viewport extends JLayeredPane
     private DrawingBoard owner;
     private ArrayList<DraggableImage> mySprites;
 
-    public Viewport(DrawingBoard owner, BufferedImage bgimage)
+    public Viewport(DrawingBoard owner)
     {
         super();
 
+        mySprites = new ArrayList<DraggableImage>();
+        this.owner = owner;
+        addMouseMotionListener(new MouseTracker());
+        addMouseListener(new MouseClick());
+    }
+
+    public void load(BufferedImage bgimage)
+    {
         int width = bgimage.getWidth();
         int height = bgimage.getHeight();
 
@@ -51,13 +59,6 @@ public class Viewport extends JLayeredPane
         background.setOpaque(true);
         background.setBounds(100, 100, width, height);
         this.add(background, LAYER_BACKGROUND);
-
-
-        mySprites = new ArrayList<DraggableImage>();
-        this.owner = owner;
-        setPreferredSize(new Dimension(width, height));
-        addMouseMotionListener(new MouseTracker());
-        addMouseListener(new MouseClick());
     }
 
     void addImage(DraggableImage i){
