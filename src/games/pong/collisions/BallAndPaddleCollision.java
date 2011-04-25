@@ -1,17 +1,20 @@
 package games.pong.collisions;
 
 import games.pong.sprites.Ball;
+import games.pong.sprites.Paddle;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
 
-public class BallAndPaddleCollision extends BasicCollisionGroup{
+public class BallAndPaddleCollision extends BasicCollisionGroup<Ball, Paddle>{
+
+	public BallAndPaddleCollision(SpriteGroup<Ball> s1, SpriteGroup<Paddle> s2) {
+		super(s1, s2);
+	}
 
 	@Override
-	public void collided(Sprite s1, Sprite s2) {
-		if(s1 instanceof Ball) 
-			bounce(s1);
-		else //s2 instanceof Ball
-			bounce(s2);		
+	public void collided(Ball s1, Paddle s2) {
+		bounce(s1);	
 	}
 
 	private void bounce(Sprite s) {

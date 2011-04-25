@@ -9,11 +9,7 @@ import com.golden.gamedev.object.Background;
 
 public abstract class BaseSprite implements ISpriteBase, IRenderXY, ITargetable
 {
- // /////// optimization /////////
-    // private final Rectangle collisionOffset = new Rectangle(0,0,0,0); //
-    // offset collision
-    
-    /**
+ /**
      * 
      */
     private static final long serialVersionUID = -4499098097309229784L;
@@ -273,7 +269,17 @@ public abstract class BaseSprite implements ISpriteBase, IRenderXY, ITargetable
         this.y = ys;
     }
     
-    /* (non-Javadoc)
+    // /////// optimization /////////
+	// private final Rectangle collisionOffset = new Rectangle(0,0,0,0); //
+	// offset collision
+	
+	@Override
+	public String toString() {
+		
+		return this.getClass().getName() + "| At position: (" + this.getX() + "," + this.getY() + ")" ;
+	}
+
+	/* (non-Javadoc)
      * @see sprites.oldsprites.ISprite#getX()
      */
     @Override

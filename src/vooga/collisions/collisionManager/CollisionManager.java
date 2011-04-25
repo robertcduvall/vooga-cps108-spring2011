@@ -5,68 +5,90 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
+import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
-public abstract class CollisionManager 
+public abstract class CollisionManager<T extends Sprite, S extends Sprite>
 {
 
-	protected ArrayList<SpriteGroup> myGroups;
+	protected SpriteGroup<T> Group1;
+	protected SpriteGroup<S> Group2;
 	private boolean active = true;
 
-	public CollisionManager()
+	public CollisionManager(SpriteGroup<T> s1, SpriteGroup<S> s2)
 	{
-	    myGroups = new ArrayList<SpriteGroup>();
+		Group1 = s1;
+		Group2 = s2;
 	}
 
-	public void setCollisionGroup(SpriteGroup ... spriteGroups)
+	public void setSpriteGroup(SpriteGroup<?> sg)
 	{
-		myGroups = new ArrayList<SpriteGroup>(Arrays.asList(spriteGroups));
-	}
-
-	public void addGroups(SpriteGroup ... spriteGroups){
-	    myGroups.addAll(Arrays.asList(spriteGroups));
-	}
-	
-	
-	public SpriteGroup getGroupByIndex(int index)
-	{
-		return myGroups.get(index);
+		if (sg.getClass().isInstance(Group1.getClass()))
+			Group1 = (SpriteGroup<T>) sg;
+		else if (sg.getClass().isInstance(Group1.getClass()))
+			Group2 = (SpriteGroup<S>) sg;
 	}
 	
-	public SpriteGroup getGroupByName(String name)
-    {
-	    for (SpriteGroup sg : myGroups){
-	        if (sg.getName().equals(name))
-	            return sg;
-	    }
-        return null;
-    }
 	
-	public void removeGroupByIndex(int index)
-    {
-        myGroups.remove(index);
-    }
-    
-    public void removeGroupByName(String name)
-    {
-        for (SpriteGroup sg : myGroups){
-            if (sg.getName().equals(name))
-                myGroups.remove(sg);
-        }
-    }
-
+	/**
+	 * Associates specified sprite groups to this manager. The groups will be
+	 * checked its collision one against another.
+	 * 
+	 * @see #checkCollision()
+	 */
+	public void setCollisionGroup(SpriteGroup<T> group1, SpriteGroup<S> group2) {
+		this.Group1 = group1;
+		this.Group2 = group2;
+	}
+	
+	/**
+	 * Returns the first group associated with this collision manager.
+	 */
+	public SpriteGroup<T> getGroup1() {
+		return this.Group1;
+	}
+	
+	/**
+	 * Returns the second group associated with this collision manager.
+	 */
+	public SpriteGroup<S> getGroup2() {
+		return this.Group2;
+	}
+	
+	/** ************************************************************************* */
+	/** ************************** COLLISION CHECK ****************************** */
+	/** ************************************************************************* */
+	
+	/**
+	 * Checks for collision between all members in
+	 * {@linkplain #getGroup1() group 1} againts all members in
+	 * {@linkplain #getGroup1() group 2}.
+	 */
 	public abstract void checkCollision();
-
-	public boolean isActive()
-	{
+	
+	/** ************************************************************************* */
+	/** ************************** ACTIVE STATE ********************************* */
+	/** ************************************************************************* */
+	
+	/**
+	 * Returns true, if this collision manager is active. Inactive collision
+	 * manager won't perform any collision check.
+	 * 
+	 * @see #setActive(boolean)
+	 */
+	public boolean isActive() {
 		return this.active;
 	}
-
-	public void setActive(boolean b)
-	{
+	
+	/**
+	 * Sets the active state of this collision manager. Inactive collision
+	 * manager won't perform any collision check.
+	 * 
+	 * @see #isActive()
+	 */
+	public void setActive(boolean b) {
 		this.active = b;
 	}
-
 
 	
 	
@@ -110,6 +132,11 @@ public abstract class CollisionManager
 		}
 
 		return false;
+	}
+
+	public void clearGroupByName(String name) {
+		if (Group1.getName().equals(name)) Group1.clear();
+		else if(Group2.getName().equals(name)) Group2.clear();
 	}
 	
 	

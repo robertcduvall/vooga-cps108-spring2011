@@ -116,7 +116,7 @@ public class VoogaPlayField
         }
         for(CollisionManager currentManager : myCollisionManagers)
         {
-            currentManager.removeGroupByName(group.getName());
+            currentManager.clearGroupByName(group.getName());
         }
     }
 
@@ -215,7 +215,7 @@ public class VoogaPlayField
      */
     public void add(Sprite extra)
     {
-        getSpriteGroup("").add(extra);
+        getSpriteGroup("").addSprites(extra);
     }
 
 

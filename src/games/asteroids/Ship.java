@@ -13,9 +13,9 @@ public class Ship extends Sprite
 
     public Ship (VoogaGame game)
     {
+    	super(game.getImageLoader().getImage("ship"));
         myGame = game;
         // TODO setImage(game.getImageLoader().getImage("ship"));
-        setImage(game.getImageLoader().getImage("ship"));
         bindKeys();
         // TODO addComponent(new HealthComponent());
     }

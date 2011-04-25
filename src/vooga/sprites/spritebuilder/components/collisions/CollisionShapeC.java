@@ -4,21 +4,21 @@ package vooga.sprites.spritebuilder.components.collisions;
 import vooga.collisions.shapes.collisionShapes.ICollisionShape;
 import vooga.util.buildable.components.BasicComponent;
 
-public class CollisionShapeC extends BasicComponent {
+public class CollisionShapeC<T extends ICollisionShape> extends BasicComponent {
 
-	private ICollisionShape myCollisionShape;
+	private T myCollisionShape;
 
-	public ICollisionShape getCollisionShape() {
+	public  T getCollisionShape() {
 		return myCollisionShape;
 	}
 
 
-	public void setCollisionShape(ICollisionShape cs) {
+	public void setCollisionShape(T cs) {
 		this.myCollisionShape = cs;
 	}
 
 
-	public CollisionShapeC(ICollisionShape cs){
+	public CollisionShapeC(T cs){
 		myCollisionShape = cs;
 	}
 	
@@ -36,7 +36,7 @@ public class CollisionShapeC extends BasicComponent {
 
 	@Override
 	protected void setFieldValues(Object... fields) {
-		myCollisionShape = (ICollisionShape) fields[0];
+		myCollisionShape = (T) fields[0];
 	}
 
 }

@@ -5,7 +5,7 @@ import vooga.collisions.shapes.collisionShapes.BoundingBox;
 import vooga.collisions.shapes.collisionShapes.CollisionPolygon;
 import vooga.collisions.shapes.collisionShapes.ICollisionShape;
 
-public class CollisionPolygonC extends CollisionShapeC {
+public class CollisionPolygonC extends CollisionShapeC<CollisionPolygon> {
 
 	
 	
