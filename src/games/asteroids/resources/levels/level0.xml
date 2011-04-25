@@ -10,27 +10,27 @@
 	<goal class="games.asteroids.AllAsteroidsDestroyed" />
 
 	<instance type="asteroid">
-		<x>100</x>
-		<y>100</y>
+		<x>10</x>
+		<y>20</y>
+	</instance>
+	
+	<instance type="bullet">
+		<x>10</x>
+		<y>150</y>
 	</instance>
 	
 	<instance type="bullet">
 		<x>200</x>
-		<y>100</y>
-	</instance>
-	
-	<instance type="bullet">
-		<x>100</x>
-		<y>300</y>
+		<y>200</y>
 	</instance>
 	
 	<instance type="asteroid">
-		<x>300</x>
-		<y>100</y>
+		<x>400</x>
+		<y>10</y>
 	</instance>
 	
 	<instance type="bullet">
-		<x>400</x>
-		<y>400</y>
+		<x>10</x>
+		<y>300</y>
 	</instance>
 </level>

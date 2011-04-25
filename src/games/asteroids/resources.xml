@@ -1,7 +1,4 @@
 <resources>
-	<strings>
-        <foo>bar</foo>
-	</strings>		
 	<images>
 		<source>src/games/asteroids/resources/images.xml</source>
 	</images>
