@@ -1,7 +1,8 @@
 package vooga.physics.util;
 
 /**
- * Allows for standardized way of toggling physics components off and on.
+ * Allows for standardized toggling of objects which use physics. Used to toggle
+ * specific objects, not physics as a whole
  * @author Nathan Klug
  *
  */

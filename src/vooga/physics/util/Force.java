@@ -1,6 +1,5 @@
 package vooga.physics.util;
 
-import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.util.math.Angle;
 import vooga.util.math.MathVector;
 
@@ -39,26 +38,5 @@ public class Force extends MathVector {
     public Force scalarMultiply(double scalar) {
         super.scalarMultiply(scalar);
         return this;
-    }
-
-    /**
-     * Applies an external force to an IPhysics object using the Impulse
-     * Momentum Theorem. <br>
-     * <br>
-     * Source: <a
-     * href="http://en.wikipedia.org/wiki/Impulse_momentum_theorem">Wikipedia
-     * </a>
-     * 
-     * @param physicalObject
-     * @param force
-     * @param elapsedTime
-     */
-    public void applyForce(INewtonianPhysical physicalObject, long elapsedTime) {
-
-        Velocity deltaVelocity = new Velocity(this.getMagnitude() * elapsedTime / physicalObject.getMass(),
-                this.getAngle());
-        Velocity spriteVelocity = physicalObject.getVelocity();
-        spriteVelocity.addVector(deltaVelocity);
-        physicalObject.setVelocity(spriteVelocity);
     }
 }
