@@ -56,7 +56,8 @@ public class LevelManager implements VoogaState
     @SuppressWarnings("unchecked")
     public LevelManager (VoogaGame game)
     {
-        this(game, new SpriteGroup<Sprite>(DEFAULT_PLAYER_GROUP_NAME));
+        System.out.println(game.getResourceManager().getBundle().getString("foo"));
+        //this(game, new SpriteGroup<Sprite>(game.getResourceManager().getBundle().getString("foo")));
     }
 
     
