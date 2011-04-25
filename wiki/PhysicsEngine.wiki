@@ -1,5 +1,20 @@
 This is a very basic overview of the physics engine. It will be updated at a later date to be a bit more useful.
 
+NOTE: Local forces still need some work. My thought is that they should be held by the sprite, but they could also be held as a map inside of the PhysicsManager class. The problem with that is that then the PhysicsManager would need to be passed around to whatever is adding the local force. Since it seems that many local forces (such as thrust) would be created by the sprite itself, it makes sense to me for the sprite to hold them. Holding them in a component would not be a great idea, because all physics components need to respond to the force. Let me know what you think.
+
+In order to implement physics, this is what needs to happen:
+  #The level manager should have an instance of WorldForceManager
+  #Add any forces/vector fields you see fit to the WorldForceManager using the very obviously named methods
+  #Create sprites with the appropriate components
+  #During each update (preferably before sprites are updated):
+    #Get the lists of active forces and fields from WorldForceManager
+    #Get the list of active sprites from wherever
+    #Call "VoogaPhysicsMediator.applyForces(/Fields)ToSprites(...)"
+  #Inside of any collision group you have, call "VoogaPhysicsMediator.collision(...)", passing in the information that the method requires.
+
+
+
+This section may be outdated. If you actually need any of the info that is in it, ask Nathan:
 There are a couple different things that we feel that the Physics Engine should handle:
 1. Forces which affect all objects in the game world, such as gravity and “point forces,” such as magnets. There are currently three such types of these forces:
 
