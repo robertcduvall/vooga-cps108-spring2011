@@ -9,7 +9,8 @@ public class PolygonPolygonFinder extends IntersectionFinder<Polygon, Polygon>
 
 	public PolygonPolygonFinder()
 	{
-		
+		c1 = Polygon.class;
+		c2 = Polygon.class;
 	}
 	
 

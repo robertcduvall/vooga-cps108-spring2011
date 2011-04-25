@@ -15,7 +15,13 @@ public class PolygonCircleFinder extends IntersectionFinder<Polygon, Circle>
 		
 	
 
-    @Override
+    public PolygonCircleFinder() {
+		super();
+		c1 = Polygon.class;
+		c2 = Circle.class;
+	}
+
+	@Override
     public Intersection getIntersection (Polygon p, Circle c)
     {
         Intersection in = new Intersection();

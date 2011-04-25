@@ -13,6 +13,11 @@ import vooga.sprites.spritegroups.SpriteGroup;
 public abstract class BasicCollisionGroup<T extends Sprite, S extends Sprite> extends CollisionManager<T,S>
 {
 	
+	public BasicCollisionGroup() {
+		super();
+	}
+
+
 	public BasicCollisionGroup(SpriteGroup<T> s1, SpriteGroup<S> s2) {
 		super(s1, s2);
 	}

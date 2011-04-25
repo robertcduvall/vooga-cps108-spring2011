@@ -15,6 +15,11 @@ public abstract class CollisionManager<T extends Sprite, S extends Sprite>
 	protected SpriteGroup<S> Group2;
 	private boolean active = true;
 
+	public CollisionManager(){
+		
+	}
+	
+	
 	public CollisionManager(SpriteGroup<T> s1, SpriteGroup<S> s2)
 	{
 		Group1 = s1;

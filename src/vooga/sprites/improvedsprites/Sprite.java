@@ -15,12 +15,14 @@ package vooga.sprites.improvedsprites;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 import vooga.collisions.ICollidable;
 import vooga.collisions.shapes.Vertex;
+import vooga.collisions.shapes.collisionShapes.CollisionPolygon;
 import vooga.collisions.shapes.collisionShapes.CollisionQuadrilateral;
 import vooga.collisions.shapes.collisionShapes.ICollisionShape;
 import vooga.collisions.shapes.regularShapes.Polygon;
@@ -383,17 +385,30 @@ public class Sprite extends BaseSprite
         {
         	
             this.addComponent(new CollisionPolygonC(
-            		new CollisionQuadrilateral(new Vertex(this.getX(),this.getY()),
+            		new CollisionPolygon(new Vertex(this.getX(),this.getY()),
                                   new Vertex(this.getX()+this.getHeight(), this.getY()),
                                   new Vertex(this.getX(),this.getY() + this.getHeight()),
                                   new Vertex(this.getX()+this.getHeight(),this.getY() + this.getHeight()))));
         }
 
-        return (T) this.getComponent(CollisionShapeC.class).getCollisionShape();
+        return (T) this.getComponentsSubclassing(CollisionShapeC.class).get(0).getCollisionShape();
     }
 
 
-    /*
+    private <T extends IComponent> ArrayList<T> getComponentsSubclassing(Class<T> clazz) {
+    	ArrayList<T> comps = new ArrayList<T>();
+    	for (IComponent comp: myComponents){
+    		if (comp.getClass().getSuperclass().equals(clazz)){
+    			comps.add((T) comp);
+    		}
+    	}
+    	
+    	
+		return comps;
+	}
+
+
+	/*
      * (non-Javadoc)
      * @see util.buildable.IBuildable#getComponent(java.lang.Class)
      */
