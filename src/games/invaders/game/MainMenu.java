@@ -16,6 +16,8 @@ import com.golden.gamedev.object.Timer;
 import com.golden.gamedev.object.background.ColorBackground;
 
 public class MainMenu extends GameObject {
+	// TODO: Make this a level.
+	// TODO: Is there a team that is working on menus?
 
 	GameFont font;
 

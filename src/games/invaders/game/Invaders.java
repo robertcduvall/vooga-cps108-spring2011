@@ -39,6 +39,7 @@ public class Invaders extends GameEngine {
 
 	public static void main(String[] args) {
 		GameLoader game = new GameLoader();
+		// TODO: How could VoogaGame be used here?
 		// TODO: The Invaders Game has a specific Dimension that it is designed
 		// to be played at, so just use that.
 		// PlayMusic playMusic = new PlayMusic("theme.wav");
