@@ -27,19 +27,28 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
     private boolean isOn;
     private Velocity deltaVelocity;
     
-    private EmptyForceBehavior forceBehavior;
-    private EmptyFieldBehavior fieldBehavior;
-    private EmptyCollisionBehavior collisionBehavior;
+    private EmptyForceBehavior myForceBehavior;
+    private EmptyFieldBehavior myFieldBehavior;
+    private EmptyCollisionBehavior myCollisionBehavior;
 
     public EmptyPhysicsC() {
         this(true);
     }
 
     public EmptyPhysicsC(boolean isOn) {
+        this(new EmptyForceBehavior(), new EmptyFieldBehavior(), new EmptyCollisionBehavior(), isOn);
+        
+    }
+    
+    public EmptyPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior){
+        this(forceBehavior, fieldBehavior, collisionBehavior, true);
+    }
+    
+    public EmptyPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior, boolean isOn){
+        myForceBehavior = forceBehavior;
+        myFieldBehavior = fieldBehavior;
+        myCollisionBehavior = collisionBehavior;
         this.isOn = isOn;
-        forceBehavior = new EmptyForceBehavior();
-        fieldBehavior = new EmptyFieldBehavior();
-        collisionBehavior = new EmptyCollisionBehavior();
     }
 
     @Override
@@ -51,7 +60,7 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
 
     @Override
     protected Object[] getFieldValues() {
-        return new Object[] {forceBehavior, fieldBehavior, collisionBehavior, isOn()}; // TODO: this is not
+        return new Object[] {myForceBehavior, myFieldBehavior, myCollisionBehavior, isOn()}; // TODO: this is not
                                                           // going to return the
                                                           // field values, just
                                                           // the fields
@@ -59,9 +68,9 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
 
     @Override
     protected void setFieldValues(Object... fields) {
-        forceBehavior = (EmptyForceBehavior) fields[0];
-        fieldBehavior = (EmptyFieldBehavior) fields[1];
-        collisionBehavior = (EmptyCollisionBehavior) fields[2];
+        myForceBehavior = (EmptyForceBehavior) fields[0];
+        myFieldBehavior = (EmptyFieldBehavior) fields[1];
+        myCollisionBehavior = (EmptyCollisionBehavior) fields[2];
         if (fields.length > 3)
             turnPhysicsOnOff((Boolean) fields[3]);
         else
@@ -69,7 +78,7 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
     }
 
     public void applyForce(Force force, long lengthOfApplication){
-        deltaVelocity.addVector(forceBehavior.forceToVelocityChange(force, lengthOfApplication));
+        deltaVelocity.addVector(myForceBehavior.forceToVelocityChange(force, lengthOfApplication));
     }
     
     public void applyForces(List<Force> forces, long lengthOfApplication) {
@@ -79,7 +88,7 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
     }
     
     public void applyField(VectorField field, long lengthOfApplication){
-        deltaVelocity.addVector(fieldBehavior.fieldToVelocityChange(field, lengthOfApplication));
+        deltaVelocity.addVector(myFieldBehavior.fieldToVelocityChange(field, lengthOfApplication));
     }
     
     public void applyFields(List<VectorField> fields, long lengthOfApplication){
@@ -89,7 +98,7 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
     }
     
     public void applyCollision(EmptyCollisionBehavior otherCollisionBehavior, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution){
-        collisionBehavior.collisionToVelocityChange(otherCollisionBehavior, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+        myCollisionBehavior.collisionToVelocityChange(otherCollisionBehavior, angleOfImpact, pointOfImpact, coefficientOfRestitution);
     }
 
     @Override

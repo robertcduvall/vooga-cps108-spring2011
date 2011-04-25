@@ -16,7 +16,7 @@ import vooga.util.buildable.components.BasicComponent;
 public class PhysicsC extends VelocityC implements INewtonianPhysical, ISpriteUpdater{
  
     private double myMass;
-
+    
     public PhysicsC(Sprite sprite, double mass){
         this(sprite, mass, true);
     }
