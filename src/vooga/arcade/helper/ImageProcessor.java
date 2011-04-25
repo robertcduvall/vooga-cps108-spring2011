@@ -55,27 +55,36 @@ public class ImageProcessor
 	{
 		AffineTransform xform = new AffineTransform();
 
+		// Scaling
+		double scale = 0.0;
 		if (b.getWidth() > width || b.getHeight() > width)
 		{
 			if (b.getWidth() > b.getHeight())
 			{
-				xform.scale((double) width / (double) b.getWidth(),
-						(double) width / (double) b.getWidth());
+				scale = (double) width / (double) b.getWidth();
 			}
 			else
 			{
-				xform.scale((double) width / (double) b.getHeight(),
-						(double) width / (double) b.getHeight());
+				scale = (double) width / (double) b.getHeight();
 			}
 		}
 		
-		if(b.getWidth() != b.getHeight())
+		// Translation
+		if (b.getWidth() != b.getHeight())
 		{
-			xform.translate((b.getWidth() - width),
-					 0);
+			if (b.getWidth() < b.getHeight())
+			{
+				xform.translate((width - ((double) b.getWidth()) * scale) / 2.0, 0);
+			}
+			else
+			{
+				xform.translate(0,(width - ((double) b.getHeight()) * scale) / 2.0);
+			}
 		}
+		
+		xform.scale(scale, scale);
 		BufferedImage scaledImage = new BufferedImage(width, width,
-				BufferedImage.TYPE_INT_RGB);
+				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D graphics2D = scaledImage.createGraphics();
 
 		graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
