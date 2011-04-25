@@ -3,6 +3,7 @@ import java.sql.SQLException;
 
 import vooga.user.controller.LoginController;
 import vooga.user.main.ResourceManager;
+import vooga.user.model.database.GameDatabase;
 import vooga.user.model.database.SQLite;
 import vooga.user.model.database.UserDatabase;
 import vooga.user.model.parser.RegXParser;
@@ -55,7 +56,13 @@ public class LoginModel
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		
+//		
+//		try {
+//			database.update(USER_TABLE, prompt, text);
+//		} catch (SQLException e2) {
+//			e2.printStackTrace();
+//		}
 		try {
 			if(database.retrieveTableColumn(USER_TABLE, "UserName").contains(text[0])){
 				controller.displayError("Username already in use");
