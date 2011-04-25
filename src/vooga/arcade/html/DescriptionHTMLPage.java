@@ -13,7 +13,7 @@ public class DescriptionHTMLPage
 		htmlGenerator.addTag("p", description);
 		
 		//TODO: FIX THISSSS OAWKEMRLFSDMLKAERJWLKFJSLKDF
-		File file = new File("src/vooga/arcade/html/test.html");
+		File file = new File("src/vooga/arcade/html/description.html");
 		try
 		{	
 			FileWriter ofstream = new FileWriter(file);
