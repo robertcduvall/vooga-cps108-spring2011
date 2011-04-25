@@ -3,7 +3,9 @@ package vooga.leveleditor.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -14,9 +16,15 @@ import javax.swing.JMenuItem;
 public class MenuBar extends JMenuBar
 {
 
-    public MenuBar()
+    private SwingGUI owner;
+    
+    private JFileChooser fileChooser;
+
+    public MenuBar(SwingGUI owner)
     {
         super();
+        
+        this.owner = owner;
 
         /*
          * Set up the File menu.
@@ -58,7 +66,13 @@ public class MenuBar extends JMenuBar
     {
         public void actionPerformed(ActionEvent e)
         {
-
+            fileChooser = new JFileChooser();
+            int val = fileChooser.showOpenDialog(MenuBar.this);
+            if(val == JFileChooser.APPROVE_OPTION)
+            {
+                File file = fileChooser.getSelectedFile();
+                owner.loadFile(file);
+            }
         }
     }
 
@@ -66,7 +80,13 @@ public class MenuBar extends JMenuBar
     {
         public void actionPerformed(ActionEvent e)
         {
-
+            fileChooser = new JFileChooser();
+            int val = fileChooser.showSaveDialog(MenuBar.this);
+            if(val == JFileChooser.APPROVE_OPTION)
+            {
+                File file = fileChooser.getSelectedFile();
+                owner.saveFile(file);
+            }
         }
     }
 
