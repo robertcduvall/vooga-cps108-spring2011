@@ -724,7 +724,7 @@ public class Sprite extends BaseSprite
     @Override
     public void setSpeed (double vx, double vy)
     {
-        this.setComponent(Speed2DC.class, vx, vy);
+        this.getComponent(Speed2DC.class).setXYSpeed(vx, vy);
     }
 
 
