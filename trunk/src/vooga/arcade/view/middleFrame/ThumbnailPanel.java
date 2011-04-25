@@ -7,7 +7,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import vooga.arcade.controller.*;
+
+import vooga.arcade.controller.ArcadeController;
 
 /**
  * Makes the main panel of game thumbnails (or any other type of thumbnail,
@@ -46,6 +47,7 @@ public class ThumbnailPanel extends JPanel
         
         scrollPane
                 .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane, name);
     }
     
