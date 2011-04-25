@@ -30,7 +30,8 @@ public class ThumbnailPanel extends JPanel
 	}
     
     public void addNewCard(List<JPanel> thumbnails, String name){
-        JPanel thumbPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel thumbPanel = new JPanel();
+        thumbPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         // Size of the Frame itself (Determines scroll length)
         thumbPanel.setPreferredSize(new Dimension(620, 500));
         for (JPanel thumbnail : thumbnails)

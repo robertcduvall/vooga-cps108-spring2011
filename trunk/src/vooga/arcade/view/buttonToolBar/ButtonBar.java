@@ -44,6 +44,7 @@ public class ButtonBar {
 	
 	public static void swapButtons(String name)
 	{
+	    //Icon buttonIcon = new ImageIcon();
 	    // TODO: Make a generalized way to swap the login and user buttons
 	}
 }
