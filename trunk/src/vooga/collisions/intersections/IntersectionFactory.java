@@ -17,7 +17,6 @@ public class IntersectionFactory
 
 	static
 	{
-		System.out.println("I get called now!");
 		//TODO: talk to resource and don't hard code this
 		buildIntersectionSet(INTERSECTION_RESOURCE);
 	}
@@ -40,25 +39,21 @@ public class IntersectionFactory
 		return (Boolean) applyOrderGenericIntersectionMethod("areIntersecting", s1, s2);
 	}
 
-
+	
 	private static Object applyOrderGenericIntersectionMethod(String methodString, IShape s1,IShape s2)
 	{
 		try
 		{
-			//System.out.println(methodString + " " + s1.getClass() +  " " + s2.getClass());
-		//	Method m = IntersectionFactory.class.getMethod(methodString, IShape.class, IShape.class);
+			Method m = IntersectionFinder.class.getMethod(methodString, IShape.class, IShape.class);
 			for(IntersectionFinder finder : myFinderSet)
 			{
-			//	Method m = finder.getClass().getMethod(methodString, parameterTypes)
 				if(finder.canApply(s1,s2))
 				{
-					return finder.areIntersecting(s1, s2);
-					//return m.invoke(finder, s1, s2);
+					return m.invoke(finder, s1, s2);
 				}
 				else if (finder.canApply(s2, s1))
 				{
-					return finder.areIntersecting(s2,s1);
-					//return m.invoke(finder, s2, s1);
+					return m.invoke(finder, s2, s1);
 				}
 			}
 		}
