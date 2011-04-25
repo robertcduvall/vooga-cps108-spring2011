@@ -3,6 +3,8 @@ package vooga.leveleditor.gui;
 import java.awt.*;
 import javax.swing.*;
 
+import org.w3c.dom.Element;
+
 /**
  * A palette of sprite buttons. To be used with the DrawingBoard.
  */
@@ -15,18 +17,15 @@ public class Palette extends JPanel
     
     public Palette(Viewport pane)
     {
-        super();
+        super(new FlowLayout(FlowLayout.LEFT));
         this.pane = pane;
-        
         this.setPreferredSize(DEFAULT_SIZE);
-        
-        this.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-        this.add(new SpriteButton(pane));
-        this.add(new SpriteButton(pane));
-        this.add(new SpriteButton(pane));
-        this.add(new SpriteButton(pane));
-        this.add(new SpriteButton(pane));
+    }
+    
+    public void addButton(Element e)
+    {
+        SpriteButton newButton = new SpriteButton(pane, e);
+        this.add(newButton);
     }
 
 }
