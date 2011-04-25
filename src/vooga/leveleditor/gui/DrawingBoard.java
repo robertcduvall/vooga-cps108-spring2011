@@ -111,6 +111,7 @@ public class DrawingBoard extends JPanel
             {
                 Element sprite = (Element)sprites.item(i);
                 SpriteLabel newSprite = new SpriteLabel(viewport, sprite);
+                palette.addButton(sprite);
             }
         }
         catch(Exception e)
