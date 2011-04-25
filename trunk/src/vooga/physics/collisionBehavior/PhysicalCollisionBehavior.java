@@ -4,6 +4,12 @@ import java.awt.Point;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
 
+/**
+ * Defines collision behavior for an object which has mass and velocity.
+ * 
+ * @author Nathan Klug
+ *
+ */
 public class PhysicalCollisionBehavior extends MovableCollisionBehavior{
 
     private double myMass;

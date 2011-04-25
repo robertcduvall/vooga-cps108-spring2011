@@ -4,6 +4,12 @@ import java.awt.Point;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
 
+/**
+ * Collision behavior for objects which have a velocity.
+ * 
+ * @author Nathan Klug
+ *
+ */
 public class MovableCollisionBehavior extends EmptyCollisionBehavior{
 
     private Velocity myVelocity;
@@ -15,6 +21,15 @@ public class MovableCollisionBehavior extends EmptyCollisionBehavior{
     public Velocity getVelocity() {
         return myVelocity;
     }
+    
+    /**
+     * Needed to keep the behavior synced with the object
+     * @param newVelocity
+     */
+    public void updateVelocity(Velocity newVelocity){
+        myVelocity = newVelocity;
+    }
+
 
     public Velocity collisionToVelocityChange(MovableCollisionBehavior otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         double myParallel = this.getVelocity().getParallelComponent(angleOfImpact);
