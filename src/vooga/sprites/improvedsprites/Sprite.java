@@ -423,6 +423,11 @@ public class Sprite extends BaseSprite
     {
         return (T) this.getComponent(comp.getClass());
     }
+    
+    //TODO: Julian, write this!
+    public <T> List<T> getComponentsWhichSubclass(Class<T> cls){
+        return null;
+    }
 
 
     /*
