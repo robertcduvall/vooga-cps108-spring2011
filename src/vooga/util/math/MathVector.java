@@ -6,11 +6,12 @@ import java.awt.Point;
  * Vector class which handles basic vector math. Physical vectors such as Force
  * and Velocity extend this class.
  * 
+ * Uses standard East = 0 degrees, West = 180 degrees, etc., counterclockwise.
+ * 
  * @author Anne Weng
  * @author Nathan Klug
  * 
  */
-// USES STANDARD EAST = 0 DEGREES, COUNTERCLOCKWISE
 public class MathVector {
 
     private double myMagnitude;
@@ -96,16 +97,6 @@ public class MathVector {
     }
     
     /**
-     * Subtracts from this vector the other vector.
-     * @param otherVector
-     */
-    public MathVector subtractVector(MathVector otherVector){
-        MathVector negateVector = otherVector.negateAngle();
-        addVector(negateVector);
-        return this;
-    }
-
-    /**
      * Adds the current MathVector to another MathVector and returns the result.
      * 
      * @param otherVector
@@ -116,6 +107,16 @@ public class MathVector {
         double yComponent = this.getYComponent() + otherVector.getYComponent();
         myMagnitude = getMagnitude(xComponent, yComponent);
         myAngle = getAngle(xComponent, yComponent);
+        return this;
+    }
+
+    /**
+     * Subtracts from this vector the other vector.
+     * @param otherVector
+     */
+    protected MathVector subtractVector(MathVector otherVector){
+        MathVector negateVector = otherVector.negateAngle();
+        addVector(negateVector);
         return this;
     }
 

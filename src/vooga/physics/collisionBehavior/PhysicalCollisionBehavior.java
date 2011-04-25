@@ -1,8 +1,6 @@
 package vooga.physics.collisionBehavior;
 
 import java.awt.Point;
-import vooga.physics.newtonianProperties.INewtonianMovable;
-import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
 
