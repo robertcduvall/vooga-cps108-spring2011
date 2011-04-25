@@ -43,4 +43,10 @@ public class Vertex extends Point2D.Double implements Cloneable
 		return "X = " + this.getX() + " Y = " +this.getY();
 	}
 
+	public Vertex rotateAround(Point2D center, double dAngle) {
+		//TODO figure out how to rotate a point around a fixed axis
+		return this;
+				
+	}
+
 }
