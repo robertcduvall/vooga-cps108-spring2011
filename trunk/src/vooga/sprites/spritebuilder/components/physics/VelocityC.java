@@ -64,8 +64,8 @@ public class VelocityC extends BasicComponent implements INewtonianMovable, ISpr
 
     @Override
     public void update(Sprite s, long elapsedTime) {
-        if (isOn())
-            VoogaPhysicsMediator.getInstance().getEngine(null).applyWorldForces(this, elapsedTime);
+//        if (isOn())
+//            VoogaPhysicsMediator.getInstance().getEngine(null).applyWorldForces(this, elapsedTime);
         
     }
 

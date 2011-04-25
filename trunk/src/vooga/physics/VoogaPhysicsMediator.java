@@ -1,8 +1,11 @@
 package vooga.physics;
 
 import java.awt.Point;
+import java.util.Collection;
 import java.util.List;
+import vooga.physics.util.Force;
 import vooga.physics.util.IPhysicsToggle;
+import vooga.physics.util.VectorField;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.physics.EmptyPhysicsC;
 import vooga.util.math.Angle;
@@ -15,14 +18,14 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  * 
  */
-public class VoogaPhysicsMediator{
+public class VoogaPhysicsMediator {
 
     private static boolean isPhysicsOn = true;
+
     /**
      * General collision method. Tells the two physical objects that a collision
      * occurred.
      * 
-     * TODO: Collisions between many types of components?
      * 
      * @param object1
      * @param object2
@@ -41,7 +44,41 @@ public class VoogaPhysicsMediator{
             }
         }
     }
+
+    /**
+     * Applies a collection of forces to a collection of sprites 
+     * 
+     * @param sprites a collection of sprites
+     * @param forces a collection of forces
+     * @param lengthOfApplication the length of time the force is applied for
+     */
+    public static void applyForcesToSprites(Collection<Sprite> sprites, Collection<Force> forces, long lengthOfApplication) {
+        for (Sprite sprite : sprites) {
+            List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
+
+            for (EmptyPhysicsC component : physicsComponents) {
+                component.applyForces(forces, lengthOfApplication);
+            }
+        }
+    }
     
+    /**
+     * Applies a collection of fields to a collection of sprites 
+     * 
+     * @param sprites a collection of sprites
+     * @param field a collection of fields
+     * @param lengthOfApplication the length of time the field is applied for
+     */
+    public static void applyFieldsToSprites(Collection<Sprite> sprites, Collection<VectorField> fields, long lengthOfApplication) {
+        for (Sprite sprite : sprites) {
+            List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
+
+            for (EmptyPhysicsC component : physicsComponents) {
+                component.applyFields(fields, lengthOfApplication);
+            }
+        }
+    }
+
     /**
      * Is physics on?
      */

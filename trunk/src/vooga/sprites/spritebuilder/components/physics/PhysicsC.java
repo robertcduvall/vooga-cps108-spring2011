@@ -60,7 +60,7 @@ public class PhysicsC extends VelocityC implements INewtonianPhysical, ISpriteUp
 
     @Override
     public void update(Sprite s, long elapsedTime) {
-        if (isOn())//TODO: Get access to engine
-            VoogaPhysicsMediator.getInstance().getEngine(null).applyWorldForces(this, elapsedTime);
+        //if (isOn())//TODO: Get access to engine
+            //VoogaPhysicsMediator.getInstance().getEngine(null).applyWorldForces(this, elapsedTime);
     }
 }
