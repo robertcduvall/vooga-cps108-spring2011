@@ -32,7 +32,7 @@ public class PongGame extends VoogaGame {
 
 	@Override
 	public void updatePlayField(long elapsedTime) {
-
+		playField.update(elapsedTime);
 	}
 
 	@Override
