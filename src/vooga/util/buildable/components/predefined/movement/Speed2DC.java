@@ -18,5 +18,11 @@ public class Speed2DC extends SpeedC
     public double getXVelocity(){
         return this.myVelocities[0];
     }
+
+	public void setSpeed(double newSpeed, double direction, double max) {
+		if (newSpeed > max) newSpeed = max;
+		myVelocities[0]= newSpeed*Math.cos(Math.toRadians(direction));
+		myVelocities[1]= newSpeed*Math.cos(Math.toRadians(direction));
+	}
     
 }
