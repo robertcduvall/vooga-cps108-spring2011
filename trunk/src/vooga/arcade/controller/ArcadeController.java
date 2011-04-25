@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 import vooga.arcade.model.ArcadeModel;
 import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.parser.ArcadeUserObject;
@@ -132,5 +133,10 @@ public class ArcadeController
     
     public void updateGameObjects(List<ArcadeGameObject> arcadeGameList, String searchQuery){
         view.updateGameObjectList(arcadeGameList, searchQuery);
+    }
+    
+    public void updateButtonBar(JToolBar newBar)
+    {
+        view.switchToolBar(newBar);
     }
 }
