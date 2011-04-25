@@ -14,12 +14,12 @@ public class HeadingC extends DoubleC implements IRotation{
 	}
 
 	@Override
-	public double getHeading(){
+	public double getAngle(){
 		return super.getDouble();
 	}
 
 	@Override
-	public void setHeading(double angle) {
+	public void setAngle(double angle) {
 		myDouble = angle;
 	}
 

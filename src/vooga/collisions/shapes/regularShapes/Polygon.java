@@ -172,80 +172,31 @@ public class Polygon extends Shape
 		this.rotate(angle - this.angle);
 	}
 
-	public Point2D.Double[] getPoints()
+	public Point2D[] getPoints()
 	{
 		return vertices;
 	}
 
-	@Override
-	public boolean contains(Point2D p) 
-	{
-		Area area = new Area(this);
-		return area.contains(p);
-	}
 
 	@Override
-	public boolean contains(Rectangle2D r) {
+	public boolean contains(double x, double y) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean contains(double x, double y) {
-		// TODO not used
-		return false;
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public boolean contains(double x, double y, double w, double h) {
-		// TODO not used.
-		return false;
+	public double rotate(double dAngle) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
-	@Override
-	public Rectangle getBounds() {
-		// TODO not used
-		return null;
-	}
-
-	@Override
-	public Rectangle2D getBounds2D() {
-		// TODO not used
-		return null;
-	}
-
-	@Override
-	public PathIterator getPathIterator(AffineTransform at) {
-		// TODO not used
-		return null;
-	}
-
-	@Override
-	public PathIterator getPathIterator(AffineTransform at, double flatness) {
-		// TODO not used
-		return null;
-	}
-
-	@Override
-	public boolean intersects(Rectangle2D r) {
-		// TODO not used
-		return false;
-	}
-
-	@Override
-	public boolean intersects(double x, double y, double w, double h) {
-		// TODO not used
-		return false;
-	}
-
-	@Override
-	public void rotate (double degrees)
-	{
-		// TODO not used
-
-	}
-
-
+	
 
 
 

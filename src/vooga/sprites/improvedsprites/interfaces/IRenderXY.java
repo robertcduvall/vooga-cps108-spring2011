@@ -2,24 +2,19 @@ package vooga.sprites.improvedsprites.interfaces;
 
 import java.awt.Graphics2D;
 
+import vooga.levels.IRenderable;
+
 /**
  * Renders an object renderable. Uses java.awt.Graphics2D
  * 
  * @author Julian
  *
  */
-public interface IRender 
+public interface IRenderXY extends IRenderable
 {
 
 
 
-
-    /**
-     * Renders this sprite to specified graphics context.
-     * 
-     * @param g graphics context
-     */
-    public abstract void render (Graphics2D g);
 
 
     /**

@@ -2,59 +2,82 @@ package vooga.util.buildable.components.predefined.basic;
 
 import java.awt.Graphics2D;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.improvedsprites.interfaces.IRender;
+import vooga.sprites.improvedsprites.interfaces.IRenderXY;
 import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.buildable.components.IComponent;
 
 
-public class HealthC extends BasicComponent implements ISpriteUpdater, IRender
+public class HealthC extends BasicComponent 
 {
 
-    Integer myMax;
+    Double myMax;
+    Double myCurrent;
+    
+    public Double getMax() {
+		return myMax;
+	}
+
+	public void setMax(Double max) {
+		this.myMax = max;
+	}
+
+	public Double getCurrent() {
+		return myCurrent;
+	}
+
+	public void setCurrent(Double current) {
+		this.myCurrent = current;
+	}
+	
+	public double increase(double add){
+		return myCurrent += add;
+	}
+	
+	public double decrease(double sub){
+		return myCurrent -= sub;
+	}
+
+
+	public HealthC(Double max){
+    	myMax = max;
+    	setToMaxHealth();
+    }
    
-    @Override
+    public void setToMaxHealth() {
+    	myCurrent = myMax;
+	}
+
+    /**
+     * Compares remaining health fraction
+     */
+	@Override
     protected int compareTo (BasicComponent o)
     {
-        // TODO Auto-generated method stub
-        return 0;
+        return ((Double)this.getHealthFraction()).compareTo((Double)((HealthC) o).getHealthFraction());
     }
 
-    @Override
+    private double getHealthFraction() {
+    	
+		return myCurrent/myMax;
+	}
+
+	@Override
     protected Object[] getFieldValues ()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return new Object[]{myMax, myCurrent};
     }
 
     @Override
     protected void setFieldValues (Object ... fields)
     {
-        // TODO Auto-generated method stub
+        myMax = (Double) fields[0];
+        if (fields.length > 1) myCurrent = (Double) fields[1];
+        else setToMaxHealth();
         
     }
 
 
-    @Override
-    public void render (Graphics2D g)
-    {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void render (Graphics2D g, int x, int y)
-    {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void update (Sprite s, long elapsedTime)
-    {
-        // TODO Auto-generated method stub
-        
-    }
 
    
     

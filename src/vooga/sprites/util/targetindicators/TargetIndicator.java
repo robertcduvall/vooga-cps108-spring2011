@@ -5,11 +5,11 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import vooga.sprites.improvedsprites.BaseSprite;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.improvedsprites.interfaces.IRender;
+import vooga.sprites.improvedsprites.interfaces.IRenderXY;
 import vooga.sprites.improvedsprites.interfaces.ITargetable;
 import vooga.sprites.spritebuilder.components.basic.TargetableC;
 
-public class TargetIndicator extends BaseSprite implements IRender
+public class TargetIndicator extends BaseSprite implements IRenderXY
 {
 
     Sprite myFocus;

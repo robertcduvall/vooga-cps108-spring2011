@@ -9,12 +9,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 import javax.imageio.ImageIO;
-import vooga.sprites.improvedsprites.interfaces.IRender;
+import vooga.sprites.improvedsprites.interfaces.IRenderXY;
 import vooga.util.buildable.components.BasicComponent;
 import vooga.util.buildable.components.IComponent;
 
 
-public class BufferedImageC extends BasicComponent implements IRender
+public class BufferedImageC extends BasicComponent implements IRenderXY
 {
 
     private BufferedImage myImage;

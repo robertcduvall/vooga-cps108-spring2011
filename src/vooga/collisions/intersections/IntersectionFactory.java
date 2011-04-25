@@ -44,14 +44,15 @@ public class IntersectionFactory
 	{
 		try
 		{
-			Method m = IntersectionFinder.class.getMethod(methodString, IShape.class, IShape.class);
 			for(IntersectionFinder finder : myFinderSet)
 			{
-				if(finder.canApply(s1,s2))
+				Method m = finder.getClass().getDeclaredMethod(methodString, IShape.class, IShape.class);
+				Class<?>[] params = m.getParameterTypes();
+				if(params[0].isAssignableFrom(s1.getClass()) && params[1].isAssignableFrom(s1.getClass()))
 				{
 					return m.invoke(finder, s1, s2);
 				}
-				else if (finder.canApply(s2, s1))
+				else if (params[1].isAssignableFrom(s1.getClass()) && params[0].isAssignableFrom(s1.getClass()))
 				{
 					return m.invoke(finder, s2, s1);
 				}
