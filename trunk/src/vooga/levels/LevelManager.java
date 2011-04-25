@@ -21,6 +21,7 @@ import vooga.reflection.Reflection;
  */
 public class LevelManager implements VoogaState
 {
+    /** The default name for the player group */
     private static final String DEFAULT_PLAYER_GROUP_NAME = "default player";
 
     /** A map of level number to array of [levelFilePath, levelType ] */
@@ -56,7 +57,7 @@ public class LevelManager implements VoogaState
     @SuppressWarnings("unchecked")
     public LevelManager (VoogaGame game)
     {
-        this(game, new SpriteGroup<Sprite>(game.getResourceManager().getBundle().getString("foo")));
+        this(game, new SpriteGroup<Sprite>(DEFAULT_PLAYER_GROUP_NAME));
     }
 
     
@@ -109,7 +110,6 @@ public class LevelManager implements VoogaState
         // If no pre-existing level of the correct type exists, create a new
         // instance
         try { 
-            System.out.println(desiredLevelType);
             myActiveLevel = ((AbstractLevel) Reflection.createInstance(desiredLevelType, myPlayers, myGame));
         } catch (Exception e) {
             throw LevelException.LEVEL_CREATION_ERROR;
