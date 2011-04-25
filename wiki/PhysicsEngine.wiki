@@ -20,7 +20,7 @@ In order to implement physics, this is what needs to happen:
 ----
 ----
 
-This section is outdated. If you actually need any of the info that is in it, ask Nathan.
+This section is outdated. If there is anything in here that is not in the above section that you need, please let me know and I can explain it to you.
 ----
 There are a couple different things that we feel that the Physics Engine should handle:
 1. Forces which affect all objects in the game world, such as gravity and “point forces,” such as magnets. There are currently three such types of these forces:
