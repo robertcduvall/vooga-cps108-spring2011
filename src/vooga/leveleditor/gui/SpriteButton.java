@@ -51,7 +51,7 @@ public class SpriteButton extends JButton
         	/*
         	 * Need to create a sprite button factory
         	 */
-            DraggableImage s = new DraggableImage(myIcon, myPane, spriteProperties);
+            DraggableImage s = new DraggableImage(myPane, spriteProperties);
             myPane.addMouseMotionListener(s);
             myPane.addImage(s);
         }

@@ -27,8 +27,8 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 	private Element myProperties;
 	private boolean myFlag = false;
 	
-	public DraggableImage(ImageIcon icon, Viewport parent, Element data){
-		super(icon);
+	public DraggableImage(Viewport parent, Element data){
+		super();
 		this.myProperties=data;
 		String name = myProperties.getElementsByTagName("name").item(0).getTextContent();
         String xs = myProperties.getElementsByTagName("x").item(0).getTextContent();
@@ -39,7 +39,7 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
         this.myIcon = new ImageIcon(imgs);
         this.myParent = parent;
         this.setIcon(myIcon);
-		setJLabelValuesForDraggableImage(icon, parent, x, y);
+		setJLabelValuesForDraggableImage(myIcon, parent, x, y);
 	}
 	
 	protected void setSpriteProperties(int x,int y){
