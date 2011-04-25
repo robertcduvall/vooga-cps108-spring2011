@@ -26,6 +26,7 @@ public class TextInputPane extends PopoverPane
     {
         super(parent);
         acceptButton = new VoogaButton(acceptImage, "Accept", new Dimension(50, 100));
+        //test comment ver. 2
     }
    
     public void initResources()
@@ -39,7 +40,6 @@ public class TextInputPane extends PopoverPane
         textInputPaneFrame = new FrameWork(myParent.getParent().bsInput, myParent.getWidth(), myParent.getHeight());
         tTextBox = new TTextField("", myParent.getWidth()/2-50, myParent.getHeight()/2+20, 110, 25);
         textInputPaneFrame.add(tTextBox);
-        //test comment
     }
    
     @Override
