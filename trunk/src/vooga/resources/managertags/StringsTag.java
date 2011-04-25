@@ -29,6 +29,7 @@ public class StringsTag extends XMLTag {
 	public void parse(Parser context, Element xmlElement) {
 		NodeList children = xmlElement.getChildNodes();
 		for(int i = 0; i < children.getLength(); i++) {
+			if(!(children.item(i) instanceof Element)) continue;
 			Element child = (Element) children.item(i);
 			String key = child.getNodeName();
 			String value = getValue(child);
