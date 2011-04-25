@@ -26,14 +26,17 @@ public class SpriteButton extends JButton
     private ImageIcon myIcon;
     private Viewport myPane;
     private String myImageLocation;
-    private Element SpriteProperties;
+    private Element spriteProperties;
 
     public SpriteButton(Viewport pane, Element spritedata)
     {
+        System.out.println("derp");
     	myPane = pane;
-    	SpriteProperties = spritedata;
-    	setImageLocation();
-        myIcon = new ImageIcon(myImageLocation);
+    	spriteProperties = spritedata;
+    	String path = spriteProperties.getElementsByTagName("image").item(0).getTextContent();
+    	//setImageLocation();
+        //myIcon = new ImageIcon(myImageLocation);
+    	myIcon = new ImageIcon(path);
         this.setIcon(myIcon);
         this.setPreferredSize(new Dimension(100, 100));
         this.addActionListener(new ClickAction());
@@ -48,7 +51,7 @@ public class SpriteButton extends JButton
         	/*
         	 * Need to create a sprite button factory
         	 */
-            DraggableImage s = new DraggableImage(myIcon, myPane, SpriteProperties);
+            DraggableImage s = new DraggableImage(myIcon, myPane, spriteProperties);
             myPane.addMouseMotionListener(s);
             myPane.addImage(s);
         }
