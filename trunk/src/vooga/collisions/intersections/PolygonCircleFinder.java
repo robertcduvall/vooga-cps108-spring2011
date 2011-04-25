@@ -1,44 +1,42 @@
 package vooga.collisions.intersections;
 
 import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
+
+import javax.sound.sampled.Line;
+
 import vooga.collisions.shapes.regularShapes.*;
 
-public class PolygonCircleFinder extends IntersectionFinder
+public class PolygonCircleFinder extends IntersectionFinder<Polygon, Circle>
 {
 
 	
-	public PolygonCircleFinder()
-	{
 		
-	}
 	
-	@Override
-	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2) {
-		return c1.isAssignableFrom(Polygon.class) && c2.isAssignableFrom(Circle.class);
-	}
 
     @Override
-    public Intersection getIntersection (IShape s1, IShape s2)
+    public Intersection getIntersection (Polygon p, Circle c)
     {
         Intersection in = new Intersection();
-        for(Line2D l: ((Polygon) s1).getSides()){
-            if(((Circle)s2).intersects(l))
-                in.addIntersectingPoints(((Circle)s2).findIntersections(l));
+        for(Line2D l: p.getSides()){
+            if(c.intersects(l))
+                in.addIntersectingPoints(c.findIntersections(l));
         }
         return in;
     }
 
     @Override
-    public boolean areIntersecting (IShape s1, IShape s2)
+    public boolean areIntersecting (Polygon p, Circle c)
     {
-        if(((Polygon)s1).contains(((Circle)s2).getCenter()))
-        	return true;
+        
         	
-        for(Line2D l: ((Polygon) s1).getSides()){
-            if(((Circle)s2).intersects(l))
-                return true;
-            if(((Circle)s2).contains(l));
+        for(Line2D l: p.getSides()){
+            if(c.contains(l))
             	return true;
+            else if (c.intersects(l))
+            	return true;
+            
         }
         
         return false;

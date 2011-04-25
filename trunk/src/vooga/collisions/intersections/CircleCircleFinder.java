@@ -6,23 +6,16 @@ import vooga.collisions.shapes.regularShapes.Circle;
 import vooga.collisions.shapes.regularShapes.IShape;
 import vooga.util.math.LineMath;
 
-public class CircleCircleFinder extends IntersectionFinder {
+public class CircleCircleFinder extends IntersectionFinder<Circle, Circle> {
 
 	public CircleCircleFinder()
 	{
 		
 	}
-	@Override
-	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2)
-	{
-		return c1.isAssignableFrom(Circle.class) && c2.isAssignableFrom(Circle.class);
-	}
 
     @Override
-    public Intersection getIntersection (IShape s1, IShape s2)
+    public Intersection getIntersection (Circle c1, Circle c2)
     {
-        Circle c1 = (Circle) s1;
-        Circle c2 = (Circle) s2;
         double dist = c1.getCenter().distance(c2.getCenter());
         double dir = LineMath.findDirection(c1.getCenter().getX(), c1.getCenter().getY(), c2.getCenter().getX(), c1.getCenter().getY());
         
@@ -49,9 +42,9 @@ public class CircleCircleFinder extends IntersectionFinder {
      * Returns true if the sum of the radii is greater than the distance between the center of the circles
      */
     @Override
-    public boolean areIntersecting (IShape s1, IShape s2)
+    public boolean areIntersecting (Circle c1, Circle c2)
     {
-        return (((Circle) s1).getRadius() + ((Circle) s2).getRadius()) > s1.getCenter().distance(s2.getCenter());
+        return (c1.getRadius() + c2.getRadius()) > c1.getCenter().distance(c2.getCenter());
     }
 
 	@Override

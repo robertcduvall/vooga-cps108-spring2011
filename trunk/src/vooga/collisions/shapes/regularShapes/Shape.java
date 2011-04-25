@@ -18,15 +18,6 @@ public abstract class Shape implements  IShape
 		return center;
 	}
 	
-	/* (non-Javadoc)
-     * @see vooga.collisions.shapes.regularShapes.IShape#contains(double, double)
-     */
-	@Override
-    public boolean contains (double x, double y)
-    {
-        return this.contains(new Point2D.Double(x, y));
-    }
-	
     /* (non-Javadoc)
      * @see vooga.collisions.shapes.regularShapes.IShape#contains(double, double, double, double)
      */

@@ -3,11 +3,11 @@ package vooga.sprites.spritebuilder.components.basic;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.improvedsprites.interfaces.IRender;
+import vooga.sprites.improvedsprites.interfaces.IRenderXY;
 import vooga.sprites.util.targetindicators.TargetIndicator;
 import vooga.util.buildable.components.BasicComponent;
 
-public class TargetableC extends BasicComponent implements IRender
+public class TargetableC extends BasicComponent implements IRenderXY
 {
     
     private boolean amTargetted;

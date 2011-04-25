@@ -26,7 +26,7 @@ import vooga.collisions.shapes.collisionShapes.ICollisionShape;
 import vooga.collisions.shapes.regularShapes.Polygon;
 import vooga.collisions.shapes.regularShapes.Quadrilateral;
 import vooga.sprites.improvedsprites.interfaces.IMobility;
-import vooga.sprites.improvedsprites.interfaces.IRender;
+import vooga.sprites.improvedsprites.interfaces.IRenderXY;
 import vooga.sprites.improvedsprites.interfaces.ISprite;
 import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
 import vooga.sprites.spritebuilder.components.collisions.CollisionShapeC;
@@ -540,8 +540,8 @@ public class Sprite extends BaseSprite
     protected void renderComponents (Graphics2D g, int x, int y)
     {
         for (IComponent c: myComponents){
-            if (c instanceof IRender)
-                ((IRender) c).render(g,x,y);
+            if (c instanceof IRenderXY)
+                ((IRenderXY) c).render(g,x,y);
         }
         
     }
@@ -776,14 +776,14 @@ public class Sprite extends BaseSprite
 
 
 	@Override
-	public void setHeading(double angle) {
-		this.getComponent(HeadingC.class).setHeading(angle);
+	public void setAngle(double angle) {
+		this.getComponent(HeadingC.class).setAngle(angle);
 	}
 
 
 	@Override
-	public double getHeading() {
-		return this.getComponent(HeadingC.class).getHeading();
+	public double getAngle() {
+		return this.getComponent(HeadingC.class).getAngle();
 	}
 
 

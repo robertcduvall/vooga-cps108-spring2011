@@ -2,20 +2,16 @@ package vooga.collisions.shapes.regularShapes;
 
 import java.awt.geom.Point2D;
 
+import vooga.sprites.improvedsprites.interfaces.IRotation;
 
-public interface IShape extends java.awt.Shape
+
+public interface IShape extends IRotation
 {
 
     public abstract void move (double dx, double dy);
 
 
     public abstract void setLocation (double x, double y);
-
-
-    public abstract void rotate (double degrees);
-
-
-    public abstract void setAngle (double angle);
 
 
     public abstract double getMaxDistanceFromCenter ();

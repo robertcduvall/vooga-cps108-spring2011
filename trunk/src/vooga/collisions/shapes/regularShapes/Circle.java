@@ -16,7 +16,7 @@ import vooga.collisions.shapes.Vertex;
 import vooga.util.math.LineMath;
 
 
-public class Circle extends Shape
+public class Circle extends Shape implements java.awt.Shape
 {
 
     protected double radius;
@@ -71,7 +71,6 @@ public class Circle extends Shape
     @Override
     public boolean contains (Point2D p)
     {
-    	double dist = p.distance(center);
         return p.distance(center) <= radius;
     }
 
@@ -287,11 +286,6 @@ public class Circle extends Shape
 		
 	}
 
-	@Override
-	public void rotate(double degrees) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void setAngle(double angle) {
@@ -308,5 +302,23 @@ public class Circle extends Shape
 	public Point2D getTopLeftCorner(Point2D[] vertices) 
 	{
 		return new Point2D.Double(this.center.x - this.radius, this.center.y - radius);
+	}
+
+	@Override
+	public boolean contains(double arg0, double arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double rotate(double dAngle) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

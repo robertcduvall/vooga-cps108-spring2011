@@ -4,7 +4,7 @@ import java.awt.geom.Line2D;
 import vooga.collisions.shapes.regularShapes.*;
 import vooga.util.math.LineMath;
 
-public class PolygonPolygonFinder extends IntersectionFinder
+public class PolygonPolygonFinder extends IntersectionFinder<Polygon, Polygon>
 {
 
 	public PolygonPolygonFinder()
@@ -12,17 +12,13 @@ public class PolygonPolygonFinder extends IntersectionFinder
 		
 	}
 	
-	@Override
-	boolean canApply(Class<? extends IShape> c1, Class<? extends IShape> c2) {
-		return c1.isAssignableFrom(Polygon.class) && c2.isAssignableFrom(Polygon.class);
-	}
 
     @Override
-    public Intersection getIntersection (IShape s1, IShape s2)
+    public Intersection getIntersection (Polygon s1, Polygon s2)
     {
         Intersection in = new Intersection();
-        for(Line2D L1: ((Polygon) s1).getSides()){
-            for(Line2D L2: ((Polygon) s2).getSides()){
+        for(Line2D L1: s1.getSides()){
+            for(Line2D L2: s2.getSides()){
                 if (L1.intersectsLine(L2))
                     in.addIntersectingPoints(LineMath.findIntersection(L1, L2));
             }
@@ -31,10 +27,10 @@ public class PolygonPolygonFinder extends IntersectionFinder
     }
 
     @Override
-    public boolean areIntersecting (IShape s1, IShape s2)
+    public boolean areIntersecting (Polygon s1, Polygon s2)
     {
-        for(Line2D L1: ((Polygon) s1).getSides()){
-            for(Line2D L2: ((Polygon) s2).getSides()){
+        for(Line2D L1: s1.getSides()){
+            for(Line2D L2: s2.getSides()){
                 if (L1.intersectsLine(L2))
                     return true;
             }

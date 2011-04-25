@@ -30,11 +30,5 @@ public class RegularPolygon extends Polygon
         return vertices;
     }
 
-    @Override
-    public void rotate (double degrees)
-    {
-        // TODO Auto-generated method stub
-
-    }
 
 }
