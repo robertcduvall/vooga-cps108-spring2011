@@ -73,9 +73,13 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
         else
             turnPhysicsOnOff(true);
     }
+    
+    public void addToVelocityChange(Velocity otherVelocity){
+        deltaVelocity.addVector(otherVelocity);
+    }
 
     public void applyForce(Force force, long lengthOfApplication) {
-        deltaVelocity.addVector(myForceBehavior.forceToVelocityChange(force, lengthOfApplication));
+        addToVelocityChange(myForceBehavior.forceToVelocityChange(force, lengthOfApplication));
     }
 
     public void applyForces(Collection<Force> forces, long lengthOfApplication) {
@@ -85,13 +89,18 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
     }
 
     public void applyField(VectorField field, long lengthOfApplication) {
-        deltaVelocity.addVector(myFieldBehavior.fieldToVelocityChange(field, lengthOfApplication));
+        addToVelocityChange(myFieldBehavior.fieldToVelocityChange(field, lengthOfApplication));
     }
 
     public void applyFields(Collection<VectorField> fields, long lengthOfApplication) {
         for (VectorField field : fields) {
             applyField(field, lengthOfApplication);
         }
+    }
+
+    public void applyCollision(EmptyCollisionBehavior otherCollisionBehavior, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        addToVelocityChange(myCollisionBehavior.collisionToVelocityChange(otherCollisionBehavior, angleOfImpact, pointOfImpact,
+                coefficientOfRestitution));
     }
 
     public EmptyCollisionBehavior getCollisionBehavior() {
@@ -101,12 +110,7 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
     public EmptyForceBehavior getForceBehavior() {
         return myForceBehavior;
     }
-
-    public void applyCollision(EmptyCollisionBehavior otherCollisionBehavior, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
-        myCollisionBehavior.collisionToVelocityChange(otherCollisionBehavior, angleOfImpact, pointOfImpact,
-                coefficientOfRestitution);
-    }
-
+    
     @Override
     public void update(Sprite s, long elapsedTime) {
         Velocity oldVelocity = getSpriteVelocityForPhysics(s);
@@ -122,6 +126,10 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
     public void setSpriteVelocityForPhysics(Sprite sprite, Velocity newVelocity) {
         sprite.setHorizontalSpeed(newVelocity.getXComponent());
         sprite.setVerticalSpeed(-newVelocity.getYComponent());
+    }
+    
+    public Velocity getDeltaVelocity(){
+        return deltaVelocity;
     }
 
     @Override

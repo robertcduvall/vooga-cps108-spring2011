@@ -59,13 +59,28 @@ public class VoogaPhysicsMediator {
     public static void applyForcesToSprites(Collection<Sprite> sprites, Collection<Force> forces, long lengthOfApplication) {
         if (isOn()) {
             for (Sprite sprite : sprites) {
-                List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
-
-                for (EmptyPhysicsC component : physicsComponents) {
-                    component.applyForces(forces, lengthOfApplication);
-                }
+                applyForcesToSprite(sprite, forces, lengthOfApplication);
             }
         }
+    }
+
+    /**
+     * Applies a collection of forces to a sprite
+     * 
+     * @param sprites
+     *            a collection of sprites
+     * @param forces
+     *            a collection of forces
+     * @param lengthOfApplication
+     *            the length of time the force is applied for
+     */
+    public static void applyForcesToSprite(Sprite sprite, Collection<Force> forces, long lengthOfApplication) {
+        List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
+
+        for (EmptyPhysicsC component : physicsComponents) {
+            component.applyForces(forces, lengthOfApplication);
+        }
+
     }
 
     /**
@@ -81,12 +96,26 @@ public class VoogaPhysicsMediator {
     public static void applyFieldsToSprites(Collection<Sprite> sprites, Collection<VectorField> fields, long lengthOfApplication) {
         if (isOn()) {
             for (Sprite sprite : sprites) {
-                List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
-
-                for (EmptyPhysicsC component : physicsComponents) {
-                    component.applyFields(fields, lengthOfApplication);
-                }
+                applyFieldsToSprite(sprite, fields, lengthOfApplication);
             }
+        }
+    }
+
+    /**
+     * Applies a collection of fields to a single sprite
+     * 
+     * @param sprites
+     *            a collection of sprites
+     * @param field
+     *            a collection of fields
+     * @param lengthOfApplication
+     *            the length of time the field is applied for
+     */
+    public static void applyFieldsToSprite(Sprite sprite, Collection<VectorField> fields, long lengthOfApplication) {
+        List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
+
+        for (EmptyPhysicsC component : physicsComponents) {
+            component.applyFields(fields, lengthOfApplication);
         }
     }
 

@@ -1,16 +1,4 @@
 Problems:
 
-1. List possible collision pairs (which is gross)
-	Maybe can fix with reflection?
-	Check if method exists?
-	Catch exceptions?
-2. Swappable components
-3. Double application of collisions because of looping
-	Define interface preferences
-4. Local Forces
-
-Thoughts:
-
-1. dv <= force, length of time of application
-	dv collision <= another object's collision behavior
-2. changing parameters to not interfaces
+1. Generalize Forces/Fields
+2. Fix implementation of rotation

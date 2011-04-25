@@ -47,7 +47,8 @@ public class RotationalPhysicsC extends GeneralPhysicsC {
      */
     @Override
     public void update(Sprite s, long elapsedTime) {
-        super.update(s, elapsedTime);
+        //TODO: uncomment once this is implemented
+        //s.rotate(getDeltaVelocity.getMagnitude()*180/Math.PI);
         //Updates the current center for force behavior
         int x = (int) s.getCenterX();
         int y = (int) s.getCenterY();
