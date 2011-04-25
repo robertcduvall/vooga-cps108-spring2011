@@ -31,6 +31,7 @@ public class SpriteLabel extends JLabel
         owner.add(this, owner.LAYER_SPRITES);
         this.setVisible(true);
         this.setBounds(x, y, icon.getIconWidth(), icon.getIconHeight());
+        this.setIcon(icon);
         owner.moveToFront(this);
     }
 
