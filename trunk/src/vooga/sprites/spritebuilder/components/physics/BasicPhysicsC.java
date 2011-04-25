@@ -1,53 +1,67 @@
 package vooga.sprites.spritebuilder.components.physics;
 
-import java.awt.Point;
-import java.util.List;
-import vooga.physics.VoogaPhysicsMediator;
 import vooga.physics.collisionBehavior.EmptyCollisionBehavior;
 import vooga.physics.collisionBehavior.PhysicalCollisionBehavior;
 import vooga.physics.fieldBehavior.EmptyFieldBehavior;
-import vooga.physics.fieldBehavior.NewtonianFieldBehavior;
 import vooga.physics.forceBehavior.EmptyForceBehavior;
 import vooga.physics.forceBehavior.NewtonianForceBehavior;
-import vooga.physics.newtonianProperties.INewtonianPhysical;
-import vooga.physics.util.Force;
-import vooga.physics.util.IPhysicsToggle;
-import vooga.physics.util.VectorField;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
 import vooga.util.buildable.components.BasicComponent;
-import vooga.util.math.Angle;
 
 /**
- * Physics Component of a Sprite.
+ * Basic Physics Component of a Sprite. Force behavior is Newtonian, Field behavior is empty,
+ * and Collision behavior is Physical.
  * 
  * @author Nathan Klug
  * 
  */
 public class BasicPhysicsC extends EmptyPhysicsC{
-
-    private boolean isOn;
-    private Velocity deltaVelocity;
     
+    /**
+     * Constructor has been made private to mask the parent constructor.
+     */
+    @SuppressWarnings("unused")
     private BasicPhysicsC() {
     }
     
+    /**
+     * Constructor has been made private to mask the parent constructor.
+     */
+    @SuppressWarnings("unused")
     private BasicPhysicsC(boolean isOn) {
     }
 
+    /**
+     * Creates a BasicPhysicsC with given velocity and mass and the default 'on' state.
+     * @param velocity
+     * @param mass
+     */
     public BasicPhysicsC(Velocity velocity, double mass) {
         this(velocity, mass, true);
     }
     
+    /**
+     * Creates a BasicPhysicsC with given velocity, mass, and state.
+     * @param velocity
+     * @param mass
+     * @param isOn
+     */
     public BasicPhysicsC(Velocity velocity, double mass, boolean isOn) {
         this(new NewtonianForceBehavior(mass),new EmptyFieldBehavior(), new PhysicalCollisionBehavior(velocity, mass), isOn);
     }
     
+    /**
+     * Constructor has been made private to mask the parent constructor.
+     */
+    @SuppressWarnings("unused")
     private BasicPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior){
         this(forceBehavior, fieldBehavior, collisionBehavior, true);
     }
     
+    /**
+     * Constructor has been made private to mask the parent constructor.
+     */
     private BasicPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior, boolean isOn){
         super(forceBehavior, fieldBehavior, collisionBehavior, isOn);
     }
@@ -63,6 +77,6 @@ public class BasicPhysicsC extends EmptyPhysicsC{
     public void update(Sprite s, long elapsedTime) {
         super.update(s, elapsedTime);
         //Updates the current velocity for the collision behavior
-        //collisionBehavior.updateVelocity(getSpriteVelocityForPhysics(s));
+        super.myCollisionBehavior.updateBehavior(getSpriteVelocityForPhysics(s));
     }
 }

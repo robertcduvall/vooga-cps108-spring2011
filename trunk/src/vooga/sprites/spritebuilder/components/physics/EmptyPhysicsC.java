@@ -2,11 +2,9 @@ package vooga.sprites.spritebuilder.components.physics;
 
 import java.awt.Point;
 import java.util.List;
-import vooga.physics.VoogaPhysicsMediator;
 import vooga.physics.collisionBehavior.EmptyCollisionBehavior;
 import vooga.physics.fieldBehavior.EmptyFieldBehavior;
 import vooga.physics.forceBehavior.EmptyForceBehavior;
-import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.physics.util.Force;
 import vooga.physics.util.IPhysicsToggle;
 import vooga.physics.util.VectorField;
@@ -24,12 +22,12 @@ import vooga.util.math.Angle;
  */
 public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPhysicsToggle{
 
-    private boolean isOn;
-    private Velocity deltaVelocity;
+    protected boolean isOn;
+    protected Velocity deltaVelocity;
     
-    private EmptyForceBehavior myForceBehavior;
-    private EmptyFieldBehavior myFieldBehavior;
-    private EmptyCollisionBehavior myCollisionBehavior;
+    protected EmptyForceBehavior myForceBehavior;
+    protected EmptyFieldBehavior myFieldBehavior;
+    protected EmptyCollisionBehavior myCollisionBehavior;
 
     public EmptyPhysicsC() {
         this(true);
