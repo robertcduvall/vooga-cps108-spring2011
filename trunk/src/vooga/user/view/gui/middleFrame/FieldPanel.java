@@ -22,6 +22,7 @@ import vooga.user.view.actions.AbstractLoginAction;
 import vooga.user.view.actions.PasswordLogin;
 import vooga.user.view.actions.RegisterButton;
 import vooga.user.view.actions.SubmitButton;
+import vooga.user.view.actions.ViewInputButton;
 
 /**
  * @author Conrad Haynes
@@ -34,6 +35,7 @@ public class FieldPanel extends JPanel{
 	private List<JTextField> inputFields = new ArrayList<JTextField>();
 	private List<String> promptText = new ArrayList<String>();
 	private String[] inputText; 
+	private static ISectionAddable mySectionType;
 	private ResourceManager guiResource = new ResourceManager("vooga.user.resources.GUIResource");
 	
 	/**
@@ -43,7 +45,8 @@ public class FieldPanel extends JPanel{
 		this.setLayout(new MigLayout());
 		
 		for (LoginTemplate login : log) {
-			addSection(login.getHeader(), login.getPrompts());
+			mySectionType = login.getSectionType();
+			mySectionType.addSection(login.getHeader(), login.getPrompts(), this);
 			
 			if (login.getImageURL() != null) {
 				addImage(login.getImageURL());
@@ -51,7 +54,8 @@ public class FieldPanel extends JPanel{
 			AbstractLoginAction[] buttons = {
 					new PasswordLogin(controller, this),
 					new SubmitButton(controller, this),
-					new RegisterButton(controller, this) };
+					new RegisterButton(controller, this), 
+					new ViewInputButton(controller,this)};
 
 			// accesses a specific button class action based on it's index in the array
 			if (login.myButton >= 0) {
@@ -60,52 +64,26 @@ public class FieldPanel extends JPanel{
 		}
 	}
 	
-	 public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 		 String[] images = guiResource.getStringArray("LoginImageArray");
 		 Random rand = new Random();
 		 Image img = new ImageIcon("src/vooga/user/resources/" + 
 				 guiResource.getString(images[rand.nextInt(images.length)])).getImage();
 		    g.drawImage(img, 0, 0, 640,480, null);
 		  }
-
+	
 	/**
-	 *This method adds a fill-in section to the gui when passed in a section title and; fill-in prompts
+	 * This method simply returns the promptText as an Arraylist
 	 */
-	public void addSection(String sectionTitle, String[] request) {
-		addSeparator(this, sectionTitle);	
-		for(String r : request){
-			promptText.add(r);
-		}		
-		// The for loop creates each prompt that the operator wants to ask
-		for (int i = 0; i < request.length; i++) {
-			JTextField user = new JTextField(30);
-			this.add(new JLabel(request[i]), "gap para");
-			//System.out.println(request[i]);
-			inputFields.add(user);
-			//System.out.println("input size " + inputFields.size());
-			this.add(user, "span, growx, wrap");
-		}
-		}	
-	/**
-	 * This method retrieves the results of all the input fields
-	 */
-	public String[] getInputFields(){
-		inputText = new String[inputFields.size()];
-		for(int j = 0; j < inputFields.size(); j++){
-			inputText[j] = inputFields.get(j).getText();
-		}
-		return inputText;
+	public List<String> getPrompts(){
+		return promptText;
 	}
 	
 	/**
-	 * This method retrieves the appropriate prompt inputs from the log-in sequence
+	 * This method simply returns the inputField as an Arraylist
 	 */
-	public String[] getPromptText(){
-		String[] text = new String[promptText.size()];
-		for(int i = 0; i < promptText.size(); i++){
-			text[i] = promptText.get(i);
-		}
-		return text;
+	public List<JTextField> getInputs(){
+		return inputFields;
 	}
 	
 	/**
@@ -116,24 +94,35 @@ public class FieldPanel extends JPanel{
 		this.add(button, "wrap para, wrap para");
 		button.addActionListener(listener);
 	}
-		
-	/**
-	 * This method is utilized by the add Section method to create different sections to the game
-	 */
-	 private void addSeparator(JPanel panel, String text)
-	   {
-	      panel.add(new JLabel(text), "gapbottom 1, span, split 2, aligny center");
-	      panel.add(new JSeparator(), "gapleft rel, growx");
-	   }
 
 	 /**
 	  * This method adds images to a specific section
 	  */
-	 public void addImage(String imagePath){
+	public void addImage(String imagePath){
 			JLabel imageLabel = new JLabel(new ImageIcon(imagePath));
 			imageLabel.setHorizontalAlignment(JLabel.CENTER);
 			this.add(imageLabel);
 		}
 	 
-	 
+	/**
+	* This method retrieves the results of all the input fields as a String[]
+	*/
+	public String[] getInputFields(){
+		inputText = new String[inputFields.size()];
+		for(int j = 0; j < inputFields.size(); j++){
+			inputText[j] = inputFields.get(j).getText();
+		}
+		return inputText;
+		}
+
+	/**
+	* This method retrieves the appropriate prompt inputs from the log-in sequence as a String[]
+	*/
+	public String[] getPromptText(){
+		String[] text = new String[promptText.size()];
+		for(int i = 0; i < promptText.size(); i++){
+			text[i] = promptText.get(i);
+			}
+			return text;
+		}
 }

@@ -19,6 +19,9 @@ import vooga.user.main.XmlWriter;
 import vooga.user.model.parser.PasswordEncoding;
 import vooga.user.model.parser.PasswordParser;
 import vooga.user.model.parser.RegXParser;
+import vooga.user.view.gui.middleFrame.ISectionAddable;
+import vooga.user.view.gui.middleFrame.InputSection;
+import vooga.user.view.gui.middleFrame.TextSection;
 import vooga.user.voogauser.UserPreference;
 import vooga.user.voogauser.VoogaUser;
 
@@ -106,9 +109,25 @@ public class LoginModel
 			for (int i = 0; i < sectionTitle.length; i++) {
 				text[i] = registrationResource.getString(sectionTitle[i]);
 			}
-			updateInformation[p] = new LoginTemplate(headerSections[p], text,null, x);
+			updateInformation[p] = new LoginTemplate(headerSections[p], text,null, x, new InputSection());
 		}
 		return updateInformation;
+	}
+	
+	public void startEditPage(){
+		try {
+			database = new SQLite();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+//		try {
+//			return password.matches(database.retrieveExactEntry(USER_TABLE, user, "Password"));
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**
@@ -137,7 +156,8 @@ public class LoginModel
 		String[] loginPrompt = registrationResource.getStringArray("DefaultLoginPrompt");
 		String[] one = {loginPrompt[0],loginPrompt[1]}; String[] two = {};
 		String image = "src/vooga/user/resources/DefaultLoginImage.png";
-		LoginTemplate[] log = {new LoginTemplate(loginPrompt[2], one,image,0), new LoginTemplate(loginPrompt[3],two,image,2)};
+		LoginTemplate[] log = {new LoginTemplate(loginPrompt[2], one,image,0,new InputSection()), 
+				new LoginTemplate(loginPrompt[3],two,image,2, new InputSection())};
 		return log;
 	}
 	

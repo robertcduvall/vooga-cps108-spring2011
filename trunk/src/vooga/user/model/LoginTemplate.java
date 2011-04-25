@@ -1,5 +1,7 @@
 package vooga.user.model;
 
+import vooga.user.view.gui.middleFrame.ISectionAddable;
+
 //import java.awt.event.ActionListener;
 /**
  * @author Conrad Haynes
@@ -9,8 +11,8 @@ public class LoginTemplate {
 	
 	public String[] myInputs, myPrompts;
 	public String myHeader, myImageURL;
-	//public ActionListener myButtonListener=null;
 	public int myButton;
+	public ISectionAddable mySectionType;
 	
 	/**
 	 * Although this method has a lot of parameters, it provides an easy way to store and wrap information to update the view with.
@@ -20,12 +22,12 @@ public class LoginTemplate {
 	 * @param imageURL - the location of an image the user want to include in their layout
 	 * @param buttonAction - create a button based on the action you want it to perform
 	 */
-	public LoginTemplate(String header, String[]prompts, String imageURL, int button){	
+	public LoginTemplate(String header, String[]prompts, String imageURL, int button, ISectionAddable section){	
 		myPrompts = prompts;
 		myHeader = header;
 		myImageURL = imageURL;
-		//myButtonListener = buttonAction;
 		myButton = button;
+		mySectionType=section;
 	}
 	
 	public void determineResults(){
@@ -58,6 +60,10 @@ public class LoginTemplate {
 	 */int getButtonListener(){
 		//return myButtonListener;
 		return myButton;
+	}
+
+	public ISectionAddable getSectionType() {
+		return mySectionType;
 	}
 	
 	

@@ -5,6 +5,8 @@ import vooga.arcade.controller.*;
 import vooga.user.model.LoginModel;
 import vooga.user.model.LoginTemplate;
 import vooga.user.view.LoginViewer;
+import vooga.user.view.gui.middleFrame.InputSection;
+import vooga.user.view.gui.middleFrame.TextSection;
 import vooga.user.voogauser.UserPreference;
 import vooga.user.voogauser.VoogaUser;
 
@@ -33,6 +35,10 @@ public class LoginController implements ILoginController
 	@Override
 	public void updateWithInput(){
 		view.update(model.update());	
+	}
+	
+	public void updateWithInformationPanel(){
+		view.update(model.update());
 	}
 	
 	@Override
@@ -73,5 +79,6 @@ public class LoginController implements ILoginController
 		System.out.println(username);
 		arcadeController.swapToolbarButton(user);
 		System.out.println("I need indication!!!!!!");
+		view.setVisible(false);
 	}
 }

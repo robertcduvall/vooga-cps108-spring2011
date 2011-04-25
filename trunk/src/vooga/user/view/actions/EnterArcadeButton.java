@@ -18,7 +18,7 @@ public class EnterArcadeButton extends AbstractLoginAction{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// Launch Arcade		
+		System.out.close();		
 	}
 
 }
