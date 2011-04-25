@@ -51,7 +51,7 @@ public class RotationalPhysicsC extends GeneralPhysicsC {
         //Updates the current center for force behavior
         int x = (int) s.getCenterX();
         int y = (int) s.getCenterY();
-        super.myForceBehavior.updateBehavior(new Point(x,y));
+        getForceBehavior().updateBehavior(new Point(x,y));
     }
 
 }

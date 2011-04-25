@@ -22,12 +22,12 @@ import vooga.util.math.Angle;
  */
 public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPhysicsToggle {
 
-    protected boolean isOn;
-    protected Velocity deltaVelocity;
+    private boolean isOn;
+    private Velocity deltaVelocity;
 
-    protected EmptyForceBehavior myForceBehavior;
-    protected EmptyFieldBehavior myFieldBehavior;
-    protected EmptyCollisionBehavior myCollisionBehavior;
+    private EmptyForceBehavior myForceBehavior;
+    private EmptyFieldBehavior myFieldBehavior;
+    private EmptyCollisionBehavior myCollisionBehavior;
 
     public EmptyPhysicsC() {
         this(true);
@@ -96,6 +96,10 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
 
     public EmptyCollisionBehavior getCollisionBehavior() {
         return myCollisionBehavior;
+    }
+    
+    public EmptyForceBehavior getForceBehavior() {
+        return myForceBehavior;
     }
 
     public void applyCollision(EmptyCollisionBehavior otherCollisionBehavior, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {

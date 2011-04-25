@@ -48,6 +48,6 @@ public class NewtonianPhysicsC extends GeneralPhysicsC{
     public void update(Sprite s, long elapsedTime) {
         super.update(s, elapsedTime);
         //Updates the current velocity for the collision behavior
-        super.myCollisionBehavior.updateBehavior(getSpriteVelocityForPhysics(s));
+        getCollisionBehavior().updateBehavior(getSpriteVelocityForPhysics(s));
     }
 }
