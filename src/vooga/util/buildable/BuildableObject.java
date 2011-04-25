@@ -393,7 +393,7 @@ public abstract class BuildableObject extends Observable
      * @see util.buildable.IBuildable#clear()
      */
     @Override
-    public void clear ()
+    public void clearComponents ()
     {
         myComponents.clear();
     }

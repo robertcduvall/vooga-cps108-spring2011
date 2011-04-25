@@ -29,6 +29,7 @@ import vooga.sprites.improvedsprites.interfaces.IMobility;
 import vooga.sprites.improvedsprites.interfaces.IRender;
 import vooga.sprites.improvedsprites.interfaces.ISprite;
 import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
+import vooga.sprites.spritebuilder.components.collisions.CollisionShapeC;
 import vooga.util.buildable.BuildException;
 import vooga.util.buildable.IBuildable;
 import vooga.util.buildable.components.ComponentResources;
@@ -81,7 +82,6 @@ public class Sprite extends BaseSprite
      */
     private static final long serialVersionUID = -4499098097309229784L;
 
-    private ICollisionShape myCollisionShape;
 
     protected ComponentSet<IComponent> myComponents;
 
@@ -353,7 +353,7 @@ public class Sprite extends BaseSprite
      * @see util.buildable.IBuildable#clear()
      */
     @Override
-    public void clear ()
+    public void clearComponents ()
     {
         myComponents.clear();
     }
@@ -381,16 +381,17 @@ public class Sprite extends BaseSprite
     @Override
     public ICollisionShape getCollisionShape ()
     {
-        if (this.myCollisionShape == null)
+        if (this.getComponent(CollisionShapeC.class) == null)
         {
-            return (this.myCollisionShape =
-                new CollisionQuadrilateral(new Vertex(this.getX(),this.getY()),
+        	
+            this.addComponent(new CollisionShapeC(
+            		new CollisionQuadrilateral(new Vertex(this.getX(),this.getY()),
                                   new Vertex(this.getX()+this.getHeight(), this.getY()),
                                   new Vertex(this.getX(),this.getY() + this.getHeight()),
-                                  new Vertex(this.getX()+this.getHeight(),this.getY() + this.getHeight())));
+                                  new Vertex(this.getX()+this.getHeight(),this.getY() + this.getHeight()))));
         }
 
-        return this.myCollisionShape;
+        return this.getComponent(CollisionShapeC.class).getCollisionShape();
     }
 
 
@@ -643,7 +644,7 @@ public class Sprite extends BaseSprite
     public void setCollisionShape (ICollisionShape cs)
     {
 
-        this.myCollisionShape = cs;
+        this.setComponent(CollisionShapeC.class, cs);
     }
 
 

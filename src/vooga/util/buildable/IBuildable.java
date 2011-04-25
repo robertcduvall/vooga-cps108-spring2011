@@ -185,7 +185,7 @@ public interface IBuildable extends Cloneable
      * 
      * @return
      */
-    public abstract void clear ();
+    public abstract void clearComponents ();
 
 
 
