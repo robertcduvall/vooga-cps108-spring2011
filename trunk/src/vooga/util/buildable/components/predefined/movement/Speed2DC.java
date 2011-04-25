@@ -24,5 +24,10 @@ public class Speed2DC extends SpeedC
 		myVelocities[0]= newSpeed*Math.cos(Math.toRadians(direction));
 		myVelocities[1]= newSpeed*Math.cos(Math.toRadians(direction));
 	}
+
+	public void setXYSpeed(double vx, double vy) {
+		myVelocities[0] = vx;
+		myVelocities[1] = vy;
+	}
     
 }
