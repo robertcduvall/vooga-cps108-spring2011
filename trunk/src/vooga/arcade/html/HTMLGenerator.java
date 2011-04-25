@@ -43,4 +43,9 @@ public class HTMLGenerator
 	{
 		return header + htmlBody.toString() + footer;
 	}
+
+	public void addText(String data)
+	{
+		htmlBody.append(data);
+	}
 }
