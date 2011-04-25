@@ -25,7 +25,9 @@ public class Palette extends JPanel
     public void addButton(Element e)
     {
         SpriteButton newButton = new SpriteButton(pane, e);
+        System.out.println(newButton);
         this.add(newButton);
+        this.revalidate();
     }
 
 }
