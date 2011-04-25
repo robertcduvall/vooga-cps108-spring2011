@@ -30,19 +30,26 @@ public class BasicPhysicsC extends EmptyPhysicsC{
     private boolean isOn;
     private Velocity deltaVelocity;
     
-    private NewtonianForceBehavior forceBehavior;
-    private EmptyFieldBehavior fieldBehavior;
-    private PhysicalCollisionBehavior collisionBehavior;
+    private BasicPhysicsC() {
+    }
+    
+    private BasicPhysicsC(boolean isOn) {
+    }
 
     public BasicPhysicsC(Velocity velocity, double mass) {
         this(velocity, mass, true);
     }
     
     public BasicPhysicsC(Velocity velocity, double mass, boolean isOn) {
-        this.isOn = isOn;
-        forceBehavior = new NewtonianForceBehavior(mass);
-        fieldBehavior = new EmptyFieldBehavior();
-        collisionBehavior = new PhysicalCollisionBehavior(velocity, mass);
+        this(new NewtonianForceBehavior(mass),new EmptyFieldBehavior(), new PhysicalCollisionBehavior(velocity, mass), isOn);
+    }
+    
+    private BasicPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior){
+        this(forceBehavior, fieldBehavior, collisionBehavior, true);
+    }
+    
+    private BasicPhysicsC(EmptyForceBehavior forceBehavior, EmptyFieldBehavior fieldBehavior, EmptyCollisionBehavior collisionBehavior, boolean isOn){
+        super(forceBehavior, fieldBehavior, collisionBehavior, isOn);
     }
 
     @Override
@@ -53,75 +60,9 @@ public class BasicPhysicsC extends EmptyPhysicsC{
     }
 
     @Override
-    protected Object[] getFieldValues() {
-        return new Object[] {forceBehavior, fieldBehavior, collisionBehavior, isOn()}; // TODO: this is not
-                                                          // going to return the
-                                                          // field values, just
-                                                          // the fields
-    }
-
-    @Override
-    protected void setFieldValues(Object... fields) {
-        forceBehavior = (NewtonianForceBehavior) fields[0];
-        fieldBehavior = (EmptyFieldBehavior) fields[1];
-        collisionBehavior = (PhysicalCollisionBehavior) fields[2];
-        if (fields.length > 3)
-            turnPhysicsOnOff((Boolean) fields[3]);
-        else
-            turnPhysicsOnOff(true);
-    }
-
-    public void applyForce(Force force, long lengthOfApplication){
-        deltaVelocity.addVector(forceBehavior.forceToVelocityChange(force, lengthOfApplication));
-    }
-    
-    public void applyForces(List<Force> forces, long lengthOfApplication) {
-        for (Force force : forces) {
-            applyForce(force, lengthOfApplication);
-        }
-    }
-    
-    public void applyField(VectorField field, long lengthOfApplication){
-        deltaVelocity.addVector(fieldBehavior.fieldToVelocityChange(field, lengthOfApplication));
-    }
-    
-    public void applyFields(List<VectorField> fields, long lengthOfApplication){
-        for (VectorField field : fields){
-            applyField(field, lengthOfApplication);
-        }
-    }
-    
-    public void applyCollision(EmptyCollisionBehavior otherCollisionBehavior, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution){
-        collisionBehavior.collisionToVelocityChange(otherCollisionBehavior, angleOfImpact, pointOfImpact, coefficientOfRestitution);
-    }
-
-    @Override
     public void update(Sprite s, long elapsedTime) {
-        Velocity oldVelocity = getSpriteVelocityForPhysics(s);
-        oldVelocity.addVector(deltaVelocity);
-        setSpriteVelocityForPhysics(s, oldVelocity);
-        deltaVelocity = new Velocity(0,0);
+        super.update(s, elapsedTime);
         //Updates the current velocity for the collision behavior
-        collisionBehavior.updateVelocity(getSpriteVelocityForPhysics(s));
-    }
-    
-    public Velocity getSpriteVelocityForPhysics(Sprite sprite){
-        return new Velocity(sprite.getHorizontalSpeed(), -sprite.getVerticalSpeed());
-    }
-    
-    public void setSpriteVelocityForPhysics(Sprite sprite, Velocity newVelocity){
-        sprite.setHorizontalSpeed(newVelocity.getXComponent());
-        sprite.setVerticalSpeed(-newVelocity.getYComponent());
-    }
-
-    @Override
-    public void turnPhysicsOnOff(boolean isOn) {
-        this.isOn = isOn;
-        
-    }
-
-    @Override
-    public boolean isOn() {
-        return isOn;
+        //collisionBehavior.updateVelocity(getSpriteVelocityForPhysics(s));
     }
 }
