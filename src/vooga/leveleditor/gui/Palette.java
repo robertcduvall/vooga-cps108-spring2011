@@ -11,8 +11,6 @@ public class Palette extends JPanel
 
     public static final Dimension DEFAULT_SIZE = new Dimension(220, 600);
     
-    private DrawingBoard owner;
-
     private Viewport pane;
     
     public Palette(Viewport pane)

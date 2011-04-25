@@ -23,11 +23,13 @@ public class SpriteButton extends JButton
 
     private ImageIcon myIcon;
     private Viewport myPane;
+    private String myImageLocation;
 
     public SpriteButton(Viewport pane)
     {
     	myPane = pane;
-        myIcon = new ImageIcon("src/vooga/leveleditor/images/space_ship.png");
+    	setImageLocation();
+        myIcon = new ImageIcon(myImageLocation);
         this.setIcon(myIcon);
         this.setPreferredSize(new Dimension(100, 100));
         this.addActionListener(new ClickAction());
@@ -45,6 +47,15 @@ public class SpriteButton extends JButton
         }
        
 
+    }
+    
+    /*
+     * This method may be used by the parser in order to set the image for
+     * each button as they are being created from the file. If needed, we will
+     * replace this with a SpriteButtonFactory
+     */
+    protected void setImageLocation(){
+    	myImageLocation = "src/vooga/leveleditor/images/space_ship.png";
     }
 
 }
