@@ -99,6 +99,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         myMusic = new LinkedList<String>();
     }
 
+    
     /**
      * Checks if the current level's goal has been achieved
      * 
@@ -237,10 +238,12 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     
     /**
      * Sets the current goal for the level
+     * 
      * @param goal Goal object defined in the XML file
      */
     public void setGoal (IGoal goal)
     {
+        goal.setupGoal(myGame.getLevelManager(), this);
     	myGoal = goal;
     }
     

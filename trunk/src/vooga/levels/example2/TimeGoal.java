@@ -2,6 +2,7 @@ package vooga.levels.example2;
 
 import vooga.levels.IGoal;
 import vooga.levels.LevelManager;
+import vooga.levels.VoogaPlayField;
 
 public class TimeGoal implements IGoal
 {
@@ -25,8 +26,15 @@ public class TimeGoal implements IGoal
 
 
 	@Override
-	public boolean checkCompletion(LevelManager levelManager) {
+	public boolean checkCompletion(LevelManager levelManager) 
+	{
 		 return ((System.currentTimeMillis() - myStartOfLevelTime)/1000.0 >= 10);
 	}
 
+
+    @Override
+    public void setupGoal (LevelManager manager, VoogaPlayField playfield)
+    {
+        myLevelManager = manager;
+    }
 }
