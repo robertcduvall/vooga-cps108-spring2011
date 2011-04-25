@@ -1,7 +1,6 @@
 package vooga.physics.collisionBehavior;
 
 import java.awt.Point;
-import vooga.physics.newtonianProperties.INewtonianPhysical;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
 
@@ -15,10 +14,6 @@ public class MovableCollisionBehavior extends EmptyCollisionBehavior{
 
     public Velocity getVelocity() {
         return myVelocity;
-    }
-    
-    public void updateVelocity(Velocity newVelocity){
-        myVelocity = newVelocity;
     }
 
     public Velocity collisionToVelocityChange(MovableCollisionBehavior otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
