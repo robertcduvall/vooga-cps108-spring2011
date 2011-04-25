@@ -14,6 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 
+import org.w3c.dom.Element;
+
 /**
  * A button that holds a sprite.
  * 
@@ -24,6 +26,7 @@ public class SpriteButton extends JButton
     private ImageIcon myIcon;
     private Viewport myPane;
     private String myImageLocation;
+    private Element SpriteProperties;
 
     public SpriteButton(Viewport pane)
     {
@@ -41,7 +44,10 @@ public class SpriteButton extends JButton
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            DraggableImage s = new DraggableImage(myIcon, myPane);
+        	/*
+        	 * Need to create a sprite button factory
+        	 */
+            DraggableImage s = new DraggableImage(myIcon, myPane, SpriteProperties);
             myPane.addMouseMotionListener(s);
             myPane.addImage(s);
         }
