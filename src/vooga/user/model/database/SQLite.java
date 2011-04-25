@@ -16,7 +16,7 @@ import java.util.List;
 		
 		public SQLite() throws SQLException, ClassNotFoundException{
 				Class.forName("org.sqlite.JDBC");//standard - need every time
-		    Connection conn =DriverManager.getConnection("jdbc:sqlite:test.db");
+		    Connection conn =DriverManager.getConnection("jdbc:sqlite:voogaUser.db");
 		    Statement stat = null;
 				stat = conn.createStatement();
 		    myStat = stat;
@@ -191,6 +191,21 @@ import java.util.List;
 			return s;
 		}
 
+		public void deleteFromTable(String tableName) throws SQLException{
+			
+			ResultSet rs = myStat.executeQuery("Delete from "+ tableName);
+		
+		String s = "empty";
+			while ( rs.next() ) {
+					rs.deleteRow();
+			}
+			rs.close();
+			myConn.close();
+	}
+
+		
+		
+		
 		/**
 		 * A very important method, this code closes the connection to the database 
 		 * - database must be closed after each submission
@@ -198,6 +213,14 @@ import java.util.List;
 		 */
 		public void close() throws SQLException{
 				myConn.close();
+		}
+		
+		public void clear(String tableName){
+			try {
+				myStat.executeUpdate("drop table if exists " + tableName + ";");
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
 		}
 	}
 	
