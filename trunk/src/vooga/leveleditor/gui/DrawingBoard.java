@@ -9,6 +9,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.*;
 
 /**
  * The main rendering and drawing area of the editor. It is composed of the
@@ -25,7 +30,7 @@ public class DrawingBoard extends JPanel
 
     private Palette palette;
 
-    private Viewport layers;
+    private Viewport viewport;
 
     private JLabel statusbar;
 
@@ -60,14 +65,14 @@ public class DrawingBoard extends JPanel
          * Now we have enough information to create the JLayeredPane. It is
          * placed in the center so that it will take all available space.
          */
-        layers = new Viewport(this, bgimage);
-        JScrollPane layersHolder = new JScrollPane(layers);
+        viewport = new Viewport(this, bgimage);
+        JScrollPane layersHolder = new JScrollPane(viewport);
         this.add(layersHolder, BorderLayout.CENTER);
 
         /*
          * Create the palette on the left.
          */
-        palette = new Palette(layers);
+        palette = new Palette(viewport);
         JScrollPane paletteHolder = new JScrollPane(palette,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -83,6 +88,32 @@ public class DrawingBoard extends JPanel
     protected void setStatusBar(String message)
     {
         statusbar.setText(message);
+    }
+
+    public void loadFile(File f)
+    {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try
+        {
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse("src/vooga/leveleditor/resource/samplelevel.xml");
+            NodeList sprites = doc.getElementsByTagName("sprite");
+            for(int i = 0; i < sprites.getLength(); i++)
+            {
+                Element sprite = (Element)sprites.item(i);
+                SpriteLabel newSprite = new SpriteLabel(viewport, sprite);
+            }
+        }
+        catch(Exception e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void safeFile(File f)
+    {
+
     }
 
 }
