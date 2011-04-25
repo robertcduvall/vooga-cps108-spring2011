@@ -11,7 +11,7 @@ public class Bullet extends Sprite
     public Bullet(BufferedImage image, int x, int y)
     {
         super(image, x, y);
-        setVerticalSpeed(0.1); // FIXME has no effect...
+        setVerticalSpeed(-0.1); 
     }
     
     public void destroy ()
