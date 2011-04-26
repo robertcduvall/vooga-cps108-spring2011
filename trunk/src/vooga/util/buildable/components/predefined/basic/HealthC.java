@@ -77,6 +77,10 @@ public class HealthC extends BasicComponent
         
     }
 
+	public boolean isDead() {
+		return myCurrent <= 0;
+	}
+
 
 
    

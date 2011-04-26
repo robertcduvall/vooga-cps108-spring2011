@@ -3,6 +3,8 @@ package games.asteroids;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.components.basic.AccelerationC;
+import vooga.sprites.spritebuilder.components.basic.DecelerationC;
 import vooga.util.buildable.components.predefined.basic.HealthC;
 import vooga.util.buildable.components.predefined.movement.Speed2DC;
 
@@ -19,7 +21,8 @@ public class Ship extends Sprite
         myGame = game;
         // TODO setImage(game.getImageLoader().getImage("ship"));
         bindKeys();
-        this.addComponent(new HealthC(42.0));
+        this.addComponents(new HealthC(42.0), new DecelerationC(.0005));
+        
     }
 
 
@@ -78,7 +81,7 @@ public class Ship extends Sprite
 
     public void thrust ()
     {
-        super.accelerate(-.01, 10);
+        super.accelerate(0.001, this.getAngle());
         //TODO PHYSICS!
     }
 

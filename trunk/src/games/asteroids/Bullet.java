@@ -11,7 +11,8 @@ public class Bullet extends Sprite
     public Bullet(BufferedImage image, int x, int y)
     {
         super(image, x, y);
-        setVerticalSpeed(-0.1); 
+        setSpeed(0.5, 0.5); 
+        
     }
     
     public void destroy ()

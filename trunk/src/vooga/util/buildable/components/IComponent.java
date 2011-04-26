@@ -26,6 +26,7 @@ public interface IComponent extends Comparable<IComponent>
      * @param c
      */
     public abstract void setTo (Object ... args);
+    
 
 
     public abstract boolean equals (IComponent c);
