@@ -29,7 +29,7 @@ public class Login extends AbstractViewAction
             gameTitles.add(currentTitle);
         }
         
-        LoginController start = new LoginController("VOOGA GAME LOGIN", "", 640, 480, gameTitles);  
+        LoginController start = new LoginController("VOOGA GAME LOGIN", controller, 640, 480, gameTitles);  
         start.toString();
     }
 }
