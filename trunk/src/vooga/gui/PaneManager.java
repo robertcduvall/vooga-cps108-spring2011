@@ -8,6 +8,7 @@ import vooga.core.VoogaGame;
 import vooga.core.VoogaState;
 import vooga.core.event.EventManager;
 import vooga.gui.panes.AbstractPane;
+import vooga.gui.panes.EmptyPane;
 
 
 /**
@@ -18,7 +19,7 @@ import vooga.gui.panes.AbstractPane;
  * @author David Crowe
  */
  
- public abstract class PaneManager implements VoogaState {
+ public class PaneManager implements VoogaState {
     //State variables
         //Instantiated by default
         protected EventManager myEventManager;
@@ -53,7 +54,9 @@ import vooga.gui.panes.AbstractPane;
     *    menuPane=new MenuPane(new ArrayList<VoogaButton>(), this);
     *    myPanes.add(menuPane);
     */
-    protected abstract void initPanes() ;
+    protected void initPanes() {
+        myPanes.add(new EmptyPane(this));
+	}
     
     /**
      * Create your EventHandlers as specified by the Events team.
@@ -68,7 +71,8 @@ import vooga.gui.panes.AbstractPane;
      *                   }
      *           });
      */
-     protected abstract void createEventHandlers() ;
+     protected void createEventHandlers() {
+	}
 
     /**
      * Loads the first pane. This is the same as calling openPane(0)
@@ -87,11 +91,12 @@ import vooga.gui.panes.AbstractPane;
     */
     public void openPane (int paneIndex)
     {
-        AbstractPane tempPane = myPanes.get(paneIndex);
-        if (tempPane!=null){
-            myActivePane=tempPane;
-//            System.out.println("Pane switched to: "+paneIndex);
-        }
+    	if(myPanes.size()!=0&&myPanes.size()>paneIndex){
+            AbstractPane tempPane = myPanes.get(paneIndex);
+            if (tempPane!=null){
+                myActivePane=tempPane;
+            }
+    	}
     }
 
     /**
