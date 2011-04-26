@@ -28,7 +28,10 @@ public class ButtonBar {
 		
 		for (int k=0; k < entryNames.length; k++) {
 		    String entry = entryNames[k];
-			String buttonName = buttonBarResource.getString(entry);
+		    String buttonName;
+		    if (k==0 && entry.equals("Login"))
+		        buttonName = buttonBarResource.getString(entry);
+		    else buttonName = entry;
 			Icon buttonIcon = new ImageIcon("src/" + buttonName);
 			if((k==0) && !(entry.equals("Login")))
 			{
