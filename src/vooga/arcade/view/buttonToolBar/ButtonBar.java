@@ -61,12 +61,14 @@ public class ButtonBar {
 	{
 	    if (username.equals("Login"))
 	    {
+	        toolBarEntriesImageNames = buttonBarResource.getStringArray("ToolBar");
 	        JToolBar newBar = createButtonToolBar(c);
 	        c.updateButtonBar(newBar);     
 	    }
 	    else{
 	        String[] entryNames = toolBarEntriesImageNames;
 	        entryNames[0] = username;
+	        toolBarEntriesImageNames = entryNames;
 	        JToolBar newBar = createButtonToolBar(c, entryNames);
 	        c.updateButtonBar(newBar);
 	    }
