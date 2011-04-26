@@ -31,7 +31,7 @@ public class LoginViewer extends JFrame implements IView {
 	private LoginMiddleFrame middleFrame;
 	private LoginController pc;
 
-	public LoginViewer(String title, String prompt, Dimension dim,
+	public LoginViewer(String title, Dimension dim,
 			LoginController p) {
 		try {
 			UIManager.setLookAndFeel(UIManager
@@ -51,7 +51,7 @@ public class LoginViewer extends JFrame implements IView {
 	
 	public LoginViewer(String title, String prompt, int dimx, int dimy,
 			LoginController p) {
-		this(title, prompt, new Dimension(dimx, dimy), p);
+		this(title,new Dimension(dimx, dimy), p);
 	}
 
 	public void showError(String str) {
