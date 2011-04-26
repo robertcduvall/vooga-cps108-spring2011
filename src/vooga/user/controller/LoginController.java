@@ -20,11 +20,11 @@ public class LoginController implements ILoginController
 	public List<String> gameReferences;
 	public GameDatabaseFactory factory;
 
-	public LoginController(String string, String string2, int i, int j, List<String> arcadeGames)
+	public LoginController(String string, ArcadeController controller, int i, int j, List<String> arcadeGames)
 	{
-		arcadeController = new ArcadeController();
+		arcadeController = controller;
 		model = new LoginModel(this);
-		view = new LoginViewer(string, string2, new Dimension(i, j), this);
+		view = new LoginViewer(string, new Dimension(i, j), this);
 		gameReferences = arcadeGames;
 		factory = new GameDatabaseFactory(gameReferences,this);
 		
@@ -86,7 +86,7 @@ public class LoginController implements ILoginController
 			if(p.getPrompt().equals("UserName")){username = p.getInput();}
 		}
 		System.out.println(username);
-		//arcadeController.swapToolbarButton(user);
+		arcadeController.swapToolbarButton(user);
 		System.out.println("I need indication!!!!!!");
 		view.setVisible(false);
 	}
