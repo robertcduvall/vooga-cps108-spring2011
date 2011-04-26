@@ -86,8 +86,12 @@ public class ArcadeController
 
     public void swapToolbarButton(VoogaUser user)
     {
+        String name;
         currentUser = user;
-        String name = user.getUsername();
+        if (currentUser==null)
+            name = "Login";
+        else name = user.getUsername();
+        
         ButtonBar.swapButtons(name);
     }
 
