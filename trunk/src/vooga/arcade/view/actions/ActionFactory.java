@@ -21,7 +21,9 @@ public class ActionFactory {
 			"vooga.arcade.resources.ActionFactoryResource");
 
 	public static ActionListener createAction(String objName, ArcadeController p) {
-		// reflect on method/class name
+		//if (objName.equals(ButtonBarItemUser))
+	    
+	    // reflect on method/class name
 		String className = factoryResources.getString(objName);
 	
 		Class<?> cls = null;
