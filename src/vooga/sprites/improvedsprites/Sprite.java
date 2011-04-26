@@ -12,7 +12,9 @@
 package vooga.sprites.improvedsprites;
 
 // JFC
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -31,8 +33,10 @@ import vooga.sprites.improvedsprites.interfaces.IMobility;
 import vooga.sprites.improvedsprites.interfaces.IRenderXY;
 import vooga.sprites.improvedsprites.interfaces.ISprite;
 import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
+import vooga.sprites.spritebuilder.components.basic.SpriteVelocityC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionShapeC;
+import vooga.sprites.spritebuilder.components.physics.VelocityC;
 import vooga.util.buildable.BuildException;
 import vooga.util.buildable.IBuildable;
 import vooga.util.buildable.components.ComponentResources;
@@ -127,7 +131,7 @@ public class Sprite extends BaseSprite
         this.x = this.oldX = x;
         this.y = this.oldY = y;
         myComponents = new ComponentSet<IComponent>();
-        myComponents.addAll(Arrays.asList(new IComponent[]{new Speed2DC(), new HeadingC()}));
+        myComponents.addAll(Arrays.asList(new IComponent[]{new SpriteVelocityC()}));
         // sprite image
         if (image != null)
         {
@@ -234,36 +238,7 @@ public class Sprite extends BaseSprite
     }
 
 
-    /*
-     * (non-Javadoc)
-     * @see sprites.oldsprites.ISprite#addHorizontalSpeed(long, double, double)
-     */
-    @Override
-    public void addHorizontalSpeed (long elapsedTime,
-                                    double accel,
-                                    double maxSpeed)
-    {
-        this.addSpeed(elapsedTime, accel, 0, maxSpeed);
-
-    }
-
-
-    /*
-     * (non-Javadoc)
-     * @see sprites.oldsprites.ISprite#addVerticalSpeed(long, double, double)
-     */
-    @Override
-    public void addVerticalSpeed (long elapsedTime,
-                                  double accel,
-                                  double maxSpeed)
-    {
-        this.addSpeed(elapsedTime, accel, 90, maxSpeed);
-    }
     
-    @Override
-    public double addSpeed(long elapsedTime, double accel, double direction, double max){
-        return this.getComponent(Speed2DC.class).setSpeed((this.getComponent(Speed2DC.class).getAbsoluteVelocity()+elapsedTime*accel), direction, max);
-    }
 
 
 
@@ -458,7 +433,7 @@ public class Sprite extends BaseSprite
     @Override
     public double getHorizontalSpeed ()
     {
-        return this.getComponent(Speed2DC.class).getXVelocity();
+        return this.getComponent(SpriteVelocityC.class).getXComponent();
     }
 
 
@@ -470,7 +445,7 @@ public class Sprite extends BaseSprite
     public double getVerticalSpeed ()
     {
     	
-        return this.getComponent(Speed2DC.class).getYVelocity();
+        return this.getComponent(SpriteVelocityC.class).getYComponent();
     }
 
 
@@ -479,13 +454,8 @@ public class Sprite extends BaseSprite
     {
         if (this.getX() == xs && this.getY() == ys) return true;
 
-        double mag =
-            Math.sqrt(Math.pow(this.getHorizontalSpeed(), 2) +
-                      (Math.pow(this.getVerticalSpeed(), 2)));
-        double dir = LineMath.findDirection(this.getX(), this.getY(), xs, ys);
-
-        this.setHorizontalSpeed(mag * Math.cos(dir));
-        this.setHorizontalSpeed(mag * Math.cos(dir));
+        this.setMovement(Math.sqrt(Math.pow(this.getHorizontalSpeed(), 2) + (Math.pow(this.getVerticalSpeed(), 2))), 
+        		LineMath.findDirection(this.getX(), this.getY(), xs, ys));
 
         return false;
     }
@@ -542,12 +512,22 @@ public class Sprite extends BaseSprite
     @Override
     public void render (Graphics2D g, int x, int y)
     {
-        super.render(g, x, y);
+    	
+    	AffineTransform aTransform = new AffineTransform();
+        aTransform.translate((int) this.getX(), 
+                             (int) this.getY());
+        aTransform.rotate(Math.toRadians(this.getAngle()-90));
+        aTransform.translate((int) -width/2, 
+                             (int) -height/2);
+        
+        g.drawImage(image.getScaledInstance(width, height, 0),aTransform,null);
         renderComponents(g, x, y);
     }
 
 
-    protected void renderComponents (Graphics2D g, int x, int y)
+
+
+	protected void renderComponents (Graphics2D g, int x, int y)
     {
         for (IComponent c: myComponents){
             if (c instanceof IRenderXY)
@@ -628,7 +608,7 @@ public class Sprite extends BaseSprite
     @Override
     public void replaceComponent (IComponent toReplace, IComponent replaceWith)
     {
-
+    	this.replaceComponent(toReplace.getClass(), replaceWith);
     }
 
 
@@ -700,10 +680,7 @@ public class Sprite extends BaseSprite
     @Override
     public void setMovement (double speed, double angleDir)
     {
-        // convert degrees to radians
-        double radians = Math.toRadians(angleDir);
-
-        this.setSpeed(Math.sin(radians) * speed, -Math.cos(radians) * speed);
+    	this.getComponent(SpriteVelocityC.class).setTo(speed, angleDir);
     }
 
 
@@ -724,7 +701,7 @@ public class Sprite extends BaseSprite
     @Override
     public void setSpeed (double vx, double vy)
     {
-        this.getComponent(Speed2DC.class).setXYSpeed(vx, vy);
+        this.getComponent(SpriteVelocityC.class).setByComponents(vx, vy);
     }
 
 
@@ -757,14 +734,14 @@ public class Sprite extends BaseSprite
     @Override
     public void update (long elapsedTime)
     {
-        this.updateMovement(elapsedTime);
-        this.updateComponents(elapsedTime);
+//        this.updateMovement(elapsedTime);
+        this.updateFromComponents(elapsedTime);
     }
 
     /**
      * @param elapsedTime
      */
-    private void updateComponents (long elapsedTime)
+    private void updateFromComponents (long elapsedTime)
     {
         for (IComponent c: myComponents){
             if (c instanceof ISpriteUpdater)
@@ -773,38 +750,62 @@ public class Sprite extends BaseSprite
     }
 
 
-    /*
-     * (non-Javadoc)
-     * @see sprites.oldsprites.ISprite#updateMovement(long)
-     */
-    @Override
-    public void updateMovement (long elapsedTime)
-    {
-        this.move(this.getHorizontalSpeed() * elapsedTime, this.getVerticalSpeed() *
-                                                      elapsedTime);
-    }
+//    /*
+//     * (non-Javadoc)
+//     * @see sprites.oldsprites.ISprite#updateMovement(long)
+//     */
+//    @Override
+//    public void updateMovement (long elapsedTime)
+//    {
+//        this.move(this.getHorizontalSpeed() * elapsedTime, this.getVerticalSpeed() *
+//                                                      elapsedTime);
+//    }
 
 
 	@Override
 	public void setAngle(double angle) {
-		this.getComponent(HeadingC.class).setAngle(angle);
+		this.getComponent(SpriteVelocityC.class).setAngle(angle);
 	}
 
 
 	@Override
 	public double getAngle() {
-		return this.getComponent(HeadingC.class).getAngle();
+		return this.getComponent(SpriteVelocityC.class).getAngle();
 	}
 
 
 	@Override
 	public double rotate(double dAngle) {
-		return this.getComponent(HeadingC.class).rotate(dAngle);
+		return this.getComponent(SpriteVelocityC.class).rotate(dAngle);
 	}
 
 	@Override
-	public double accelerate(double d, double max) {
-		return this.addSpeed(1, d, this.getAngle(), max);
+	public double accelerate(double mag, double dir) {
+		return this.addSpeed(mag*Math.cos(Math.toRadians(dir)), mag*Math.sin(Math.toRadians(dir)));
+	}
+
+
+	@Override
+	public void addHorizontalSpeed(double dVx) {
+		this.addSpeed(dVx, 0);
+	}
+
+
+	@Override
+	public void addVerticalSpeed(double dVy) {
+		this.addSpeed(0, dVy);
+	}
+
+
+	@Override
+	public double addSpeed(double dVx, double dVy) {
+		
+		return this.getComponent(SpriteVelocityC.class).addByComponents(dVx,dVy);
+	}
+
+
+	public double getAbsoluteSpeed() {
+		return LineMath.calcMagnitude(this.getHorizontalSpeed(), this.getVerticalSpeed());
 	}
 
 

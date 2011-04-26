@@ -47,6 +47,22 @@ public class LineMath
     }
 
 
+    
+    /**
+     * finds the direction of this change in x,y distance
+     * @param line
+     * @return the direction in degrees of this line if it were a vector in
+     *         caresian system
+     */
+    public static double findDirection (double dx, double dy)
+    {
+    	if (dx > 0) return Math.toDegrees(Math.atan(dy / dx));
+        else if (dx < 0) return (Math.toDegrees(Math.atan(dy / dx)) + 180) % 360;
+        else if (dy < 0) return 270;
+        else if (dx > 0) return 90;
+        return 0; //when line has mag = 0
+    }
+    
     /**
      * @param line
      * @return the direction in degrees of this line if it were a vector in
@@ -54,13 +70,8 @@ public class LineMath
      */
     public static double findDirection (Line2D line)
     {
-        double dx = findDX(line);
-        double dy = findDY(line);
-        if (dx > 0) return Math.toDegrees(Math.atan(dy / dx));
-        else if (dx < 0) return (Math.toDegrees(Math.atan(dy / dx)) + 180) % 360;
-        else if (dy < 0) return 270;
-        else if (dx > 0) return 90;
-        return 0; //when line has mag = 0
+    	return findDirection(findDX(line),findDY(line));
+        
     }
 
 
@@ -139,6 +150,11 @@ public class LineMath
     {
         return findDirection(new Line2D.Double(x,y,xs,ys));
     }
+
+
+	public static double calcMagnitude(double dx, double dy) {
+		return Math.sqrt(dx*dx + dy*dy);
+	}
     
 
 }

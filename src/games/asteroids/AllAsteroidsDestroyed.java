@@ -19,7 +19,7 @@ public class AllAsteroidsDestroyed implements IGoal
     @Override
     public void progress ()
     {
-        myLevelManager.loadNextLevel();
+//        myLevelManager.loadNextLevel();
     }
 
 

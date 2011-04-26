@@ -74,76 +74,26 @@ public interface IMobility extends IRotation
 
 
     /**
-     * Accelerates sprite horizontal speed by <code>accel</code> and limit the
-     * speed to <code>maxSpeed</code>.
-     * <p>
-     * 
-     * This is used to create momentum speed (slowly increase/decrease the
-     * sprite speed).
-     * <p>
-     * 
-     * For example :
-     * 
-     * <pre>
-     * Sprite s;
-     * 
-     * public void update(long elapsedTime) {
-     *  // accelerate sprite speed by 0.002
-     *  // and limit the maximum speed to 4
-     *  // moving right
-     *  s.addHorizontalSpeed(elapsedTime, 0.002, 4);
-     *  // moving left
-     *  s.addHorizontalSpeed(elapsedTime, -0.002, -4);
-     *  // momentum stop
-     *  s.addHorizontalSpeed(elapsedTime, (s.getHorizontalSpeed() &gt; 0) ? -0.002
-     *          : 0.002, 0);
-     * }
-     * </pre>
+     * liearly increases the horizontal speed of the sprite
+     * @param dx
      */
-    public abstract void addHorizontalSpeed (long elapsedTime,
-                                             double accel,
-                                             double maxSpeed);
+    public abstract void addHorizontalSpeed (double dVx);
 
 
     /**
-     * Accelerates sprite vertical speed by <code>accel</code> and limit the
-     * speed to <code>maxSpeed</code>.
-     * <p>
-     * 
-     * This is used to create momentum speed (slowly increase/decrease the
-     * sprite speed).
-     * <p>
-     * 
-     * For example :
-     * 
-     * <pre>
-     * Sprite s;
-     * 
-     * public void update(long elapsedTime) {
-     *  // accelerate sprite speed by 0.002
-     *  // and limit the maximum speed to 4
-     *  // moving down
-     *  s.addVerticalSpeed(elapsedTime, 0.002, 4);
-     *  // moving up
-     *  s.addVerticalSpeed(elapsedTime, -0.002, -4);
-     *  // momentum stop
-     *  s.addVerticalSpeed(elapsedTime,
-     *          (s.getVerticalSpeed() &gt; 0) ? -0.002 : 0.002, 0);
-     * }
-     * </pre>
+     * liearly increases the vertical speed of the sprite
+     * @param dy
      */
-    public abstract void addVerticalSpeed (long elapsedTime,
-                                           double accel,
-                                           double maxSpeed);
+    public abstract void addVerticalSpeed (double dVy);
 
 
-    double addSpeed (long elapsedTime, double accel, double direction, double max);
+    double addSpeed( double dVx, double dVy);
 
 
-    /**
-     * Updates sprite movement.
-     */
-    public abstract void updateMovement (long elapsedTime);
+//    /**
+//     * Updates sprite movement.
+//     */
+//    public abstract void updateMovement (long elapsedTime);
 
 
     /**
@@ -165,11 +115,18 @@ public interface IMobility extends IRotation
      */
     public abstract double getVerticalSpeed ();
 
+    
+    /**
+     * Calculates the absolute speed of this object based on the x and y speed components
+     * @return
+     */
+    public abstract double getAbsoluteSpeed();
+    
     /**
      * Accelerate this object by a given amount
      * @param i
      * @return
      */
-	double accelerate(double accel, double max);
+	double accelerate(double mag, double dir);
     
 }
