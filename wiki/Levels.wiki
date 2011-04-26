@@ -1,0 +1,31 @@
+#summary (WORK IN PROGRESS) How to use the LevelManager, writing a supported level XML file, and extending the Level package to support new features.
+#labels Phase-Implementation
+
+= Introduction =
+
+In the VOOGA game engine, you have the option to use a pre-built Level system to facilitate use of multiple levels for your game. VOOGA provides a basic definition of a level, but this definition can be extended to support additional features for any type of game. *LevelManager* serves as the forward-facing API for the level package.
+
+  * Defining a Level
+   * Level XML File
+    * Background
+    * Sprite Archetype
+    * Collision Managers / Sprite Groups
+    * Goals
+    * Instances / Sprite Pool
+   * Level Classes
+   * Goals (Completing a Level)
+  * The LevelManager
+  * Adding Additional Features to Your Level
+
+----
+
+= Defining A Level =
+In order to define a level, you need to first design a Level class. A level class should extend AbstractLevel. The developer must override the loadLevel() method within this level class to reflect the initial conditions of the level. Several convenience methods are provided as part of the LevelManager API
+
+
+Adding a tag, levelmanager.activelevel.adddefinition(tag)
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
