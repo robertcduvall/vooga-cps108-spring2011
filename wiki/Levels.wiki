@@ -1,11 +1,8 @@
 #summary (WORK IN PROGRESS) How to use the LevelManager, writing a supported level XML file, and extending the Level package to support new features.
-#labels Phase-Implementation
 
 = Introduction =
 
 In the VOOGA game engine, you have the option to use a pre-built Level system to facilitate use of multiple levels for your game. VOOGA provides a basic definition of a level, but this definition can be extended to support additional features for any type of game. *LevelManager* serves as the forward-facing API for the level package.
-
-----
 
 = The LevelManager =
 The LevelManager serves as the forward-facing API for the level package and is already integrated with VoogaGame. The LevelManager provides a construct to easily manage and move between different levels in your game. Initial level order is defined via the _resources.xml_ file using the {{{ <level> }}} tag and is automatically set via the ResourceManager in VoogaGame 
