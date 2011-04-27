@@ -33,7 +33,7 @@ public class SpriteVelocityC extends HeadingC implements ISpriteUpdater{
 	}
 	
 	public SpriteVelocityC(){
-		this(0.0,90.0);
+		this(0.0,0.0);
 	}
 	
 	@Override
@@ -66,7 +66,7 @@ public class SpriteVelocityC extends HeadingC implements ISpriteUpdater{
 	}
 
 	public double getXComponent() {
-		return myMagnitude*Math.cos(Math.toRadians(myAngle));
+		return myMagnitude*Math.cos(-Math.toRadians(myAngle));
 	}
 
 	public double getYComponent() {

@@ -2,7 +2,7 @@
 	<background type="color">red</background>
 	<collision_manager g1="asteroid" g2="bullet" class="games.asteroids.collisions.AsteroidBulletCollision" />
 	<collision_manager g1="asteroid" g2="ship" class="games.asteroids.collisions.AsteroidShipCollision" />
-	
+	<collision_manager g1="ship" g2="ship" class="games.asteroids.collisions.ShipEdgeCollision" />
 	
 	<sprite group="asteroid" class="games.asteroids.Asteroid" type="asteroid" image="asteroid" />
 	<sprite group="bullet" class="games.asteroids.Bullet" type="bullet" image="bullet" />

@@ -63,6 +63,8 @@ public class CollisionShapeC<T extends ICollisionShape> extends BasicComponent i
 
 	@Override
 	public void update(Sprite s, long elapsedTime) {
+	
+		myCollisionShape.setAngle(s.getAngle());
 		myCollisionShape.move(s.getX()-s.getOldX(),s.getY()-s.getOldY());
 	}
 
