@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class GameDatabase extends SQLite{
 
-	public GameDatabase() throws SQLException, ClassNotFoundException {
+	public GameDatabase(){
 		super();
 	}
 

@@ -17,6 +17,7 @@ public class LoginController implements ILoginController
 	private LoginViewer view;
 	public ArcadeController arcadeController;
 	public LoginModel model;
+	public VoogaUser myUser;
 	public List<String> gameReferences;
 	public GameDatabaseFactory factory;
 
@@ -39,21 +40,21 @@ public class LoginController implements ILoginController
 
 	@Override
 	public void updateWithInput(){
-		view.update(model.update(new InputSection()));	
+		view.update(model.createPrompts(new InputSection()));	
 	}
 	
 	public void updateWithInformationPanel(){
-		view.update(model.update(new ViewInformationSection()));
+		view.update(model.createPrompts(new ViewInformationSection()));
 	}
 	
 	@Override
-	public boolean processInformation(String[] prompt ,String[] text) {
-		 return model.process(prompt,text);
+	public boolean processInformation(String[] text) {
+		 return model.process(text);
 	}
 	
 	@Override
 	public boolean approveLogin(String user, String password) {
-		return model.verifyPassword(user, password);		
+		return model.verifyPassword(user, password);
 	}
 	
 /**
@@ -80,19 +81,14 @@ public class LoginController implements ILoginController
  */
 	@Override
 	public void exitLogin() throws Exception{
-		VoogaUser user = model.getVoogaUser();
-		String username = "";
-		for(UserPreference p : user.getPreferenceList()){
-			if(p.getPrompt().equals("UserName")){username = p.getInput();}
-		}
-		System.out.println(username);
-		arcadeController.swapToolbarButton(user);
-		System.out.println("I need indication!!!!!!");
+		myUser = model.getVoogaUser();
+		System.out.println("Username is " + myUser.getUsername());
+		arcadeController.swapToolbarButton(myUser);
 		view.setVisible(false);
 	}
 	@Override
 	public void logOut(){
-		model.logOut();
+		myUser.removeAllPreferences();
 		view.setVisible(false);
 	}
 }

@@ -28,47 +28,20 @@ public class GameDatabaseFactory {
 	}
 	
 	private void confirmDatabases(List<String> gameReferences) {
-		try {
-			userDatabase = new UserDatabase();
-		} catch (SQLException e4) {
-			e4.printStackTrace();
-		} catch (ClassNotFoundException e4) {
-			e4.printStackTrace();
-		}
+			
+		userDatabase = new UserDatabase();
 		for(String gameTitle : gameReferences){
-		try {
 			gameDatabase = new GameDatabase();
-		} catch (SQLException e3) {
-			e3.printStackTrace();
-		} catch (ClassNotFoundException e3) {
-			e3.printStackTrace();
-		}	
-		try {
-			gameDatabase.initialize(gameTitle, registrationResource.getStringArray("AbstractGamePreferences"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		List<String> allUsers = null;
-		try {
-			allUsers = userDatabase.retrieveTableColumn(USER_TABLE, "UserName");
-		} catch (SQLException e2) {
-			e2.printStackTrace();
-		}
-		List<String> currentUsers = null;
-		try {
-			currentUsers = gameDatabase.retrieveTableColumn(gameTitle, "UserName");
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+			try {
+				gameDatabase.initialize(gameTitle, registrationResource.getStringArray("AbstractGamePreferences"));
+			} catch (SQLException e) {e.printStackTrace();}
+
+		List<String> allUsers = userDatabase.retrieveTableColumn(USER_TABLE, "UserName");
+		List<String> currentUsers = gameDatabase.retrieveTableColumn(gameTitle, "UserName");
 		for(String user : allUsers){
 			if(currentUsers == null || currentUsers.contains(user)){
 				String[] temp = registrationResource.getStringArray("DefaultGamePreference");
-				
-				try {
-					gameDatabase.addNewUser(gameTitle,addUser(user,temp));
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+					gameDatabase.addRow(gameTitle,addUser(user,temp));
 			}
 			
 		}
