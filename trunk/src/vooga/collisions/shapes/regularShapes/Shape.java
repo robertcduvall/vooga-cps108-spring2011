@@ -1,13 +1,34 @@
 package vooga.collisions.shapes.regularShapes;
 
+import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 
 import vooga.collisions.shapes.Vertex;
 
 public abstract class Shape implements  IShape
 {
-	protected Vertex center;
+	@Override
+	public Double setAngle(double angle) {
+		return rotate(angle-myAngle);
+	}
 
+	@Override
+	public Double getAngle() {
+		return myAngle;
+	}
+	
+	@Override
+	public Double rotate(double dAngle) {
+		
+		shapeRotate(dAngle);
+		return myAngle = (myAngle + dAngle) %360;
+	}
+
+	protected abstract void shapeRotate(double dAngle);
+	
+
+	protected Vertex center;
+	protected double myAngle;
 	
 	/* (non-Javadoc)
      * @see vooga.collisions.shapes.regularShapes.IShape#getCenter()
@@ -34,6 +55,12 @@ public abstract class Shape implements  IShape
     public void setCenter (Point2D.Double center)
     {
     	this.center = new Vertex(center);
+    }
+    
+    @Override
+    public void setCenter (double x,double y)
+    {
+    	this.center = new Vertex(x,y);
     }
 
 }

@@ -27,6 +27,7 @@ public class Asteroids extends VoogaGame
         // TODO getResourceManager().getKeyMap().registerEventHandler(this);
 
         getLevelManager().loadLevel(0);
+        
     }
 
 

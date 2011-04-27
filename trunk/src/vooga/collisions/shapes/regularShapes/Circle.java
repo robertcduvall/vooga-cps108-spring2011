@@ -1,5 +1,6 @@
 package vooga.collisions.shapes.regularShapes;
 
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
@@ -282,14 +283,13 @@ public class Circle extends Shape implements java.awt.Shape
 
 	@Override
 	public void setLocation(double x, double y) {
-		// TODO Auto-generated method stub
-		
+		//do nothing
 	}
 
 
 	@Override
 	public java.lang.Double setAngle(double angle) {
-		
+		//do nothing
 		return angle;
 		
 	}
@@ -313,13 +313,21 @@ public class Circle extends Shape implements java.awt.Shape
 
 	@Override
 	public java.lang.Double getAngle() {
-		// TODO Auto-generated method stub
 		return 0.0;
 	}
 
 	@Override
 	public java.lang.Double rotate(double dAngle) {
-		// TODO Auto-generated method stub
 		return 0.0;
+	}
+
+	@Override
+	public void render(Graphics2D g) {
+		g.draw(this.asEllipse2D());
+	}
+
+	@Override
+	protected void shapeRotate(double dAngle) {
+		//do nothing
 	}
 }

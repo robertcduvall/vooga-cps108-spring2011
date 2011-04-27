@@ -7,7 +7,11 @@ import java.awt.geom.Point2D;
 public class LineMath
 {
 
-    static double findSlope (Line2D line)
+    public static final int P1 = 1;
+    public static final int P2 = 2;
+
+
+	static double findSlope (Line2D line)
     {
         return (line.getY2() - line.getY1()) / (line.getX2() - line.getX1());
     }
@@ -154,6 +158,51 @@ public class LineMath
 
 	public static double calcMagnitude(double dx, double dy) {
 		return Math.sqrt(dx*dx + dy*dy);
+	}
+
+
+
+	private static Line2D rotateAround(Line2D line, Point2D p, double dAngle) {
+		Line2D radius = new Line2D.Double(LineMath.findMidpoint(line), p);
+		return LineMath.moveCenterTo(line, LineMath.rotate(radius,dAngle).getP2());
+	}
+
+
+	private static Line2D moveCenterTo(Line2D line, Point2D nC) {
+		double dx = nC.getX() - LineMath.findMidpoint(line).getX();
+		double dy = nC.getY() - LineMath.findMidpoint(line).getY();
+		line.setLine(line.getP1().getX()+dx, 
+				line.getP1().getY()+dy,
+				line.getP2().getX()+dx, 
+				line.getP2().getY()+dy);
+		return line;
+	}
+
+
+	public static Line2D rotate(Line2D radius, double dAngle) {
+		double mag = LineMath.length(radius);
+		double nA = LineMath.findDirection(radius)+dAngle;
+		
+		return new Line2D.Double(radius.getX1(), 
+				radius.getY1(), 
+				radius.getX1()+mag*Math.cos(Math.toRadians(nA)),
+				radius.getY1()+mag*Math.sin(Math.toRadians(nA)));
+	}
+
+
+	private static double findDirection(Point2D p1, Point2D p2) {
+		return findDirection(new Line2D.Double(p1, p2));
+	}
+
+
+	public static double length(Point2D p1, Point2D p2) {
+		return LineMath.length(new Line2D.Double(p1,p2));
+	}
+
+
+	public static Line2D rotate(double x1, double y1, double x2,
+			double y2, Double angle) {
+		return rotate(new Line2D.Double(x1,y1,x2,y2), angle);
 	}
     
 

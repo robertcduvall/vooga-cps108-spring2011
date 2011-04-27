@@ -1,5 +1,8 @@
 package games.asteroids;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.Sprite;
@@ -11,7 +14,15 @@ import vooga.util.buildable.components.predefined.movement.Speed2DC;
 
 public class Ship extends Sprite
 {
-    private static final long serialVersionUID = 1L;
+    @Override
+	public void render(Graphics2D g) {
+		super.render(g);
+		g.setColor(Color.BLACK);
+		this.getCollisionShape().render(g);
+	}
+
+
+	private static final long serialVersionUID = 1L;
     private VoogaGame myGame;
 
 
