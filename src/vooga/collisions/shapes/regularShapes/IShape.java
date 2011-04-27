@@ -2,10 +2,11 @@ package vooga.collisions.shapes.regularShapes;
 
 import java.awt.geom.Point2D;
 
+import vooga.levels.IRenderable;
 import vooga.sprites.improvedsprites.interfaces.IRotation;
 
 
-public interface IShape extends IRotation
+public interface IShape extends IRotation, IRenderable
 {
 
     public abstract void move (double dx, double dy);
@@ -30,5 +31,7 @@ public interface IShape extends IRotation
 
 
     public abstract void setCenter (Point2D.Double center);
+    
+    public abstract void setCenter (double x, double y);
 
 }

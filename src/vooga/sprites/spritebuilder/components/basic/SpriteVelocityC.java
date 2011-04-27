@@ -74,7 +74,6 @@ public class SpriteVelocityC extends HeadingC implements ISpriteUpdater{
 	}
 
 	public double setByComponents(double vx, double vy) {
-		System.out.println(vx + "," + vy);
 		if ((myAngle =LineMath.findDirection(vx, vy)) == null)
 			myAngle = oldAngle;
 		else setAngle(LineMath.findDirection(vx, vy));

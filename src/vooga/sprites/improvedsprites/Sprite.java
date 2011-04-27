@@ -16,6 +16,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ import vooga.collisions.shapes.regularShapes.Polygon;
 import vooga.collisions.shapes.regularShapes.Quadrilateral;
 import vooga.sprites.improvedsprites.interfaces.IMobility;
 import vooga.sprites.improvedsprites.interfaces.IRenderXY;
+import vooga.sprites.improvedsprites.interfaces.IRotation;
 import vooga.sprites.improvedsprites.interfaces.ISprite;
 import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
 import vooga.sprites.spritebuilder.components.basic.SpriteVelocityC;
@@ -169,6 +171,9 @@ public class Sprite extends BaseSprite
     public Sprite (BufferedImage image, double x, double y, IComponent...comps){
         this(image,x,y);
         this.addComponents(comps);
+    }
+    public Sprite (double x, double y, IComponent...comps){
+        this(null,x,y, comps);
     }
 
     /**
@@ -361,25 +366,25 @@ public class Sprite extends BaseSprite
         	
             this.addComponent(new CollisionPolygonC(
             		new CollisionPolygon(new Vertex(this.getX(),this.getY()),
-                                  new Vertex(this.getX()+this.getHeight(), this.getY()),
-                                  new Vertex(this.getX(),this.getY() + this.getHeight()),
-                                  new Vertex(this.getX()+this.getHeight(),this.getY() + this.getHeight()))));
+                                  new Vertex(this.getX()+this.getWidth(), this.getY()),
+                                  new Vertex(this.getX()+this.getWidth(),this.getY() + this.getHeight()),
+                                  new Vertex(this.getX(),this.getY() + this.getHeight()))));
         }
 
         return (T) this.getComponentsWhichSubclass(CollisionShapeC.class).get(0).getCollisionShape();
     }
 
 
-    public <T extends IComponent> ArrayList<T> getComponentsWhichSubclass(Class<T> clazz) {
-    	ArrayList<T> comps = new ArrayList<T>();
+    public <T> ArrayList<T> getComponentsWhichSubclass(Class<T> clazz) {
+    	ArrayList<T> subs = new ArrayList<T>();
     	for (IComponent comp: myComponents){
-    		if (comp.getClass().getSuperclass().equals(clazz)){
-    			comps.add((T) comp);
+    		if (clazz.isAssignableFrom(comp.getClass())){
+    			subs.add((T) comp);
     		}
     	}
     	
     	
-		return comps;
+		return subs;
 	}
 
 
@@ -512,14 +517,14 @@ public class Sprite extends BaseSprite
     @Override
     public void render (Graphics2D g, int x, int y)
     {
-    	
+//    	Line2D shift = new Line2D.Double(LineMath.rotate(x, y, this.getCenterX(), this.getCenterY(), this.getAngle()).getP2(),new Point2D.Double(getCenterX(), this.getCenterY()) );
+//    	System.out.println(LineMath.findDirection(shift));
     	AffineTransform aTransform = new AffineTransform();
-        aTransform.translate((int) this.getX(), 
-                             (int) this.getY());
+        aTransform.translate((int) this.getX() +width/2, 
+                             (int) this.getY()+height/2);
         aTransform.rotate(Math.toRadians(this.getAngle()+90));
         aTransform.translate((int) -width/2, 
                              (int) -height/2);
-        
         g.drawImage(image.getScaledInstance(width, height, 0),aTransform,null);
         renderComponents(g, x, y);
     }
@@ -529,9 +534,8 @@ public class Sprite extends BaseSprite
 
 	protected void renderComponents (Graphics2D g, int x, int y)
     {
-        for (IComponent c: myComponents){
-            if (c instanceof IRenderXY)
-                ((IRenderXY) c).render(g,x,y);
+        for (IRenderXY r: getComponentsWhichSubclass(IRenderXY.class)){
+        	r.render(g,x,y);
         }
         
     }
@@ -743,9 +747,8 @@ public class Sprite extends BaseSprite
      */
     private void updateFromComponents (long elapsedTime)
     {
-        for (IComponent c: myComponents){
-            if (c instanceof ISpriteUpdater)
-                ((ISpriteUpdater) c).update(this, elapsedTime);
+        for (ISpriteUpdater c: getComponentsWhichSubclass(ISpriteUpdater.class)){
+              c.update(this, elapsedTime);
         }
     }
 
@@ -764,7 +767,8 @@ public class Sprite extends BaseSprite
 
 	@Override
 	public Double setAngle(double angle) {
-		return this.getComponent(SpriteVelocityC.class).setAngle(angle);
+		
+		return this.rotate(angle-this.getAngle());
 	}
 
 
@@ -776,7 +780,12 @@ public class Sprite extends BaseSprite
 
 	@Override
 	public Double rotate(double dAngle) {
-		return this.getComponent(SpriteVelocityC.class).rotate(dAngle);
+		for (IRotation r: this.getComponentsWhichSubclass(IRotation.class)){
+			r.rotate(dAngle);
+			
+		}
+
+		return this.getComponent(SpriteVelocityC.class).getAngle();
 	}
 
 	@Override

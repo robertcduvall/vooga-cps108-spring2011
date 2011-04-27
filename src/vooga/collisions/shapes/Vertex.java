@@ -1,6 +1,9 @@
 package vooga.collisions.shapes;
 
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+
+import vooga.util.math.LineMath;
 
 public class Vertex extends Point2D.Double implements Cloneable
 {
@@ -42,10 +45,15 @@ public class Vertex extends Point2D.Double implements Cloneable
 	{
 		return "X = " + this.getX() + " Y = " +this.getY();
 	}
-
-	public Vertex rotateAround(Point2D center, double dAngle) {
-		//TODO figure out how to rotate a point around a fixed axis
+	
+	public Point2D rotateAround(Point2D center, double dAngle) {
+		this.setLocation(rotateAround(this, center, dAngle));
 		return this;
+				
+	}
+
+	public static Point2D rotateAround(Point2D p, Point2D center, double dAngle) {
+		return LineMath.rotate(new Line2D.Double(center,p), dAngle).getP2();
 				
 	}
 

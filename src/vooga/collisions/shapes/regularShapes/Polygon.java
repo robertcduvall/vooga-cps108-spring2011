@@ -1,5 +1,6 @@
 package vooga.collisions.shapes.regularShapes;
 
+import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -185,12 +186,20 @@ public class Polygon extends Shape
 	}
 
 	@Override
-	public Double rotate(double dAngle) {
+	public void shapeRotate(double dAngle) {
 		
-		for (Vertex v: this.vertices)
+		for (Vertex v: this.vertices){
 			v.rotateAround(this.getCenter(), dAngle);
+		}
 		
-		return 0.0;
+	}
+
+	@Override
+	public void render(Graphics2D g) {
+		for (Line2D l: this.getSides()){
+			g.draw(l);
+		}
+		
 	}
 
 	
