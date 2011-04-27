@@ -4,6 +4,10 @@
 
 In the VOOGA game engine, you have the option to use a pre-built Level system to facilitate use of multiple levels for your game. VOOGA provides a basic definition of a level, but this definition can be extended to support additional features for any type of game. *LevelManager* serves as the forward-facing API for the level package.
 
+<wiki:toc max_depth="3" />
+
+----
+
 = The LevelManager =
 The LevelManager serves as the forward-facing API for the level package and is already integrated with VoogaGame. The LevelManager provides a construct to easily manage and move between different levels in your game. Initial level order is defined via the _resources.xml_ file using the {{{ <level> }}} tag and is automatically set via the ResourceManager in VoogaGame 
 
@@ -70,7 +74,7 @@ The level XML file is wrapped by a {{{ <level> }}} tag. Any content outside of t
 The {{{ <background> }}} tag provides a way to add backgrounds to be used on the level. It requires a type (presently only _Color_ and _Image_ are supported via the XML file) and an argument based on the type. For a color background, specify any Java recognized static color ([http://download.oracle.com/javase/1.4.2/docs/api/java/awt/Color.html Java Colors]). For an image background, specify an image name (if using the image-mapping feature of the ResourceManager) or an image filepath. It is also possible to manually create a background (required for unsupported types, such as Parallax) in the Level class:
 
 {{{
-Background background = new ParallaxBackground(new Background[]{new Background(), new Background()});
+Background background = new ParallaxBackground(new Background[]{bg1, bg2});
 addToBackgroundQueue(background);
 }}}
 
@@ -84,21 +88,34 @@ The {{{ <collision_manager> }}} tag has a dual function: specifying both Sprite 
 === {{{ <sprite> }}} ===
 The {{{ <sprite> }}} tag defines an archetype constructor for a specific type of sprite. It is recommended that you define archetype constructors for any sprite (except a player sprite) that you may use during the course of the level, though it is not required. Two sprite archetypes are defined above: an asteroid and a bullet. Archetypes are required to have 4 attributes and may optionally contain components. 
 
-An archetype is tied an existing class that extends *Sprite*. It also requires a sprite group for which sprites created using the archetype will automatically be added. The archetype is referred to by its type when used later:
+An archetype is tied an existing class that extends *Sprite*. Two are specified above, one with components and one without. Each sprite archetype defined is required to implement a standard constructor:
 
 {{{
-LevelManager.addArchetypeSprite("asteroid", 10, 10); 
+ExampleSprite(BufferedImage image, int x, int y)
+}}}
+
+It also requires a sprite group for which sprites created using the archetype will automatically be added. The archetype is referred to by its type when used to create a sprite:
+
+{{{
+LevelManager.addArchetypeSprite(String type, int x, int y, IComponent[] components); 
 }}} 
 
+The archetype also includes an image reference if using the image feature of the ResourceManager or a filepath if not. 
+
+
+=== {{{ <component> }}} ===
+The {{{ <component> }}} tag defines individual components to be attached to specific sprite archetype constructors. Archetypes defined with a component will automatically be constructed with an instance of the component and its parameters. It is tied to an existing class that defines the behavior of the component. If a component requires arguments, they are required to be specified as child tags and their respective values. All arguments must be defined in order as they would in a standard constructor. Multiple components can be specified for a single archetype sprite, but they must be specified for each individual archetype sprite.
+
+
+=== {{{ <goal> }}} ===
 
 
 
+----
 
-<sprite class="games.asteroids.Bullet" group="bullet" type="bullet" image="bullet" />
+ <goal class="games.asteroids.AllAsteroidsDestroyed" />
 
-
-
-The <strings> tag encloses key-value pairs of strings. For instance, foo would be the key to value bar in the example above. These are accessed via the Bundle object returned by the getBundle() method of ResourceManager?.
+The <strings> tag encloses key-value pairs of strings. For instance, foo would be the key to value bar in the example above. These are accessed via the Bundle object returned by the getBundle() method of ResourceManager.
 
 
 
