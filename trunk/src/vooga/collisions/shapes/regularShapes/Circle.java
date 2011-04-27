@@ -288,8 +288,9 @@ public class Circle extends Shape implements java.awt.Shape
 
 
 	@Override
-	public void setAngle(double angle) {
-		// TODO Auto-generated method stub
+	public java.lang.Double setAngle(double angle) {
+		
+		return angle;
 		
 	}
 
@@ -311,14 +312,14 @@ public class Circle extends Shape implements java.awt.Shape
 	}
 
 	@Override
-	public double getAngle() {
+	public java.lang.Double getAngle() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 0.0;
 	}
 
 	@Override
-	public double rotate(double dAngle) {
+	public java.lang.Double rotate(double dAngle) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 0.0;
 	}
 }

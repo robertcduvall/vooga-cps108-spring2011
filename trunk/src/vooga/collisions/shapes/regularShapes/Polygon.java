@@ -1,13 +1,7 @@
 package vooga.collisions.shapes.regularShapes;
 
-import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
 import java.awt.geom.Line2D;
-import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Line2D.Double;
 import java.util.ArrayList;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
@@ -167,9 +161,9 @@ public class Polygon extends Shape
 	 */
 
 	@Override
-	public void setAngle(double angle) 
+	public java.lang.Double setAngle(double angle) 
 	{
-		this.rotate(angle - this.angle);
+		return this.rotate(angle - this.angle);
 	}
 
 	public Point2D[] getPoints()
@@ -185,18 +179,18 @@ public class Polygon extends Shape
 	}
 
 	@Override
-	public double getAngle() {
+	public Double getAngle() {
 		//TODO how do you get the "angle" of the shape?
-		return 0;
+		return 0.0;
 	}
 
 	@Override
-	public double rotate(double dAngle) {
+	public Double rotate(double dAngle) {
 		
 		for (Vertex v: this.vertices)
 			v.rotateAround(this.getCenter(), dAngle);
 		
-		return 0;
+		return 0.0;
 	}
 
 	
