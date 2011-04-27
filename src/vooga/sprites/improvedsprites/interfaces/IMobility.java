@@ -64,10 +64,10 @@ public interface IMobility extends IRotation
      * The angle is as followed:
      * 
      * <pre>
-     *   0�   : moving to top (12 o'clock)
-     *   90�  : moving to right (3 o'clock)
-     *   180� : moving to bottom (6 o'clock)
-     *   270� : moving to left (9 o'clock)
+     *   0�   : moving to right (12 o'clock)
+     *   90�  : moving to top (3 o'clock)
+     *   180� : moving to left (6 o'clock)
+     *   270� : moving to bottom (9 o'clock)
      * </pre>
      */
     public abstract void setMovement (double speed, double angleDir);

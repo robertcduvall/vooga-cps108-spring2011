@@ -57,12 +57,28 @@ public class Ship extends Sprite
             @Override
             public void handleEvent (Object o)
             {
-                shoot();
+                shoot(getAngle());
             }
+        });
+        myGame.registerEventHandler("Input.User.Cheat", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+                powerupShoot();
+            }
+
+			
         });
     }
 
 
+    private void powerupShoot() {
+    	for (int i = 0; i < 360; i+= 10){
+    		shoot(this.getAngle()+i);
+    	}
+	}
+    
     public void damage ()
     {
         getComponent(HealthC.class).decrease(1.0);
@@ -72,10 +88,10 @@ public class Ship extends Sprite
     }
 
 
-    public void shoot ()
+    public void shoot (double angle)
     {
        Sprite bullet = myGame.getLevelManager().addArchetypeSprite("bullet", (int)getX(), (int)getY());
-       // TODO set bullet velocity based on current angle
+       bullet.setMovement(.05, angle);
     }
 
 
@@ -88,12 +104,12 @@ public class Ship extends Sprite
 
     public void turnLeft ()
     {
-       this.setAngle(getAngle() + 1);
+       this.setAngle(getAngle() - 1);
     }
 
 
     public void turnRight ()
     {
-        setAngle(getAngle() - 1);
+        setAngle(getAngle() + 1);
     }
 }

@@ -19,17 +19,17 @@ public class HeadingC extends BasicComponent implements IRotation{
 	}
 
 	@Override
-	public double getAngle(){
+	public Double getAngle(){
 		return myAngle;
 	}
 
 	@Override
-	public void setAngle(double angle) {
-		myAngle = angle;
+	public Double setAngle(double angle) {
+		return myAngle = angle;
 	}
 
 	@Override
-	public double rotate(double dAngle) {
+	public Double rotate(double dAngle) {
 		return myAngle = (myAngle + dAngle)%360;
 	}
 

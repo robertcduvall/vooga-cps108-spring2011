@@ -516,7 +516,7 @@ public class Sprite extends BaseSprite
     	AffineTransform aTransform = new AffineTransform();
         aTransform.translate((int) this.getX(), 
                              (int) this.getY());
-        aTransform.rotate(Math.toRadians(this.getAngle()-90));
+        aTransform.rotate(Math.toRadians(this.getAngle()+90));
         aTransform.translate((int) -width/2, 
                              (int) -height/2);
         
@@ -763,19 +763,19 @@ public class Sprite extends BaseSprite
 
 
 	@Override
-	public void setAngle(double angle) {
-		this.getComponent(SpriteVelocityC.class).setAngle(angle);
+	public Double setAngle(double angle) {
+		return this.getComponent(SpriteVelocityC.class).setAngle(angle);
 	}
 
 
 	@Override
-	public double getAngle() {
+	public Double getAngle() {
 		return this.getComponent(SpriteVelocityC.class).getAngle();
 	}
 
 
 	@Override
-	public double rotate(double dAngle) {
+	public Double rotate(double dAngle) {
 		return this.getComponent(SpriteVelocityC.class).rotate(dAngle);
 	}
 
@@ -806,6 +806,11 @@ public class Sprite extends BaseSprite
 
 	public double getAbsoluteSpeed() {
 		return LineMath.calcMagnitude(this.getHorizontalSpeed(), this.getVerticalSpeed());
+	}
+
+
+	public void setAbsoluteSpeed(double d) {
+		this.setMovement(d, this.getAngle());
 	}
 
 

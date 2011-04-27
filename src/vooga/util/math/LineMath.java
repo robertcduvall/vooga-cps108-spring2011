@@ -54,13 +54,13 @@ public class LineMath
      * @return the direction in degrees of this line if it were a vector in
      *         caresian system
      */
-    public static double findDirection (double dx, double dy)
+    public static Double findDirection (double dx, double dy)
     {
     	if (dx > 0) return Math.toDegrees(Math.atan(dy / dx));
         else if (dx < 0) return (Math.toDegrees(Math.atan(dy / dx)) + 180) % 360;
-        else if (dy < 0) return 270;
-        else if (dx > 0) return 90;
-        return 0; //when line has mag = 0
+        else if (dy < 0) return 270.0;
+        else if (dy > 0) return 90.0;
+        return null; //when line has mag = 0
     }
     
     /**
@@ -68,7 +68,7 @@ public class LineMath
      * @return the direction in degrees of this line if it were a vector in
      *         caresian system
      */
-    public static double findDirection (Line2D line)
+    public static Double findDirection (Line2D line)
     {
     	return findDirection(findDX(line),findDY(line));
         

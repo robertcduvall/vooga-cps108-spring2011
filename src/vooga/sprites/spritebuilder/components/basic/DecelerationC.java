@@ -10,11 +10,11 @@ public class DecelerationC extends AccelerationC {
 
 	@Override
 	public void update(Sprite s, long elapsedTime) {
-//		if (s.getAbsoluteSpeed() >= myDouble)
-//			super.update(s, elapsedTime);
-////		else
-////			s.setSpeed(0, 0);
-//		
+		if (s.getAbsoluteSpeed() >= -myDouble)
+			super.update(s, elapsedTime);
+		else
+			s.setSpeed(0, 0);
+		
 	}
 	
 	
