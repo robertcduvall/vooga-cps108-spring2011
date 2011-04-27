@@ -34,7 +34,7 @@ public class LevelManager implements VoogaState
     private int myNumOfLevelsCompleted;
 
     /** The players for this game */
-    private Collection<SpriteGroup<Sprite>> myPlayers;
+    private Collection<SpriteGroup<? extends Sprite>> myPlayers;
 
     /** The currently running game */
     private VoogaGame myGame;
@@ -64,10 +64,10 @@ public class LevelManager implements VoogaState
     /**
      * Sets the level map, vooga game AND players
      */
-    public LevelManager(VoogaGame game, SpriteGroup<Sprite>... players)
+    public LevelManager(VoogaGame game, SpriteGroup<? extends Sprite>... players)
     {
         myGame = game;
-        myPlayers = new ArrayList<SpriteGroup<Sprite>>();
+        myPlayers = new ArrayList<SpriteGroup<? extends Sprite>>();
         myPlayers.addAll(Arrays.asList(players));
         myEventManager = new EventManager();
         //myEventManager.setKeyMap(game.getResourceManager().getKeyMap()); // FIXME
@@ -259,7 +259,7 @@ public class LevelManager implements VoogaState
      * 
      * @param player sprite group to add
      */
-    public void addPlayer (SpriteGroup<Sprite> player)
+    public void addPlayer (SpriteGroup<? extends Sprite> player)
     {
         if(player == null) return;
         myPlayers.add(player);

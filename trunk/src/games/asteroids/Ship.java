@@ -101,7 +101,8 @@ public class Ship extends Sprite
 
     public void shoot (double angle)
     {
-       Sprite bullet = myGame.getLevelManager().addArchetypeSprite("bullet", (int)getX(), (int)getY());
+       Sprite bullet = myGame.getLevelManager().addArchetypeSprite("bullet", (int)getCenterX(), (int)getCenterY());
+       bullet.move(-bullet.getWidth(), -bullet.getHeight());
        bullet.setMovement(.05, angle);
     }
 

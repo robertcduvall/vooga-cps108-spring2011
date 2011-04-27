@@ -819,7 +819,10 @@ public class Sprite extends BaseSprite
 	}
 
 
-
+	public Point2D getCenterPoint(){
+		return new Point2D.Double(getCenterX(), getCenterY());
+		
+	}
 
 
 }
