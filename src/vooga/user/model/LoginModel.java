@@ -22,6 +22,7 @@ public class LoginModel
 	private LoginController controller;
 	private RegXParser myRegEx;
 	private SQLite database;
+	private String[] prompt;
 	private final static String USER_TABLE = "user";
 	//private List<Integer> buttons = new ArrayList<Integer>();
 	
@@ -29,6 +30,7 @@ public class LoginModel
 	private ResourceManager regExResource = new ResourceManager("vooga.user.resources.RegularExpressionResource"); 
 	
 	public LoginModel(LoginController pc){
+		prompt = registrationResource.getStringArray("AllPreferences");
 		user = new VoogaUser();
 		controller = pc;
 		myRegEx =new RegXParser();
@@ -38,110 +40,69 @@ public class LoginModel
 /**
  * Process is a method called by the controller that evaluates the information inputed by the user
  */
-	public boolean process(String[] prompt, String[] text){
+	public boolean process(String[] text){
 		for (int i = 0; i < text.length; i++) {
 			if (myRegEx.verifyRegex(prompt[i], text[i])) {
 				user.add(new UserPreference(prompt[i], text[i]));
-				update(new InputSection());
+				createPrompts(new InputSection());
 			} else {
 				controller.displayError("Incorrect Input Error " + regExResource.getString(prompt[i] + "X"));
 				user.removeAllPreferences();
 				return false;
 			}
 		}
-		try {
-			database = new UserDatabase();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 		
-//		
-//		try {
-//			database.update(USER_TABLE, prompt, text);
-//		} catch (SQLException e2) {
-//			e2.printStackTrace();
-//		}
-		try {
+			database = new UserDatabase();
 			if(database.retrieveTableColumn(USER_TABLE, "UserName").contains(text[0])){
 				controller.displayError("Username already in use");
 				user.removeAllPreferences();
 				database.close();
 				return false;
 			}
-		} catch (SQLException e2) {
-			e2.printStackTrace();
-		}
-		
-		try {
-			database.addNewUser(USER_TABLE, text);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		
-		try {
-			user.setUsername(database.retrieveExactEntry(USER_TABLE, text[0], "UserName"));
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		try {
+			database.addRow(USER_TABLE, text);
+			user.setUsername(database.retrieveBox(USER_TABLE, text[0], "UserName"));
 			database.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return true;
+			return true;
 	}
 
 /**
  * The update method reads in a resource file and composes the prompt questions in the GUI layout
  */
-	public LoginTemplate[] update(ISectionAddable section) {
-		int[] intArray = {-1};
-		String[] headerSections = registrationResource.getStringArray("Section");
+	public LoginTemplate[] createPrompts(ISectionAddable section) {
+		int[] intArray = { -1 };
+		String[] headerSections = registrationResource
+				.getStringArray("Section");
 		LoginTemplate[] updateInformation = new LoginTemplate[headerSections.length];
 		for (int p = 0; p < headerSections.length; p++) {
-			String[] sectionTitle = registrationResource.getStringArray(headerSections[p]);
+			String[] sectionTitle = registrationResource
+					.getStringArray(headerSections[p]);
 			String[] text = new String[sectionTitle.length];
 			if (p == headerSections.length - 1) {
-				int[] newButtonArray = {1,3,4};
+				int[] newButtonArray = { 1, 3, 4 };
 				intArray = newButtonArray;
 			}
 			for (int i = 0; i < sectionTitle.length; i++) {
 				text[i] = registrationResource.getString(sectionTitle[i]);
 			}
-			updateInformation[p] = new LoginTemplate(headerSections[p], text,null, intArray, section);
+			updateInformation[p] = new LoginTemplate(headerSections[p], text,
+					null, intArray, section);
 		}
 		return updateInformation;
 	}
 	
 	public void startEditPage(){
-		try {
 			database = new UserDatabase();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
 	 * This method uses the password map to determine if the user has a pre-existing VoogaUser account to operate through
 	 */
 	public boolean verifyPassword(String user, String password) {
-				try {
-					database = new UserDatabase();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-		try {
-			return password.matches(database.retrieveExactEntry(USER_TABLE, user, "Password"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
+			database = new UserDatabase();
+			if (password.matches(database.retrieveBox(USER_TABLE, user, "Password"))){
+				return updateUser(user);
+			}
+			return false;
 	}
 
 	/**
@@ -161,8 +122,14 @@ public class LoginModel
 		return user;
 	}
 	
-	public void logOut() {
-		user.removeAllPreferences();	
+	public boolean updateUser(String userName) {
+			database = new UserDatabase();	
+			String[] userPrefs = database.retrieveRow(USER_TABLE, userName, prompt);
+			for(int i = 0; i < prompt.length; i++){
+			user.add(new UserPreference(prompt[i], userPrefs[i]));
+			}
+			user.setUsername(userPrefs[0]);
+			return true;
 	}
 	
 	}

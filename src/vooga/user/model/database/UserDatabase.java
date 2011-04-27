@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class UserDatabase extends SQLite{
 
-	public UserDatabase() throws SQLException, ClassNotFoundException {
+	public UserDatabase(){
 		super();
 	}
 

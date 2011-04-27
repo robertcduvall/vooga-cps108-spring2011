@@ -25,14 +25,6 @@ public class EditButton extends AbstractLoginAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		pc.updateWithInput();
-		
-		try {
-			database = new UserDatabase();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		database = new UserDatabase();
 	}
-
 }
