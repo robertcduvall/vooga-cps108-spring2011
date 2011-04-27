@@ -5,27 +5,108 @@
 
 In the VOOGA game engine, you have the option to use a pre-built Level system to facilitate use of multiple levels for your game. VOOGA provides a basic definition of a level, but this definition can be extended to support additional features for any type of game. *LevelManager* serves as the forward-facing API for the level package.
 
-  * Defining a Level
-   * Level XML File
-    * Background
-    * Sprite Archetype
-    * Collision Managers / Sprite Groups
-    * Goals
-    * Instances / Sprite Pool
-   * Level Classes
-   * Goals (Completing a Level)
-  * The LevelManager
-  * Adding Additional Features to Your Level
-
 ----
 
+= The LevelManager =
+The LevelManager serves as the forward-facing API for the level package and is already integrated with VoogaGame. The LevelManager provides a construct to easily manage and move between different levels in your game. Initial level order is defined via the _resources.xml_ file using the {{{ <level> }}} tag and is automatically set via the ResourceManager in VoogaGame 
+
+{{{ 
+<level id="0" type="games.asteroids.Level">src/games/asteroids/resources/levels/level0.xml</level> 
+}}}
+
+Each level in _resources.xml_ requires 3 parameters: a numeric id, a class type, and a filepath to the individual level XML file. The id is used to refer to level within the LevelManager, which in turn allows the level order to be defined dynamically and gives the developer freedom to name the XML file as they see fit. The class type refers to the Level class that should be used with that particular XML file. Levels of a similar type would likely use the same Level class. The filepath gives the location of the level's XML file, which contains the definition of the level itself.
+
+As an alternative to defining levels in the _resources.xml_ file, the developer can choose to manually specify the level order by creating a map of numeric level ids to the level's specific information:
+
+{{{
+Map<Integer, String[]> levelOrder = new HashMap<Integer, String[]>();
+
+levelOrder.put(0, new String[]{"src/games/asteroids/resources/levels/level0.xml", "games.asteroids.Level"});
+
+LevelManager.setLevelOrder(levelOrder);
+}}}
+
+
+== Players ==
+Vooga defines a level as a group of sprites, sounds, backgrounds, and initial conditions for the level, but does not include players as part of that definition as they are considered objects that are inserted into the level and can persist from level to level, or rather, be inserted into another level. As such, players should be defined in code and added to the LevelManager using the {{{ addPlayer() }}} method. You have the option to define the name of the player group or use the default group name (player). Players are defined as a sprite group and can contain multiple sprites that are considered part of the same player. 
+
+
 = Defining A Level =
-In order to define a level, you need to first design a Level class. A level class should extend AbstractLevel. The developer must override the loadLevel() method within this level class to reflect the initial conditions of the level. Several convenience methods are provided as part of the LevelManager API
+In order to define a level, you need to first design a Level class. A level class should extend *AbstractLevel*. The developer must override the loadLevel() method within this level class to reflect the initial conditions of the level. Several convenience methods are provided as part of the LevelManager API to load your level in a variety of ways.
+
+== Level XML File ==
+To efficiently utilize the level package, you should define the contents of your level via an XML file. This provides an easy and convenient way to link pre-existing classes to the level system. An example XML file is given below and each of the tags are explained in detail. Note that you can either use standard tags ({{{ <tag> ... </tag> }}}) or self-closing tags ({{{ <tag ... /> }}}) and that all class types must be specified as fully-qualified class names. 
+
+{{{
+<level>
+        <background type="color">red</background>
+
+        <collision_manager class="games.asteroids.collisions.AsteroidBulletCollision" g1="asteroid" g2="player" />
+        
+        <sprite class="games.asteroids.Asteroid" group="asteroid" type="asteroid" image="asteroid">
+                 <component class="games.asteroids.BasicPhysicsC">
+                            <velocity>10</velocity>
+                            <mass>1</mass>
+                 </component>
+        </sprite>
+        <sprite class="games.asteroids.Bullet" group="bullet" type="bullet" image="bullet" />
+
+        <goal class="games.asteroids.AllAsteroidsDestroyed" />
+
+        <instance type="asteroid">
+                <x>100</x>
+                <y>100</y>
+                <damage>true</damage>
+        </instance>
+
+        <strings>
+                <totalAsteroids>50</totalAsteroids>
+        </strings>
+
+</level>
+}}}
+
+The level XML file is wrapped by a {{{ <level> }}} tag. Any content outside of this tag is ignored. Likewise, any tag that the XML parser does not have a definition for is ignored as well. Currently all supported tags are shown above in the code block.
+
+
+=== {{{ <background> }}} ===
+The {{{ <background> }}} tag provides a way to add backgrounds to be used on the level. It requires a type (presently only _Color_ and _Image_ are supported via the XML file) and an argument based on the type. For a color background, specify any Java recognized static color ([http://download.oracle.com/javase/1.4.2/docs/api/java/awt/Color.html Java Colors]). For an image background, specify an image name (if using the image-mapping feature of the ResourceManager) or an image filepath. It is also possible to manually create a background (required for unsupported types, such as Parallax) in the Level class:
+
+{{{
+Background background = new ParallaxBackground(new Background[]{new Background(), new Background()});
+addToBackgroundQueue(background);
+}}}
+
+To use one of these backgrounds on the level, add the convenience method {{{ LevelManager.useNextBackground() }}} within the {{{ loadLevel() }}} method of your Level class.
+
+
+=== {{{ <collision_manager> }}} ===
+The {{{ <collision_manager> }}} tag has a dual function: specifying both Sprite Groups as well as Collision Managers. It requires a class type for the collision manager that provides behavior for when two sprites collide. It also requires the developer to specify two sprite groups that are used in the collision manager. If the group does not yet exist, it is created and can be referenced again later. You also have the option to use the existing player group, as is shown above.
+
+
+=== {{{ <sprite> }}} ===
+The {{{ <sprite> }}} tag defines an archetype constructor for a specific type of sprite. It is recommended that you define archetype constructors for any sprite (except a player sprite) that you may use during the course of the level, though it is not required. Two sprite archetypes are defined above: an asteroid and a bullet. Archetypes are required to have 4 attributes and may optionally contain components. 
+
+An archetype is tied an existing class that extends *Sprite*. It also requires a sprite group for which sprites created using the archetype will automatically be added. The archetype is referred to by its type when used later:
+
+{{{
+LevelManager.addArchetypeSprite("asteroid", 10, 10); 
+}}} 
+
+
+
+
+
+<sprite class="games.asteroids.Bullet" group="bullet" type="bullet" image="bullet" />
+
+
+
+The <strings> tag encloses key-value pairs of strings. For instance, foo would be the key to value bar in the example above. These are accessed via the Bundle object returned by the getBundle() method of ResourceManager?.
+
+
+
+
+
 
 
 Adding a tag, levelmanager.activelevel.adddefinition(tag)
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
