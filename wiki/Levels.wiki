@@ -108,15 +108,44 @@ The {{{ <component> }}} tag defines individual components to be attached to spec
 
 
 === {{{ <goal> }}} ===
+The {{{ <goal> }}} tag defines a link to a class that contains the conditions to complete the level and what happens once the current level is complete (end game, next level, etc). A goal class must implement the interface *IGoal* and the methods {{{ checkCompletion() }}} and {{{ progress() }}} appropriately defined.
+
+
+=== {{{ <instance> }}} ===
+The {{{ <instance> }}} tag refers to a specific instance of a sprite you would like to add to your level. These instances are stored in the *SpritePool* temporarily until you choose to add them to your level via one of the convenience methods provided in LevelManager. An instance requires a type matching one of the sprite archetype constructors to be specified as well as the respective constructor arguments for that type of sprite. Instances are not required, but may be useful in defining initial conditions for a level.
+
+
+=== {{{ <strings> }}} ===
+The {{{ <strings> }}} tag is used to specify key-value pairs for data that may be used anywhere in the level, but don't particularly fit as part of any of the previous tags.
 
 
 
 ----
 
- <goal class="games.asteroids.AllAsteroidsDestroyed" />
+        <instance type="asteroid">
+                <x>100</x>
+                <y>100</y>
+                <damage>true</damage>
+        </instance>
+
+        <strings>
+                <totalAsteroids>50</totalAsteroids>
+        </strings>
 
 The <strings> tag encloses key-value pairs of strings. For instance, foo would be the key to value bar in the example above. These are accessed via the Bundle object returned by the getBundle() method of ResourceManager.
 
+
+ * Defining a Level		
+9	   * Level XML File		
+10	    * Background		
+11	    * Sprite Archetype		
+12	    * Collision Managers / Sprite Groups		
+13	    * Goals		
+14	    * Instances / Sprite Pool		
+15	   * Level Classes		
+16	   * Goals (Completing a Level)		
+17	  * The LevelManager		
+18	  * Adding Additional Features to Your Level
 
 
 
