@@ -88,5 +88,23 @@ public class PolygonMath
         
         return maxY;
     }
+    
+    public static Vertex[] createRegularPoylgon (Point2D center,
+            int sideNum,
+            double sideLength)
+ {
+
+		Vertex[] vertices = new Vertex[(int) sideNum];
+		double angle = Math.PI / sideNum + Math.PI/2;
+		for (int i = 0; i < vertices.length; i++) {
+			vertices[i] = new Vertex(sideLength * Math.cos(angle)
+					+ center.getX(), sideLength * Math.sin(angle)
+					+ center.getY());
+			angle += 2 * Math.PI / sideNum;
+
+		}
+
+		return vertices;
+}
 
 }

@@ -4,9 +4,17 @@ import java.awt.Dimension;
 
 import com.golden.gamedev.object.PlayField;
 
+import vooga.collisions.shapes.ShapeFactory;
+import vooga.collisions.shapes.collisionShapes.CollisionCircle;
+import vooga.collisions.shapes.collisionShapes.CollisionPolygon;
+import vooga.collisions.shapes.regularShapes.Polygon;
+import vooga.collisions.shapes.regularShapes.RegularPolygon;
 import vooga.core.VoogaGame;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
+import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 import vooga.sprites.spritegroups.SpriteGroup;
+import vooga.util.math.LineMath;
 
 
 public class Asteroids extends VoogaGame
@@ -25,7 +33,8 @@ public class Asteroids extends VoogaGame
         myShip = new Ship(this);
         myShip.setX(150);
         myShip.setY(150);
-        getLevelManager().addPlayer(new SpriteGroup<Sprite>("ship", myShip));
+        myShip.addComponent(new CollisionCircleC(myShip.getCenterPoint(), myShip.getWidth()));
+        getLevelManager().addPlayer(new SpriteGroup<Ship>("ship", myShip));
         
         // TODO getResourceManager().getKeyMap().registerEventHandler(this);
 

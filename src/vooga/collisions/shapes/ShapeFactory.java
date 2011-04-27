@@ -53,8 +53,17 @@ public class ShapeFactory
 		return new Polygon(polyCoords, width, height);
 	}
 
-
-	public static java.awt.Shape makeShape (BufferedImage image)
+	public static Polygon makePolygonFromImage(BufferedImage image){
+		return makeShapeFromGeneralPath(makeShape(image), image.getWidth(), image.getHeight());
+	}
+	
+	public static Polygon makePolygonFromImage(BufferedImage image, double x, double y){
+		Polygon p = makeShapeFromGeneralPath(makeShape(image), image.getWidth(), image.getHeight());
+			p.setLocation(x, y);
+		return p;
+	}
+	
+	public static GeneralPath makeShape (BufferedImage image)
 	{
 		int h = image.getHeight();
 		int w = image.getWidth();

@@ -277,8 +277,7 @@ public class Circle extends Shape implements java.awt.Shape
 
 	@Override
 	public void move(double dx, double dy) {
-		// TODO Auto-generated method stub
-		
+		super.center.move(dx, dy); 
 	}
 
 	@Override

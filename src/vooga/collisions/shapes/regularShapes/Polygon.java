@@ -19,12 +19,28 @@ public class Polygon extends Shape
 	protected double angle;
 	protected BoundingBox boundingBox;
 
+	public Polygon(Polygon p){
+		this(p.getPoints());
+	}
+	
 	public Polygon(Vertex ... verticies)
 	{
 		this.vertices = verticies.clone();
 		this.topLeftCorner = new Vertex(getTopLeftCorner(this.vertices));
 		center = updateCenter();
 		boundingBox = new BoundingBox(this.topLeftCorner, this.getWidth(), this.getHeight());
+	}
+	
+	/**
+	 * Use this constructor to create a regular polygon at point x,y with side num <sideNum> and side length <sideLength>
+	 * @param x
+	 * @param y
+	 * @param sideNum
+	 * @param sideLength
+	 */
+	public Polygon(double x, double y, int sideNum,
+			double sideLength) {
+		 this(PolygonMath.createRegularPoylgon(new Point2D.Double(x,y), sideNum, sideLength));
 	}
 
 	public Polygon(Point2D ... vertices)
