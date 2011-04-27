@@ -143,6 +143,15 @@ public abstract class CollisionManager<T extends Sprite, S extends Sprite>
 		if (Group1.getName().equals(name)) Group1.clear();
 		else if(Group2.getName().equals(name)) Group2.clear();
 	}
+
+
+	public void setSpriteGroup1(SpriteGroup<T> sg) {
+		Group1 = sg;
+		
+	}
 	
-	
+	public void setSpriteGroup2(SpriteGroup<S> sg) {
+		Group2 = sg;
+		
+	}
 }

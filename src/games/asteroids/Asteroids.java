@@ -1,6 +1,9 @@
 package games.asteroids;
 
 import java.awt.Dimension;
+
+import com.golden.gamedev.object.PlayField;
+
 import vooga.core.VoogaGame;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
@@ -27,7 +30,6 @@ public class Asteroids extends VoogaGame
         // TODO getResourceManager().getKeyMap().registerEventHandler(this);
 
         getLevelManager().loadLevel(0);
-        
     }
 
 

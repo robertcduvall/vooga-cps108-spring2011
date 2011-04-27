@@ -161,11 +161,6 @@ public class Polygon extends Shape
 	}
 	 */
 
-	@Override
-	public java.lang.Double setAngle(double angle) 
-	{
-		return this.rotate(angle - this.angle);
-	}
 
 	public Point2D[] getPoints()
 	{
@@ -179,11 +174,6 @@ public class Polygon extends Shape
 		return false;
 	}
 
-	@Override
-	public Double getAngle() {
-		//TODO how do you get the "angle" of the shape?
-		return 0.0;
-	}
 
 	@Override
 	public void shapeRotate(double dAngle) {

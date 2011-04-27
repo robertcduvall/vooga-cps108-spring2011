@@ -32,10 +32,9 @@ public class PolygonPolygonFinder extends IntersectionFinder<Polygon, Polygon>
     {
         for(Line2D L1: s1.getSides()){
             for(Line2D L2: s2.getSides()){
-                if (L1.intersectsLine(L2))
-                    System.out.println("hi");
-
+                if (L1.intersectsLine(L2)){
                     return true;
+                }
             }
         }
         return false;
