@@ -6,6 +6,8 @@ import vooga.levels.util.PoolDeferredConstructor;
 
 import com.golden.gamedev.object.Background;
 
+import vooga.physics.PhysicsManager;
+import vooga.physics.VoogaPhysicsMediator;
 import vooga.resources.bundle.Bundle;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
@@ -45,6 +47,9 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     /** The local string bundle for the level. */
     private Bundle myBundle;
     
+    /** The physics manager which stores the forces which affect all objects in the level. */
+    private PhysicsManager myPhysics;
+    
     public AbstractLevel (Collection<SpriteGroup<Sprite>> players, VoogaGame game)
     {
         super();
@@ -57,6 +62,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         myMusic = new LinkedList<String>();
         mySpritePool = new SpritePool();
         myBundle = new Bundle();
+        myPhysics = new PhysicsManager();
     }
 
 
@@ -273,6 +279,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     @Override
     public void update (long elapsedTime)
     {
+        VoogaPhysicsMediator.applyPhysicsToSpriteGroups(getAllSpriteGroups(), myPhysics, elapsedTime);
         super.update(elapsedTime);
         checkCompletion();      
     }
