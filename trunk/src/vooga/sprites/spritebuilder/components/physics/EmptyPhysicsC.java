@@ -113,6 +113,9 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
     
     @Override
     public void update(Sprite s, long elapsedTime) {
+        if (s.carriesComponent(LocalForceC.class)){
+            applyForces(s.getComponent(LocalForceC.class).getLocalForces(), elapsedTime);
+        }
         Velocity oldVelocity = getSpriteVelocityForPhysics(s);
         oldVelocity.addVector(deltaVelocity);
         setSpriteVelocityForPhysics(s, oldVelocity);
