@@ -14,7 +14,7 @@ import vooga.physics.forceBehavior.EmptyForceBehavior;
  * @author Nathan Klug
  * 
  */
-public class GeneralPhysicsC extends EmptyPhysicsC{
+public abstract class GeneralPhysicsC extends EmptyPhysicsC{
     
     /**
      * Constructor has been made private to mask the parent constructor.
