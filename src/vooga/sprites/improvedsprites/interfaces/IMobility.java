@@ -123,10 +123,18 @@ public interface IMobility extends IRotation
     public abstract double getAbsoluteSpeed();
     
     /**
-     * Accelerate this object by a given amount
+     * Accelerate this object by a given amount, in the indicated direction
      * @param i
      * @return
      */
 	double accelerate(double mag, double dir);
+
+	
+	/**
+     * Accelerate this object by a given amount, in the direction it is currently facing.
+     * @param i
+     * @return
+     */
+	double accelerate(double mag);
     
 }
