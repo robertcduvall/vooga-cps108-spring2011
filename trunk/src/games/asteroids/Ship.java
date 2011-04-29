@@ -109,7 +109,7 @@ public class Ship extends Sprite
 
     public void thrust ()
     {
-        super.accelerate(0.001, this.getAngle());
+        super.accelerate(0.005);
         //TODO PHYSICS!
     }
 

@@ -784,6 +784,13 @@ public class Sprite extends BaseSprite
 		return this.getComponent(SpriteVelocityC.class).rotate(dAngle);
 	}
 
+	
+	@Override
+	public double accelerate(double mag) {
+		return this.accelerate(mag, this.getAngle());
+	}
+	
+	
 	@Override
 	public double accelerate(double mag, double dir) {
 		return this.addSpeed(mag*Math.cos(Math.toRadians(dir)), mag*Math.sin(Math.toRadians(dir)));
