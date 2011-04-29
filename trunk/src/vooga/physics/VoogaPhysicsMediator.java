@@ -3,10 +3,11 @@ package vooga.physics;
 import java.awt.Point;
 import java.util.Collection;
 import java.util.List;
+import vooga.physics.forceGenerator.AbstractForceGenerator;
 import vooga.physics.util.Force;
 import vooga.physics.util.VectorField;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.physics.EmptyPhysicsC;
+import vooga.sprites.spritebuilder.components.physics.AbstractPhysicsC;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.math.Angle;
 
@@ -35,11 +36,11 @@ public class VoogaPhysicsMediator {
      */
     public static void collision(Sprite sprite1, Sprite sprite2, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         if (isOn()) {
-            List<EmptyPhysicsC> physicsComponents1 = sprite1.getComponentsWhichSubclass(EmptyPhysicsC.class);
-            List<EmptyPhysicsC> physicsComponents2 = sprite2.getComponentsWhichSubclass(EmptyPhysicsC.class);
+            List<AbstractPhysicsC> physicsComponents1 = sprite1.getComponentsWhichSubclass(AbstractPhysicsC.class);
+            List<AbstractPhysicsC> physicsComponents2 = sprite2.getComponentsWhichSubclass(AbstractPhysicsC.class);
 
-            for (EmptyPhysicsC componentFromSprite1 : physicsComponents1) {
-                for (EmptyPhysicsC componentFromSprite2 : physicsComponents2) {
+            for (AbstractPhysicsC componentFromSprite1 : physicsComponents1) {
+                for (AbstractPhysicsC componentFromSprite2 : physicsComponents2) {
                     componentFromSprite1.applyCollision(componentFromSprite2.getCollisionBehavior(), angleOfImpact,
                             pointOfImpact, coefficientOfRestitution);
                 }
@@ -60,7 +61,6 @@ public class VoogaPhysicsMediator {
     public static void applyPhysicsToSpriteGroups(Collection<SpriteGroup<Sprite>> spriteGroups, PhysicsManager physics, long lengthOfApplication) {
         if (isOn()) {
             applyForcesToSpriteGroups(spriteGroups, physics.getActiveWorldForces(), lengthOfApplication);
-            applyFieldsToSpriteGroups(spriteGroups, physics.getActiveVectorFields(), lengthOfApplication);
         }
     }
 
@@ -75,9 +75,9 @@ public class VoogaPhysicsMediator {
      * @param lengthOfApplication
      *            the length of time the force is applied for
      */
-    public static void applyForcesToSpriteGroups(Collection<SpriteGroup<Sprite>> spriteGroups, Collection<Force> forces, long lengthOfApplication) {
+    public static void applyForcesToSpriteGroups(Collection<SpriteGroup<Sprite>> spriteGroups, Collection<AbstractForceGenerator> forces, long lengthOfApplication) {
         if (isOn()) {
-            for (Force force : forces) {
+            for (AbstractForceGenerator force : forces) {
                 for (SpriteGroup<Sprite> spriteGroup : spriteGroups) {
                     for (Sprite spriteInGroup : spriteGroup.getSprites()) {
                         applyForceToSprite(spriteInGroup, force, lengthOfApplication);
@@ -97,7 +97,7 @@ public class VoogaPhysicsMediator {
      * @param lengthOfApplication
      *            the length of time the force is applied for
      */
-    public static void applyForcesToSprites(Collection<Sprite> sprites, Collection<Force> forces, long lengthOfApplication) {
+    public static void applyForcesToSprites(Collection<Sprite> sprites, Collection<AbstractForceGenerator> forces, long lengthOfApplication) {
         if (isOn()) {
             for (Sprite sprite : sprites) {
                 applyForcesToSprite(sprite, forces, lengthOfApplication);
@@ -115,10 +115,10 @@ public class VoogaPhysicsMediator {
      * @param lengthOfApplication
      *            the length of time the force is applied for
      */
-    public static void applyForcesToSprite(Sprite sprite, Collection<Force> forces, long lengthOfApplication) {
-        List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
+    public static void applyForcesToSprite(Sprite sprite, Collection<AbstractForceGenerator> forces, long lengthOfApplication) {
+        List<AbstractPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(AbstractPhysicsC.class);
 
-        for (EmptyPhysicsC component : physicsComponents) {
+        for (AbstractPhysicsC component : physicsComponents) {
             component.applyForces(forces, lengthOfApplication);
         }
     }
@@ -133,91 +133,14 @@ public class VoogaPhysicsMediator {
      * @param lengthOfApplication
      *            the length of time the force is applied for
      */
-    public static void applyForceToSprite(Sprite sprite, Force force, long lengthOfApplication) {
-        List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
+    public static void applyForceToSprite(Sprite sprite, AbstractForceGenerator force, long lengthOfApplication) {
+        List<AbstractPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(AbstractPhysicsC.class);
 
-        for (EmptyPhysicsC component : physicsComponents) {
+        for (AbstractPhysicsC component : physicsComponents) {
             component.applyForce(force, lengthOfApplication);
         }
     }
     
-    /**
-     * Applies a collection of fields to a collection of sprite groups. Iterates over fields
-     * first, so if there are none defined, saves a lot of computation.
-     * 
-     * @param spriteGroups
-     *            a collection of spriteGroups
-     * @param fields
-     *            a collection of fields
-     * @param lengthOfApplication
-     *            the length of time the field is applied for
-     */
-    public static void applyFieldsToSpriteGroups(Collection<SpriteGroup<Sprite>> spriteGroups, Collection<VectorField> fields, long lengthOfApplication) {
-        if (isOn()) {
-            for (VectorField field : fields) {
-                for (SpriteGroup<Sprite> spriteGroup : spriteGroups) {
-                    for (Sprite spriteInGroup : spriteGroup.getSprites()) {
-                        applyFieldToSprite(spriteInGroup, field, lengthOfApplication);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Applies a collection of fields to a collection of sprites
-     * 
-     * @param sprites
-     *            a collection of sprites
-     * @param field
-     *            a collection of fields
-     * @param lengthOfApplication
-     *            the length of time the field is applied for
-     */
-    public static void applyFieldsToSprites(Collection<Sprite> sprites, Collection<VectorField> fields, long lengthOfApplication) {
-        if (isOn()) {
-            for (Sprite sprite : sprites) {
-                applyFieldsToSprite(sprite, fields, lengthOfApplication);
-            }
-        }
-    }
-
-    /**
-     * Applies a collection of fields to a single sprite
-     * 
-     * @param sprites
-     *            a collection of sprites
-     * @param fields
-     *            a collection of fields
-     * @param lengthOfApplication
-     *            the length of time the field is applied for
-     */
-    public static void applyFieldsToSprite(Sprite sprite, Collection<VectorField> fields, long lengthOfApplication) {
-        List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
-
-        for (EmptyPhysicsC component : physicsComponents) {
-            component.applyFields(fields, lengthOfApplication);
-        }
-    }
-    
-    /**
-     * Applies a field to a single sprite
-     * 
-     * @param sprite
-     *            a sprite
-     * @param field
-     *            a field
-     * @param lengthOfApplication
-     *            the length of time the field is applied for
-     */
-    public static void applyFieldToSprite(Sprite sprite, VectorField field, long lengthOfApplication) {
-        List<EmptyPhysicsC> physicsComponents = sprite.getComponentsWhichSubclass(EmptyPhysicsC.class);
-
-        for (EmptyPhysicsC component : physicsComponents) {
-            component.applyField(field, lengthOfApplication);
-        }
-    }
-
     /**
      * Is physics on?
      */

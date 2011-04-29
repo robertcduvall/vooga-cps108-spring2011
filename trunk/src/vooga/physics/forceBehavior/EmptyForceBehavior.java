@@ -1,7 +1,7 @@
 package vooga.physics.forceBehavior;
 
 import vooga.physics.AbstractBehavior;
-import vooga.physics.util.Force;
+import vooga.physics.forceGenerator.AbstractForceGenerator;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
 /**
@@ -18,7 +18,7 @@ public class EmptyForceBehavior extends AbstractBehavior{
      * @param time the time the force is acting
      * @return the change in velocity
      */
-    public Velocity forceToVelocityChange(Force force, long time){
+    public Velocity forceToVelocityChange(AbstractForceGenerator force, long time){
         return new Velocity(0,new Angle());
     }
 }

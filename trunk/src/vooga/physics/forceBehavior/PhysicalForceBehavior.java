@@ -1,5 +1,6 @@
 package vooga.physics.forceBehavior;
 
+import vooga.physics.forceGenerator.AbstractForceGenerator;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 
@@ -9,16 +10,21 @@ import vooga.physics.util.Velocity;
  * @author Nathan Klug
  *
  */
-public class NewtonianForceBehavior extends EmptyForceBehavior {
+public class PhysicalForceBehavior extends EmptyForceBehavior {
 
     protected double myMass;
     
-    public NewtonianForceBehavior(double mass){
+    public PhysicalForceBehavior(double mass){
         myMass = mass;
     }
     
+    public double getMass(){
+        return myMass;
+    }
+    
     @Override
-    public Velocity forceToVelocityChange(Force force, long time) {
+    public Velocity forceToVelocityChange(AbstractForceGenerator forceGen, long time) {
+        Force force = forceGen.getForce(this);
         return new Velocity(force.getMagnitude() * time / myMass, force.getAngle());
     }
 

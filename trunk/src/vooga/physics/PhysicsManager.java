@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import vooga.physics.forceBehavior.EmptyForceBehavior;
+import vooga.physics.forceGenerator.AbstractForceGenerator;
 import vooga.physics.util.Force;
 import vooga.physics.util.VectorField;
 import vooga.physics.util.Velocity;
@@ -20,16 +21,12 @@ import vooga.util.math.Angle;
  */
 public class PhysicsManager {
 
-    private Set<Force> worldForces;
-    private Set<VectorField> vectorFields;
-    private Set<Force> activeForces;
-    private Set<VectorField> activeFields;
+    private Set<AbstractForceGenerator> worldForces;
+    private Set<AbstractForceGenerator> activeForces;
 
     public PhysicsManager() {
-        worldForces = new HashSet<Force>();
-        vectorFields = new HashSet<VectorField>();
-        activeForces = new HashSet<Force>();
-        activeFields = new HashSet<VectorField>();
+        worldForces = new HashSet<AbstractForceGenerator>();
+        activeForces = new HashSet<AbstractForceGenerator>();
     }
 
     /**
@@ -37,7 +34,7 @@ public class PhysicsManager {
      * 
      * @param force
      */
-    public void addGlobalForce(Force force, boolean isActive) {
+    public void addGlobalForce(AbstractForceGenerator force, boolean isActive) {
         worldForces.add(force);
         setActivity(force, isActive);
     }
@@ -47,34 +44,13 @@ public class PhysicsManager {
      * 
      * @param force
      */
-    public void removeGlobalForce(Force force) {
+    public void removeGlobalForce(AbstractForceGenerator force) {
         worldForces.remove(force);
         if (activeForces.contains(force))
             activeForces.remove(force);
     }
-
-    /**
-     * Adds a point field to the collection of worldwide fields
-     * 
-     * @param field
-     */
-    public void addGlobalPointField(VectorField field, boolean isActive) {
-        vectorFields.add(field);
-        setActivity(field, isActive);
-    }
-
-    /**
-     * Removes a point field from the collection of worldwide point fields.
-     * 
-     * @param field
-     */
-    public void removeGlobalPointField(VectorField field) {
-        vectorFields.remove(field);
-        if (activeFields.contains(field))
-            activeFields.remove(field);
-    }
     
-    public void setActivity(Force force, boolean activity){
+    public void setActivity(AbstractForceGenerator force, boolean activity){
         if (!worldForces.contains(force)){
             //Throw warning?
         }
@@ -85,24 +61,12 @@ public class PhysicsManager {
                 activeForces.remove(force);
         }  
     }
-    
-    public void setActivity(VectorField field, boolean activity){
-        if (!vectorFields.contains(field)){
-            //Throw warning?
-        }
-        else {
-            if (activity)
-                vectorFields.add(field);
-            else
-                vectorFields.remove(field);
-        }  
-    }
 
     /**
      * Gets all of the forces in this manager
      * @return
      */
-    public Collection<Force> getWorldForces() {
+    public Collection<AbstractForceGenerator> getWorldForces() {
         return worldForces;
     }
     
@@ -110,30 +74,14 @@ public class PhysicsManager {
      * Gets all of the forces in this manager
      * @return
      */
-    public Collection<Force> getActiveWorldForces() {
+    public Collection<AbstractForceGenerator> getActiveWorldForces() {
         return activeForces;
     }
 
-    /**
-     * Gets all of the vector fields in this manager
-     * @return
-     */
-    public Collection<VectorField> getVectorFields() {
-        return vectorFields;
-    }
-    
-    /**
-     * Gets all of the vector fields in this manager
-     * @return
-     */
-    public Collection<VectorField> getActiveVectorFields() {
-        return activeFields;
-    }
+
     
     public void clear(){
-        worldForces = new HashSet<Force>();
-        vectorFields = new HashSet<VectorField>();
-        activeForces = new HashSet<Force>();
-        activeFields = new HashSet<VectorField>();
+        worldForces = new HashSet<AbstractForceGenerator>();
+        activeForces = new HashSet<AbstractForceGenerator>();
     }
 }

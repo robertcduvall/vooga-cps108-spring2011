@@ -1,5 +1,6 @@
 package vooga.physics.forceBehavior;
 
+import vooga.physics.forceGenerator.AbstractForceGenerator;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
@@ -25,9 +26,10 @@ public class FrictionForceBehavior extends EmptyForceBehavior {
     }
 
     @Override
-    public Velocity forceToVelocityChange(Force force, long time) {
+    public Velocity forceToVelocityChange(AbstractForceGenerator forceGen, long time) {
         // TODO: Check calculation
         if (collisionOccurring) {
+            Force force = forceGen.getForce(this);
             double normalMagnitude = force.getPerpComponent(mySurfaceTangent);
             if (normalMagnitude < 0) {
                 // Normal magnitude is negative so surfaceTangent is in
