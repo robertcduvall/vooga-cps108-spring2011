@@ -2,6 +2,8 @@ package vooga.physics.forceBehavior;
 
 import java.awt.Point;
 
+import vooga.physics.forceGenerator.AbstractForceGenerator;
+import vooga.physics.forceGenerator.PointForceGenerator;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
@@ -37,10 +39,11 @@ public class RotationalForceBehavior extends EmptyForceBehavior {
      * @param pointOfApplication
      * @param elapsedTime
      */
-    public Velocity applyRotationalForce(Force force, Point pointOfApplication, long elapsedTime) {
-        MathVector radius = new MathVector(myCenter, pointOfApplication);
+    public Velocity forceToVelocityChange(PointForceGenerator forceGen, long time) {
+        Force force = forceGen.getForce(this);
+        MathVector radius = new MathVector(myCenter, forceGen.getLocation());
         Angle theta = radius.getVectorAngle(force);
-        double deltaOmega = force.getMagnitude() * -theta.sin() * elapsedTime / myMass
+        double deltaOmega = force.getMagnitude() * -theta.sin() * time / myMass
         / radius.getMagnitude();
         return new Velocity(deltaOmega, new Angle(0));
     }

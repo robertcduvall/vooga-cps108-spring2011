@@ -6,7 +6,7 @@ import java.util.List;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.physics.EmptyPhysicsC;
+import vooga.sprites.spritebuilder.components.physics.AbstractPhysicsC;
 import vooga.util.math.Angle;
 
 /**
