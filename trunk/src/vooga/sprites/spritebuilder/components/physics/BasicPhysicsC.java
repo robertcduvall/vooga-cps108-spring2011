@@ -1,8 +1,7 @@
 package vooga.sprites.spritebuilder.components.physics;
 
 import vooga.physics.collisionBehavior.PhysicalCollisionBehavior;
-import vooga.physics.fieldBehavior.EmptyFieldBehavior;
-import vooga.physics.forceBehavior.NewtonianForceBehavior;
+import vooga.physics.forceBehavior.PhysicalForceBehavior;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.BasicComponent;
@@ -14,7 +13,7 @@ import vooga.util.buildable.components.BasicComponent;
  * @author Nathan Klug
  * 
  */
-public class BasicPhysicsC extends GeneralPhysicsC{
+public class BasicPhysicsC extends AbstractPhysicsC{
 
     /**
      * Creates a BasicPhysicsC with given velocity and mass and the default 'on' state.
@@ -32,7 +31,7 @@ public class BasicPhysicsC extends GeneralPhysicsC{
      * @param isOn
      */
     public BasicPhysicsC(Velocity velocity, double mass, boolean isOn) {
-        super(new NewtonianForceBehavior(mass),new EmptyFieldBehavior(), new PhysicalCollisionBehavior(velocity, mass), isOn);
+        super(new PhysicalForceBehavior(mass), new PhysicalCollisionBehavior(velocity, mass), isOn);
     }
 
     @Override

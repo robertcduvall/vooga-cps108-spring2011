@@ -3,7 +3,6 @@ package vooga.sprites.spritebuilder.components.physics;
 import java.awt.Point;
 
 import vooga.physics.collisionBehavior.EmptyCollisionBehavior;
-import vooga.physics.fieldBehavior.EmptyFieldBehavior;
 import vooga.physics.forceBehavior.RotationalForceBehavior;
 import vooga.sprites.improvedsprites.Sprite;
 
@@ -17,7 +16,7 @@ import vooga.sprites.improvedsprites.Sprite;
  * @author Anne Weng
  *
  */
-public class RotationalPhysicsC extends GeneralPhysicsC {
+public class RotationalPhysicsC extends AbstractPhysicsC {
 
     /**
      * Calls the constructor with default state 'on'.
@@ -36,8 +35,7 @@ public class RotationalPhysicsC extends GeneralPhysicsC {
      * @param isOn
      */
     public RotationalPhysicsC(double mass, Point center, boolean isOn){
-        super(new RotationalForceBehavior(mass, center),
-                new EmptyFieldBehavior(), new EmptyCollisionBehavior(), isOn);
+        super(new RotationalForceBehavior(mass, center),new EmptyCollisionBehavior(), isOn);
     }
     
     /**

@@ -1,7 +1,6 @@
 package vooga.sprites.spritebuilder.components.physics;
 
 import vooga.physics.collisionBehavior.MovableCollisionBehavior;
-import vooga.physics.fieldBehavior.EmptyFieldBehavior;
 import vooga.physics.forceBehavior.EmptyForceBehavior;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
@@ -13,7 +12,8 @@ import vooga.util.buildable.components.BasicComponent;
  * @author Anne Weng
  * 
  */
-public class VelocityC extends GeneralPhysicsC{
+public class VelocityC extends AbstractPhysicsC{
+    
 
     /**
      * Creates a VelocityPhysicsC with given velocity and mass and the default 'on' state.
@@ -31,7 +31,7 @@ public class VelocityC extends GeneralPhysicsC{
      * @param isOn
      */
     public VelocityC(Velocity velocity, boolean isOn) {
-        super(new EmptyForceBehavior(), new EmptyFieldBehavior(), new MovableCollisionBehavior(velocity), isOn);
+        super(new EmptyForceBehavior(), new MovableCollisionBehavior(velocity), isOn);
     }
 
     @Override

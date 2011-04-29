@@ -4,9 +4,9 @@ import java.awt.Point;
 
 import vooga.physics.collisionBehavior.EmptyCollisionBehavior;
 import vooga.physics.collisionBehavior.FrictionCollisionBehavior;
-import vooga.physics.fieldBehavior.EmptyFieldBehavior;
 import vooga.physics.forceBehavior.FrictionForceBehavior;
 import vooga.physics.forceBehavior.RotationalForceBehavior;
+import vooga.physics.forceGenerator.AbstractForceGenerator;
 import vooga.physics.util.Force;
 import vooga.sprites.improvedsprites.Sprite;
 
@@ -20,7 +20,7 @@ import vooga.sprites.improvedsprites.Sprite;
  * @author Nathan Klug
  *
  */
-public class FrictionPhysicsC extends GeneralPhysicsC {
+public class FrictionPhysicsC extends AbstractPhysicsC {
     
     /**
      * Calls the constructor with default state 'on'.
@@ -39,12 +39,11 @@ public class FrictionPhysicsC extends GeneralPhysicsC {
      * @param isOn
      */
     public FrictionPhysicsC(double mass, double coefficientOfFriction, boolean isOn){
-        super(new FrictionForceBehavior(coefficientOfFriction, mass),
-                new EmptyFieldBehavior(), new FrictionCollisionBehavior(), isOn);
+        super(new FrictionForceBehavior(coefficientOfFriction, mass), new FrictionCollisionBehavior(), isOn);
     }
     
     @Override
-    public void applyForce(Force force, long lengthOfApplication) {
+    public void applyForce(AbstractForceGenerator force, long lengthOfApplication) {
         Object[] collisionProperties = getCollisionBehavior().getFields();
         if ((Boolean) collisionProperties[0])
             getForceBehavior().updateBehavior(collisionProperties);

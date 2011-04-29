@@ -2,11 +2,9 @@ package vooga.sprites.spritebuilder.components.physics;
 
 
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
-import vooga.physics.util.Force;
+import vooga.physics.forceGenerator.AbstractForceGenerator;
 import vooga.util.buildable.components.BasicComponent;
 
 /**
@@ -17,10 +15,10 @@ import vooga.util.buildable.components.BasicComponent;
  */
 public class LocalForceC extends BasicComponent {
 
-    private Collection<Force> localForces;
+    private Collection<AbstractForceGenerator> localForces;
     
     public LocalForceC(){
-        localForces = new HashSet<Force>();
+        localForces = new HashSet<AbstractForceGenerator>();
     }
     
     /**
@@ -28,7 +26,7 @@ public class LocalForceC extends BasicComponent {
      * @param newForce
      * @return true if the force was not already in the collection and was therefore added
      */
-    public boolean addLocalForce(Force newForce){
+    public boolean addLocalForce(AbstractForceGenerator newForce){
         if (localForces.contains(newForce))
             return false;
         localForces.add(newForce);
@@ -40,14 +38,14 @@ public class LocalForceC extends BasicComponent {
      * @param forceToRemove
      * @return true if the force was already in the collection and was therefore removed
      */
-    public boolean removeLocalForce(Force forceToRemove){
+    public boolean removeLocalForce(AbstractForceGenerator forceToRemove){
         if (!localForces.contains(forceToRemove))
             return false;
         localForces.remove(forceToRemove);
         return true;
     }
     
-    public Collection<Force> getLocalForces(){
+    public Collection<AbstractForceGenerator> getLocalForces(){
         return localForces;
     }
     
@@ -64,7 +62,7 @@ public class LocalForceC extends BasicComponent {
 
     @Override
     protected void setFieldValues(Object... fields) {
-        localForces = (Collection<Force>) fields[0];
+        localForces = (Collection<AbstractForceGenerator>) fields[0];
         
     }
 
