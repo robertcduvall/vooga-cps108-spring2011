@@ -49,6 +49,7 @@ public class EmptyPhysicsC extends BasicComponent implements ISpriteUpdater, IPh
         myFieldBehavior = fieldBehavior;
         myCollisionBehavior = collisionBehavior;
         this.isOn = isOn;
+        deltaVelocity = new Velocity(0,new Angle(0));
     }
 
     @Override
