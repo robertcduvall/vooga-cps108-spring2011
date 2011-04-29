@@ -134,6 +134,7 @@ The {{{ <strings> }}} tag is used to specify key-value pairs for data that may b
 
 The <strings> tag encloses key-value pairs of strings. For instance, foo would be the key to value bar in the example above. These are accessed via the Bundle object returned by the getBundle() method of ResourceManager.
 
+=Help=
 If you have any questions, first look at the asteroids example, then look at the design document in the downloads section (it's a bit outdated but it still should answer the majority of questions). After that if you still have questions, feel free to contact me at anytime at andrew.patterson@duke.edu  (Wes is out of town right now so you're more likely to be able to get ahold of me).  I'll do my best to answer your questions as soon as possible.
 
 
