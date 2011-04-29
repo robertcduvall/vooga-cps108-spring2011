@@ -9,6 +9,8 @@ import java.util.Collection;
 import org.junit.Test;
 
 import vooga.physics.collisionBehavior.EmptyCollisionBehavior;
+import vooga.physics.forceGenerator.AbstractForceGenerator;
+import vooga.physics.forceGenerator.BasicForceGenerator;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.sprites.spritebuilder.components.physics.BasicPhysicsC;
@@ -26,16 +28,16 @@ public class TestNewtonianBehavior {
     public void testNewtonianForce(){
         BasicPhysicsC basic = new BasicPhysicsC(new Velocity(0,new Angle(0)), 1);
         //Velocity of 0, mass of 1
-        basic.applyForce(new Force(10,new Angle(Math.PI)), 1);
+        basic.applyForce(new BasicForceGenerator(new Force(10,new Angle(Math.PI))), 1);
         //Applies force with magnitude 10 pointing west
         Velocity delta = basic.getDeltaVelocity();
         assertEquals("Delta magnitude single application", 10, delta.getMagnitude(), 0);
         assertEquals("Delta angle single application", Math.PI, delta.getAngle().getRadians(),0);
 
-        Collection<Force> forces = new ArrayList<Force>();
-        forces.add(new Force(10,new Angle(Math.PI/2)));
-        forces.add(new Force(10,new Angle(0)));
-        forces.add(new Force(10,new Angle(Math.PI*1.5)));
+        Collection<AbstractForceGenerator> forces = new ArrayList<AbstractForceGenerator>();
+        forces.add(new BasicForceGenerator(new Force(10,new Angle(Math.PI/2))));
+        forces.add(new BasicForceGenerator(new Force(10,new Angle(0))));
+        forces.add(new BasicForceGenerator(new Force(10,new Angle(Math.PI*1.5))));
         basic.applyForces(forces, 1);
         delta = basic.getDeltaVelocity();
         assertEquals("Delta magnitude multiple applications", 0, delta.getMagnitude(),Math.pow(10,-14));
