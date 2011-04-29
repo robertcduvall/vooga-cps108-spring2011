@@ -75,6 +75,7 @@ public class MainGame extends VoogaGame {
 	@Override
 	public void initResources() {
 		if (!haveInitialized){
+			this.setFPS(50);
 			
 			haveInitialized = true;
 			
@@ -113,14 +114,14 @@ public class MainGame extends VoogaGame {
 	
 	
 	        //networking part
-	        isHost = true;
+	        isHost = false;
 	        network = new LocalNetworkEngine();
 	        
 	        //set up host
-	        network.createHost(false);
+//	        network.createHost(false);
 	        
 	        //connect to the host
-	        //network.connect(hostIP)
+	        network.connect("10.180.111.162");
 		}
 	
 	}
