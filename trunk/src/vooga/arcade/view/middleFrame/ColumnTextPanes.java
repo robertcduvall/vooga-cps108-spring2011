@@ -2,6 +2,7 @@ package vooga.arcade.view.middleFrame;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,117 +18,51 @@ import javax.swing.event.ListSelectionListener;
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
 
-
 /**
  * A generic class that creates a swing component that creates column of
  * JEditorPane, stacked on top of each other using GridLayout.
  */
 public class ColumnTextPanes extends JPanel
 {
-    private static final long serialVersionUID = 1L;
-    private List<DefaultListModel> editorPane =
-        new ArrayList<DefaultListModel>();
-    private ResourceManager columnTextAreaResource =
-        new ResourceManager("vooga.arcade.resources.ColumnTextAreaResource");
-    private ResourceManager middleFrameResource =
-        new ResourceManager("vooga.arcade.resources.MiddleFrameResource");
+	private static final long serialVersionUID = 1L;
+	private List<JEditorPane> editorPanes = new ArrayList<JEditorPane>();
+	private ResourceManager columnTextAreaResource = new ResourceManager(
+			"vooga.arcade.resources.ColumnTextAreaResource");
+	private ResourceManager middleFrameResource = new ResourceManager(
+			"vooga.arcade.resources.MiddleFrameResource");
 
+	public ColumnTextPanes(final int numPanels, String[] names,
+			final ArcadeController pc)
+	{
+		for (int i = 0; i < numPanels; i++)
+		{
+			JEditorPane pane = new JEditorPane();
+			pane.setEditable(false); // Read-only
+			editorPanes.add(pane);
+			this.add(new JScrollPane(pane));
+		}
 
-    public ColumnTextPanes (final int numPanels,
-                            String[] names,
-                            final ArcadeController pc)
-    {
-        for (int i = 0; i < numPanels; i++)
-        {
-            DefaultListModel d = new DefaultListModel();
-            JEditorPane paneToAdd = new JEditorPane();
-            paneToAdd.setEditable(false);
-            paneToAdd.setDragEnabled(true);
-            JScrollPane scrollPane = new JScrollPane(paneToAdd);
-            editorPane.add(d);
+		GridLayout g = new GridLayout(numPanels, 1);
+		g.setVgap(columnTextAreaResource.getInteger("VerticalGap"));
+		this.setLayout(g);
+		this.setPreferredSize(new Dimension(columnTextAreaResource
+				.getInteger("PreferredWidth"), columnTextAreaResource
+				.getInteger("PreferredHeight")));
 
-            paneToAdd.setBorder(BorderFactory.createTitledBorder(names[i]));
+	}
 
-            if (i == middleFrameResource.getInteger("CurrentPlayerIndex"))
-            {
-                ListSelectionListener listSelectionListener =
-                    new ListSelectionListener()
-                    {
-                        int selections[];
+	public void changePaneToURL(int i, String url)
+	{
+		try
+		{
+			// Try to display the page
+			editorPanes.get(i).setPage(url);
+		}
+		catch (IOException e)
+		{
+			System.err.println("FAIL URL");
+		}
 
-
-                        public void valueChanged (ListSelectionEvent listSelectionEvent)
-                        {
-
-                            boolean adjust =
-                                listSelectionEvent.getValueIsAdjusting();
-
-                            if (!adjust)
-                            {
-                                JList list =
-                                    (JList) listSelectionEvent.getSource();
-
-                                selections = list.getSelectedIndices();
-                            }
-                        }
-                    };
-
-            }
-
-            this.add(scrollPane);
-
-        }
-
-        GridLayout g = new GridLayout(numPanels, 1);
-        g.setVgap(columnTextAreaResource.getInteger("VerticalGap"));
-        this.setLayout(g);
-        this.setPreferredSize(new Dimension(columnTextAreaResource.getInteger("PreferredWidth"),
-                                            columnTextAreaResource.getInteger("PreferredHeight")));
-
-    }
-
-
-    public void clearAll ()
-    {
-        for (int i = 0; i < editorPane.size(); i++)
-            editorPane.get(i).clear();
-    }
-
-
-    public void clearComponent (int i)
-    {
-        editorPane.get(i).clear();
-    }
-
-
-    public void addStringToComponent (int i, String s)
-    {
-        editorPane.get(i).addElement(s);
-    }
-
-
-    public DefaultListModel getTextArea (int i)
-    {
-        return editorPane.get(i);
-    }
-
-
-    public void addString (int i, String name)
-    {
-
-        editorPane.get(i).addElement(name);
-    }
-
-
-    public void setSelected (int component, int index)
-    {
-
-    }
-
-
-    public void setUnselected (int component, int index)
-    {
-
-    }
+	}
 
 }
