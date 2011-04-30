@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.helper.ImageProcessor;
+import vooga.arcade.html.AboutHTMLPage;
 import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.view.actions.ActionFactory;
 
@@ -74,7 +75,7 @@ public class ArcadeGamePanel extends ArcadePanel
             
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                arcadeController.updateColumnText("lolol", 1);
+                arcadeController.updateColumnText(AboutHTMLPage.generateHTMLFile(gameObject),0);
             }
         });
 	}
