@@ -6,16 +6,16 @@ import java.io.FileWriter;
 
 public class DescriptionHTMLPage
 {
-	private static HTMLGenerator htmlGenerator = new HTMLGenerator();
-
 	public static String generateHTMLFile(String description)
 	{
+		HTMLGenerator htmlGenerator = new HTMLGenerator();
+
 		htmlGenerator.addTag("p", description);
-		
-		//TODO: FIX THISSSS OAWKEMRLFSDMLKAERJWLKFJSLKDF
+
+		// TODO: FIX THISSSS OAWKEMRLFSDMLKAERJWLKFJSLKDF
 		File file = new File("src/vooga/arcade/html/description.html");
 		try
-		{	
+		{
 			FileWriter ofstream = new FileWriter(file);
 			BufferedWriter out = new BufferedWriter(ofstream);
 			out.write(htmlGenerator.toString());
