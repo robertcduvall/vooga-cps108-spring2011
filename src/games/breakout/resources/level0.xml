@@ -5,6 +5,7 @@
 	<collision_manager g1="ball" g2="ball" class="games.breakout.collisions.BallEdgeBounce" />
 	
 	<sprite group="block" class="games.breakout.sprites.Block" type="block" image="block" />
+	<sprite group="ball" class="games.breakout.sprites.Ball" type="ball" image="ball" />
 
 	<goal class="games.breakout.BlocksCleared" />
 
