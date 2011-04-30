@@ -1,18 +1,19 @@
 package vooga.arcade.parser.gameObject;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 
 import org.jdom.Element;
 /**
  * 
+ * General object used to contain information that can be
+ * displayed in the arcade.
+ * 
  * @author Yong-Hui Goh
+ * @author KevinWang
  *
  */
 public abstract class ArcadeObject
@@ -29,7 +30,9 @@ public abstract class ArcadeObject
 	}
 
 	/**
-	 * @return the drawableData
+	 * return the contained image
+	 * 
+	 * @return the image
 	 */
 	public BufferedImage getImage() {
         if(image!= null) return image;
@@ -43,6 +46,10 @@ public abstract class ArcadeObject
         return image;
     }
 
+	/**
+	 * return name of the object
+	 * @return the name
+	 */
 	public String getName()
 	{
 		return root.getChildText("name");

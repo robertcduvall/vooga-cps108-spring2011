@@ -7,6 +7,12 @@ import javax.swing.JTextField;
 
 import vooga.arcade.controller.ArcadeController;
 
+/**
+ * Implement the search function in the arcade search bar.
+ * 
+ * @author KevinWang
+ *
+ */
 public class Search extends AbstractViewAction
 {
 

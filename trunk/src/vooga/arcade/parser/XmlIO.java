@@ -9,13 +9,23 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-
+/**
+ * Static class used to read and write XML
+ * @author KevinWang
+ *
+ */
 public class XmlIO{
 
     private static XMLOutputter writer;
     private static SAXBuilder builder;
 
     
+    /**
+     * create arcadeGameObject from the given path.
+     * 
+     * @param path
+     * @return
+     */
     public static ArcadeGameObject getArcadeGameObject(String path){
         initiatebuilder();
         
@@ -32,13 +42,24 @@ public class XmlIO{
         return new ArcadeGameObject(root, path);
     }
     
+    /**
+     * Initialize the SAXBuilder.
+     * 
+     */
     private static void initiatebuilder() {
         if(builder == null){
             builder = new SAXBuilder(); 
         }
     }
 
+    /**
+     * Write current xml contained in root to the specified path location
+     * 
+     * @param root
+     * @param path
+     */
     public static void writeToXml(Element root, String path){
+        
         initiateWriter();
         
         try {
@@ -48,7 +69,10 @@ public class XmlIO{
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * initialize XMLOutputter
+     */
     private static void initiateWriter() {
         if(writer == null){
             writer = new XMLOutputter();

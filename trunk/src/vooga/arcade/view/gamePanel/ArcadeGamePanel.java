@@ -24,6 +24,8 @@ import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.view.actions.ActionFactory;
 
 /**
+ * JPanel instance that contains an arcadeGameObject
+ * 
  * @author KevinWang
  * @author Ethan Goh
  */
@@ -42,8 +44,12 @@ public class ArcadeGamePanel extends ArcadePanel
 		this.gameObject = gameObject;
 		this.arcadeController = pc;
 		addPlayButton();
+		addListenerToButton(pc);
 	}
 
+	/**
+	 * add play button to the panel.
+	 */
 	private void addPlayButton()
 	{
 		JButton playButton = new JButton(title);
@@ -59,16 +65,24 @@ public class ArcadeGamePanel extends ArcadePanel
 		this.add(playButton, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * add action listener to button
+	 * @param pc
+	 */
 	private void addListenerToButton(ArcadeController pc){
 	    imageButton.addActionListener(new ActionListener() {
             
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                //arcadeController.
+                arcadeController.updateColumnText("lolol", 1);
             }
         });
 	}
 
+	/**
+	 * set icon size
+	 * @param i
+	 */
 	private void setIconSize(int i)
 	{
 		iconSize = i;
