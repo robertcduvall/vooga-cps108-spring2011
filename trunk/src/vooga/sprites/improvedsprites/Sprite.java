@@ -132,6 +132,9 @@ public class Sprite extends BaseSprite
         // init variables
         this.x = this.oldX = x;
         this.y = this.oldY = y;
+        this.setAngle(-90); // as a result, sprites are oriented the way their images are,
+                            // which makes more sense for sprites that don't rotate
+        
         myComponents = new ComponentSet<IComponent>();
         myComponents.addAll(Arrays.asList(new IComponent[]{new SpriteVelocityC()}));
         // sprite image
