@@ -21,7 +21,7 @@ public class Breakout extends VoogaGame
     @Override
     public void initResources ()
     {
-        Paddle paddle = new Paddle(this, getWidth()/2, 0);
+        Paddle paddle = new Paddle(this, getWidth()/2, getHeight());
         getLevelManager().addPlayer(new SpriteGroup<Paddle>("paddle", paddle));
         getLevelManager().loadLevel(0);
     }
