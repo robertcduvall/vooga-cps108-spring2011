@@ -56,7 +56,7 @@ public class ColumnTextPanes extends JPanel
 		try
 		{
 			// Try to display the page
-			editorPanes.get(i).setPage(url);
+			editorPanes.get(i).setPage("file://"+url);
 		}
 		catch (IOException e)
 		{

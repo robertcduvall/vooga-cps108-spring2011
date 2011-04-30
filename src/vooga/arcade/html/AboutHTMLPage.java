@@ -8,23 +8,25 @@ import vooga.arcade.parser.ArcadeGameObject;
 
 public class AboutHTMLPage
 {
-	private static HTMLGenerator htmlGenerator = new HTMLGenerator();
 
 	private static String[] aboutFields = { "Title", "Genre", "Author",
 			"Date Created", "Version", "Language", "Price" };
 
 	public static String generateHTMLFile(ArcadeGameObject ago)
 	{
+		HTMLGenerator htmlGenerator = new HTMLGenerator();
+
 		for (String s : aboutFields)
 		{
 			String t = removeAllSpaces(s);
 			htmlGenerator.addTag("b", s + ": ");
-			htmlGenerator.addText(ago.getData(t));
+			htmlGenerator.addText(ago.getData(t.toLowerCase()));
 			htmlGenerator.addLineBreak();
 		}
 
 		// TODO: FIX THISSSS OAWKEMRLFSDMLKAERJWLKFJSLKDF
 		File file = new File("src/vooga/arcade/html/about.html");
+		file.delete();
 		try
 		{
 			FileWriter ofstream = new FileWriter(file);
@@ -34,7 +36,9 @@ public class AboutHTMLPage
 		}
 		catch (Exception e)
 		{
+			System.err.println("WTF FAIL");
 		}
+		
 		return file.getAbsolutePath();
 	}
 

@@ -140,7 +140,7 @@ public class ArcadeController
     }
     
     public void updateColumnText(String s, int index){
-        view.getMiddleFrame().getTextPanes().addStringToComponent(index, s);
+        view.getMiddleFrame().getTextPanes().changePaneToURL(index, s);
     }
     
     public void updateButtonBar(JToolBar newBar)

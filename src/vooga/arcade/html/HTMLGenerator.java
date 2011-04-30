@@ -36,7 +36,7 @@ public class HTMLGenerator
 	
 	public void addLineBreak()
 	{
-		htmlBody.append("</ br>");
+		htmlBody.append("<br />");
 	}
 	
 	public String toString()
