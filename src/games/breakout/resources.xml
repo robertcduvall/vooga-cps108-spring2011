@@ -1,1 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<images>
+		<source>src/games/breakout/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.breakout.Level">src/games/breakout/resources/level0.xml</level>
+	<source>src/games/asteroids/resources/keymap.xml</source>
+</resources>

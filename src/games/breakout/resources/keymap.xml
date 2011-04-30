@@ -1,0 +1,5 @@
+<keymap>
+	<key_event event="Input.Start" sensitivity="Level" key="SPACE" />
+	<key_event event="Input.Left" sensitivity="Level" key="LEFT" />
+	<key_event event="Input.Right" sensitivity="Level" key="RIGHT" />
+</keymap>

@@ -8,7 +8,10 @@ public class Paddle extends Sprite
 {
     public Paddle (VoogaGame game, double x, double y)
     {
-        super(game.getImageLoader().getImage("paddle"), x, y);
+        super(game.getImageLoader().getImage("paddle"));
+        
+        setX(x - getWidth()/2);
+        setY(y - getHeight());
     }
 
 }
