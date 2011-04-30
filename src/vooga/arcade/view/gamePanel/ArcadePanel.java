@@ -39,7 +39,6 @@ public abstract class ArcadePanel extends JPanel
 		title = t;
 		this.setLayout(new BorderLayout(10, 10));
 		addImageButton();
-		//addTitle();
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	}
 	
@@ -48,9 +47,5 @@ public abstract class ArcadePanel extends JPanel
 	    imageButton = new JButton(icon);
 	    this.add(imageButton, BorderLayout.NORTH);
 	}
-	
-	private void addTitle()
-	{
-		this.add(new JLabel(title), BorderLayout.EAST);
-	}
+
 }
