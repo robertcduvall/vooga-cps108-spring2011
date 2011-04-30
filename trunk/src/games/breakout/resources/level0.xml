@@ -1,0 +1,26 @@
+<level>
+	<background type="color">black</background>
+	<collision_manager g1="ball" g2="block" class="games.breakout.collisions.BallHitsBlock" />
+	<collision_manager g1="ball" g2="paddle" class="games.breakout.collisions.BallHitsPaddle" />
+	<collision_manager g1="ball" g2="ball" class="games.breakout.collisions.BallEdgeBounce" />
+	
+	<sprite group="block" class="games.breakout.sprites.Block" type="block" image="block" />
+
+	<goal class="games.breakout.BlocksCleared" />
+
+	<instance type="block">
+		<x>0</x>
+		<y>0</y>
+	</instance>
+	
+	<instance type="block">
+		<x>1</x>
+		<y>0</y>
+	</instance>
+	
+	<instance type="block">
+		<x>3</x>
+		<y>1</y>
+	</instance>
+	
+</level>

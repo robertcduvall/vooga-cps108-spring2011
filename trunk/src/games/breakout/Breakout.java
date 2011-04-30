@@ -1,7 +1,9 @@
 package games.breakout;
 
+import games.breakout.sprites.Paddle;
 import java.awt.Dimension;
 import vooga.core.VoogaGame;
+import vooga.sprites.spritegroups.SpriteGroup;
 
 public class Breakout extends VoogaGame
 {
@@ -19,7 +21,8 @@ public class Breakout extends VoogaGame
     @Override
     public void initResources ()
     {
-        // TODO Auto-generated method stub
-        
+        Paddle paddle = new Paddle(this, getWidth()/2, 0);
+        getLevelManager().addPlayer(new SpriteGroup<Paddle>("paddle", paddle));
+        getLevelManager().loadLevel(0);
     }
 }
