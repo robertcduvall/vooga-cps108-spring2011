@@ -3,7 +3,6 @@ package games.breakout.sprites;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.util.buildable.components.predefined.basic.IntegerC;
 import vooga.util.buildable.components.predefined.movement.Speed2DC;
 
 @SuppressWarnings("serial")
@@ -17,6 +16,7 @@ public class Paddle extends Sprite
     public Paddle (VoogaGame game, double x, double y)
     {
         super(game.getImageLoader().getImage("paddle"));
+        
         setX(x - getWidth()/2);
         setY(y - getHeight());
         

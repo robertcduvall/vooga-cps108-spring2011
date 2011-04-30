@@ -7,6 +7,8 @@ import vooga.sprites.spritegroups.SpriteGroup;
 
 public class Breakout extends VoogaGame
 {
+    {distribute = true;}
+    
     public static void main (String[] args)
     {
         launchGame(new Breakout(), new Dimension(640, 480), false);
