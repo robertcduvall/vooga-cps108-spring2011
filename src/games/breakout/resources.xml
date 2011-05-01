@@ -3,5 +3,6 @@
 		<source>src/games/breakout/resources/images.xml</source>
 	</images>
 	<level id="0" type="games.breakout.Level">src/games/breakout/resources/level0.xml</level>
+	<level id="1" type="games.breakout.Level">src/games/breakout/resources/level1.xml</level>
 	<source>src/games/breakout/resources/keymap.xml</source>
 </resources>
