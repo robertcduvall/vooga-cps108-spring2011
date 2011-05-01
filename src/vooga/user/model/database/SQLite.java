@@ -20,7 +20,8 @@ import java.util.List;
 				} catch (ClassNotFoundException e) {e.printStackTrace();}//standard - need every time
 		    Connection conn = null;
 			try {
-				conn = DriverManager.getConnection("jdbc:sqlite:voogaUser.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:voogaUser.db");
+				//conn = DriverManager.getConnection("fdb3.leadhoster.com", "714187_vooga2011", "vooga108");
 			} catch (SQLException e) {e.printStackTrace();}
 		    Statement stat = null;
 				try {

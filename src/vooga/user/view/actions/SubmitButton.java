@@ -22,7 +22,7 @@ public class SubmitButton extends AbstractLoginAction {
 	public void actionPerformed(ActionEvent arg0) {
 		if(pc.processInformation(panel.getInputFields())){
 		try {
-			pc.exitLogin();
+			pc.logIn();
 		} catch (Exception e) {
 			System.out.println("no");
 			e.printStackTrace();

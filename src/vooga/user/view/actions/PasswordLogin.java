@@ -27,7 +27,7 @@ public class PasswordLogin extends AbstractLoginAction{
 			controller.displayError("Incorrect Username & Password");
 		}else{
 			try {
-			controller.exitLogin();
+			controller.logIn();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

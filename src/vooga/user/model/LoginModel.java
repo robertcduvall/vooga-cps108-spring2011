@@ -78,7 +78,7 @@ public class LoginModel
 					.getStringArray(headerSections[p]);
 			String[] text = new String[sectionTitle.length];
 			if (p == headerSections.length - 1) {
-				int[] newButtonArray = { 1, 3, 4 };
+				int[] newButtonArray = {1,4,5,3};
 				intArray = newButtonArray;
 			}
 			for (int i = 0; i < sectionTitle.length; i++) {
