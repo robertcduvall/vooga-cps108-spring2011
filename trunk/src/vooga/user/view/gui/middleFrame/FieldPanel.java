@@ -160,4 +160,9 @@ public class FieldPanel extends JPanel{
 			}
 			return text;
 		}
+	
+	public void clear(){
+		this.clear();
+		this.removeAll();
+	}
 }

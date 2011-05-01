@@ -49,6 +49,8 @@ public class AssignImageButton extends AbstractLoginAction{
 		JLabel userImage = new JLabel(new ImageIcon(image));
 		panel.remove(2);
 		panel.add(userImage,2);
+		panel.setVisible(false);
+		panel.setVisible(true);
 		controller.getVooga().setIcon(image);
 		}
 	}
