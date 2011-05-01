@@ -5,6 +5,12 @@ import games.breakout.sprites.Ball;
 import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
 import vooga.sprites.improvedsprites.Sprite;
 
+/**
+ * Collision group for bouncing balls off the edge of the screen.
+ * 
+ * 
+ * @author Misha
+ */
 public class BallEdgeBounce extends EdgeCollisionGroup
 {    
     @Override

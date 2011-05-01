@@ -8,6 +8,12 @@ import vooga.resources.images.ImageLoader;
 import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
 import vooga.sprites.spritegroups.SpriteGroup;
 
+/**
+ * Breakout. Bounce a ball off a paddle to destroy bricks.
+ * 
+ * @author Misha
+ *
+ */
 public class Breakout extends VoogaGame
 {
     {distribute = true;}

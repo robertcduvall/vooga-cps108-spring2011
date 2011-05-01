@@ -1,7 +1,8 @@
 <images>
 	<image name="block">
 		<path>src/games/breakout/resources/block.png</path>
-		<width>40</width>
+		<width>38</width>
+		<height>22</height>
 		<state count="*" />
 	</image>
 	<image name="ball">

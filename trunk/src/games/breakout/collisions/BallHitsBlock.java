@@ -4,8 +4,19 @@ import games.breakout.sprites.Ball;
 import games.breakout.sprites.Block;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
 
+/**
+ * A collision group for testing whether a ball hits a block or not. 
+ * 
+ * @author Misha
+ *
+ */
 public class BallHitsBlock extends BasicCollisionGroup<Ball, Block>
 {
+    
+    /**
+     * Tests whether a ball and a block have collided, treating each
+     * ball as a perfect circle and each block as a perfect rectangle.
+     */
     @Override
     public boolean areCollide(Ball ball, Block block)
     {
@@ -25,6 +36,9 @@ public class BallHitsBlock extends BasicCollisionGroup<Ball, Block>
 
     }
     
+    /**
+     * Handle a collision between a ball and a block.
+     */
     @Override
     public void collided (Ball ball, Block block)
     {
@@ -40,7 +54,7 @@ public class BallHitsBlock extends BasicCollisionGroup<Ball, Block>
         if (ball.getCenterY() > block.getY() + block.getHeight())
             ball.bounceDown();
         
-        block.setActive(false);
+        block.damage();
     }
 
 }
