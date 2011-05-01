@@ -10,17 +10,19 @@ import vooga.user.view.gui.middleFrame.FieldPanel;
 public class ViewInputButton extends AbstractLoginAction{
 
 	FieldPanel panel;
+	ILoginController pc;
 	public ViewInputButton(ILoginController p, FieldPanel fieldPanel) {
 		super(p);
-		controller = p;
+		pc = p;
 		panel = fieldPanel;
 	}
 
 	//@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		controller.updateWithInformationPanel();
-		System.out.println("Should Display");
+		pc.updateWithInformationPanel();
+		//controller.removeFrame();
+		//System.out.println("Should Display");
 		}
 	}
 

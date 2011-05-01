@@ -65,7 +65,9 @@ public class LoginViewer extends JFrame implements IView {
 	@Override
 	public void update(LoginTemplate[] template) {
 		this.remove(middleFrame);
-		this.add(new LoginMiddleFrame(pc, template), BorderLayout.CENTER);
+		middleFrame = new LoginMiddleFrame(pc, template);
+		this.add(middleFrame, BorderLayout.CENTER);
 		this.setVisible(true);
 	}
+	
 }

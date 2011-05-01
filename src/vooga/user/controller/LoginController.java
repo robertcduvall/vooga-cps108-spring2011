@@ -75,7 +75,6 @@ public class LoginController implements ILoginController
 		return model.getVoogaUser();
 	}
 	
-
 /**
  * This method exits the loginButton and 
  */

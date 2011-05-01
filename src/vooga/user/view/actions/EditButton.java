@@ -1,15 +1,9 @@
 package vooga.user.view.actions;
-
 import java.awt.event.ActionEvent;
-import java.sql.SQLException;
-
-import javax.swing.JOptionPane;
-
 import vooga.user.controller.ILoginController;
 import vooga.user.model.database.SQLite;
 import vooga.user.model.database.UserDatabase;
 import vooga.user.view.gui.middleFrame.FieldPanel;
-
 
 public class EditButton extends AbstractLoginAction {
 
