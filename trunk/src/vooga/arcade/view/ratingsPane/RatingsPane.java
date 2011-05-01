@@ -51,4 +51,8 @@ public class RatingsPane extends JPanel {
 	public JEditorPane getRatingsPane() {
 		return ratingsPane;
 	}
+	
+	public void displayRatings(String s){
+	    
+	}
 }
