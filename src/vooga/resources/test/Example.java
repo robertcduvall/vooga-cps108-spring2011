@@ -28,12 +28,10 @@ public class Example extends VoogaGame {
 	private static final int HEIGHT = 480;
 	
 	public Example() {
-		super(RESOURCE_XML_FILE);
 	}
 	
 	@Override
 	public void initResources() {
-		super.initResources();
 		playfield = new PlayField();
 		BufferedImage ship = getImageLoader().getImage("ship");
 		BufferedImage bg = getImageLoader().getImage("space");
