@@ -1,27 +1,15 @@
 package vooga.network.example.Game;
-import games.pong.PongGame;
-
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
 
 import vooga.core.VoogaGame;
 import vooga.network.INetworkEngine;
 import vooga.network.tcpEngine.LocalNetworkEngine;
+import vooga.sprites.improvedsprites.AnimatedSprite;
 
-import com.golden.gamedev.Game;
-import com.golden.gamedev.GameLoader;
-import com.golden.gamedev.object.AnimatedSprite;
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.CollisionManager;
 import com.golden.gamedev.object.GameFont;
@@ -30,13 +18,14 @@ import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.object.Timer;
 import com.golden.gamedev.object.background.ImageBackground;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
-import com.golden.gamedev.object.sprite.AdvanceSprite;
 
 
 public class MainGame extends VoogaGame {
 
 	Sprite plane1;
 	Sprite plane2;
+	AnimatedSprite explosion1;
+	AnimatedSprite explosion2;
 	ArrayList<Sprite> bulletArr;
 	SpriteGroup  bullets;
 	SpriteGroup  planes;
@@ -69,9 +58,15 @@ public class MainGame extends VoogaGame {
     
     boolean isHost = false;
     INetworkEngine network;
+    
+    int remainingPlane = 2;
  
     boolean haveInitialized = false;
 	
+    protected void finalize(){
+    	network.disconnect();
+    }
+    
 	@Override
 	public void initResources() {
 		if (!haveInitialized){
@@ -79,7 +74,7 @@ public class MainGame extends VoogaGame {
 			
 			haveInitialized = true;
 			
-			Status = AtRunningStatus;			//Before Running Status
+			Status = BeforeRunningStatus;			//Before Running Status
 	
 	        // create the background
 	        backgr = new ImageBackground(getImage("resources/background3.jpg"), w, h);
@@ -88,6 +83,14 @@ public class MainGame extends VoogaGame {
 			
 			plane2 = new Sprite(getImage("resources/plane4.png"),w/2+20,h/2);
 			
+			explosion1 = new AnimatedSprite(getImages("resources/boom.png",16,1),0,0);
+			explosion1.setActive(false);
+			//explosion1.setAnimationFrame(3, 16);
+			
+			explosion2 = new AnimatedSprite(getImages("resources/boom.png",16,1),0,0);
+			explosion2.setActive(false);
+			//explosion2.setAnimationFrame(3, 16);
+			
 			bullets = new SpriteGroup("bullets");
 			planes = new SpriteGroup("planes");
 			planes.add(plane1);
@@ -95,7 +98,7 @@ public class MainGame extends VoogaGame {
 			
 			bulletArr = new ArrayList<Sprite>();
 			for (int i = 0; i < MaxBulletSize; i++){
-				Sprite bullet = new Sprite(getImage("resources/bullet3.png"),-1,-1);
+				Sprite bullet = new Sprite(getImage("resources/bullet3.png"),-20,-20);
 				bulletArr.add(bullet);
 				bullets.add(bullet);
 			}
@@ -122,151 +125,149 @@ public class MainGame extends VoogaGame {
 	        
 	        //connect to the host
 	        network.connect("10.180.111.162");
+	        
+	        remainingPlane = 2;
 		}
 	
 	}
 
 	@Override
 	public void render(Graphics2D arg0) {
-//		if (Status == BeforeRunningStatus){
-//			backgr.render(arg0);
-//			font.drawString(arg0, "Survive Timer: 00:00:000", 10, 10);
-//			font.drawString(arg0, "Try to survive as long as possible", w/2 - 120, h/2 - 50);
-//			font.drawString(arg0, "Press Enter to start the game", w/2 - 100, h/2);
-//		}
-//		else if (Status == AtRunningStatus){
-//			backgr.render(arg0);
-//			plane.render(arg0);
-//			bullets.render(arg0);
-//			
-//			
-//			//draw stopwatch
-//			font.drawString(arg0, "Survive Timer: " + millisecToString(surviveTime), 10, 10);
-//
-//		}
-//		else if (Status == AfterRunningStatus){
-//			font.drawString(arg0, "Game Over", w/2 - 50, h/2 - 50);
-//			font.drawString(arg0, "Survive Time: " + millisecToString(surviveTime), w/2 - 100, h/2);
-//		}
-		
-		//currently only render the plane to the screen
-		backgr.render(arg0);
-		planes.render(arg0);
-		
+		if (Status == BeforeRunningStatus){
+			backgr.render(arg0);
+			font.drawString(arg0, "Survive Timer: 00:00:000", 10, 10);
+			font.drawString(arg0, "Try to survive as long as possible", w/2 - 120, h/2 - 50);
+			if (isHost)
+				font.drawString(arg0, "Press Enter to start the game", w/2 - 100, h/2);
+			else
+				font.drawString(arg0, "Wait for the host to start the game", w/2 - 100, h/2);
+		}
+		else if (Status == AtRunningStatus){
+			backgr.render(arg0);
+			planes.render(arg0);
+			bullets.render(arg0);
+			explosion1.render(arg0);
+			explosion2.render(arg0);
+			
+			
+			//draw stopwatch
+			font.drawString(arg0, "Survive Timer: " + millisecToString(surviveTime), 10, 10);
+
+		}
+		else if (Status == AfterRunningStatus){
+			backgr.render(arg0);
+			bullets.render(arg0);
+			explosion1.render(arg0);
+			explosion2.render(arg0);
+			font.drawString(arg0, "Game Over", w/2 - 50, h/2 - 50);
+			font.drawString(arg0, "Survive Time: " + millisecToString(surviveTime), w/2 - 100, h/2);
+		}
 	}
 
 	@Override
 	public void update(long arg0) {
-//		if (Status == BeforeRunningStatus){
-//			initResources();
-//			if (keyPressed(KeyEvent.VK_ENTER)){
-//				Status = AtRunningStatus;
-//				startTime = System.currentTimeMillis();
-//			}
-//		}
-//		else if (Status == AtRunningStatus){
-//			//backgr.update(arg0);
-//			plane1.update(arg0);
-//			bullets.update(arg0);
-//			
-//			//setup stopwatch
-//			surviveTime = System.currentTimeMillis() - startTime;
-//			
-//			
-//			//setup plane action
-//			double planeSpeedX = 0, planeSpeedY = 0;
-//			if (keyDown(KeyEvent.VK_LEFT))     planeSpeedX = -1 * PlaneSpeed;
-//	        if (keyDown(KeyEvent.VK_RIGHT))    planeSpeedX = PlaneSpeed;
-//	        if (keyDown(KeyEvent.VK_UP))       planeSpeedY = -1 * PlaneSpeed;
-//	        if (keyDown(KeyEvent.VK_DOWN))     planeSpeedY = PlaneSpeed;
-//	        plane1.setSpeed(planeSpeedX, planeSpeedY);
-//	        
-//	        //set inside the border
-//	        if (plane1.getX() < 0)                plane1.setX(0);
-//	        if (plane1.getX() > w - planesize)    plane1.setX(w - planesize);
-//	        if (plane1.getY() < 0)                plane1.setY(0);
-//	        if (plane1.getY() > h - planesize)    plane1.setY(h - planesize);
-//	       
-//			//plane.setBackground(backgr);
-//			
-//			//bullet.setSpeed(0.1, 0.1);
-//			if (t.action(arg0)){
-//				currentBulletSize++;
-//	        	insertBullet(currentBulletSize);
-//			}
-//			
-//			collisionType.checkCollision();
-//
-//		}
-//		else if (Status == AfterRunningStatus){
-//			if (keyPressed(KeyEvent.VK_ENTER)){
-//				Status = BeforeRunningStatus;
-//			}
-//		}
+		if (Status == BeforeRunningStatus){
+			initResources();
+			if (keyPressed(KeyEvent.VK_ENTER)){
+				Status = AtRunningStatus;
+				startTime = System.currentTimeMillis();
+			}
+		}
+		else if (Status == AtRunningStatus){
+			//backgr.update(arg0);
+			planes.update(arg0);
+			bullets.update(arg0);
+			explosion1.update(arg0);
+			explosion2.update(arg0);
+			
+			//setup stopwatch
+			surviveTime = System.currentTimeMillis() - startTime;
+			
+			if (isHost){
+				//receive the plane2
+				List<Object> receivedCommands = network.update();
+				double plane2SpeedX = 0, plane2SpeedY = 0;
+				for (Object command : receivedCommands){
+					if (((String) command).equals("MoveUp"))
+						plane2SpeedY = -1 * PlaneSpeed;
+					if (((String) command).equals("MoveDown"))
+						plane2SpeedY = PlaneSpeed;
+					if (((String) command).equals("MoveLeft"))
+						plane2SpeedX = -1 * PlaneSpeed;
+					if (((String) command).equals("MoveRight"))
+						plane2SpeedX = PlaneSpeed;
+				}
+				plane2.setSpeed(plane2SpeedX, plane2SpeedY);
+				
+				//check for plane1
+				double plane1SpeedX = 0, plane1SpeedY = 0;
+				if (keyDown(KeyEvent.VK_LEFT))     plane1SpeedX = -1 * PlaneSpeed;
+		        if (keyDown(KeyEvent.VK_RIGHT))    plane1SpeedX = PlaneSpeed;
+		        if (keyDown(KeyEvent.VK_UP))       plane1SpeedY = -1 * PlaneSpeed;
+		        if (keyDown(KeyEvent.VK_DOWN))     plane1SpeedY = PlaneSpeed;
+		        plane1.setSpeed(plane1SpeedX, plane1SpeedY);
+		        
+		        //check validity
+		        checkValidity(plane1);
+		        checkValidity(plane2);
+		        
+		        //update bullets
+		        if (t.action(arg0)){
+					currentBulletSize++;
+		        	insertBullet(currentBulletSize);
+				}
+				
+		        //check collision
+				collisionType.checkCollision();
+		        
+		        //send command to client
+		        network.send("p1,x=" + plane1.getX());
+		        network.send("p1,y=" + plane1.getY());
+		        network.send("p2,x=" + plane2.getX());
+		        network.send("p2,y=" + plane2.getY());
+			}
+			else{
+				if (keyDown(KeyEvent.VK_LEFT))     network.send("MoveLeft");
+		        if (keyDown(KeyEvent.VK_RIGHT))    network.send("MoveRight");
+		        if (keyDown(KeyEvent.VK_UP))       network.send("MoveUp");
+		        if (keyDown(KeyEvent.VK_DOWN))     network.send("MoveDown");
+		        
+		        List<Object> receivedCommands = network.update();
+		        for (Object command : receivedCommands){
+		        	if(((String) command).startsWith("p1")){
+		        		String info = ((String) command).split(",")[1];
+		        		if (info.split("=")[0].equals("x"))
+		        			plane1.setX(Double.parseDouble(info.split("=")[1]));
+		        		if (info.split("=")[0].equals("y"))
+		        			plane1.setY(Double.parseDouble(info.split("=")[1]));
+		        	}
+		        	else if (((String) command).startsWith("p2")){
+		        		String info = ((String) command).split(",")[1];
+		        		if (info.split("=")[0].equals("x"))
+		        			plane2.setX(Double.parseDouble(info.split("=")[1]));
+		        		if (info.split("=")[0].equals("y"))
+		        			plane2.setY(Double.parseDouble(info.split("=")[1]));
+		        	}
+		        }
+		        
+			}
+			
+		}
+		else if (Status == AfterRunningStatus){
+			explosion1.update(arg0);
+			explosion2.update(arg0);
+			bullets.update(arg0);
+			if (keyPressed(KeyEvent.VK_ENTER)){
+				Status = BeforeRunningStatus;
+			}
+		}
 		
 		//if isHost, do the processing, update and send
 		//otherwise, send and update
-		planes.update(arg0);
+//		planes.update(arg0);
+//		explosion1.update(arg0);
 //		bullets.update(arg0);
-		if (isHost){
-			//receive the plane2
-			List<Object> receivedCommands = network.update();
-			double plane2SpeedX = 0, plane2SpeedY = 0;
-			for (Object command : receivedCommands){
-				if (((String) command).equals("MoveUp"))
-					plane2SpeedY = -1 * PlaneSpeed;
-				if (((String) command).equals("MoveDown"))
-					plane2SpeedY = PlaneSpeed;
-				if (((String) command).equals("MoveLeft"))
-					plane2SpeedX = -1 * PlaneSpeed;
-				if (((String) command).equals("MoveRight"))
-					plane2SpeedX = PlaneSpeed;
-			}
-			plane2.setSpeed(plane2SpeedX, plane2SpeedY);
-			
-			//check for plane1
-			double plane1SpeedX = 0, plane1SpeedY = 0;
-			if (keyDown(KeyEvent.VK_LEFT))     plane1SpeedX = -1 * PlaneSpeed;
-	        if (keyDown(KeyEvent.VK_RIGHT))    plane1SpeedX = PlaneSpeed;
-	        if (keyDown(KeyEvent.VK_UP))       plane1SpeedY = -1 * PlaneSpeed;
-	        if (keyDown(KeyEvent.VK_DOWN))     plane1SpeedY = PlaneSpeed;
-	        plane1.setSpeed(plane1SpeedX, plane1SpeedY);
-	        
-	        //check validity
-	        checkValidity(plane1);
-	        checkValidity(plane2);
-	        
-	        //send command to client
-	        network.send("p1,x=" + plane1.getX());
-	        network.send("p1,y=" + plane1.getY());
-	        network.send("p2,x=" + plane2.getX());
-	        network.send("p2,y=" + plane2.getY());
-		}
-		else{
-			if (keyDown(KeyEvent.VK_LEFT))     network.send("MoveLeft");
-	        if (keyDown(KeyEvent.VK_RIGHT))    network.send("MoveRight");
-	        if (keyDown(KeyEvent.VK_UP))       network.send("MoveUp");
-	        if (keyDown(KeyEvent.VK_DOWN))     network.send("MoveDown");
-	        
-	        List<Object> receivedCommands = network.update();
-	        for (Object command : receivedCommands){
-	        	if(((String) command).startsWith("p1")){
-	        		String info = ((String) command).split(",")[1];
-	        		if (info.split("=")[0].equals("x"))
-	        			plane1.setX(Double.parseDouble(info.split("=")[1]));
-	        		if (info.split("=")[0].equals("y"))
-	        			plane1.setY(Double.parseDouble(info.split("=")[1]));
-	        	}
-	        	else if (((String) command).startsWith("p2")){
-	        		String info = ((String) command).split(",")[1];
-	        		if (info.split("=")[0].equals("x"))
-	        			plane2.setX(Double.parseDouble(info.split("=")[1]));
-	        		if (info.split("=")[0].equals("y"))
-	        			plane2.setY(Double.parseDouble(info.split("=")[1]));
-	        	}
-	        }
-	        
-		}
+		
 	}
 	
 	private void checkValidity(Sprite plane){
@@ -316,6 +317,8 @@ public class MainGame extends VoogaGame {
 			if (bullet != null){
 				setRandomLocation(bullet,location);
 				setRandomSpeed(bullet,BulletSpeed,location);
+				
+				//send out the bullet location and velocity
 			}
 		}
 	}
@@ -337,6 +340,7 @@ public class MainGame extends VoogaGame {
 		else if (location == fromDown)
 			ySpeed *= -1;
 		obj.setSpeed(xSpeed, ySpeed);
+		System.out.println("x= "+xSpeed+", y= "+ySpeed);
 	}
 	
 	private void setRandomLocation(Sprite obj, int location){
@@ -364,12 +368,40 @@ public class MainGame extends VoogaGame {
 			pixelPerfectCollision = true;
 		}
 
-		   public void collided(Sprite s1, Sprite s2) {
-		      // we make both of sprites to vanish!
-		      s1.setActive(false);
-		      s2.setActive(false);
-		      Status = AfterRunningStatus;
-		   }
+		public void collided(Sprite s1, Sprite s2) {
+
+			if (s1.equals(plane1)) {
+				//set explosion
+				explosion1.setX(s1.getX());
+				explosion1.setY(s1.getY());
+				s1.setActive(false);
+				s2.setActive(false);
+				explosion1.setAnimate(true);
+				explosion1.setLoopAnim(false);
+				remainingPlane--;
+				//send update
+				//
+				
+			} else if (s1.equals(plane2)) {
+				//set explosion
+				explosion2.setX(s1.getX());
+				explosion2.setY(s1.getY());
+				s1.setActive(false);
+				s2.setActive(false);
+				explosion2.setAnimate(true);
+				explosion2.setLoopAnim(false);
+				remainingPlane--;
+				//send update
+				//
+
+			}
+			
+			if (remainingPlane == 0){
+				Status = AfterRunningStatus;
+				//send update
+				
+			}
+		}
 	}
 
 	@Override
