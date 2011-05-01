@@ -1,0 +1,694 @@
+<level>
+	<strings>
+		<startx>32</startx>
+		<starty>32</starty>
+	</strings>
+	
+	<sprite class="games.keen.StaticTile" group="tiles" type="G" image="ground_tile" /sprite>
+	<sprite class="games.keen.Yorp" group="monsters" type="Y" image="yorp" /sprite>
+	
+	<instance type="G">
+		<x>32</x>
+		<y>48</y>
+	</instance>
+	<instance type="G">
+		<x>48</x>
+		<y>48</y>
+	</instance>
+	<instance type="G">
+		<x>128</x>
+		<y>48</y>
+	</instance>
+	<instance type="G">
+		<x>144</x>
+		<y>48</y>
+	</instance>
+	<instance type="G">
+		<x>160</x>
+		<y>48</y>
+	</instance>
+	<instance type="G">
+		<x>176</x>
+		<y>48</y>
+	</instance>
+	<instance type="G">
+		<x>272</x>
+		<y>64</y>
+	</instance>
+	<instance type="G">
+		<x>256</x>
+		<y>80</y>
+	</instance>
+	<instance type="G">
+		<x>272</x>
+		<y>80</y>
+	</instance>
+	<instance type="G">
+		<x>288</x>
+		<y>80</y>
+	</instance>
+	<instance type="G">
+		<x>240</x>
+		<y>96</y>
+	</instance>
+	<instance type="G">
+		<x>256</x>
+		<y>96</y>
+	</instance>
+	<instance type="G">
+		<x>272</x>
+		<y>96</y>
+	</instance>
+	<instance type="G">
+		<x>288</x>
+		<y>96</y>
+	</instance>
+	<instance type="G">
+		<x>304</x>
+		<y>96</y>
+	</instance>
+	<instance type="G">
+		<x>384</x>
+		<y>96</y>
+	</instance>
+	<instance type="Y">
+		<x>528</x>
+		<y>96</y>
+	</instance>
+	<instance type="K">
+		<x>592</x>
+		<y>96</y>
+	</instance>
+	<instance type="G">
+		<x>64</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>80</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>96</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>112</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>128</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>144</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>160</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>176</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>192</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>208</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>224</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>240</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>256</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>272</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>288</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>304</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>320</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>336</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>352</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>368</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>384</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>400</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>416</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>432</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>448</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>464</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>480</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>496</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>512</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>528</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>544</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>560</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>576</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>592</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>608</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>624</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>640</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>704</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>720</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>736</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>752</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>768</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>784</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>800</x>
+		<y>112</y>
+	</instance>
+	<instance type="G">
+		<x>64</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>96</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>128</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>160</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>192</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>224</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>256</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>288</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>320</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>352</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>384</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>416</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>448</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>480</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>512</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>544</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>576</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>608</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>640</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>704</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>736</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>768</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>800</x>
+		<y>128</y>
+	</instance>
+	<instance type="G">
+		<x>48</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>80</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>112</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>144</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>176</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>208</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>240</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>272</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>304</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>336</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>368</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>400</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>432</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>464</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>496</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>528</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>560</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>592</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>624</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>656</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>720</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>752</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>784</x>
+		<y>144</y>
+	</instance>
+	<instance type="G">
+		<x>0</x>
+		<y>208</y>
+	</instance>
+	<instance type="G">
+		<x>48</x>
+		<y>240</y>
+	</instance>
+	<instance type="G">
+		<x>0</x>
+		<y>272</y>
+	</instance>
+	<instance type="G">
+		<x>368</x>
+		<y>272</y>
+	</instance>
+	<instance type="G">
+		<x>192</x>
+		<y>288</y>
+	</instance>
+	<instance type="Y">
+		<x>256</x>
+		<y>288</y>
+	</instance>
+	<instance type="G">
+		<x>352</x>
+		<y>288</y>
+	</instance>
+	<instance type="G">
+		<x>368</x>
+		<y>288</y>
+	</instance>
+	<instance type="Y">
+		<x>432</x>
+		<y>288</y>
+	</instance>
+	<instance type="Y">
+		<x>496</x>
+		<y>288</y>
+	</instance>
+	<instance type="G">
+		<x>592</x>
+		<y>288</y>
+	</instance>
+	<instance type="G">
+		<x>800</x>
+		<y>288</y>
+	</instance>
+	<instance type="G">
+		<x>0</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>16</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>32</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>48</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>64</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>80</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>96</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>112</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>128</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>144</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>160</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>176</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>192</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>208</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>224</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>240</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>256</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>272</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>288</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>304</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>320</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>336</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>352</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>368</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>384</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>400</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>416</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>432</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>448</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>464</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>480</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>496</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>512</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>528</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>544</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>560</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>576</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>592</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>608</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>624</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>640</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>656</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>672</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>688</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>704</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>720</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>736</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>752</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>768</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>784</x>
+		<y>304</y>
+	</instance>
+	<instance type="G">
+		<x>800</x>
+		<y>304</y>
+	</instance>
+</level>

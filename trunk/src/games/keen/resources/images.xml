@@ -1,0 +1,44 @@
+<images>
+	<image name="ground"><path>src/games/keen/resources/images/ground.png</path></image>
+	<image name="yorp">
+		<path>src/games/keen/resources/images/yorp.png</path>
+		<width>32</width>
+		<state>
+			<directions order="EW">
+				<frame t="10" count="4" />
+			</directions>
+		</state>
+		<state count="2" />
+		<state />
+		<state />
+	</image>
+	<image name="keen">
+		<path>src/games/keen/resources/images/keen4.png</path>
+		<width>60</width>
+
+		<state>
+			<directions order="EW" />
+		</state>
+
+		<state>
+			<directions order="E">
+				<frame t="10" count="4" />
+			</directions>
+			<directions order="W">
+				<frame t="10" count="3" />
+			</directions>
+		</state>
+		
+		<state count="2">
+			<directions order="EW" />
+		</state>
+		
+		<state />
+		
+		<state>
+			<directions order="EW">
+				<frame t="10" count="2" />
+			</directions>
+		</state>
+	</image>
+</images>
