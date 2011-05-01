@@ -53,6 +53,9 @@ public class ImageParser extends Parser
         public void parse(Parser context, Element xmlElement) {
             imageName = xmlElement.getAttribute(NAME);
             
+            state = 0;
+            dir = Direction.NORTH;
+            
             imageAdded = false;
             parseChildren(context, xmlElement);
             if (!imageAdded) addImage(0);

@@ -1,13 +1,13 @@
 <images>
+	<image name="block">
+		<path>src/games/breakout/resources/block.png</path>
+		<width>40</width>
+		<state count="*" />
+	</image>
 	<image name="ball">
 		<path>src/games/breakout/resources/ball.png</path>
 	</image>
 	<image name="paddle">
 		<path>src/games/breakout/resources/paddle.png</path>
-	</image>
-		<image name="block">
-		<path>src/games/breakout/resources/block.png</path>
-		<width>40</width>
-		<state count="1" />
 	</image>
 </images>
