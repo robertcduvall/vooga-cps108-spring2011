@@ -11,15 +11,14 @@ public class BlocksCleared implements IGoal
     @Override
     public boolean checkCompletion (LevelManager levelManager)
     {
-        return playfield.getSpriteGroup("blocks").getActiveSprite() == null;
+        return playfield.getSpriteGroup("block").getActiveSprite() == null;
     }
 
 
     @Override
     public void progress ()
     {
-        // TODO Auto-generated method stub
-
+        System.out.println("You win!");
     }
 
 
