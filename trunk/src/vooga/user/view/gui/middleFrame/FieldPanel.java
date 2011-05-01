@@ -19,6 +19,7 @@ import vooga.user.controller.ILoginController;
 import vooga.user.main.ResourceManager;
 import vooga.user.model.LoginTemplate;
 import vooga.user.view.actions.AbstractLoginAction;
+import vooga.user.view.actions.AssignImageButton;
 import vooga.user.view.actions.EditButton;
 import vooga.user.view.actions.PasswordLogin;
 import vooga.user.view.actions.RegisterButton;
@@ -59,17 +60,17 @@ public class FieldPanel extends JPanel{
 					new RegisterButton(controller, this), 
 					new ViewInputButton(controller,this),
 					new EditButton(controller,this),
+					new AssignImageButton(controller, this)
 					};
 
 			// accesses a specific button class action based on it's index in the array
-			int count = 0;
-			for(Integer i : login.getButtonListener()){
-				count++;
-				System.out.println("inside i "+ " " + count + " " + i);
-			if (i >= 0) {
-				System.out.println(buttons[i]);
-				addButton(buttons[i],buttonNames[i]);}}
-	}
+			for (Integer i : login.getButtonListener()) {
+				if (i >= 0) {
+					addButton(buttons[i], buttonNames[i]);
+				}
+			}
+			this.add(new JLabel(""), "wrap para, gap para");
+		}
 	}
 	
 	private void addSection(String header, String[] prompts,
@@ -115,7 +116,7 @@ public class FieldPanel extends JPanel{
 	 */
 	public void addButton(ActionListener listener, String name) {
 		JButton button = new JButton(name);
-		this.add(button, "wrap para, gap para");
+		this.add(button, "gap para"); //wrap para, 
 		button.addActionListener(listener);
 	}
 

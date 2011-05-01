@@ -1,5 +1,6 @@
 package vooga.user.voogauser;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ public class VoogaUser {
 	public HashMap<String, ArrayList<AbstractGamePreference>> gameInfo = new HashMap<String, ArrayList<AbstractGamePreference>>();
 	public List<String> allGames = new ArrayList<String>(); //KEVIN WILL MAKE THIS METHOD  - getGameList
 	public String myUsername;
+	public Image myIcon;
 	public VoogaUser myUser;
 	
 	
@@ -87,5 +89,12 @@ public class VoogaUser {
 	 */
 	public String getUsername(){
 		return myUsername;
+	}
+	
+	public void setIcon(Image icon){
+		myIcon = icon;
+	}
+	public Image getImageIcon(){
+		return myIcon;
 	}
 }

@@ -80,7 +80,7 @@ public class LoginController implements ILoginController
  * This method exits the loginButton and 
  */
 	@Override
-	public void exitLogin() throws Exception{
+	public void logIn(){
 		myUser = model.getVoogaUser();
 		System.out.println("Username is " + myUser.getUsername());
 		arcadeController.swapToolbarButton(myUser);

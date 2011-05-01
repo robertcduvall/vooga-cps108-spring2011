@@ -1,6 +1,7 @@
 package vooga.user.controller;
 
 import vooga.user.view.gui.middleFrame.TextSection;
+import vooga.user.voogauser.VoogaUser;
 
 /**
  * Interface for the Controller in the MVC pattern for the login structure.
@@ -33,10 +34,12 @@ public interface ILoginController
 	
 	public void updateWithInformationPanel();
 	
+	public VoogaUser getVooga();
+	
 /**
  * This method saves the VoogaUser information and exits the Login of the system
 */
-	void exitLogin() throws Exception;
+	void logIn();
 	
 	void logOut();
 }
