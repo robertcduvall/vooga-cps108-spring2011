@@ -134,6 +134,5 @@ public class Parser
 		} catch (ParserConfigurationException e) {
 			throw ParserException.SYSTEM_ERROR;
 		}
-
 	}
 }
