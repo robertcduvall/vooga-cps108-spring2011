@@ -117,14 +117,14 @@ public class MainGame extends VoogaGame {
 	
 	
 	        //networking part
-	        isHost = false;
+	        isHost = true;
 	        network = new LocalNetworkEngine();
 	        
 	        //set up host
-//	        network.createHost(false);
+	        network.createHost(false);
 	        
 	        //connect to the host
-	        network.connect("10.180.111.162");
+	        //network.connect("10.180.111.162");
 	        
 	        remainingPlane = 2;
 		}
