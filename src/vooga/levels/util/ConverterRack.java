@@ -9,7 +9,6 @@ import java.util.Map;
 import vooga.core.VoogaGame;
 import vooga.reflection.Reflection;
 import vooga.resources.images.ImageLoader;
-import vooga.sprites.improvedsprites.Sprite;
 
 /**
  * An extendible class that allows conversion of strings to specified types.
@@ -110,6 +109,7 @@ public class ConverterRack {
 	/**
 	 * Construct an object given string assignments.
 	 */
+	@SuppressWarnings("unchecked")
 	public<T> T constructInstance(String className, List<String> assignments) {
 		Class<?> spriteClass;
 		try {

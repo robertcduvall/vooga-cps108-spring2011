@@ -1,3 +1,0 @@
-vooga/levels/example2/LevelTypeA_1.xml
-vooga/levels/example2/LevelTypeA_2.xml
-vooga/levels/example2/LevelTypeB_1.xml

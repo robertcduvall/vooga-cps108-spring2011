@@ -1,6 +1,8 @@
 package vooga.levels;
 
 import java.util.*;
+
+import vooga.levels.util.Converter;
 import vooga.levels.util.LevelParser;
 import vooga.levels.util.PoolDeferredConstructor;
 
@@ -9,6 +11,7 @@ import com.golden.gamedev.object.Background;
 import vooga.physics.PhysicsManager;
 import vooga.physics.VoogaPhysicsMediator;
 import vooga.resources.bundle.Bundle;
+import vooga.resources.xmlparser.XMLTag;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.buildable.components.IComponent;
@@ -309,4 +312,25 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         if (other != null && other instanceof AbstractLevel) return myId == ((AbstractLevel) other).getId();
         else return false;
     }
+
+
+    /**
+     * Add a custom XML tag to the parser. Used when adding custom tags to 
+     * a level XML file.
+     * @param tag Custom XML tag
+     */
+	public void addParserDefinition(XMLTag tag) {
+		myLevelParser.addDefinition(tag);
+	}
+	
+	/**
+	 * Add a custom type converter to the converter rack. Used when parsing
+	 * custom types from a level XML file. 
+	 * 
+	 * @param target target class to convert to
+	 * @param converter conversion class
+	 */
+	public void addTypeConverter(Class<?> target, Converter<?> converter){
+		myLevelParser.getConverterRack().addConverter(target, converter);
+	}
 }
