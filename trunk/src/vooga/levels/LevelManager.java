@@ -9,6 +9,7 @@ import vooga.core.VoogaGame;
 import vooga.core.VoogaState;
 import vooga.core.event.EventManager;
 import vooga.reflection.Reflection;
+import vooga.resources.xmlparser.XMLTag;
 
 
 /**
@@ -21,8 +22,8 @@ import vooga.reflection.Reflection;
  */
 public class LevelManager implements VoogaState
 {
-    /** The default name for the player group */
-    private static final String DEFAULT_PLAYER_GROUP_NAME = "default player";
+
+    private static final String DEFAULT_PLAYER_GROUP_NAME = "player";
 
     /** A map of level number to array of [levelFilePath, levelType ] */
     private Map<Integer, String[]> myLevelOrderMap;
@@ -285,6 +286,17 @@ public class LevelManager implements VoogaState
     public EventManager getEventManager ()
     {
         return myEventManager;
+    }
+    
+    
+    /**
+     * Add a custom XML tag to the parser. Used when adding custom tags to 
+     * a level XML file.
+     * @param tag Custom XML tag
+     */
+    public void addParserDefinition (XMLTag tag)
+    {
+    	myActiveLevel.addParserDefinition(tag);
     }
 
 

@@ -49,7 +49,8 @@ public class LevelParser extends Parser {
 								new InstanceTag(this),
 								new GoalTag(this),
 								new ComponentTag(this),
-								new MusicTag(this));
+								new MusicTag(this),
+								new StringsTag(level));
 	}
 	
 	public AbstractLevel getLevel() {
