@@ -1,4 +1,4 @@
-#summary (WORK IN PROGRESS) How to use the LevelManager, writing a supported level XML file, and extending the Level package to support new features.
+#summary How to use the LevelManager, writing a supported level XML file, and extending the Level package to support new features.
 
 = Introduction =
 
@@ -116,43 +116,61 @@ The {{{ <instance> }}} tag refers to a specific instance of a sprite you would l
 
 
 === {{{ <strings> }}} ===
-The {{{ <strings> }}} tag is used to specify key-value pairs for data that may be used anywhere in the level, but don't particularly fit as part of any of the previous tags.
+The {{{ <strings> }}} tag is used to specify key-value pairs for data that may be used anywhere in the level, but don't particularly fit as part of any of the previous tags. Key-value pairs are stored in a resource bundle and may be accessed using the method {{{ AbstractLevel.getBundle() }}} and any of the associated methods provided by the bundle object.
 
 
+== Level Class ==
+A game using the VOOGA engine must contain at least one level class that extends *AbstractLevel*. You should override the {{{ loadLevel() }}} method using any of the convenience methods to meet your needs. In theory, similar levels should be able to reuse the same level class - for example: a game may have 5 levels in which you shoot aliens that enter the screen from many directions; each of these levels can share a single level class that defines the basic functionality of the alien levels. However, for a game which has levels that behave considerably different, you should define an individual level class for each distinct type of level. 
 
-----
-
-        <instance type="asteroid">
-                <x>100</x>
-                <y>100</y>
-                <damage>true</damage>
-        </instance>
-
-        <strings>
-                <totalAsteroids>50</totalAsteroids>
-        </strings>
-
-The <strings> tag encloses key-value pairs of strings. For instance, foo would be the key to value bar in the example above. These are accessed via the Bundle object returned by the getBundle() method of ResourceManager.
-
-=Help=
-If you have any questions, first look at the asteroids example, then look at the design document in the downloads section (it's a bit outdated but it still should answer the majority of questions). After that if you still have questions, feel free to contact me at anytime at andrew.patterson@duke.edu  (Wes is out of town right now so you're more likely to be able to get ahold of me).  I'll do my best to answer your questions as soon as possible.
+The level class used to create each level when using level XML files is defined in the _resources.xml_ file as described [#LevelManager above]. 
 
 
-
-9	   * Level XML File		
-10	    * Background		
-11	    * Sprite Archetype		
-12	    * Collision Managers / Sprite Groups		
-13	    * Goals		
-14	    * Instances / Sprite Pool		
-15	   * Level Classes		
-16	   * Goals (Completing a Level)		
-17	  * The LevelManager		
-18	  * Adding Additional Features to Your Level
+== Goals == 
+Goals provide a mechanism for you to determine when and how a level is completed and what action the game should take afterward. Goals are intentionally under-defined to allow you to design a goal to fit your needs. A goal class should implement the interface *IGoal* and require definitions for the {{{ checkCompletion() }}} and {{{ progress() }}} methods. These two methods define the level-ending conditions and post-ending-action respectively. Each goal class has access to both the game and the current level to give you as much or as little information needed to define a goal. 
 
 
+= Adding Additional Features to Your Level =
+While the level package is fairly comprehensive, you may find that you would like to add some additional functionality to the level. 
 
 
+== Adding Additional Tags to the XML File ==
+A tag class should extend *XMLTag* and override the methods {{{ getTagName() }}} and {{{ parse() }}}. {{{ parse() }}} should define what should be done with the content obtained from the tag and also pass that content to its final location. An example is included below:
+
+{{{
+public MusicTag(LevelParser parser) {
+	this.parser = parser;
+}
+
+@Override
+public String getTagName() {
+	return MUSIC;
+}
+
+@Override
+public void parse(Parser context, Element xmlElement) {
+	String filename = xmlElement.getAttribute(FILE);
+	
+	parser.addToMusicQueue(filename);
+}
+}}}
+
+Once you have defined a new tag, you can add it to the parser definition list using {{{ AbstractLevel.addParserDefinition(XMLTag) }}}. Note, however, that this must be done for each level class that may use the new tag definition and should be included as part of the {{{ loadLevel() }}} method of the level class. 
 
 
-Adding a tag, levelmanager.activelevel.adddefinition(tag)
+== Type Converter ==
+Information in the XML file is stored as strings and must be converted as part of the parsing process. The level package includes converters for most of the primitive types as well as commonly used types in VOOGA, but you may find that a type you wish to use is not included. A conversion class should extend *Converter* and override the method {{{ convert() }}}. The {{{ convert() }}} method should return a result in the target class type. An example conversion class is included below:
+
+{{{
+private class DoubleConverter extends Converter<Double> {
+	@Override
+	public Double convert(String input) {
+		return Double.parseDouble(input);
+	}
+}
+}}}
+
+Once you have defined a new converter, you can add it to the *ConverterRack* using {{{ AbstractLevel.addTypeConverter(Class<?> target, Converter<?> converter) }}}. Note, however, that this must be done for each level class that may use the new type converter and should be included as part of the {{{ loadLevel() }}} method of the level class. 
+
+
+= Help! I'm Still Lost... =
+First, look at the asteroids example, then look at the design document in the downloads section (it's a bit outdated but it still should answer the majority of questions). If neither of those resources have answered your question, feel free to contact Wes (wab12@duke.edu) or Andrew (andrew.patterson@duke.edu) and we will do our best to answer your question as soon as possible. 
