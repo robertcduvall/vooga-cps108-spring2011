@@ -5,9 +5,7 @@ import java.util.Collection;
 import vooga.physics.collisionBehavior.EmptyCollisionBehavior;
 import vooga.physics.forceBehavior.EmptyForceBehavior;
 import vooga.physics.forceGenerator.AbstractForceGenerator;
-import vooga.physics.util.Force;
 import vooga.physics.util.IPhysicsToggle;
-import vooga.physics.util.VectorField;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
@@ -25,8 +23,8 @@ public abstract class AbstractPhysicsC extends BasicComponent implements ISprite
     private boolean isOn;
     private Velocity deltaVelocity;
 
-    private EmptyForceBehavior myForceBehavior;
-    private EmptyCollisionBehavior myCollisionBehavior;
+    protected EmptyForceBehavior myForceBehavior;
+    protected EmptyCollisionBehavior myCollisionBehavior;
 
     public AbstractPhysicsC(EmptyForceBehavior forceBehavior,
             EmptyCollisionBehavior collisionBehavior) {
@@ -38,6 +36,7 @@ public abstract class AbstractPhysicsC extends BasicComponent implements ISprite
         myForceBehavior = forceBehavior;
         myCollisionBehavior = collisionBehavior;
         this.isOn = isOn;
+        deltaVelocity = new Velocity(0, new Angle(0));
     }
 
     @Override

@@ -51,7 +51,8 @@ public class TestNewtonianBehavior {
         BasicPhysicsC basic1 = new BasicPhysicsC(new Velocity(10,new Angle(0)), 1);
         BasicPhysicsC basic2 = new BasicPhysicsC(new Velocity(5,new Angle(Math.PI)), 1);
         Angle collisionAngle = new Angle(Math.PI/2);
-        basic1.applyCollision(basic2.getCollisionBehavior(), collisionAngle, new Point(0,0), 1);
+        EmptyCollisionBehavior behave2 = basic2.getCollisionBehavior();
+        basic1.applyCollision(behave2, collisionAngle, new Point(0,0), 1);
         basic2.applyCollision(basic1.getCollisionBehavior(), collisionAngle, new Point(0,0), 1);
         Velocity delta1 = basic1.getDeltaVelocity();
         assertEquals("Delta1 magnitude", 5, delta1.getMagnitude(),0);
