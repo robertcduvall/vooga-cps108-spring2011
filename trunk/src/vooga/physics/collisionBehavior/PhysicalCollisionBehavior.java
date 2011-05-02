@@ -24,6 +24,7 @@ public class PhysicalCollisionBehavior extends MovableCollisionBehavior{
     }
 
     public Velocity collisionToVelocityChange(PhysicalCollisionBehavior otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        //PhysicalCollisionBehavior otherObject = (PhysicalCollisionBehavior) otherObjectAbstract; //<-THIS IS BAD
         double myParallel = this.getVelocity().getParallelComponent(angleOfImpact);
         double myPerp = this.getVelocity().getPerpComponent(angleOfImpact);
         double otherParallel = otherObject.getVelocity().getParallelComponent(angleOfImpact);
