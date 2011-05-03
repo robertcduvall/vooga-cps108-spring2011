@@ -59,6 +59,8 @@ public class MainGame extends VoogaGame {
     long startTime = 0;
     long stopTime = 0;
     long surviveTime = 0;
+    long score1 = 0;
+    long score2 = 0;
     
     boolean isHost = false;
     INetworkEngine network;
@@ -167,7 +169,10 @@ public class MainGame extends VoogaGame {
 			explosion1.render(arg0);
 			explosion2.render(arg0);
 			font.drawString(arg0, "Game Over", w/2 - 50, h/2 - 50);
-			font.drawString(arg0, "Survive Time: " + millisecToString(surviveTime), w/2 - 100, h/2);
+			if (isHost)
+				font.drawString(arg0, "Survive Time: " + millisecToString(score1), w/2 - 100, h/2);
+			else
+				font.drawString(arg0, "Survive Time: " + millisecToString(score2), w/2 - 100, h/2);
 		}
 	}
 
@@ -210,6 +215,9 @@ public class MainGame extends VoogaGame {
 				//System.out.println("time: "+arg0);
 				//receive the plane2
 				//List<Object> receivedCommands = network.update();
+				double plane2SpeedX = 0, plane2SpeedY = 0;
+				boolean p1Changed = false;
+				boolean p2Changed = false;
 				
 				//check for plane1
 				double plane1SpeedX = 0, plane1SpeedY = 0;
@@ -235,8 +243,6 @@ public class MainGame extends VoogaGame {
 			        		plane2.setX(Double.parseDouble(info.split("=")[1]));
 			        	if (info.split("=")[0].equals("y"))
 			        		plane2.setY(Double.parseDouble(info.split("=")[1]));
-			        	if (info.equals("explode"))
-			        		setPlane2Exploded(plane2);
 					}
 				}
 		        
@@ -268,37 +274,45 @@ public class MainGame extends VoogaGame {
 		      
 				List<Object> receivedCommands = network.update();
 				for (Object commands : receivedCommands){
-				String command = (String) commands;
-		        if(command.startsWith("p1")){
-		        	String info = command.split(",")[1];
-		        	if (info.split("=")[0].equals("x"))
-		        		plane1.setX(Double.parseDouble(info.split("=")[1]));
-		        	if (info.split("=")[0].equals("y"))
-		        		plane1.setY(Double.parseDouble(info.split("=")[1]));
-		        	if (info.equals("explode"))
-		        		setPlane1Exploded(plane1);
-		        }
-		        if(command.startsWith("b")){
-		        	Sprite bullet = getAvailableSprite();
-		        	bullet.setX(Double.parseDouble(command.split(",")[1]));
-		        	bullet.setY(Double.parseDouble(command.split(",")[2]));
-		        	bullet.setHorizontalSpeed(Double.parseDouble(command.split(",")[3]));
-		        	bullet.setVerticalSpeed(Double.parseDouble(command.split(",")[4]));
-		        }
-		        
-		        collisionType.checkCollision();
-		        
-		    }
-			if (remainingPlane == 0)
-				Status = AfterRunningStatus;
+					String command = (String) commands;
+					if(command.startsWith("p1")){
+						String info = command.split(",")[1];
+						if (info.split("=")[0].equals("x"))
+							plane1.setX(Double.parseDouble(info.split("=")[1]));
+						if (info.split("=")[0].equals("y"))
+							plane1.setY(Double.parseDouble(info.split("=")[1]));
+					}
+					if(command.startsWith("b")){
+						Sprite bullet = getAvailableSprite();
+						bullet.setX(Double.parseDouble(command.split(",")[1]));
+						bullet.setY(Double.parseDouble(command.split(",")[2]));
+						bullet.setHorizontalSpeed(Double.parseDouble(command.split(",")[3]));
+						bullet.setVerticalSpeed(Double.parseDouble(command.split(",")[4]));
+		        	}
+				}
+				//check collision
+				collisionType.checkCollision();
 		}
 	}
 		else if (Status == AfterRunningStatus){
 			explosion1.update(arg0);
 			explosion2.update(arg0);
 			bullets.update(arg0);
-			if (keyPressed(KeyEvent.VK_ENTER)){
-				Status = BeforeRunningStatus;
+			if (isHost){
+				if (keyPressed(KeyEvent.VK_ENTER)){
+					Status = AtRunningStatus;
+					startTime = System.currentTimeMillis();
+					network.send("GameStart");
+				}
+			}
+			else{
+//				String command = receivedCommands.poll();
+				List<Object> receivedCommands = network.update();
+				for (Object commands : receivedCommands)
+					if (((String)commands).equals("GameStart")){
+						Status = AtRunningStatus;
+						startTime = System.currentTimeMillis();
+					}
 			}
 		}
 		
@@ -426,21 +440,23 @@ public class MainGame extends VoogaGame {
 				explosion1.setAnimate(true);
 				explosion1.setLoopAnim(false);
 				remainingPlane--;
+				score1 = System.currentTimeMillis() - startTime;
 				//send update
-				
-				network.send("p1,explode");
-				
-				System.out.println("remaining plane: "+ remainingPlane);
+				//
 				
 			} else if (s1.equals(plane2)) {
 				//set explosion
+				explosion2.setX(s1.getX());
+				explosion2.setY(s1.getY());
 				s1.setActive(false);
 				s2.setActive(false);
+				explosion2.setAnimate(true);
+				explosion2.setLoopAnim(false);
+				remainingPlane--;
+				score2 = System.currentTimeMillis() - startTime;
 				//send update
 				//
-				network.send("p2,explode");
-				
-				System.out.println("remaining plane: "+ remainingPlane);
+
 			}
 			
 			if (remainingPlane == 0){
@@ -451,22 +467,6 @@ public class MainGame extends VoogaGame {
 		}
 	}
 
-	private void setPlane1Exploded(Sprite plane){
-		explosion1.setX(plane.getX());
-		explosion1.setY(plane.getY());
-		explosion1.setAnimate(true);
-		explosion1.setLoopAnim(false);
-		remainingPlane--;
-	}
-	
-	private void setPlane2Exploded(Sprite plane){
-		explosion2.setX(plane.getX());
-		explosion2.setY(plane.getY());
-		explosion2.setAnimate(true);
-		explosion2.setLoopAnim(false);
-		remainingPlane--;
-	}
-	
 	@Override
 	public void updatePlayField(long elapsedTime) {
 		// TODO Auto-generated method stub
