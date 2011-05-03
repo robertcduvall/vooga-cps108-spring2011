@@ -210,9 +210,6 @@ public class MainGame extends VoogaGame {
 				//System.out.println("time: "+arg0);
 				//receive the plane2
 				//List<Object> receivedCommands = network.update();
-				double plane2SpeedX = 0, plane2SpeedY = 0;
-				boolean p1Changed = false;
-				boolean p2Changed = false;
 				
 				//check for plane1
 				double plane1SpeedX = 0, plane1SpeedY = 0;
@@ -238,6 +235,8 @@ public class MainGame extends VoogaGame {
 			        		plane2.setX(Double.parseDouble(info.split("=")[1]));
 			        	if (info.split("=")[0].equals("y"))
 			        		plane2.setY(Double.parseDouble(info.split("=")[1]));
+			        	if (info.equals("explode"))
+			        		setPlane2Exploded(plane2);
 					}
 				}
 		        
@@ -276,6 +275,8 @@ public class MainGame extends VoogaGame {
 		        		plane1.setX(Double.parseDouble(info.split("=")[1]));
 		        	if (info.split("=")[0].equals("y"))
 		        		plane1.setY(Double.parseDouble(info.split("=")[1]));
+		        	if (info.equals("explode"))
+		        		setPlane1Exploded(plane1);
 		        }
 		        if(command.startsWith("b")){
 		        	Sprite bullet = getAvailableSprite();
@@ -284,7 +285,12 @@ public class MainGame extends VoogaGame {
 		        	bullet.setHorizontalSpeed(Double.parseDouble(command.split(",")[3]));
 		        	bullet.setVerticalSpeed(Double.parseDouble(command.split(",")[4]));
 		        }
+		        
+		        collisionType.checkCollision();
+		        
 		    }
+			if (remainingPlane == 0)
+				Status = AfterRunningStatus;
 		}
 	}
 		else if (Status == AfterRunningStatus){
@@ -421,20 +427,20 @@ public class MainGame extends VoogaGame {
 				explosion1.setLoopAnim(false);
 				remainingPlane--;
 				//send update
-				//
+				
+				network.send("p1,explode");
+				
+				System.out.println("remaining plane: "+ remainingPlane);
 				
 			} else if (s1.equals(plane2)) {
 				//set explosion
-				explosion2.setX(s1.getX());
-				explosion2.setY(s1.getY());
 				s1.setActive(false);
 				s2.setActive(false);
-				explosion2.setAnimate(true);
-				explosion2.setLoopAnim(false);
-				remainingPlane--;
 				//send update
 				//
-
+				network.send("p2,explode");
+				
+				System.out.println("remaining plane: "+ remainingPlane);
 			}
 			
 			if (remainingPlane == 0){
@@ -445,6 +451,22 @@ public class MainGame extends VoogaGame {
 		}
 	}
 
+	private void setPlane1Exploded(Sprite plane){
+		explosion1.setX(plane.getX());
+		explosion1.setY(plane.getY());
+		explosion1.setAnimate(true);
+		explosion1.setLoopAnim(false);
+		remainingPlane--;
+	}
+	
+	private void setPlane2Exploded(Sprite plane){
+		explosion2.setX(plane.getX());
+		explosion2.setY(plane.getY());
+		explosion2.setAnimate(true);
+		explosion2.setLoopAnim(false);
+		remainingPlane--;
+	}
+	
 	@Override
 	public void updatePlayField(long elapsedTime) {
 		// TODO Auto-generated method stub
