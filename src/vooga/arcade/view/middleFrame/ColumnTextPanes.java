@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.Document;
 
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.helper.ResourceManager;
@@ -56,13 +57,14 @@ public class ColumnTextPanes extends JPanel
 		try
 		{
 			// Try to display the page
+			Document doc = editorPanes.get(i).getDocument();
+			doc.putProperty(Document.StreamDescriptionProperty, null);
 			editorPanes.get(i).setPage("file://"+url);
 		}
 		catch (IOException e)
 		{
 			System.err.println("FAIL URL");
 		}
-
 	}
 
 }
