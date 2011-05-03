@@ -62,7 +62,7 @@ public class MainGame extends VoogaGame {
     
     boolean isHost = false;
     INetworkEngine network;
-    PriorityQueue<String> receivedCommands;
+//    PriorityQueue<String> receivedCommands;
     
     int remainingPlane = 2;
  
@@ -75,7 +75,7 @@ public class MainGame extends VoogaGame {
 	@Override
 	public void initResources() {
 		if (!haveInitialized){
-			this.setFPS(30);
+			this.setFPS(40);
 			
 			haveInitialized = true;
 			
@@ -133,7 +133,7 @@ public class MainGame extends VoogaGame {
 	        
 	        remainingPlane = 2;
 	        
-	        receivedCommands = new PriorityQueue<String>();
+//	        receivedCommands = new PriorityQueue<String>();
 		}
 	
 	}
@@ -173,7 +173,10 @@ public class MainGame extends VoogaGame {
 
 	@Override
 	public void update(long arg0) {
-		updateReceivedList();
+//		updateReceivedList();
+		
+		System.out.println("time elapse: "+arg0);
+		
 		if (Status == BeforeRunningStatus){
 			initResources();
 			if (isHost){
@@ -184,10 +187,13 @@ public class MainGame extends VoogaGame {
 				}
 			}
 			else{
-				String command = receivedCommands.poll();
-				if (command != null && command.equals("GameStart"))
-					Status = AtRunningStatus;
-					startTime = System.currentTimeMillis();
+//				String command = receivedCommands.poll();
+				List<Object> receivedCommands = network.update();
+				for (Object commands : receivedCommands)
+					if (((String)commands).equals("GameStart")){
+						Status = AtRunningStatus;
+						startTime = System.currentTimeMillis();
+					}
 			}
 		}
 		else if (Status == AtRunningStatus){
@@ -207,11 +213,9 @@ public class MainGame extends VoogaGame {
 				boolean p1Changed = false;
 				boolean p2Changed = false;
 				
-				if (receivedCommands.size() != 0)
-		        	System.out.println(receivedCommands.size());
-				
-				while (!receivedCommands.isEmpty()){
-				String command = receivedCommands.poll();
+				List<Object> receivedCommands = network.update();
+				for (Object commands : receivedCommands){
+				String command = (String) commands;
 				p2Changed = true;
 				if (command.equals("MoveUp"))
 					plane2SpeedY = -1 * PlaneSpeed;
@@ -264,10 +268,9 @@ public class MainGame extends VoogaGame {
 		        if (keyDown(KeyEvent.VK_UP))       network.send("MoveUp");
 		        if (keyDown(KeyEvent.VK_DOWN))     network.send("MoveDown");
 		        
-		        if (receivedCommands.size() != 0)
-		        	System.out.println(receivedCommands.size());
-		        while (!receivedCommands.isEmpty()){
-		        String command = receivedCommands.poll();
+				List<Object> receivedCommands = network.update();
+				for (Object commands : receivedCommands){
+				String command = (String) commands;
 		        if(command.startsWith("p1")){
 		        	String info = command.split(",")[1];
 		        	if (info.split("=")[0].equals("x"))
@@ -302,12 +305,12 @@ public class MainGame extends VoogaGame {
 		
 	}
 	
-	private void updateReceivedList(){
-		List<Object> received = network.update();
-		for (Object command : received){
-			receivedCommands.offer((String) command);
-		}
-	}
+//	private void updateReceivedList(){
+//		List<Object> received = network.update();
+//		for (Object command : received){
+//			receivedCommands.offer((String) command);
+//		}
+//	}
 	
 	private void checkValidity(Sprite plane){
 		if (plane.getX() < 0)                plane.setX(0);
