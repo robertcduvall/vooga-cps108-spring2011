@@ -3,7 +3,11 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.PriorityQueue;
+
+import javax.management.Query;
 
 import vooga.core.VoogaGame;
 import vooga.network.INetworkEngine;
@@ -58,6 +62,7 @@ public class MainGame extends VoogaGame {
     
     boolean isHost = false;
     INetworkEngine network;
+    PriorityQueue<String> receivedCommands;
     
     int remainingPlane = 2;
  
@@ -70,7 +75,7 @@ public class MainGame extends VoogaGame {
 	@Override
 	public void initResources() {
 		if (!haveInitialized){
-			this.setFPS(50);
+			this.setFPS(30);
 			
 			haveInitialized = true;
 			
@@ -118,7 +123,7 @@ public class MainGame extends VoogaGame {
 	
 	        //networking part
 	        isHost = true;
-	        network = new LocalNetworkEngine();
+	        network = new LocalNetworkEngine(5421);
 	        
 	        //set up host
 	        network.createHost(false);
@@ -127,6 +132,8 @@ public class MainGame extends VoogaGame {
 	        //network.connect("10.180.111.162");
 	        
 	        remainingPlane = 2;
+	        
+	        receivedCommands = new PriorityQueue<String>();
 		}
 	
 	}
@@ -140,7 +147,7 @@ public class MainGame extends VoogaGame {
 			if (isHost)
 				font.drawString(arg0, "Press Enter to start the game", w/2 - 100, h/2);
 			else
-				font.drawString(arg0, "Wait for the host to start the game", w/2 - 100, h/2);
+				font.drawString(arg0, "Wait for the host to start the game", w/2 - 150, h/2);
 		}
 		else if (Status == AtRunningStatus){
 			backgr.render(arg0);
@@ -166,11 +173,21 @@ public class MainGame extends VoogaGame {
 
 	@Override
 	public void update(long arg0) {
+		updateReceivedList();
 		if (Status == BeforeRunningStatus){
 			initResources();
-			if (keyPressed(KeyEvent.VK_ENTER)){
-				Status = AtRunningStatus;
-				startTime = System.currentTimeMillis();
+			if (isHost){
+				if (keyPressed(KeyEvent.VK_ENTER)){
+					Status = AtRunningStatus;
+					startTime = System.currentTimeMillis();
+					network.send("GameStart");
+				}
+			}
+			else{
+				String command = receivedCommands.poll();
+				if (command != null && command.equals("GameStart"))
+					Status = AtRunningStatus;
+					startTime = System.currentTimeMillis();
 			}
 		}
 		else if (Status == AtRunningStatus){
@@ -185,26 +202,36 @@ public class MainGame extends VoogaGame {
 			
 			if (isHost){
 				//receive the plane2
-				List<Object> receivedCommands = network.update();
+				//List<Object> receivedCommands = network.update();
 				double plane2SpeedX = 0, plane2SpeedY = 0;
-				for (Object command : receivedCommands){
-					if (((String) command).equals("MoveUp"))
-						plane2SpeedY = -1 * PlaneSpeed;
-					if (((String) command).equals("MoveDown"))
-						plane2SpeedY = PlaneSpeed;
-					if (((String) command).equals("MoveLeft"))
-						plane2SpeedX = -1 * PlaneSpeed;
-					if (((String) command).equals("MoveRight"))
-						plane2SpeedX = PlaneSpeed;
+				boolean p1Changed = false;
+				boolean p2Changed = false;
+				
+				if (receivedCommands.size() != 0)
+		        	System.out.println(receivedCommands.size());
+				
+				while (!receivedCommands.isEmpty()){
+				String command = receivedCommands.poll();
+				p2Changed = true;
+				if (command.equals("MoveUp"))
+					plane2SpeedY = -1 * PlaneSpeed;
+				else if (command.equals("MoveDown"))
+					plane2SpeedY = PlaneSpeed;
+				else if (command.equals("MoveLeft"))
+					plane2SpeedX = -1 * PlaneSpeed;
+				else if (command.equals("MoveRight"))
+					plane2SpeedX = PlaneSpeed;
 				}
 				plane2.setSpeed(plane2SpeedX, plane2SpeedY);
 				
+				
+				
 				//check for plane1
 				double plane1SpeedX = 0, plane1SpeedY = 0;
-				if (keyDown(KeyEvent.VK_LEFT))     plane1SpeedX = -1 * PlaneSpeed;
-		        if (keyDown(KeyEvent.VK_RIGHT))    plane1SpeedX = PlaneSpeed;
-		        if (keyDown(KeyEvent.VK_UP))       plane1SpeedY = -1 * PlaneSpeed;
-		        if (keyDown(KeyEvent.VK_DOWN))     plane1SpeedY = PlaneSpeed;
+				if (keyDown(KeyEvent.VK_LEFT))     {plane1SpeedX = -1 * PlaneSpeed; p1Changed = true;}
+		        if (keyDown(KeyEvent.VK_RIGHT))    {plane1SpeedX = PlaneSpeed;p1Changed = true;}
+		        if (keyDown(KeyEvent.VK_UP))       {plane1SpeedY = -1 * PlaneSpeed;p1Changed = true;}
+		        if (keyDown(KeyEvent.VK_DOWN))     {plane1SpeedY = PlaneSpeed;p1Changed = true;}
 		        plane1.setSpeed(plane1SpeedX, plane1SpeedY);
 		        
 		        //check validity
@@ -221,38 +248,43 @@ public class MainGame extends VoogaGame {
 				collisionType.checkCollision();
 		        
 		        //send command to client
+				if (p1Changed){
 		        network.send("p1,x=" + plane1.getX());
 		        network.send("p1,y=" + plane1.getY());
+				}
+				if (p2Changed){
 		        network.send("p2,x=" + plane2.getX());
 		        network.send("p2,y=" + plane2.getY());
+				}
 			}
+			//receive update for client
 			else{
 				if (keyDown(KeyEvent.VK_LEFT))     network.send("MoveLeft");
 		        if (keyDown(KeyEvent.VK_RIGHT))    network.send("MoveRight");
 		        if (keyDown(KeyEvent.VK_UP))       network.send("MoveUp");
 		        if (keyDown(KeyEvent.VK_DOWN))     network.send("MoveDown");
 		        
-		        List<Object> receivedCommands = network.update();
-		        for (Object command : receivedCommands){
-		        	if(((String) command).startsWith("p1")){
-		        		String info = ((String) command).split(",")[1];
-		        		if (info.split("=")[0].equals("x"))
-		        			plane1.setX(Double.parseDouble(info.split("=")[1]));
-		        		if (info.split("=")[0].equals("y"))
-		        			plane1.setY(Double.parseDouble(info.split("=")[1]));
-		        	}
-		        	else if (((String) command).startsWith("p2")){
-		        		String info = ((String) command).split(",")[1];
-		        		if (info.split("=")[0].equals("x"))
-		        			plane2.setX(Double.parseDouble(info.split("=")[1]));
-		        		if (info.split("=")[0].equals("y"))
-		        			plane2.setY(Double.parseDouble(info.split("=")[1]));
-		        	}
+		        if (receivedCommands.size() != 0)
+		        	System.out.println(receivedCommands.size());
+		        while (!receivedCommands.isEmpty()){
+		        String command = receivedCommands.poll();
+		        if(command.startsWith("p1")){
+		        	String info = command.split(",")[1];
+		        	if (info.split("=")[0].equals("x"))
+		        		plane1.setX(Double.parseDouble(info.split("=")[1]));
+		        	if (info.split("=")[0].equals("y"))
+		        		plane1.setY(Double.parseDouble(info.split("=")[1]));
 		        }
-		        
-			}
-			
+		        else if (command.startsWith("p2")){
+		        	String info = ((String) command).split(",")[1];
+		        	if (info.split("=")[0].equals("x"))
+		        		plane2.setX(Double.parseDouble(info.split("=")[1]));
+		        	if (info.split("=")[0].equals("y"))
+		        		plane2.setY(Double.parseDouble(info.split("=")[1]));
+		        }
+		    }
 		}
+	}
 		else if (Status == AfterRunningStatus){
 			explosion1.update(arg0);
 			explosion2.update(arg0);
@@ -268,6 +300,13 @@ public class MainGame extends VoogaGame {
 //		explosion1.update(arg0);
 //		bullets.update(arg0);
 		
+	}
+	
+	private void updateReceivedList(){
+		List<Object> received = network.update();
+		for (Object command : received){
+			receivedCommands.offer((String) command);
+		}
 	}
 	
 	private void checkValidity(Sprite plane){
@@ -340,7 +379,6 @@ public class MainGame extends VoogaGame {
 		else if (location == fromDown)
 			ySpeed *= -1;
 		obj.setSpeed(xSpeed, ySpeed);
-		System.out.println("x= "+xSpeed+", y= "+ySpeed);
 	}
 	
 	private void setRandomLocation(Sprite obj, int location){
