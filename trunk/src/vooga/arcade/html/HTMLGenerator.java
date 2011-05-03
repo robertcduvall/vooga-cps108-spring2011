@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class HTMLGenerator
 {
-	private String header = "<html><body>";
-	private String footer = "</body></html>";
+	private String header = "<html><body><font face=\"Verdana\">";
+	private String footer = "</font></body></html>";
 	private StringBuilder htmlBody;
 
 	public HTMLGenerator()
