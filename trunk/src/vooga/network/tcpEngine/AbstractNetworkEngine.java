@@ -25,6 +25,10 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 	protected ServerSocket serverSocket;
 	protected int gameSize;
 	
+	protected void finalize(){
+		disconnect();
+    }
+	
 	protected AbstractNetworkEngine(int port){
 		this.port = port;
 		connectionList = Collections
