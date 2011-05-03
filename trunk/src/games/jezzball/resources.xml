@@ -1,0 +1,8 @@
+<resources>
+	<images>
+		<source>src/games/jezzball/resources/images.xml</source>
+	</images>
+
+	<level id="0" type="games.jezzball.Level">src/games/jezzball/resources/level0.xml</level>
+	<source>src/games/asteroids/resources/keymap.xml</source>
+</resources>

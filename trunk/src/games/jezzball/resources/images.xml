@@ -1,0 +1,14 @@
+<images>
+	<image name="ball">
+		<path>src/games/jezzball/resources/ball.png</path>
+	</image>
+	<image name="cursor">
+		<path>src/games/jezzball/resources/arrow.gif</path>
+	</image>
+	<image name="wall">
+		<path>src/games/jezzball/resources/wall.png</path>
+	</image>
+	<image name="tile">
+		<path>src/games/jezzball/resources/tile.png</path>
+	</image>
+</images>
