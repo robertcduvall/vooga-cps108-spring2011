@@ -277,6 +277,13 @@ public class MainGame extends VoogaGame {
 		        	if (info.split("=")[0].equals("y"))
 		        		plane1.setY(Double.parseDouble(info.split("=")[1]));
 		        }
+		        if(command.startsWith("b")){
+		        	Sprite bullet = getAvailableSprite();
+		        	bullet.setX(Double.parseDouble(command.split(",")[1]));
+		        	bullet.setY(Double.parseDouble(command.split(",")[2]));
+		        	bullet.setHorizontalSpeed(Double.parseDouble(command.split(",")[3]));
+		        	bullet.setVerticalSpeed(Double.parseDouble(command.split(",")[4]));
+		        }
 		    }
 		}
 	}
@@ -353,6 +360,7 @@ public class MainGame extends VoogaGame {
 				setRandomSpeed(bullet,BulletSpeed,location);
 				
 				//send out the bullet location and velocity
+				network.send("b,"+bullet.getX()+","+bullet.getY()+","+bullet.getHorizontalSpeed()+","+bullet.getVerticalSpeed());
 			}
 		}
 	}
