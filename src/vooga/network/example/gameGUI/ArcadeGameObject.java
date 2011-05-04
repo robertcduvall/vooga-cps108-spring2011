@@ -18,14 +18,21 @@ import com.golden.gamedev.GameLoader;
  * @author KevinWang
  * @author Ethan Goh
  * 
+ * This class is adepted from the Arcade project.
+ * 
  */
+
 public class ArcadeGameObject {
 
-	protected Game game;
-	protected Dimension dimension;
+	private Game game;
+	private Dimension dimension;
+	private String name;
+	private boolean isHost = false;
+	private int port = 0;
 
-	public ArcadeGameObject() {
+	public ArcadeGameObject(String name) {
 		this.dimension = new Dimension(640,480);
+		this.name = name;
 	}
 
 	/**
@@ -52,12 +59,21 @@ public class ArcadeGameObject {
 	 */
 	private void createGame() {
 		Class cls = null;
-
+		
 		try {
-			cls = Class.forName("vooga.network.example.Game.MainGame");
+			cls = Class.forName(name);
 			game = (Game) (cls.newInstance());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void setPort(int p){
+		port = p;
+	}
+	
+	public void setHost(boolean b){
+		isHost = b;
 	}
 }
