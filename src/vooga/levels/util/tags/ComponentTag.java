@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import vooga.levels.util.LevelParser;
@@ -40,15 +41,16 @@ public class ComponentTag extends XMLTag {
 		
 		// Get arguments.
 		List<String> args = new ArrayList<String>();
-		NodeList nodes = parent.getChildNodes();
+		NodeList nodes = xmlElement.getChildNodes();
 		for(int i = 0; i < nodes.getLength(); i++) {
-			String value = getValue((Element) nodes.item(i));
-			args.add(value);
+		    if(nodes.item(i).getNodeType() != Node.ELEMENT_NODE) continue;
+			args.add(getValue((Element) nodes.item(i)));
 		}
 		
 		IComponent component = parser.getConverterRack().constructInstance(className, args);
 
 		SpriteConstructor archetype = parser.getSpriteConstructor(parentArchetype);
+		System.out.println("comp");
 		archetype.addComponent(component);
 	}
 }

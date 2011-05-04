@@ -208,14 +208,25 @@ public class VoogaPlayField
 
 
     /**
+     * Inserts a sprite into a sprite group.
+     * 
+     * @param Sprite to add
+     */
+    public void addSpriteToGroup(String group, Sprite extra)
+    {
+        getSpriteGroup(group).addSprites(extra);
+    }
+    
+    
+    /**
      * Inserts a sprite directly into the playingfield without explicitly giving
      * it a sprite group.
      * 
      * @param Sprite to add
      */
-    public void add(Sprite extra)
+    public void addSprite(Sprite extra)
     {
-        getSpriteGroup("").addSprites(extra);
+    	addSpriteToGroup("", extra);
     }
 
 

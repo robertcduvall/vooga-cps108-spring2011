@@ -119,6 +119,7 @@ public class LevelManager implements VoogaState
         try {
             myActiveLevel.parseXMLFile(desiredLevelPath, id);
         } catch (Exception e) {
+        	e.printStackTrace();
             throw LevelException.LEVEL_PARSING_ERROR;
         }
         
@@ -126,6 +127,7 @@ public class LevelManager implements VoogaState
             myActiveLevel.loadLevel();
             myPastLevels.add(myActiveLevel);
         } catch (Exception e) {
+        	e.printStackTrace();
             throw LevelException.LEVEL_LOADING_ERROR;
         }
     }
@@ -150,12 +152,12 @@ public class LevelManager implements VoogaState
 
 
     /**
-     * Retrieves the highest running level's id
+     * Retrieves the highest running level
      */
-    public int getCurrentLevel ()
+    public AbstractLevel getCurrentLevel ()
     {
-        if (myActiveLevel == null) return -1;
-        return myActiveLevel.getId();
+        if (myActiveLevel == null) return null;
+        return myActiveLevel;
     }
 
 
@@ -260,7 +262,7 @@ public class LevelManager implements VoogaState
      * 
      * @param player sprite group to add
      */
-    public void addPlayer (SpriteGroup<? extends Sprite> player)
+	public void addPlayer (SpriteGroup<? extends Sprite> player)
     {
         if(player == null) return;
         myPlayers.add(player);
