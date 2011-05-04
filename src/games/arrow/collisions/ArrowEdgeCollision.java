@@ -9,7 +9,7 @@ public class ArrowEdgeCollision extends EdgeCollisionGroup<Arrow> {
 
 	@Override
 	public void collidedTop(Arrow s) {
-		//do nothing
+		s.setAbsoluteSpeed(0);
 	}
 
 	@Override
