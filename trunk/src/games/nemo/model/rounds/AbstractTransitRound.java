@@ -1,10 +1,10 @@
-package vooga.stats.example02.model.rounds;
+package games.nemo.model.rounds;
 
 import java.awt.Graphics2D;
 import java.io.IOException;
 
-import vooga.stats.example02.util.commands.ImageReader;
-import vooga.stats.example02.util.resources.ResourceManager;
+import games.nemo.util.commands.ImageReader;
+import games.nemo.util.resources.ResourceManager;
 
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.GameFont;
@@ -28,10 +28,6 @@ public abstract class AbstractTransitRound extends AbstractRound
 		myResourceManager = ResourceManager.getManager(resourceFile);
 		myKeyword = keyword;
 		myFont = font;
-		//
-		//System.out.println(myResourceManager.getString(myKeyword));
-		//System.out.println("Width: "+Integer.toString(ImageReader.readImage(myResourceManager.getString(myKeyword)).getWidth()));//
-		//
 		myBackground = new ImageBackground(ImageReader.readImage(myResourceManager.getString(myKeyword)));
 
 		

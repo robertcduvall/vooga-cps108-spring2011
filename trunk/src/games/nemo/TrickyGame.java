@@ -1,24 +1,24 @@
-package vooga.stats.example02;
+package games.nemo;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import vooga.stats.example02.model.FishSharkCollision;
-import vooga.stats.example02.model.rounds.AbstractRound;
-import vooga.stats.example02.model.rounds.EndRound;
-import vooga.stats.example02.model.rounds.GameRound;
-import vooga.stats.example02.model.rounds.NextRound;
-import vooga.stats.example02.model.rounds.StartRound;
+import games.nemo.model.FishSharkCollision;
+import games.nemo.model.rounds.AbstractRound;
+import games.nemo.model.rounds.EndRound;
+import games.nemo.model.rounds.GameRound;
+import games.nemo.model.rounds.NextRound;
+import games.nemo.model.rounds.StartRound;
 
-import vooga.stats.example02.spriteGroups.Nemos;
-import vooga.stats.example02.spriteGroups.Sharks;
-import vooga.stats.example02.util.commands.ImageReader;
-import vooga.stats.example02.util.resources.ResourceManager;
-import vooga.stats.example02.view.components.ErrorCatcher;
+import games.nemo.spriteGroups.Nemos;
+import games.nemo.spriteGroups.Sharks;
+import games.nemo.util.commands.ImageReader;
+import games.nemo.util.resources.ResourceManager;
+import games.nemo.view.components.ErrorCatcher;
 
-import vooga.stats.example02.characters.Nemo;
+import games.nemo.characters.Nemo;
 
 import com.golden.gamedev.Game;
 import com.golden.gamedev.GameLoader;

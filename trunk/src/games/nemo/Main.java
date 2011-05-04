@@ -1,10 +1,15 @@
-package vooga.stats.example02;
+package games.nemo;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import vooga.stats.example02.util.resources.ResourceManager;
-import vooga.stats.example02.view.components.ErrorCatcher;
+import javax.imageio.ImageIO;
+
+import games.nemo.util.resources.ResourceManager;
+import games.nemo.view.components.ErrorCatcher;
 
 import com.golden.gamedev.Game;
 import com.golden.gamedev.GameLoader;
@@ -23,13 +28,25 @@ public class Main
 	private static String GAME_RESOURCE = "game";	
 	private static String WINDOW_SIZE = "window_size";
 	
+	private ResourceManager myResourceManager;
+	
 	public class Tester extends Game {
 		private PlayField myTester;
 		
 		@Override
 		public void initResources() {
+			
+			myResourceManager = ResourceManager.getManager(GAME_RESOURCE);
+			
+			//ImageBackground backgr = new ImageBackground(getImage(
+					//myResourceManager.getString("background_image")));
+			
+			ImageBackground backgr = new ImageBackground(ImageReader.readImage(
+					myResourceManager.getString("background_image")));
+			
 			myTester = new PlayField();
-			myTester.setBackground(new ImageBackground(getImage("resources/opening.jpg")));
+			//myTester.setBackground(new ImageBackground(getImage("resources/opening.jpg")));
+			myTester.setBackground(backgr);
 		}
 		
 		@Override
@@ -52,10 +69,12 @@ public class Main
 		
 		String[] windowSize = resources.getStringArray(WINDOW_SIZE,",");
 		
-		//TrickyGame myGame = new TrickyGame();
+		TrickyGame myGame = new TrickyGame();
 		
+		/*
 		Main testMain = new Main();
 		Tester myGame = testMain.new Tester();
+		*/
 		
 		GameLoader myGameLoader = new GameLoader();
 		

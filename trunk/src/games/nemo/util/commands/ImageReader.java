@@ -1,4 +1,4 @@
-package vooga.stats.example02.util.commands;
+package games.nemo.util.commands;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import vooga.stats.example02.view.components.ErrorCatcher;
+import games.nemo.view.components.ErrorCatcher;
 
 /**
  * A command for reading image
@@ -42,9 +42,6 @@ public class ImageReader {
                     new FileInputStream(myLocation));
             myBufferedImage = ImageIO.read(is);
         } catch (IOException ex) {
-        	//
-        	System.out.println(ex.getMessage());
-        	//
             new ErrorCatcher(ex.getMessage());
         }
 
