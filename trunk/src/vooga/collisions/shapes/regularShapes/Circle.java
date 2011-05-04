@@ -282,7 +282,7 @@ public class Circle extends Shape implements java.awt.Shape
 
 	@Override
 	public void setLocation(double x, double y) {
-		//do nothing
+		super.center.setLocation(x, y);
 	}
 
 

@@ -774,7 +774,7 @@ public class Sprite extends BaseSprite
 
 	@Override
 	public Double getAngle() {
-		return this.getComponent(SpriteVelocityC.class).getAngle();
+		return this.getComponent(SpriteVelocityC.class).getAngle()+90;
 	}
 
 

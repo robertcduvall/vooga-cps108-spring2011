@@ -47,7 +47,7 @@ public class Archer extends Sprite implements IPowerupable{
             @Override
             public void handleEvent (Object o)
             {
-                fire();
+                fire(getAngle()+45);
             }
         });
         myGame.registerEventHandler("Input.User.moveLeft", new IEventHandler()
@@ -66,27 +66,41 @@ public class Archer extends Sprite implements IPowerupable{
                 moveRight();
             }
         });
+        myGame.registerEventHandler("Input.User.multishot", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+                mutlishot();
+            }
+        });
        
     }
 
-	protected void fire() {
+	protected void mutlishot() {
+		for (int i = -30; i < 30; i+=15){
+			fire(this.getAngle()+i+45);
+		}
+	}
+
+	protected void fire(Double angle) {
 		System.out.println("Fire!");
 		Sprite arrow = myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY());
 	    arrow.move(-arrow.getWidth()/2, -arrow.getHeight()/2);
-	    arrow.setMovement(myTension*.5, this.getAngle()+40);
+	    arrow.setMovement(myTension*.5, angle);
 	    releaseBowstring();
 	}
 
 	protected void releaseBowstring() {
-		myTension = 0;
+//		myTension = 0;
 	}
 
 	
 
 	protected void pullBowstring() {
 		
-		myTension = myTension >= 2 ? myTension : (myTension + .01);
-		
+//		myTension = myTension >= 2 ? myTension : (myTension + .01);
+		myTension = 2;
 		
 	}
 	

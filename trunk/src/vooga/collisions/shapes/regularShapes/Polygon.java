@@ -213,7 +213,8 @@ public class Polygon extends Shape
 		for (int i = 0; (i+1)*(n) < vertices.length; i++){
 			newSet[i] = vertices[i*n];
 		}
-		return new Polygon(newSet);
+		vertices = newSet;
+		return this;
 	}
 
 	

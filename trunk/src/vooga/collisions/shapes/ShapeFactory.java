@@ -57,6 +57,10 @@ public class ShapeFactory
 		return makeShapeFromGeneralPath(makeShape(image), image.getWidth(), image.getHeight());
 	}
 	
+	public static Polygon makePolygonFromImage(BufferedImage image, int simplifyFactor){
+		return makeShapeFromGeneralPath(makeShape(image), image.getWidth(), image.getHeight()).simplify(simplifyFactor);
+	}
+	
 	public static Polygon makePolygonFromImage(BufferedImage image, double x, double y){
 		Polygon p = makeShapeFromGeneralPath(makeShape(image), image.getWidth(), image.getHeight());
 			p.setLocation(x, y);
@@ -141,7 +145,6 @@ public class ShapeFactory
 		total.closePath();
 		count++;
 		total.transform(AffineTransform.getScaleInstance(1.0 / w, 1.0 / h));
-		System.out.println("Number of points = " + count);
 
 		return total;
 	}
