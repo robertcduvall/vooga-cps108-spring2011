@@ -6,8 +6,8 @@ While local forces are not yet implemented as a held list, per say, you can appl
 
 In order to implement physics, this is what needs to happen:
   # The level manager should have an instance of WorldForceManager
-  # Add any forces/vector fields you see fit to the WorldForceManager using the very obviously named methods
-  # Create sprites with the appropriate components
+  # Add any forces/vector fields you see fit to the WorldForceManager by getting an instance of it (the "getPhysics" method of AbstractLevel should suffice to get the manager)
+  # Create sprites with the appropriate components (for gravity, this would just be "PhysicsVelocityC"
   # During each update (preferably before sprites are updated):
     # Get the lists of active forces and fields from WorldForceManager
     # Get the list of active sprites from wherever
@@ -15,54 +15,4 @@ In order to implement physics, this is what needs to happen:
   # Inside of any collision group you have, call "VoogaPhysicsMediator.collision(...)", passing in the information that the method requires.
 
 
-
-----
-----
-----
-
-This section is outdated. If there is anything in here that is not in the above section that you need, please let me know and I can explain it to you.
-----
-There are a couple different things that we feel that the Physics Engine should handle:
-1. Forces which affect all objects in the game world, such as gravity and “point forces,” such as magnets. There are currently three such types of these forces:
-
-	a. Constant forces: These forces affects an object based on the object’s mass. As such, it only affects objects which implement IPhysics (or, in the case of Vooga, contain an IPhysics component).
-
-	b. Mass Proportional forces: These are essentially forces which act proportionally to the object’s mass, meaning that the mass is irrelevant. This is how gravity is implemented. This will be integrated with force type (a) in a more general force which takes parameters in the next version. These affect all objects equally. 
-
-	c. Point force: This is a force which either attracts or repulses forces of the same type, such as point gravitation or electric charge. These affect other objects which implement the same IPointForce interface. To represent two different types of point forces (such as gravitation and magnetism), create two different components, each of which implements an interface extending IPointForce (for example, create IMagnetic extends IPoint force, and have a MagneticC implement IMagnetic).
-
-All three of these types are held by the PhysicsEngine itself. To add one of these, simply call instanceOfPhysicsEngine.addWorldForce/Field(Force/Field f). The affects of these forces are calculated at each update. If the proper components (listed above) are contained in the sprite, this should automatically occur. 
-
-Example 1: Basic Gravity:
-At initialization of the level, call: 
-“instanceOfPhysicsEngine.addWorldForce(new MassProportionalForce(0,9.8))” 
-
-Example 2: Two magnets:
-
-1.	Create new interface IMagnetic extends IPointForce, and define a constant value which affects all magnetic forces
-
-2.	Create new component MagneticC extends VelocityC implements IMagnetic
-
-a.	Implement the getPointMagnitude() method to return the magnetic attraction of that object
-
-b.	Override update(Sprite s, long elapsedTime) to be:
-
-		if (isOn())
-            instanceOfPhysicsEngine.applyPoint Fields(this, elapsedTime);
-
-3.	Add this component to the list: 
-instanceOfPhysicsEngine.addGlobalPointField(this, elapsedTime);
-
-
-2. The effect of collisions on the colliding objects. This works similarly to the above. For the given implemention of sprites in Vooga, there exists a VoogaPhysicsMediator, which has a method “collision” which takes two sprites, and some other essential information about the collision which should be provided by the collisions team. To implement physics for collisions:
-
-   1. Make sure to call instanceOfVoogaPhysicsMediator (perhaps to be implemented as a singleton?).collision(…) inside of the collisionManager, when the collision occurs (this should already be done by the collisions team).
-
-   2. Make sure to implement a PhysicsC component (making sure to specify the mass) on the objects you want to collide properly (no need to specify it for walls or other such objects), or else they won’t work properly.
-
-
-Besides those two major things, we also wanted to provide lots of customizable behavior, but also a lot of defaults so you have less code to write. This means a couple of things:
-
-   1. To specify default Newtonian collisions and force application, use a NewtonianPhysicsEngine. If the default behavior is not overridden (see 2), it will calculate based on Newtonian physics
-
-   2. To customize the reaction of an object to an applied force, an applied field, or a collision, implement IPhysicsCustomForce, IPhysicsCustomField, or IPhysicsCustomCollision within the component you would like to use to calculate the result of this force/field/collision. In the case of Newtonian Physics, to implement a custom collision, it might be convenient to extend INewtonianCollider (which extends IPhysicsCustomCollision) instead.
+If you have other questions, ask me
