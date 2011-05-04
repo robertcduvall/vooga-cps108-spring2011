@@ -1,4 +1,4 @@
-package vooga.stats.example02.util.resources;
+package games.nemo.util.resources;
 
 import java.net.URL;
 import java.util.*;
@@ -17,7 +17,7 @@ import java.util.*;
  * @author Robert C. Duvall
  */
 public class ResourceManager implements Iterable<String> {
-    public static final String DEFAULT_SUBPACKAGE = "vooga.stats.example02.resources";
+    public static final String DEFAULT_SUBPACKAGE = "games.nemo.resources";
     public static final String DEFAULT_LANGUAGE = "English";
     public static final String DEFAULT_DELIMITER = ",";
     private static final String MISSING_RESOURCE = "Missing resource file: %s.%s";
