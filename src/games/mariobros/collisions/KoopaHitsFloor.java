@@ -1,26 +1,39 @@
 package games.mariobros.collisions;
 
-import games.mariobros.sprites.Floor;
-import games.mariobros.sprites.Mario;
-import vooga.collisions.collisionManager.BasicCollisionGroup;
-import vooga.collisions.collisionManager.CollisionManager;
+import games.mariobros.MarioBros;
+import games.mariobros.sprites.Koopa;
+import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
+import vooga.sprites.improvedsprites.Sprite;
 
-public class KoopaHitsFloor extends BasicCollisionGroup<Mario, Floor>
-{
-    /**
-     * Stomp.
-     */
+public class KoopaHitsFloor extends EdgeCollisionGroup
+{    
     @Override
-    public boolean areCollide(Mario p, Floor e)
+    public void collidedTop (Sprite s)
     {
-    	
-    	return CollisionManager.isPixelCollide(p.getX(), p.getY(), p.getImage(), e.getX(), e.getY(), e.getImage());
+        ((Koopa) s).bounceDown();
     }
-    
+
+
     @Override
-    public void collided (Mario p, Floor e)
+    public void collidedRight (Sprite s)
     {
-        p.setAngle(360-p.getAngle());
-        e.setActive(false);
+        ((Koopa) s).bounceLeft();
     }
+
+
+    @Override
+    public void collidedLeft (Sprite s)
+    {
+        ((Koopa) s).bounceRight();
+    }
+
+
+    @Override
+    public void collidedBottom (Sprite s)
+    {
+        s.setActive(false);
+        
+        MarioBros.eventManager.fireEvent(this, "Game.BallLost");
+    }
+
 }
