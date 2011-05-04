@@ -13,8 +13,9 @@ public class FishSprite extends Sprite{
 	private VoogaGame myGame;
 	protected int mySize;
 	
-	public FishSprite(BufferedImage image, int x, int y){
+	public FishSprite(BufferedImage image, int x, int y, int size){
 		super(image,x,y);
+		mySize = size;
 	}
 
 	public int getSize(){
