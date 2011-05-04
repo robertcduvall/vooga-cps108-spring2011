@@ -84,7 +84,7 @@ public class LocalNetworkEngine extends AbstractNetworkEngine  {
 					System.out.println("returned from sever" + serverIP);
 					availableServer.add(serverIP);
 					availableServers.add(new ConnectInfo(serverIP, myInfo
-							.getName()));
+							.getName(), port));
 				}
 			}
 		} catch (Exception e) {

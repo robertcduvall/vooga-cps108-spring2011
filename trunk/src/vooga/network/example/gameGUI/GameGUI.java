@@ -39,7 +39,10 @@ import vooga.network.tcpEngine.ConnectInfo;
 import vooga.network.tcpEngine.LocalNetworkEngine;
 
 /**
+ * This GUI is designed as a platform for the network games. However, to do the book keeping it is necessary to
+ * design another protocol, which may not be finished before the demo.
  * Should refactor this by the MVC pattern. In this program the GUI part make the program hard to read.
+ * 
  * @author hz41
  *
  */
@@ -51,6 +54,7 @@ public class GameGUI extends JFrame implements ActionListener {
 	private String userName;
 	
 	private Map<String, ArcadeNetworkGame> gameMap;
+	private Map<String, List<ConnectInfo>> connectMap;
 	
 	private static final String resources = "vooga.network.example.gameGUI.resources.games";
 
@@ -275,11 +279,24 @@ public class GameGUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		
-		
+		int gameIndex = gameList.getSelectedIndex();
+		ArcadeNetworkGame game = gameMap.get((String) listModel.get(gameIndex));
+		int tmpPort = port+(int)Math.round(Math.random()*1000);
+		game.setPort(tmpPort);
 		if (obj == createItem || obj == createServerButton) {
+			
+			
 			// here it should be select a game and create the book keeping process for the host with this game
+			game.setHost(true);
+			messageShow.append("the game: " + (String) listModel.get(gameIndex)
+					+ "has start a host\n");
+			networkEngine.send(GUIControlCommands.CREATEHOST);
+			networkEngine.send((String) listModel.get(gameIndex));
+			networkEngine.send(new ConnectInfo("127.0.0.1", null, tmpPort));
 		} else if (obj == joinItem || obj == joinButton) {
-			// send out message to request to join a certain game
+//			networkEngine.send("user "+userName+" request joinGame "+(String) listModel.get(gameIndex));
+			networkEngine.send(GUIControlCommands.JOIN);
+			
 		} else if (obj == userNameItem || obj == usernameButton) {
 			UserConf userConf = new UserConf(this, userName);
 			userConf.setVisible(true);
@@ -287,16 +304,11 @@ public class GameGUI extends JFrame implements ActionListener {
 			nameLabel.setText("User Name: " + userName);
 			networkEngine.getMyInfo().setName(userName);
 			networkEngine.getMyInfo().setName(userName);
-
 		} else if (obj == startgameItem || obj == startgameButton) {
 			// the host machine should start the game as a host, and inform all other machines to connect to here
-			int index = gameList.getSelectedIndex();
-			messageShow.append("selected game " + (String) listModel.get(index)
+			messageShow.append("start game: " + (String) listModel.get(gameIndex)
 					+ "\n");
-			ArcadeNetworkGame game = gameMap.get((String) listModel.get(index));
-			game.setHost(true);
-			int tmpPort = port+(int)Math.round(Math.random()*1000);
-			game.setPort(tmpPort);
+			game.start();
 
 		} else if (obj == clientMessage || obj == clientMessageButton) {
 			String message = clientMessage.getText();

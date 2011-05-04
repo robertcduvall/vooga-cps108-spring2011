@@ -16,6 +16,7 @@ public class UserReceiveRunnable implements Runnable
 		this.engine = e;
 	}
 
+	// In this step the user receivable should deal with two kind of control commands, create host and join
 	@Override
 	public void run()
 	{
