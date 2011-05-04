@@ -76,10 +76,10 @@ public class MainGame extends VoogaGame {
     
 	@Override
 	public void initResources() {
-		if (!haveInitialized){
+		
 			this.setFPS(100);
 			
-			haveInitialized = true;
+			
 			
 			Status = BeforeRunningStatus;			//Before Running Status
 	
@@ -122,7 +122,10 @@ public class MainGame extends VoogaGame {
 	                                   "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_" +
 	                                   "`abcdefghijklmnopqrstuvwxyz{|}~~");
 	
-	
+	        remainingPlane = 2;
+	        
+	        if (!haveInitialized){
+	        	haveInitialized = true;
 	        //networking part
 	        isHost = true;
 	        network = new LocalNetworkEngine(5421);
@@ -133,7 +136,7 @@ public class MainGame extends VoogaGame {
 	        //connect to the host
 	        //network.connect("10.180.111.162");
 	        
-	        remainingPlane = 2;
+	        
 	        
 //	        receivedCommands = new PriorityQueue<String>();
 		}
@@ -177,11 +180,7 @@ public class MainGame extends VoogaGame {
 	}
 
 	@Override
-	public void update(long arg0) {
-//		updateReceivedList();
-		
-		//System.out.println("time elapse: "+arg0);
-		
+	public void update(long arg0) {		
 		if (Status == BeforeRunningStatus){
 			initResources();
 			if (isHost){
@@ -298,38 +297,24 @@ public class MainGame extends VoogaGame {
 			explosion1.update(arg0);
 			explosion2.update(arg0);
 			bullets.update(arg0);
+			//haveInitialized = false;
 			if (isHost){
 				if (keyPressed(KeyEvent.VK_ENTER)){
-					Status = AtRunningStatus;
-					startTime = System.currentTimeMillis();
-					network.send("GameStart");
+					Status = BeforeRunningStatus;
+					network.send("GameAboutToStart");
 				}
 			}
 			else{
 //				String command = receivedCommands.poll();
 				List<Object> receivedCommands = network.update();
 				for (Object commands : receivedCommands)
-					if (((String)commands).equals("GameStart")){
-						Status = AtRunningStatus;
-						startTime = System.currentTimeMillis();
+					if (((String)commands).equals("GameAboutToStart")){
+						Status = BeforeRunningStatus;
 					}
 			}
 		}
-		
-		//if isHost, do the processing, update and send
-		//otherwise, send and update
-//		planes.update(arg0);
-//		explosion1.update(arg0);
-//		bullets.update(arg0);
-		
 	}
 	
-//	private void updateReceivedList(){
-//		List<Object> received = network.update();
-//		for (Object command : received){
-//			receivedCommands.offer((String) command);
-//		}
-//	}
 	
 	private void checkValidity(Sprite plane){
 		if (plane.getX() < 0)                plane.setX(0);
@@ -339,9 +324,6 @@ public class MainGame extends VoogaGame {
 	}
 	
 	public static void main(String[] args) {
-//        GameLoader game = new GameLoader();
-//        game.setup(new MainGame(), new Dimension(640,480), false);
-//        game.start();
 		launchGame(new MainGame(), new Dimension(640, 480), false);
     }
 	
