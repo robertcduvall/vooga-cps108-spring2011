@@ -70,7 +70,6 @@ public class Archer extends Sprite implements IPowerupable{
     }
 
 	protected void fire() {
-		if (myTension <= 0) return;
 		System.out.println("Fire!");
 		Sprite arrow = myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY());
 	    arrow.move(-arrow.getWidth()/2, -arrow.getHeight()/2);
@@ -86,17 +85,18 @@ public class Archer extends Sprite implements IPowerupable{
 
 	protected void pullBowstring() {
 		
-		myTension = myTension >= 1 ? myTension : (myTension + .01);
+		myTension = myTension >= 2 ? myTension : (myTension + .01);
 		
 		
 	}
 	
 	protected void moveRight() {
-		this.moveX(1);
+		
+		if (this.getX() < myGame.getWidth()-this.getWidth()) this.moveX(1);
 	}
 
 	protected void moveLeft() {
-		this.moveX(-1);
+		if (this.getX() > 0) this.moveX(-1);
 	}
 	
 	public void die(){

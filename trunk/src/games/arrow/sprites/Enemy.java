@@ -13,9 +13,7 @@ public class Enemy extends Sprite {
 		super(image, x, y);
 		this.height =100;
 		this.width = 100;
-//		this.setHorizontalSpeed((Math.random()-.5)*0.1);
-		System.out.println("Hi? I'm an enemy!");
-		System.out.println(image);
+		this.setHorizontalSpeed((Math.random()-.5)*0.1);
 	}
 
 }
