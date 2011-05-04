@@ -131,7 +131,7 @@ public class Main extends VoogaGame implements NetworkGame{
 
 	        network = new LocalNetworkEngine(port);
 	        if(isHost){
-	        	network.createHost(false);
+	        	network.createHost(false, false);
 	        }else{
 	        	network.connect(serverIP);
 	        }

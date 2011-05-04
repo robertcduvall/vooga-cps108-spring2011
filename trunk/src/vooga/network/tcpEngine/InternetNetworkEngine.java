@@ -24,7 +24,7 @@ public class InternetNetworkEngine extends AbstractNetworkEngine {
 	}
 
 	@Override
-	public boolean createHost(boolean fullyConnect) {
+	public boolean createHost(boolean fullyConnect, boolean visiable) {
 		if (!isConnected) {
 			Socket connection = null;
 			ObjectOutputStream output = null;

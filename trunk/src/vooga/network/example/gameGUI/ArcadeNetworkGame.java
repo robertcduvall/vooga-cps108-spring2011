@@ -30,6 +30,7 @@ public class ArcadeNetworkGame {
 	private Dimension dimension;
 	private String name;
 	private boolean isHost = false;
+	private String serverIP = null;
 	private int port = 0;
 
 	public ArcadeNetworkGame(String name) {
@@ -66,6 +67,9 @@ public class ArcadeNetworkGame {
 			cls = Class.forName(name);
 			game = (Game) (cls.newInstance());
 			
+			((NetworkGame)game).setIsHost(isHost);
+			((NetworkGame)game).setPort(port);
+			((NetworkGame)game).setServerIP(serverIP);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,5 +85,9 @@ public class ArcadeNetworkGame {
 	
 	public int getPort(){
 		return port;
+	}
+	
+	public void setIP(String IP){
+		serverIP = IP;
 	}
 }

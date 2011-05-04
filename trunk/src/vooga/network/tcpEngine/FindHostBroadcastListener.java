@@ -40,7 +40,6 @@ public class FindHostBroadcastListener extends Thread {
 				}
 			}
 		}catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 }

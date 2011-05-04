@@ -247,6 +247,6 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 	}
 	
 	
-	public abstract boolean createHost(boolean fullyConnect);
+	public abstract boolean createHost(boolean fullyConnect, boolean visiable);
 	public abstract List<ConnectInfo> searchHost();
 }
