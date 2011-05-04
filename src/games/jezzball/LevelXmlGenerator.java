@@ -11,7 +11,7 @@ public class LevelXmlGenerator {
                 }else if(j==0 || j == numColumns-1){
                     type="wall";
                 }else{
-                    type = "tile";
+                    continue;
                 }
                 String outputString = "<instance type=\""+type+"\">\n"+
                 "\t<x>"+(xCoord+20*i)+"</x>\n"+

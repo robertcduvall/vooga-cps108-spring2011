@@ -60,10 +60,14 @@ public class LineMath
      */
     public static Double findDirection (double dx, double dy)
     {
-    	if (dx > 0) return Math.toDegrees(Math.atan(dy / dx));
-        else if (dx < 0) return (Math.toDegrees(Math.atan(dy / dx)) + 180) % 360;
-        else if (dy < 0) return 270.0;
-        else if (dy > 0) return 90.0;
+    	//TODO: BUG using setVerticalspeed and stuff calculating 
+        
+        //double verySmallNumber = 1E-10;
+        double verySmallNumber=0;
+        if (dx > verySmallNumber) return Math.toDegrees(Math.atan(dy / dx));
+        else if (dx < -verySmallNumber) return (Math.toDegrees(Math.atan(dy / dx)) + 180) % 360;
+        else if (dy < -verySmallNumber) return 270.0;
+        else if (dy > verySmallNumber) return 90.0;
         return null; //when line has mag = 0
     }
     

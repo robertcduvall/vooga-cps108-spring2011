@@ -1,5 +1,9 @@
 <keymap>
-	<key_event event="Input.Start" sensitivity="Level" key="SPACE" />
-	<key_event event="Input.Left" sensitivity="Level" key="LEFT" />
-	<key_event event="Input.Right" sensitivity="Level" key="RIGHT" />
+	<key_event event="Input.Left" sensitivity="Edge" key="LEFT" />
+	<key_event event="Input.Right" sensitivity="Edge" key="RIGHT" />
+	<key_event event="Input.Up" sensitivity="Edge" key="UP"/>
+	<key_event event="Input.Down" sensitivity="Edge" key="DOWN"/>
+	<key_event event="Input.spawnTile" sensitivity="Edge" key="SPACE"/>
+	<key_event event="Input.changeOrientation" sensitivity="Edge" key="ENTER"/>
+	
 </keymap>

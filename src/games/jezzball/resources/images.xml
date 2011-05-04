@@ -3,7 +3,7 @@
 		<path>src/games/jezzball/resources/ball.png</path>
 	</image>
 	<image name="cursor">
-		<path>src/games/jezzball/resources/arrow.gif</path>
+		<path>src/games/jezzball/resources/red_arrow.png</path>
 	</image>
 	<image name="wall">
 		<path>src/games/jezzball/resources/wall.png</path>
