@@ -1,6 +1,9 @@
 package games.arrow.sprites;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
+import com.golden.gamedev.util.ImageUtil;
 
 import vooga.collisions.shapes.ShapeFactory;
 import vooga.collisions.shapes.collisionShapes.CollisionPolygon;
@@ -13,16 +16,21 @@ public class Arrow extends Sprite {
 
 	@Override
 	public Double getAngle() {
-		return super.getAngle()-85;
+		return super.getAngle();
 	}
 
-
+	@Override
+	public void render(Graphics2D g, int x, int y) {
+		super.render(g, x, y);
+		this.getCollisionShape().render(g);
+	}
+	
 	public Arrow(BufferedImage image, int x, int y)
     {
         super(image, x, y);
         this.height = 25;
         this.width = 50;
-        this.addComponents(new PermAccelerationC(0.0, .0001), new CollisionPolygonC(new CollisionPolygon(this.getCenterX(), this.getCenterY(), 3 , this.getHeight())));
+        this.addComponents(new PermAccelerationC(0.0, .0001), new CollisionPolygonC(new CollisionPolygon(ShapeFactory.makePolygonFromImage(ImageUtil.resize(image, width,height)).simplify(2))));
     }
     
 	

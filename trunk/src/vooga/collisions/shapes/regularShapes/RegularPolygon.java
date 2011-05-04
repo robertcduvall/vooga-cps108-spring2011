@@ -11,8 +11,9 @@ public class RegularPolygon extends Polygon
 
     public RegularPolygon (double x, double y, int sideNum, double sideLength)
     {
+    	super(PolygonMath.createRegularPoylgon(new Point2D.Double(x ,y) , sideNum, sideLength));
         center = new Vertex(x,y);
-        vertices = PolygonMath.createRegularPoylgon(center, sideNum, sideLength);
+        
     }
 
    

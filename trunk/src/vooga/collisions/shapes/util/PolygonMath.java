@@ -89,7 +89,7 @@ public class PolygonMath
         return maxY;
     }
     
-    public static Vertex[] createRegularPoylgon (Point2D center,
+    public static Polygon createRegularPoylgon (Point2D center,
             int sideNum,
             double sideLength)
  {
@@ -104,7 +104,9 @@ public class PolygonMath
 
 		}
 
-		return vertices;
+		Polygon p = new Polygon(vertices);
+		p.rotate(Math.toDegrees(-angle));
+		return p;
 }
 
 }

@@ -42,23 +42,11 @@ public class ArrowGame extends VoogaGame
 
         getLevelManager().loadLevel(0);
         
-        this.registerEventHandler("EnemySpawn", new IEventHandler()
-        {
-                @Override
-                public void handleEvent(Object o)
-                {
-                        spawnEnemy();
-                }
-        });
         
-        this.addPeriodicTimer("OneTime", 10000, "EnemySpawn");
     }
 
 
-    protected void spawnEnemy() {
-    	getLevelManager().addArchetypeSprite("enemy", (int)(this.getWidth()*Math.random()),(int)((this.getHeight()-100)*Math.random()));
-		
-	}
+    
 
 
 	@Override
