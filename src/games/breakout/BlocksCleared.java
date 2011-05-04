@@ -42,8 +42,8 @@ public class BlocksCleared implements IGoal
         Paddle p = (Paddle) playfield.getSpriteGroup("paddle").getActiveSprite();
         
         if (b != null) b.setActive(false);
-        p.prepareNewBall();
         p.setBallCount(1 + p.getBallCount());
+        p.prepareNewBall();
         
         try
         {

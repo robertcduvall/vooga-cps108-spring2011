@@ -1,0 +1,20 @@
+<game>
+  <title>Breakout</title>
+  <path>games.breakout.Breakout</path>
+  <genre>Arcade</genre>
+  <author>Misha</author>
+  <description>The classic Breakout game.</description>
+  <datecreated>May 1, 2010</datecreated>
+  <highscores></highscores>
+  <version>1.1</version>
+  <price></price>
+  <language>Java</language>
+  <dimension>
+    <width>640</width>
+    <height>480</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>./src/vooga/arcade/resources/breakout.jpg</image>
+</game>
