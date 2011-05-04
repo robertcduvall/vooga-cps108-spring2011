@@ -8,8 +8,11 @@ import vooga.util.math.Angle;
 
 public class MasslessForceBehavior extends EmptyForceBehavior{
 
-    
-    public Velocity forceToVelocityChange(MassProportionalForceGenerator forceGen, long time){
+    /**
+     * This should only take a MassProportionalForceGenerator. Fix after fixing multiple dispatch
+     */
+    @Override
+    public Velocity forceToVelocityChange(AbstractForceGenerator forceGen, long time){
         Force force = forceGen.getForce(this);
         return new Velocity(force.getMagnitude() * time, force.getAngle());
     }

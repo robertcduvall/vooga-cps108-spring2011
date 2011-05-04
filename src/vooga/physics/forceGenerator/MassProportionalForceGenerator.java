@@ -13,6 +13,13 @@ public class MassProportionalForceGenerator extends AbstractForceGenerator {
         myForce = force;
     }
     
+    /**
+     * This method shouldn't exist. Temporary fix until multiple dispatch works
+     */
+    public Force getForce(EmptyForceBehavior forceTarget){
+        return myForce;
+    }
+    
     public Force getForce(MasslessForceBehavior forceTarget){
         return myForce;
     }
