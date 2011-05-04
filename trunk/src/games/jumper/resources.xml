@@ -1,0 +1,8 @@
+<resources>
+	<images>
+		<source>src/games/jumper/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.jumper.levelstuff.Level">src/games/jumper/resources/level0.xml</level>
+	<level id="1" type="games.jumper.levelstuff.Level">src/games/jumper/resources/level1.xml</level>
+	<source>src/games/jumper/resources/keymap.xml</source>
+</resources>
