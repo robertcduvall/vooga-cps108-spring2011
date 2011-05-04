@@ -19,9 +19,12 @@ public class AboutHTMLPage
 		for (String s : aboutFields)
 		{
 			String t = removeAllSpaces(s);
-			htmlGenerator.addTag("b", s + ": ");
-			htmlGenerator.addText(ago.getData(t.toLowerCase()));
-			htmlGenerator.addLineBreak();
+			if (!ago.getData(t.toLowerCase()).isEmpty())
+			{
+				htmlGenerator.addTag("b", s + ": ");
+				htmlGenerator.addText(ago.getData(t.toLowerCase()));
+				htmlGenerator.addLineBreak();
+			}
 		}
 
 		// TODO: FIX THISSSS OAWKEMRLFSDMLKAERJWLKFJSLKDF
@@ -38,7 +41,7 @@ public class AboutHTMLPage
 		{
 			System.err.println("WTF FAIL");
 		}
-		
+
 		return file.getAbsolutePath();
 	}
 

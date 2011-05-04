@@ -56,7 +56,7 @@ public class ImageProcessor
 		AffineTransform xform = new AffineTransform();
 
 		// Scaling
-		double scale = 0.0;
+		double scale = 1.0;
 		if (b.getWidth() > width || b.getHeight() > width)
 		{
 			if (b.getWidth() > b.getHeight())
@@ -83,6 +83,13 @@ public class ImageProcessor
 		}
 		
 		xform.scale(scale, scale);
+		
+		//If image is smaller than box, then align center. 
+		if(b.getWidth() < width && b.getHeight() < width)
+		{
+			xform.translate(-(b.getWidth() - width)/2.0, -(b.getHeight() - width)/2.0);
+		}
+		
 		BufferedImage scaledImage = new BufferedImage(width, width,
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics2D graphics2D = scaledImage.createGraphics();
