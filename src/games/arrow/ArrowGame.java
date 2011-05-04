@@ -25,7 +25,7 @@ public class ArrowGame extends VoogaGame
 {
     public static void main (String[] args)
     {
-        launchGame(new ArrowGame(), new Dimension(800, 800), false);
+        launchGame(new ArrowGame(), new Dimension(800, 600), false);
     }
 
     private Archer myArcher;
