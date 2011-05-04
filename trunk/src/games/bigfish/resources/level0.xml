@@ -8,4 +8,4 @@
 	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish6" image="fish6"></sprite>
 	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish0" image="fish0"></sprite>
 	<goal class="games.bigfish.BiggerThanTheRest"></goal>
-</level>
+	<collision_manager g1="playerFish" g2="enemyFish" class="games.bigfish.collisions.PlayerHitsFish"></collision_manager></level>

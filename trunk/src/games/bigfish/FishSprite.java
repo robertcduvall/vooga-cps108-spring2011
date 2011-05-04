@@ -15,8 +15,10 @@ public class FishSprite extends Sprite{
 	
 	public FishSprite(BufferedImage image, int x, int y){
 		super(image,x,y);
-		
+	}
 
+	public int getSize(){
+		return mySize;
 	}
 	
 
