@@ -20,9 +20,11 @@ import com.golden.gamedev.GameLoader;
  * 
  * This class is adepted from the Arcade project.
  * 
+ * @author Roman
+ * 
  */
 
-public class ArcadeGameObject {
+public class ArcadeNetworkGame {
 
 	private Game game;
 	private Dimension dimension;
@@ -30,7 +32,7 @@ public class ArcadeGameObject {
 	private boolean isHost = false;
 	private int port = 0;
 
-	public ArcadeGameObject(String name) {
+	public ArcadeNetworkGame(String name) {
 		this.dimension = new Dimension(640,480);
 		this.name = name;
 	}
