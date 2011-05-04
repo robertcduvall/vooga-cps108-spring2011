@@ -1,0 +1,20 @@
+<level>
+	<background type="color">black</background>
+	<collision_manager g1="pacman" g2="wall" class="games.pacman.collisions.RunIntoWall" />
+<!--	<collision_manager g1="ball" g2="block" class="games.pacman.collisions.BallHitsBlock" />
+	<collision_manager g1="ball" g2="paddle" class="games.breakout.collisions.BallHitsPaddle" />
+	<collision_manager g1="ball" g2="ball" class="games.breakout.collisions.BallEdgeBounce" />
+	-->
+	<sprite group="pacman" class="games.pacman.sprites.PacMan" type="pacman" image="pacman" />
+	<sprite group="wall" class="games.pacman.sprites.Wall" type="wall" image="wall" />
+	
+	
+	<goal class="games.pacman.DotsCleared" />
+
+	<instance type="wall"><x>6</x><y>0</y></instance>
+	<!--<instance type="block"><x>6</x><y>0</y><c>1</c></instance>
+	<instance type="block"><x>7</x><y>0</y><c>1</c></instance>
+	<instance type="block"><x>8</x><y>0</y><c>1</c></instance>
+	<instance type="block"><x>9</x><y>0</y><c>1</c></instance>
+-->
+</level>

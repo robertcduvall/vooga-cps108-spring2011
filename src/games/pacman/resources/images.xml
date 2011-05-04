@@ -1,0 +1,14 @@
+<images>
+	<image name="pacman">
+		<path>src/games/pacman/resources/PacMan.png</path>
+	</image>
+	<image name="dot">
+		<path>src/games/pacman/resources/Dot.jpg</path>
+	</image>
+	<image name="wall">
+		<path>src/games/pacman/resources/Wall.png</path>
+<!--		<width>38</width>
+		<height>22</height>
+		<state count="*" />-->
+	</image>
+</images>
