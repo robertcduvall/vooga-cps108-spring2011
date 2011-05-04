@@ -116,7 +116,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      */
     public boolean checkCompletion ()
     {
-        if (myGoal.checkCompletion(myGame.getLevelManager()))
+        if (myGoal != null && myGoal.checkCompletion(myGame.getLevelManager()))
         {
             myGoal.progress();
             myGame.getLevelManager().updateNumOfLevelsCompleted();
@@ -124,8 +124,8 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         }
         return false;
     }
-
-
+    
+    
     /**
      * Places all sprites from the pool onto the playingfield
      */
