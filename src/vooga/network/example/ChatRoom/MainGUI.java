@@ -256,7 +256,7 @@ public class MainGUI extends JFrame implements ActionListener
 				networkEngine = new LocalNetworkEngine(port);
 				networkEngine.getMyInfo().setName(userName);
 			}
-			if (networkEngine.createHost(false)) {
+			if (networkEngine.createHost(false, true)) {
 				messageShow.append("fail to build the server\n");
 			} else {
 				joinButton.setEnabled(false);

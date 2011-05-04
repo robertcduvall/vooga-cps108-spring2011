@@ -102,6 +102,8 @@ public class GameGUI extends JFrame implements ActionListener {
 	private DefaultListModel listModel;
 
 	public GameGUI() {
+		this.gameMap = new HashMap<String, ArcadeNetworkGame>();
+		
 		init();
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,9 +116,6 @@ public class GameGUI extends JFrame implements ActionListener {
 		this.setTitle("Network Game Starter");
 
 		this.setVisible(true);
-		
-		this.gameMap = new HashMap<String, ArcadeNetworkGame>();
-		
 	}
 
 	public void init() {
@@ -286,11 +285,10 @@ public class GameGUI extends JFrame implements ActionListener {
         ArcadeNetworkGame game = gameMap.get((String) listModel.get(gameIndex));
 		if (obj == createItem || obj == createServerButton) {
 			if (networkEngine == null) {
-				// networkEngine = new InternetNetworkEngine(port);
 				networkEngine = new LocalNetworkEngine(port);
 				networkEngine.getMyInfo().setName(userName);
 			}
-			if (networkEngine.createHost(false)) {
+			if (networkEngine.createHost(false, true)) {
 				messageShow.append("fail to build the server\n");
 			} else {
 				joinButton.setEnabled(false);
@@ -300,7 +298,6 @@ public class GameGUI extends JFrame implements ActionListener {
 				(new Thread(new UserReceiveRunnable(this, networkEngine)))
 						.start();
 				
-				// also create host for the game
 				game.setHost(true);
 				int tmpPort = port+(int)Math.round(Math.random()*1000);
 				game.setPort(tmpPort);
@@ -340,6 +337,7 @@ public class GameGUI extends JFrame implements ActionListener {
 									networkEngine))).start();
 							
 							game.setHost(false);
+							game.setIP((String) selectedValue);
 							messageShow
 									.append("build the connection successfully\n");
 						}

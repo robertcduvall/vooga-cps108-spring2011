@@ -36,7 +36,7 @@ public class ReceiveRunnable implements Runnable
 						engine.connect(str);
 					} else if (obj == ConnectionControl.CREATEHOST) {
 						System.out.println("received build host command");
-						engine.createHost(false);
+						engine.createHost(false, true);
 					} else if (obj == ConnectionControl.INFORMATION) {
 						client.info = (ConnectInfo) client.input.readObject();
 					} else

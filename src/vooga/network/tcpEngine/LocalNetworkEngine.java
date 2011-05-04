@@ -31,14 +31,16 @@ public class LocalNetworkEngine extends AbstractNetworkEngine  {
 	}
 	
 	
-	public boolean createHost(boolean fullyConnect) {
+	public boolean createHost(boolean fullyConnect, boolean visiable) {
 		//only create host is not connected yet
 		if (!isConnected){
 			try {
 				serverSocket = new ServerSocket(port, 10);
 				// start to listen to the UDP broadcast
-				FindHostBroadcastListener listener = new FindHostBroadcastListener();
-				listener.start();
+				if(visiable){
+					FindHostBroadcastListener listener = new FindHostBroadcastListener();
+					listener.start();
+				}
 	
 				ServerListener listenerThread = new ServerListener(serverSocket,
 						this, fullyConnect);
@@ -88,8 +90,7 @@ public class LocalNetworkEngine extends AbstractNetworkEngine  {
 				}
 			}
 		} catch (Exception e) {
-			//System.out.println("exception occur");
-			//e.printStackTrace();
+			
 		} finally {
 			server.close();
 		}

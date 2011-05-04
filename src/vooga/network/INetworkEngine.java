@@ -20,11 +20,12 @@ public interface INetworkEngine {
 	 * Create a host, if the argument is true, then there will be connections
 	 * between each clients connecting to this host. The default argument should
 	 * be false.
-	 * 
+	 * @param visiable TODO
 	 * @param name
+	 * 
 	 * @return false if successfully created
 	 */
-	boolean createHost(boolean fullyConnect);
+	boolean createHost(boolean fullyConnect, boolean visiable);
 
 	/**
 	 * 
