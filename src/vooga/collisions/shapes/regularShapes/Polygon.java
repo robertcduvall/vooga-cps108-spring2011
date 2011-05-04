@@ -208,6 +208,14 @@ public class Polygon extends Shape
 		
 	}
 
+	public Polygon simplify(int n) {
+		Vertex[] newSet = new Vertex[vertices.length/n];
+		for (int i = 0; (i+1)*(n) < vertices.length; i++){
+			newSet[i] = vertices[i*n];
+		}
+		return new Polygon(newSet);
+	}
+
 	
 
 
