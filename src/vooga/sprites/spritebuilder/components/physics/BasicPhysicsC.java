@@ -20,18 +20,17 @@ public class BasicPhysicsC extends AbstractPhysicsC{
      * @param velocity
      * @param mass
      */
-    public BasicPhysicsC(Velocity velocity, double mass) {
-        this(velocity, mass, true);
+    public BasicPhysicsC(double mass) {
+        this(mass, true);
     }
     
     /**
      * Creates a BasicPhysicsC with given velocity, mass, and state.
-     * @param velocity
      * @param mass
      * @param isOn
      */
-    public BasicPhysicsC(Velocity velocity, double mass, boolean isOn) {
-        super(new PhysicalForceBehavior(mass), new PhysicalCollisionBehavior(velocity, mass), isOn);
+    public BasicPhysicsC(double mass, boolean isOn) {
+        super(new PhysicalForceBehavior(mass), new PhysicalCollisionBehavior(new Velocity(0,0), mass), isOn);
     }
 
     @Override
