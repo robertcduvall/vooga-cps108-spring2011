@@ -36,7 +36,7 @@ public abstract class ArcadeObject
 	 */
 	public BufferedImage getImage() {
         if(image!= null) return image;
-        System.out.println(root.getChildText("image"));
+//        System.out.println(root.getChildText("image"));
         try {
             image = ImageIO.read(new File(root.getChildText("image")));
         }
