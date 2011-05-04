@@ -1,0 +1,4 @@
+<keymap>
+        <key_event event="Input.User.Target" sensitivity="Edge" key="T"/>
+        <key_event event="Input.User.Shoot" sensitivity="Edge" key="SPACE"/>
+</keymap>
