@@ -130,9 +130,7 @@ public class PacMan extends Sprite
     {
         double newX = getX() + dx;
         double newY=getY()+dy;
-        if (0 < newX && newX + getWidth() < game.getWidth())
             moveX(dx);
-        if (0 < newY && newY + getHeight() < game.getHeight())
             moveY(dy);
     }
 

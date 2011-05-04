@@ -1,6 +1,8 @@
 <level>
-	<background type="color">black</background>
+<!--    <background type="image">background</background>-->
+    <background type="color">black</background>
 	<collision_manager g1="pacman" g2="wall" class="games.pacman.collisions.RunIntoWall" />
+<!--  	<collision_manager g1="edge" g2="pacman" class="games.pacman.collisions.PacManEdge" />-->
 <!--	<collision_manager g1="ball" g2="block" class="games.pacman.collisions.BallHitsBlock" />
 	<collision_manager g1="ball" g2="paddle" class="games.breakout.collisions.BallHitsPaddle" />
 	<collision_manager g1="ball" g2="ball" class="games.breakout.collisions.BallEdgeBounce" />

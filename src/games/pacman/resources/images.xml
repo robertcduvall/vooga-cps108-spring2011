@@ -11,4 +11,7 @@
 		<height>22</height>
 		<state count="*" />-->
 	</image>
+	 <!--   <image name="background">
+        <path>src/games/arrow/resources/images/background.jpg</path>
+    </image> -->
 </images>
