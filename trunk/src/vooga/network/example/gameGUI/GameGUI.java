@@ -36,6 +36,7 @@ import javax.swing.event.ListSelectionListener;
 
 import vooga.network.INetworkEngine;
 import vooga.network.tcpEngine.ConnectInfo;
+import vooga.network.tcpEngine.InternetNetworkEngine;
 import vooga.network.tcpEngine.LocalNetworkEngine;
 
 /**
@@ -285,7 +286,8 @@ public class GameGUI extends JFrame implements ActionListener {
         ArcadeNetworkGame game = gameMap.get((String) listModel.get(gameIndex));
 		if (obj == createItem || obj == createServerButton) {
 			if (networkEngine == null) {
-				networkEngine = new LocalNetworkEngine(port);
+				networkEngine = new InternetNetworkEngine(port);
+			//	networkEngine = new LocalNetworkEngine(port);
 				networkEngine.getMyInfo().setName(userName);
 			}
 			if (networkEngine.createHost(false, true)) {
@@ -306,7 +308,8 @@ public class GameGUI extends JFrame implements ActionListener {
 
 		} else if (obj == joinItem || obj == joinButton) {
 			if (networkEngine == null) {
-				networkEngine = new LocalNetworkEngine(port);
+				networkEngine = new InternetNetworkEngine(port);
+			//	networkEngine = new LocalNetworkEngine(port);
 				networkEngine.getMyInfo().setName(userName);
 			}
 			List<ConnectInfo> result = networkEngine.searchHost();
