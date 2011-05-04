@@ -16,7 +16,7 @@ public class Arrow extends Sprite {
 
 	@Override
 	public Double getAngle() {
-		return super.getAngle();
+		return super.getAngle()-90;
 	}
 
 	@Override
