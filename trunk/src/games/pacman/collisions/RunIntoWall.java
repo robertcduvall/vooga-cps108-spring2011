@@ -22,7 +22,8 @@ public class RunIntoWall extends BasicCollisionGroup<PacMan, Wall>
     public void collided (PacMan pacman, Wall wall)
     {
     	//this.pixelPerfectCollision=true;
-       System.out.println("we've collided"+num);
+    	System.out.println(pacman.getAngle());
+    	pacman.setAbsoluteSpeed(0);
        num++;
     }
 
