@@ -1,0 +1,29 @@
+<images>
+	<image name="fish0">
+		<path>resources/zerothfish.png</path>
+	</image>
+	<image name="fish1">
+		<path>resources/firstfish.png</path>
+	</image>
+	<image name="fish2">
+		<path>resources/secondfish.png</path>
+	</image>
+	<image name="fish3">
+		<path>resources/thirdfish.png</path>
+	</image>
+	<image name="fish4">
+		<path>resources/fourthfish.png</path>
+	</image>
+	<image name="fish5">
+		<path>resources/fifthfish.png</path>
+	</image>
+	<image name="fish6">
+		<path>resources/sixthfish.png</path>
+	</image>
+	<image name="fish7">
+		<path>resources/seventhfish.png</path>
+	</image>
+	<image name="flame">
+		<path>resources/fire.png</path>
+	</image>
+</images>
