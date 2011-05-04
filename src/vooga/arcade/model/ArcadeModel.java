@@ -10,6 +10,7 @@ import vooga.arcade.search.AlphabeticalSort;
 import vooga.arcade.search.IArcadeGameListFilter;
 import vooga.arcade.search.IArcadeGameListSort;
 import vooga.arcade.search.SearchByStringFilter;
+import vooga.arcade.view.helper.ResourceManager;
 
 public class ArcadeModel
 {
@@ -24,6 +25,7 @@ public class ArcadeModel
 	private IArcadeGameListSort currentSort;
 	private IArcadeGameListFilter currentFilter;
 
+	private ResourceManager resources = new ResourceManager("vooga.arcade.resources.GUIResource");
 	public ArcadeModel()
 	{
 		masterArcadeGameList = new ArrayList<ArcadeGameObject>();
@@ -41,7 +43,7 @@ public class ArcadeModel
 	{
 		// TODO: Change the Path thing!
 		masterArcadeGameList = ArcadeGameFinder
-				.findAllArcadeGames("src/games/metadata");
+				.findAllArcadeGames(resources.getString("FolderPath"));
 	}
 
 	public void filterArcadeGameList(String tag, String[] query)
