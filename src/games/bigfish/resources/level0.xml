@@ -1,0 +1,11 @@
+<level>
+	<background type="color">blue</background>
+	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish5" image="fish5"></sprite>
+	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish4" image="fish4"></sprite>
+	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish3" image="fish3"></sprite>
+	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish2" image="fish2"></sprite>
+	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish1" image="fish1"></sprite>
+	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish6" image="fish6"></sprite>
+	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish0" image="fish0"></sprite>
+	<goal class="games.bigfish.BiggerThanTheRest"></goal>
+</level>

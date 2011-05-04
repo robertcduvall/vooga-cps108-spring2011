@@ -1,0 +1,6 @@
+<resources>
+	<images>
+		<source>src/games/bigfish/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.bigfish.Level">src/games/bigfish/resources/level0.xml</level>
+	<source>src/games/bigfish/resources/keymap.xml</source></resources>
