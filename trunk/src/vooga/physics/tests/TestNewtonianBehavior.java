@@ -13,6 +13,7 @@ import vooga.physics.forceGenerator.AbstractForceGenerator;
 import vooga.physics.forceGenerator.BasicForceGenerator;
 import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
+import vooga.sprites.spritebuilder.components.physics.AbstractPhysicsC;
 import vooga.sprites.spritebuilder.components.physics.BasicPhysicsC;
 import vooga.util.math.Angle;
 
@@ -26,9 +27,10 @@ public class TestNewtonianBehavior {
 
     @Test
     public void testNewtonianForce(){
-        BasicPhysicsC basic = new BasicPhysicsC(new Velocity(0,new Angle(0)), 1);
+        AbstractPhysicsC basic = new BasicPhysicsC(new Velocity(0,new Angle(0)), 1);
         //Velocity of 0, mass of 1
-        basic.applyForce(new BasicForceGenerator(new Force(10,new Angle(Math.PI))), 1);
+        AbstractForceGenerator force = new BasicForceGenerator(new Force(10,new Angle(Math.PI)));
+        basic.applyForce(force, 1);
         //Applies force with magnitude 10 pointing west
         Velocity delta = basic.getDeltaVelocity();
         assertEquals("Delta magnitude single application", 10, delta.getMagnitude(), 0);
