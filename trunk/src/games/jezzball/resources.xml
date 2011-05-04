@@ -4,5 +4,7 @@
 	</images>
 
 	<level id="0" type="games.jezzball.Level">src/games/jezzball/resources/level0.xml</level>
+	<level id="1" type="games.jezzball.Level">src/games/jezzball/resources/level1.xml</level>
+	
 	<source>src/games/jezzball/resources/keymap.xml</source>
 </resources>

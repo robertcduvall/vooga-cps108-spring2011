@@ -1,6 +1,7 @@
 package games.jezzball;
 
 import vooga.levels.IGoal;
+import vooga.levels.LevelException;
 import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
 
@@ -9,8 +10,8 @@ public class LevelCleared implements IGoal{
     private LevelManager myLevelManager;
     private VoogaPlayField myPlayField;
     private double totalTiles;
-    private int xDimension = 10;
-    private int yDimension = 10;
+    private int xDimension = 15;
+    private int yDimension = 15;
     
     @Override
     public boolean checkCompletion(LevelManager levelManager) {
@@ -19,9 +20,16 @@ public class LevelCleared implements IGoal{
 
     @Override
     public void progress() {
-        System.out.println("WIN!");
-        System.out.println(((double)myPlayField.getSpriteGroup("wall").size()));
-        System.exit(0);
+        try
+        {
+            myLevelManager.loadNextLevel();
+        }
+        catch (LevelException e)
+        {
+            /* TODO win the game better */
+            System.out.println("You win!");
+            System.exit(0);  
+        }
         
     }
 

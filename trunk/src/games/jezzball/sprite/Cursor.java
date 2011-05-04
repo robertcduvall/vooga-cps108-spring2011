@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
+import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
 
 public class Cursor extends Sprite {
@@ -17,6 +18,7 @@ public class Cursor extends Sprite {
     public Cursor(BufferedImage image,final VoogaGame game, int x, int y) {
         super(image, x, y);
         this.game = game;
+        this.setAngle(Direction.NORTH.getAngle());
         /*
          * game.addEveryTurnEvent("trackCursor", new IEventHandler() {
          * 
@@ -83,6 +85,12 @@ public class Cursor extends Sprite {
             @Override
             public void handleEvent(Object o) {
                 vertical = !vertical;
+                if(vertical){
+                    setImage(game.getImageLoader().getImage("vertical_arrow"));
+                }else{
+                    setImage(game.getImageLoader().getImage("horizontal_arrow"));
+                }
+                
             }
         });
 
