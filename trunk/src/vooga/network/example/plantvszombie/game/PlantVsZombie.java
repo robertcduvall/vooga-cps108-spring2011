@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import vooga.reflection.Reflection;
+import vooga.core.VoogaGame;
 import vooga.network.example.plantvszombie.collisions.EnemyPlantCollision;
 import vooga.network.example.plantvszombie.collisions.ProjectileEnemyCollision;
 
@@ -32,7 +33,7 @@ import com.golden.gamedev.object.font.SystemFont;
  * @author Roman
  * Trying reproduce the famous game Plant vs Zombies, all resources used here come from the game.
  */
-public class PlantVsZombie extends Game {
+public class PlantVsZombie extends VoogaGame {
 	private final String resource = "vooga.network.example.plantvszombie.resources.sunCost";
 
 	private final String loseScript = "Zombies ate your brain.";
@@ -259,6 +260,13 @@ public class PlantVsZombie extends Game {
     public void setSunRepository(int value){
     	SunRepository = value;
     }
+
+
+	@Override
+	public void updatePlayField(long elapsedTime) {
+		// TODO Auto-generated method stub
+		
+	}
 
     
 }

@@ -1,10 +1,13 @@
-package vooga.network.example.Game;
+package vooga.network.example.gameGUI;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import com.golden.gamedev.Game;
+import com.golden.gamedev.GameLoader;
 
 import vooga.network.INetworkEngine;
 import vooga.network.tcpEngine.ConnectInfo;
@@ -240,6 +243,8 @@ public class MainGUI extends JFrame implements ActionListener
 				System.exit(0);
 			}
 		});
+		
+		initGames();
 	}
 
 	public void actionPerformed(ActionEvent e)
@@ -318,6 +323,9 @@ public class MainGUI extends JFrame implements ActionListener
 		} else if (obj == startgameItem || obj == startgameButton) {
 			int index = gameList.getSelectedIndex();
 			messageShow.append("selected game "+(String)listModel.get(index)+"\n");
+			ArcadeGameObject gameObj = new ArcadeGameObject();
+			gameObj.start();
+			
 			
 			
 		} else if (obj == clientMessage || obj == clientMessageButton) {
@@ -343,14 +351,17 @@ public class MainGUI extends JFrame implements ActionListener
 		}
 	}
 	
+	private void initGames(){
+		
+	}
+    
+	
 	private class ListListener implements ListSelectionListener {
 
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			
-
 		}
-
 	}
 
 	public static void main(String[] args)
