@@ -1,0 +1,12 @@
+<resources>
+	<images>
+		<source>src/games/arrow/resources/images.xml</source>
+	</images>
+	<!--
+	<sounds>
+		<source>resources/sounds.xml</source>
+	</sounds>
+	-->
+	<level id="0" type="games.arrow.Level">src/games/arrow/resources/levels/level0.xml</level>
+	<source>src/games/arrow/resources/keymap.xml</source>
+</resources>
