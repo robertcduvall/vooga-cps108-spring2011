@@ -10,7 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
@@ -46,6 +49,10 @@ public class GameGUI extends JFrame implements ActionListener {
 
 	private static int port = 8999;
 	private String userName;
+	
+	private Map<String, ArcadeNetworkGame> gameMap;
+	
+	private static final String resources = "vooga.network.example.gameGUI.resources.games";
 
 	public JTextArea messageShow;
 	public JList gameList;
@@ -60,18 +67,18 @@ public class GameGUI extends JFrame implements ActionListener {
 	private JTextField showStatus;
 
 	private JMenuBar jMenuBar = new JMenuBar();
-	private JMenu operateMenu = new JMenu("Operation(O)");
+	private JMenu operateMenu = new JMenu("Operation");
 
-	private JMenuItem userNameItem = new JMenuItem("UserName(I)");
-	private JMenuItem startgameItem = new JMenuItem("StartGame(L)");
-	private JMenuItem exitItem = new JMenuItem("Exit(X)");
+	private JMenuItem userNameItem = new JMenuItem("UserName");
+	private JMenuItem startgameItem = new JMenuItem("StartGame");
+	private JMenuItem exitItem = new JMenuItem("Exit");
 
-	private JMenu conMenu = new JMenu("Option(C)");
-	private JMenuItem userItem = new JMenuItem("Users(U)");
-	private JMenuItem joinItem = new JMenuItem("Join(C)");
+	private JMenu conMenu = new JMenu("Option");
+	private JMenuItem createItem = new JMenuItem("Create");
+	private JMenuItem joinItem = new JMenuItem("Join");
 
-	private JMenu helpMenu = new JMenu("Help(H)");
-	private JMenuItem helpItem = new JMenuItem("Help(H)");
+	private JMenu helpMenu = new JMenu("Help");
+	private JMenuItem helpItem = new JMenuItem("Help");
 
 	private JToolBar toolBar = new JToolBar();
 
@@ -103,6 +110,9 @@ public class GameGUI extends JFrame implements ActionListener {
 		this.setTitle("Network Game Starter");
 
 		this.setVisible(true);
+		
+		this.gameMap = new HashMap<String, ArcadeNetworkGame>();
+		
 	}
 
 	public void init() {
@@ -114,7 +124,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		operateMenu.add(startgameItem);
 		operateMenu.add(exitItem);
 		jMenuBar.add(operateMenu);
-		conMenu.add(userItem);
+		conMenu.add(createItem);
 		conMenu.add(joinItem);
 		jMenuBar.add(conMenu);
 		helpMenu.add(helpItem);
@@ -149,7 +159,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		userNameItem.addActionListener(this);
 		startgameItem.addActionListener(this);
 		exitItem.addActionListener(this);
-		userItem.addActionListener(this);
+		createItem.addActionListener(this);
 		joinItem.addActionListener(this);
 		helpItem.addActionListener(this);
 
@@ -163,8 +173,10 @@ public class GameGUI extends JFrame implements ActionListener {
 		messageShow.setEditable(false);
 
 		listModel = new DefaultListModel();
-		listModel.addElement("Sustain30s");
-		listModel.addElement("PlantsVsZombies");
+    	ResourceBundle myResources = ResourceBundle.getBundle(resources);
+    	for (String key : myResources.keySet()){
+    		listModel.addElement(key);
+    	}
 
 		gameList = new JList(listModel);
 		gameList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -262,7 +274,13 @@ public class GameGUI extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if (obj == userNameItem || obj == usernameButton) {
+		
+		
+		if (obj == createItem || obj == createServerButton) {
+			// here it should be select a game and create the book keeping process for the host with this game
+		} else if (obj == joinItem || obj == joinButton) {
+			// send out message to request to join a certain game
+		} else if (obj == userNameItem || obj == usernameButton) {
 			UserConf userConf = new UserConf(this, userName);
 			userConf.setVisible(true);
 			userName = userConf.userInputName;
@@ -271,10 +289,14 @@ public class GameGUI extends JFrame implements ActionListener {
 			networkEngine.getMyInfo().setName(userName);
 
 		} else if (obj == startgameItem || obj == startgameButton) {
+			// the host machine should start the game as a host, and inform all other machines to connect to here
 			int index = gameList.getSelectedIndex();
 			messageShow.append("selected game " + (String) listModel.get(index)
 					+ "\n");
-			// TODO going to add the start game functions
+			ArcadeNetworkGame game = gameMap.get((String) listModel.get(index));
+			game.setHost(true);
+			int tmpPort = port+(int)Math.round(Math.random()*1000);
+			game.setPort(tmpPort);
 
 		} else if (obj == clientMessage || obj == clientMessageButton) {
 			String message = clientMessage.getText();
@@ -299,7 +321,10 @@ public class GameGUI extends JFrame implements ActionListener {
 	}
 
 	private void initGames() {
-
+    	ResourceBundle myResources = ResourceBundle.getBundle(resources);
+    	for (String key : myResources.keySet()){
+    		gameMap.put(key, new ArcadeNetworkGame(myResources.getString(key)));
+    	}
 	}
 
 	private void initGUI() {
