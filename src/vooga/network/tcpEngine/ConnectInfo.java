@@ -9,10 +9,13 @@ public class ConnectInfo implements Serializable
 {
 	private String IP;
 	private String userName;
+	private int port;
 	
-	public ConnectInfo(String ip, String username){
+	
+	public ConnectInfo(String ip, String username, int port){
 		IP = ip;
 		userName = username;
+		this.port = port;
 	}
 	
 	public ConnectInfo(String s){
@@ -30,6 +33,10 @@ public class ConnectInfo implements Serializable
 	
 	public void setName(String name){
 		userName = name;
+	}
+	
+	public void setPort(int port){
+		this.port = port;
 	}
 	
 	@Override

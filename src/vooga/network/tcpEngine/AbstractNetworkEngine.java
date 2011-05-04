@@ -36,7 +36,7 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 		receivedList = Collections.synchronizedList(new LinkedList<Object>());
 		try {
 			myInfo = new ConnectInfo(InetAddress.getLocalHost()
-					.getHostAddress(), "userName");
+					.getHostAddress(), "userName", port);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
