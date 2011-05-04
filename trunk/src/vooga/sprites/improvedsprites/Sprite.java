@@ -38,7 +38,6 @@ import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
 import vooga.sprites.spritebuilder.components.basic.SpriteVelocityC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionShapeC;
-import vooga.sprites.spritebuilder.components.physics.VelocityC;
 import vooga.util.buildable.BuildException;
 import vooga.util.buildable.IBuildable;
 import vooga.util.buildable.components.ComponentResources;
