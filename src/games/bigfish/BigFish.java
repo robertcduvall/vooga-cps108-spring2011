@@ -68,7 +68,9 @@ public class BigFish extends VoogaGame {
 		BufferedImage fishImage = this.getImageLoader().getImage("fish"+size,Direction.EAST);
 		Sprite fish = getLevelManager().addArchetypeSprite("enemyFish"+size, 0, 
 				gen.nextInt(getHeight()));
+
 		fish.setImage(ImageUtil.flip(fishImage));
+
 	}
 
 }

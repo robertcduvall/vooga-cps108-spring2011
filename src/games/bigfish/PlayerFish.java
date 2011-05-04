@@ -11,7 +11,7 @@ public class PlayerFish extends FishSprite {
 
 	private final double SWIM_SPEED = 2;
 	private VoogaGame myGame;
-	private int mySize;
+	private int fishEaten;
 	
 	public PlayerFish(VoogaGame game, int x, int y, int size) {
 
@@ -23,8 +23,6 @@ public class PlayerFish extends FishSprite {
 
 			@Override
 			public void handleEvent(Object o) {
-				//accelerate(SWIM_SPEED, 90);
-
 				VerticalSwim(SWIM_SPEED);
 			}
 		});
@@ -33,8 +31,6 @@ public class PlayerFish extends FishSprite {
 
 			@Override
 			public void handleEvent(Object o) {
-				//accelerate(SWIM_SPEED, 270);
-
 				VerticalSwim(-1*SWIM_SPEED);
 			}
 		});
@@ -43,8 +39,6 @@ public class PlayerFish extends FishSprite {
 
 			@Override
 			public void handleEvent(Object o) {
-				//accelerate(SWIM_SPEED, 180);
-
 				HorizontalSwim(-1*SWIM_SPEED);
 			}
 		});
@@ -53,24 +47,22 @@ public class PlayerFish extends FishSprite {
 
 			@Override
 			public void handleEvent(Object o) {
-				//accelerate(SWIM_SPEED, 0);
 				HorizontalSwim(SWIM_SPEED);
 			}
-
-			
 		});
-
-		
+	}
+	
+	public void addToEaten(){
+		fishEaten ++;
 	}
 
 	private void HorizontalSwim(double d) {
 		this.moveX(d);
-		//accelerate(.0008);
 	}
 	
 	private void VerticalSwim(double d) {
 		this.moveY(d);
-		//accelerate(.0008);
 	}
+	
 
 }
