@@ -1,11 +1,11 @@
 <level>
 	<background type="color">grey</background>
-	<collision_manager g1="click" g2="tile" class="games.jezzball.collision.CreateWallCollision" />
 	<collision_manager g1="ball" g2="wall" class="games.jezzball.collision.WallCollision" />
 	
 	<sprite group="ball" class="games.jezzball.sprite.Ball" type="ball" image="ball" />
 	<sprite group="wall" class="games.jezzball.sprite.Wall" type="wall" image="wall" />
 	<sprite group="tile" class="games.jezzball.sprite.Tile" type="tile" image="tile" />
+	<sprite group="cursor" class="games.jezzball.sprite.Cursor" type="cursor" image="cursor" />
 	
 
 	<goal class="games.jezzball.LevelCleared" />
@@ -67,46 +67,6 @@
 	<y>100</y>
 	</instance>
 
-<instance type="tile">
-	<x>120</x>
-	<y>120</y>
-	</instance>
-
-<instance type="tile">
-	<x>120</x>
-	<y>140</y>
-	</instance>
-
-<instance type="tile">
-	<x>120</x>
-	<y>160</y>
-	</instance>
-
-<instance type="tile">
-	<x>120</x>
-	<y>180</y>
-	</instance>
-
-<instance type="tile">
-	<x>120</x>
-	<y>200</y>
-	</instance>
-
-<instance type="tile">
-	<x>120</x>
-	<y>220</y>
-	</instance>
-
-<instance type="tile">
-	<x>120</x>
-	<y>240</y>
-	</instance>
-
-<instance type="tile">
-	<x>120</x>
-	<y>260</y>
-	</instance>
-
 <instance type="wall">
 	<x>120</x>
 	<y>280</y>
@@ -116,46 +76,6 @@
 <instance type="wall">
 	<x>140</x>
 	<y>100</y>
-	</instance>
-
-<instance type="tile">
-	<x>140</x>
-	<y>120</y>
-	</instance>
-
-<instance type="tile">
-	<x>140</x>
-	<y>140</y>
-	</instance>
-
-<instance type="tile">
-	<x>140</x>
-	<y>160</y>
-	</instance>
-
-<instance type="tile">
-	<x>140</x>
-	<y>180</y>
-	</instance>
-
-<instance type="tile">
-	<x>140</x>
-	<y>200</y>
-	</instance>
-
-<instance type="tile">
-	<x>140</x>
-	<y>220</y>
-	</instance>
-
-<instance type="tile">
-	<x>140</x>
-	<y>240</y>
-	</instance>
-
-<instance type="tile">
-	<x>140</x>
-	<y>260</y>
 	</instance>
 
 <instance type="wall">
@@ -169,46 +89,6 @@
 	<y>100</y>
 	</instance>
 
-<instance type="tile">
-	<x>160</x>
-	<y>120</y>
-	</instance>
-
-<instance type="tile">
-	<x>160</x>
-	<y>140</y>
-	</instance>
-
-<instance type="tile">
-	<x>160</x>
-	<y>160</y>
-	</instance>
-
-<instance type="tile">
-	<x>160</x>
-	<y>180</y>
-	</instance>
-
-<instance type="tile">
-	<x>160</x>
-	<y>200</y>
-	</instance>
-
-<instance type="tile">
-	<x>160</x>
-	<y>220</y>
-	</instance>
-
-<instance type="tile">
-	<x>160</x>
-	<y>240</y>
-	</instance>
-
-<instance type="tile">
-	<x>160</x>
-	<y>260</y>
-	</instance>
-
 <instance type="wall">
 	<x>160</x>
 	<y>280</y>
@@ -218,46 +98,6 @@
 <instance type="wall">
 	<x>180</x>
 	<y>100</y>
-	</instance>
-
-<instance type="tile">
-	<x>180</x>
-	<y>120</y>
-	</instance>
-
-<instance type="tile">
-	<x>180</x>
-	<y>140</y>
-	</instance>
-
-<instance type="tile">
-	<x>180</x>
-	<y>160</y>
-	</instance>
-
-<instance type="tile">
-	<x>180</x>
-	<y>180</y>
-	</instance>
-
-<instance type="tile">
-	<x>180</x>
-	<y>200</y>
-	</instance>
-
-<instance type="tile">
-	<x>180</x>
-	<y>220</y>
-	</instance>
-
-<instance type="tile">
-	<x>180</x>
-	<y>240</y>
-	</instance>
-
-<instance type="tile">
-	<x>180</x>
-	<y>260</y>
 	</instance>
 
 <instance type="wall">
@@ -271,46 +111,6 @@
 	<y>100</y>
 	</instance>
 
-<instance type="tile">
-	<x>200</x>
-	<y>120</y>
-	</instance>
-
-<instance type="tile">
-	<x>200</x>
-	<y>140</y>
-	</instance>
-
-<instance type="tile">
-	<x>200</x>
-	<y>160</y>
-	</instance>
-
-<instance type="tile">
-	<x>200</x>
-	<y>180</y>
-	</instance>
-
-<instance type="tile">
-	<x>200</x>
-	<y>200</y>
-	</instance>
-
-<instance type="tile">
-	<x>200</x>
-	<y>220</y>
-	</instance>
-
-<instance type="tile">
-	<x>200</x>
-	<y>240</y>
-	</instance>
-
-<instance type="tile">
-	<x>200</x>
-	<y>260</y>
-	</instance>
-
 <instance type="wall">
 	<x>200</x>
 	<y>280</y>
@@ -320,46 +120,6 @@
 <instance type="wall">
 	<x>220</x>
 	<y>100</y>
-	</instance>
-
-<instance type="tile">
-	<x>220</x>
-	<y>120</y>
-	</instance>
-
-<instance type="tile">
-	<x>220</x>
-	<y>140</y>
-	</instance>
-
-<instance type="tile">
-	<x>220</x>
-	<y>160</y>
-	</instance>
-
-<instance type="tile">
-	<x>220</x>
-	<y>180</y>
-	</instance>
-
-<instance type="tile">
-	<x>220</x>
-	<y>200</y>
-	</instance>
-
-<instance type="tile">
-	<x>220</x>
-	<y>220</y>
-	</instance>
-
-<instance type="tile">
-	<x>220</x>
-	<y>240</y>
-	</instance>
-
-<instance type="tile">
-	<x>220</x>
-	<y>260</y>
 	</instance>
 
 <instance type="wall">
@@ -373,46 +133,6 @@
 	<y>100</y>
 	</instance>
 
-<instance type="tile">
-	<x>240</x>
-	<y>120</y>
-	</instance>
-
-<instance type="tile">
-	<x>240</x>
-	<y>140</y>
-	</instance>
-
-<instance type="tile">
-	<x>240</x>
-	<y>160</y>
-	</instance>
-
-<instance type="tile">
-	<x>240</x>
-	<y>180</y>
-	</instance>
-
-<instance type="tile">
-	<x>240</x>
-	<y>200</y>
-	</instance>
-
-<instance type="tile">
-	<x>240</x>
-	<y>220</y>
-	</instance>
-
-<instance type="tile">
-	<x>240</x>
-	<y>240</y>
-	</instance>
-
-<instance type="tile">
-	<x>240</x>
-	<y>260</y>
-	</instance>
-
 <instance type="wall">
 	<x>240</x>
 	<y>280</y>
@@ -422,46 +142,6 @@
 <instance type="wall">
 	<x>260</x>
 	<y>100</y>
-	</instance>
-
-<instance type="tile">
-	<x>260</x>
-	<y>120</y>
-	</instance>
-
-<instance type="tile">
-	<x>260</x>
-	<y>140</y>
-	</instance>
-
-<instance type="tile">
-	<x>260</x>
-	<y>160</y>
-	</instance>
-
-<instance type="tile">
-	<x>260</x>
-	<y>180</y>
-	</instance>
-
-<instance type="tile">
-	<x>260</x>
-	<y>200</y>
-	</instance>
-
-<instance type="tile">
-	<x>260</x>
-	<y>220</y>
-	</instance>
-
-<instance type="tile">
-	<x>260</x>
-	<y>240</y>
-	</instance>
-
-<instance type="tile">
-	<x>260</x>
-	<y>260</y>
 	</instance>
 
 <instance type="wall">
@@ -519,13 +199,22 @@
 	<x>280</x>
 	<y>280</y>
 	</instance>
-	
+
+
 	<instance type="ball">
-		<x>150</x>
-		<y>150</y>
+		<x>180</x>
+		<y>180</y>
 		<direction>34</direction>
 		<speed>0.1</speed>
 	</instance>
+	
+	<instance type="ball">
+		<x>160</x>
+		<y>160</y>
+		<direction>79</direction>
+		<speed>0.1</speed>
+	</instance>
+	
 	
 	<!--  
 	<instance type="ball">

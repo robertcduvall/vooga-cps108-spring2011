@@ -40,12 +40,13 @@ public class WallCollision extends BasicCollisionGroup<Ball, Wall>{
         int side = checkCollisionSide(ball, wall);
         System.out.println(side);
         System.out.println(ball.getX() + " "+ ball.getY());
+        System.out.println("collision with wall at location " + wall.getX() + " " + wall.getY());
         switch (side){
         
-        case TOP: ball.collideBottom(); ball.move(0, wall.getY()-ball.getHeight()-ball.getY()); break;
-        case BOTTOM: ball.collideTop(); ball.move(0, wall.getY()+wall.getHeight()-ball.getY());break; 
-        case RIGHT : ball.collideLeft(); ball.move(wall.getX()+wall.getWidth()-ball.getX(), 0);break; 
-        case LEFT: ball.collideRight(); ball.move(wall.getX()-ball.getWidth()-ball.getX(), 0);break;
+        case TOP: ball.collideBottom(); ball.move(0, wall.getY()-ball.getHeight()-ball.getY()-3); break;
+        case BOTTOM: ball.collideTop(); ball.move(0, wall.getY()+wall.getHeight()-ball.getY()+3);break; 
+        case RIGHT : ball.collideLeft(); ball.move(wall.getX()+wall.getWidth()-ball.getX()+3, 0);break; 
+        case LEFT: ball.collideRight(); ball.move(wall.getX()-ball.getWidth()-ball.getX()-3, 0);break;
         }
         
     }
