@@ -38,7 +38,7 @@ public class MouseRotateC extends BasicComponent implements ISpriteUpdater{
 
 	@Override
 	public void update(Sprite s, long elapsedTime) {
-		s.setAngle(LineMath.findDirection(myGame.getMouseX()-s.getCenterX(), myGame.getMouseY()-s.getCenterY()));
+		s.setAngle(LineMath.findDirection(myGame.getMouseX()-s.getCenterX(), myGame.getMouseY()-s.getCenterY())-90);
 	}
 
 }

@@ -25,7 +25,7 @@ public class HeadingC extends BasicComponent implements IRotation{
 
 	@Override
 	public Double setAngle(double angle) {
-		return myAngle = angle;
+		return myAngle = (angle % 360);
 	}
 
 	@Override

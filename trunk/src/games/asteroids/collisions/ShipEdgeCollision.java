@@ -24,7 +24,7 @@ public class ShipEdgeCollision extends EdgeCollisionGroup {
 
 	@Override
 	public void collidedBottom(Sprite s) {
-		s.setSpeed(s.getHorizontalSpeed(), -s.getVerticalSpeed());		
+		s.setSpeed(0, 0);		
 	}
 
 
