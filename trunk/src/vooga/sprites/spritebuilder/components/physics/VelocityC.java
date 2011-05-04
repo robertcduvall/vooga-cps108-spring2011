@@ -20,7 +20,15 @@ public class VelocityC extends AbstractPhysicsC{
      * @param velocity
      */
     public VelocityC() {
-        this(true);
+        this(new Velocity(0,0),true);
+    }
+    
+    /**
+     * Creates a VelocityPhysicsC which has a given initial velocity (replaced by the sprite's velocity after update)
+     * @param velocity
+     */
+    public VelocityC(Velocity velocity) {
+        this(velocity, true);
     }
     
     /**
@@ -29,8 +37,8 @@ public class VelocityC extends AbstractPhysicsC{
      * @param mass
      * @param isOn
      */
-    public VelocityC(boolean isOn) {
-        super(new EmptyForceBehavior(), new MovableCollisionBehavior(new Velocity(0,0)), isOn);
+    public VelocityC(Velocity velocity, boolean isOn) {
+        super(new EmptyForceBehavior(), new MovableCollisionBehavior(velocity), isOn);
     }
 
     @Override
