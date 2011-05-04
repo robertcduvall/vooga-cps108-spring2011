@@ -78,4 +78,8 @@ public class ArcadeNetworkGame {
 	public void setHost(boolean b){
 		isHost = b;
 	}
+	
+	public int getPort(){
+		return port;
+	}
 }

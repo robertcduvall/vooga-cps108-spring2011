@@ -13,7 +13,7 @@ public class UserConf extends JDialog {
 
 	JPanel panelSave = new JPanel();
 	JLabel message = new JLabel();
-	String userInputName;
+	public String userInputName;
 
 	JTextField userName ;
 
