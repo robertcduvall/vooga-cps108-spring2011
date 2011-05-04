@@ -275,6 +275,13 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     }
     
     /**
+     * Returns the physics manager associated with this level
+     */
+    public PhysicsManager getPhysics(){
+        return myPhysics;
+    }
+    
+    /**
      * Updates the level and checks for goal completion
      * 
      * @param elapsedTime
