@@ -61,7 +61,7 @@ public class PacMan extends Sprite
         this.game = game;
         this.numLives = 3;
         int width = this.getWidth();
-        this.addComponents(new CollisionPolygonC(new CollisionQuadrilateral(new Vertex(0,0), new Vertex(0,this.getWidth()), new Vertex(this.getHeight(),0), new Vertex(this.getWidth(),this.getHeight()))));
+      //  this.addComponents(new CollisionPolygonC(new CollisionQuadrilateral(new Vertex(0,0), new Vertex(0,this.getWidth()), new Vertex(this.getHeight(),0), new Vertex(this.getWidth(),this.getHeight()))));
         
         game.registerEventHandler("Input.User.Start", new IEventHandler()
         {

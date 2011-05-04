@@ -30,7 +30,7 @@ public class Wall extends Sprite
     {
         super(image, 1 + x * (2 + image.getWidth()), 1 + y * (2 + image.getHeight()));
         
-        this.addComponents(new CollisionPolygonC(new CollisionQuadrilateral(new Vertex(0,0), new Vertex(0,this.getWidth()), new Vertex(this.getHeight(),0), new Vertex(this.getWidth(),this.getHeight()))));
+     //   this.addComponents(new CollisionPolygonC(new CollisionQuadrilateral(new Vertex(0,0), new Vertex(0,this.getWidth()), new Vertex(this.getHeight(),0), new Vertex(this.getWidth(),this.getHeight()))));
 
         
     	System.out.println("created");
