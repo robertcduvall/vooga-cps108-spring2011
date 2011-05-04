@@ -185,7 +185,6 @@ public class GameGUI extends JFrame implements ActionListener {
 		gameList = new JList(listModel);
 		gameList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		gameList.setSelectedIndex(0);
-		gameList.addListSelectionListener(new ListListener());
 
 		messageScrollPane = new JScrollPane(messageShow,
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -271,32 +270,87 @@ public class GameGUI extends JFrame implements ActionListener {
 			}
 		});
 
-		initGUI();
-
 		initGames();
 	}
-
-	public void actionPerformed(ActionEvent e) {
+    private void initGames() {
+        ResourceBundle myResources = ResourceBundle.getBundle(resources);
+        for (String key : myResources.keySet()){
+            gameMap.put(key, new ArcadeNetworkGame(myResources.getString(key)));
+        }
+    }
+    
+	public void actionPerformed(ActionEvent e)
+	{
 		Object obj = e.getSource();
-		
-		int gameIndex = gameList.getSelectedIndex();
-		ArcadeNetworkGame game = gameMap.get((String) listModel.get(gameIndex));
-		int tmpPort = port+(int)Math.round(Math.random()*1000);
-		game.setPort(tmpPort);
+        int gameIndex = gameList.getSelectedIndex();
+        ArcadeNetworkGame game = gameMap.get((String) listModel.get(gameIndex));
 		if (obj == createItem || obj == createServerButton) {
-			
-			
-			// here it should be select a game and create the book keeping process for the host with this game
-			game.setHost(true);
-			messageShow.append("the game: " + (String) listModel.get(gameIndex)
-					+ "has start a host\n");
-			networkEngine.send(GUIControlCommands.CREATEHOST);
-			networkEngine.send((String) listModel.get(gameIndex));
-			networkEngine.send(new ConnectInfo("127.0.0.1", null, tmpPort));
+			if (networkEngine == null) {
+				// networkEngine = new InternetNetworkEngine(port);
+				networkEngine = new LocalNetworkEngine(port);
+				networkEngine.getMyInfo().setName(userName);
+			}
+			if (networkEngine.createHost(false)) {
+				messageShow.append("fail to build the server\n");
+			} else {
+				joinButton.setEnabled(false);
+				createServerButton.setEnabled(false);
+				exitButton.setEnabled(true);
+
+				(new Thread(new UserReceiveRunnable(this, networkEngine)))
+						.start();
+				
+				// also create host for the game
+				game.setHost(true);
+				int tmpPort = port+(int)Math.round(Math.random()*1000);
+				game.setPort(tmpPort);
+                messageShow.append("build the server successfully\n");
+			}
+
 		} else if (obj == joinItem || obj == joinButton) {
-//			networkEngine.send("user "+userName+" request joinGame "+(String) listModel.get(gameIndex));
-			networkEngine.send(GUIControlCommands.JOIN);
-			
+			if (networkEngine == null) {
+				networkEngine = new LocalNetworkEngine(port);
+				networkEngine.getMyInfo().setName(userName);
+			}
+			List<ConnectInfo> result = networkEngine.searchHost();
+			if (result != null) {
+				if (result.size() == 0)
+					JOptionPane.showMessageDialog(null, "Host Not Found",
+							"Alert", JOptionPane.ERROR_MESSAGE);
+				else {
+					String[] foundServer = new String[result.size()];
+					for (int i = 0; i < result.size(); i++)
+						foundServer[i] = result.get(i).getIPaddress();
+					Object selectedValue = JOptionPane.showInputDialog(null,
+							"Choose one Server", "Input",
+							JOptionPane.INFORMATION_MESSAGE, null, foundServer,
+							foundServer[0]);
+					if ((String) selectedValue != null) {
+						if (networkEngine.connect((String) selectedValue)) {
+							messageShow
+									.append("fail to build the connection\n");
+						} else {
+							// set buttons
+							joinButton.setEnabled(false);
+							createServerButton.setEnabled(false);
+							exitButton.setEnabled(true);
+
+							// start thread
+							(new Thread(new UserReceiveRunnable(this,
+									networkEngine))).start();
+							
+							game.setHost(false);
+							messageShow
+									.append("build the connection successfully\n");
+						}
+					}
+				}
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Server not found, check server connectivity", "Alert",
+						JOptionPane.ERROR_MESSAGE);
+			}
+
 		} else if (obj == userNameItem || obj == usernameButton) {
 			UserConf userConf = new UserConf(this, userName);
 			userConf.setVisible(true);
@@ -304,12 +358,10 @@ public class GameGUI extends JFrame implements ActionListener {
 			nameLabel.setText("User Name: " + userName);
 			networkEngine.getMyInfo().setName(userName);
 			networkEngine.getMyInfo().setName(userName);
-		} else if (obj == startgameItem || obj == startgameButton) {
-			// the host machine should start the game as a host, and inform all other machines to connect to here
-			messageShow.append("start game: " + (String) listModel.get(gameIndex)
-					+ "\n");
-			game.start();
 
+		} else if (obj == startgameItem || obj == startgameButton) {
+			networkEngine.send(new StartGame(game.getPort()));
+			game.start();
 		} else if (obj == clientMessage || obj == clientMessageButton) {
 			String message = clientMessage.getText();
 			networkEngine.send(userName + " : " + message);
@@ -319,7 +371,6 @@ public class GameGUI extends JFrame implements ActionListener {
 			int j = JOptionPane.showConfirmDialog(this, "Confirm disconnect?",
 					"exit", JOptionPane.YES_OPTION,
 					JOptionPane.QUESTION_MESSAGE);
-
 			if (j == JOptionPane.YES_OPTION) {
 				networkEngine.disconnect();
 				// set the buttons
@@ -327,52 +378,21 @@ public class GameGUI extends JFrame implements ActionListener {
 				createServerButton.setEnabled(true);
 				exitButton.setEnabled(false);
 			}
+
 		} else if (obj == helpItem) {
 
 		}
 	}
-
-	private void initGames() {
-    	ResourceBundle myResources = ResourceBundle.getBundle(resources);
-    	for (String key : myResources.keySet()){
-    		gameMap.put(key, new ArcadeNetworkGame(myResources.getString(key)));
-    	}
+	
+	public void startGame(int port){
+        int gameIndex = gameList.getSelectedIndex();
+        ArcadeNetworkGame game = gameMap.get((String) listModel.get(gameIndex));
+        game.setPort(port);
+        game.start();
 	}
 
-	private void initGUI() {
-		if (networkEngine == null) {
-			networkEngine = new LocalNetworkEngine(port);
-			networkEngine.getMyInfo().setName(userName);
-
-			List<ConnectInfo> result = networkEngine.searchHost();
-			if (result != null && result.size() != 0) {
-				// String[] foundServer = new String[result.size()];
-				// for (int i = 0; i < result.size(); i++)
-				// foundServer[i] = result.get(i).getIPaddress();
-				// Object selectedValue = JOptionPane.showInputDialog(null,
-				// "Choose one Server", "Input",
-				// JOptionPane.INFORMATION_MESSAGE, null, foundServer,
-				// foundServer[0]);
-				// if ((String) selectedValue != null) {
-				// networkEngine.connect((String) selectedValue);
-				// }
-				networkEngine.connect("127.0.0.1");
-			} else {
-				networkEngine.createHost(false);
-			}
-			(new Thread(new UserReceiveRunnable(this, networkEngine))).start();
-		}
-	}
-
-	private class ListListener implements ListSelectionListener {
-
-		@Override
-		public void valueChanged(ListSelectionEvent e) {
-
-		}
-	}
-
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		GameGUI app = new GameGUI();
 	}
 }

@@ -24,10 +24,14 @@ public class UserReceiveRunnable implements Runnable
 		while(engine.isConnected()){
 			received = engine.update();
 			for(Object object : received){
-				try{
-					gui.messageShow.append((String)object+"\n");
-				}catch(Exception e){
-					e.printStackTrace();
+				if(object instanceof StartGame){
+					gui.startGame(((StartGame)object).port);
+				}else{
+					try{
+						gui.messageShow.append((String)object+"\n");
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 				}
 			}
 		}

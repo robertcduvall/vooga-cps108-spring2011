@@ -135,9 +135,7 @@ public class Main extends VoogaGame implements NetworkGame{
 	        }else{
 	        	network.connect(serverIP);
 	        }
-	        
 		}
-	
 	}
 
 	@Override
@@ -460,9 +458,4 @@ public class Main extends VoogaGame implements NetworkGame{
 	public void setServerIP(String IP) {
 		this.serverIP = IP;
 	}
-	
-	
-	
-	
-
 }
