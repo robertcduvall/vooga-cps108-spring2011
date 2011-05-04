@@ -1,11 +1,11 @@
 <images>
-	<image name="floor">
+	<image name="block">
 		<path>src/games/mariobros/resources/floor.png</path>
-	</image>
-	<image name="mario">
-		<path>src/games/mariobros/resources/mario.png</path>
 	</image>
 	<image name="koopa">
 		<path>src/games/mariobros/resources/koopa.png</path>
+	</image>
+	<image name="lander">
+		<path>src/games/mariobros/resources/mario.png</path>
 	</image>
 </images>
