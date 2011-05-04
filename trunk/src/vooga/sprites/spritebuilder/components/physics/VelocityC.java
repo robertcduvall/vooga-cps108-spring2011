@@ -20,7 +20,7 @@ public class VelocityC extends AbstractPhysicsC{
      * @param velocity
      * @param mass
      */
-    public VelocityC(Velocity velocity, double mass) {
+    public VelocityC(Velocity velocity) {
         this(velocity, true);
     }
     
