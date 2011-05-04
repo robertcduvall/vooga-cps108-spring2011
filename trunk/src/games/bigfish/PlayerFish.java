@@ -15,12 +15,10 @@ public class PlayerFish extends FishSprite {
 	
 	public PlayerFish(VoogaGame game, int x, int y, int size) {
 
-    	super(game.getImageLoader().getImage("fish"+size,Direction.WEST),x,y);
-		mySize = size;
+    	super(game.getImageLoader().getImage("fish"+size,Direction.WEST),x,y,size);
 		myGame = game;
 
 		game.registerEventHandler("Input.User.Down", new IEventHandler() {
-
 			@Override
 			public void handleEvent(Object o) {
 				VerticalSwim(SWIM_SPEED);
@@ -28,7 +26,6 @@ public class PlayerFish extends FishSprite {
 		});
 
 		game.registerEventHandler("Input.User.Up", new IEventHandler() {
-
 			@Override
 			public void handleEvent(Object o) {
 				VerticalSwim(-1*SWIM_SPEED);
@@ -36,7 +33,6 @@ public class PlayerFish extends FishSprite {
 		});
 
 		game.registerEventHandler("Input.User.Left", new IEventHandler() {
-
 			@Override
 			public void handleEvent(Object o) {
 				HorizontalSwim(-1*SWIM_SPEED);
@@ -44,7 +40,6 @@ public class PlayerFish extends FishSprite {
 		});
 
 		game.registerEventHandler("Input.User.Right", new IEventHandler() {
-
 			@Override
 			public void handleEvent(Object o) {
 				HorizontalSwim(SWIM_SPEED);
@@ -54,6 +49,14 @@ public class PlayerFish extends FishSprite {
 	
 	public void addToEaten(){
 		fishEaten ++;
+		checkLevelUp();
+	}
+
+	private void checkLevelUp() {
+		if(fishEaten > Math.pow(mySize, 2)){
+			mySize++;
+			this.setImage(myGame.getImageLoader().getImage("fish"+mySize,Direction.WEST));
+		}
 	}
 
 	private void HorizontalSwim(double d) {

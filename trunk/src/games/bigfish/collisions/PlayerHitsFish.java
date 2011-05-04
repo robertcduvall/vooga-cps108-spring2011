@@ -1,13 +1,11 @@
 package games.bigfish.collisions;
 
+import java.awt.geom.Point2D;
+
 import games.bigfish.FishSprite;
 import games.bigfish.PlayerFish;
-import games.breakout.sprites.Ball;
-import games.breakout.sprites.Block;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
 import vooga.collisions.collisionManager.CollisionManager;
-import vooga.collisions.intersections.IntersectionFactory;
-
 public class PlayerHitsFish extends BasicCollisionGroup<PlayerFish, FishSprite>{
 	@Override
 	public void collided(PlayerFish player, FishSprite fish) {
@@ -33,9 +31,9 @@ public class PlayerHitsFish extends BasicCollisionGroup<PlayerFish, FishSprite>{
 
 	    }
 	 private boolean collider(PlayerFish player, FishSprite enemy){
-		 double dx = Math.abs(player.getCenterX() - enemy.getCenterX()) - enemy.getWidth()/2.0;
+		 	double dx = Math.abs(player.getCenterX() - enemy.getCenterX()) - enemy.getWidth()/2.0;
 	        double dy = Math.abs(player.getCenterY() - enemy.getCenterY()) - enemy.getHeight()/2.0;
-	        
+	       
 	        if (dx > player.getWidth() || dy > player.getHeight())
 	            return false;
 	        
