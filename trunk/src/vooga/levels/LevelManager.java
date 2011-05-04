@@ -159,8 +159,17 @@ public class LevelManager implements VoogaState
         if (myActiveLevel == null) return null;
         return myActiveLevel;
     }
+    
+    
+    /**
+     * Retrieves the game.
+     */
+    public VoogaGame getCurrentGame ()
+    {
+    	return myGame;
+    }
 
-
+    
     /**
      * Returns number of levels completed
      */
