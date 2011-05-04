@@ -5,17 +5,17 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.collisions.collisionManager.boundaries.*;
 
-public abstract class EdgeCollisionGroup extends BasicCollisionGroup<EdgeSprite, Sprite> {
+public abstract class EdgeCollisionGroup<T extends Sprite> extends BasicCollisionGroup<EdgeSprite, T> {
 
 
 	@Override
 	public void setCollisionGroup(SpriteGroup<EdgeSprite> group1,
-			SpriteGroup<Sprite> group2) {
+			SpriteGroup<T> group2) {
 		super.setCollisionGroup(new EdgeSpriteGroup("edgeGroup", group2.getBackground()), group2);
 	}
 
 	@Override
-	public void collided(EdgeSprite s1, Sprite s2) {
+	public void collided(EdgeSprite s1, T s2) {
 		
 		switch(s1.getEdgeID()){
 			case EdgeSpriteGroup.RECTANGLE_TOP: if (s2.getVerticalSpeed() < 0) collidedTop(s2);break;
@@ -25,16 +25,16 @@ public abstract class EdgeCollisionGroup extends BasicCollisionGroup<EdgeSprite,
 		}
 	}
 
-	public abstract void collidedTop(Sprite s);
-	public abstract void collidedRight(Sprite s);
-	public abstract void collidedLeft(Sprite s);
-	public abstract void collidedBottom(Sprite s);
+	public abstract void collidedTop(T s);
+	public abstract void collidedRight(T s);
+	public abstract void collidedLeft(T s);
+	public abstract void collidedBottom(T s);
 	
 	public EdgeCollisionGroup() {
 		super();
 	}
 
-	public EdgeCollisionGroup(SpriteGroup<Sprite> s2) {
+	public EdgeCollisionGroup(SpriteGroup<T> s2) {
 		super(new EdgeSpriteGroup("edgeGroup", s2.getBackground()), s2);
 	}
 

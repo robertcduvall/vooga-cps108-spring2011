@@ -6,6 +6,7 @@ import vooga.collisions.shapes.Vertex;
 import vooga.collisions.shapes.collisionShapes.BoundingBox;
 import vooga.collisions.shapes.collisionShapes.CollisionPolygon;
 import vooga.collisions.shapes.collisionShapes.ICollisionShape;
+import vooga.collisions.shapes.regularShapes.Polygon;
 
 public class CollisionPolygonC extends CollisionShapeC<CollisionPolygon> {
 
@@ -19,6 +20,7 @@ public class CollisionPolygonC extends CollisionShapeC<CollisionPolygon> {
 	public CollisionPolygonC(CollisionPolygon cs) {
 		super(cs);
 	}
+
 
 
 }

@@ -1,5 +1,8 @@
 package vooga.resources;
 
+import java.awt.MouseInfo;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -29,7 +32,16 @@ public class KeyMap
 
     public enum Sensitivity
     {
-        EDGE, LEVEL
+        EDGE(true), LEVEL(true), MOUSE_EDGE(false), MOUSE_LEVEL(false);
+        
+        private boolean amKey;
+        Sensitivity(Boolean amkey){
+        	amKey = amkey;
+        }
+        
+        public boolean isKey(){
+        	return amKey;
+        }
     }
 
     private Map<Integer, Entry> myKeys;
@@ -50,8 +62,14 @@ public class KeyMap
             Sensitivity.EDGE;
         if (edgeLevelSensitive.equalsIgnoreCase("Level")) sensitivity =
             Sensitivity.LEVEL;
+        if (edgeLevelSensitive.equalsIgnoreCase("MouseEdge")) sensitivity =
+            Sensitivity.MOUSE_EDGE;
+        if (edgeLevelSensitive.equalsIgnoreCase("MouseLevel")) sensitivity =
+            Sensitivity.MOUSE_LEVEL;
 
-        int keyCode = getKeyCode(keyName);
+        int keyCode = 0;
+        if (sensitivity.isKey()) keyCode = getKeyCode(keyName);
+        else keyCode = getMouseCode(keyName);
 
         if (!myKeys.containsKey(keyCode)) myKeys.put(keyCode,
                                                      new Entry(keyCode,
@@ -61,8 +79,16 @@ public class KeyMap
     }
 
 
-    private int getKeyCode (String keyName)
+    private int getMouseCode(String keyName) {
+    	if (keyName.equalsIgnoreCase("Button1")) return MouseEvent.BUTTON1;
+    	else if (keyName.equalsIgnoreCase("Button2")) return MouseEvent.BUTTON2;
+    	else return MouseEvent.BUTTON3;
+	}
+
+
+	private int getKeyCode (String keyName)
     {
+    	
         return KeyStroke.getKeyStroke(keyName).getKeyCode();
     }
 
@@ -73,7 +99,9 @@ public class KeyMap
         {
             KeyMap.Entry entry = mapEntry.getValue();
             if ((entry.sensitivity == KeyMap.Sensitivity.LEVEL && game.bsInput.isKeyDown(entry.keyCode)) ||
-                (entry.sensitivity == KeyMap.Sensitivity.EDGE && game.bsInput.isKeyPressed(entry.keyCode)))
+                (entry.sensitivity == KeyMap.Sensitivity.EDGE && game.bsInput.isKeyPressed(entry.keyCode)) ||
+                (entry.sensitivity == KeyMap.Sensitivity.MOUSE_LEVEL && game.bsInput.isMouseDown(entry.keyCode)) ||
+                (entry.sensitivity == KeyMap.Sensitivity.MOUSE_EDGE && game.bsInput.isMousePressed(entry.keyCode)))
             {
                 for (String eventName : entry.events)
                 {
