@@ -1,4 +1,4 @@
-package vooga.network.example.Game;
+package vooga.network.example.sustain;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -11,6 +11,7 @@ import javax.management.Query;
 
 import vooga.core.VoogaGame;
 import vooga.network.INetworkEngine;
+import vooga.network.example.gameGUI.NetworkGame;
 import vooga.network.tcpEngine.LocalNetworkEngine;
 import vooga.sprites.improvedsprites.AnimatedSprite;
 
@@ -24,7 +25,7 @@ import com.golden.gamedev.object.background.ImageBackground;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
 
-public class MainGame extends VoogaGame {
+public class Main extends VoogaGame implements NetworkGame{
 
 	Sprite plane1;
 	Sprite plane2;
@@ -63,8 +64,9 @@ public class MainGame extends VoogaGame {
     long score2 = 0;
     
     boolean isHost = false;
-    INetworkEngine network;
-//    PriorityQueue<String> receivedCommands;
+    int port = 5421;
+    String serverIP = "127.0.0.1";
+    private INetworkEngine network;
     
     int remainingPlane = 2;
  
@@ -126,19 +128,14 @@ public class MainGame extends VoogaGame {
 	        
 	        if (!haveInitialized){
 	        	haveInitialized = true;
-	        //networking part
-	        isHost = true;
-	        network = new LocalNetworkEngine(5421);
+
+	        network = new LocalNetworkEngine(port);
+	        if(isHost){
+	        	network.createHost(false);
+	        }else{
+	        	network.connect(serverIP);
+	        }
 	        
-	        //set up host
-	        network.createHost(false);
-	        
-	        //connect to the host
-	        //network.connect("10.180.111.162");
-	        
-	        
-	        
-//	        receivedCommands = new PriorityQueue<String>();
 		}
 	
 	}
@@ -323,9 +320,7 @@ public class MainGame extends VoogaGame {
         if (plane.getY() > h - planesize)    plane.setY(h - planesize);
 	}
 	
-	public static void main(String[] args) {
-		launchGame(new MainGame(), new Dimension(640, 480), false);
-    }
+
 	
 	private String millisecToString(long time){
 		if (time >= (long)3600*1000*1000){
@@ -423,8 +418,6 @@ public class MainGame extends VoogaGame {
 				explosion1.setLoopAnim(false);
 				remainingPlane--;
 				score1 = System.currentTimeMillis() - startTime;
-				//send update
-				//
 				
 			} else if (s1.equals(plane2)) {
 				//set explosion
@@ -436,23 +429,40 @@ public class MainGame extends VoogaGame {
 				explosion2.setLoopAnim(false);
 				remainingPlane--;
 				score2 = System.currentTimeMillis() - startTime;
-				//send update
-				//
-
 			}
 			
 			if (remainingPlane == 0){
 				Status = AfterRunningStatus;
-				//send update
-				
 			}
 		}
 	}
 
 	@Override
 	public void updatePlayField(long elapsedTime) {
-		// TODO Auto-generated method stub
 		
 	}
+	
+	public static void main(String[] args) {
+		launchGame(new Main(), new Dimension(640, 480), false);
+    }
+
+	@Override
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	@Override
+	public void setIsHost(boolean host) {
+		this.isHost = host;
+	}
+
+	@Override
+	public void setServerIP(String IP) {
+		this.serverIP = IP;
+	}
+	
+	
+	
+	
 
 }

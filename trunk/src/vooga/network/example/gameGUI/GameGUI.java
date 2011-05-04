@@ -1,81 +1,96 @@
 package vooga.network.example.gameGUI;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.List;
+
+import javax.swing.Box;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.golden.gamedev.Game;
-import com.golden.gamedev.GameLoader;
-
 import vooga.network.INetworkEngine;
 import vooga.network.tcpEngine.ConnectInfo;
-import vooga.network.tcpEngine.InternetNetworkEngine;
 import vooga.network.tcpEngine.LocalNetworkEngine;
 
-import java.io.*;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+/**
+ * Should refactor this by the MVC pattern. In this program the GUI part make the program hard to read.
+ * @author hz41
+ *
+ */
+public class GameGUI extends JFrame implements ActionListener {
 
-public class MainGUI extends JFrame implements ActionListener
-{
+	private INetworkEngine networkEngine;
 
-	INetworkEngine networkEngine;
-
-	static int port = 8999;
-	String userName;
+	private static int port = 8999;
+	private String userName;
 
 	public JTextArea messageShow;
 	public JList gameList;
-	JScrollPane messageScrollPane;
-	JScrollPane memberScrollPane;
+	private JScrollPane messageScrollPane;
+	private JScrollPane memberScrollPane;
 
-	JLabel messageLabel;
-	JLabel nameLabel;
+	private JLabel messageLabel;
+	private JLabel nameLabel;
 
-	JTextField clientMessage;
-	JButton clientMessageButton;
-	JTextField showStatus;
+	private JTextField clientMessage;
+	private JButton clientMessageButton;
+	private JTextField showStatus;
 
-	JMenuBar jMenuBar = new JMenuBar();
-	JMenu operateMenu = new JMenu("Operation(O)");
+	private JMenuBar jMenuBar = new JMenuBar();
+	private JMenu operateMenu = new JMenu("Operation(O)");
 
-	JMenuItem userNameItem = new JMenuItem("UserName(I)");
-	JMenuItem startgameItem = new JMenuItem("StartGame(L)");
-	JMenuItem exitItem = new JMenuItem("Exit(X)");
+	private JMenuItem userNameItem = new JMenuItem("UserName(I)");
+	private JMenuItem startgameItem = new JMenuItem("StartGame(L)");
+	private JMenuItem exitItem = new JMenuItem("Exit(X)");
 
-	JMenu conMenu = new JMenu("Option(C)");
-	JMenuItem userItem = new JMenuItem("Users(U)");
-	JMenuItem joinItem = new JMenuItem("Join(C)");
+	private JMenu conMenu = new JMenu("Option(C)");
+	private JMenuItem userItem = new JMenuItem("Users(U)");
+	private JMenuItem joinItem = new JMenuItem("Join(C)");
 
-	JMenu helpMenu = new JMenu("Help(H)");
-	JMenuItem helpItem = new JMenuItem("Help(H)");
+	private JMenu helpMenu = new JMenu("Help(H)");
+	private JMenuItem helpItem = new JMenuItem("Help(H)");
 
-	JToolBar toolBar = new JToolBar();
+	private JToolBar toolBar = new JToolBar();
 
-	JButton usernameButton;
-	JButton startgameButton;
-	JButton createServerButton;
-	JButton joinButton;
-	JButton exitButton;
+	private JButton usernameButton;
+	private JButton startgameButton;
+	private JButton createServerButton;
+	private JButton joinButton;
+	private JButton exitButton;
 
-	Dimension faceSize = new Dimension(400, 600);
+	private Dimension faceSize = new Dimension(400, 600);
 
-	JPanel downPanel;
-	JPanel midPanel;
-	GridBagLayout girdBag;
-	GridBagConstraints girdBagCon;
-	
+	private JPanel downPanel;
+	private JPanel midPanel;
+	private GridBagLayout girdBag;
+	private GridBagConstraints girdBagCon;
+
 	private DefaultListModel listModel;
 
-	public MainGUI()
-	{
+	public GameGUI() {
 		init();
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,8 +105,7 @@ public class MainGUI extends JFrame implements ActionListener
 		this.setVisible(true);
 	}
 
-	public void init()
-	{
+	public void init() {
 
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
@@ -147,16 +161,15 @@ public class MainGUI extends JFrame implements ActionListener
 
 		messageShow = new JTextArea();
 		messageShow.setEditable(false);
-		
-        listModel = new DefaultListModel();
-        listModel.addElement("Sustain30s");
-        listModel.addElement("PlantsVsZombies");
-        
-        gameList = new JList(listModel);
-        gameList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        gameList.setSelectedIndex(0);
-        gameList.addListSelectionListener(new ListListener());
-        
+
+		listModel = new DefaultListModel();
+		listModel.addElement("Sustain30s");
+		listModel.addElement("PlantsVsZombies");
+
+		gameList = new JList(listModel);
+		gameList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		gameList.setSelectedIndex(0);
+		gameList.addListSelectionListener(new ListListener());
 
 		messageScrollPane = new JScrollPane(messageShow,
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -236,98 +249,33 @@ public class MainGUI extends JFrame implements ActionListener
 		contentPane.add(midPanel, BorderLayout.CENTER);
 		contentPane.add(downPanel, BorderLayout.SOUTH);
 
-		this.addWindowListener(new WindowAdapter()
-		{
-			public void windowClosing(WindowEvent e)
-			{
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
-		
+
+		initGUI();
+
 		initGames();
 	}
 
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-
-		if (obj == userItem || obj == createServerButton) {
-			if (networkEngine == null) {
-				// networkEngine = new InternetNetworkEngine(port);
-				networkEngine = new LocalNetworkEngine(port);
-				networkEngine.getMyInfo().setName(userName);
-			}
-			if (networkEngine.createHost(false)) {
-				messageShow.append("fail to build the server\n");
-			} else {
-				joinButton.setEnabled(false);
-				createServerButton.setEnabled(false);
-				exitButton.setEnabled(true);
-
-			}
-
-		} else if (obj == joinItem || obj == joinButton) {
-			if (networkEngine == null) {
-				// networkEngine = new InternetNetworkEngine(port);
-				networkEngine = new LocalNetworkEngine(port);
-				networkEngine.getMyInfo().setName(userName);
-			}
-			List<ConnectInfo> result = networkEngine.searchHost();
-			if (result != null) {
-				if (result.size() == 0)
-					JOptionPane.showMessageDialog(null, "Host Not Found",
-							"Alert", JOptionPane.ERROR_MESSAGE);
-				else {
-					String[] foundServer = new String[result.size()];
-					for (int i = 0; i < result.size(); i++)
-						foundServer[i] = result.get(i).getIPaddress();
-					Object selectedValue = JOptionPane.showInputDialog(null,
-							"Choose one Server", "Input",
-							JOptionPane.INFORMATION_MESSAGE, null, foundServer,
-							foundServer[0]);
-					// System.out.println((String) selectedValue);
-					if ((String) selectedValue != null) {
-						if (networkEngine.connect((String) selectedValue)) {
-							messageShow
-									.append("fail to build the connection\n");
-						} else {
-							// set buttons
-							joinButton.setEnabled(false);
-							createServerButton.setEnabled(false);
-							exitButton.setEnabled(true);
-
-							// start thread
-//							(new Thread(new UserReceiveRunnable(this,
-//									networkEngine))).start();
-//							(new Thread(new UpdateConnectionInfo(this,
-//									networkEngine))).start();
-							messageShow
-									.append("build the connection successfully\n");
-						}
-					}
-				}
-			} else {
-				JOptionPane.showMessageDialog(null,
-						"Server not found, check server connectivity", "Alert",
-						JOptionPane.ERROR_MESSAGE);
-			}
-
-		} else if (obj == userNameItem || obj == usernameButton) {
-//			UserConf userConf = new UserConf(this, userName);
-//			userConf.setVisible(true);
-//			userName = userConf.userInputName;
+		if (obj == userNameItem || obj == usernameButton) {
+			UserConf userConf = new UserConf(this, userName);
+			userConf.setVisible(true);
+			userName = userConf.userInputName;
 			nameLabel.setText("User Name: " + userName);
 			networkEngine.getMyInfo().setName(userName);
 			networkEngine.getMyInfo().setName(userName);
 
 		} else if (obj == startgameItem || obj == startgameButton) {
 			int index = gameList.getSelectedIndex();
-			messageShow.append("selected game "+(String)listModel.get(index)+"\n");
-			ArcadeGameObject gameObj = new ArcadeGameObject();
-			gameObj.start();
-			
-			
-			
+			messageShow.append("selected game " + (String) listModel.get(index)
+					+ "\n");
+			// TODO going to add the start game functions
+
 		} else if (obj == clientMessage || obj == clientMessageButton) {
 			String message = clientMessage.getText();
 			networkEngine.send(userName + " : " + message);
@@ -345,27 +293,49 @@ public class MainGUI extends JFrame implements ActionListener
 				createServerButton.setEnabled(true);
 				exitButton.setEnabled(false);
 			}
-
 		} else if (obj == helpItem) {
 
 		}
 	}
-	
-	private void initGames(){
-		
+
+	private void initGames() {
+
 	}
-    
-	
+
+	private void initGUI() {
+		if (networkEngine == null) {
+			networkEngine = new LocalNetworkEngine(port);
+			networkEngine.getMyInfo().setName(userName);
+
+			List<ConnectInfo> result = networkEngine.searchHost();
+			if (result != null && result.size() != 0) {
+				// String[] foundServer = new String[result.size()];
+				// for (int i = 0; i < result.size(); i++)
+				// foundServer[i] = result.get(i).getIPaddress();
+				// Object selectedValue = JOptionPane.showInputDialog(null,
+				// "Choose one Server", "Input",
+				// JOptionPane.INFORMATION_MESSAGE, null, foundServer,
+				// foundServer[0]);
+				// if ((String) selectedValue != null) {
+				// networkEngine.connect((String) selectedValue);
+				// }
+				networkEngine.connect("127.0.0.1");
+			} else {
+				networkEngine.createHost(false);
+			}
+			(new Thread(new UserReceiveRunnable(this, networkEngine))).start();
+		}
+	}
+
 	private class ListListener implements ListSelectionListener {
 
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			
+
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		MainGUI app = new MainGUI();
+	public static void main(String[] args) {
+		GameGUI app = new GameGUI();
 	}
 }

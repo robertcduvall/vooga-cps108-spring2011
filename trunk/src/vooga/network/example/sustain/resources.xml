@@ -1,0 +1,19 @@
+<resources>
+    <!--
+	<images>
+		<source>src/games/asteroids/resources/images.xml</source>
+	</images>
+    -->
+	<!--
+	<sounds>
+		<source>resources/sounds.xml</source>
+	</sounds>
+	-->
+	<!-- 
+	<level id="0" type="games.pong.Level">src/games/pong/resources/levels/level0.xml</level>
+	<level id="1">src/games/pong/resources/levels/level1.xml</level>
+	<level id="2">src/games/pong/resources/levels/level2.xml</level>
+	<level id="3">src/games/pong/resources/levels/level3.xml</level>
+	<source>src/games/pong/resources/keymap.xml</source>
+	 -->
+</resources>
