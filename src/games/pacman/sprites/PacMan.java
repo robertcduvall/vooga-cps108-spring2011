@@ -21,7 +21,7 @@ public class PacMan extends Sprite
     /**
      * The pacman speed, in pixels per ms.
      */
-    public static final Double PACMAN_SPEED = 5D; 
+    public static final Double PACMAN_SPEED = .8; 
     
     private VoogaGame game;
     private int numLives;
@@ -60,7 +60,6 @@ public class PacMan extends Sprite
         setAngle(Direction.NORTH.getAngle());
         this.game = game;
         this.numLives = 3;
-        int width = this.getWidth();
       //  this.addComponents(new CollisionPolygonC(new CollisionQuadrilateral(new Vertex(0,0), new Vertex(0,this.getWidth()), new Vertex(this.getHeight(),0), new Vertex(this.getWidth(),this.getHeight()))));
         
         game.registerEventHandler("Input.User.Start", new IEventHandler()
@@ -77,8 +76,7 @@ public class PacMan extends Sprite
             @Override
             public void handleEvent (Object o)
             {
-                setAngle(Direction.SOUTH.getAngle());
-                shift(-PACMAN_SPEED,0);
+                move(180D);
             }            
         });
         
@@ -87,8 +85,7 @@ public class PacMan extends Sprite
             @Override
             public void handleEvent (Object o)
             {
-                setAngle(Direction.NORTH.getAngle());
-                shift(PACMAN_SPEED,0);
+                move(0D);
             }            
         });
         
@@ -97,8 +94,7 @@ public class PacMan extends Sprite
             @Override
             public void handleEvent (Object o)
             {
-                setAngle(Direction.EAST.getAngle());
-                shift(0,-PACMAN_SPEED);
+                move(270D);
             }            
         });
         
@@ -107,8 +103,7 @@ public class PacMan extends Sprite
             @Override
             public void handleEvent (Object o)
             {
-                setAngle(Direction.WEST.getAngle());
-                shift(0,PACMAN_SPEED);
+                move(90D);
             }            
         });
         
@@ -126,12 +121,10 @@ public class PacMan extends Sprite
      * Move paddle, if the screen boundaries/walls allow.
      * @param dx The difference in x-coordinate.
      */
-    protected void shift (double dx,double dy)
+    protected void move (Double angle)
     {
-        double newX = getX() + dx;
-        double newY=getY()+dy;
-            moveX(dx);
-            moveY(dy);
+    	this.setAngle(angle);
+    	this.setAbsoluteSpeed(PACMAN_SPEED);
     }
 
     
