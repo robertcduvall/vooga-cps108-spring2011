@@ -1,0 +1,7 @@
+<resources>
+	<images>
+		<source>src/games/mariobros/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.mariobros.Level">src/games/mariobros/resources/level0.xml</level>
+	<source>src/games/mariobros/resources/keymap.xml</source>
+</resources>
