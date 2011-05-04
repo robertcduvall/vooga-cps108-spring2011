@@ -1,24 +1,12 @@
 package games.starshipdefender.gameobjects;
-
-import vooga.core.VoogaGame;
+import java.awt.image.BufferedImage;
 import vooga.sprites.improvedsprites.Sprite;
 
 public class Torpedo extends Sprite
 {
-    private VoogaGame myGame;
-    private int xpos;
-    private int ypos;
-    
-    public Torpedo(VoogaGame game)
+    public Torpedo(BufferedImage image, double x, double y)
     {
-        myGame = game;
-    }
-    
-    public Torpedo(VoogaGame game, int x, int y)
-    {
-        this(game);
-        xpos = x;
-        ypos = y;
+        super(image, x, y);
     }
 
     

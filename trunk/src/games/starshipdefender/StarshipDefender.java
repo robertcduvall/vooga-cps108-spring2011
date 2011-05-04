@@ -1,16 +1,20 @@
 package games.starshipdefender;
 
-import games.starshipdefender.gameobjects.PlayerShip;
+
+import games.starshipdefender.gameobjects.TargetingImage;
 
 import java.awt.Dimension;
 
 import vooga.core.VoogaGame;
 import vooga.sprites.spritegroups.SpriteGroup;
+import vooga.core.event.*;
+import vooga.resources.images.*;
+
 
 public class StarshipDefender extends VoogaGame
 {
-//    public static EventManager EventManager;
-//    public static ImageLoader ImageLoader;
+    public static EventManager EventManager;
+    public static ImageLoader ImageLoader;
     
     
     @Override
@@ -22,11 +26,11 @@ public class StarshipDefender extends VoogaGame
     @Override
     public void initResources()
     {
-//        EventManager = this.getEventManager();
-//        ImageLoader = this.getImageLoader();
+        EventManager = this.getEventManager();
+        ImageLoader = this.getImageLoader();
         
-        PlayerShip ship = new PlayerShip(this);
-        this.getLevelManager().addPlayer(new SpriteGroup<PlayerShip>("playership", ship));
+        TargetingImage target = new TargetingImage(this);
+        this.getLevelManager().addPlayer(new SpriteGroup<TargetingImage>("target", target));
         
         this.getLevelManager().loadLevel(0);
         
