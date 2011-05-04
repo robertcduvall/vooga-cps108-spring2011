@@ -16,7 +16,7 @@ import vooga.util.buildable.components.BasicComponent;
 public class BasicPhysicsC extends AbstractPhysicsC{
 
     /**
-     * Creates a BasicPhysicsC with given velocity and mass and the default 'on' state.
+     * Creates a BasicPhysicsC with given mass and the default 'on' state.
      * @param velocity
      * @param mass
      */
@@ -25,7 +25,16 @@ public class BasicPhysicsC extends AbstractPhysicsC{
     }
     
     /**
-     * Creates a BasicPhysicsC with given velocity, mass, and state.
+     * Creates a BasicPhysicsC with given velocity and mass and the default 'on' state.
+     * @param velocity
+     * @param mass
+     */
+    public BasicPhysicsC(Velocity velocity, double mass) {
+        this(velocity, mass, true);
+    }
+    
+    /**
+     * Creates a BasicPhysicsC with given mass, and state.
      * @param mass
      * @param isOn
      */
@@ -33,6 +42,15 @@ public class BasicPhysicsC extends AbstractPhysicsC{
         super(new PhysicalForceBehavior(mass), new PhysicalCollisionBehavior(new Velocity(0,0), mass), isOn);
     }
 
+    /**
+     * Creates a BasicPhysicsC with given velocity, mass, and state.
+     * @param mass
+     * @param isOn
+     */
+    public BasicPhysicsC(Velocity velocity, double mass, boolean isOn) {
+        super(new PhysicalForceBehavior(mass), new PhysicalCollisionBehavior(velocity, mass), isOn);
+    }
+    
     @Override
     protected int compareTo(BasicComponent o) {
         // TODO: do we use this to compare whether a component is more specific.
