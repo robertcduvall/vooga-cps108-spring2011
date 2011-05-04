@@ -5,6 +5,12 @@
 	<image name="cursor">
 		<path>src/games/jezzball/resources/red_arrow.png</path>
 	</image>
+	<image name="vertical_arrow">
+		<path>src/games/jezzball/resources/vertical_arrow.png</path>
+	</image>
+	<image name="horizontal_arrow">
+		<path>src/games/jezzball/resources/horizontal_arrow.png</path>
+	</image>
 	<image name="wall">
 		<path>src/games/jezzball/resources/wall.png</path>
 	</image>

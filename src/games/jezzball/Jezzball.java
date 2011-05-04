@@ -28,7 +28,7 @@ public class Jezzball extends VoogaGame{
     public void initResources() {
         //initEngine();
         imageLoader = getImageLoader();
-        Cursor c = new Cursor(imageLoader.getImage("cursor"),this, 140,140);
+        Cursor c = new Cursor(imageLoader.getImage("vertical_arrow"),this, 140,140);
         getLevelManager().addPlayer(new SpriteGroup<Cursor>("cursor", c));
         getLevelManager().loadLevel(0);
         
@@ -36,7 +36,7 @@ public class Jezzball extends VoogaGame{
 
     
     public static void main(String args[]){
-        launchGame(new Jezzball(), new Dimension(400,400), false);
+        launchGame(new Jezzball(), new Dimension(600,600), false);
     }
 
 }

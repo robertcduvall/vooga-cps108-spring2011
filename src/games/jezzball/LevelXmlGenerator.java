@@ -27,7 +27,7 @@ public class LevelXmlGenerator {
     }
     
     public static void main(String args[]){
-        createLevel(100,100,10,10);
+        createLevel(100,100,15,15);
     }
     
     /*

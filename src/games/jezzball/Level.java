@@ -1,14 +1,19 @@
 package games.jezzball;
 
+import games.jezzball.collision.CreateWallCollision;
 import games.jezzball.sprite.Cursor;
 
 import java.awt.Point;
+import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.levels.AbstractLevel;
+import vooga.reflection.Reflection;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
@@ -33,7 +38,11 @@ public class Level extends AbstractLevel
     
     private static int NUM_HIT_WALL=0;
     
-    int[][] tileArray = new int[10][10];
+    private Map<String, int[]> modifierMap;
+    private String[] mapKey= new String[]{"Up", "Down", "Right", "Left"};
+    private int[][] mapValue = new int[][]{new int[]{0,-20}, new int[]{0,20}, new int[]{20,0}, new int[]{-20,0}};
+    
+    int[][] tileArray = new int[15][15];
     
     
     public Level (Collection<SpriteGroup<Sprite>> players, VoogaGame game)
@@ -41,6 +50,13 @@ public class Level extends AbstractLevel
         super(players, game);
         this.game = (Jezzball)game;
         initTileArray();
+        addCollisionManager(new CreateWallCollision(game, getSpriteGroup("ball"), getSpriteGroup("tile")));
+        
+        modifierMap = new HashMap<String, int[]>();
+        for(int i=0; i<mapKey.length; i++){
+            modifierMap.put(mapKey[i], mapValue[i]);
+        }
+        
         
         game.registerEventHandler("Level.spawnTile", new IEventHandler() {
             
@@ -67,6 +83,17 @@ public class Level extends AbstractLevel
             }
         });
         
+        game.registerEventHandler("Level.collideWithTile", new IEventHandler() {
+            
+            @Override
+            public void handleEvent(Object o) {
+                collideWithTile();
+                
+            }
+
+            
+        });
+        
         registerEvents();
         
     }
@@ -79,6 +106,27 @@ public class Level extends AbstractLevel
                     tileArray[i][j]= EMPTY;
                 }
             }
+        }
+        
+    }
+    
+    private void setTileArray(int typeFrom, int typeTo){
+        for (int i = 0; i< tileArray.length; i++){
+            for (int j = 0; j < tileArray[i].length; j++){
+                if(tileArray[i][j]==typeFrom){
+                    tileArray[i][j]=typeTo;
+                }
+            }
+        }
+    }
+    
+    public void collideWithTile() {
+        spawning = false;
+        NUM_HIT_WALL=0;
+        setTileArray(TILE,EMPTY);
+        
+        for(Sprite s : getSpriteGroup("tile").getSprites()){
+            s.setActive(false);
         }
         
     }
@@ -96,8 +144,11 @@ public class Level extends AbstractLevel
     
     public void consolidateWalls(){
         for(Sprite s : getSpriteGroup("tile").getSprites()){
-            addArchetypeSprite("wall", (int)s.getX(), (int)s.getY());
-            s.setActive(false);
+            if(s.isActive()){
+                addArchetypeSprite("wall", (int)s.getX(), (int)s.getY());
+                s.setActive(false);
+            }
+            
         }
         
         System.out.println("Consolidate!");
@@ -130,7 +181,41 @@ public class Level extends AbstractLevel
         game.addTimer("spawnRight", SPAWN_RATE, "Game.spawnRight", p);
     }
     
+    public void spawnGivenDirection(Point p, String direction){
+        p = modifyPoint(p, direction);
+        
+        if(!checkToContinue(WALL, p)){
+            return;
+        }
+        setGrid(TILE, p);
+        game.fireEvent(this, "Level.spawnTile", p);
+        game.addTimer("spawn"+direction, SPAWN_RATE, "Game.spawn"+direction, p);
+        
+        
+    }
+    /**
+     * @param p
+     * @param direction
+     * @return
+     */
+    protected Point getNewPoint(Point p, String direction) {
+        try {
+            Method m =this.getClass().getDeclaredMethod(direction, Point.class);
+            p= (Point) m.invoke(this, p);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return p;
+    }
+    
+    public Point modifyPoint(Point p, String direction){
+        int[] modifierArray = modifierMap.get(direction);
+        return new Point((int)p.getX()+modifierArray[0], (int)p.getY()+modifierArray[1]);
+    }
+    
     public void spawnUp(Point p){
+        if(!spawning) return;
         p = new Point((int)p.getX(), (int)p.getY()-20);
         if(!checkToContinue(WALL, p)){
             return;
@@ -141,6 +226,7 @@ public class Level extends AbstractLevel
     }
     
     public void spawnDown(Point p){
+        if(!spawning) return;
         p = new Point((int)p.getX(), (int)p.getY()+20);
         if(!checkToContinue(WALL, p)){
             return;
@@ -151,6 +237,7 @@ public class Level extends AbstractLevel
     }
     
     public void spawnLeft(Point p){
+        if(!spawning) return;
         p = new Point((int)p.getX()-20, (int)p.getY());
         if(!checkToContinue(WALL, p)){
             return;
@@ -161,6 +248,7 @@ public class Level extends AbstractLevel
     }
     
     public void spawnRight(Point p){
+        if(!spawning) return;
         p = new Point((int)p.getX()+20, (int)p.getY());
         if(!checkToContinue(WALL, p)){
             return;
@@ -232,13 +320,7 @@ public class Level extends AbstractLevel
     }
 
     private void consolidateToWall() {
-        for (int i = 0; i< tileArray.length; i++){
-            for (int j = 0; j < tileArray[i].length; j++){
-                if(tileArray[i][j]==TILE){
-                    tileArray[i][j]=WALL;
-                }
-            }
-        }
+        setTileArray(TILE, WALL);
     }
 
     private boolean checkGrid(int type, Point location){
@@ -282,7 +364,8 @@ public class Level extends AbstractLevel
         game.registerEventHandler("Game.spawnUp", new IEventHandler() {
             @Override
             public void handleEvent(Object o) {
-                spawnUp((Point)o);
+                //spawnUp((Point)o);
+                spawnGivenDirection((Point)o, "Up");
             }
         });
         
@@ -306,6 +389,8 @@ public class Level extends AbstractLevel
                 spawnLeft((Point)o);
             }
         });
+        
+        
     }
 
 }
