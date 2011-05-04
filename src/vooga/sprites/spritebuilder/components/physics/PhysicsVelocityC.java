@@ -2,6 +2,7 @@ package vooga.sprites.spritebuilder.components.physics;
 
 import vooga.physics.collisionBehavior.MovableCollisionBehavior;
 import vooga.physics.forceBehavior.EmptyForceBehavior;
+import vooga.physics.forceBehavior.MasslessForceBehavior;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.BasicComponent;
@@ -38,7 +39,7 @@ public class PhysicsVelocityC extends AbstractPhysicsC{
      * @param isOn
      */
     public PhysicsVelocityC(Velocity velocity, boolean isOn) {
-        super(new EmptyForceBehavior(), new MovableCollisionBehavior(velocity), isOn);
+        super(new MasslessForceBehavior(), new MovableCollisionBehavior(velocity), isOn);
     }
 
     @Override
