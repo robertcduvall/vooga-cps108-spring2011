@@ -41,7 +41,7 @@ public class ArcadeModel
 	{
 		// TODO: Change the Path thing!
 		masterArcadeGameList = ArcadeGameFinder
-				.findAllArcadeGames("src/vooga/arcade/parser");
+				.findAllArcadeGames("src/games/metadata");
 	}
 
 	public void filterArcadeGameList(String tag, String[] query)
