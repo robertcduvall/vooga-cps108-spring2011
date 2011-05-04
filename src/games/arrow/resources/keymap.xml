@@ -1,0 +1,9 @@
+<keymap>
+	<key_event event="Input.User.Pull" sensitivity="MouseLevel" key="BUTTON3"/>
+	<key_event event="Input.User.Release" sensitivity="Edge" key="SPACE"/>
+	<key_event event="Input.User.Fire" sensitivity="MouseEdge" key="BUTTON1"/>
+	<key_event event="Input.User.moveRight" sensitivity="Level" key="D"/>
+	<key_event event="Input.User.moveLeft" sensitivity="Level" key="A"/>
+	<key_event event="Input.User.moveRight" sensitivity="Level" key="RIGHT"/>
+	<key_event event="Input.User.moveLeft" sensitivity="Level" key="LEFT"/>
+</keymap>

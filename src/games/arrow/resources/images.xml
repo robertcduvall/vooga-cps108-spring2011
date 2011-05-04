@@ -1,0 +1,14 @@
+<images>
+	<image name="archer">
+		<path>src/games/arrow/resources/images/archer.gif</path>
+	</image>
+	<image name="enemy">
+		<path>src/games/arrow/resources/images/enemy2.gif</path>
+	</image>
+	<image name="arrow">
+		<path>src/games/arrow/resources/images/arrow.gif</path>
+	</image>
+	<image name="background">
+		<path>src/games/arrow/resources/images/background.jpg</path>
+	</image>
+</images>
