@@ -1,0 +1,14 @@
+<images>
+        <image name="crosshairs">
+                <path>src/starshipdefender/resources/images/crosshairs.jpg</path>
+        </image>
+        <image name="space">
+                <path>src/starshipdefender/resources/images/space.jpeg</path>
+        </image>
+        <image name="stardestroyer">
+                <path>src/starshipdefender/resources/images/StarDestroyer.jpg</path>
+        </image>
+        <image name="torpedo">
+                <path>src/starshipdefender/resources/images/torpedo.jpg</path>
+        </image>
+</images>

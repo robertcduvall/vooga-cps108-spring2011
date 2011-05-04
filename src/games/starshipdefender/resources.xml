@@ -1,0 +1,13 @@
+<resources>
+	<images>
+		<source>src/starshipdefender/resources/images.xml</source>
+	</images>
+	<!--
+	<sounds>
+		<source>resources/sounds.xml</source>
+	</sounds>
+	-->
+	<level id="0" type="starshipdefender.Level">src/starshipdefender/resources/level0.xml</level>
+	<level id="1" type ="starshipdefender.Level">src/starshipdefender/resources/level1.xml</level>
+	<source>src/starshipdefender/resources/keymap.xml</source>
+</resources>

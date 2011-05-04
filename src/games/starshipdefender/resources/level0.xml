@@ -1,0 +1,13 @@
+<level>
+	<background type="image">space</background>
+	<collision_manager g1="torpedo" g2="enemyship" class="starshipdefender.collision.TorpedoEnemyShipCollision" />
+	<collision_manager g1="torpedo" g2="playership" class="starshipdefender.collision.EnemyTorpedoShipCollision" />
+	
+	<sprite group="enemyship" class="starshipdefender.gameobjects.EnemyShip" type="enemyship" image="StarDestroyer" />
+	<sprite group="torpedo" class="starshipdefender.gameobjects.Torpedo" type="torpedo" image="torpedo" />
+	<sprite group="playership" class="starshipdefender.gameobjects.PlayerShip" type="playership" />
+
+	<goal class="starshipdefender.AllShipDestroyedGoal" />
+
+	<instance type="enemyship"><x>6</x><y>0</y></instance>
+</level>
