@@ -15,11 +15,14 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import com.golden.gamedev.util.ImageUtil;
+
 import vooga.core.VoogaGame;
 import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
 import vooga.resources.Direction;
 import vooga.resources.images.ImageLoader;
+import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
 public class BigFish extends VoogaGame {
@@ -62,10 +65,10 @@ public class BigFish extends VoogaGame {
 	protected void spawnRandomFish() {
 		Random gen = new Random();
 		int size = gen.nextInt(7);
-		//BufferedImage fishImage = this.getImageLoader().getImage("fish"+size,Direction.WEST);
-		getLevelManager().addArchetypeSprite("enemyFish"+size, 0, 
+		BufferedImage fishImage = this.getImageLoader().getImage("fish"+size,Direction.EAST);
+		Sprite fish = getLevelManager().addArchetypeSprite("enemyFish"+size, 0, 
 				gen.nextInt(getHeight()));
-			
+		fish.setImage(ImageUtil.flip(fishImage));
 	}
 
 }
