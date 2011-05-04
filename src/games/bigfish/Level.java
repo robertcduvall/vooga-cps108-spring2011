@@ -32,7 +32,7 @@ public class Level extends AbstractLevel {
 
 	@Override
 	public void loadLevel() {
-
+		this.
         addAllSpritesFromPool();
         addBackground();
         
