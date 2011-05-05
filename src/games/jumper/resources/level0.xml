@@ -1,0 +1,71 @@
+<level>
+	<background type="color">white</background>
+	<collision_manager g1="avatar" g2="blocks" class="games.jumper.collisions.AvatarToBricks" />
+	<collision_manager g1="avatar" g2="spikes" class="games.jumper.collisions.AvatarToSpikes" />
+	<collision_manager g1="avatar" g2="door" class="games.jumper.collisions.AvatarToDoor" />
+	
+	<sprite group="avatar" class="games.jumper.sprites.Avatar" type="avatar" image="mario" />
+	<sprite group="block" class="games.jumper.sprites.Block" type="block" image="block" />
+	<sprite group="door" class="games.jumper.sprites.Door" type="door" image="door" />
+	<sprite group="Spikes" class="games.jumper.sprites.Spikes" type="spikes" image="spikes" />
+
+	<goal class="games.jumper.levelstuff.DoorReached" />
+
+	
+	<!-- this is the ground, it will be at the same y axis for every level -->
+	<instance type="block"><x>0</x><y>340</y></instance>
+	<instance type="block"><x>20</x><y>340</y></instance>
+	<instance type="block"><x>40</x><y>340</y></instance>
+	<instance type="block"><x>60</x><y>340</y></instance>
+	<instance type="block"><x>80</x><y>340</y></instance>
+	<instance type="block"><x>100</x><y>340</y></instance>
+	<instance type="block"><x>120</x><y>340</y></instance>
+	<instance type="spikes"><x>140</x><y>320</y></instance>
+	<instance type="spikes"><x>180</x><y>320</y></instance>
+	<instance type="spikes"><x>220</x><y>320</y></instance>
+	<instance type="block"><x>260</x><y>340</y></instance>
+	<instance type="block"><x>280</x><y>340</y></instance>
+	<instance type="block"><x>300</x><y>340</y></instance>
+	<instance type="block"><x>320</x><y>340</y></instance>
+	<instance type="block"><x>340</x><y>340</y></instance>
+	<instance type="block"><x>360</x><y>340</y></instance>
+	<instance type="block"><x>380</x><y>340</y></instance>
+	<instance type="block"><x>400</x><y>340</y></instance>
+	<instance type="block"><x>420</x><y>340</y></instance>
+	<instance type="block"><x>440</x><y>340</y></instance>
+	<instance type="block"><x>460</x><y>340</y></instance>
+	<instance type="block"><x>480</x><y>340</y></instance>
+	<instance type="block"><x>500</x><y>340</y></instance>
+	<instance type="block"><x>520</x><y>340</y></instance>
+	<instance type="block"><x>540</x><y>340</y></instance>
+	<instance type="block"><x>560</x><y>340</y></instance>
+	<instance type="block"><x>580</x><y>340</y></instance>
+	<instance type="block"><x>600</x><y>340</y></instance>
+	<instance type="block"><x>620</x><y>340</y></instance>
+	<instance type="block"><x>640</x><y>340</y></instance>
+	<instance type="block"><x>660</x><y>340</y></instance>
+	<instance type="block"><x>680</x><y>340</y></instance>
+	
+	<instance type="block"><x>100</x><y>270</y></instance>
+	<instance type="block"><x>120</x><y>270</y></instance>
+	<instance type="block"><x>140</x><y>270</y></instance>
+	<instance type="block"><x>160</x><y>270</y></instance>
+	
+
+	<instance type="block"><x>220</x><y>260</y></instance>
+	<instance type="block"><x>240</x><y>260</y></instance>
+	<instance type="block"><x>260</x><y>260</y></instance>
+	
+	<instance type="block"><x>340</x><y>240</y></instance>
+	<instance type="block"><x>360</x><y>240</y></instance>
+	<instance type="block"><x>380</x><y>240</y></instance>
+	
+	<instance type="block"><x>420</x><y>200</y></instance>
+	<instance type="spikes"><x>440</x><y>180</y></instance>
+	
+	<instance type="block"><x>480</x><y>160</y></instance>
+	
+	<instance type="block"><x>360</x><y>120</y></instance>
+	<instance type="block"><x>380</x><y>120</y></instance>
+	<instance type="door"><x>360</x><y>70</y></instance>
+</level>

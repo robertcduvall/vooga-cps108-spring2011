@@ -1,0 +1,14 @@
+<images>
+	<image name="block">
+		<path>src/games/jumper/resources/Brick_Block.png</path>
+	</image>
+	<image name="spikes">
+		<path>src/games/jumper/resources/spikes.png</path>
+	</image>
+	<image name="mario">
+		<path>src/games/jumper/resources/mario.png</path>
+	</image>
+	<image name="door">
+		<path>src/games/jumper/resources/door.png</path>
+	</image>
+</images>
