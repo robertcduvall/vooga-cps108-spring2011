@@ -11,7 +11,11 @@ public interface IShape extends IRotation, IRenderable
 
     public abstract void move (double dx, double dy);
 
-
+/**
+ * based on upper left corner
+ * @param x
+ * @param y
+ */
     public abstract void setLocation (double x, double y);
 
 
