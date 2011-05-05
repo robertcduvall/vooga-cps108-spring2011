@@ -8,10 +8,16 @@ import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.physics.MasslessPhysicsC;
 import vooga.sprites.spritebuilder.components.physics.PhysicsVelocityC;
-
+/**
+ * 
+ * @author Charlie Hatcher
+ *
+ */
 @SuppressWarnings("serial")
 public class Avatar extends Sprite{
 	
+	private static final int NUMER_OF_LIVES_AT_START = 3;
+	private static final int CHEAT_BONUS = 10;
 	private static final double AVATAR_JUMP = -2.4;
 	private static final double X_LOCATION = 100;
 	private static final double Y_LOCATION = 300;
@@ -27,7 +33,7 @@ public class Avatar extends Sprite{
 		myPhysics = new MasslessPhysicsC();
 		this.addComponent(myPhysics);
 		this.myGame = game;
-		myLives = 3;
+		myLives = NUMER_OF_LIVES_AT_START;
 		setAngle(Direction.NORTH.getAngle());
 		
 		game.registerEventHandler("Input.User.Left", new IEventHandler() {
@@ -58,7 +64,7 @@ public class Avatar extends Sprite{
 			
 			@Override
 			public void handleEvent(Object o) {
-				myLives=10;
+				myLives=CHEAT_BONUS;
 				
 			}
 		});

@@ -1,4 +1,5 @@
 <level>
+	<!-- Author Charlie Hatcher -->
 	<background type="color">blue</background>
 	<collision_manager g1="avatar" g2="block" class="games.jumper.collisions.AvatarToBlock" />
 	<collision_manager g1="avatar" g2="spikes" class="games.jumper.collisions.AvatarToSpikes" />
