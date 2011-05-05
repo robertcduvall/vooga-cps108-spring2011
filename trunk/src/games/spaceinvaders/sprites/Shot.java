@@ -1,10 +1,8 @@
 package games.spaceinvaders.sprites;
 
-import games.spaceinvaders.Commons;
 import java.awt.image.BufferedImage;
-import vooga.sprites.improvedsprites.Sprite;
 
-public class Shot extends Sprite implements Commons
+public class Shot extends Sprites
 {
 //    private final int H_SPACE = 6;
 //    private final int V_SPACE = 1;
@@ -23,4 +21,9 @@ public class Shot extends Sprite implements Commons
 //        setX(x + H_SPACE);
 //        setY(y - V_SPACE);
 //    }
+    
+    public void die()
+    {
+        //visiable = false;
+    }
 }
