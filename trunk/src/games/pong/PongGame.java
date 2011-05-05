@@ -1,52 +1,45 @@
 package games.pong;
 
-import java.awt.Color;
+import games.breakout.sprites.Paddle;
+import games.pong.sprites.PlayerPaddle;
+
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 
 import javax.imageio.ImageIO;
 
+
 import vooga.core.VoogaGame;
-import vooga.sprites.improvedsprites.Sprite;
+import vooga.core.event.EventManager;
+import vooga.resources.images.ImageLoader;
+import vooga.sprites.spritegroups.SpriteGroup;
+import vooga.view.function.AbstractGraphicsFunction;
+
 
 import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.background.ColorBackground;
+	
+
 
 public class PongGame extends VoogaGame {
-
-	PlayField playField;
-	String SPRITE_LOCATION = "src/games/pong/resources/images/rectangle.png";
+	public static EventManager eventManager;
+	public static ImageLoader imageLoader;
 
 	public static void main(String[] args) {
 		launchGame(new PongGame(), new Dimension(640, 480), false);
 	}
 
-	@Override
-	public void render(Graphics2D g) {
-		playField.render(g);
-	}
+	public void updatePlayField(long elapsedTime) {	}
 
-	@Override
-	public void updatePlayField(long elapsedTime) {
-		playField.update(elapsedTime);
-	}
 
 	@Override
 	public void initResources() {
-		Background background = new ColorBackground(Color.BLACK);
-		BufferedImage paddle_image = null;
-		try {
-			paddle_image = ImageIO.read(new File(SPRITE_LOCATION));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Sprite paddle1 = new Sprite(paddle_image);
-		playField = new PlayField(background);
+		eventManager = getEventManager();
+        imageLoader = getImageLoader();
+        
+        PlayerPaddle playerPaddle = new PlayerPaddle(this, 10, 10);
+        getLevelManager().addPlayer(new SpriteGroup<PlayerPaddle>("paddle", playerPaddle));
+		getLevelManager().loadLevel(0);
 	}
-
 }

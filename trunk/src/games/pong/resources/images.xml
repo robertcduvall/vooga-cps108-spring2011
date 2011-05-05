@@ -1,0 +1,8 @@
+<images>
+	<image name="ball">
+		<path>src/games/pong/resources/images/ball.png</path>
+	</image>
+	<image name="paddle">
+		<path>src/games/pong/resources/images/paddle.gif</path>
+	</image>
+</images>
