@@ -32,7 +32,7 @@ public class LevelManager implements VoogaState
     private int myNumOfLevels;
 
     /** The total number of levels completed */
-    private int myNumOfLevelsCompleted;
+    private int myNumOfLevelsCompleted = 0;
 
     /** The players for this game */
     private Collection<SpriteGroup<? extends Sprite>> myPlayers;

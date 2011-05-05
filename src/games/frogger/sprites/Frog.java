@@ -22,7 +22,6 @@ public class Frog extends Sprite {
 		this.game = game;
 		activeFrog = true;
 		
-		
 		game.registerEventHandler("Input.User.Left", new IEventHandler()
         {
             @Override
@@ -85,7 +84,7 @@ public class Frog extends Sprite {
 	
 	private void moveRight() {
 		this.setAngle(0.0);
-		if(this.getX() + this.getWidth() <= game.getWidth()) {
+		if(this.getX() + 2*this.getWidth() <= game.getWidth()) {
 			this.moveX(FROG_DELTA);
 		}
 	}
@@ -99,7 +98,7 @@ public class Frog extends Sprite {
 	
 	private void moveDown() {
 		this.setAngle(90.0);
-		if(this.getY() + this.getHeight() <= ((Frogger) game).FROG_Y_START) {
+		if(this.getY() + this.getHeight() <= Frogger.FROG_Y_START) {
 			this.moveY(FROG_DELTA);
 		}
 	}

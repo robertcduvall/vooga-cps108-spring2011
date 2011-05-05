@@ -42,8 +42,6 @@ public class SpriteConstructor {
 	 */
 	//FIXME: Refactor into single method.
 	public Sprite construct(List<String> assignments) {
-		//BufferedImage image = (BufferedImage) converterRack.convert(BufferedImage.class, imageName);
-		
 		assignments.add(0, imageName);
 		
 		Sprite sprite = converterRack.constructInstance(className, assignments);

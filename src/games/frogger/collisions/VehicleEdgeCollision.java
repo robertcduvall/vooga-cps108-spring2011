@@ -15,7 +15,7 @@ public class VehicleEdgeCollision extends EdgeCollisionGroup<Vehicle> {
 
 	@Override
 	public void collidedRight(Vehicle s) {
-		if(s.getOldX() >= 550){
+		if(s.getOldX() - s.getWidth()/2 >= 550 ){
 			s.setActive(false);
 			Frogger.myEventManager.fireEvent(this, "Vehicle.Destroy", s.getComponent(SpriteTypeC.class).getString());
 		}
