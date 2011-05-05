@@ -1,0 +1,10 @@
+<resources>
+	<images>
+		<source>src/games/fishin/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.fishin.Level">src/games/fishin/resources/levels/level0.xml</level>
+	<keymap>
+	<key_event event="Input.User.Action" sensitivity="Edge" key="SPACE"/>
+	<key_event event="Input.User.Cheat" sensitivity="Edge" key="X"/>
+	</keymap>
+</resources>

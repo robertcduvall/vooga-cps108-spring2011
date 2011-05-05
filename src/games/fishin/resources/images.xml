@@ -1,0 +1,26 @@
+<images>
+	<image name="ocean">
+		<path>src/games/fishin/resources/ocean.png</path>
+	</image>
+	<image name="fisherman">
+		<path>src/games/fishin/resources/fisherman.png</path>
+	</image>
+	<image name="exclamation">
+		<path>src/games/fishin/resources/exclamation.png</path>
+	</image>
+	<image name="land">
+		<path>src/games/fishin/resources/land.png</path>
+	</image>
+	<image name="rodUp">
+		<path>src/games/fishin/resources/rodUp.png</path>
+	</image>
+	<image name="rodDown">
+		<path>src/games/fishin/resources/rodDown.png</path>
+	</image>
+	<image name="sun">
+		<path>src/games/fishin/resources/sun.png</path>
+	</image>	
+	<image name="empty">
+		<path>src/games/fishin/resources/empty.png</path>
+	</image>
+</images>

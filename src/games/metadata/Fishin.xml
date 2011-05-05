@@ -1,0 +1,24 @@
+<game>
+	<title>Fishin</title>
+    <path>games.fishin.Fishin</path>
+	<genre>Fishin</genre>
+	<author>Anne Weng</author>
+	<description>Catch fish. Save the day.</description>
+	<datecreated>May 5, 2011</datecreated>
+	<highscores>
+		<first>11</first>
+		<second>0</second>
+		<third>0</third>
+	</highscores>
+	<version>-1</version>
+	<price>$0.08</price>
+	<language>Fish</language>
+	<dimension>
+		<width>640</width>
+		<height>480</height>
+	</dimension>
+	<rating>5</rating>
+	<favorite></favorite>
+	<comment>Press SPACE to fish.</comment>
+	<image>src/games/fishin/resources/fishinIcon.jpg</image>
+</game>

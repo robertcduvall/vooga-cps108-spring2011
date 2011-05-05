@@ -1,0 +1,32 @@
+<level>
+	<background type="color">cyan</background>
+	
+	<sprite class="games.fishin.sprites.StationarySprite" group="sun" type="sun" image="sun" />
+	<sprite class="games.fishin.sprites.Ocean" group="ocean" type="ocean" image="ocean" />
+	<sprite class="games.fishin.sprites.StationarySprite" group="land" type="land" image="land" />
+	<sprite class="games.fishin.sprites.StationarySprite" group="fisherman" type="fisherman" image="fisherman" />
+	<sprite class="games.fishin.sprites.Rod" group="rod" type="rod" image="rod" />
+	<sprite class="games.fishin.sprites.Exclamation" group="exclamation" type="exclamation" image="exclamation" />
+		
+	<instance type="sun">
+		<x>60</x>
+		<y>40</y>
+	</instance>
+	<instance type="rod">
+		<x>112</x>
+		<y>72</y>
+	</instance>	
+	<instance type ="ocean">
+		<x>-10</x>
+		<y>368</y>
+	</instance>
+	<instance type="land">
+		<x>446</x>
+		<y>284</y>
+	</instance>
+	<instance type="fisherman">
+		<x>380</x>
+		<y>210</y>
+	</instance>
+
+</level>
