@@ -12,7 +12,8 @@ import vooga.resources.images.ImageLoader;
 import vooga.sprites.spritegroups.SpriteGroup;
 
 /**
- * Jezzball!
+ * Jezzball! Create walls to compartmentalize of grid.
+ * Cover 75% to win
  * 
  * @author KevinWang
  *
@@ -20,27 +21,17 @@ import vooga.sprites.spritegroups.SpriteGroup;
 public class Jezzball extends VoogaGame{
     public static ImageLoader imageLoader;
     
-    
-    
-    
-    
     @Override
-    public void updatePlayField(long elapsedTime) {
-        // Depricated?
-        
-    }
+    public void updatePlayField(long elapsedTime) {}
 
     @Override
     public void initResources() {
-        //initEngine();
         imageLoader = getImageLoader();
-        Cursor c = new Cursor(imageLoader.getImage("vertical_arrow"),this, 140,140);
+        Cursor c = new Cursor(imageLoader.getImage("vertical_arrow"),this, 140,140, 20);
         getLevelManager().addPlayer(new SpriteGroup<Cursor>("cursor", c));
         getLevelManager().loadLevel(0);
-        
     }
 
-    
     public static void main(String args[]){
         launchGame(new Jezzball(), new Dimension(600,600), false);
     }
