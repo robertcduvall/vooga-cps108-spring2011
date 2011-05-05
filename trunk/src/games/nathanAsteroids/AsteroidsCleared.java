@@ -8,10 +8,10 @@ import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
 
 /**
- * A goal that checks if all the blocks on the playfield have
+ * A goal that checks if all the asteroids on the playfield have
  * been destroyed.
  * 
- * @author Misha
+ * @author Nathan Klug
  *
  */
 public class AsteroidsCleared implements IGoal
@@ -25,7 +25,7 @@ public class AsteroidsCleared implements IGoal
     @Override
     public boolean checkCompletion (LevelManager levelManager)
     {
-        return playfield.getSpriteGroup("block").getActiveSprite() == null;
+        return playfield.getSpriteGroup("asteroid").getActiveSprite() == null;
     }
 
 

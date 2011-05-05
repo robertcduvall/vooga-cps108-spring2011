@@ -19,7 +19,10 @@ import vooga.util.math.Angle;
 /**
  * XML Level Parser
  * 
+ * Modified to create ships
+ * 
  * @author Sterling Dorminey
+ * @author Nathan Klug
  * 
  */
 public class ShipParser extends Parser {

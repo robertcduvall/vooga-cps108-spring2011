@@ -17,6 +17,12 @@ import com.golden.gamedev.object.Sprite;
 import com.golden.gamedev.object.SpriteGroup;
 import com.golden.gamedev.object.background.ImageBackground;
 
+/**
+ * Rather lacking version of asteroids. Only cool thing is the ship creation.
+ * 
+ * @author Nathan Klug
+ *
+ */
 public class NathanAsteroids extends VoogaGame {
 
     public static void main (String[] args)

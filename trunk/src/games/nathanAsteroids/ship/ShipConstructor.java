@@ -14,7 +14,11 @@ import vooga.util.buildable.components.IComponent;
 
 /**
  * Factory class to construct a given sprite given some set of assignments.
+ * 
+ * Modified to create ship pieces
+ * 
  * @author SterlingDorminey
+ * @author Nathan Klug
  *
  */
 public class ShipConstructor {
