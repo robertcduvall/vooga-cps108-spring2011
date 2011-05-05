@@ -28,7 +28,7 @@ public class LevelCleared implements IGoal{
         {
             /* TODO win the game better */
             System.out.println("You win!");
-            System.exit(0);  
+         	myLevelManager.getCurrentGame().finish();  
         }
         
     }
