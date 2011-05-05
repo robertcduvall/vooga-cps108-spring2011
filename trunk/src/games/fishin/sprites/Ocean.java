@@ -6,13 +6,11 @@ import vooga.sprites.improvedsprites.AnimatedSprite;
 
 @SuppressWarnings("serial")
 public class Ocean extends AnimatedSprite {
-    private int x;
     private double t;
     private VoogaGame game;
     
     public Ocean(VoogaGame game, int x, int y) {
         super(game.getImageLoader().getAnimation("ocean"), x, y);
-        this.x = 0;
         t = 0;
         this.game = game;
         bindEvents();
@@ -30,13 +28,10 @@ public class Ocean extends AnimatedSprite {
     }
 
     public void moveOcean() {
-        x +=(int) (10*Math.sin(t));
-        t += Math.PI/180;
+        t += Math.PI/8;
         if (t >= 2*Math.PI) {
             t -= 2*Math.PI;
         }
-        super.setX(x);
-        super.updateAnimation();
-        //super.setMovement(0.1, Math.cos(t));
+        super.setMovement(Math.cos(t)/6, 0);
     }
 }

@@ -25,6 +25,7 @@ public class Rod extends AnimatedSprite {
             public void handleEvent(Object o)
             {
                 isReeling = true;
+                game.fireEvent(this, "FishBiteStartExclamation");
                 update();
             }
         });
@@ -34,6 +35,7 @@ public class Rod extends AnimatedSprite {
             public void handleEvent(Object o)
             {
                 isReeling = false;
+                game.fireEvent(this, "FishBiteDoneExclamation");
                 update();
             }
         });
@@ -44,7 +46,6 @@ public class Rod extends AnimatedSprite {
                     game.fireEvent(this, "FishCaught");
                     game.fireEvent(this, "FishBiteDone");
                     System.out.println("Fish caught!");
-                    update();
                 }
             }
         });

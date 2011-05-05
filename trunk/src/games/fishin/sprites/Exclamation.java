@@ -3,7 +3,6 @@ package games.fishin.sprites;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.AnimatedSprite;
-import vooga.sprites.improvedsprites.Sprite;
 
 @SuppressWarnings("serial")
 public class Exclamation extends AnimatedSprite {
@@ -17,10 +16,11 @@ public class Exclamation extends AnimatedSprite {
         this.game = game;
         isVisible = false;
         bindEvents();
+        update();
     }
 
     private void bindEvents() {
-        game.registerEventHandler("FishBiteStart", new IEventHandler()
+        game.registerEventHandler("FishBiteStartExclamation", new IEventHandler()
         {
             @Override
             public void handleEvent(Object o)
@@ -29,23 +29,23 @@ public class Exclamation extends AnimatedSprite {
                 update();
             }
         });
-        game.registerEventHandler("FishBiteDone", new IEventHandler()
+        game.registerEventHandler("FishBiteDoneExclamation", new IEventHandler()
         {
             @Override
             public void handleEvent(Object o)
             {
                 isVisible = false;
+                update();
             }
         });
     }
 
     private void update() {
         if (isVisible) {
-
-            Sprite omg = game.getLevelManager().addArchetypeSprite("exclamation", 100, 180);
+            super.setImages(game.getImageLoader().getAnimation("exclamation"));
         }
         else {
-            this.setActive(false);
+            super.setImages(game.getImageLoader().getAnimation("empty"));
         }
     }
 
