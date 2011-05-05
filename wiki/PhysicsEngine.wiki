@@ -1,20 +1,18 @@
-
-
 To add gravity to your game:
 
 There should be only two steps:
 
-  # Add a PhysicsVelocityC component to your sprites. To do this, insert the line {{{addComponents(new PhysicsVelocityC());}}} to the constructor of your sprite.
+  # Add a MasslessPhysicsC component to your sprites. To do this, insert the line {{{addComponents(new MasslessPhysicsC());}}} to the constructor of your sprite.
   # Add a "MassProportionalForceGenerator" to the instance of the physics manager which is stored in AbstractLevel. To do this, call
   
 {{{(level instance).getPhysics().addGlobalForce(new MassProportionalForceGenerator(new Force(xValue, yValue)));}}} 
 
-where xValue would probably be 0 and yValue would probably be 9.8 in the real world, but in vooga world should probably be much smaller (try around 0.00005?). You might also need to fiddle with the sign, because I'm not sure if it gets inverted or not.
+where xValue would probably be 0 and yValue would probably be 9.8 in the real world, but in vooga world should probably be much smaller (try around 0.00015?). You might also need to fiddle with the sign, because I'm not sure if it gets inverted or not.
 
 
 To add behavior like jumping to your sprites, call:
 
-{{{VoogaPhysicsMediator.applyForceToSprite((your sprite), new MassProportionalForce(new Force(0,(some small number)), 1);}}}
+{{{VoogaPhysicsMediator.applyForceToSprite((your sprite), new MassProportionalForceGenerator(new Force(0,(some small number)), 1);}}}
 
 Where (some small number) might be either positive or negative.
 
