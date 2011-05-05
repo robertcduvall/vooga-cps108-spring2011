@@ -7,7 +7,7 @@
 		<source>resources/sounds.xml</source>
 	</sounds>
 	-->
-	<level id="0" type="starshipdefender.Level">src/games/starshipdefender/resources/level0.xml</level>
-	<level id="1" type ="starshipdefender.Level">src/games/starshipdefender/resources/level1.xml</level>
+	<level id="0" type="games.starshipdefender.Level">src/games/starshipdefender/resources/level0.xml</level>
+	<level id="1" type ="games.starshipdefender.Level">src/games/starshipdefender/resources/level1.xml</level>
 	<source>src/games/starshipdefender/resources/keymap.xml</source>
 </resources>
