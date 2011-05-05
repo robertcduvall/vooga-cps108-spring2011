@@ -29,7 +29,7 @@ public class Viewport extends JLayeredPane
     public Viewport(DrawingBoard owner)
     {
         super();
-
+        
         mySprites = new ArrayList<DraggableImage>();
         this.owner = owner;
         addMouseMotionListener(new MouseTracker());
@@ -62,7 +62,6 @@ public class Viewport extends JLayeredPane
     }
 
     void addImage(DraggableImage i){
-    	System.out.println("added");
         mySprites.add(i);
     }
 
@@ -91,12 +90,7 @@ public class Viewport extends JLayeredPane
          */
         @Override
         public void mouseClicked(MouseEvent arg0) {
-            /*if(!arg0.isControlDown()){
-				moveSelectedSprite();
-			}
-			if(arg0.isControlDown()){
-				editSelectedSprite();
-			}*/
+        	System.out.println(mySprites.size());
             for(int i=0; i<mySprites.size();i++){
                 if(!arg0.isControlDown()){
                     if(mySprites.get(i).moveIfSelected(x, y));
