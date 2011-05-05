@@ -1,0 +1,8 @@
+<resources>
+	<images>
+		<source>src/games/missilecommand/resources/images.xml</source>
+	</images>
+	
+	<level id="0" type="games.missilecommand.levels.Level">src/games/missilecommand/levels/level0.xml</level>
+	<level id="1" type="games.missilecommand.levels.Level">src/games/missilecommand/levels/level1.xml</level>
+</resources>

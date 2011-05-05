@@ -1,0 +1,12 @@
+<level>
+	<background type="image">background</background>
+
+	<sprite group="banner" class="games.missilecommand.sprites.Banner"
+		type="banner" image="banner" />
+
+	<instance type="banner">
+		<x>150</x>
+		<y>350</y>
+	</instance>
+
+</level>
