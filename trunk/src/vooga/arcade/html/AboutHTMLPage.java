@@ -28,7 +28,7 @@ public class AboutHTMLPage
 		}
 
 		// TODO: FIX THISSSS OAWKEMRLFSDMLKAERJWLKFJSLKDF
-		File file = new File("src/vooga/arcade/html/about.html");
+		File file = new File("src/vooga/arcade/html/description.html");
 		file.delete();
 		try
 		{
