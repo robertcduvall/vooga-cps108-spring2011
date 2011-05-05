@@ -119,7 +119,8 @@ public class PlayerType extends Sprite {
 			@Override
 			public void handleEvent(Object o) {
 				System.out.println("You're such a noob, loser");
-				System.exit(0);
+				game.getLevelManager().getCurrentLevel().clearPlayField();
+				game.getLevelManager().loadLevel(game.getLevelManager().getCurrentLevel().getId());
 			}
 		});
 		
