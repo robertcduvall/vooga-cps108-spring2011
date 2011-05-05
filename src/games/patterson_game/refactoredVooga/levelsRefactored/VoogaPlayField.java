@@ -1,8 +1,8 @@
 package games.patterson_game.refactoredVooga.levelsRefactored;
 
-import games.patterson_game.refactoredVooga.collisions.collisionManager.CollisionManager;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
-import games.patterson_game.refactoredVooga.sprites.spritegroups.SpriteGroup;
+import vooga.collisions.collisionManager.CollisionManager;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collection;

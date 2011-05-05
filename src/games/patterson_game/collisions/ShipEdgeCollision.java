@@ -1,7 +1,7 @@
 package games.patterson_game.collisions;
 
-import games.patterson_game.refactoredVooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
+import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
+import vooga.sprites.improvedsprites.Sprite;
 
 /**
  * Bounces the ship off of the screen edges

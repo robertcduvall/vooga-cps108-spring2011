@@ -1,6 +1,6 @@
 package games.patterson_game.refactoredVooga.levelsRefactored.util.tags;
 
-import games.patterson_game.refactoredVooga.collisions.collisionManager.CollisionManager;
+import vooga.collisions.collisionManager.CollisionManager;
 import games.patterson_game.refactoredVooga.levelsRefactored.util.LevelParser;
 import games.patterson_game.refactoredVooga.reflection.Reflection;
 import games.patterson_game.refactoredVooga.resources.xmlparser.Parser;

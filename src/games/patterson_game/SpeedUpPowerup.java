@@ -3,8 +3,8 @@ package games.patterson_game;
 import games.patterson_game.refactoredVooga.core.VoogaGame;
 import games.patterson_game.refactoredVooga.core.event.IEventHandler;
 import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
-import games.patterson_game.refactoredVooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
-import games.patterson_game.refactoredVooga.util.buildable.components.predefined.basic.HealthC;
+import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
+import vooga.util.buildable.components.predefined.basic.HealthC;
 import java.awt.image.BufferedImage;
 
 /**

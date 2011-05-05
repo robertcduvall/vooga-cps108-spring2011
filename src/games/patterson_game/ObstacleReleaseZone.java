@@ -4,7 +4,7 @@ import games.patterson_game.refactoredVooga.core.VoogaGame;
 import games.patterson_game.refactoredVooga.core.event.IEventHandler;
 import games.patterson_game.refactoredVooga.levelsRefactored.LevelManager;
 import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

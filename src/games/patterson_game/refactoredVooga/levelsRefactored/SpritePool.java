@@ -1,7 +1,7 @@
 package games.patterson_game.refactoredVooga.levelsRefactored;
 
 import games.patterson_game.refactoredVooga.levelsRefactored.util.PoolDeferredConstructor;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 import java.util.*;
 
 

@@ -7,7 +7,7 @@ import games.patterson_game.refactoredVooga.levelsRefactored.util.tags.*;
 import games.patterson_game.refactoredVooga.resources.xmlparser.Parser;
 import games.patterson_game.refactoredVooga.resources.xmlparser.ParserException;
 import games.patterson_game.refactoredVooga.resources.xmlparser.XMLTag;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -6,10 +6,12 @@ import games.patterson_game.refactoredVooga.levelsRefactored.IGoal.GoalStatus;
 import games.patterson_game.refactoredVooga.levelsRefactored.util.LevelParser;
 import games.patterson_game.refactoredVooga.levelsRefactored.util.PoolDeferredConstructor;
 import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
-import games.patterson_game.refactoredVooga.sprites.spritegroups.SpriteGroup;
-import games.patterson_game.refactoredVooga.util.buildable.components.IComponent;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
+import vooga.util.buildable.components.IComponent;
 import java.util.*;
+import vooga.physics.PhysicsManager;
+import vooga.physics.VoogaPhysicsMediator;
 import com.golden.gamedev.object.Background;
 
 
@@ -51,6 +53,9 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     
     /** This level's <code>EventManager */
     protected EventManager myEventManager;
+    
+    /** The physics manager which stores the forces which affect all objects in the level. */
+    private PhysicsManager myPhysics;
 
 
     /**
@@ -72,6 +77,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         mySpritePool = new SpritePool();
         myGoals = new HashMap<IGoal, Boolean>();
         myEventManager = myGame.getEventManager();
+        myPhysics = new PhysicsManager();
     }
 
 
@@ -127,6 +133,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
         if(myGoals == null) return;
         for(IGoal currentGoal : myGoals.keySet())
         {
+            if(myGoals==null || currentGoal == null) continue;
             if(myGoals.get(currentGoal) == true) continue;
             GoalStatus status = currentGoal.checkCompletion();
             if(status == GoalStatus.COMPLETE)
@@ -297,6 +304,15 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     {
         return myBundle;
     }
+    
+    
+    /**
+     * Returns the physics manager associated with this level
+     */
+    public PhysicsManager getPhysics()
+    {
+        return myPhysics;
+    }
 
 
     /**
@@ -307,6 +323,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
     @Override
     public void update (long elapsedTime)
     {
+        VoogaPhysicsMediator.applyPhysicsToSpriteGroups(getAllSpriteGroups(), myPhysics, elapsedTime);
         super.update(elapsedTime);
         checkCompletion();     
         myEventManager.update(elapsedTime);

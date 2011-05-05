@@ -5,9 +5,9 @@ import games.patterson_game.refactoredVooga.core.VoogaState;
 import games.patterson_game.refactoredVooga.core.event.EventManager;
 import games.patterson_game.refactoredVooga.levelsRefactored.IGoal.GoalStatus;
 import games.patterson_game.refactoredVooga.reflection.Reflection;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
-import games.patterson_game.refactoredVooga.sprites.spritegroups.SpriteGroup;
-import games.patterson_game.refactoredVooga.util.buildable.components.IComponent;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
+import vooga.util.buildable.components.IComponent;
 import java.awt.Graphics2D;
 import java.util.*;
 

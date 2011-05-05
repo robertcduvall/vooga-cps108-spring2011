@@ -4,7 +4,7 @@ import games.patterson_game.refactoredVooga.levelsRefactored.util.LevelParser;
 import games.patterson_game.refactoredVooga.levelsRefactored.util.SpriteConstructor;
 import games.patterson_game.refactoredVooga.resources.xmlparser.Parser;
 import games.patterson_game.refactoredVooga.resources.xmlparser.XMLTag;
-import games.patterson_game.refactoredVooga.util.buildable.components.*;
+import vooga.util.buildable.components.*;
 import java.util.ArrayList;
 import java.util.List;
 
