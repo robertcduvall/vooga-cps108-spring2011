@@ -1,0 +1,5 @@
+<images>
+	<image name="car_a">
+		<path>src/games/frogger/resources/carA.png</path>
+	</image>
+</images>
