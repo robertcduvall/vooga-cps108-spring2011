@@ -10,7 +10,11 @@ public class PongTargetC extends TargetC implements ISpriteUpdater
     @Override
     public void update (Sprite s, long elapsedTime)
     {
-        s.setLocation(s.getX(), myTarget.getY());
+        //s.setLocation(s.getX(), myTarget.getY());
+    	if(myTarget.getY() > s.getCenterY())
+    		s.setY(s.getY()+4);
+    	else
+    		s.setY(s.getY()-4);
     }
 
 }
