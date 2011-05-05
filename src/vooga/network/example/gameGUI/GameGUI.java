@@ -44,7 +44,8 @@ import vooga.network.tcpEngine.LocalNetworkEngine;
  * design another protocol, which may not be finished before the demo.
  * Should refactor this by the MVC pattern. In this program the GUI part make the program hard to read.
  * 
- * @author hz41
+ * @author LingZhao Xie
+ * @author Hong(Roman) Zhang
  *
  */
 public class GameGUI extends JFrame implements ActionListener {
