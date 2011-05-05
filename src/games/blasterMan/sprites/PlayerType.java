@@ -1,5 +1,6 @@
 package games.blasterMan.sprites;
 
+import games.blasterMan.HealthPoints;
 import games.blasterMan.Skill;
 
 import java.awt.image.BufferedImage;
@@ -56,7 +57,7 @@ public class PlayerType extends Sprite {
 		mySkills = new ArrayList<Skill>();
 		originalImage = image;
 		face = 1;
-		this.addComponent(new HealthC(42.0));
+		this.addComponent(new HealthPoints(42.0));
 	}
 
 	public PlayerType(VoogaGame game, BufferedImage image) {
@@ -66,7 +67,7 @@ public class PlayerType extends Sprite {
 		mySkills = new ArrayList<Skill>();
 		originalImage = image;
 		face = 1;
-		this.addComponent(new HealthC(42.0));
+		this.addComponent(new HealthPoints(42.0));
 	}
 
 	public PlayerType(VoogaGame game, double x, double y) {
@@ -75,7 +76,7 @@ public class PlayerType extends Sprite {
 		this.initEvents();
 		mySkills = new ArrayList<Skill>();
 		face = 1;
-		this.addComponent(new HealthC(42.0));
+		this.addComponent(new HealthPoints(42.0));
 	}
 
 	public void toggleDirection() {
@@ -100,8 +101,8 @@ public class PlayerType extends Sprite {
 	}
 
 	public void damage() {
-		getComponent(HealthC.class).decrease(3.0);
-		if (getComponent(HealthC.class).isDead()) {
+		getComponent(HealthPoints.class).decrease(3.0);
+		if (getComponent(HealthPoints.class).isDead()) {
 			game.fireEvent(this, "Game.PlayerDied");
 		}
 	}
