@@ -95,11 +95,13 @@ public class Polygon extends Shape
 		return center;
 	}
 
+	@Override
 	public double getWidth()
 	{
 		return PolygonMath.getMaxX(this) - topLeftCorner.getX();
 	}
 
+	@Override
 	public double getHeight()
 	{
 		return PolygonMath.getMaxY(this) - topLeftCorner.getY();

@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class ComponentSet<IComponent> extends TreeSet<IComponent>
+public class ComponentSet extends TreeSet<IComponent>
 {
 
 	public ComponentSet ()

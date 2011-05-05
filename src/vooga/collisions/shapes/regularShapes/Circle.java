@@ -307,7 +307,6 @@ public class Circle extends Shape implements java.awt.Shape
 
 	@Override
 	public boolean contains(double arg0, double arg1) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -329,5 +328,15 @@ public class Circle extends Shape implements java.awt.Shape
 	@Override
 	protected void shapeRotate(double dAngle) {
 		//do nothing
+	}
+
+	@Override
+	public double getWidth() {
+		return 2*radius;
+	}
+
+	@Override
+	public double getHeight() {
+		return 2*radius;
 	}
 }

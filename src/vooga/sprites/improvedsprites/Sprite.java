@@ -93,7 +93,7 @@ public class Sprite extends BaseSprite
     private static final long serialVersionUID = -4499098097309229784L;
 
 
-    protected ComponentSet<IComponent> myComponents;
+    protected ComponentSet myComponents;
 
 
     /**
@@ -133,7 +133,7 @@ public class Sprite extends BaseSprite
         this.x = this.oldX = x;
         this.y = this.oldY = y;
         
-        myComponents = new ComponentSet<IComponent>();
+        myComponents = new ComponentSet();
         addComponents(new SpriteVelocityC(), new PhysicsVelocityC());
         // sprite image
         if (image != null)
@@ -559,7 +559,7 @@ public class Sprite extends BaseSprite
     @Override
     public void replaceAllComponents (Class<? extends IComponent> ... components)
     {
-        myComponents = new ComponentSet<IComponent>();
+        myComponents = new ComponentSet();
         for (Class<? extends IComponent> c : components)
             try
             {
@@ -581,7 +581,7 @@ public class Sprite extends BaseSprite
     @Override
     public void replaceAllComponents (IComponent ... components)
     {
-        myComponents = new ComponentSet<IComponent>();
+        myComponents = new ComponentSet();
         myComponents.addAll(Arrays.asList(components));
     }
 
