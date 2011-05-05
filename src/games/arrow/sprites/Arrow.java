@@ -12,11 +12,11 @@ import vooga.sprites.spritebuilder.components.basic.AccelerationC;
 import vooga.sprites.spritebuilder.components.basic.PermAccelerationC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 
-public class Arrow extends Sprite {
+public class Arrow extends GoodSprite {
 
 	@Override
 	public Double getAngle() {
-		return super.getAngle()-90;
+		return super.getAngle();
 	}
 
 	@Override
