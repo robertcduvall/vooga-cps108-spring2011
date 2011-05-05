@@ -80,7 +80,7 @@ public class TargetingImage extends Sprite
     
     private void shoot()
     {
-        Sprite shot = myGame.getLevelManager().addSpriteFromPool("torpedo");
+        Sprite shot = myGame.getLevelManager().addSpriteFromPool("starshipdefender.gameobjects.Torpedo");
         shot.setLocation(0, myGame.getHeight());
         shot.moveTo(myGame.bsTimer.getTime(), this.getX(), this.getY());
     }

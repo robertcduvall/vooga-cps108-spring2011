@@ -9,6 +9,9 @@ public class Torpedo extends Sprite
         super(image, x, y);
     }
 
-    
+    public Torpedo(BufferedImage image)
+    {
+        super(image);
+    }
     
 }
