@@ -24,6 +24,12 @@ import com.golden.gamedev.object.Timer;
 import com.golden.gamedev.object.background.ImageBackground;
 import com.golden.gamedev.object.collision.BasicCollisionGroup;
 
+/**
+ * 
+ * @author LingZhao Xie
+ * @author Hong(Roman) Zhang
+ *
+ */
 
 public class Main extends VoogaGame implements NetworkGame{
 
