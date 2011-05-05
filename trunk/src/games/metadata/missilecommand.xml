@@ -1,9 +1,10 @@
 <game>
-	<title>MissileCommand</title>
+	<title>Missile Command</title>
 	<path>games.missileDefense.missilecommand</path>
 	<genre>Arcade</genre>
 	<author>Alex Lee</author>
-	<description>Defend the city from certain destruction.</description>
+	<description>Defend the city from certain destruction. *N.B. the
+		destruction is actually certain. You cannot win.</description>
 	<datecreated>May 5, 2010</datecreated>
 	<highscores></highscores>
 	<version>1.0</version>
