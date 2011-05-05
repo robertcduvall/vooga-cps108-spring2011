@@ -1,5 +1,6 @@
-package games.patterson_game;
+package games.patterson_game.floating_objects;
 
+import games.patterson_game.AvoiderGame;
 import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
 import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
 import vooga.util.buildable.components.predefined.basic.HealthC;

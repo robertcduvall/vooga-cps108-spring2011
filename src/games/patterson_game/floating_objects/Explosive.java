@@ -1,5 +1,6 @@
-package games.patterson_game;
+package games.patterson_game.floating_objects;
 
+import games.patterson_game.AvoiderGame;
 import games.patterson_game.refactoredVooga.levelsRefactored.LevelManager;
 import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
 import vooga.sprites.improvedsprites.Sprite;

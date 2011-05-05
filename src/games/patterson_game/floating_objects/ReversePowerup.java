@@ -1,5 +1,7 @@
-package games.patterson_game;
+package games.patterson_game.floating_objects;
 
+import games.patterson_game.AvoiderGame;
+import games.patterson_game.Ship;
 import games.patterson_game.refactoredVooga.core.VoogaGame;
 import games.patterson_game.refactoredVooga.core.event.IEventHandler;
 import games.patterson_game.refactoredVooga.resources.bundle.Bundle;

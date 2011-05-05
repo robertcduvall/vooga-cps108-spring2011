@@ -16,12 +16,12 @@
 	<collision_manager g1="player group" g2="shrapnel group" class="games.patterson_game.collisions.ShipFloatingObjectCollision" />
 	
 	<sprite group="bullet group" class="games.patterson_game.BulletBall" type="bulletBall" image="BulletBall" />
-	<sprite group="floating object group" class="games.patterson_game.Obstacle" type="obstacle" image="Obstacle" />
-	<sprite group="floating object group" class="games.patterson_game.Explosive" type="explosive" image="Explosive" />
-	<sprite group="floating object group" class="games.patterson_game.SpeedUpPowerup" type="speedUpPowerup" image="Powerup" />
-	<sprite group="floating object group" class="games.patterson_game.ReversePowerup" type="reversePowerup" image="Powerup" />
-	<sprite group="floating object group" class="games.patterson_game.WeaponChangePowerup" type="weaponChangePowerup" image="Powerup" />
-	<sprite group="shrapnel group" class="games.patterson_game.Shrapnel" type="shrapnel" image="Shrapnel" />
+	<sprite group="floating object group" class="games.patterson_game.floating_objects.Obstacle" type="obstacle" image="Obstacle" />
+	<sprite group="floating object group" class="games.patterson_game.floating_objects.Explosive" type="explosive" image="Explosive" />
+	<sprite group="floating object group" class="games.patterson_game.floating_objects.SpeedUpPowerup" type="speedUpPowerup" image="Powerup" />
+	<sprite group="floating object group" class="games.patterson_game.floating_objects.ReversePowerup" type="reversePowerup" image="Powerup" />
+	<sprite group="floating object group" class="games.patterson_game.floating_objects.WeaponChangePowerup" type="weaponChangePowerup" image="Powerup" />
+	<sprite group="shrapnel group" class="games.patterson_game.floating_objects.Shrapnel" type="shrapnel" image="Shrapnel" />
 	<sprite group="bullet group" class="games.patterson_game.Spearhead" type="spearhead" image="Spearhead" />
 		
 </level>
