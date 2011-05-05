@@ -1,30 +1,32 @@
 package games.pacman.collisions;
 
-import games.pacman.sprites.players.PacMan;
+import games.pacman.sprites.players.Players;
 import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
 
-public class PacManEdge extends EdgeCollisionGroup<PacMan> {
+public class PlayerEdge extends EdgeCollisionGroup<Players> {
 
 	@Override
-	public void collidedTop(PacMan s) {
+	public void collidedTop(Players s) {
 		s.setLocation(s.getX(),1);
+s.changeAngle();
 	}
 
 	@Override
-	public void collidedRight(PacMan s) {
-		System.out.println("right");
-		System.out.println(s.getBackground().getWidth());
+	public void collidedRight(Players s) {
 		s.setLocation(s.getBackground().getWidth()-s.getCollisionShape().getWidth()-1, s.getY());
+		s.changeAngle();
 	}
 
 	@Override
-	public void collidedLeft(PacMan s) {
+	public void collidedLeft(Players s) {
 		s.setLocation(1, s.getY());
+		s.changeAngle();
 	}
 
 	@Override
-	public void collidedBottom(PacMan s) {
+	public void collidedBottom(Players s) {
 		s.setLocation(s.getX(),s.getBackground().getHeight()-s.getCollisionShape().getHeight()-1);
+		s.changeAngle();
 	}
 	
 }

@@ -4,6 +4,7 @@ import games.pacman.sprites.players.PacMan;
 import java.awt.Dimension;
 import vooga.core.VoogaGame;
 import vooga.core.event.EventManager;
+import vooga.core.event.IEventHandler;
 import vooga.resources.images.ImageLoader;
 import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
 import vooga.sprites.spritegroups.SpriteGroup;
@@ -43,5 +44,15 @@ public class PacManGame extends VoogaGame
         
         getLevelManager().addPlayer(new SpriteGroup<PacMan>("pacman", pacman));
         getLevelManager().loadLevel(0);
+
+        eventManager.registerEventHandler("GameOver", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+            	finish();
+            }    
+        });
     }
+
 }

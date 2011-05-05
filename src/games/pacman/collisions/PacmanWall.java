@@ -1,24 +1,24 @@
 package games.pacman.collisions;
 
-import games.pacman.sprites.players.PacMan;
+import games.pacman.sprites.players.Players;
 import games.pacman.sprites.Wall;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
 
 /**
- * A collision group for testing whether pacman/ghost is running into wall. 
+ * A collision group for testing whether pacman is running into wall. 
  * 
  * @author DJ Sharkey
  *
  */
-public class RunIntoWall extends BasicCollisionGroup<PacMan, Wall>
+public class PacmanWall extends BasicCollisionGroup<Players, Wall>
 {    
     /**
      * Handle a collision between a ball and a block.
      */
     @Override
-    public void collided (PacMan pacman, Wall wall)
+    public void collided (Players player, Wall wall)
     {
-    	pacman.collided(wall);
+    	player.collided(wall);
     }
 
 }
