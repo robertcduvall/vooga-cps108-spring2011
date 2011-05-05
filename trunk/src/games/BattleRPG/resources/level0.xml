@@ -1,0 +1,6 @@
+<level>
+	<background type="image">mapbkg</background>
+	<sprite group="characterSprite" class="games.BattleRPG.sprite.PlayerSprite" type="boyPlayer" image="boyChar"></sprite>
+	<sprite group="characterSprite" class="games.BattleRPG.sprite.PlayerSprite" type="girlPlayer" image="girlChar"></sprite>
+	<goal class="games.BattleRPG.level.GoalScreen"></goal>
+</level>

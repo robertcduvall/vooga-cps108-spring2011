@@ -1,0 +1,12 @@
+<keymap>
+	<key_event event="arrowDown" sensitivity="Edge" key="DOWN"/>
+	<key_event event="arrowUp" sensitivity="Edge" key="UP"/>
+	<key_event event="arrowLeft" sensitivity="Edge" key="LEFT"/>
+	<key_event event="arrowRight" sensitivity="Edge" key="RIGHT"/>
+	<key_event event="moveDown" sensitivity="Level" key="S"/>
+	<key_event event="moveUp" sensitivity="Level" key="W"/>
+	<key_event event="moveLeft" sensitivity="Level" key="A"/>
+	<key_event event="moveRight" sensitivity="Level" key="D"/>
+	<key_event event="enterButton" sensitivity="Edge" key="ENTER"/>
+	<key_event event="escapeKey" sensitivity="Edge" key="ESCAPE"/>
+</keymap>

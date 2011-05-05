@@ -1,0 +1,21 @@
+<level>
+	<background type="image">bkg1</background>
+	<sprite group="randomEnemy" class="games.BattleRPG.sprite.StatSprite" type="enemy0" image="enemy0"></sprite>
+	<sprite group="randomEnemy" class="games.BattleRPG.sprite.StatSprite" type="enemy1" image="enemy1"></sprite>
+	<sprite group="randomEnemy" class="games.BattleRPG.sprite.StatSprite" type="enemy10" image="enemy10"></sprite>
+	<sprite group="characterSprite" class="games.BattleRPG.sprite.PlayerSprite" type="boyPlayer" image="boyChar"></sprite>
+	<sprite group="characterSprite" class="games.BattleRPG.sprite.PlayerSprite" type="girlPlayer" image="girlChar"></sprite>
+	
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="0" image="0"></sprite>
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="1" image="1"></sprite>
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="2" image="2"></sprite>
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="3" image="3"></sprite>
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="4" image="4"></sprite>
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="5" image="5"></sprite>
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="6" image="6"></sprite>
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="7" image="7"></sprite>
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="8" image="8"></sprite>
+	<sprite group="numberSprite" class="vooga.sprites.improvedsprites.Sprite" type="9" image="9"></sprite>
+	
+	<goal class="games.BattleRPG.level.GoalScreen"></goal>
+</level>
