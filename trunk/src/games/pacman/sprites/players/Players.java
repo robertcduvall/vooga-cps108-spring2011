@@ -22,6 +22,7 @@ public abstract class Players extends Sprite{
 
 
 	public abstract void changeAngle();
+	
 	@Override
 	public void render(Graphics2D g,int x,int y) {
 		AffineTransform aTransform = new AffineTransform();
@@ -74,4 +75,8 @@ public abstract class Players extends Sprite{
 	public void respawn() {
 		setOrigPosition();
 	}
+
+
+
+	public abstract void respondToWall();
 }

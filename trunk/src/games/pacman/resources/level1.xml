@@ -1,27 +1,27 @@
 <level>
     <background type="color">black</background>
-	<collision_manager g1="pacman" g2="wall" class="games.pacman.collisions.PacmanWall" />
-    <collision_manager g1="enemies" g2="wall" class="games.pacman.collisions.EnemyWall" />	
+    <collision_manager g1="pacman" g2="wall" class="games.pacman.collisions.PacmanWall" />
+    <collision_manager g1="enemies" g2="wall" class="games.pacman.collisions.EnemyWall" />  
     <collision_manager g1="chaser" g2="wall" class="games.pacman.collisions.EnemyWall" />  
     
-  	<collision_manager g1="edge" g2="pacman" class="games.pacman.collisions.PlayerEdge" />
-  	<collision_manager g1="edge" g2="enemies" class="games.pacman.collisions.PlayerEdge" />
-  	     <collision_manager g1="edge" g2="chaser" class="games.pacman.collisions.PlayerEdge" />
-  	
+    <collision_manager g1="edge" g2="pacman" class="games.pacman.collisions.PlayerEdge" />
+    <collision_manager g1="edge" g2="enemies" class="games.pacman.collisions.PlayerEdge" />
+         <collision_manager g1="edge" g2="chaser" class="games.pacman.collisions.PlayerEdge" />
+    
     <collision_manager g1="pacman" g2="enemies" class="games.pacman.collisions.PacmanEnemy" />
         <collision_manager g1="pacman" g2="chaser" class="games.pacman.collisions.PacmanEnemy" />
     
     <collision_manager g1="dots" g2="wall" class="games.pacman.collisions.DotWall" />
     <collision_manager g1="pacman" g2="dots" class="games.pacman.collisions.PacmanDot" />
 
-	<sprite group="pacman" class="games.pacman.sprites.players.PacMan" type="pacman" image="pacman" />
-	<sprite group="wall" class="games.pacman.sprites.Wall" type="wall" image="wall" />
-	<sprite group="dots" class="games.pacman.sprites.Dot" type="dot" image="dot" />
+    <sprite group="pacman" class="games.pacman.sprites.players.PacMan" type="pacman" image="pacman" />
+    <sprite group="wall" class="games.pacman.sprites.Wall" type="wall" image="wall" />
+    <sprite group="dots" class="games.pacman.sprites.Dot" type="dot" image="dot" />
     <sprite group="enemies" class="games.pacman.sprites.players.enemies.Dumbie" type="dumbie" image="dumbie" />
-	<sprite group="enemies" class="games.pacman.sprites.players.enemies.Chaser" type="chaser" image="dumbie" />
-	
-	
-	<goal class="games.pacman.goals.DotsCleared" />
+    <sprite group="enemies" class="games.pacman.sprites.players.enemies.Chaser" type="chaser" image="dumbie" />
+    
+    
+    <goal class="games.pacman.goals.DotsCleared" />
 <instance type="wall"><x>1</x><y>1</y></instance>
 <instance type="wall"><x>2</x><y>1</y></instance>
 <instance type="wall"><x>3</x><y>1</y></instance>
@@ -105,11 +105,12 @@
 <instance type="wall"><x>11</x><y>8</y></instance>
 <instance type="wall"><x>12</x><y>8</y></instance>
 <instance type="wall"><x>13</x><y>8</y></instance>
+<instance type="dumbie"><x>14</x><y>9</y></instance>
 
-	<!--<instance type="block"><x>6</x><y>0</y><c>1</c></instance>
-	<instance type="block"><x>7</x><y>0</y><c>1</c></instance>
-	<instance type="block"><x>8</x><y>0</y><c>1</c></instance>
-	<instance type="block"><x>9</x><y>0</y><c>1</c></instance>
-	
+    <!--<instance type="block"><x>6</x><y>0</y><c>1</c></instance>
+    <instance type="block"><x>7</x><y>0</y><c>1</c></instance>
+    <instance type="block"><x>8</x><y>0</y><c>1</c></instance>
+    <instance type="block"><x>9</x><y>0</y><c>1</c></instance>
+    
 -->
 </level>

@@ -7,7 +7,7 @@ import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
 
 /**
- * Check if PacMan is out of lives.
+ * Check if Pacman is out of lives.
  * 
  * @author DJ Sharkey
  *

@@ -3,5 +3,6 @@
 		<source>src/games/pacman/resources/images.xml</source>
 	</images>
 	<level id="0" type="games.pacman.Level">src/games/pacman/resources/level0.xml</level>
+	<level id="1" type="games.pacman.Level">src/games/pacman/resources/level1.xml</level>
 	<source>src/games/pacman/resources/keymap.xml</source>
 </resources>

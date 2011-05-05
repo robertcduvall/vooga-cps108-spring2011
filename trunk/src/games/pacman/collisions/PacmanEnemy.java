@@ -12,4 +12,5 @@ public class PacmanEnemy extends BasicCollisionGroup<PacMan, Players> {
 	public void collided(PacMan pacman, Players player) {
 		pacman.loseLife();
 	}
+
 }
