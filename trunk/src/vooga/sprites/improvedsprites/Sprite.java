@@ -522,7 +522,7 @@ public class Sprite extends BaseSprite
     	AffineTransform aTransform = new AffineTransform();
         aTransform.translate((int) this.getX() +width/2, 
                              (int) this.getY()+height/2);
-        aTransform.rotate(Math.toRadians(this.getAngle()+90));
+        aTransform.rotate(Math.toRadians(this.getAngle()+getArbitraryRotate()));
         aTransform.translate((int) -width/2, 
                              (int) -height/2);
         g.drawImage(image.getScaledInstance(width, height, 0),aTransform,null);
@@ -530,6 +530,11 @@ public class Sprite extends BaseSprite
     }
 
 
+
+
+	private Double getArbitraryRotate() {
+		return 90.0;
+	}
 
 
 	protected void renderComponents (Graphics2D g, int x, int y)
