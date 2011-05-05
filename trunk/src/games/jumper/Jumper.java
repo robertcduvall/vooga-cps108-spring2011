@@ -35,7 +35,6 @@ public class Jumper extends VoogaGame{
 		myImageLoader = getImageLoader();
 		
 		myAvatar = new Avatar(this);
-		myAvatar.addComponent(new CollisionCircleC(myAvatar.getCenterPoint(), myAvatar.getWidth()/2));
 		getLevelManager().addPlayer(new SpriteGroup<Avatar>("avatar", myAvatar));
 		getLevelManager().loadLevel(0);
 	

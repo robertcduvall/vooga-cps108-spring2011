@@ -13,7 +13,7 @@ public class JumperLevel extends AbstractLevel{
 
 	public JumperLevel(Collection<SpriteGroup<Sprite>> players, VoogaGame game) {
 		super(players, game);
-		this.getPhysics().addGlobalForce(new MassProportionalForceGenerator(new Force(0,-.000005)), true);
+		this.getPhysics().addGlobalForce(new MassProportionalForceGenerator(new Force(0,-.0005)), true);
 	}
 
 	@Override
