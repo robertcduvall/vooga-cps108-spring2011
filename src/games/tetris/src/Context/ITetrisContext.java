@@ -15,8 +15,14 @@ public interface ITetrisContext
 
 	Timer getArrTimer();
 
+	Timer getBlockLockTimer();
+	
 	Timer getSoftDropTimer();
 
+	void subtractBlockLockDelayTotal(int time);
+	
+	void resetBlockLockDelayTotal();
+	
 	void generateNextBlock();
 
 	void adjustDasBy(int i);
