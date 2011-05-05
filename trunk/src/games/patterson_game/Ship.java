@@ -129,7 +129,7 @@ public class Ship extends Sprite
         getComponent(HealthC.class).decrease(damage);
         if (getComponent(HealthC.class).isDead())
         {
-            System.exit(0);
+            ((AvoiderGame) myGame).lose();
         }
     }
 
@@ -207,7 +207,9 @@ public class Ship extends Sprite
         aTransform.translate((int) this.getX(), (int) this.getY());
         g.drawImage(image.getScaledInstance(width, height, 0),aTransform,null);
         renderComponents(g, x, y);
-        myFont.drawString(g, "HEALTH: " + getComponent(HealthC.class).getCurrent(),50, 450);
+        myFont.drawString(g,
+                          myBundle.getString("health_label") + getComponent(HealthC.class).getCurrent(),
+                          myBundle.getInteger("health_label_x"), myBundle.getInteger("health_label_y"));
         myFont.drawString(g, myDisplayText, (int) getX() - getWidth(),(int) getY() - getHeight()/4);
     }
 }

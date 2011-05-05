@@ -8,6 +8,7 @@ import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
 import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
 import games.patterson_game.refactoredVooga.sprites.spritegroups.SpriteGroup;
 import java.util.Collection;
+import com.golden.gamedev.object.Background;
 
 
 public class AvoiderLevel extends AbstractLevel
@@ -15,10 +16,12 @@ public class AvoiderLevel extends AbstractLevel
     private ObstacleReleaseZone myObstacleReleaseZone;
     private EventManager myEventManager;
     private Bundle myBundle;
+    private Collection<SpriteGroup<Sprite>> myPlayers;
 
     public AvoiderLevel (Collection<SpriteGroup<Sprite>> players, VoogaGame game)
     {
         super(players, game);
+        myPlayers = players;
         myBundle = AvoiderGame.getBundle();
         myEventManager = myGame.getEventManager();
         createEventHandler();
@@ -47,6 +50,20 @@ public class AvoiderLevel extends AbstractLevel
             public void handleEvent (Object o)
             {
                 myObstacleReleaseZone.releaseFloatingObject();
+            }
+        });
+        myEventManager.registerEventHandler("ShowLoseScreen", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+                setBackground((Background) o);
+                // Remove players from screen
+                for(SpriteGroup<Sprite> currentPlayer : myPlayers)
+                {
+                    removeSpriteGroup(currentPlayer);
+                }
+                myGoals.clear();
             }
         });
     }

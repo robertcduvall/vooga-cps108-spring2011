@@ -124,6 +124,7 @@ public abstract class AbstractLevel extends VoogaPlayField implements Comparable
      */
     public void checkCompletion ()
     {
+        if(myGoals == null) return;
         for(IGoal currentGoal : myGoals.keySet())
         {
             if(myGoals.get(currentGoal) == true) continue;
