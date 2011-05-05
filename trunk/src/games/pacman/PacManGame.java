@@ -27,7 +27,7 @@ public class PacManGame extends VoogaGame
     
     public static void main (String[] args)
     {
-        launchGame(new PacManGame(), new Dimension(640, 480), false);
+        launchGame(new PacManGame(), new Dimension(48*15, 10*48), false);
     }
 
     @Override

@@ -7,27 +7,25 @@ public class PacManEdge extends EdgeCollisionGroup<PacMan> {
 
 	@Override
 	public void collidedTop(PacMan s) {
-		placePacMan(s);
+		s.setLocation(s.getX(),1);
 	}
 
 	@Override
 	public void collidedRight(PacMan s) {
-		placePacMan(s);
+		System.out.println("right");
+		System.out.println(s.getBackground().getWidth());
+		s.setLocation(s.getBackground().getWidth()-s.getCollisionShape().getWidth()-1, s.getY());
 	}
 
 	@Override
 	public void collidedLeft(PacMan s) {
-		placePacMan(s);
+		s.setLocation(1, s.getY());
 	}
 
 	@Override
 	public void collidedBottom(PacMan s) {
-		placePacMan(s);
+		s.setLocation(s.getX(),s.getBackground().getHeight()-s.getCollisionShape().getHeight()-1);
 	}
 	
-	private void placePacMan(PacMan s) {
-		s.setAbsoluteSpeed(0);
-		s.move(-1*s.getWidth()/2*Math.cos(s.getAngle()),
-    			-1*s.getHeight()/2*Math.sin(s.getAngle()));	}
-
 }
+
