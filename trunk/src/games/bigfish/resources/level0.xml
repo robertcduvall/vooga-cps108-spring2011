@@ -1,6 +1,7 @@
 <level>
 	<background type="color">blue</background>
-	<collision_manager g1="playerFish" g2="enemyFish" class="games.bigfish.collisions.PlayerHitsFish"></collision_manager>
+	<collision_manager g1="playerFish" g2="enemyFish" class="games.bigfish.collisions.PlayerHitsFish" />
+	<collision_manager g1="enemyFish" g2="enemyFish" class="games.bigfish.collisions.FishHitsWall" />
 	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish5" image="fish5"></sprite>
 	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish4" image="fish4"></sprite>
 	<sprite group="enemyFish" class="games.bigfish.FishSprite" type="enemyFish3" image="fish3"></sprite>

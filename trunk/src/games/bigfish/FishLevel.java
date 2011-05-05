@@ -16,11 +16,11 @@ import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
-public class Level extends AbstractLevel {
-
+public class FishLevel extends AbstractLevel {
+	
 	private VoogaGame myGame;
 	
-	public Level(Collection<SpriteGroup<Sprite>> players, VoogaGame game) {
+	public FishLevel(Collection<SpriteGroup<Sprite>> players, VoogaGame game) {
 		super(players, game);
 		myGame = game;
 		game.addPeriodicTimer("period1", 1000, "spawnFish");
@@ -47,7 +47,6 @@ public class Level extends AbstractLevel {
 
 	@Override
 	public void loadLevel() {
-		this.
         addAllSpritesFromPool();
         addBackground();
 	}
@@ -55,7 +54,8 @@ public class Level extends AbstractLevel {
 	protected void spawnRandomFish() {
 		Random gen = new Random();
 		int size = gen.nextInt(7);
-		BufferedImage fishImage = myGame.getImageLoader().getImage("fish"+size,Direction.EAST);
+		BufferedImage fishImage =
+			myGame.getImageLoader().getImage("fish"+size,Direction.EAST);
 		FishSprite EnemyFish = new FishSprite(ImageUtil.flip(fishImage), -fishImage.getWidth(), gen.nextInt(480),size);
 		this.getSpriteGroup("enemyFish").addSprites(EnemyFish);
 	}
