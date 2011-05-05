@@ -1,0 +1,24 @@
+<game>
+	<title>Maze</title>
+    <path>games.lolcats.src.Main.TetrisGame</path>
+	<genre>maze</genre>
+	<author>Drew Miller. Mostly codejacked some from Ethan.</author>
+	<description>LoLcat puzzle game.</description>
+	<datecreated>April 5, 2011</datecreated>
+	<highscores>
+		<first>56981642</first>
+		<second>8428622</second>
+		<third>9000</third>
+	</highscores>
+	<version>1.0</version>
+	<price>$-5.99</price>
+	<language>English</language>
+	<dimension>
+		<width>600</width>
+		<height>600</height>
+	</dimension>
+	<rating>5</rating>
+	<favorite></favorite>
+	<comment>Does not Super Rotation System (SRS) and does not have adjustable DAS and ARR delays. Almost as exciting as annoying space invaders.</comment>
+	<image>src/games/lolcats/tetris.jpg</image>
+</game>
