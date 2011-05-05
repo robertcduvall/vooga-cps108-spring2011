@@ -400,7 +400,7 @@ public abstract class BaseSprite implements ISpriteBase, IRenderXY, ITargetable
     }
     
     /* (non-Javadoc)
-     * @see sprites.oldsprites.ISprite#render(java.awt.Graphics2D, int, int).
+     * @see sprites.oldsprites.ISprite#render(java.awt.Graphics2D, int, int)
      */
     @Override
     public void render(Graphics2D g, int x, int y) {
