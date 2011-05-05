@@ -39,7 +39,7 @@ public class BallAndEdgeCollision extends EdgeCollisionGroup{
 	    	((Ball) s).bounceUp();
 	    	// s.setActive(false);
 	        
-	       // Breakout.eventManager.fireEvent(this, "Game.BallLost");
+	       // Breakout.eventManager.fireEvent(this, "Game.BallLost");.
 	    }
 
 }
