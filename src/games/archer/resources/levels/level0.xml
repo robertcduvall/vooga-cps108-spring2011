@@ -1,0 +1,19 @@
+<level>
+	<background type="image">background</background>
+<!--	<collision_manager g1="arrow" g2="archer" class="games.arrow.collisions.ArrowArcherCollision" />-->
+	<collision_manager g1="edge" g2="arrow" class="games.arrow.collisions.ArrowEdgeCollision" />
+	<collision_manager g1="arrow" g2="enemy" class="games.arrow.collisions.ArrowEnemyCollision" /> 
+	<collision_manager g1="edge" g2="enemy" class="games.arrow.collisions.EnemyEdgeCollision" />
+	
+	<sprite group="enemy" class="games.arrow.sprites.Enemy" type="enemy0" image="enemy0" />
+	<sprite group="enemy" class="games.arrow.sprites.Enemy" type="enemy1" image="enemy1" />
+	<sprite group="enemy" class="games.arrow.sprites.Enemy" type="enemy2" image="enemy2" />
+	<sprite group="enemy" class="games.arrow.sprites.Enemy" type="enemy3" image="enemy3" />
+	<sprite group="enemy" class="games.arrow.sprites.Enemy" type="enemy4" image="enemy4" />
+	<sprite group="arrow" class="games.arrow.sprites.Arrow" type="arrow" image="arrow" />
+
+	<goal class="games.arrow.EnemiesSlain" />
+
+	
+	
+</level>
