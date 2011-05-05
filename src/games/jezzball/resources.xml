@@ -3,8 +3,9 @@
 		<source>src/games/jezzball/resources/images.xml</source>
 	</images>
 
-	<level id="0" type="games.jezzball.Level">src/games/jezzball/resources/level0.xml</level>
-	<level id="1" type="games.jezzball.Level">src/games/jezzball/resources/level1.xml</level>
-	<level id="2" type="games.jezzball.TextLevel">src/games/jezzball/resources/level2.xml</level>
+	<level id="0" type="games.jezzball.level.Level">src/games/jezzball/resources/level0.xml</level>
+	<level id="1" type="games.jezzball.level.Level">src/games/jezzball/resources/level1.xml</level>
+	<level id="2" type="games.jezzball.level.Level">src/games/jezzball/resources/level2.xml</level>
+	<level id="3" type="games.jezzball.level.TextLevel">src/games/jezzball/resources/level3.xml</level>
 	<source>src/games/jezzball/resources/keymap.xml</source>
 </resources>
