@@ -2,7 +2,7 @@
 	<image name="ground"><path>src/games/keen/resources/images/ground.png</path></image>
 	<image name="yorp">
 		<path>src/games/keen/resources/images/yorp.png</path>
-		<width>32</width>
+		<width>31</width>
 		<state>
 			<directions order="EW">
 				<frame t="10" count="4" />
