@@ -20,7 +20,7 @@ public abstract class BuildableObject extends Observable
     implements Comparable<BuildableObject>, Cloneable, IBuildable
 {
 
-    protected ComponentSet<IComponent> myComponents;
+    protected ComponentSet myComponents;
     protected boolean amActive;
 
 
@@ -146,7 +146,7 @@ public abstract class BuildableObject extends Observable
     @Override
     public void replaceAllComponents (IComponent ... components)
     {
-        myComponents = new ComponentSet<IComponent>();
+        myComponents = new ComponentSet();
         myComponents.addAll(Arrays.asList(components));
     }
 
@@ -157,7 +157,7 @@ public abstract class BuildableObject extends Observable
     @Override
     public void replaceAllComponents (Class<? extends IComponent> ... components)
     {
-        myComponents = new ComponentSet<IComponent>();
+        myComponents = new ComponentSet();
         for (Class<? extends IComponent> c : components)
             try
             {

@@ -38,4 +38,8 @@ public interface IShape extends IRotation, IRenderable
     
     public abstract void setCenter (double x, double y);
 
+	double getWidth();
+
+	double getHeight();
+
 }
