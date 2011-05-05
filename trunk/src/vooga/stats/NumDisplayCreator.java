@@ -34,7 +34,7 @@ public class NumDisplayCreator { // extends DisplayCreator {
     private Map<String, String> myClassMap;
     protected static int myDisplayCount;
     private int myDisplayGroupCount;
-    private Map<String, String> myOperators;
+    private static Map<String, String> myOperators;
     
     public NumDisplayCreator(String xmlLocation) {
     	createOverlays(xmlLocation);
@@ -94,10 +94,15 @@ public class NumDisplayCreator { // extends DisplayCreator {
         }
     }
     
+    public static Map<String, String> getOperatorMap() {
+    	initializeOperators();
+    	return myOperators;
+    }
+    
     /**
 	 * Initialize operator properties
 	 */
-	private Map<String, String> initializeOperators() {
+	private static Map<String, String> initializeOperators() {
 		Properties props = new Properties();
 		try {
             props.load(new FileInputStream("src/vooga/stats/resources/statOperators.properties"));

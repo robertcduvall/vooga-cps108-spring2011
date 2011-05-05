@@ -28,6 +28,7 @@ public class Main
 	private static String GAME_RESOURCE = "game";	
 	private static String WINDOW_SIZE = "window_size";
 	
+	/*	
 	private ResourceManager myResourceManager;
 	
 	public class Tester extends Game {
@@ -60,6 +61,7 @@ public class Main
 		}
 
 	}
+	*/
 	
 	public static void main(String[] args) throws Exception
 	{

@@ -21,10 +21,12 @@ public abstract class AbstractStat<T>
 		return myStat;
 	}
 	
+	/*
 	public void cheat(T t)
 	{
 		myStat = t;
 	}
+	*/
 	
 	public abstract T update();
 }

@@ -1,0 +1,7 @@
+<resources>
+	<images>
+		<source>src/games/nemo/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.nemo.Level">src/games/nemo/resources/level0.xml</level>
+	<level id="1" type="games.nemo.Level">src/games/nemo/resources/level1.xml</level>
+</resources>

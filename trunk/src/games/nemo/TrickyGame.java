@@ -5,6 +5,9 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import vooga.core.VoogaGame;
+
+import games.breakout.Breakout;
 import games.nemo.model.FishSharkCollision;
 import games.nemo.model.rounds.AbstractRound;
 import games.nemo.model.rounds.EndRound;
@@ -37,12 +40,12 @@ import com.golden.gamedev.object.font.BitmapFont;
  * @author Yin
  *
  */
-public class TrickyGame extends Game
+public class TrickyGame extends VoogaGame
 {
 	// { distribute = true; }
 	private ResourceManager myResourceManager;
 	
-	private String GAME_RESOURCE = "game";
+	private static String GAME_RESOURCE = "game";
 	private final int FRAMES_PER_SECOND = 50;
 	private final int SHARK_NUM = 5; // shark num should increase dynamically
 	private final int NEMO_NUM = 1;
@@ -63,6 +66,7 @@ public class TrickyGame extends Game
 	private boolean myEnd;
 	
 	// Keywords for locating resources
+	private static String WINDOW_SIZE = "window_size";
 	private final String BACKGROUND_LOCATION = "background_image";
 	private final String NEMO_LOCATION = "nemo_image";
 	private final String SHARK_LOCATION = "shark_image";
@@ -95,7 +99,7 @@ public class TrickyGame extends Game
 		if (myStart)
 		{
 			if (keyDown(KeyEvent.VK_ENTER))
-				myRound = new GameRound(NEMO_NUM, mySharkNum, mySpeed, myLastTime, ROUND_RESOURCE);
+				myRound = new GameRound(NEMO_NUM, mySharkNum, mySpeed, myLastTime, myFont, ROUND_RESOURCE);
 			myStart = false;
 			myRunGame = true;
 		}
@@ -109,7 +113,7 @@ public class TrickyGame extends Game
 				// Enter next round
 				if (mySharkNum < 20)
 				{
-					mySharkNum += 4;
+					mySharkNum += 5;
 					mySpeed += 3;
 					myLastTime += LAST_TIME*3/5;
 					myRound = new NextRound(ROUND_RESOURCE, NEXT_BACKGROUND_LOCATION, myFont);
@@ -143,7 +147,7 @@ public class TrickyGame extends Game
 		{
 			if (keyDown(KeyEvent.VK_ENTER))
 			{
-				myRound = new GameRound(NEMO_NUM, mySharkNum, mySpeed, myLastTime, ROUND_RESOURCE);
+				myRound = new GameRound(NEMO_NUM, mySharkNum, mySpeed, myLastTime, myFont, ROUND_RESOURCE);
 				myNext = false;
 				myRunGame = true;
 			}
@@ -158,7 +162,7 @@ public class TrickyGame extends Game
 				mySharkNum = SHARK_NUM;
 				myLastTime = LAST_TIME;
 				
-				myRound = new GameRound(NEMO_NUM, mySharkNum, mySpeed, myLastTime, ROUND_RESOURCE);
+				myRound = new GameRound(NEMO_NUM, mySharkNum, mySpeed, myLastTime, myFont, ROUND_RESOURCE);
 				
 				myEnd = false; myWin = false; myLoss = false; myNext = false;
 				myRunGame = true;
@@ -206,4 +210,50 @@ public class TrickyGame extends Game
 		
 		myRound = new StartRound(ROUND_RESOURCE, START_BACKGROUND_LOCATION, myFont);
 	}
+
+	/*
+	@Override
+	public void updatePlayField(long elapsedTime) {	
+		
+	}
+	*/
+	
+	public static void main(String[] args) throws Exception
+	{
+		
+		ResourceManager resources = ResourceManager
+        .getManager(GAME_RESOURCE);
+		
+		String[] windowSize = resources.getStringArray(WINDOW_SIZE,",");
+		
+		TrickyGame myGame = new TrickyGame();
+		
+		GameLoader myGameLoader = new GameLoader();
+		
+		// Run program
+		// If exception is caught, user is notified via GUI
+		
+		try
+		{
+			myGameLoader.setup(myGame, 
+			   new Dimension(Integer.parseInt(windowSize[0]),Integer.parseInt(windowSize[1])), 
+			   false);
+			   myGameLoader.start();
+		}
+		catch (Exception e)
+		{
+			new ErrorCatcher(e.getMessage());
+		}
+		
+		
+		//launchGame(new TrickyGame(), new Dimension(640, 480), false);
+		
+	}
+
+	@Override
+	public void updatePlayField(long elapsedTime) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

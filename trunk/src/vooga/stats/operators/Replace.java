@@ -9,7 +9,7 @@ public class Replace extends BinaryOperator
 	@Override
 	protected Double evaluate(Double x, Double y) {
 		x = y;
-		return x;
+		return y;
 	}
 	
 }

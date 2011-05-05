@@ -74,7 +74,7 @@ public class NumStat<T> extends AbstractStat {
 	 */
 	// TODO: is it necessary?
 	public void setInitialValue(T initial) {
-		super.cheat(initial);
+		cheat(initial);
 	}
 	
 	/**
@@ -90,11 +90,9 @@ public class NumStat<T> extends AbstractStat {
 	 * Manually change statistical information
 	 * @param stat
 	 */
-	/*
-	public void cheat(T stat) {
-		myStat = stat;
+	public void cheat(T t) {
+		myStat = t;
 	}
-	*/
 	
 	/**
 	 * Update stat by current step and operator
@@ -102,7 +100,7 @@ public class NumStat<T> extends AbstractStat {
 	 */
 	@Override
 	public T update() {
-		super.cheat((T) myOperator.evaluateSafe(Double.valueOf(myStat.toString()), 
+		cheat((T) myOperator.evaluateSafe(Double.valueOf(myStat.toString()), 
 				Double.valueOf(myStep.toString())));
 		return myStat;
 	}
