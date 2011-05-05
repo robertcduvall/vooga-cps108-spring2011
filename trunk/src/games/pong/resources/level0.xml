@@ -10,7 +10,7 @@
 	<sprite group="AIPaddle" class="games.pong.sprites.AIPaddle" type="AIPaddle" image="paddle" />
 	<sprite group="powerup" class="games.pong.sprites.Ball" type="gravity" image="powerup1" />
 
-	<goal class="games.pong.BlocksCleared" />
+	<goal class="games.pong.BlankGoal" />
 	
 	
 	
