@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 
 import vooga.collisions.shapes.Vertex;
 import vooga.collisions.shapes.collisionShapes.BoundingBox;
+import vooga.collisions.shapes.regularShapes.Circle;
 import vooga.collisions.shapes.regularShapes.Polygon;
 
 public class PolygonMath
@@ -109,11 +110,19 @@ public class PolygonMath
 		return p;
 }
 
-    public static Point2D findTopLeftCorner(Point2D[] vertices)
+    public static Point2D findTopLeftCorner(Polygon p)
 	{
 
-		return new Point2D.Double(PolygonMath.getMinX(vertices), PolygonMath.getMinY(vertices));
+		return new Point2D.Double(PolygonMath.getMinX(p.getPoints()), PolygonMath.getMinY(p.getPoints()));
 	}
+    
+    public static Point2D findTopLeftCorner(Circle c)
+	{
+
+		return new Point2D.Double(c.getCenter().getX() - c.getRadius(), c.getCenter().getY() - c.getRadius());
+	}
+    
+    
 
 
 }

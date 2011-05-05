@@ -74,7 +74,7 @@ public class Polygon extends Shape
 			this.vertices[i] = new Vertex(vertices[i]);
 		}
 
-		this.topLeftCorner = new Vertex(PolygonMath.findTopLeftCorner(vertices));
+		this.topLeftCorner = new Vertex(PolygonMath.findTopLeftCorner(this));
 		center = updateCenter();
 		boundingBox = new BoundingBox(this.topLeftCorner, this.getWidth(), this.getHeight());
 	}
@@ -105,7 +105,7 @@ public class Polygon extends Shape
 		return PolygonMath.getMaxY(this) - topLeftCorner.getY();
 	}
 
-	public Point2D getTopLeftCorner(Point2D[] vertices)
+	public Point2D getTopLeftCorner()
 	{
 
 		return this.topLeftCorner;

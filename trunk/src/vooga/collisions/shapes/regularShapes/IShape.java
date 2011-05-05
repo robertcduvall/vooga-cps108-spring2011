@@ -22,7 +22,7 @@ public interface IShape extends IRotation, IRenderable
     public abstract double getMaxDistanceFromCenter ();
 
 
-    public abstract Point2D getTopLeftCorner (Point2D[] vertices);
+    public abstract Point2D getTopLeftCorner ();
 
 
     public abstract Point2D getCenter ();

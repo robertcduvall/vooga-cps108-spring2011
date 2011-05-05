@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import vooga.collisions.shapes.Vertex;
+import vooga.collisions.shapes.util.PolygonMath;
 import vooga.util.math.LineMath;
 
 
@@ -299,9 +300,9 @@ public class Circle extends Shape implements java.awt.Shape
 	}
 
 	@Override
-	public Point2D getTopLeftCorner(Point2D[] vertices) 
+	public Point2D getTopLeftCorner() 
 	{
-		return new Point2D.Double(this.center.x - this.radius, this.center.y - radius);
+		return PolygonMath.findTopLeftCorner(this);
 	}
 
 	@Override
