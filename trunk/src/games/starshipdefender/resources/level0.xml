@@ -3,9 +3,9 @@
 	<collision_manager g1="torpedo" g2="enemyship" class="games.starshipdefender.collision.TorpedoEnemyShipCollision" />
 	<collision_manager g1="torpedo" g2="playership" class="games.starshipdefender.collision.EnemyTorpedoShipCollision" />
 	
-	<sprite group="enemyship" class="games.starshipdefender.gameobjects.EnemyShip" type="enemyship" image="StarDestroyer" />
+	<sprite group="enemyship" class="games.starshipdefender.gameobjects.EnemyShip" type="enemyship" image="stardestroyer" />
 	<sprite group="torpedo" class="games.starshipdefender.gameobjects.Torpedo" type="torpedo" image="torpedo" />
-	<sprite group="playership" class="games.starshipdefnder.gameobjects.PlayerShip" type="playership" image="playership" />
+	<sprite group="playership" class="games.starshipdefender.gameobjects.PlayerShip" type="playership" image="playership" />
 
 	<goal class="games.starshipdefender.AllShipDestroyedGoal" />
 
