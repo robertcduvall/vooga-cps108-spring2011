@@ -27,6 +27,9 @@ public class AbstractPaddle extends Sprite {
 		super(x, y);
 	}
 	
-	
+	@Override
+    public Double getArbitraryRotate() {
+            return 0D;
+    }
 
 }

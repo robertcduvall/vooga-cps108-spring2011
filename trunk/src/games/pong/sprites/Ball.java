@@ -29,6 +29,41 @@ public class Ball extends Sprite
         setY(y);
         setSpeed(.1, .1);
     }
+    
+    public void bounceUp()
+    {
+        if (getVerticalSpeed() > 0)
+            setVerticalSpeed(-getVerticalSpeed());
+    }
+    
+    /**
+     * Bounce the ball downwards from an obstacle above
+     * the ball (this exists as a separate method so
+     * that multiple collisions don't cancel out).
+     */
+    public void bounceDown()
+    {
+        if (getVerticalSpeed() < 0)
+            setVerticalSpeed(-getVerticalSpeed());
+    }
+    
+    /**
+     * Bounce the ball to the left.
+     */
+    public void bounceLeft()
+    {
+        if (getHorizontalSpeed() > 0)
+            setHorizontalSpeed(-getHorizontalSpeed());
+    }
+    
+    /**
+     * Bounce the ball to the right.
+     */
+    public void bounceRight()
+    {
+        if (getHorizontalSpeed() < 0)
+            setHorizontalSpeed(-getHorizontalSpeed());
+    }
    
 }
 

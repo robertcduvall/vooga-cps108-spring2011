@@ -38,8 +38,8 @@ public class PongGame extends VoogaGame {
 		eventManager = getEventManager();
         imageLoader = getImageLoader();
         
-        PlayerPaddle playerPaddle = new PlayerPaddle(this, 10, 10);
-        getLevelManager().addPlayer(new SpriteGroup<PlayerPaddle>("paddle", playerPaddle));
+        PlayerPaddle playerPaddle = new PlayerPaddle(this, 10, 170);
+        getLevelManager().addPlayer(new SpriteGroup<PlayerPaddle>("PlayerPaddle", playerPaddle));
 		getLevelManager().loadLevel(0);
 	}
 }
