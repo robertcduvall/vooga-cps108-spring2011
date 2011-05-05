@@ -15,7 +15,7 @@ import com.golden.gamedev.object.*;
 import com.golden.gamedev.object.background.ImageBackground;
 
 /**
- * Space Invader game
+ * Space Invader Game. Move your ship left or right to destroy all the enemies
  * @author Chao Chen
  *
  */
@@ -45,7 +45,7 @@ public class SpaceInvaders extends VoogaGame
         imageLoader = getImageLoader();
         
         Player player = new Player(this, getWidth()/2, getHeight());
-//        getLevelManager().addPlayer(new SpriteGroup<Player>("player", player));
-//        getLevelManager().loadLevel(0);
+        getLevelManager().addPlayer(new SpriteGroup<Player>("player", player));
+        getLevelManager().loadLevel(0);
     }
 }
