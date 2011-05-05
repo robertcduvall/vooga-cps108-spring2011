@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 import org.w3c.dom.Element;
 /**
- * Creates a image icon that can be dragged along the jlayeredpane.
+ * Creates a image icon that can be dragged along the jlayeredpane
  * 
  * @author Charlie Hatcher
  *
