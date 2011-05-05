@@ -80,6 +80,7 @@ public abstract class AbstractPhysicsC extends BasicComponent implements ISprite
     public void applyCollision(EmptyCollisionBehavior otherCollisionBehavior, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
         addToVelocityChange(myCollisionBehavior.collisionToVelocityChange(otherCollisionBehavior, angleOfImpact, pointOfImpact,
                 coefficientOfRestitution));
+        setCurrentCollision(angleOfImpact);
     }
     
     public void setCurrentCollision(Angle angleOfCollision){
@@ -100,9 +101,10 @@ public abstract class AbstractPhysicsC extends BasicComponent implements ISprite
         if (s.carriesComponent(LocalForceC.class)){
             applyForces(s.getComponent(LocalForceC.class).getLocalForces(), elapsedTime);
         }
-        if (isColliding){
-            deltaVelocity.getPerpComponent(angleOfCollision);
-        }
+//        if (isColliding){
+//            deltaVelocity.getPerpComponent(angleOfCollision);
+//        }
+        isColliding = false;
         Velocity oldVelocity = getSpriteVelocityForPhysics(s);
         oldVelocity.addVector(deltaVelocity);
         setSpriteVelocityForPhysics(s, oldVelocity);
