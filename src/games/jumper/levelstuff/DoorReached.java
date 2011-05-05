@@ -40,7 +40,7 @@ public class DoorReached implements IGoal{
 	             * TODO: Set up a better way to handle a win.
 	             */
 	            System.out.println("You win!");
-	            System.exit(0);  
+	            myLevelManager.getCurrentGame().finish();  
 	        }
 	}
 
