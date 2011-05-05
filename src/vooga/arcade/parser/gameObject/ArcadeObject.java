@@ -45,7 +45,7 @@ public abstract class ArcadeObject
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+//			e.printStackTrace();
 			try
 			{
 				image = ImageIO.read(new File("src/games/tetris/kea.jpg"));
