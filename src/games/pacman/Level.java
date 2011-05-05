@@ -33,17 +33,11 @@ public class Level extends AbstractLevel
         placeDots();
     }
     protected void placeDots() {
-    	System.out.println("DOT!");
-    	Sprite dot = myGame.getLevelManager().addArchetypeSprite(
-    			"dot",-10,-10);
-		//dot.setImage(ImageUtil.resize(enemy.getImage(), enemy.getImage().getWidth()/4,enemy.getImage().getHeight()/4));
-    //	enemy.setBackground(getBackground());
     	for(int i=0;i<15;i++){
     		for(int j=0;j<10;j++){
     			 myGame.getLevelManager().addArchetypeSprite(
     	    			"dot",i*48+24,j*48+24);
     		}
-    	}
-		getSpriteGroup("dots").addSprites(dot);
+    	}		
 	}
 }
