@@ -3,12 +3,14 @@
 	<collision_manager g1="ball" g2="PlayerPaddle" class="games.pong.collisions.BallAndPaddleCollision" />
 	<collision_manager g1="ball" g2="AIPaddle" class="games.pong.collisions.BallAndPaddleCollision" />
 	<collision_manager g1="ball" g2="ball" class="games.pong.collisions.BallAndEdgeCollision" />
+	<collision_manager g1="powerup" g2="powerup" class="games.pong.collisions.PowerUpAndEdgeCollision" />
+	
 	<sprite group="ball" class="games.pong.sprites.Ball" type="ball" image="ball" />
 	<sprite group="PlayerPaddle" class="games.pong.sprites.PlayerPaddle" type="PlayerPaddle" image="paddle" />
 	<sprite group="AIPaddle" class="games.pong.sprites.AIPaddle" type="AIPaddle" image="paddle" />
+	<sprite group="powerup" class="games.pong.sprites.Ball" type="gravity" image="powerup1" />
 
 	<goal class="games.pong.BlocksCleared" />
-	<instance type="ball"><x>60</x><y>60</y></instance>
 	
 	
 	

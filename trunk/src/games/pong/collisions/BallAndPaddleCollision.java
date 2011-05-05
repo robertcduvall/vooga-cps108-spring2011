@@ -14,6 +14,7 @@ public class BallAndPaddleCollision extends BasicCollisionGroup<Ball, AbstractPa
     @Override
     public void collided (Ball ball, AbstractPaddle paddle)
     {
+    	ball.setSpeed(1.005*ball.getHorizontalSpeed(), 1.01*ball.getVerticalSpeed());
     	//System.out.println("collided!");
     	
         double paddleRatio = (ball.getCenterY() - paddle.getCenterY())/paddle.getHeight();
