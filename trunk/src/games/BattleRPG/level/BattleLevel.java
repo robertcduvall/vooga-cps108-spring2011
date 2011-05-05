@@ -189,7 +189,8 @@ public class BattleLevel extends AbstractLevel
 	{	
 		for(StatSprite enemy : enemySprites)
 			addHitPointsForSprite(enemy);
-		addHitPointsForSprite(myPlayer);
+		if(myPlayer.curHP > 0)
+			addHitPointsForSprite(myPlayer);
 	}
 	public void addHitPointsForSprite(StatSprite enemy)
 	{
