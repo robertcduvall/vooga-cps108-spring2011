@@ -43,6 +43,14 @@ public class Level extends AbstractLevel
     {
         addBackground();
         addAllSpritesFromPool();
+        for(SpriteGroup sg : getAllSpriteGroups())
+        {
+            for(Object o : sg.getSprites())
+            {
+                Sprite s = (Sprite)o;
+                if(s != null) s.setAngle(270);
+            }
+        }
     }
     
     /**
