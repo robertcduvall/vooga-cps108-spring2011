@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.EventObject;
 import java.util.List;
+import vooga.physics.util.Velocity;
 import vooga.util.math.Angle;
 
 public class GunPiece extends ShipPiece{
@@ -15,6 +16,11 @@ public class GunPiece extends ShipPiece{
             Ship ship, Angle angle) {
         super(image, x, y, mass, hp, hardness, ship, angle);
 
+    }
+    
+    @Override
+    public void eventOccurred() {
+        System.out.println("fire gun!");
     }
 
 
