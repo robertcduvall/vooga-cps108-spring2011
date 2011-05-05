@@ -4,17 +4,17 @@ import games.jumper.Jumper;
 import games.jumper.sprites.Avatar;
 import games.jumper.sprites.Spikes;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
-
+/**
+ * Collision detection for Avatar and spikes
+ * @author Charlie Hatcher
+ *
+ */
 public class AvatarToSpikes extends BasicCollisionGroup<Avatar,Spikes>{
 
-	/**public AvatarToSpikes(){
-		super();
-		
-	}
-	public AvatarToSpikes(SpriteGroup<Avatar> s1, SpriteGroup<Spikes> s2){
-		super(s1,s2);
-		System.out.println("hello");
-	}*/
+	/**
+	 * If the collision is occurred, fire the event to notify the game the player has
+	 * died.
+	 */
 	@Override
 	public void collided(Avatar s1, Spikes s2) {
 		Jumper.myEventManager.fireEvent(this, "Game.Avatar.Died");
