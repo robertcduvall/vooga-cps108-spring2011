@@ -1,14 +1,11 @@
 <level>
 	<background type="color">black</background>
 	<collision_manager g1="lander" g2="block" class="games.mariobros.collisions.LanderHitsFloor" />
-	<collision_manager g1="koopa" g2="lander" class="games.mariobros.collisions.MarioHitsKoopa" />
-	<collision_manager g1="koopa" g2="koopa" class="games.mariobros.collisions.KoopaHitsFloor" />
 	
 	<sprite group="block" class="games.mariobros.sprites.Block" type="block" image="block" />
-	<sprite group="koopa" class="games.mariobros.sprites.Koopa" type="koopa" image="koopa" />
 	<sprite group="lander" class="games.mariobros.sprites.Lander" type="lander" image="lander" />
 
-	<goal class="games.mariobros.LandedInRightArea" />
+	<goal class="games.mariobros.LandedLevelOne" />
 
 <instance type="block"><x>10</x><y>30</y></instance>
 <instance type="block"><x>11</x><y>30</y></instance>
