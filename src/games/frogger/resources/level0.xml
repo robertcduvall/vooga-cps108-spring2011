@@ -1,19 +1,112 @@
 <level>
-	<background type="color">black</background>
+	<background type="image">RoadBackground1</background>
 	
-	<collision_manager g1="frogger" g2="vehicles" class="games.frogger.collisions.FroggerVehicleCollision" />
+	<collision_manager g1="frog" g2="vehicles" class="games.frogger.collisions.FroggerVehicleCollision" />
 	<collision_manager g1="edge" g2="vehicles" class="games.frogger.collisions.VehicleEdgeCollision" />
+	<collision_manager g1="frog" g2="pad" class="games.frogger.collisions.FroggerPadCollision" />
 	
-	<sprite class="games.frogger.sprites.CarA" group="vehicles" type="carA" image="car_a">
-		<component class="games.frogger.sprites.components.VelocityC">
-			<mag>1.0</mag>
+	<goal class="games.frogger.goals.FrogsOnPads" />
+	
+	<sprite class="games.frogger.sprites.Vehicle" group="vehicles" type="vehicleA" image="carA">
+		<component class="vooga.sprites.spritebuilder.components.basic.SpriteVelocityC">
+			<mag>0.1</mag>
 			<dir>0.0</dir>
+		</component>
+		<component class="games.frogger.sprites.components.SpriteTypeC">
+			<type>vehicleA</type>
 		</component>
 	</sprite>
 	
-	<instance type="carA">
+	<sprite class="games.frogger.sprites.Vehicle" group="vehicles" type="vehicleB" image="carB">
+		<component class="vooga.sprites.spritebuilder.components.basic.SpriteVelocityC">
+			<mag>0.1</mag>
+			<dir>180.0</dir>
+		</component>
+		<component class="games.frogger.sprites.components.SpriteTypeC">
+			<type>vehicleB</type>
+		</component>
+	</sprite>
+	
+	<sprite class="games.frogger.sprites.Vehicle" group="vehicles" type="vehicleC" image="carC">
+		<component class="vooga.sprites.spritebuilder.components.basic.SpriteVelocityC">
+			<mag>0.1</mag>
+			<dir>0.0</dir>
+		</component>
+		<component class="games.frogger.sprites.components.SpriteTypeC">
+			<type>vehicleC</type>
+		</component>
+	</sprite>
+	
+	<sprite class="games.frogger.sprites.Vehicle" group="vehicles" type="vehicleD" image="carD">
+		<component class="vooga.sprites.spritebuilder.components.basic.SpriteVelocityC">
+			<mag>0.1</mag>
+			<dir>180.0</dir>
+		</component>
+		<component class="games.frogger.sprites.components.SpriteTypeC">
+			<type>vehicleD</type>
+		</component>
+	</sprite>
+	
+	<sprite class="games.frogger.sprites.Vehicle" group="vehicles" type="vehicleE" image="carE">
+		<component class="vooga.sprites.spritebuilder.components.basic.SpriteVelocityC">
+			<mag>0.1</mag>
+			<dir>0.0</dir>
+		</component>
+		<component class="games.frogger.sprites.components.SpriteTypeC">
+			<type>vehicleE</type>
+		</component>
+	</sprite>
+	
+	<sprite class="games.frogger.sprites.Pad" group="pad" type="pad" image="pad" />
+	
+	<instance type="vehicleA">
 		<x>100</x>
-		<y>100</y>
+		<y>500</y>
 	</instance>
+	<instance type="vehicleB">
+		<x>200</x>
+		<y>458</y>
+	</instance>
+	<instance type="vehicleC">
+		<x>100</x>
+		<y>416</y>
+	</instance>
+	<instance type="vehicleD">
+		<x>200</x>
+		<y>374</y>
+	</instance>
+	<instance type="vehicleE">
+		<x>200</x>
+		<y>332</y>
+	</instance>
+	
+	<instance type="pad">
+		<x>10</x>
+		<y>25</y>
+	</instance>
+	<instance type="pad">
+		<x>140</x>
+		<y>25</y>
+	</instance>
+	<instance type="pad">
+		<x>270</x>
+		<y>25</y>
+	</instance>
+	<instance type="pad">
+		<x>400</x>
+		<y>25</y>
+	</instance>
+	<instance type="pad">
+		<x>530</x>
+		<y>25</y>
+	</instance>
+	
+	<strings>
+		<vehicleA>-50,500</vehicleA>
+		<vehicleB>650,458</vehicleB>
+		<vehicleC>-50,416</vehicleC>
+		<vehicleD>650,374</vehicleD>
+		<vehicleE>-50,332</vehicleE>
+	</strings>
 	
 </level>

@@ -46,11 +46,9 @@ public class ComponentTag extends XMLTag {
 		    if(nodes.item(i).getNodeType() != Node.ELEMENT_NODE) continue;
 			args.add(getValue((Element) nodes.item(i)));
 		}
-		
-		IComponent component = parser.getConverterRack().constructInstance(className, args);
 
+		IComponent component = parser.getConverterRack().constructInstance(className, args);
 		SpriteConstructor archetype = parser.getSpriteConstructor(parentArchetype);
-		System.out.println("comp");
 		archetype.addComponent(component);
 	}
 }
