@@ -2,11 +2,13 @@
 	<background type="image">background0</background>
 	<collision_manager g1="lander" g2="block" class="games.mariobros.collisions.LanderHitsFloor" />
 	<collision_manager g1="lander" g2="goal" class="games.mariobros.collisions.LanderHitsGoal" />
+	<collision_manager g1="lander" g2="asteroid" class="games.mariobros.collisions.LanderHitsAsteroid" />
 	<collision_manager g1="lander" g2="lander" class="games.mariobros.collisions.LanderEdgeHit" />
 	
 	<sprite group="block" class="games.mariobros.sprites.Block" type="block" image="block" />
 	<sprite group="goal" class="games.mariobros.sprites.GoalBlock" type="goal" image="goal" />
 	<sprite group="lander" class="games.mariobros.sprites.Lander" type="lander" image="lander" />
+	<sprite group="asteroid" class="games.mariobros.sprites.Asteroid" type="asteroid" image="asteroid" />
 
 	<goal class="games.mariobros.Landed" />
 

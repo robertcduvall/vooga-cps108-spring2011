@@ -1,8 +1,10 @@
 package games.mariobros;
 
+import games.asteroids.Asteroid;
 import games.mariobros.sprites.Lander;
 
 import java.awt.Dimension;
+import java.util.Random;
 
 import vooga.core.VoogaGame;
 import vooga.core.event.EventManager;
@@ -36,12 +38,12 @@ public class MarioBros extends VoogaGame
 		eventManager = getEventManager();
 		imageLoader = getImageLoader();
 
-		eventManager.registerEventHandler("Game.Close", new IEventHandler()
+		eventManager.registerEventHandler("Game.RandomAsteroid", new IEventHandler()
 		{
 			@Override
 			public void handleEvent(Object o)
 			{
-				closeGame();
+				addRandomAsteroid();
 			}
 		});
 		
@@ -51,9 +53,12 @@ public class MarioBros extends VoogaGame
 
 	}
 
-	public void closeGame()
+	public void addRandomAsteroid()
 	{
-		this.finish();
-		this.stop();
+		Random r = new Random();
+		
+		Asteroid a = (Asteroid) getLevelManager().addArchetypeSprite("asteroid", -r.nextInt(10), -r.nextInt(10), null);
+		
+		
 	}
 }
