@@ -18,21 +18,22 @@ import vooga.sprites.spritegroups.SpriteGroup;
 public abstract class TileManager {
     
     protected String[][] tileArray;
-    protected Point origin = new Point(100,100);
-    protected int tileSize = 20;
+    protected Point origin;
+    protected int tileSize;
     protected Map<String, List<TileManager.TileCoordinate>> tileGroups;
     
     
     
     public TileManager(int x, int y, int tileSize){
+        this(x, y, tileSize, new Point(0,0));
+    }
+    
+    public TileManager(int x, int y, int tileSize, Point origin){
+        
         tileArray = new String[x][y];
         this.tileSize = tileSize;
         tileGroups = new HashMap<String, List<TileManager.TileCoordinate>>();
         initTileArray();
-    }
-    
-    public TileManager(int x, int y, int tileSize, Point origin){
-        this(x, y, tileSize);
         this.origin = origin;
     }
     
