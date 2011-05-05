@@ -11,10 +11,19 @@ public class PongTargetC extends TargetC implements ISpriteUpdater
     public void update (Sprite s, long elapsedTime)
     {
         //s.setLocation(s.getX(), myTarget.getY());
-    	if(myTarget.getY() > s.getCenterY())
-    		s.setY(s.getY()+4);
-    	else
-    		s.setY(s.getY()-4);
+    	
+    	int diff = (int)( myTarget.getY() - s.getCenterY());
+    	if(myTarget.getX() > 50)
+    		moveTowards(s, diff);
+    	
     }
+
+	private void moveTowards(Sprite s, int diff) {
+		if(diff >= 0)
+    		s.setY(s.getY()+Math.min(4,diff));
+    	else
+    		s.setY(s.getY()+Math.max(-4,diff));
+		
+	}
 
 }
