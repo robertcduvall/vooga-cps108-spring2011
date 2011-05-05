@@ -1,38 +1,38 @@
 package games.frogger.collisions;
 
 import games.frogger.Frogger;
+import games.frogger.sprites.Vehicle;
+import games.frogger.sprites.components.SpriteTypeC;
 import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
-import vooga.sprites.improvedsprites.Sprite;
 
-public class VehicleEdgeCollision extends EdgeCollisionGroup<Sprite> {
+public class VehicleEdgeCollision extends EdgeCollisionGroup<Vehicle> {
 	
 	@Override
-	public void collidedTop(Sprite s) {
+	public void collidedTop(Vehicle s) {
 		s.setActive(false);
-		Frogger.myEventManager.fireEvent(this, "Vehicle.Destroy");
-		System.out.println("top");
+		Frogger.myEventManager.fireEvent(this, "Vehicle.Destroy", s.getClass());
 	}
 
 	@Override
-	public void collidedRight(Sprite s) {
-		System.out.println("right");
-		//s.setActive(false);
-		//Frogger.myEventManager.fireEvent(this, "Vehicle.Destroy");
-		
+	public void collidedRight(Vehicle s) {
+		if(s.getOldX() >= 550){
+			s.setActive(false);
+			Frogger.myEventManager.fireEvent(this, "Vehicle.Destroy", s.getComponent(SpriteTypeC.class).getString());
+		}
 	}
 
 	@Override
-	public void collidedLeft(Sprite s) {
-		s.setActive(false);
-		Frogger.myEventManager.fireEvent(this, "Vehicle.Destroy");
-		System.out.println("left");
+	public void collidedLeft(Vehicle s) {
+		if(s.getOldX() < 0 - s.getHeight()){
+			s.setActive(false);
+			Frogger.myEventManager.fireEvent(this, "Vehicle.Destroy", s.getComponent(SpriteTypeC.class).getString());
+		}
 	}
 
 	@Override
-	public void collidedBottom(Sprite s) {
+	public void collidedBottom(Vehicle s) {
 		s.setActive(false);
 		Frogger.myEventManager.fireEvent(this, "Vehicle.Destroy");
-		System.out.println("bottom");
 	}
 
 }

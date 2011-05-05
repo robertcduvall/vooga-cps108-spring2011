@@ -22,6 +22,7 @@ import vooga.sprites.improvedsprites.Sprite;
  */
 public class LevelParser extends Parser {
 	private AbstractLevel level;
+	private VoogaGame game;
 	private Map<String, SpriteConstructor> spriteFactoryMap;
 	private ConverterRack converterRack;
 	
@@ -38,6 +39,7 @@ public class LevelParser extends Parser {
 		super();
 		
 		this.level = level;
+		this.game = game;
 		
 		spriteFactoryMap = new HashMap<String, SpriteConstructor>();
 		converterRack = new ConverterRack(game);
@@ -57,6 +59,10 @@ public class LevelParser extends Parser {
 		return level;
 	}
 	
+	public VoogaGame getGame() {
+		return game;
+	}
+	
 	public void addToBackgroundQueue(Background background) {
 		level.addToBackgroundQueue(background);
 	}
@@ -73,13 +79,13 @@ public class LevelParser extends Parser {
 		spriteFactoryMap.put(name, factory);
 	}
 
-	/**
-	 * Construct a sprite given the name of its archetype and other assignments for it.
-	 */
-	public Sprite makeSprite(String name, List<String> assignments) {
-		SpriteConstructor factory = spriteFactoryMap.get(name);
-		return factory.construct(assignments);
-	}
+//	/**
+//	 * Construct a sprite given the name of its archetype and other assignments for it.
+//	 */
+//	public Sprite makeSprite(String name, List<String> assignments) {
+//		SpriteConstructor factory = spriteFactoryMap.get(name);
+//		return factory.construct(assignments);
+//	}
 	
 	public Sprite makeSprite(String name, Object ... assignments) {
 		SpriteConstructor factory = spriteFactoryMap.get(name);

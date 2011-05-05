@@ -1,5 +1,29 @@
 <images>
-	<image name="car_a">
+	<image name="carA">
 		<path>src/games/frogger/resources/carA.png</path>
+	</image>
+	<image name="carB">
+		<path>src/games/frogger/resources/carB.png</path>
+	</image>
+	<image name="carC">
+		<path>src/games/frogger/resources/carC.png</path>
+	</image>
+	<image name="carD">
+		<path>src/games/frogger/resources/carD.png</path>
+	</image>
+	<image name="carE">
+		<path>src/games/frogger/resources/carE.png</path>
+	</image>
+	<image name="pad">
+		<path>src/games/frogger/resources/pad.png</path>
+	</image>
+	<image name="frog">
+		<path>src/games/frogger/resources/frog.png</path>
+	</image>
+	<image name="RoadBackground1">
+		<path>src/games/frogger/resources/RoadBackground1.png</path>
+	</image>
+	<image name="RoadBackground2">
+		<path>src/games/frogger/resources/RoadBackground2.png</path>
 	</image>
 </images>
