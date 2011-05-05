@@ -2,13 +2,19 @@ package vooga.user.model.database;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-public class UserDatabase extends SQLite{
+/**
+ * @author CP
+ * This class, one that extends the SQLite Database class, was created to handle the initialization of the user Database.
+ * Specifically that of how the database is created and what exactly it is used for. In this case, it handles the details
+ * relevant to all users of the game engine such as: age, e-mail, passwords, telephone numbers, etc.
+ */
+public class UserDatabase extends SQLiteConnection{
 
 	public UserDatabase(){
 		super();
 	}
 
+	//This initialize method creates a userDatabase table for the users to add and retrieve information from
 	@Override
 	public void initialize(String tableName, String[] tableComponents) {
 		try {

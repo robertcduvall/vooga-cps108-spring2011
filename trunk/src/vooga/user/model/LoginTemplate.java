@@ -32,10 +32,6 @@ public class LoginTemplate {
 		mySectionType=section;
 	}
 	
-	public void determineResults(){
-		
-	}
-	
 	/**
 	 * Retrieves the header/section title of the template
 	 */
@@ -64,11 +60,10 @@ public class LoginTemplate {
 		return myButtons;
 	}
 
+	/**
+	 * Retrieves the section type (instructions for how to display information) from a given LoginTemplate
+	 */
 	public ISectionAddable getSectionType() {
 		return mySectionType;
-	}
-	
-	
-	
-	
+	}	
 }

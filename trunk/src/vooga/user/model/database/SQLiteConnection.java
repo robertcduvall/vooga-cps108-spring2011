@@ -8,13 +8,13 @@ import java.util.List;
 	 *This SQLite class, although somewhat cluttered, contains all the method calls to access, change, or utilize the 
 	 *SQLite database. 
 	 */
-	public abstract class SQLite {
+	public abstract class SQLiteConnection {
 		
 		public static PreparedStatement myPrep;
 		public static Connection myConn;
 		public static Statement myStat;
 		
-		public SQLite(){
+		public SQLiteConnection(){
 				try {
 					Class.forName("org.sqlite.JDBC");
 				} catch (ClassNotFoundException e) {e.printStackTrace();}//standard - need every time
@@ -215,7 +215,12 @@ import java.util.List;
 				} catch (SQLException e) {e.printStackTrace();}
 		}
 		
-		
+		/**
+		 * This method, although never implemented, was created in the case the user wishes to drop a table from the database.
+		 * For example, if a game were to be completely removed from the database and the host had no desire to keep it stored, 
+		 * this method would be called
+		 * @param tableName - a reference to the table by string name
+		 */
 		public void clear(String tableName){
 			try {
 				myStat.executeUpdate("drop table if exists " + tableName + ";");

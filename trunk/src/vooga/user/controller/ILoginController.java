@@ -32,8 +32,14 @@ public interface ILoginController
  */
 	public void updateWithInput();
 	
+/**
+ * Updates the GUI with a LoginTemplate that contains a mere text section type. Uses information from the database
+ */
 	public void updateWithInformationPanel();
 	
+/**
+ * Returns the original VoogaUser. This method was created in collaboration with the arcade. Still to be determined if necessary
+ */
 	public VoogaUser getVooga();
 	
 /**
@@ -41,5 +47,8 @@ public interface ILoginController
 */
 	void logIn();
 	
+/**
+ * This method logs the VoogaUser out od the system. To preserve their privacy and enable others to log on.
+ */
 	void logOut();
 }
