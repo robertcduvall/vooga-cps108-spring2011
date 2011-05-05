@@ -20,7 +20,7 @@ public class AvoiderGame extends VoogaGame
     
     public static void main (String[] args)
     {
-        launchGame(AvoiderGame.getInstance(), new Dimension(1000, 700), false);
+        launchGame(new AvoiderGame(), new Dimension(1000, 700), false);
     }
     
     /**
@@ -29,6 +29,7 @@ public class AvoiderGame extends VoogaGame
     @Override
     public void initResources ()
     {
+        instance = this;
         myBundle = getResourceManager().getBundle();
         myShip = new Ship(this);
         myLevelManager.addPlayer(new SpriteGroup<Sprite>(myBundle.getString("player_group_name"), myShip));
