@@ -2,6 +2,9 @@ package games.asteroids;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+
+import com.golden.gamedev.util.ImageUtil;
 
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
@@ -14,12 +17,22 @@ import vooga.util.buildable.components.predefined.movement.Speed2DC;
 
 public class Ship extends Sprite
 {
-    @Override
-	public void render(Graphics2D g) {
-		super.render(g);
-		g.setColor(Color.BLACK);
+	@Override
+	public void render(Graphics2D g,int x,int y) {
+		AffineTransform aTransform = new AffineTransform();
+        aTransform.translate((int) this.getX() +width/2, 
+                             (int) this.getY()+height/2);
+        aTransform.rotate(Math.toRadians(this.getAngle()+90));
+        
+        aTransform.translate((int) -width/2, 
+                             (int) -height/2);
+        if (this.getHorizontalSpeed() < 0) g.drawImage(ImageUtil.flip(ImageUtil.resize(image, width, height)),aTransform,null);
+        else g.drawImage(ImageUtil.resize(image, width, height),aTransform,null);
+        super.renderComponents(g, x, y);
+        g.setColor(Color.BLACK);
 		this.getCollisionShape().render(g);
 	}
+		
 
 
 	private static final long serialVersionUID = 1L;
@@ -109,7 +122,7 @@ public class Ship extends Sprite
 
     public void thrust ()
     {
-        super.accelerate(0.001);
+        super.setAbsoluteSpeed(.1);
         //TODO PHYSICS!
     }
 
