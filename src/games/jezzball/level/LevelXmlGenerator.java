@@ -1,5 +1,11 @@
-package games.jezzball;
+package games.jezzball.level;
 
+/**
+ * code written to generate XML for level xmls
+ * 
+ * @author KevinWang
+ *
+ */
 public class LevelXmlGenerator {
     public static void createLevel(int xCoord, int yCoord, int numRows, int numColumns){
         String type;

@@ -1,4 +1,4 @@
-package games.jezzball;
+package games.jezzball.level;
 
 import vooga.levels.IGoal;
 import vooga.levels.LevelException;
@@ -9,7 +9,6 @@ public class LevelCleared implements IGoal{
 
     private LevelManager myLevelManager;
     private VoogaPlayField myPlayField;
-    private double totalTiles;
     private int xDimension = 15;
     private int yDimension = 15;
     
@@ -20,17 +19,8 @@ public class LevelCleared implements IGoal{
 
     @Override
     public void progress() {
-        try
-        {
-            myLevelManager.loadNextLevel();
-        }
-        catch (LevelException e)
-        {
-            /* TODO win the game better */
-            System.out.println("You win!");
-         	myLevelManager.getCurrentGame().finish();  
-        }
-        
+        myLevelManager.loadNextLevel();
+
     }
 
     @Override

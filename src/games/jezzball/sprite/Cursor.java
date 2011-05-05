@@ -11,34 +11,31 @@ import vooga.core.event.IEventHandler;
 import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
 
+/**
+ * player controlled cursor that creates new wall.
+ * 
+ * @author KevinWang
+ *
+ */
 public class Cursor extends Sprite {
     private boolean vertical = true;
     private VoogaGame game;
+    private int tileSize;
 
-    public Cursor(BufferedImage image,final VoogaGame game, int x, int y) {
+    public Cursor(BufferedImage image,final VoogaGame game, int x, int y, int tileSize) {
         super(image, x, y);
         this.game = game;
+        this.tileSize = tileSize;
         this.setAngle(Direction.NORTH.getAngle());
-        /*
-         * game.addEveryTurnEvent("trackCursor", new IEventHandler() {
-         * 
-         * @Override public void handleEvent(Object o) { setX(game.getMouseX());
-         * setY(game.getMouseY()); } });
-         * 
-         * game.registerEventHandler("Input.changeOrientation", new
-         * IEventHandler() {
-         * 
-         * @Override public void handleEvent(Object o) { vertical = !vertical; }
-         * });
-         * 
-         * game.registerEventHandler("Input.clicked", new IEventHandler() {
-         * 
-         * @Override public void handleEvent(Object o) { //TODO spawn new sprite
-         * that will cause tiles to
-         * 
-         * } });
-         */
 
+        registerEvents();
+
+    }
+
+    /**
+     * @param game
+     */
+    protected void registerEvents() {
         game.registerEventHandler("Input.Right", new IEventHandler() {
             @Override
             public void handleEvent(Object o) {
@@ -93,42 +90,51 @@ public class Cursor extends Sprite {
                 
             }
         });
-
     }
 
+    /**
+     * moves left
+     */
     public void moveLeft() {
-        this.move(-20, 0);
-        System.out.println("move to " +this.getX() + " " + this.getY());
+        this.move(-tileSize, 0);
     }
-
+    
+    /**
+     * moves right
+     */
     public void moveRight() {
-        this.move(20, 0);
-        System.out.println("move to " +this.getX() + " " + this.getY());
+        this.move(tileSize, 0);
     }
 
+    /**
+     * moves up
+     */
     public void moveUp() {
-        this.move(0, -20);
-        System.out.println("move to " +this.getX() + " " + this.getY());
+        this.move(0, -tileSize);
     }
 
+    /**
+     * moves down
+     */
     public void moveDown() {
-        this.move(0, 20);
-        System.out.println("move to " +this.getX() + " " + this.getY());
+        this.move(0, tileSize);
     }
     
     
-
+    /**
+     * returns coordinate
+     * @return new point
+     */
     public Point getCoordinate() {
         return new Point((int)this.getX(), (int)this.getY());
     }
 
+    /**
+     * indiate state of the cursor
+     * @return
+     */
     public boolean orientationIsVertical() {
         return vertical;
-    }
-    
-    @Override
-    public void render(Graphics2D g){
-        super.render(g);
     }
 
 }

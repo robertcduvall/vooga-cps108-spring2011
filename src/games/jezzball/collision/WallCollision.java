@@ -8,7 +8,12 @@ import vooga.collisions.collisionManager.BasicCollisionGroup;
 import vooga.collisions.collisionManager.CollisionManager;
 import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
 import vooga.sprites.improvedsprites.Sprite;
-
+/**
+ * Handles collisions between the ball and the wall.
+ * @author KevinWang
+ * @author Misha (areCollide method is modified from Misha's)
+ *
+ */
 public class WallCollision extends BasicCollisionGroup<Ball, Wall>{
 
     private final static int TOP = 0;
@@ -16,6 +21,11 @@ public class WallCollision extends BasicCollisionGroup<Ball, Wall>{
     private final static int BOTTOM = 2;
     private final static int LEFT = 3;
     
+    private int margin = 3;// Small margin to make sure after collision is resolve there won't be a second collision
+    
+    /**
+     * Math voodo to see if Collision actually happened
+     */
     @Override
     public boolean areCollide(Ball ball, Wall wall)
     {
@@ -32,25 +42,31 @@ public class WallCollision extends BasicCollisionGroup<Ball, Wall>{
         return CollisionManager.isPixelCollide(ball.getX(), ball.getY(), ball.getImage(), 
                 wall.getX(), wall.getY(), wall.getImage());
         
-//        return dx*dx + dy*dy < ball.getRadius() * ball.getRadius();
     }
     
+    /**
+     * resolve collision
+     */
     @Override
     public void collided(Ball ball, Wall wall) {
         int side = checkCollisionSide(ball, wall);
-        System.out.println(side);
-        System.out.println(ball.getX() + " "+ ball.getY());
-        System.out.println("collision with wall at location " + wall.getX() + " " + wall.getY());
+        
         switch (side){
         
-        case TOP: ball.collideBottom(); ball.move(0, wall.getY()-ball.getHeight()-ball.getY()-3); break;
-        case BOTTOM: ball.collideTop(); ball.move(0, wall.getY()+wall.getHeight()-ball.getY()+3);break; 
-        case RIGHT : ball.collideLeft(); ball.move(wall.getX()+wall.getWidth()-ball.getX()+3, 0);break; 
-        case LEFT: ball.collideRight(); ball.move(wall.getX()-ball.getWidth()-ball.getX()-3, 0);break;
+        case TOP: ball.collideBottom(); ball.move(0, wall.getY()-ball.getHeight()-ball.getY()-margin); break;
+        case BOTTOM: ball.collideTop(); ball.move(0, wall.getY()+wall.getHeight()-ball.getY()+margin); break; 
+        case RIGHT : ball.collideLeft(); ball.move(wall.getX()+wall.getWidth()-ball.getX()+margin, 0); break; 
+        case LEFT: ball.collideRight(); ball.move(wall.getX()-ball.getWidth()-ball.getX()-margin, 0); break;
         }
         
     }
 
+    /**
+     * Determines which side of the wall the collision happened.
+     * @param ball
+     * @param wall
+     * @return int representing the side
+     */
     private int checkCollisionSide(Ball ball, Wall wall) {
         
         boolean rightSide = (ball.getHorizontalSpeed()<0);

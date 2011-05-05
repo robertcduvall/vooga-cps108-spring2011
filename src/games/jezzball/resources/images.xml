@@ -17,4 +17,7 @@
 	<image name="tile">
 		<path>src/games/jezzball/resources/tile.png</path>
 	</image>
+	<image name="text">
+		<path>src/games/jezzball/resources/exit_text.png</path>
+	</image>
 </images>

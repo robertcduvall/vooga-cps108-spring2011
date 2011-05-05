@@ -1,0 +1,20 @@
+<game>
+  <title>Jezzball</title>
+  <path>games.jezzball.Jezzball</path>
+  <genre>Arcade</genre>
+  <author>Kevin</author>
+  <description>Jezzball. No explanation required</description>
+  <datecreated>May 1, 2010</datecreated>
+  <highscores></highscores>
+  <version>1.1</version>
+  <price></price>
+  <language>Java</language>
+  <dimension>
+    <width>600</width>
+    <height>600</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/jezzball/jezzball.png</image>
+</game>

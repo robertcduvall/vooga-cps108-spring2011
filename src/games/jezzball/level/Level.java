@@ -1,7 +1,10 @@
-package games.jezzball;
+package games.jezzball.level;
 
+import games.jezzball.Jezzball;
 import games.jezzball.collision.CreateWallCollision;
 import games.jezzball.sprite.Cursor;
+import games.jezzball.tileManager.JezzballTileManager;
+import games.jezzball.tileManager.TileManager;
 
 import java.awt.Point;
 import java.lang.reflect.Method;
@@ -20,40 +23,34 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
 /**
- * @author Michael Ansel
- * @author Wesley Brown
+ * Level class managing adding and removing sprites
+ * 
+ * @author KevinWang
  *
  */
 public class Level extends AbstractLevel
 {
     private Jezzball game;
-
-    
     private static int SPAWN_RATE = 100;
     private boolean spawning = false;
-
-    
+    private int gridSize = 20;
 
     private static int NUM_HIT_WALL=0;
     private static int CONTACT_ON_BOTH_SIDES = 2;
 
-    private Map<String, int[]> modifierMap;
-    private String[] modifierMapKey= new String[]{"Up", "Down", "Right", "Left"};
-    private int[][] modifierMapValue = new int[][]{new int[]{0,-20}, new int[]{0,20}, new int[]{20,0}, new int[]{-20,0}};
+    private Map<String, int[]> modifierMap;// Map used to make writing code to move in specific directions easier
+    private final String[] modifierMapKey= new String[]{"Up", "Down", "Right", "Left"};
+    private int[][] modifierMapValue = new int[][]{new int[]{0,-gridSize}, new int[]{0,gridSize}, new int[]{gridSize,0}, new int[]{-gridSize,0}};
     
-    private TileManager tileManager;
+    private JezzballTileManager tileManager;
     
-    private Bundle resource;
-
+    //Should use resource manager instead of hard coding numbers and words.
+    //However, it seems like bundle doesn't work.
     public Level (Collection<SpriteGroup<Sprite>> players, VoogaGame game)
     {
         super(players, game);        
         this.game = (Jezzball)game;
-        resource = getBundle();
-        tileManager= new TileManager(game.getEventManager());
-        //SPAWN_RATE = resource.getInteger("spawnRate");
-        //TOP_LEFT_CORNER = new Point(resource.getInteger("topLeftX"), resource.getInteger("topLeftY"));
-
+        tileManager= new JezzballTileManager(15, 15, gridSize, new Point(100,100), game.getEventManager());
         
         addCollisionManager(new CreateWallCollision(game, getSpriteGroup("ball"), getSpriteGroup("tile")));
         initModifierMap();
@@ -61,7 +58,7 @@ public class Level extends AbstractLevel
 
     }
     /**
-     * 
+     * initialized modifierMap
      */
     protected void initModifierMap() {
         modifierMap = new HashMap<String, int[]>();
@@ -71,17 +68,16 @@ public class Level extends AbstractLevel
     }
 
 
+    /**
+     * Method to reset spawning of new wall
+     */
     public void resetSpawn() {
         spawning = false;
         NUM_HIT_WALL=0;
-        tileManager.setTileArray(TileManager.TILE,TileManager.EMPTY);
+        tileManager.setTileArray("tile","empty");
         for(Sprite s : getSpriteGroup("tile").getSprites()){
             s.setActive(false);
         }
-    }
-
-    public void spawnSprite(String type, int x, int y){
-        addArchetypeSprite(type, x, y);
     }
 
     
@@ -94,6 +90,11 @@ public class Level extends AbstractLevel
         addBackground();
     }
 
+    /**
+     * replace certain sprites with a different type of sprite
+     * @param replaced
+     * @param toReplace
+     */
     public void replaceSprites(String replaced, String toReplace){
         for(Sprite s : getSpriteGroup(replaced).getSprites()){
             if(s.isActive()){
@@ -103,12 +104,18 @@ public class Level extends AbstractLevel
         }
     }
 
+    /**
+     * jumpstart the spawing process
+     * 
+     * @param p
+     * @param vertical
+     */
     public void initialSpawn(Point p, boolean vertical){
         if(spawning) return;
         spawning = true;
-        tileManager.setTile(p, TileManager.TILE);
+        tileManager.setTile(p, "tile");
         
-        spawnSprite("tile", (int)p.getX(), (int)p.getY());
+        addArchetypeSprite("tile", (int)p.getX(), (int)p.getY());
         if(vertical){
             game.addTimer("spawnUp", SPAWN_RATE, "Game.spawnUp", p);
             game.addTimer("spawnDown", SPAWN_RATE, "Game.spawnDown", p);
@@ -120,51 +127,49 @@ public class Level extends AbstractLevel
     }
 
 
+    /**
+     * Continuing of spawning given a direction 
+     * @param p
+     * @param direction
+     */
     public void spawnGivenDirection(Point p, String direction){
         if(!spawning) return;
 
         p = modifyPoint(p, direction);
 
-        if(!checkToContinue(tileManager.WALL, p)) return;
+        if(!checkToContinue("wall", p)) return;
 
-        tileManager.setTileArrayGivenPoint(tileManager.TILE, p);
-        spawnSprite("tile", (int)p.getX(), (int)p.getY());
+        tileManager.setTile(p, "tile");
+        addArchetypeSprite("tile", (int)p.getX(), (int)p.getY());
         game.addTimer("spawn"+direction, SPAWN_RATE, "Game.spawn"+direction, p);
 
 
     }
 
 
-    public Point modifyPoint(Point p, String direction){
+    
+    private Point modifyPoint(Point p, String direction){
         int[] modifierArray = modifierMap.get(direction);
         return new Point((int)p.getX()+modifierArray[0], (int)p.getY()+modifierArray[1]);
     }
 
 
 
-    private boolean checkToContinue(int type, Point location){
+    private boolean checkToContinue(String type, Point location){
         if(tileManager.getTile(location)!=type){
             return true;
         }
 
         NUM_HIT_WALL++;
-        if(NUM_HIT_WALL==CONTACT_ON_BOTH_SIDES){
+        if(NUM_HIT_WALL==CONTACT_ON_BOTH_SIDES){//if both sides have reached a wall
             NUM_HIT_WALL=0;
             game.fireEvent(this,"Level.consolidateWall");
-            tileManager.setTileArray(TileManager.TILE, TileManager.WALL);
-            tileManager.fillEmptyChamber(this);
+            tileManager.setTileArray("tile", "wall");
+            tileManager.fillEmptyChamber(getSpriteGroup("ball"));
             spawning = false;
         }
         return false;
     }
-
-
-    
-
-    
-
-    
-
 
     private void registerEvents() {
 
@@ -176,7 +181,7 @@ public class Level extends AbstractLevel
                 Object[] arg = (Object[])o;
                 Point p = (Point)arg[0];
                 String type = (String)arg[1];
-                spawnSprite(type, (int)p.getX(), (int)p.getY());
+                addArchetypeSprite(type, (int)p.getX(), (int)p.getY());
             }
         });
 
@@ -213,15 +218,12 @@ public class Level extends AbstractLevel
             }
         });
 
-
-        final String[] directions = new String[]{"Up", "Down", "Left", "Right"};
-
-        for(int i =0; i<directions.length; i++){
+        for(int i =0; i<modifierMapKey.length; i++){
             final int count = i;
-            game.registerEventHandler("Game.spawn"+directions[count], new IEventHandler() {
+            game.registerEventHandler("Game.spawn"+modifierMapKey[count], new IEventHandler() {
                 @Override
                 public void handleEvent(Object o) {
-                    spawnGivenDirection((Point)o, directions[count]);
+                    spawnGivenDirection((Point)o, modifierMapKey[count]);
                 }
             });
         }
