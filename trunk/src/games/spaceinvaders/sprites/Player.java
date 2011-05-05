@@ -1,9 +1,9 @@
 package games.spaceinvaders.sprites;
 
 import games.spaceinvaders.Commons;
-import com.golden.gamedev.object.Sprite;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
+import vooga.sprites.improvedsprites.Sprite;
 
 public class Player extends Sprite implements Commons
 {
