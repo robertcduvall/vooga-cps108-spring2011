@@ -1,0 +1,20 @@
+<game>
+  <title>MissileDefense</title>
+  <path>games.missileDefense.MissileDefense</path>
+  <genre>Arcade</genre>
+  <author>Max Egan</author>
+  <description>Missile Defense! Defend yourself from missiles!</description>
+  <datecreated>May 5, 2010</datecreated>
+  <highscores></highscores>
+  <version>1.0</version>
+  <price>9001</price>
+  <language>Java</language>
+  <dimension>
+    <width>800</width>
+    <height>800</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/missileDefense/MissileDefense.png</image>
+</game>
