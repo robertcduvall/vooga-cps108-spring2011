@@ -1,7 +1,8 @@
 <level>
 	<background type="color">black</background>
-	<collision_manager g1="bullet" g2="city" class="games.missileDefense.collisions.BulletCityCollision" />
 	<collision_manager g1="missile" g2="missile" class="games.missileDefense.collisions.MissileEdgeCollision" />
+	<collision_manager g1="bullet" g2="bullet" class="games.missileDefense.collisions.BulletEdgeCollision" />
+	
 	<collision_manager g1="missile" g2="city" class="games.missileDefense.collisions.MissileCityCollision" />
 	<collision_manager g1="missile" g2="gun" class="games.missileDefense.collisions.MissileGunCollision" />
 	<collision_manager g1="bullet" g2="missile" class="games.missileDefense.collisions.BulletMissileCollision" />
@@ -13,6 +14,8 @@
 	<goal class="games.missileDefense.levels.MissilesGone" />
 	
 	<instance type="city"><x>600</x><y>600</y><health>1</health></instance>
+	<instance type="city"><x>200</x><y>600</y><health>1</health></instance>
+	<instance type="city"><x>450</x><y>600</y><health>1</health></instance>
 
 	<instance type="missile"><x>50</x><y>-100</y><horizSpeed>0.011</horizSpeed></instance>
 	<instance type="missile"><x>700</x><y>-100</y><horizSpeed>-0.01</horizSpeed></instance>
