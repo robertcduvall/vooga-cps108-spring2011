@@ -21,7 +21,8 @@ public class Level extends AbstractLevel
     {
         super(players, game);
         
-        game.getEventManager().addPeriodicTimer("gravity", 5000, "FirePowerUp", game);
+        game.addPeriodicTimer("gravity", 5000, "FirePowerUp", game);
+        game.addPeriodicTimer("gravity2", 5000, "FirePowerUp.one", game);
 		
 		game.registerEventHandler("FirePowerUp", new IEventHandler()
         {
