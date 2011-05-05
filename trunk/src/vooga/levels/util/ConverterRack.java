@@ -12,7 +12,7 @@ import vooga.resources.images.ImageLoader;
 
 /**
  * An extendible class that allows conversion of strings to specified types.
- * @author Sterling Dorminey
+ * @author Sterling Dorminey & Wesley Brown
  *
  */
 public class ConverterRack {
@@ -73,6 +73,11 @@ public class ConverterRack {
 		}
 		
 	}
+	
+	/**
+	 * Class converter for arguments specified as Strings in an XML file.
+	 * @param g current game
+	 */
 	public ConverterRack(VoogaGame g) {
 		conversionMap = new HashMap<Class<?>, Converter<?>>();
 		
@@ -103,6 +108,12 @@ public class ConverterRack {
 		return converter.convert(input);
 	}
 	
+	
+	/**
+	 * Add a new class converter. Used for external extension.
+	 * @param target class to convert to
+	 * @param converter coverter class definition
+	 */
 	public void addConverter(Class<?> target, Converter<?> converter) {
 		conversionMap.put(target, converter);
 	}

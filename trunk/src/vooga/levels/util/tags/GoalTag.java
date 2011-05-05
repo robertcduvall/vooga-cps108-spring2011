@@ -12,6 +12,12 @@ import vooga.levels.util.LevelParser;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
+/**
+ * Goal Tag
+ * @author Wesley Brown
+ *
+ */
+
 public class GoalTag extends XMLTag {
 
 	private static final String GOAL = "goal";

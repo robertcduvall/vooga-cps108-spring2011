@@ -15,7 +15,7 @@ import vooga.util.buildable.components.*;
 
 /**
  * Represents a component tag.
- * @author Sterling Dorminey
+ * @author Sterling Dorminey & Wesley Brown
  *
  */
 public class ComponentTag extends XMLTag {

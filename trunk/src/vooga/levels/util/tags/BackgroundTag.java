@@ -15,6 +15,12 @@ import vooga.resources.images.ImageLoader;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
+/**
+ * Background Tag
+ * @author Wesley Brown
+ *
+ */
+
 public class BackgroundTag extends XMLTag {
 	
 	private static final String BACKGROUND = "background";

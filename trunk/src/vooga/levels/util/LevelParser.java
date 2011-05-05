@@ -17,7 +17,7 @@ import vooga.sprites.improvedsprites.Sprite;
 
 /**
  * XML Level Parser
- * @author Sterling Dorminey
+ * @author Sterling Dorminey & Wesley Brown
  *
  */
 public class LevelParser extends Parser {
@@ -35,6 +35,13 @@ public class LevelParser extends Parser {
 		}
 		
 	}
+	
+	/**
+	 * Reads level XML file, converts information to appropriate classes, and 
+	 * adds information to the level for future use.
+	 * @param level current level class receiving information form XML file
+	 * @param game current game
+	 */
 	public LevelParser(AbstractLevel level, VoogaGame game) {
 		super();
 		
@@ -55,38 +62,75 @@ public class LevelParser extends Parser {
 								new StringsTag(level));
 	}
 	
+	
+	/**
+	 * Get the level this parser is attached to
+	 * @return level parser
+	 */
 	public AbstractLevel getLevel() {
 		return level;
 	}
 	
+	
+	/**
+	 * Get the current game
+	 * @return vooga gam
+	 */
 	public VoogaGame getGame() {
 		return game;
 	}
 	
+	
+	/**
+	 * Adds new background to queue of backgrounds for the level
+	 * @param background 
+	 */
 	public void addToBackgroundQueue(Background background) {
 		level.addToBackgroundQueue(background);
 	}
 	
+	
+	/**
+	 * Adds new music file to queue of music for the level
+	 * @param music
+	 */
 	public void addToMusicQueue(String music) {
 		level.addToMusicQueue(music);
 	}
 	
+	
+	/**
+	 * Sets the level's goal
+	 * @param goal goal class for this level
+	 */
 	public void setGoal(IGoal goal) {
 		level.setGoal(goal);
 	}
 	
+	
+	/**
+	 * Add a new sprite archetype constructor.
+	 * @param name name to refer to archetype constructor
+	 * @param factory sprite constructor
+	 */
 	public void addSpriteArchetype(String name, SpriteConstructor factory) {
 		spriteFactoryMap.put(name, factory);
 	}
 
-//	/**
-//	 * Construct a sprite given the name of its archetype and other assignments for it.
-//	 */
-//	public Sprite makeSprite(String name, List<String> assignments) {
-//		SpriteConstructor factory = spriteFactoryMap.get(name);
-//		return factory.construct(assignments);
-//	}
+	/**
+	 * Construct a sprite given the name of its archetype and other assignments for it.
+	 */
+	public Sprite makeSprite(String name, List<String> assignments) {
+		SpriteConstructor factory = spriteFactoryMap.get(name);
+		return factory.construct(assignments);
+	}
 	
+	/**
+	 * Construct a sprite give the name of its archetype and its arguments
+	 * @param name name referring to archetype defined in xml file
+	 * @param assignments sprite arguments
+	 * @return
+	 */
 	public Sprite makeSprite(String name, Object ... assignments) {
 		SpriteConstructor factory = spriteFactoryMap.get(name);
 		return factory.construct(assignments);
@@ -108,6 +152,11 @@ public class LevelParser extends Parser {
 		return spriteFactoryMap;
 	}
 	
+	
+	/**
+	 * Get the class converter 
+	 * @return converterrack
+	 */
 	public ConverterRack getConverterRack() {
 		return converterRack;
 	}

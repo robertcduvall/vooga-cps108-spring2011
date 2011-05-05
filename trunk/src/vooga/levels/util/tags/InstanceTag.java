@@ -12,6 +12,12 @@ import vooga.levels.util.PoolDeferredConstructor;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
+/**
+ * 
+ * @author Sterling Dorminey
+ *
+ */
+
 public class InstanceTag extends XMLTag {
 	private static final String TAG_NAME = "instance";
 	private static final String TYPE_ATTR = "type";

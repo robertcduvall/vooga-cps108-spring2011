@@ -7,6 +7,12 @@ import vooga.levels.util.SpriteConstructor;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
+/**
+ * Sprite Tag
+ * @author Sterling Dorminey
+ *
+ */
+
 public class SpriteTag extends XMLTag {
 	private static final String GROUP = "group";
 	private static final String CLASS = "class";
