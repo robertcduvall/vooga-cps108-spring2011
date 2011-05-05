@@ -1,0 +1,20 @@
+<game>
+  <title>Jumper</title>
+  <path>games.jumper.Jumper</path>
+  <genre>Arcade</genre>
+  <author>Charlie</author>
+  <description>Watch out for the spikes.</description>
+  <datecreated>May 4, 2010</datecreated>
+  <highscores></highscores>
+  <version>1.1</version>
+  <price></price>
+  <language>Java</language>
+  <dimension>
+    <width>700</width>
+    <height>400</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/jumper/resources/jumpout.jpg</image>
+</game>
