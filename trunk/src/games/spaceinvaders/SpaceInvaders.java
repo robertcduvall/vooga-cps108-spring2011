@@ -2,8 +2,6 @@ package games.spaceinvaders;
 
 import games.spaceinvaders.sprites.Player;
 import java.awt.*;
-import java.io.File;
-import javax.imageio.ImageIO;
 import vooga.core.VoogaGame;
 import vooga.core.event.EventManager;
 import vooga.resources.images.ImageLoader;
@@ -47,7 +45,7 @@ public class SpaceInvaders extends VoogaGame
         imageLoader = getImageLoader();
         
         Player player = new Player(this, getWidth()/2, getHeight());
-        getLevelManager().addPlayer(new SpriteGroup<Player>("player", player));
-        getLevelManager().loadLevel(0);
+//        getLevelManager().addPlayer(new SpriteGroup<Player>("player", player));
+//        getLevelManager().loadLevel(0);
     }
 }
