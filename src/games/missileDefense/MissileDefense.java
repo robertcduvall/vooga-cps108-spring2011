@@ -1,5 +1,6 @@
 package games.missileDefense;
 
+
 import games.missileDefense.sprites.Gun;
 
 import java.awt.Dimension;
@@ -11,6 +12,9 @@ import vooga.physics.util.Force;
 import vooga.resources.images.ImageLoader;
 import vooga.sprites.spritegroups.SpriteGroup;
 
+/**
+ * @author Max Egan
+ */
 public class MissileDefense extends VoogaGame
 {
 	public static ImageLoader imageLoader;
@@ -23,7 +27,7 @@ public class MissileDefense extends VoogaGame
 	@Override
 	public void updatePlayField(long elapsedTime) 
 	{
-		
+		//not used
 	}
 
 	@Override
