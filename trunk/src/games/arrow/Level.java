@@ -3,6 +3,9 @@ package games.arrow;
 import games.arrow.sprites.Enemy;
 
 import java.util.Collection;
+
+import com.golden.gamedev.util.ImageUtil;
+
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.levels.AbstractLevel;
@@ -43,7 +46,8 @@ public class Level extends AbstractLevel
     
     protected void spawnEnemy() {
     	Sprite enemy = myGame.getLevelManager().addArchetypeSprite("enemy", (int)(getBackground().getWidth()*Math.random()),(int)((getBackground().getHeight()/2)*Math.random()));
-		enemy.setBackground(getBackground());
+		enemy.setImage(ImageUtil.resize(enemy.getImage(), enemy.getImage().getWidth()/4,enemy.getImage().getHeight()/4));
+    	enemy.setBackground(getBackground());
 		getSpriteGroup("enemy").addSprites(enemy);
 	}
     

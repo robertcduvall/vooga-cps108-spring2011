@@ -87,7 +87,7 @@ public class Archer extends Sprite implements IPowerupable{
 		System.out.println("Fire!");
 		Sprite arrow = myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY());
 	    arrow.move(-arrow.getWidth()/2, -arrow.getHeight()/2);
-	    arrow.setMovement(myTension*.5, angle);
+	    arrow.setMovement(myTension*.5, angle+90);
 	    releaseBowstring();
 	}
 
@@ -106,11 +106,11 @@ public class Archer extends Sprite implements IPowerupable{
 	
 	protected void moveRight() {
 		
-		if (this.getX() < myGame.getWidth()-this.getWidth()) this.moveX(1);
+		if (this.getX() < myGame.getWidth()-this.getWidth()) this.moveX(2);
 	}
 
 	protected void moveLeft() {
-		if (this.getX() > 0) this.moveX(-1);
+		if (this.getX() > 0) this.moveX(-2);
 	}
 	
 	public void die(){

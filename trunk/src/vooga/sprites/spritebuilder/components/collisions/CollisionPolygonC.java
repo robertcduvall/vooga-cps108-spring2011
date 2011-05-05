@@ -21,6 +21,8 @@ public class CollisionPolygonC extends CollisionShapeC<CollisionPolygon> {
 		super(cs);
 	}
 
-
+	public CollisionPolygonC(Polygon p){
+		this(new CollisionPolygon(p));
+	}
 
 }

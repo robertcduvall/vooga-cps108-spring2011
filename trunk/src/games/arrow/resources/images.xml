@@ -3,7 +3,7 @@
 		<path>src/games/arrow/resources/images/archer.gif</path>
 	</image>
 	<image name="enemy">
-		<path>src/games/arrow/resources/images/enemy2.gif</path>
+		<path>src/games/arrow/resources/images/enemies/zebra.png</path>
 	</image>
 	<image name="arrow">
 		<path>src/games/arrow/resources/images/arrow.gif</path>

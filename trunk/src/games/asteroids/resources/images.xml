@@ -1,6 +1,6 @@
 <images>
 	<image name="ship">
-		<path>src/games/asteroids/resources/images/ship.gif</path>
+		<path>src/games/asteroids/resources/images/PacMan.png</path>
 	</image>
 	<image name="bullet">
 		<path>src/games/asteroids/resources/images/green_bullet.gif</path>
