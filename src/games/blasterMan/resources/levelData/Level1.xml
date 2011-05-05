@@ -1,0 +1,9 @@
+<level>
+	<background type="color">black</background>
+	<collision_manager g1="skill" g2="slime" class="games.blasterMan.collisions.SkillSpriteMonsterCollision"></collision_manager>
+	<collision_manager g1="blasterman" g2="slime" class="games.blasterMan.collisions.PlayerMonsterCollision"></collision_manager>
+	<sprite group="slime" class="games.blasterMan.sprites.Monster"
+		type="slime" image="slime">
+	</sprite>
+	<sprite group="skill" class="games.blasterMan.sprites.SkillSprite" type="fireball" image="fireball"></sprite>
+	<goal class="games.blasterMan.AllMonsterDestroyed"></goal></level>

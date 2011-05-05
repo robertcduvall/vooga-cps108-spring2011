@@ -1,0 +1,6 @@
+<keymap>
+	<key_event event="Input.MoveUp" sensitivity="Level" key="UP"></key_event>
+	<key_event event="Input.MoveDown" sensitivity="Level" key="DOWN"></key_event>
+	<key_event event="Input.MoveRight" sensitivity="Level" key="RIGHT"></key_event>
+	<key_event event="Input.MoveLeft" sensitivity="Level" key="LEFT"></key_event>
+	<key_event event="Input.Shoot" sensitivity="Edge" key="SPACE"></key_event></keymap>
