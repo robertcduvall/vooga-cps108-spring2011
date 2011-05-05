@@ -188,11 +188,11 @@ public class Circle extends Shape implements java.awt.Shape
 
     public boolean intersects (Line2D l)
     {
-        Point2D p =
-            LineMath.findProjection(new Line2D.Double(l.getP1(), center), l)
-                    .getP2();
+        Line2D proj =
+            LineMath.findProjection(new Line2D.Double(l.getP1(), center), l);
+        System.out.println(LineMath.length(proj));
 
-        return this.contains(p);
+        return this.contains(proj.getP2());
     }
 
 
