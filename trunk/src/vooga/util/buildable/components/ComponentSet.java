@@ -8,6 +8,19 @@ import java.util.TreeSet;
 public class ComponentSet extends TreeSet<IComponent>
 {
 
+	@Override
+	public boolean add(IComponent n) {
+		for (IComponent c : this)
+        {
+            if (n.equals(c)) {
+            	this.remove(c);
+            	break;
+            }
+        }
+		super.add(n);
+		return true;
+	}
+
 	public ComponentSet ()
     {
         super(new Comparator<IComponent>()
