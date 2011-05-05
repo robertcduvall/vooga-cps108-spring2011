@@ -2,10 +2,19 @@
 	<image name="block">
 		<path>src/games/mariobros/resources/floor.png</path>
 	</image>
-	<image name="koopa">
-		<path>src/games/mariobros/resources/koopa.png</path>
+	<image name="goal">
+		<path>src/games/mariobros/resources/goal.png</path>
 	</image>
 	<image name="lander">
-		<path>src/games/mariobros/resources/mario.png</path>
+		<path>src/games/mariobros/resources/ship.png</path>
+	</image>
+	<image name="background0">
+		<path>src/games/mariobros/resources/background0.jpg</path>
+	</image>
+	<image name="background1">
+		<path>src/games/mariobros/resources/background1.jpg</path>
+	</image>
+	<image name="background2">
+		<path>src/games/mariobros/resources/background2.jpg</path>
 	</image>
 </images>

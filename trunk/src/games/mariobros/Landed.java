@@ -18,7 +18,7 @@ import vooga.physics.util.Force;
  * @author Misha
  *
  */
-public class LandedLevelOne implements IGoal
+public class Landed implements IGoal
 {   
     private VoogaPlayField playfield;
     private LevelManager levels;

@@ -1,0 +1,32 @@
+<level>
+	<background type="image">background2</background>
+	<collision_manager g1="lander" g2="block" class="games.mariobros.collisions.LanderHitsFloor" />
+	<collision_manager g1="lander" g2="goal" class="games.mariobros.collisions.LanderHitsGoal" />
+	<collision_manager g1="lander" g2="lander" class="games.mariobros.collisions.LanderEdgeHit" />
+	
+	<sprite group="block" class="games.mariobros.sprites.Block" type="block" image="block" />
+	<sprite group="goal" class="games.mariobros.sprites.GoalBlock" type="goal" image="goal" />
+	<sprite group="lander" class="games.mariobros.sprites.Lander" type="lander" image="lander" />
+
+	<goal class="games.mariobros.Landed" />
+	<instance type="block"><x>36</x><y>23</y></instance>
+	<instance type="block"><x>36</x><y>24</y></instance>
+	<instance type="block"><x>36</x><y>25</y></instance>
+	<instance type="block"><x>36</x><y>26</y></instance>
+	<instance type="block"><x>36</x><y>27</y></instance>
+<instance type="block"><x>36</x><y>28</y></instance>
+<instance type="block"><x>36</x><y>29</y></instance>
+<instance type="block"><x>36</x><y>30</y></instance>
+<instance type="goal"><x>37</x><y>30</y></instance>
+<instance type="goal"><x>38</x><y>30</y></instance>
+<instance type="goal"><x>39</x><y>30</y></instance>
+<instance type="goal"><x>40</x><y>30</y></instance>
+<instance type="block"><x>41</x><y>30</y></instance>
+<instance type="block"><x>41</x><y>29</y></instance>
+<instance type="block"><x>41</x><y>28</y></instance>
+<instance type="block"><x>41</x><y>27</y></instance>
+<instance type="block"><x>41</x><y>26</y></instance>
+<instance type="block"><x>41</x><y>25</y></instance>
+<instance type="block"><x>41</x><y>24</y></instance>
+<instance type="block"><x>41</x><y>23</y></instance>
+</level>

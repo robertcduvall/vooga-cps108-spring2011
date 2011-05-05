@@ -10,6 +10,11 @@ import vooga.core.event.IEventHandler;
 import vooga.resources.images.ImageLoader;
 import vooga.sprites.spritegroups.SpriteGroup;
 
+/**
+ * IS IT MARIO? OR LUNAR LANDER?
+ * @author Ethan Goh
+ *
+ */
 public class MarioBros extends VoogaGame
 {
 	public static EventManager eventManager;
