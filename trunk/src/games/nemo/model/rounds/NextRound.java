@@ -32,9 +32,11 @@ public class NextRound extends AbstractTransitRound
 	{
 		super.render(g);
 		
-		myFont.drawString(g, "      ====================      ", 340, 307);
-        myFont.drawString(g, "Press Enter to start next round!", 350, 317);
-        myFont.drawString(g, "      ====================      ", 340, 327);
+		myFont.drawString(g, "         ====================         ", 270, 142);
+		myFont.drawString(g, "         Try to dodge Sharks          ", 270, 157);
+		myFont.drawString(g, "Control Nemo by arrows on your keyboard", 270, 172);
+        myFont.drawString(g, "Press Enter to start next round!", 270, 187);
+        myFont.drawString(g, "         ====================         ", 270, 202);
 	}
 	
 }
