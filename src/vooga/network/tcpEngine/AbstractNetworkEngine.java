@@ -18,18 +18,17 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 	protected ConnectInfo myInfo;
 	protected List<Connection> connectionList;
 	protected List<Object> receivedList;
-	//protected boolean isInternetHost;
 	protected boolean startGame;
 
 	protected boolean isConnected;
 	protected ServerSocket serverSocket;
 	protected int gameSize;
-	
-	protected void finalize(){
+
+	protected void finalize() {
 		disconnect();
-    }
-	
-	protected AbstractNetworkEngine(int port){
+	}
+
+	protected AbstractNetworkEngine(int port) {
 		this.port = port;
 		connectionList = Collections
 				.synchronizedList(new LinkedList<Connection>());
@@ -44,12 +43,12 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 		startGame = false;
 		gameSize = 20;
 	}
-	
+
 	@Override
 	public boolean connect(String IP) {
-		//only do the connection if is not connected yet
-		if (!isConnected){
-		Connection c = new Connection();
+		// only do the connection if is not connected yet
+		if (!isConnected) {
+			Connection c = new Connection();
 			try {
 				c.socket = new Socket(IP, port);
 				connectionList.add(c);
@@ -69,12 +68,9 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 				e.printStackTrace();
 			}
 			return false;
-		}
-		else
+		} else
 			return true;
 	}
-	
-
 
 	@Override
 	public List<Object> update() {
@@ -90,29 +86,6 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 	@Override
 	public void disconnect() {
 		send(ConnectionControl.STOP);
-
-		// if internet connection type, tell the server to eliminate itself
-		// re-implement in the InternetNetworkEngine part
-		
-//		if (isInternetHost) {
-//			Socket connection = null;
-//			ObjectOutputStream output = null;
-//			String ControlMsg = Constants.DisconnectHostPrefix + ",";
-//			try {
-//				// connect to the server, sent local info to the server
-//				connection = new Socket(Constants.ServerIP,
-//						Constants.ServerPort);
-//				output = new ObjectOutputStream(connection.getOutputStream());
-//
-//				InetAddress clientAddress = InetAddress.getLocalHost();
-//				ControlMsg = ControlMsg + clientAddress.getHostAddress();
-//
-//				output.writeObject(ControlMsg);
-//
-//			} catch (Exception e) {
-//
-//			}
-//		}
 
 		synchronized (connectionList) {
 			for (Connection c : connectionList) {
@@ -156,10 +129,8 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 	public boolean isConnected() {
 		return isConnected;
 	}
-	
-	
-	public List<ConnectInfo> getConnectionInfo()
-	{
+
+	public List<ConnectInfo> getConnectionInfo() {
 		List<ConnectInfo> rtn = new LinkedList<ConnectInfo>();
 		synchronized (connectionList) {
 			for (Connection c : connectionList) {
@@ -169,39 +140,32 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 		return rtn;
 	}
 
-	public ConnectInfo getMyInfo()
-	{
+	public ConnectInfo getMyInfo() {
 
 		return myInfo;
 	}
 
-	public int getConnectionSize()
-	{
+	public int getConnectionSize() {
 		return connectionList.size();
 	}
 
-	public List<Object> getReceivedList()
-	{
+	public List<Object> getReceivedList() {
 		return receivedList;
 	}
 
-	public List<Connection> getConnectionList()
-	{
+	public List<Connection> getConnectionList() {
 		return connectionList;
 	}
 
-	public void setStartGame(boolean v)
-	{
+	public void setStartGame(boolean v) {
 		startGame = v;
 	}
 
-	public boolean isStartGame()
-	{
+	public boolean isStartGame() {
 		return startGame;
 	}
 
-	public void fullyConnect()
-	{
+	public void fullyConnect() {
 		synchronized (connectionList) {
 			for (Connection c : connectionList) {
 				try {
@@ -216,37 +180,23 @@ public abstract class AbstractNetworkEngine implements INetworkEngine {
 		}
 	}
 
-	public void setGameSize(int size)
-	{
+	public void setGameSize(int size) {
 		gameSize = size;
 	}
 
-	public int getGameSize()
-	{
+	public int getGameSize() {
 		return gameSize;
 	}
 
-	
-
-	public void setUserName(String userName)
-	{
+	public void setUserName(String userName) {
 		myInfo.setName(userName);
 	}
 
 	public boolean spaceToJoin() {
 		return gameSize > connectionList.size();
-
 	}
 
-	public boolean isGameStarted() {
-		return false;
-	}
-
-	public void setGameStarted(boolean v) {
-		
-	}
-	
-	
 	public abstract boolean createHost(boolean fullyConnect, boolean visiable);
+
 	public abstract List<ConnectInfo> searchHost();
 }
