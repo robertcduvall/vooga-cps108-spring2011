@@ -7,12 +7,12 @@ import vooga.sprites.improvedsprites.Sprite;
 
 public class BiggerThanTheRest implements IGoal{
 
-    private VoogaPlayField playfield;
-    private LevelManager manager;
+    private VoogaPlayField myPlayfield;
+    private LevelManager myLevelManager;
     
 	@Override
 	public boolean checkCompletion(LevelManager levelManager) {
-		for(Sprite player : playfield.getSpriteGroup("playerFish").getSprites()){
+		for(Sprite player : myPlayfield.getSpriteGroup("playerFish").getSprites()){
 			if(((PlayerFish)player).getSize()>6)
 				return true;
 		}
@@ -22,13 +22,13 @@ public class BiggerThanTheRest implements IGoal{
 	@Override
 	public void progress() {
 		System.out.println("YOU WIN!");
-		System.exit(0);
+        myLevelManager.getCurrentGame().finish();
 	}
 
 	@Override
 	public void setupGoal(LevelManager manager, VoogaPlayField playfield) {
-        this.playfield = playfield;
-        this.manager = manager;
+        this.myPlayfield = playfield;
+        this.myLevelManager = manager;
 	}
 
 }

@@ -21,7 +21,7 @@ public class PlayerHitsFish extends BasicCollisionGroup<PlayerFish, FishSprite>{
 		}
 		else{
 			System.out.println("You lose, loser!");
-			System.exit(0);
+			player.lose();
 		}
 	}
 
