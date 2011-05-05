@@ -1,0 +1,24 @@
+<game>
+	<title>SpaceInvaders</title>
+    <path>games.spaceinvaders.SpaceInvaders</path>
+	<genre>Star War</genre>
+	<author>Chao Chen</author>
+	<description>Just destroy all the enenies</description>
+	<datecreated>May 5, 2011</datecreated>
+	<highscores>
+		<first>0</first>
+		<second>0</second>
+		<third>0</third>
+	</highscores>
+	<version>1.0</version>
+	<price>$0.99</price>
+	<language>Aliens</language>
+	<dimension>
+		<width>640</width>
+		<height>480</height>
+	</dimension>
+	<rating>5</rating>
+	<favorite></favorite>
+	<comment>Press ALT to fire. </comment>
+	<image>src/games/spaceinvaders/resources/spaceinvaders.jpg</image>
+</game>
