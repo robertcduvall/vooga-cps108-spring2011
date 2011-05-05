@@ -46,8 +46,8 @@ public class MathVector {
      * @param angle
      */
     public MathVector(double parallelComponent, double perpComponent, Angle angle){
-        this(parallelComponent*angle.cos() + perpComponent*angle.cos(), 
-                parallelComponent*angle.sin() + perpComponent*angle.sin());
+        this(parallelComponent*angle.cos() - perpComponent*angle.sin(), 
+                parallelComponent*angle.sin() - perpComponent*angle.cos());
         
     }
     
@@ -201,8 +201,8 @@ public class MathVector {
      * @return
      */
     public double getPerpComponent(Angle angle) {
-        angle.setRadians(angle.getRadians() + Math.PI / 2);
-        return dotProduct(new MathVector(1, angle));
+        Angle angleCopy = new Angle(angle.getRadians() + Math.PI / 2);
+        return dotProduct(new MathVector(1, angleCopy));
     }
     
     /**

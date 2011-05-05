@@ -35,7 +35,7 @@ public class PhysicalCollisionBehavior extends MovableCollisionBehavior implemen
         * coefficientOfRestitution * (otherPerp - myPerp);
         double denominator = this.getMass() + otherObject.getMass();
 
-        Velocity newVelocity = new Velocity(perpNumerator / denominator, parallelNumerator / denominator, angleOfImpact);
+        Velocity newVelocity = new Velocity(parallelNumerator / denominator, perpNumerator / denominator, angleOfImpact);
 
         return newVelocity.subtractVector(this.getVelocity());
     }
