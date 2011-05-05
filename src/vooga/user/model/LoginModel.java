@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import vooga.user.controller.LoginController;
 import vooga.user.main.ResourceManager;
 import vooga.user.model.database.GameDatabase;
-import vooga.user.model.database.SQLite;
+import vooga.user.model.database.SQLiteConnection;
 import vooga.user.model.database.UserDatabase;
 import vooga.user.model.parser.RegXParser;
 import vooga.user.view.gui.middleFrame.ISectionAddable;
@@ -21,7 +21,7 @@ public class LoginModel
 	private VoogaUser user;
 	private LoginController controller;
 	private RegXParser myRegEx;
-	private SQLite database;
+	private SQLiteConnection database;
 	private String[] prompt;
 	private final static String USER_TABLE = "user";
 	//private List<Integer> buttons = new ArrayList<Integer>();
@@ -51,7 +51,13 @@ public class LoginModel
 				return false;
 			}
 		}
-		
+		//This checks to verify that the 2 passwords entries are equivalent
+			if(!prompt[1].equals(prompt[2])){
+				user.removeAllPreferences();
+				controller.displayError("Passwords do not match");
+				return false;
+			}
+		//This checks to make sure the database does not already contain a voogaUser with the same username
 			database = new UserDatabase();
 			if(database.retrieveTableColumn(USER_TABLE, "UserName").contains(text[0])){
 				controller.displayError("Username already in use");
@@ -90,10 +96,6 @@ public class LoginModel
 		return updateInformation;
 	}
 	
-	public void startEditPage(){
-			database = new UserDatabase();
-	}
-
 	/**
 	 * This method uses the password map to determine if the user has a pre-existing VoogaUser account to operate through
 	 */
@@ -117,11 +119,17 @@ public class LoginModel
 				new LoginTemplate(loginPrompt[3],two,image,second, new InputSection())};
 		return log;
 	}
-	
+
+	/**
+	 * This method, utilized in the controller, returns the voogaUser created through the model
+	 */
 	public VoogaUser getVoogaUser(){
 		return user;
 	}
 	
+	/**
+	 * This updateUser method, re-creates a voogaUser object from information stored in the database
+	 */
 	public boolean updateUser(String userName) {
 			database = new UserDatabase();	
 			String[] userPrefs = database.retrieveRow(USER_TABLE, userName, prompt);

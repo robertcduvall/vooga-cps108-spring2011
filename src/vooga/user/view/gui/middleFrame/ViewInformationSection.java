@@ -1,10 +1,10 @@
 package vooga.user.view.gui.middleFrame;
 import javax.swing.JLabel;
-import vooga.user.model.database.SQLite;
+import vooga.user.model.database.SQLiteConnection;
 import vooga.user.model.database.UserDatabase;
 
 public class ViewInformationSection implements ISectionAddable {
-	SQLite database;
+	SQLiteConnection database;
 	private final static String USER_TABLE = "user";
 	
 	

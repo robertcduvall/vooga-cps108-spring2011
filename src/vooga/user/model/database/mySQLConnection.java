@@ -2,11 +2,11 @@ package vooga.user.model.database;
 
 import java.sql.*;
 
-public class mySQL{
+public class mySQLConnection{
   public static void main(String[] args) {
     System.out.println("MySQL Connect Example.");
     Connection conn = null;
-    String url = "jdbc:mysql://www.mysql14.000webhost.com:3307";
+    String url = "jdbc:mysql://64.120.149.69:3306";
     String dbName = "/a8014122_vooga";
     String driver = "com.mysql.jdbc.Driver";
     String userName = "a8014122_duke"; 

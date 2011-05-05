@@ -28,6 +28,7 @@ public class SubmitButton extends AbstractLoginAction {
 			e.printStackTrace();
 		}
 		}
+		panel.repaint();
 	}
 
 }

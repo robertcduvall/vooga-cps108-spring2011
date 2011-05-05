@@ -42,7 +42,7 @@ public class LoginViewer extends JFrame implements IView {
 		pc = p;
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle(title);
-		this.setResizable(true);
+		this.setResizable(false);
 		middleFrame = new LoginMiddleFrame(pc, pc.getDefaultTemplate());
 		this.add(middleFrame, BorderLayout.CENTER);
 		this.setMinimumSize(dim);

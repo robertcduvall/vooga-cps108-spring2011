@@ -11,7 +11,10 @@ import vooga.user.view.gui.middleFrame.InputSection;
 import vooga.user.view.gui.middleFrame.TextSection;
 import vooga.user.voogauser.UserPreference;
 import vooga.user.voogauser.VoogaUser;
-
+/**
+ * @author Conrad Haynes
+ * This controller is the main hub that enable s communication between the model and the view. All information passes through here
+ */
 public class LoginController implements ILoginController
 {
 	private LoginViewer view;
@@ -76,7 +79,7 @@ public class LoginController implements ILoginController
 	}
 	
 /**
- * This method exits the loginButton and 
+ * This method exits the loginButton
  */
 	@Override
 	public void logIn(){
