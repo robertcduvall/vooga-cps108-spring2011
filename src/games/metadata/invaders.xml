@@ -1,5 +1,5 @@
 <game>
-	<title>Annoying Space Invaders</title>
+	<title>Annoying Invaders</title>
     <path>games.invaders.game.invaders</path>
 	<genre>fixed shooter</genre>
 	<author>Drew Miller</author>
