@@ -1,5 +1,20 @@
 <level>
 	<background type="color">blue</background>
 	<collision_manager g1="Shot" g2="Alien" class="games.spaceinvaders.collisions.BulletHitAlien"></collision_manager>
-
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien1" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien2" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien3" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien4" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien5" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien6" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien7" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien8" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien9" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien10" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien11" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien12" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien13" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien14" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien15" image="alien.png"></sprite>
+	<sprite group="myEnemyGroup" class="games.spaceinvaders.Alien" type="alien16" image="alien.png"></sprite>
 	</level>
