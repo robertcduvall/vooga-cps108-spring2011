@@ -15,7 +15,7 @@ import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
  * @author DJ Sharkey
  */
 @SuppressWarnings("serial")
-public class Wall extends Sprite
+public class VertWall extends AbstractWall
 {   
     
     /**
@@ -26,16 +26,15 @@ public class Wall extends Sprite
      * @param x The column in which to place the block.
      * @param y The row in which to place the block.
      */
-    public Wall(BufferedImage image, int x, int y)
+    public VertWall(BufferedImage image, int x, int y,double angle)
     {
-        super(image, 1 + x * (2 + image.getWidth()), 1 + y * (2 + image.getHeight()));
+     //   super(image,x-image.getWidth()/2+image.getHeight()/2, y+image.getHeight());
+        super(image, x, y);
+    	setImage(PacManGame.imageLoader.getImage("vertWall"));
         
-     //   this.addComponents(new CollisionPolygonC(new CollisionQuadrilateral(new Vertex(0,0), new Vertex(0,this.getWidth()), new Vertex(this.getHeight(),0), new Vertex(this.getWidth(),this.getHeight()))));
+        System.out.println("x: " +x +" "+this.getX());
+        System.out.println("y: " +y +" "+this.getY());
 
-        
-    	System.out.println("created");
-        setImage(PacManGame.imageLoader.getImage("wall"));
-        this.setAngle(Direction.NORTH.getAngle());
     }
  
 }

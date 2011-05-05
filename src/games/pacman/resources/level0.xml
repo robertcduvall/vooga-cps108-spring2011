@@ -8,15 +8,25 @@
 	<collision_manager g1="ball" g2="ball" class="games.breakout.collisions.BallEdgeBounce" />
 	-->
 	<sprite group="pacman" class="games.pacman.sprites.PacMan" type="pacman" image="pacman" />
-	<sprite group="wall" class="games.pacman.sprites.Wall" type="wall" image="wall" />
+	<sprite group="wall" class="games.pacman.sprites.HorizWall" type="horizWall" image="horizWall" />
+	<sprite group="wall" class="games.pacman.sprites.VertWall" type="vertWall" image="vertWall" />
 	
 	
 	<goal class="games.pacman.DotsCleared" />
 
-	<instance type="wall"><x>6</x><y>0</y></instance>
+<!-- 	<instance type="horizWall"><x>0</x><y>0</y><angle>0</angle></instance>
+	<instance type="horizWall"><x>61</x><y>0</y><angle>0</angle></instance>
+	 -->
+	
+	<instance type="vertWall"><x>0</x><y>0</y><angle>0</angle></instance>
+	   <instance type="vertWall"><x>0</x><y>61</y><angle>0</angle></instance>
+	      <instance type="vertWall"><x>21</x><y>0</y><angle>0</angle></instance>
+	
+
 	<!--<instance type="block"><x>6</x><y>0</y><c>1</c></instance>
 	<instance type="block"><x>7</x><y>0</y><c>1</c></instance>
 	<instance type="block"><x>8</x><y>0</y><c>1</c></instance>
 	<instance type="block"><x>9</x><y>0</y><c>1</c></instance>
+	
 -->
 </level>
