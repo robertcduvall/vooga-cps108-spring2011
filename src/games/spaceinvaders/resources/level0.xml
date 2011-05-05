@@ -1,0 +1,5 @@
+<level>
+	<background type="color">blue</background>
+	<collision_manager g1="Shot" g2="Alien" class="games.spaceinvaders.collisions.BulletHitAlien"></collision_manager>
+
+	</level>
