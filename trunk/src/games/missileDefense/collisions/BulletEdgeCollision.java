@@ -3,7 +3,11 @@ package games.missileDefense.collisions;
 import games.missileDefense.sprites.Bullet;
 import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
 import vooga.sprites.improvedsprites.Sprite;
-
+/**
+ * 
+ * @author johnegan
+ *Used to get rid of bullets when they cant hit anything anymore.
+ */
 public class BulletEdgeCollision extends EdgeCollisionGroup<Bullet>
 {
 

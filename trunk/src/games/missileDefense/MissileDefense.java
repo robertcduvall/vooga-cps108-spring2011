@@ -14,6 +14,7 @@ import vooga.sprites.spritegroups.SpriteGroup;
 
 /**
  * @author Max Egan
+ * This is the class which runs the game
  */
 public class MissileDefense extends VoogaGame
 {

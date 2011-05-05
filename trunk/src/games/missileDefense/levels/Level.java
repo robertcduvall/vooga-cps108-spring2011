@@ -8,7 +8,11 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.levels.AbstractLevel;
 
-
+/**
+ * just defines the various levels
+ * @author johnegan
+ *
+ */
 public class Level extends AbstractLevel
 {
     public static final int GAME_LEVELS = 2;

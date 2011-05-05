@@ -2,7 +2,11 @@ package games.missileDefense.collisions;
 
 import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
 import vooga.sprites.improvedsprites.Sprite;
-
+/**
+ * 
+ * @author johnegan
+ *so we can get rid of missles that fall off the map
+ */
 public class MissileEdgeCollision extends EdgeCollisionGroup
 {
 

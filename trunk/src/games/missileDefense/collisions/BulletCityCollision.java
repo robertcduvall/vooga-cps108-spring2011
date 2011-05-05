@@ -4,7 +4,12 @@ import games.missileDefense.sprites.Bullet;
 import games.missileDefense.sprites.City;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
 import vooga.sprites.spritegroups.SpriteGroup;
-
+/**
+ * 
+ * @author johnegan
+ * This little diddy is what blows up cities
+ *
+ */
 public class BulletCityCollision extends BasicCollisionGroup<Bullet, City>
 {
 

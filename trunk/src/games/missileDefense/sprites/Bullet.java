@@ -13,6 +13,11 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 
+/**
+ * Bullet fired from the gun
+ * @author johnegan
+ *
+ */
 public class Bullet extends Sprite
 {
 
@@ -22,6 +27,11 @@ public class Bullet extends Sprite
 		this.addComponent(new CollisionPolygonC(new CollisionPolygon(ShapeFactory.makePolygonFromImage(ImageUtil.resize(image, width,height), 4))));;
 	}
 
+	/*
+	 * this renders a frame around it
+	 * (non-Javadoc)
+	 * @see vooga.sprites.improvedsprites.Sprite#render(java.awt.Graphics2D, int, int)
+	 */
 	public void render(Graphics2D g, int x, int y)
 	{
 		AffineTransform aTransform = new AffineTransform();
