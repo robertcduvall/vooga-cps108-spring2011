@@ -7,6 +7,7 @@ public class RotatePieceClockwise implements IKeyAction
 	@Override
 	public void performKeyPressed(ITetrisContext tc, long elapsedTime)
 	{
+		tc.subtractBlockLockDelayTotal(-100);
 		tc.getActiveMino().rotate(true, tc.getTetrisMatrix());
 	}
 

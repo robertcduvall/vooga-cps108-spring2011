@@ -10,6 +10,7 @@ public class HardDropPiece implements IKeyAction
                 tc.getActiveMino().hardDrop(tc.getTetrisMatrix());
                 tc.getTetrisMatrix().lockMino(tc.getActiveMino(),tc);
                 tc.generateNextBlock();
+                tc.resetBlockLockDelayTotal();
         }
 
         @Override
