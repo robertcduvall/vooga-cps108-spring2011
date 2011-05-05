@@ -10,7 +10,7 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  *
  */
-public class PhysicalCollisionBehavior extends MovableCollisionBehavior{
+public class PhysicalCollisionBehavior extends MovableCollisionBehavior implements CollisionVisitor {
 
     private double myMass;
 
@@ -24,20 +24,30 @@ public class PhysicalCollisionBehavior extends MovableCollisionBehavior{
     }
 
     public Velocity collisionToVelocityChange(PhysicalCollisionBehavior otherObject, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
-        //PhysicalCollisionBehavior otherObject = (PhysicalCollisionBehavior) otherObjectAbstract; //<-THIS IS BAD
         double myParallel = this.getVelocity().getParallelComponent(angleOfImpact);
         double myPerp = this.getVelocity().getPerpComponent(angleOfImpact);
         double otherParallel = otherObject.getVelocity().getParallelComponent(angleOfImpact);
         double otherPerp = otherObject.getVelocity().getPerpComponent(angleOfImpact);
 
         double parallelNumerator = this.getMass() * myParallel + otherObject.getMass() * otherParallel
-                + otherObject.getMass() * coefficientOfRestitution * (otherParallel - myParallel);
+        + otherObject.getMass() * coefficientOfRestitution * (otherParallel - myParallel);
         double perpNumerator = this.getMass() * myPerp + otherObject.getMass() * otherPerp + otherObject.getMass()
-                * coefficientOfRestitution * (otherPerp - myPerp);
+        * coefficientOfRestitution * (otherPerp - myPerp);
         double denominator = this.getMass() + otherObject.getMass();
 
         Velocity newVelocity = new Velocity(perpNumerator / denominator, parallelNumerator / denominator, angleOfImpact);
-        
+
         return newVelocity.subtractVector(this.getVelocity());
+    }
+    
+    @Override
+    public Velocity visitFirst(CollisionVisitor first, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        return first.visitNext(this, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+    }
+    
+    
+    @Override
+    public Velocity visitNext(PhysicalCollisionBehavior physical, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        return collisionToVelocityChange(physical, angleOfImpact, pointOfImpact, coefficientOfRestitution);
     }
 }

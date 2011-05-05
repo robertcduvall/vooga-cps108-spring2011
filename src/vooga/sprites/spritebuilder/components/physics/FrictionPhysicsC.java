@@ -1,13 +1,8 @@
 package vooga.sprites.spritebuilder.components.physics;
 
-import java.awt.Point;
-
-import vooga.physics.collisionBehavior.EmptyCollisionBehavior;
 import vooga.physics.collisionBehavior.FrictionCollisionBehavior;
 import vooga.physics.forceBehavior.FrictionForceBehavior;
-import vooga.physics.forceBehavior.RotationalForceBehavior;
 import vooga.physics.forceGenerator.AbstractForceGenerator;
-import vooga.physics.util.Force;
 import vooga.sprites.improvedsprites.Sprite;
 
 /**

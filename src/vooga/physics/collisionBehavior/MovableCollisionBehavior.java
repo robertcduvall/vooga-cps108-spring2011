@@ -10,7 +10,7 @@ import vooga.util.math.Angle;
  * @author Nathan Klug
  *
  */
-public class MovableCollisionBehavior extends EmptyCollisionBehavior{
+public class MovableCollisionBehavior extends EmptyCollisionBehavior implements CollisionVisitor {
 
     private Velocity myVelocity;
 
@@ -50,5 +50,15 @@ public class MovableCollisionBehavior extends EmptyCollisionBehavior{
     public void updateBehavior(Object... newValues){
         if (newValues.length != 0)
             myVelocity = (Velocity) newValues[0];
+    }
+    
+    @Override
+    public Velocity visitFirst(CollisionVisitor first, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        return first.visitNext(this, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+    }
+    
+    @Override
+    public Velocity visitNext(MovableCollisionBehavior movable, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        return collisionToVelocityChange(movable, angleOfImpact, pointOfImpact, coefficientOfRestitution);
     }
 }

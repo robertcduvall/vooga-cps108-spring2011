@@ -2,7 +2,6 @@ package vooga.sprites.spritebuilder.components.physics;
 
 import vooga.physics.collisionBehavior.MovableCollisionBehavior;
 import vooga.physics.forceBehavior.EmptyForceBehavior;
-import vooga.physics.forceBehavior.MasslessForceBehavior;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.BasicComponent;
