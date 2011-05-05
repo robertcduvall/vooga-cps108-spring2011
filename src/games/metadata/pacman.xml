@@ -1,0 +1,20 @@
+<game>
+  <title>PacMan!</title>
+  <path>games.pacman.PacManGame</path>
+  <genre>Arcade Classic</genre>
+  <author>DJ Sharkey</author>
+  <description>Not as good as Miss PacMan</description>
+  <datecreated>May 5, 2010</datecreated>
+  <highscores>Higher than yours</highscores>
+  <version>0.1</version>
+  <price>$$$</price>
+  <language>Java</language>
+  <dimension>
+    <width>720</width>
+    <height>480</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/bigfish/resources/thirdfish.png</image>
+</game>
