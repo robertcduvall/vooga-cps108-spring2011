@@ -11,6 +11,7 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.basic.AccelerationC;
 import vooga.sprites.spritebuilder.components.basic.PermAccelerationC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
+import vooga.sprites.spritebuilder.components.physics.MasslessPhysicsC;
 
 public class Arrow extends GoodSprite {
 
@@ -28,9 +29,10 @@ public class Arrow extends GoodSprite {
 	public Arrow(BufferedImage image, int x, int y)
     {
         super(image, x, y);
+        
         this.height = 25;
         this.width = 50;
-        this.addComponents( new CollisionPolygonC(new CollisionPolygon(ShapeFactory.makePolygonFromImage(ImageUtil.resize(image, width,height), 5))));
+        this.addComponents(new MasslessPhysicsC(), new CollisionPolygonC(new CollisionPolygon(ShapeFactory.makePolygonFromImage(ImageUtil.resize(image, width,height), 5))));
     }
     
 	
