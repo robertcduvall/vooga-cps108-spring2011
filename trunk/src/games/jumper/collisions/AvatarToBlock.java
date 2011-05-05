@@ -2,9 +2,8 @@ package games.jumper.collisions;
 
 import games.jumper.sprites.Avatar;
 import games.jumper.sprites.Block;
-import games.jumper.sprites.Door;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
-import vooga.resources.Direction;
+
 /**
  * Collision detection between the Avatar and the blocks.
  * @author Charlie Hatcher

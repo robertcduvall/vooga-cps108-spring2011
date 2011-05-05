@@ -1,13 +1,14 @@
 package games.jumper.sprites;
 
-import java.awt.Graphics2D;
+
+
 
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.physics.MasslessPhysicsC;
-import vooga.sprites.spritebuilder.components.physics.PhysicsVelocityC;
+
 /**
  * 
  * @author Charlie Hatcher
