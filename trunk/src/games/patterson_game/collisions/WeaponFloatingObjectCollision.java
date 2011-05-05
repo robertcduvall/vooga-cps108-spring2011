@@ -2,8 +2,8 @@ package games.patterson_game.collisions;
 
 import games.patterson_game.AbstractFloatingObject;
 import games.patterson_game.AbstractWeapon;
-import games.patterson_game.refactoredVooga.collisions.collisionManager.BasicCollisionGroup;
-import games.patterson_game.refactoredVooga.util.buildable.components.predefined.basic.HealthC;
+import vooga.collisions.collisionManager.BasicCollisionGroup;
+import vooga.util.buildable.components.predefined.basic.HealthC;
 
 /**
  * Performs damage a floating object when hit by a weapon

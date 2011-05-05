@@ -3,7 +3,7 @@ package games.patterson_game.refactoredVooga.levelsRefactored.util;
 import games.patterson_game.refactoredVooga.core.VoogaGame;
 import games.patterson_game.refactoredVooga.reflection.Reflection;
 import games.patterson_game.refactoredVooga.resources.images.ImageLoader;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;

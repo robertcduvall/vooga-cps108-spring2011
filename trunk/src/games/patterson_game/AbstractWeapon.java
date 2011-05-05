@@ -1,6 +1,6 @@
 package games.patterson_game;
 
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;

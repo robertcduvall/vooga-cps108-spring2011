@@ -2,8 +2,8 @@ package games.patterson_game.collisions;
 
 import games.patterson_game.AbstractFloatingObject;
 import games.patterson_game.Ship;
-import games.patterson_game.refactoredVooga.collisions.collisionManager.BasicCollisionGroup;
-import games.patterson_game.refactoredVooga.sprites.spritegroups.SpriteGroup;
+import vooga.collisions.collisionManager.BasicCollisionGroup;
+import vooga.sprites.spritegroups.SpriteGroup;
 
 /**
  * Collides a floating object with the ship

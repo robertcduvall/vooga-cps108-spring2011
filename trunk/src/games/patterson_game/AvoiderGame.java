@@ -2,8 +2,8 @@ package games.patterson_game;
 
 import games.patterson_game.refactoredVooga.core.VoogaGame;
 import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
-import games.patterson_game.refactoredVooga.sprites.spritegroups.SpriteGroup;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
 import java.awt.Dimension;
 import com.golden.gamedev.object.background.ImageBackground;
 

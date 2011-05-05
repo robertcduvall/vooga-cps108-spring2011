@@ -5,8 +5,8 @@ import games.patterson_game.refactoredVooga.core.event.EventManager;
 import games.patterson_game.refactoredVooga.core.event.IEventHandler;
 import games.patterson_game.refactoredVooga.levelsRefactored.AbstractLevel;
 import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
-import games.patterson_game.refactoredVooga.sprites.spritegroups.SpriteGroup;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
 import java.util.Collection;
 import com.golden.gamedev.object.Background;
 

@@ -2,10 +2,10 @@ package games.patterson_game;
 
 import games.patterson_game.refactoredVooga.levelsRefactored.LevelManager;
 import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
-import games.patterson_game.refactoredVooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
-import games.patterson_game.refactoredVooga.util.buildable.components.predefined.basic.HealthC;
+import vooga.sprites.improvedsprites.Sprite;
 import java.awt.image.BufferedImage;
+import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
+import vooga.util.buildable.components.predefined.basic.HealthC;
 
 /**
  * An explosive floating object that explodes and sends shrapnel flying when it is destroyed

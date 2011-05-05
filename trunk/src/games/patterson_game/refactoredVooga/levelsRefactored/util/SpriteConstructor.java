@@ -2,9 +2,9 @@ package games.patterson_game.refactoredVooga.levelsRefactored.util;
 
 import games.patterson_game.refactoredVooga.levelsRefactored.AbstractLevel;
 import games.patterson_game.refactoredVooga.reflection.Reflection;
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
-import games.patterson_game.refactoredVooga.sprites.spritegroups.SpriteGroup;
-import games.patterson_game.refactoredVooga.util.buildable.components.IComponent;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
+import vooga.util.buildable.components.IComponent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;

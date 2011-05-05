@@ -1,6 +1,6 @@
 package games.patterson_game.refactoredVooga.levelsRefactored.util;
 
-import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 import java.util.List;
 
 
