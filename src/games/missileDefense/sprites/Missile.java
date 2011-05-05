@@ -17,7 +17,13 @@ import vooga.sprites.spritebuilder.components.physics.BasicPhysicsC;
 public class Missile extends Sprite
 {
 
-	
+	/**
+	 * Missiles that fall from the sky
+	 * @param image
+	 * @param x
+	 * @param y
+	 * @param horizSpeed
+	 */
 	public Missile(BufferedImage image, int x, int y, double horizSpeed)
 	{
 		super(image, x, y);

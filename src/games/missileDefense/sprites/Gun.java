@@ -15,7 +15,12 @@ import vooga.util.buildable.components.predefined.basic.HealthC;
 public class Gun extends Sprite
 {
 	VoogaGame game;
-
+/**
+ * The player's gun
+ * @param game
+ * @param x
+ * @param y
+ */
 	public Gun(VoogaGame game, double x, double y)
 	{
 		super(game.getImageLoader().getImage("gun"));
@@ -26,7 +31,9 @@ public class Gun extends Sprite
 		this.addComponents(new HealthC(1.0), new CollisionPolygonC(new CollisionPolygon(ShapeFactory.makePolygonFromImage(ImageUtil.resize(image, width,height), 2))));
 
 		this.game = game;
-
+/**
+ * these handle input
+ */
 		this.game.registerEventHandler("Input.User.Fire", new IEventHandler()
 		{
 			@Override

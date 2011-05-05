@@ -3,7 +3,11 @@ package games.missileDefense.levels;
 import vooga.levels.IGoal;
 import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
-
+/**
+ * when all the missles have fallen or been destroyed
+ * @author johnegan
+ *
+ */
 public class MissilesGone implements IGoal
 {
 	private VoogaPlayField playfield;

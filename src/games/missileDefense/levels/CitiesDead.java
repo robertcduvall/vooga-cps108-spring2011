@@ -7,6 +7,11 @@ import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
 import vooga.sprites.improvedsprites.Sprite;
 
+/**
+ * When all the cities are dead this is the IGoal. Currently doesn't work...
+ * @author johnegan
+ *
+ */
 public class CitiesDead implements IGoal
 {
 	private VoogaPlayField playfield;

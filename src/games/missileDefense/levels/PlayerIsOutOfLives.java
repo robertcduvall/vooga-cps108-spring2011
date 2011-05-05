@@ -5,7 +5,9 @@ import vooga.levels.IGoal;
 import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
 import vooga.sprites.improvedsprites.Sprite;
-
+/*
+ * when the player gets hit
+ */
 public class PlayerIsOutOfLives implements IGoal
 {
 	private VoogaPlayField playfield;

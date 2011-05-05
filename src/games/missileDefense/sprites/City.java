@@ -18,13 +18,22 @@ import vooga.util.buildable.components.predefined.basic.HealthC;
 
 public class City extends Sprite
 {
+	/**
+	 * build a city!
+	 * @param image
+	 * @param x
+	 * @param y
+	 * @param health
+	 */
 	public City(BufferedImage image, int x, int y, double health)
 	{
 		super(image, x, y);
 		this.setAngle(Direction.NORTH.getAngle());
 		this.addComponents(new HealthC(health), new CollisionPolygonC(new CollisionPolygon(ShapeFactory.makePolygonFromImage(ImageUtil.resize(image, width,height), 2))));
 	}
-	
+	/**
+	 * when the city is hit with something that could damage it (a missile)
+	 */
 	public void damage()
 	{
 		this.getComponent(HealthC.class).decrease(1.0);
