@@ -1,0 +1,9 @@
+<resources>
+	<images>
+		<source>src/games/BattleRPG/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.BattleRPG.level.MapLevel">src/games/BattleRPG/resources/level0.xml</level>
+	<level id="1" type="games.BattleRPG.level.BattleLevel">src/games/BattleRPG/resources/level1.xml</level>
+	<level id="2" type="games.BattleRPG.level.BattleLevel">src/games/BattleRPG/resources/level2.xml</level>
+	<source>src/games/BattleRPG/resources/keymap.xml</source>
+</resources>
