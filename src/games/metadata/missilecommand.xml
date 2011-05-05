@@ -1,6 +1,6 @@
 <game>
 	<title>Missile Command</title>
-	<path>games.missileDefense.missilecommand</path>
+	<path>games.missilecommand.MissileCommandAlex</path>
 	<genre>Arcade</genre>
 	<author>Alex Lee</author>
 	<description>Defend the city from certain destruction. *N.B. the
