@@ -26,9 +26,10 @@ public class BallAndEdgeCollision extends EdgeCollisionGroup{
 	    @Override
 	    public void collidedLeft (Sprite s)
 	    {
-	    	s.setActive(false);
-	        PongGame.eventManager.fireEvent(this, "BallExitsLeft");
-	        PongGame.eventManager.fireEvent(this, "BallExits");	        
+	    	((Ball) s).bounceRight();
+//	    	s.setActive(false);
+//	        PongGame.eventManager.fireEvent(this, "BallExitsLeft");
+//	        PongGame.eventManager.fireEvent(this, "BallExits");	        
 	    }
 
 
