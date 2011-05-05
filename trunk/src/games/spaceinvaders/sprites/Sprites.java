@@ -31,19 +31,6 @@ public class Sprites extends Sprite implements Commons
         this.visible = visible;
     }
 
-//    @Override
-//    public void setImage(BufferedImage image) 
-//    {
-//        set
-//        this.image = image;
-//    }
-//
-//    @Override
-//    public BufferedImage getImage() 
-//    {
-//        return (BufferedImage)image;
-//    }
-
     public void setDying(boolean dying) 
     {
         this.dying = dying;
