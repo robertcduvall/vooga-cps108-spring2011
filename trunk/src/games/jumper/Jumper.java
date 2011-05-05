@@ -2,6 +2,8 @@ package games.jumper;
 
 
 
+import games.jumper.sprites.Avatar;
+
 import java.awt.Dimension;
 
 import vooga.core.VoogaGame;
@@ -16,7 +18,7 @@ public class Jumper extends VoogaGame{
 	
 	public static EventManager myEventManager;
     public static ImageLoader myImageLoader;
-    //private Avatar myAvatar;
+    private Avatar myAvatar;
     
 	public static void main(String[] args){
 		launchGame(new Jumper(), new Dimension(700,400),false);
@@ -32,9 +34,9 @@ public class Jumper extends VoogaGame{
 		myEventManager = getEventManager();
 		myImageLoader = getImageLoader();
 		
-		//myAvatar = new Avatar(this);
-		//myAvatar.addComponent(new CollisionCircleC(myAvatar.getCenterPoint(), myAvatar.getWidth()/2));
-		//getLevelManager().addPlayer(new SpriteGroup<Avatar>("avatar", myAvatar));
+		myAvatar = new Avatar(this);
+		myAvatar.addComponent(new CollisionCircleC(myAvatar.getCenterPoint(), myAvatar.getWidth()/2));
+		getLevelManager().addPlayer(new SpriteGroup<Avatar>("avatar", myAvatar));
 		getLevelManager().loadLevel(0);
 	
 	}
