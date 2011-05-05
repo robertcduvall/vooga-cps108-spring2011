@@ -1,0 +1,24 @@
+<game>
+	<title>Tetris</title>
+    <path>games.tetris.src.Main.TetrisGame</path>
+	<genre>Tetris</genre>
+	<author>Ethan Goh</author>
+	<description>The classic Tetris from 1984</description>
+	<datecreated>April 3, 2011</datecreated>
+	<highscores>
+		<first>56981642</first>
+		<second>8428622</second>
+		<third>9000</third>
+	</highscores>
+	<version>10.1</version>
+	<price>$5.99</price>
+	<language>Engrish</language>
+	<dimension>
+		<width>800</width>
+		<height>600</height>
+	</dimension>
+	<rating>5</rating>
+	<favorite></favorite>
+	<comment>Uses The Super Rotation System (SRS) and has adjustable DAS and ARR delays.</comment>
+	<image>src/games/tetris/tetris.jpg</image>
+</game>

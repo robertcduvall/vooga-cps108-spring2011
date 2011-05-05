@@ -1,0 +1,24 @@
+<game>
+        <title>Invisible Game</title>
+    <path>vooga.arcade.parser.TestGame</path>
+        <genre>Slate</genre>
+        <author>Mystery Man</author>
+        <description>Boredom</description>
+        <datecreated>April 25, 2011</datecreated>
+        <highscores>
+                <first>0</first>
+                <second>0</second>
+                <third>0</third>
+        </highscores>
+        <version>1</version>
+        <price>FREE</price>
+        <language>NOT JAVA</language>
+        <dimension>
+                <width>800</width>
+                <height>800</height>
+        </dimension>
+        <rating>0.0</rating>
+        <favorite></favorite>
+        <comment></comment>
+        <image>src/games/tetris/rcd.jpg</image>
+</game>

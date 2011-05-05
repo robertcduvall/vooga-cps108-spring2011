@@ -1,0 +1,24 @@
+<game>
+  <title>DuelingDan</title>
+  <path>vooga.core.event.examples.duelingdan.DuelingDan</path>
+  <genre>Spamming</genre>
+  <author>Michael Ansel</author>
+  <description>Shoot bullets at bubbles!</description>
+  <datecreated>April 15, 2011</datecreated>
+  <highscores>
+    <first>123</first>
+    <second>12</second>
+    <third>1</third>
+  </highscores>
+  <version>Vista</version>
+  <price>$1.99</price>
+  <language>Ruby on F@iL</language>
+  <dimension>
+    <width>400</width>
+    <height>400</height>
+  </dimension>
+  <rating>4</rating>
+  <favorite></favorite>
+  <comment>AWesoMee</comment>
+  <image>src/games/tetris/duelingdan.jpg</image>
+</game>
