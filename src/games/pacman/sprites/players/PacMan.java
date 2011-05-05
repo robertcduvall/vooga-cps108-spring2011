@@ -1,4 +1,6 @@
-package games.pacman.sprites;
+package games.pacman.sprites.players;
+
+import games.pacman.sprites.players.Players;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -24,7 +26,7 @@ import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
  *
  */
 @SuppressWarnings("serial")
-public class PacMan extends Sprite
+public class PacMan extends Players
 {   
     /**
      * The pacman speed, in pixels per ms.
@@ -35,28 +37,7 @@ public class PacMan extends Sprite
     private int numLives;
     
     
-	@Override
-	public void render(Graphics2D g,int x,int y) {
-		AffineTransform aTransform = new AffineTransform();
-        aTransform.translate((int) this.getX() +width/2, 
-                             (int) this.getY()+height/2);
-        aTransform.rotate(Math.toRadians(this.getAngle()+90));
-        
-        aTransform.translate((int) -width/2, 
-                             (int) -height/2);
-       
-        
-        if (this.getAngle()==180.0){
-        	g.drawImage(ImageUtil.flip(	
-        								ImageUtil.resize(
-        										image, width, height)),aTransform,null);
-        }else 
-        	g.drawImage(ImageUtil.resize(image, width, height),aTransform,null);
-        super.renderComponents(g, x, y);
-        g.setColor(Color.WHITE);
-        this.getCollisionShape().render(g);
-        g.setColor(Color.BLACK);
-	}
+	
     /**
      * @return The number of balls remaining in the supply.
      */
@@ -84,15 +65,11 @@ public class PacMan extends Sprite
      */
     public PacMan (VoogaGame game, double x, double y)
     {
-        super(game.getImageLoader().getImage("pacman"));
+        super(game, x, y, game.getImageLoader().getImage("pacman"));
         
-        setX(x - getWidth()/2);
-        setY(y - getHeight());
-        
-        this.game = game;
-        this.numLives = 3;
-      //  this.addComponents(new CollisionPolygonC(new CollisionQuadrilateral(new Vertex(0,0), new Vertex(0,this.getWidth()), new Vertex(this.getHeight(),0), new Vertex(this.getWidth(),this.getHeight()))));
-        //this.addComponent(new CollisionCircleC(this.getCenterPoint(),this.getWidth()/2));
+      
+       this.numLives = 3;
+     
         game.registerEventHandler("Input.User.Start", new IEventHandler()
         {
             @Override
@@ -159,28 +136,7 @@ public class PacMan extends Sprite
     	this.setAbsoluteSpeed(PACMAN_SPEED);
     }
 	
-    public void collided(Sprite spr) {
-		this.setAbsoluteSpeed(0);
-	    int colWidth =(int) this.getCollisionShape().getWidth();
-	    int colHeight=(int) this.getCollisionShape().getHeight();
-	    int colX = (int) this.getCollisionShape().getTopLeftCorner().getX();
-	    int colY = (int) this.getCollisionShape().getTopLeftCorner().getY();
-	    
-	    int xOverlap=0;
-	    int yOverlap=0;
-	    if(this.getAngle()==0){
-		    xOverlap = (1*(int) (spr.getCollisionShape().getTopLeftCorner().getX()-(colX+colWidth)))-2;
-	    }else if(this.getAngle()==90){
-		    yOverlap = 1*(int) (spr.getCollisionShape().getTopLeftCorner().getY()-(colHeight+colY))-2;
-	    }else if(this.getAngle()==180){
-	    	xOverlap=(int)(spr.getCollisionShape().getTopLeftCorner().getX()+spr.getCollisionShape().getWidth()-colX)+2;
-	    }else if(this.getAngle()==270){
-	    	yOverlap=(1*(int)(spr.getCollisionShape().getTopLeftCorner().getY()+spr.getCollisionShape().getHeight()-colY))+2;
-	    }
-	    this.move(xOverlap,yOverlap);
-	    System.out.println(this.getAngle()+" "+xOverlap+" "+yOverlap);
-	    System.out.println("collided");		
-	}
+
 
     
  //   System.exit(0);

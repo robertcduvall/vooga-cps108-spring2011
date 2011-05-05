@@ -1,7 +1,6 @@
 package games.pacman.collisions;
 
 import games.pacman.sprites.Dot;
-import games.pacman.sprites.PacMan;
 import games.pacman.sprites.Wall;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
 

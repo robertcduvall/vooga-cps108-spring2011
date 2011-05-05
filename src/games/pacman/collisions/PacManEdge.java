@@ -1,6 +1,6 @@
 package games.pacman.collisions;
 
-import games.pacman.sprites.PacMan;
+import games.pacman.sprites.players.PacMan;
 import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
 
 public class PacManEdge extends EdgeCollisionGroup<PacMan> {

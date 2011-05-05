@@ -1,9 +1,8 @@
 package games.pacman.collisions;
 
-import games.pacman.sprites.PacMan;
+import games.pacman.sprites.players.PacMan;
 import games.pacman.sprites.Wall;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
-import vooga.collisions.collisionManager.CollisionManager;
 
 /**
  * A collision group for testing whether pacman/ghost is running into wall. 

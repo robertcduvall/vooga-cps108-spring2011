@@ -1,6 +1,6 @@
 package games.pacman;
 
-import games.pacman.sprites.PacMan;
+import games.pacman.sprites.players.PacMan;
 import java.awt.Dimension;
 import vooga.core.VoogaGame;
 import vooga.core.event.EventManager;
