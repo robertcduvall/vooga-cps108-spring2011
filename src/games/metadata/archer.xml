@@ -1,0 +1,20 @@
+<game>
+  <title>Archer</title>
+  <path>games.arrow.ArrowGame</path>
+  <genre>Arcade</genre>
+  <author>Julian Genkins</author>
+  <description>You shoot arrows at things that are moving. Win.</description>
+  <datecreated>May 5, 2010</datecreated>
+  <highscores>3</highscores>
+  <version>7.22</version>
+  <price>1</price>
+  <language>Java</language>
+  <dimension>
+    <width>800</width>
+    <height>600</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/arrow/archer.jpg</image>
+</game>
