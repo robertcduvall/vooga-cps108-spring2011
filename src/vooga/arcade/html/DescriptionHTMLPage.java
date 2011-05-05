@@ -4,16 +4,31 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+import vooga.arcade.parser.ArcadeGameObject;
+
 public class DescriptionHTMLPage
 {
-	public static String generateHTMLFile(String description)
+	private static String[] aboutFields = { "Description", "Comment", "Rating", "Highscores" };
+
+	public static String generateHTMLFile(ArcadeGameObject ago)
 	{
 		HTMLGenerator htmlGenerator = new HTMLGenerator();
 
-		htmlGenerator.addTag("p", description);
+		for (String s : aboutFields)
+		{
+			String t = removeAllSpaces(s);
+			if (!ago.getData(t.toLowerCase()).isEmpty())
+			{
+				htmlGenerator.addTag("b", s + ": ");
+				if (ago.getData(t.toLowerCase()) != null)
+					htmlGenerator.addText(ago.getData(t.toLowerCase()));
+				htmlGenerator.addLineBreak();
+			}
+		}
 
 		// TODO: FIX THISSSS OAWKEMRLFSDMLKAERJWLKFJSLKDF
-		File file = new File("src/vooga/arcade/html/description.html");
+		File file = new File("src/vooga/arcade/html/about.html");
+		file.delete();
 		try
 		{
 			FileWriter ofstream = new FileWriter(file);
@@ -23,7 +38,18 @@ public class DescriptionHTMLPage
 		}
 		catch (Exception e)
 		{
+			System.err.println("WTF FAIL");
 		}
+
 		return file.getAbsolutePath();
+	}
+
+	private static String removeAllSpaces(String s)
+	{
+		String[] ar = s.split("\\s+");
+		String tr = "";
+		for (String t : ar)
+			tr += t;
+		return tr;
 	}
 }
