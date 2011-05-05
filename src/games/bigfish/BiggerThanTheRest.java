@@ -12,8 +12,8 @@ public class BiggerThanTheRest implements IGoal{
     
 	@Override
 	public boolean checkCompletion(LevelManager levelManager) {
-		for(Sprite player :playfield.getSpriteGroup("playerFish").getSprites()){
-			if(((PlayerFish)player).getSize()>7)
+		for(Sprite player : playfield.getSpriteGroup("playerFish").getSprites()){
+			if(((PlayerFish)player).getSize()>6)
 				return true;
 		}
 		return false;
