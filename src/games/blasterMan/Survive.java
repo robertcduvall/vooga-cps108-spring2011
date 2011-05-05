@@ -36,7 +36,7 @@ public class Survive implements IGoal{
         catch (LevelException e)
         {
             System.out.println("GOOD JOB!!!!!");
-            System.exit(0);  
+            System.exit(0);
         }
 		
 	}

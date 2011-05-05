@@ -21,7 +21,6 @@ import vooga.sprites.spritegroups.SpriteGroup;
  *
  */
 public class Level extends AbstractLevel{
-	private PlayerType player;
 	private VoogaGame game;
 	public Level(Collection<SpriteGroup<Sprite>> players, VoogaGame game) {
 		super(players, game);
@@ -31,9 +30,6 @@ public class Level extends AbstractLevel{
 	@Override
     public void loadLevel ()
     {
-		player = new PlayerType(game, game.getImageLoader().getImage("blasterman", Direction.WEST));
-		player.setLocation(300, 200);
-        this.getSpriteGroup("blasterman").addSprites(player);
         addBackground();
     }
 	public void initEvents(){
@@ -57,6 +53,6 @@ public class Level extends AbstractLevel{
 			slime.setImage(ImageUtil.flip(ImageUtil.rotate(game.getImageLoader().getImage("slime"), -90)));
 		}
 		this.getSpriteGroup("slime").addSprites(slime);
-		slime.addComponent(new Targetting(player));
+		slime.addComponent(new Targetting(((BlasterManGame)game).getPlayer()));
 	}
 }

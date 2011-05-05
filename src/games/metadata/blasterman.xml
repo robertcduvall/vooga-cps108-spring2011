@@ -1,0 +1,18 @@
+<game>
+	<title>Blasterman</title>
+	<path>games.blasterMan.BlasterManGame</path>
+	<genre>Arcade</genre>
+	<author>Josue Mirtil</author>
+	<description>A fox that calls himself blasterman? Evil demon king does not appreciate being lied to. MWAHAHAHA</description>
+	<datecreated>May 5, 2010</datecreated>
+	<highscores></highscores>
+	<version>1.0</version>
+	<price></price>
+	<language>Java</language>
+	<dimension><width>680</width>
+		<height>460</height></dimension>
+	<rating></rating>
+	<favorite></favorite>
+	<comment></comment>
+	<image>src/games/blasterMan/resources/images/BlazeBackground.png</image>
+</game>
