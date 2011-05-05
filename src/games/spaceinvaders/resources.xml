@@ -2,5 +2,6 @@
 	<images>
 		<source>src/games/spaceinvaders/resources/images.xml</source>
 	</images>
+	<level id="0" type="games.spaceinvaders.levels.Level">src/games/spaceinvaders/resources/level0.xml</level>
 	<source>src/games/spaceinvaders/resources/keymap.xml</source>
 </resources>
