@@ -1,5 +1,5 @@
 <game>
-	<title>Maze</title>
+	<title>LoLcat Maze</title>
     <path>games.lolcats.src.Main.TetrisGame</path>
 	<genre>maze</genre>
 	<author>Drew Miller. Mostly codejacked some from Ethan.</author>

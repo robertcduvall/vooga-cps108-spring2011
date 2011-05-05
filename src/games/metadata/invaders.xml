@@ -1,0 +1,24 @@
+<game>
+	<title>Annoying Space Invaders</title>
+    <path>games.invaders.game.invaders</path>
+	<genre>fixed shooter</genre>
+	<author>Drew Miller</author>
+	<description>A variation on the alien arcade classic that everyone loves.</description>
+	<datecreated>May 20, 2011</datecreated>
+	<highscores>
+		<first>400</first>
+		<second>200</second>
+		<third>120</third>
+	</highscores>
+	<version>1.0</version>
+	<price>$9.999</price>
+	<language>English</language>
+	<dimension>
+		<width>600</width>
+		<height>600</height>
+	</dimension>
+	<rating>5</rating>
+	<favorite></favorite>
+	<comment>Exploit the game mechanics to achieve victory against the low-flying enemy fleet.</comment>
+	<image>src/games/invaders/game/resources/images/asi_title.png</image>
+</game>
