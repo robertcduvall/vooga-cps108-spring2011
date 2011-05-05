@@ -5,12 +5,12 @@ import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.Sprite;
 
-public class Archer extends Sprite implements IPowerupable{
+public class Archer extends GoodSprite implements IPowerupable{
 
 	
 	@Override
 	public Double setAngle(double dAngle) {
-		return super.setAngle(dAngle-45);
+		return super.setAngle(dAngle+45);
 	}
 
 	private VoogaGame myGame;
@@ -87,7 +87,7 @@ public class Archer extends Sprite implements IPowerupable{
 		System.out.println("Fire!");
 		Sprite arrow = myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY());
 	    arrow.move(-arrow.getWidth()/2, -arrow.getHeight()/2);
-	    arrow.setMovement(myTension*.5, angle+90);
+	    arrow.setMovement(myTension*.5, angle);
 	    releaseBowstring();
 	}
 
