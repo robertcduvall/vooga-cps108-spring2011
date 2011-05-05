@@ -27,9 +27,9 @@ public class StartRound extends AbstractTransitRound
 	{        
         //super.render(g);
         
-        myFont.drawString(g, "====================", 340, 307);
+        myFont.drawString(g, "      ====================      ", 340, 307);
         myFont.drawString(g, "Click mouse to start a new game!", 350, 317);
-        myFont.drawString(g, "====================", 340, 327);
+        myFont.drawString(g, "      ====================      ", 340, 327);
         
         super.render(g);
 	}

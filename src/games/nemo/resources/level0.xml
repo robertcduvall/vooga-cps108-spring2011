@@ -1,0 +1,22 @@
+<level>
+	<background type="image"><path>src/games/nemo/resources/images/ocean.jpg</path></background>
+	<collision_manager g1="Nemo" g2="Shark" class="games.nemo.model.FishSharkCollision" />
+	
+	<sprite group="Nemo" class="games.nemo.characters.Nemo" type="Nemo" image="Nemo" />
+	<sprite group="Shark" class="games.nemo.characters.Shark" type="Shark" image="Shark" />
+
+	<goal class="games.nemo.TimesUp" goal="8000L"/>
+
+	<instance type="Shark"><speed>1</speed></instance>
+	<instance type="Shark"><speed>1</speed></instance>
+	<instance type="Shark"><speed>1</speed></instance>
+	<instance type="Shark"><speed>1</speed></instance>
+	<instance type="Shark"><speed>1</speed></instance>
+	
+	<instance type="Shark"><speed>1</speed></instance>
+	<instance type="Shark"><speed>1</speed></instance>
+	<instance type="Shark"><speed>1</speed></instance>
+	<instance type="Shark"><speed>1</speed></instance>
+	<instance type="Shark"><speed>1</speed></instance>
+
+</level>

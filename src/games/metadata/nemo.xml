@@ -1,0 +1,20 @@
+<game>
+  <title>Nemo</title>
+  <path>games.nemo.TrickyGame</path>
+  <genre>Retro Classic Game</genre>
+  <author>Yin</author>
+  <description>Save Nemo by evading Sharks!</description>
+  <datecreated>May 4, 2010</datecreated>
+  <highscores></highscores>
+  <version>0.9</version>
+  <price>?</price>
+  <language>Java</language>
+  <dimension>
+    <width>800</width>
+    <height>600</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/nemo/resources/images/opening.jpg</image>
+</game>

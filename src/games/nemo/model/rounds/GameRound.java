@@ -1,7 +1,13 @@
 package games.nemo.model.rounds;
 
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Map;
+
+import vooga.stats.AbstractStat;
+import vooga.stats.NumDisplayCreator;
+import vooga.stats.NumStat;
 
 import games.nemo.model.FishSharkCollision;
 
@@ -12,6 +18,7 @@ import games.nemo.util.resources.ResourceManager;
 
 import com.golden.gamedev.engine.timer.SystemTimer;
 import com.golden.gamedev.object.CollisionManager;
+import com.golden.gamedev.object.GameFont;
 import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.background.ImageBackground;
 
@@ -41,13 +48,15 @@ public class GameRound extends AbstractRound
 	private Sharks mySharks;
 	private CollisionManager myCollisions;
 	private SystemTimer myTimer;
+	private NumStat<Double> myPlayTime;
+	private GameFont myFont;
 	
 	private static final String BACKGROUND_LOCATION = "background_image";
 	private static final String NEMO_LOCATION = "nemo_image";
 	private static final String SHARK_LOCATION = "shark_image";
 	private final int FRAMES_PER_SECOND = 50;
 	
-	public GameRound(int NemoNum, int SharkNum, int speed, long lastTime, String resFile)
+	public GameRound(int NemoNum, int SharkNum, int speed, long lastTime, GameFont font, String resFile)
 	{
 		myResourceManager = ResourceManager.getManager(resFile);
 		
@@ -72,6 +81,11 @@ public class GameRound extends AbstractRound
 		myTimer.setFPS(FRAMES_PER_SECOND);
 		myTimer.startTimer();
 		myStartTime = myTimer.getTime();
+		//System.out.println(DisplayCreator.getOperatorMap().get(DisplayCreator.getOperatorMap()));
+		
+		myFont = font;
+		myPlayTime = new NumStat<Double>(0.0, 1.0, "REPLACE", NumDisplayCreator.getOperatorMap());
+		
 		
 		this.setBackground(myBackground);
 		this.addGroup(myNemos);
@@ -99,7 +113,22 @@ public class GameRound extends AbstractRound
 			myWin = true;
 		}
 		
+		myPlayTime.setStep(((double)(myTimer.getTime()-myStartTime))/1000.0);
+		myPlayTime.update();
 		super.update(elapsedTime);
+	}
+	
+	@Override
+	public void render(Graphics2D g)
+	{
+		super.render(g);
+		
+		myFont.drawString(g, "Playing Time: "+myPlayTime.toString(), 10, 10);
+	}
+	
+	public void setFont(GameFont font)
+	{
+		myFont = font;
 	}
 	
 	/**
@@ -136,4 +165,8 @@ public class GameRound extends AbstractRound
 		return !myInGame;
 	}
 	
+	public NumStat getPlayTime() 
+	{
+		return myPlayTime;
+	}
 }

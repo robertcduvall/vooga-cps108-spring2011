@@ -1,0 +1,10 @@
+<images>
+	<image name="Nemo">
+		<path>src/games/nemo/resources/images/nemo.gif</path>
+		<width>57</width>
+		<height>56</height>
+	</image>
+	<image name="Shark">
+		<path>src/games/nemo/resources/images/shark.gif</path>
+	</image>
+</images>
