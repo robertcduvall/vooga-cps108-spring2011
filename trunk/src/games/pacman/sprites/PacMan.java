@@ -1,12 +1,20 @@
 package games.pacman.sprites;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+
+import com.golden.gamedev.util.ImageUtil;
+
 import vooga.collisions.shapes.Vertex;
+import vooga.collisions.shapes.collisionShapes.CollisionCircle;
 import vooga.collisions.shapes.collisionShapes.CollisionPolygon;
 import vooga.collisions.shapes.collisionShapes.CollisionQuadrilateral;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 
 /**
@@ -21,11 +29,31 @@ public class PacMan extends Sprite
     /**
      * The pacman speed, in pixels per ms.
      */
-    public static final Double PACMAN_SPEED = .8; 
+    public static final Double PACMAN_SPEED = .1; 
     
     private VoogaGame game;
     private int numLives;
     
+    
+	@Override
+	public void render(Graphics2D g,int x,int y) {
+		AffineTransform aTransform = new AffineTransform();
+        aTransform.translate((int) this.getX() +width/2, 
+                             (int) this.getY()+height/2);
+        aTransform.rotate(Math.toRadians(this.getAngle()+90));
+        
+        aTransform.translate((int) -width/2, 
+                             (int) -height/2);
+       
+        
+        if (this.getAngle()==180.0){
+        	g.drawImage(ImageUtil.flip(	
+        								ImageUtil.resize(
+        										image, width, height)),aTransform,null);
+        }else 
+        	g.drawImage(ImageUtil.resize(image, width, height),aTransform,null);
+        super.renderComponents(g, x, y);
+	}
     /**
      * @return The number of balls remaining in the supply.
      */
@@ -57,11 +85,11 @@ public class PacMan extends Sprite
         
         setX(x - getWidth()/2);
         setY(y - getHeight());
-        setAngle(Direction.NORTH.getAngle());
+        
         this.game = game;
         this.numLives = 3;
       //  this.addComponents(new CollisionPolygonC(new CollisionQuadrilateral(new Vertex(0,0), new Vertex(0,this.getWidth()), new Vertex(this.getHeight(),0), new Vertex(this.getWidth(),this.getHeight()))));
-        
+        //this.addComponent(new CollisionCircleC(this.getCenterPoint(),this.getWidth()/2));
         game.registerEventHandler("Input.User.Start", new IEventHandler()
         {
             @Override
@@ -123,6 +151,7 @@ public class PacMan extends Sprite
      */
     protected void move (Double angle)
     {
+    	
     	this.setAngle(angle);
     	this.setAbsoluteSpeed(PACMAN_SPEED);
     }

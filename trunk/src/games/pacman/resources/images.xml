@@ -5,12 +5,18 @@
 	<image name="dot">
 		<path>src/games/pacman/resources/Dot.jpg</path>
 	</image>
-	<image name="wall">
-		<path>src/games/pacman/resources/Wall.png</path>
+	<image name="horizWall">
+		<path>src/games/pacman/resources/HorizWall.png</path>
 <!--		<width>38</width>
 		<height>22</height>
 		<state count="*" />-->
 	</image>
+    <image name="vertWall">
+        <path>src/games/pacman/resources/HorizWall.png</path>
+<!--        <width>38</width>
+        <height>22</height>
+        <state count="*" />-->
+    </image>
 	 <!--   <image name="background">
         <path>src/games/arrow/resources/images/background.jpg</path>
     </image> -->
