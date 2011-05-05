@@ -1,14 +1,17 @@
-package games.lolcats.src.KeyActions;
+package games.tetris.src.KeyActions;
 
-import games.lolcats.src.Context.ITetrisContext;
+import games.tetris.src.Context.ITetrisContext;
 
-public class ResetGame implements IKeyAction {
+public class ResetGame implements IKeyAction
+{
 	@Override
-	public void performKeyPressed(ITetrisContext tc, long elapsedTime) {
+	public void performKeyPressed(ITetrisContext tc, long elapsedTime)
+	{
 		tc.reset();
 	}
 
 	@Override
-	public void performKeyDown(ITetrisContext tc, long elapsedTime) {
+	public void performKeyDown(ITetrisContext tc, long elapsedTime)
+	{
 	}
 }

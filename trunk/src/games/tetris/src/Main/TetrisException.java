@@ -1,12 +1,13 @@
-package games.lolcats.src.Main;
+package games.tetris.src.Main;
 
 import java.util.ResourceBundle;
 
-public class TetrisException extends Exception {
+public class TetrisException extends Exception
+{
 	private static final long serialVersionUID = 1L;
 
 	private static ResourceBundle stringsResource = ResourceBundle
-			.getBundle("games.lolcats.TetrisExceptionResource");
+			.getBundle("games.tetris.TetrisExceptionResource");
 
 	public static TetrisException NONEXISTANT_MINO = new TetrisException(
 			stringsResource.getString("NONEXISTANT_MINO"));
@@ -14,7 +15,8 @@ public class TetrisException extends Exception {
 	public static TetrisException UNEXPECTED_ERROR = new TetrisException(
 			stringsResource.getString("UNEXPECTED_ERROR"));
 
-	public TetrisException(String string) {
+	public TetrisException(String string)
+	{
 		super(string);
 	}
 }

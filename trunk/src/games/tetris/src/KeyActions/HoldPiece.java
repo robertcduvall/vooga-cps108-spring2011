@@ -2,17 +2,17 @@ package games.tetris.src.KeyActions;
 
 import games.tetris.src.Context.ITetrisContext;
 
-public class DecreaseDas implements IKeyAction
+public class HoldPiece implements IKeyAction
 {
 	@Override
 	public void performKeyPressed(ITetrisContext tc, long elapsedTime)
 	{
-		return;
+		tc.holdMino();
+		tc.setHoldUsed(true);
 	}
 
 	@Override
 	public void performKeyDown(ITetrisContext tc, long elapsedTime)
 	{
-		tc.adjustDasBy(-5);
 	}
 }

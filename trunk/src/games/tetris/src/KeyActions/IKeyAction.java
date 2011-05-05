@@ -1,8 +1,9 @@
-package games.lolcats.src.KeyActions;
+package games.tetris.src.KeyActions;
 
-import games.lolcats.src.Context.ITetrisContext;
+import games.tetris.src.Context.ITetrisContext;
 
-public interface IKeyAction {
+public interface IKeyAction
+{
 	void performKeyPressed(ITetrisContext tc, long elapsedTime);
 
 	void performKeyDown(ITetrisContext tc, long elapsedTime);
