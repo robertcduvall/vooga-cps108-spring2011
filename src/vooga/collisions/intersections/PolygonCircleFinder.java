@@ -7,6 +7,7 @@ import java.awt.geom.Point2D.Double;
 import javax.sound.sampled.Line;
 
 import vooga.collisions.shapes.regularShapes.*;
+import vooga.util.math.LineMath;
 
 public class PolygonCircleFinder extends IntersectionFinder<Polygon, Circle>
 {
@@ -38,10 +39,10 @@ public class PolygonCircleFinder extends IntersectionFinder<Polygon, Circle>
         
         	
         for(Line2D l: p.getSides()){
-            if(c.contains(l))
+            if(c.contains(l.getP1()) || c.contains(l.getP2()) || c.contains(LineMath.findMidpoint(l))){
+            	
             	return true;
-            else if (c.intersects(l))
-            	return true;
+            }
             
         }
         
