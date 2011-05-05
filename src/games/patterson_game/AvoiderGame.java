@@ -42,7 +42,7 @@ public class AvoiderGame extends VoogaGame
                   new ImageBackground(getImage(myBundle.getString("lose_background"))));
     }
     
-    /** This method is deprecated in the VoogaGame class */
+    /** This method is deprecated in the VoogaGame class */ 
     @Override
     public void updatePlayField (long elapsedTime)
     { return; }
