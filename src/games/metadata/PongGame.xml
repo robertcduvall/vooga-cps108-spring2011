@@ -1,0 +1,20 @@
+<game>
+  <title>AI Pong</title>
+  <path>games.pong.PongGame</path>
+  <genre>AI</genre>
+  <author>Shun Fan</author>
+  <description>it's smarter than skynet</description>
+  <datecreated>May 5, 2010</datecreated>
+  <highscores>3</highscores>
+  <version>0.1</version>
+  <price></price>
+  <language>Java</language>
+  <dimension>
+    <width>640</width>
+    <height>480</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/bigfish/resources/thirdfish.png</image>
+</game>
