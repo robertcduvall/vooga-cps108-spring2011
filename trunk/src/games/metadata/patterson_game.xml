@@ -1,0 +1,24 @@
+<game>
+	<title>Avoiders!</title>
+    <path>games.patterson_game.AvoiderGame</path>
+	<genre>Avoider game</genre>
+	<author>Andrew Patterson (Nosrettap99) </author>
+	<description>Undescribable!</description>
+	<datecreated>February 29, 1812</datecreated>
+	<highscores>
+		<first>913124</first>
+		<second>13423</second>
+		<third>2</third>
+	</highscores>
+	<version>15.11</version>
+	<price>$12.99</price>
+	<language>English or French</language>
+	<dimension>
+		<width>1000</width>
+		<height>700</height>
+	</dimension>
+	<rating>5.2</rating>
+	<favorite></favorite>
+	<comment>Just about the coolest game imaginable!</comment>
+	<image>src/games/patterson_game/resources/images/Obstacle.png</image>
+</game>
