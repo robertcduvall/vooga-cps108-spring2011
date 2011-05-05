@@ -1,5 +1,6 @@
 package games.pong.collisions;
 
+import games.pong.PongGame;
 import games.pong.sprites.Ball;
 import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
 import vooga.sprites.improvedsprites.Sprite;
@@ -15,14 +16,18 @@ public class BallAndEdgeCollision extends EdgeCollisionGroup{
 	    @Override
 	    public void collidedRight (Sprite s)
 	    {
-	        ((Ball) s).bounceLeft();
+	        //((Ball) s).bounceLeft();
+	        s.setActive(false);
+	        PongGame.eventManager.fireEvent(this, "BallExitsRight");
 	    }
 
 
 	    @Override
 	    public void collidedLeft (Sprite s)
 	    {
-	        ((Ball) s).bounceRight();
+	    	s.setActive(false);
+	        PongGame.eventManager.fireEvent(this, "BallExitsLeft");
+	        
 	    }
 
 
