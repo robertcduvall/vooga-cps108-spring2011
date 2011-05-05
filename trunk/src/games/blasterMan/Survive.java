@@ -29,7 +29,8 @@ public class Survive implements IGoal{
 		levels.updateNumOfLevelsCompleted();
 		try
         {
-            levels.loadNextLevel();
+            //levels.loadNextLevel();
+			levels.loadLevel(levels.getCurrentLevel().getId() + 1);
             System.out.println("Next Level!!!");
         }
         catch (LevelException e)
