@@ -6,6 +6,7 @@ import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.components.physics.MasslessPhysicsC;
 import vooga.sprites.spritebuilder.components.physics.PhysicsVelocityC;
 
 @SuppressWarnings("serial")
@@ -13,25 +14,21 @@ public class Avatar extends Sprite{
 	
 	private static final double AVATAR_JUMP = -3;
 	private static final double X_LOCATION = 100;
-	private static final double Y_LOCATION = 100;
+	private static final double Y_LOCATION = 300;
 	private VoogaGame myGame;
 	private int myLives;
-	public static final Double Avatar_Speed = 2D; 
-
-	@Override
-     public void render(Graphics2D g) {
-             super.render(g);
-             this.getCollisionShape().render(g);
-     }
+	public static final Double Avatar_Speed = 2D;
+	MasslessPhysicsC myPhysics;
 
 	public Avatar(VoogaGame game){
 		super(game.getImageLoader().getImage("mario"));
 		setX(X_LOCATION);
 		setY(Y_LOCATION);
-		this.addComponent(new PhysicsVelocityC());
+		myPhysics = new MasslessPhysicsC();
+		this.addComponent(myPhysics);
 		this.myGame = game;
 		myLives = 3;
-		setAngle(Direction.SOUTH.getAngle());
+		setAngle(Direction.NORTH.getAngle());
 		
 		game.registerEventHandler("Input.User.Left", new IEventHandler() {
 			
@@ -86,6 +83,12 @@ public class Avatar extends Sprite{
 		myLives--;
 		this.setX(X_LOCATION);
 		this.setY(Y_LOCATION);
+	}
+	
+	public void stopMoving(){
+		this.setVerticalSpeed(0);
+		this.setAngle(Direction.SOUTH.getAngle());
+		System.out.println("mySpeed = " + this.getVerticalSpeed());
 	}
 	
 

@@ -17,7 +17,7 @@ public class AvatarToSpikes extends BasicCollisionGroup<Avatar,Spikes>{
 	}*/
 	@Override
 	public void collided(Avatar s1, Spikes s2) {
-		s1.setActive(false);
+		System.out.println("hello");
 		Jumper.myEventManager.fireEvent(this, "Game.Avatar.Died");
 	}
 
