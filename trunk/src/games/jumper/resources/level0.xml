@@ -1,5 +1,5 @@
 <level>
-	<background type="color">white</background>
+	<background type="color">blue</background>
 	<collision_manager g1="avatar" g2="blocks" class="games.jumper.collisions.AvatarToBricks" />
 	<collision_manager g1="avatar" g2="spikes" class="games.jumper.collisions.AvatarToSpikes" />
 	<collision_manager g1="avatar" g2="door" class="games.jumper.collisions.AvatarToDoor" />
@@ -67,5 +67,5 @@
 	
 	<instance type="block"><x>360</x><y>120</y></instance>
 	<instance type="block"><x>380</x><y>120</y></instance>
-	<instance type="door"><x>360</x><y>70</y></instance>
+	<instance type="door"><x>360</x><y>50</y></instance>
 </level>
