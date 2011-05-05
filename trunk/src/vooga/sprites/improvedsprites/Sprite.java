@@ -532,7 +532,7 @@ public class Sprite extends BaseSprite
 
 
 
-	private Double getArbitraryRotate() {
+	protected Double getArbitraryRotate() {
 		return 90.0;
 	}
 
