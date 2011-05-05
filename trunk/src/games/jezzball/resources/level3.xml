@@ -1,0 +1,6 @@
+<level>
+	<background type="color">grey</background>
+	<sprite group="text" class="games.jezzball.sprite.Text" type="text" image="text" />
+	<goal class="games.jezzball.level.FinishGame" />
+	
+</level>

@@ -1,307 +1,311 @@
 <level>
 	<background type="color">grey</background>
-	<collision_manager g1="ball" g2="wall" class="games.jezzball.collision.WallCollision" />
-	
-	<sprite group="ball" class="games.jezzball.sprite.Ball" type="ball" image="ball" />
-	<sprite group="wall" class="games.jezzball.sprite.Wall" type="wall" image="wall" />
-	<sprite group="tile" class="games.jezzball.sprite.Tile" type="tile" image="tile" />
-	
+	<collision_manager g1="ball" g2="wall"
+		class="games.jezzball.collision.WallCollision" />
 
-	<goal class="games.jezzball.LevelCleared" />
-	
-	
+	<sprite group="ball" class="games.jezzball.sprite.Ball" type="ball"
+		image="ball" />
+	<sprite group="wall" class="games.jezzball.sprite.Wall" type="wall"
+		image="wall" />
+	<sprite group="tile" class="games.jezzball.sprite.Tile" type="tile"
+		image="tile" />
+
+
+	<goal class="games.jezzball.level.LevelCleared" />
+
+
 	<instance type="wall">
-	<x>100</x>
-	<y>100</y>
+		<x>100</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>120</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>120</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>140</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>140</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>160</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>160</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>180</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>180</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>200</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>200</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>220</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>220</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>240</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>240</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>260</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>260</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>280</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>280</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>300</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>300</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>320</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>320</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>340</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>340</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>360</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>360</y>
 	</instance>
 
-<instance type="wall">
-	<x>100</x>
-	<y>380</y>
-	</instance>
-
-
-<instance type="wall">
-	<x>120</x>
-	<y>100</y>
-	</instance>
-
-<instance type="wall">
-	<x>120</x>
-	<y>380</y>
+	<instance type="wall">
+		<x>100</x>
+		<y>380</y>
 	</instance>
 
 
-<instance type="wall">
-	<x>140</x>
-	<y>100</y>
+	<instance type="wall">
+		<x>120</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>140</x>
-	<y>380</y>
-	</instance>
-
-
-<instance type="wall">
-	<x>160</x>
-	<y>100</y>
-	</instance>
-
-<instance type="wall">
-	<x>160</x>
-	<y>380</y>
+	<instance type="wall">
+		<x>120</x>
+		<y>380</y>
 	</instance>
 
 
-<instance type="wall">
-	<x>180</x>
-	<y>100</y>
+	<instance type="wall">
+		<x>140</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>180</x>
-	<y>380</y>
-	</instance>
-
-
-<instance type="wall">
-	<x>200</x>
-	<y>100</y>
-	</instance>
-
-<instance type="wall">
-	<x>200</x>
-	<y>380</y>
+	<instance type="wall">
+		<x>140</x>
+		<y>380</y>
 	</instance>
 
 
-<instance type="wall">
-	<x>220</x>
-	<y>100</y>
+	<instance type="wall">
+		<x>160</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>220</x>
-	<y>380</y>
-	</instance>
-
-
-<instance type="wall">
-	<x>240</x>
-	<y>100</y>
-	</instance>
-
-<instance type="wall">
-	<x>240</x>
-	<y>380</y>
+	<instance type="wall">
+		<x>160</x>
+		<y>380</y>
 	</instance>
 
 
-<instance type="wall">
-	<x>260</x>
-	<y>100</y>
+	<instance type="wall">
+		<x>180</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>260</x>
-	<y>380</y>
-	</instance>
-
-
-<instance type="wall">
-	<x>280</x>
-	<y>100</y>
-	</instance>
-
-<instance type="wall">
-	<x>280</x>
-	<y>380</y>
+	<instance type="wall">
+		<x>180</x>
+		<y>380</y>
 	</instance>
 
 
-<instance type="wall">
-	<x>300</x>
-	<y>100</y>
+	<instance type="wall">
+		<x>200</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>300</x>
-	<y>380</y>
-	</instance>
-
-
-<instance type="wall">
-	<x>320</x>
-	<y>100</y>
-	</instance>
-
-<instance type="wall">
-	<x>320</x>
-	<y>380</y>
+	<instance type="wall">
+		<x>200</x>
+		<y>380</y>
 	</instance>
 
 
-<instance type="wall">
-	<x>340</x>
-	<y>100</y>
+	<instance type="wall">
+		<x>220</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>340</x>
-	<y>380</y>
-	</instance>
-
-
-<instance type="wall">
-	<x>360</x>
-	<y>100</y>
-	</instance>
-
-<instance type="wall">
-	<x>360</x>
-	<y>380</y>
+	<instance type="wall">
+		<x>220</x>
+		<y>380</y>
 	</instance>
 
 
-<instance type="wall">
-	<x>380</x>
-	<y>100</y>
+	<instance type="wall">
+		<x>240</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>120</y>
+	<instance type="wall">
+		<x>240</x>
+		<y>380</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>140</y>
+
+	<instance type="wall">
+		<x>260</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>160</y>
+	<instance type="wall">
+		<x>260</x>
+		<y>380</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>180</y>
+
+	<instance type="wall">
+		<x>280</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>200</y>
+	<instance type="wall">
+		<x>280</x>
+		<y>380</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>220</y>
+
+	<instance type="wall">
+		<x>300</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>240</y>
+	<instance type="wall">
+		<x>300</x>
+		<y>380</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>260</y>
+
+	<instance type="wall">
+		<x>320</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>280</y>
+	<instance type="wall">
+		<x>320</x>
+		<y>380</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>300</y>
+
+	<instance type="wall">
+		<x>340</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>320</y>
+	<instance type="wall">
+		<x>340</x>
+		<y>380</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>340</y>
+
+	<instance type="wall">
+		<x>360</x>
+		<y>100</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>360</y>
+	<instance type="wall">
+		<x>360</x>
+		<y>380</y>
 	</instance>
 
-<instance type="wall">
-	<x>380</x>
-	<y>380</y>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>100</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>120</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>140</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>160</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>180</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>200</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>220</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>240</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>260</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>280</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>300</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>320</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>340</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>360</y>
+	</instance>
+
+	<instance type="wall">
+		<x>380</x>
+		<y>380</y>
 	</instance>
 
 
@@ -311,14 +315,14 @@
 		<direction>34</direction>
 		<speed>0.1</speed>
 	</instance>
-	
+
 	<instance type="ball">
 		<x>160</x>
 		<y>160</y>
 		<direction>79</direction>
 		<speed>0.1</speed>
 	</instance>
-	
+
 	<strings>
 		<gridSizeX>15</gridSizeX>
 		<gridSizeY>15</gridSizeY>
@@ -326,8 +330,8 @@
 		<topLeftX>100</topLeftX>
 		<topLeftY>100</topLeftY>
 	</strings>
-	
 
-	
-	
+
+
+
 </level>

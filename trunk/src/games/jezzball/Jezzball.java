@@ -19,6 +19,9 @@ import vooga.sprites.spritegroups.SpriteGroup;
  *
  */
 public class Jezzball extends VoogaGame{
+    
+    //{distribute = true;}
+    
     public static ImageLoader imageLoader;
     
     @Override
