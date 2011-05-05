@@ -2,5 +2,5 @@
 	<images>
 		<source>src/games/blasterMan/resources/images/images.xml</source></images>
 	<level id="0" type="games.blasterMan.Level">src/games/blasterMan/resources/levelData/level0.xml</level>
-	<level id="1" type="games.blasterMan/resources/Level">src/games/blasterman/resources/levelData/level1.xml</level>
+	<level id="1">src/games/blasterman/resources/levelData/level1.xml</level>
 	<source>src/games/blasterMan/resources/keymap.xml</source></resources>
