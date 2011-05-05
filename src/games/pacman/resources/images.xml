@@ -3,21 +3,9 @@
 		<path>src/games/pacman/resources/PacMan.png</path>
 	</image>
 	<image name="dot">
-		<path>src/games/pacman/resources/Dot.jpg</path>
+		<path>src/games/pacman/resources/Dot.png</path>
 	</image>
-	<image name="horizWall">
-		<path>src/games/pacman/resources/HorizWall.png</path>
-<!--		<width>38</width>
-		<height>22</height>
-		<state count="*" />-->
+	<image name="wall">
+		<path>src/games/pacman/resources/Wall.png</path>
 	</image>
-    <image name="vertWall">
-        <path>src/games/pacman/resources/HorizWall.png</path>
-<!--        <width>38</width>
-        <height>22</height>
-        <state count="*" />-->
-    </image>
-	 <!--   <image name="background">
-        <path>src/games/arrow/resources/images/background.jpg</path>
-    </image> -->
 </images>
