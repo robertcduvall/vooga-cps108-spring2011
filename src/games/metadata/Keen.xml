@@ -1,0 +1,20 @@
+<game>
+  <title>Keen</title>
+  <path>games.keen.KeenGame</path>
+  <genre>Platformer</genre>
+  <author>Sterling</author>
+  <description>A cheap Commander Keen clone.</description>
+  <datecreated>May 1, 2011</datecreated>
+  <highscores></highscores>
+  <version>1.0</version>
+  <price></price>
+  <language>Java</language>
+  <dimension>
+    <width>640</width>
+    <height>480</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/keen/keen.gif</image>
+</game>
