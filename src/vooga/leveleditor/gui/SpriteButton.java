@@ -11,7 +11,8 @@ import org.w3c.dom.Element;
 
 /**
  * A button that holds a sprite.
- * 
+ * @author Charlie Hatcher
+ * @author Alex Lee
  */
 @SuppressWarnings("serial")
 public class SpriteButton extends JButton
@@ -28,8 +29,6 @@ public class SpriteButton extends JButton
     	myPane = pane;
     	spriteProperties = spritedata;
     	String path = spriteProperties.getElementsByTagName("image").item(0).getTextContent();
-    	//setImageLocation();
-        //myIcon = new ImageIcon(myImageLocation);
     	myIcon = new ImageIcon(path);
         this.setIcon(myIcon);
         this.setPreferredSize(new Dimension(100, 100));
@@ -38,13 +37,16 @@ public class SpriteButton extends JButton
 
     private class ClickAction implements ActionListener
     {
-
+    	
+    	/**
+    	 * If the button is clicked, create the image represented by the button
+    	 * and place it on the level image. The MouseMotionListener is used by the
+    	 * level image to determine if the image has been selected and if it is being
+    	 * dragged.
+    	 */
         @Override
         public void actionPerformed(ActionEvent e)
         {
-        	/*
-        	 * Need to create a sprite button factory
-        	 */
             DraggableImage s = new DraggableImage(myPane, spriteProperties, true);
             myPane.addMouseMotionListener(s);
             myPane.addImage(s);
@@ -53,13 +55,6 @@ public class SpriteButton extends JButton
 
     }
     
-    /*
-     * This method may be used by the parser in order to set the image for
-     * each button as they are being created from the file. If needed, we will
-     * replace this with a SpriteButtonFactory
-     */
-    protected void setImageLocation(){
-    	myImageLocation = "src/vooga/leveleditor/images/space_ship.png";
-    }
+  
 
 }

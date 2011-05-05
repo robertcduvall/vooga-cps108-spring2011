@@ -125,7 +125,9 @@ public class DrawingBoard extends JPanel
 
     public void saveFile(File f)
     {
-
+    	/*
+    	 * TODO: This is where save would be implemented for the xml file
+    	 */
     }
 
 }

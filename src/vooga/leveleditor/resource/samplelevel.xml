@@ -13,7 +13,7 @@
     <sprite>
         <spritegroup>Protagonist</spritegroup>
         <name>Bob</name>
-        <image>src/vooga/leveleditor/images/space_ship.png</image>
+        <image>src/vooga/leveleditor/images/Brick_Block.png</image>
         <x>400</x>
         <y>400</y>
     </sprite>
