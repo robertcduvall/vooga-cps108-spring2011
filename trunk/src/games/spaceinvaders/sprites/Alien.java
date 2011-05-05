@@ -1,17 +1,19 @@
-package games.spaceinvaders;
+package games.spaceinvaders.sprites;
 
 import java.awt.image.BufferedImage;
+import vooga.sprites.improvedsprites.Sprite;
+import games.spaceinvaders.Commons;
 
-public class Alien extends Sprites
+public class Alien extends Sprite implements Commons
 {
     private Bomb bomb;
 
-    public Alien(BufferedImage alienImg, BufferedImage bombImg, int x, int y) 
+    public Alien(BufferedImage image, int x, int y) 
     {
-        super(alienImg);
-        this.x = x;
-        this.y = y;
-        bomb = new Bomb(bombImg, x, y);
+        super(image, x, y);
+        setX(x);
+        setY(y);
+        setAbsoluteSpeed(ALIEN_SPEED);
     }
 
     public void act(int direction) 
@@ -24,16 +26,17 @@ public class Alien extends Sprites
         return bomb;
     }
 
-    public class Bomb extends Sprites 
+    public class Bomb extends Sprite 
     {
         private boolean destroyed;
 
         public Bomb(BufferedImage image, int x, int y) 
         {
-            super(image);
+            super(image, x, y);
+            setX(x);
+            setY(y);
+            setAbsoluteSpeed(BOMB_SPEED);
             setDestroyed(true);
-            this.x = x;
-            this.y = y;
         }
 
         public void setDestroyed(boolean destroyed) 
