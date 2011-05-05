@@ -34,7 +34,7 @@ public class ThumbnailPanel extends JPanel
         JPanel thumbPanel = new JPanel();
         thumbPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         
-        int height = (thumbnails.size() / 3 * 200);
+        int height = (thumbnails.size() / 3 * 250);
         
         // Size of the Frame itself (Determines scroll length)
         thumbPanel.setPreferredSize(new Dimension(620, height));
