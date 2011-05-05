@@ -17,7 +17,7 @@
 		<y>72</y>
 	</instance>	
 	<instance type ="ocean">
-		<x>-10</x>
+		<x>-29</x>
 		<y>368</y>
 	</instance>
 	<instance type="land">
@@ -28,5 +28,8 @@
 		<x>380</x>
 		<y>210</y>
 	</instance>
-
+	<instance type="exclamation">
+		<x>440</x>
+		<y>70</y>
+	</instance>
 </level>

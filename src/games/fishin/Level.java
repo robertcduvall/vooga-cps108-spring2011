@@ -32,7 +32,7 @@ public class Level extends AbstractLevel
         myTracker = myCreator.getTracker();
         bindEvents();
         
-        game.addPeriodicTimer("OceanTimer", 10, "MoveOcean");
+        game.addPeriodicTimer("OceanTimer", 90, "MoveOcean");
         game.addPeriodicTimer("BaseFishTimer", 2001, "BaseFishBite");   //Base fish delay is 2 s
     }
 
@@ -63,7 +63,7 @@ public class Level extends AbstractLevel
             @Override
             public void handleEvent(Object o)
             {
-                delay = generator.nextInt(6001); //Delay between bites is 2-8 seconds. (2 to 2+6 s)
+                delay = generator.nextInt(4001); //Delay between bites is 2-6 seconds. (2 to 2+4 s)
                 game.addTimer("FishRandomTimer", delay, "FishBiteStart");
                 game.addTimer("FishRandomEnd", delay+500, "FishBiteDone");      //You have 0.5 s to land fish
             }
