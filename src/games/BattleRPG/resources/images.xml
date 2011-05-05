@@ -1,0 +1,62 @@
+<images>
+	<image name="mapbkg">
+		<path>resources/images/mapbkg.png</path>
+	</image>
+	<image name="bkg1">
+        <path>resources/images/bkg1.png</path>
+    </image>
+    <image name="bkg2">
+        <path>resources/images/bkg2.png</path>
+    </image>
+    <image name="cursor">
+    	<path>resources/images/cursor.png</path>
+    </image>
+    <image name="textbox">
+    	<path>resources/images/textbox.png</path>
+    </image>
+	<image name="enemy0">
+		<path>resources/images/wolf.png</path>
+	</image>
+	<image name="enemy1">
+		<path>resources/images/cat.png</path>
+	</image>
+	<image name="enemy10">
+		<path>resources/images/dragon.png</path>
+	</image>
+	<image name="boyChar">
+		<path>resources/images/boyChar.png</path>
+	</image>
+	<image name="girlChar">
+		<path>resources/images/girlChar.png</path>
+	</image>
+	<image name="0">
+		<path>resources/images/numbers/0.png</path>
+	</image>
+	<image name="1">
+		<path>resources/images/numbers/1.png</path>
+	</image>
+	<image name="2">
+		<path>resources/images/numbers/2.png</path>
+	</image>
+	<image name="3">
+		<path>resources/images/numbers/3.png</path>
+	</image>
+	<image name="4">
+		<path>resources/images/numbers/4.png</path>
+	</image>
+	<image name="5">
+		<path>resources/images/numbers/5.png</path>
+	</image>
+	<image name="6">
+		<path>resources/images/numbers/6.png</path>
+	</image>
+	<image name="7">
+		<path>resources/images/numbers/7.png</path>
+	</image>
+	<image name="8">
+		<path>resources/images/numbers/8.png</path>
+	</image>
+	<image name="9">
+		<path>resources/images/numbers/9.png</path>
+	</image>
+</images>
