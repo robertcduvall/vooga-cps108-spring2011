@@ -1,0 +1,113 @@
+package games.patterson_game.refactoredVooga.resources;
+
+import games.patterson_game.refactoredVooga.core.VoogaGame;
+import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
+import games.patterson_game.refactoredVooga.resources.images.ImageLoader;
+import games.patterson_game.refactoredVooga.resources.managertags.ImageResourceTag;
+import games.patterson_game.refactoredVooga.resources.managertags.KeyMapTag;
+import games.patterson_game.refactoredVooga.resources.managertags.LevelTag;
+import games.patterson_game.refactoredVooga.resources.managertags.StringsTag;
+import games.patterson_game.refactoredVooga.resources.xmlparser.Parser;
+import games.patterson_game.refactoredVooga.resources.xmlparser.XMLTag;
+import java.io.File;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Mega-class that manages all resources.
+ * If you want to use resources (which you should), use this class!
+ * @author Sterling Dorminey
+ *
+ */
+public class ResourceManager extends Parser {
+	
+	private static final String RESOURCE_FILENAME = "resources.xml";
+    private ImageLoader imageLoader;
+	
+	private Map<Integer, String[]> levelMap;
+    private VoogaGame myGame;
+    private KeyMap myKeyMap;
+    private Bundle bundle;
+	
+	public class RootTag extends XMLTag {
+		@Override
+		public String getTagName() {
+				return "resources";
+		}
+	}
+
+
+	public ResourceManager (VoogaGame game)
+    {
+        super();
+        myGame = game;
+        levelMap = new HashMap<Integer, String[]>();
+        myKeyMap = new KeyMap();
+        bundle = new Bundle();
+        addDefinitions( new RootTag(),
+                        new ImageResourceTag(this),
+                        new LevelTag(this),
+                        new KeyMapTag(this),
+                        new StringsTag(this));
+    }
+	
+	public void setImageLoader(ImageLoader imageLoader)	{
+		this.imageLoader = imageLoader;
+	}
+	
+	/**
+	 * Gets the image loader, which is used to load images.
+	 */
+	public ImageLoader getImageLoader() {
+		return imageLoader;
+	}
+	
+//	TODO: SoundLoader
+//	public SoundLoader getSoundLoader() {
+//	    return soundLoader;
+//	}
+//	
+//	public void setSoundLoader(SoundLoader soundLoader)
+//	{
+//	    this.soundLoader = soundLoader;
+//	}
+
+	/**
+	 * Parse the resources.xml file.
+	 */
+	public void parse() {
+        try
+        {
+            parse(new File(myGame.getClass().getResource(RESOURCE_FILENAME).toURI()).getAbsolutePath());
+        }
+        catch (URISyntaxException e)
+        {
+            e.printStackTrace();
+        }
+        // Set level order once we've loaded all the level tags.
+        myGame.getLevelManager().setLevelOrder(levelMap);
+	}
+	
+	public KeyMap getKeyMap() {
+	    return myKeyMap;
+	}
+	
+	public void setKeyMap(KeyMap keyMap)
+	{
+	    myKeyMap = keyMap;
+	}
+
+	public Bundle getBundle() {
+		return bundle;
+	}
+	
+	public Map<Integer, String[]> getLevelMap() {
+		return levelMap;
+	}
+
+    public VoogaGame getGame ()
+    {
+        return myGame;
+    }
+}

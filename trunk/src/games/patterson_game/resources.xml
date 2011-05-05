@@ -1,0 +1,63 @@
+<resources>
+
+   <strings>
+        <player_group_name>player group</player_group_name>
+        <floating_object_to_ship_damage>10</floating_object_to_ship_damage>
+        <level_message_pt_1>LEVEL </level_message_pt_1>
+        <level_message_pt_2> GOOD LUCK</level_message_pt_2>
+        <obstacle_release_interval>1000</obstacle_release_interval>
+        <bullet_ball_acceleration>0.003</bullet_ball_acceleration>
+        <bullet_ball_strength>20.0</bullet_ball_strength>
+        <explosive_strength>15.0</explosive_strength>
+        <num_of_shrapnel_pieces>15</num_of_shrapnel_pieces>
+        <shrapnel_speed>0.2</shrapnel_speed>
+        <bonus_level_message>BONUS LEVEL!</bonus_level_message>
+        <obstacle_speed_increasor>1.5</obstacle_speed_increasor>
+        <speed_increasor_interval>10000</speed_increasor_interval>
+        <obstacle_strength>15</obstacle_strength>
+        <obstacle_height>68</obstacle_height>
+        <default_obstacle_speed>-0.05</default_obstacle_speed>
+        <obstacle_frequency>10</obstacle_frequency>
+        <explosive_frequency>10</explosive_frequency>
+        <reversePowerup_frequency>10</reversePowerup_frequency>
+        <speedUpPowerup_frequency>10</speedUpPowerup_frequency>
+        <weaponChangePowerup_frequency>10</weaponChangePowerup_frequency>
+        <open_release_zone_interval>200</open_release_zone_interval>
+        <reverse_powerup_strength>15</reverse_powerup_strength>
+        <reverse_powerup_length>5000</reverse_powerup_length>
+        <reverse_powerup_message>BACKWARDS MOVEMENT</reverse_powerup_message>
+        <reverse_powerup_revert_message>NORMAL MOVEMENT</reverse_powerup_revert_message>
+        <ship_initial_x>70</ship_initial_x>
+        <ship_initial_y>250</ship_initial_y>
+        <ship_initial_health>100</ship_initial_health>
+        <ship_initial_weapon>bulletBall</ship_initial_weapon>
+        <ship_initial_max_speed>0.15</ship_initial_max_speed>
+        <ship_message_display_time>2500</ship_message_display_time>
+        <ship_taking_damage_message>OUCH! THAT HURT!</ship_taking_damage_message>
+        <ship_gun_recharge_delay>500</ship_gun_recharge_delay>
+        <shrapnel_strength>15</shrapnel_strength>
+        <spearhead_strength>25</spearhead_strength>
+        <spearhead_acceleration>0.002</spearhead_acceleration>
+        <speed_up_multiplier>2.3</speed_up_multiplier>
+        <speed_up_powerup_strength>15</speed_up_powerup_strength>
+        <speed_up_powerup_message>SPEEDING UP</speed_up_powerup_message>
+        <speed_up_powerup_revert_message>SLOWING DOWN</speed_up_powerup_revert_message>        
+        <speed_up_powerup_length>5000</speed_up_powerup_length>
+        <time_goal_length>15</time_goal_length>
+        <weapon_change_powerup_weapon>spearhead</weapon_change_powerup_weapon>
+        <revert_weapon_delay>7000</revert_weapon_delay>
+        <weapon_change_message>NEW WEAPON: </weapon_change_message>
+        <weapon_change_revert_message>REVERTING WEAPON</weapon_change_revert_message>
+
+    </strings>
+    
+	<images>
+		<source>src/games/patterson_game/resources/images.xml</source>
+	</images>
+	
+	<level id="0" type="games.patterson_game.AvoiderLevel">src/games/patterson_game/resources/levels/level0.xml</level>
+	<level id="1" type="games.patterson_game.AvoiderLevel">src/games/patterson_game/resources/levels/level1.xml</level>
+	<level id="2" type="games.patterson_game.NeverEndingLevel">src/games/patterson_game/resources/levels/level2.xml</level>
+	
+	<source>src/games/patterson_game/resources/keymap.xml</source>
+</resources>
