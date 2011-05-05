@@ -11,4 +11,10 @@
 	<image name="paddle">
 		<path>src/games/breakout/resources/paddle.png</path>
 	</image>
+	<image name="win">
+		<path>src/games/breakout/resources/win.png</path>
+	</image>
+	<image name="lose">
+		<path>src/games/breakout/resources/lose.png</path>
+	</image>
 </images>

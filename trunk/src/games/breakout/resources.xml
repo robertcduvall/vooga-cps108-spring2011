@@ -2,7 +2,9 @@
 	<images>
 		<source>src/games/breakout/resources/images.xml</source>
 	</images>
-	<level id="0" type="games.breakout.Level">src/games/breakout/resources/level0.xml</level>
-	<level id="1" type="games.breakout.Level">src/games/breakout/resources/level1.xml</level>
+	<level id="0" type="games.breakout.levels.Level">src/games/breakout/resources/level0.xml</level>
+	<level id="1" type="games.breakout.levels.Level">src/games/breakout/resources/level1.xml</level>
+	<level id="2" type="games.breakout.levels.WinLossLevel">src/games/breakout/resources/win.xml</level>
+	<level id="3" type="games.breakout.levels.WinLossLevel">src/games/breakout/resources/lose.xml</level>
 	<source>src/games/breakout/resources/keymap.xml</source>
 </resources>
