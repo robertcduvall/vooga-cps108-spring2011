@@ -23,13 +23,13 @@ public class ScrollingSpriteDisplay<T extends Sprite> {
 	//and in setting X and Y for sprites in setDisplayed. Should probably use a variable instead.
 	
 	//State
-	SpriteGroup myDisplayedSprites;
-	ArrayList<T> mySprites;
-	Sprite myLeftArrow, myRightArrow;
-	T myActiveSprite;
-	int myHeight, myWidth, myStart, myNumberSpritesDisplayed;
-	double myX, myY;
-	VoogaGame myParent;
+	private SpriteGroup myDisplayedSprites;
+	private ArrayList<T> mySprites;
+	private Sprite myLeftArrow, myRightArrow;
+	private T myActiveSprite;
+	private int myHeight, myWidth, myStart, myNumberSpritesDisplayed;
+	private double myX, myY;
+	private VoogaGame myParent;
 	private ResourceManager defaultResources = new ResourceManager("resources.gui.Defaults");
 	
 	
