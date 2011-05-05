@@ -1,7 +1,5 @@
 package vooga.network.example.plantvszombie.game;
 
-
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -264,7 +262,6 @@ public class PlantVsZombie extends VoogaGame {
 
 	@Override
 	public void updatePlayField(long elapsedTime) {
-		// TODO Auto-generated method stub
 		
 	}
 
