@@ -1,0 +1,20 @@
+<game>
+  <title>Lunar Lander</title>
+  <path>games.mariobros.MarioBros</path>
+  <genre>Arcade</genre>
+  <author>Ethan</author>
+  <description>The classic Lunar Lander game.</description>
+  <datecreated>May 2, 2010</datecreated>
+  <highscores></highscores>
+  <version>1.1</version>
+  <price></price>
+  <language>Java</language>
+  <dimension>
+    <width>640</width>
+    <height>480</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/mariobros/mario-bros.jpg</image>
+</game>
