@@ -19,6 +19,7 @@ public class BallAndEdgeCollision extends EdgeCollisionGroup{
 	        //((Ball) s).bounceLeft();
 	        s.setActive(false);
 	        PongGame.eventManager.fireEvent(this, "BallExitsRight");
+	        PongGame.eventManager.fireEvent(this, "DecreaseAIHealth.bounds");
 	        PongGame.eventManager.fireEvent(this, "BallExits");
 	    }
 
@@ -26,10 +27,11 @@ public class BallAndEdgeCollision extends EdgeCollisionGroup{
 	    @Override
 	    public void collidedLeft (Sprite s)
 	    {
-	    	((Ball) s).bounceRight();
-//	    	s.setActive(false);
-//	        PongGame.eventManager.fireEvent(this, "BallExitsLeft");
-//	        PongGame.eventManager.fireEvent(this, "BallExits");	        
+	    	//((Ball) s).bounceRight();
+	    	s.setActive(false);
+	        PongGame.eventManager.fireEvent(this, "BallExitsLeft");
+	        PongGame.eventManager.fireEvent(this, "DecreasePlayerHealth.bounds");
+	        PongGame.eventManager.fireEvent(this, "BallExits");	        
 	    }
 
 

@@ -2,6 +2,7 @@ package games.pong;
 
 import games.breakout.sprites.Ball;
 import games.breakout.sprites.Paddle;
+import games.pong.sprites.AbstractPaddle;
 import vooga.levels.IGoal;
 import vooga.levels.LevelException;
 import vooga.levels.LevelManager;
@@ -25,7 +26,9 @@ public class BlankGoal implements IGoal
     @Override
     public boolean checkCompletion (LevelManager levelManager)
     {
-        return false;
+    	AbstractPaddle player = (AbstractPaddle) playfield.getSpriteGroup("PlayerPaddle").getActiveSprite();
+    	AbstractPaddle computer = (AbstractPaddle) playfield.getSpriteGroup("AIPaddle").getActiveSprite();
+    	return player.isDead() || computer.isDead();
     }
 
 
@@ -35,7 +38,7 @@ public class BlankGoal implements IGoal
     @Override
     public void progress ()
     {
-       
+       System.out.println("game over");
     }
 
 
