@@ -1,0 +1,24 @@
+<game>
+  <title>Some Kind of RPG</title>
+  <path>games.BattleRPG.BattleRPG</path>
+  <genre>RPG</genre>
+  <author>Austin Benesh</author>
+  <description>You think it's all just cats and wolves... until you find the fire dragon. Good luck. You'll need to level up a bit first.</description>
+  <datecreated>2011</datecreated>
+  <highscores>
+    <first>3</first>
+    <second>2</second>
+    <third>1</third>
+  </highscores>
+  <version>1.0</version>
+  <price>0.00</price>
+  <language>english</language>
+  <dimension>
+    <width>500</width>
+    <height>400</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>./src/games/BattleRPG/resources/images/gameIcon.png</image>
+</game>
