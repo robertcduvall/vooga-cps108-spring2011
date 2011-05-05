@@ -8,6 +8,12 @@ import vooga.reflection.Reflection;
 import vooga.resources.xmlparser.Parser;
 import vooga.resources.xmlparser.XMLTag;
 
+/**
+ * Collision Manager Tag
+ * @author Sterling Dorminey
+ *
+ */
+
 public class CollisionManagerTag extends XMLTag {
 	private static final String TAG_NAME = "collision_manager";
 	private static final String CLASS = "class";
