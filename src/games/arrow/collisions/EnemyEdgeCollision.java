@@ -25,7 +25,7 @@ public class EnemyEdgeCollision extends EdgeCollisionGroup<Enemy> {
 	public void collidedBottom(Enemy s) {
 		System.out.println("COllided!");
 		s.setAbsoluteSpeed(0);		
-		s.setActive(false);
+		getGroup2().remove(s);
 	}
 
 

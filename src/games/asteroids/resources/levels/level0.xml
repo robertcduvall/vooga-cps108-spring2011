@@ -14,23 +14,20 @@
 		<y>20</y>
 	</instance>
 	
-	<instance type="bullet">
-		<x>10</x>
-		<y>150</y>
-	</instance>
-	
-	<instance type="bullet">
-		<x>200</x>
-		<y>200</y>
-	</instance>
-	
 	<instance type="asteroid">
 		<x>400</x>
 		<y>10</y>
 	</instance>
 	
-	<instance type="bullet">
-		<x>10</x>
-		<y>300</y>
+	<instance type="asteroid">
+		<x>90</x>
+		<y>430</y>
 	</instance>
+	
+	<instance type="asteroid">
+		<x>600</x>
+		<y>70</y>
+	</instance>
+	
+	
 </level>

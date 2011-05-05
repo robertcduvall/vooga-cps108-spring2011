@@ -6,7 +6,7 @@
 	
 	<sprite class="games.frogger.sprites.CarA" group="vehicles" type="carA" image="car_a">
 		<component class="games.frogger.sprites.components.VelocityC">
-			<mag>0.1</mag>
+			<mag>1.0</mag>
 			<dir>0.0</dir>
 		</component>
 	</sprite>

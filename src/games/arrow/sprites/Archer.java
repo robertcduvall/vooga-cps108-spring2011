@@ -4,6 +4,8 @@ import games.arrow.sprites.components.MouseRotateC;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.builder.SpriteBuilder;
+import vooga.sprites.spritebuilder.components.basic.PermAccelerationC;
 
 public class Archer extends GoodSprite implements IPowerupable{
 
@@ -15,11 +17,13 @@ public class Archer extends GoodSprite implements IPowerupable{
 
 	private VoogaGame myGame;
 	private double myTension;
+	private SpriteBuilder<Arrow> ArrowBuilder;
 
 	public Archer (VoogaGame game)
     {
     	super(game.getImageLoader().getImage("archer"));
         myGame = game;
+        ArrowBuilder = new SpriteBuilder<Arrow>(PermAccelerationC.class);
         addComponent(new MouseRotateC(game));
         bindKeys();
     }
@@ -85,7 +89,7 @@ public class Archer extends GoodSprite implements IPowerupable{
 
 	protected void fire(Double angle) {
 		System.out.println("Fire!");
-		Sprite arrow = myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY());
+		Sprite arrow = ArrowBuilder.buildSprite((Arrow)myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY()), 0.0, .0001);
 	    arrow.move(-arrow.getWidth()/2, -arrow.getHeight()/2);
 	    arrow.setMovement(myTension*.5, angle);
 	    releaseBowstring();

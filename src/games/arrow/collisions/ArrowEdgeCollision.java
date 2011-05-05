@@ -26,7 +26,7 @@ public class ArrowEdgeCollision extends EdgeCollisionGroup<Arrow> {
 	public void collidedBottom(Arrow s) {
 		s.setAbsoluteSpeed(0);
 		s.removeComponent(PermAccelerationC.class);
-		s.setActive(false);
+		getGroup2().remove(s);
 	}
 
 

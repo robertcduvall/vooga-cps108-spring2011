@@ -9,7 +9,7 @@ public class ArrowEnemyCollision extends BasicCollisionGroup<Arrow, Enemy>{
 	@Override
 	public void collided(Arrow s1, Enemy s2) {
 		if (!s2.isDead()){
-			s1.setActive(false);
+			getGroup1().remove(s1);
 			s2.die();
 		}
 		//TODO Increase Score
