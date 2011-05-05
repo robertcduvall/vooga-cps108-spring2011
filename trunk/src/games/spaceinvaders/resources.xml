@@ -1,0 +1,6 @@
+<resources>
+	<images>
+		<source>src/games/spaceinvaders/resources/images.xml</source>
+	</images>
+	<source>src/games/spaceinvaders/resources/keymap.xml</source>
+</resources>
