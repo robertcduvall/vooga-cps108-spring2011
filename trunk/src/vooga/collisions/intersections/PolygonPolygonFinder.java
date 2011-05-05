@@ -1,6 +1,8 @@
 package vooga.collisions.intersections;
 
 import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
+
 import vooga.collisions.shapes.regularShapes.*;
 import vooga.util.math.LineMath;
 
@@ -20,8 +22,10 @@ public class PolygonPolygonFinder extends IntersectionFinder<Polygon, Polygon>
         Intersection in = new Intersection();
         for(Line2D L1: s1.getSides()){
             for(Line2D L2: s2.getSides()){
-                if (L1.intersectsLine(L2))
-                    in.addIntersectingPoints(LineMath.findIntersection(L1, L2));
+                if (L1.intersectsLine(L2)) {
+                	Point2D intersectionPoint = LineMath.findIntersection(L1, L2);
+                	if(intersectionPoint != null) in.addIntersectingPoints(intersectionPoint);
+                }
             }
         }
         return in;

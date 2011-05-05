@@ -10,14 +10,9 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
 public class Level extends AbstractLevel {
-
-	protected int offsetX, offsetY;
 	
 	public Level(Collection<SpriteGroup<Sprite>> players, VoogaGame game) {
 		super(players, game);
-		
-		offsetX = 0;
-		offsetY = 0;
 	}
 
 	@Override
@@ -27,13 +22,4 @@ public class Level extends AbstractLevel {
 		super.addAllSpritesFromPool();
 		super.addBackground();
 	}
-
-	public int getOffsetX() {
-		return offsetX;
-	}
-	
-	public int getOffsetY() {
-		return offsetY;
-	}
-
 }

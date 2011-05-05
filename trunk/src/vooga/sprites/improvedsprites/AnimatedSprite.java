@@ -185,6 +185,7 @@ public class AnimatedSprite extends Sprite {
      * This method is obsolete on animated sprite, since animated sprite always
      * use several images for its animation.
      * 
+     * @deprecated
      * @see #setImages(BufferedImage[])
      */
     public void setImage(BufferedImage image) {

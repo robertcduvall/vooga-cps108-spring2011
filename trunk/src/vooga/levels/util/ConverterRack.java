@@ -92,7 +92,10 @@ public class ConverterRack {
 	 */
 	public Object convert(Class<?> target, String input) {
 		if(!conversionMap.containsKey(target)) {
-			throw new RuntimeException("Unable to convert");
+			if(target.getSuperclass().equals(target)) 
+				throw new RuntimeException("Unable to convert");
+
+			return convert(target.getSuperclass(), input);
 		}
 		
 		Converter<?> converter = conversionMap.get(target);

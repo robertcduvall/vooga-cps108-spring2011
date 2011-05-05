@@ -1,5 +1,7 @@
 package games.keen.sprites;
 
+import games.keen.KeenGame;
+
 import java.awt.image.BufferedImage;
 
 import vooga.core.VoogaGame;
@@ -7,12 +9,13 @@ import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.AnimatedSprite;
 
 @SuppressWarnings("serial")
-public class MonsterSprite extends AnimatedSprite {
+public class MonsterSprite extends LevelSprite {
 
 	protected boolean isDead;
 	private VoogaGame game;
 	private String name;
 	private State state;
+	private double oldX, oldY;
 	
 	private static class State {
 		private int imageIndex;
@@ -31,8 +34,11 @@ public class MonsterSprite extends AnimatedSprite {
 		}
 	}
 	
-	public MonsterSprite(VoogaGame game, String name, int x, int y) {
-		super(x, y);
+	public MonsterSprite(KeenGame game, String name, int x, int y) {
+		super(game, x, y);
+		
+		oldX = x;
+		oldY = y;
 		
 		this.game = game;
 		this.name = name;
@@ -62,5 +68,10 @@ public class MonsterSprite extends AnimatedSprite {
 	
 	public void kill() {
 		isDead = true;
+	}
+	
+	public void revertPosition() {
+		setX(getOldX());
+		setY(getOldY());
 	}
 }
