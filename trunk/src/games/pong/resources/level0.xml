@@ -1,11 +1,15 @@
 <level>
 <background type="color">green</background>
 	<collision_manager g1="ball" g2="PlayerPaddle" class="games.pong.collisions.BallAndPaddleCollision" />
+	<collision_manager g1="ball" g2="AIPaddle" class="games.pong.collisions.BallAndPaddleCollision" />
 	<collision_manager g1="ball" g2="ball" class="games.pong.collisions.BallAndEdgeCollision" />
 	<sprite group="ball" class="games.pong.sprites.Ball" type="ball" image="ball" />
 	<sprite group="PlayerPaddle" class="games.pong.sprites.PlayerPaddle" type="PlayerPaddle" image="paddle" />
-
+	<sprite group="AIPaddle" class="games.pong.sprites.AIPaddle" type="AIPaddle" image="paddle" />
 
 	<goal class="games.pong.BlocksCleared" />
 	<instance type="ball"><x>60</x><y>60</y></instance>
+	
+	
+	
 </level>

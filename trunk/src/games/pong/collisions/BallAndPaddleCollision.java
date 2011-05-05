@@ -9,25 +9,25 @@ import vooga.collisions.collisionManager.CollisionManager;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
-public class BallAndPaddleCollision extends BasicCollisionGroup<Ball, PlayerPaddle>{
-	@Override
-    public boolean areCollide(Ball ball, PlayerPaddle paddle)
-    {
-
-        return CollisionManager.isPixelCollide(ball.getX(), ball.getY(), ball.getImage(), 
-                                              paddle.getX(), paddle.getY(), paddle.getImage());
-        
-        
-//        return dx*dx + dy*dy < ball.getRadius() * ball.getRadius();
-    }
+public class BallAndPaddleCollision extends BasicCollisionGroup<Ball, AbstractPaddle>{
 
     @Override
-    public void collided (Ball ball, PlayerPaddle paddle)
+    public void collided (Ball ball, AbstractPaddle paddle)
     {
-    	System.out.println("collided!");
+    	//System.out.println("collided!");
+    	
         double paddleRatio = (ball.getCenterY() - paddle.getCenterY())/paddle.getHeight();
-        ball.setAngle(0+90*paddleRatio);
-
+        //System.out.println(ball.getAngle());
+        //if(ball.getAngle()<=270 && ball.getAngle()>=90)
+        if(ball.getHorizontalSpeed()<0) {
+        	ball.setX(ball.getX()+3);
+        	ball.setAngle(90*paddleRatio);
+        	
+        }
+        else {
+        	ball.setX(ball.getX()-3);
+        	ball.setAngle(180-90*paddleRatio);
+        	
+        }
     }
-
 }

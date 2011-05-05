@@ -1,6 +1,7 @@
 package games.pong;
 
 import games.breakout.sprites.Paddle;
+import games.pong.sprites.AIPaddle;
 import games.pong.sprites.PlayerPaddle;
 
 import java.awt.Dimension;
@@ -38,8 +39,13 @@ public class PongGame extends VoogaGame {
 		eventManager = getEventManager();
         imageLoader = getImageLoader();
         
-        PlayerPaddle playerPaddle = new PlayerPaddle(this, 10, 170);
+        PlayerPaddle playerPaddle = new PlayerPaddle(this, 0, 170);
+        AIPaddle AI_Paddle = new AIPaddle(this, 630, 170);
+        getLevelManager().addPlayer(new SpriteGroup<AIPaddle>("AIPaddle", AI_Paddle));
         getLevelManager().addPlayer(new SpriteGroup<PlayerPaddle>("PlayerPaddle", playerPaddle));
-		getLevelManager().loadLevel(0);
+		getLevelManager().loadLevel(0);	
+        
+		
+		
 	}
 }

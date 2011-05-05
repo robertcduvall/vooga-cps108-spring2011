@@ -7,17 +7,22 @@ import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.Sprite;
 
 public class PlayerPaddle extends AbstractPaddle{
-
+	private VoogaGame game;
+	private Boolean BallInPlay;
+	
 	public PlayerPaddle(VoogaGame game, double x, double y) {
 		super(game.getImageLoader().getImage("paddle"), x, y);
-		        
+		
+		this.game = game;
+		
         game.registerEventHandler("Input.Player.Up", new IEventHandler()
         {
             @Override
             public void handleEvent (Object o)
             {
                 //System.out.println("up!");
-            	setY(getY()-5);
+            	//setY(getY()-5);
+            	moveUp();
             }            
         });
         
@@ -27,10 +32,58 @@ public class PlayerPaddle extends AbstractPaddle{
             public void handleEvent (Object o)
             {
             	//System.out.println("down!");
-            	setY(getY()+5);
+            	//if(getCenterY()+height/2 < game.getHeight())
+            	//setY(getY()+5);
+            	moveDown();
+            }            
+        });
+        
+        game.registerEventHandler("StartNewBall", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+            	if(!BallInPlay){
+            		createNewBall();
+            		BallInPlay = true;
+            	}
+            	
+            }            
+        });
+        
+        game.registerEventHandler("BallExitsRight", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+            	BallInPlay = false;
+            }            
+        });
+        
+        game.registerEventHandler("BallExitsLeft", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+            	BallInPlay = false;
             }            
         });
 
+	}
+	
+	public void moveDown() {
+		if(getCenterY()+height/2 < game.getHeight())
+			setY(getY()+5);
+	}
+	
+	public void moveUp() {
+		if(getCenterY()-height/2 > 0)
+			setY(getY()-5);
+	}
+	
+	public void createNewBall() {
+		game.getLevelManager().addArchetypeSprite("ball", (int) getCenterX()+10, (int) getY());
+		game.fireEvent(this, "AIstart", game);
 	}
 	
 	
