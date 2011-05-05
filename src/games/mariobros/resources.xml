@@ -5,5 +5,7 @@
 	<level id="0" type="games.mariobros.Level">src/games/mariobros/resources/level0.xml</level>
 	<level id="1" type="games.mariobros.Level">src/games/mariobros/resources/level1.xml</level>
 	<level id="2" type="games.mariobros.Level">src/games/mariobros/resources/level2.xml</level>
+	<level id="3" type="games.mariobros.Level">src/games/mariobros/resources/level3.xml</level>
+	
 	<source>src/games/mariobros/resources/keymap.xml</source>
 </resources>

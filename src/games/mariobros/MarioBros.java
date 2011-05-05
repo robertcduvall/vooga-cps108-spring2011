@@ -1,6 +1,6 @@
 package games.mariobros;
 
-import games.asteroids.Asteroid;
+import games.mariobros.sprites.Asteroid;
 import games.mariobros.sprites.Lander;
 
 import java.awt.Dimension;
@@ -11,11 +11,13 @@ import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
 import vooga.resources.images.ImageLoader;
 import vooga.sprites.spritegroups.SpriteGroup;
+import vooga.util.buildable.components.IComponent;
 
 /**
  * IS IT MARIO? OR LUNAR LANDER?
+ * 
  * @author Ethan Goh
- *
+ * 
  */
 public class MarioBros extends VoogaGame
 {
@@ -38,15 +40,18 @@ public class MarioBros extends VoogaGame
 		eventManager = getEventManager();
 		imageLoader = getImageLoader();
 
-		eventManager.registerEventHandler("Game.RandomAsteroid", new IEventHandler()
-		{
-			@Override
-			public void handleEvent(Object o)
-			{
-				addRandomAsteroid();
-			}
-		});
-		
+		eventManager.registerEventHandler("Game.RandomAsteroid",
+				new IEventHandler()
+				{
+					@Override
+					public void handleEvent(Object o)
+					{
+						addRandomAsteroid();
+					}
+				});
+
+		eventManager.addPeriodicTimer("AsteroidCreation", 500,
+				"Game.RandomAsteroid");
 		Lander mario = new Lander(this, getWidth() / 2, getHeight() / 8);
 		getLevelManager().addPlayer(new SpriteGroup<Lander>("lander", mario));
 		getLevelManager().loadLevel(0);
@@ -56,9 +61,10 @@ public class MarioBros extends VoogaGame
 	public void addRandomAsteroid()
 	{
 		Random r = new Random();
-		
-		Asteroid a = (Asteroid) getLevelManager().addArchetypeSprite("asteroid", -r.nextInt(10), -r.nextInt(10), null);
-		
-		
+
+		Asteroid a = (Asteroid) getLevelManager().addArchetypeSprite(
+				"asteroid", -r.nextInt(10), -r.nextInt(10), new IComponent[0]);
+		a.randomizeVelocityTowardsScreen();
+
 	}
 }

@@ -8,6 +8,9 @@
 	<image name="lander">
 		<path>src/games/mariobros/resources/ship.png</path>
 	</image>
+	<image name="asteroid">
+		<path>src/games/mariobros/resources/asteroid.png</path>
+	</image>
 	<image name="background0">
 		<path>src/games/mariobros/resources/background0.jpg</path>
 	</image>
