@@ -5,7 +5,15 @@ import java.awt.Dimension;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.replay.StateTable;
-
+/** 
+ * Blasterman!!! 
+ * <p>Use arrow keys to move around. Press space to shoot. Press Escape to replay your awesomeness. 
+ * <p>Survive the level for 60 
+ * seconds and you win!!
+ * 
+ * @author Josue
+ *
+ */
 public class BlasterManGame extends VoogaGame{
 	private StateTable st;
 	@Override 

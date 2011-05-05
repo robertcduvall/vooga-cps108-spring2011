@@ -14,7 +14,12 @@ import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.IComponent;
 import vooga.util.buildable.components.predefined.basic.HealthC;
-
+/**
+ * This sprite represents the main player
+ * 
+ * @author Josue
+ *
+ */
 @SuppressWarnings("serial")
 public class PlayerType extends Sprite {
 	/*
