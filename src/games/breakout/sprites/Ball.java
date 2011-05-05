@@ -16,6 +16,8 @@ public class Ball extends Sprite
      */
     public static final Double BALL_SPEED = 0.4D;
     
+    private Paddle parent;
+    
     /**
      * Creates a ball moving straight up and sitting on 
      * top of the point (x,y)
@@ -29,6 +31,22 @@ public class Ball extends Sprite
         setY(y - getHeight());
         setAngle(-90);
         setAbsoluteSpeed(BALL_SPEED);
+    }
+    
+    /**
+     * Set the paddle that this ball was created by.
+     * 
+     * @param parent The owner paddle.
+     */
+    public void setParent(Paddle parent) {this.parent = parent;}
+    
+    /**
+     * Destroy the ball, and inform the paddle.
+     */
+    public void destroy()
+    {
+        setActive(false);
+        parent.prepareNewBall();
     }
     
     /**
