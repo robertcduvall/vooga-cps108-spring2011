@@ -1,13 +1,13 @@
 <level>
 	<background type="color">blue</background>
-	<collision_manager g1="avatar" g2="blocks" class="games.jumper.collisions.AvatarToBricks" />
+	<collision_manager g1="avatar" g2="block" class="games.jumper.collisions.AvatarToBlock" />
 	<collision_manager g1="avatar" g2="spikes" class="games.jumper.collisions.AvatarToSpikes" />
 	<collision_manager g1="avatar" g2="door" class="games.jumper.collisions.AvatarToDoor" />
 	
 	<sprite group="avatar" class="games.jumper.sprites.Avatar" type="avatar" image="mario" />
 	<sprite group="block" class="games.jumper.sprites.Block" type="block" image="block" />
 	<sprite group="door" class="games.jumper.sprites.Door" type="door" image="door" />
-	<sprite group="Spikes" class="games.jumper.sprites.Spikes" type="spikes" image="spikes" />
+	<sprite group="spikes" class="games.jumper.sprites.Spikes" type="spikes" image="spikes" />
 
 	<goal class="games.jumper.levelstuff.DoorReached" />
 

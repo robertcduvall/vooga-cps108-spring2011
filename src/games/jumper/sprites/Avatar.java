@@ -13,10 +13,10 @@ public class Avatar extends Sprite{
 	
 	private static final double AVATAR_JUMP = -3;
 	private static final double X_LOCATION = 100;
-	private static final double Y_LOCATION = 300;
+	private static final double Y_LOCATION = 100;
 	private VoogaGame myGame;
 	private int myLives;
-	public static final Double PADDLE_SPEED = 2D; 
+	public static final Double Avatar_Speed = 2D; 
 
 	@Override
      public void render(Graphics2D g) {
@@ -37,7 +37,7 @@ public class Avatar extends Sprite{
 			
 			@Override
 			public void handleEvent(Object o) {
-				shift(-PADDLE_SPEED);
+				shift(-Avatar_Speed);
 			}
 		});
 		
@@ -45,7 +45,7 @@ public class Avatar extends Sprite{
 			
 			@Override
 			public void handleEvent(Object o) {
-				shift(PADDLE_SPEED);
+				shift(Avatar_Speed);
 			}
 		});
 		
@@ -65,6 +65,7 @@ public class Avatar extends Sprite{
 			}
 		});
 	}
+	
     /**
      * Move the paddle, if the screen boundaries allow for it.
      * @param dx The difference in x-coordinate.
@@ -86,5 +87,6 @@ public class Avatar extends Sprite{
 		this.setX(X_LOCATION);
 		this.setY(Y_LOCATION);
 	}
+	
 
 }
