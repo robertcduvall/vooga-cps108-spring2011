@@ -1,0 +1,11 @@
+<keymap>
+	<!--<key_event event="Input.User.Thrust" sensitivity="Level" key="UP" />-->
+	<!--<key_event event="Input.User.TurnLeft" sensitivity="Level" key="LEFT"/>-->
+	<!--<key_event event="Input.User.TurnRight" sensitivity="Level" key="RIGHT"/>-->
+	<key_event event="Input.User.Cover" sensitivity="Edge" key="SPACE"/>
+	<key_event event="Input.User.Fire"  sensitivity="MouseEdge" key = "Button1"/>
+	<key_event event="Input.User.NewGame" sensitivity="Edge" key="N"/>
+	<key_event event="Input.User.QuitGame" sensitivity="Edge" key="Q"/>
+	<!--  <key_event event="Input.User.Cheat" sensitivity="Edge" key="X"/>-->
+	<!-- TODO figure out mouse event firing -->
+</keymap>

@@ -1,0 +1,4 @@
+Level0_SO0      850       512
+Level0_SO1      0         564
+Level0_SO2      0         392
+Level0_SO3      755       317

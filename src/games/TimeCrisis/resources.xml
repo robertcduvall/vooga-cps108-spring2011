@@ -1,0 +1,30 @@
+<resources>
+	<strings>
+		<MaxLevel>2</MaxLevel>
+		<NumOfEnemyImgs>7</NumOfEnemyImgs>
+		<NumOfWoundImgs>4</NumOfWoundImgs>
+		
+		<EnemyShowFrequency0>150</EnemyShowFrequency0>
+		<EnemyShowFrequency1>150</EnemyShowFrequency1>
+		
+		<EnemyKillLimit0>5</EnemyKillLimit0>
+		<EnemyKillLimit1>10</EnemyKillLimit1>
+		
+		<EnemyPathFile0>src/games/TimeCrisis/resources/EnemyPathFile0.txt</EnemyPathFile0>
+		<EnemyPathFile1>src/games/TimeCrisis/resources/EnemyPathFile1.txt</EnemyPathFile1>
+		
+		<PlayerTimeStart0>30</PlayerTimeStart0>
+		<PlayerTimeStart1>20</PlayerTimeStart1>
+		
+		<SceneLevelFile0>src/games/TimeCrisis/resources/SceneLevelFile0.txt</SceneLevelFile0>
+		<SceneLevelFile1>src/games/TimeCrisis/resources/SceneLevelFile1.txt</SceneLevelFile1>
+	</strings>
+	
+	<images>
+		<source>src/games/TimeCrisis/resources/images.xml</source>
+	</images>
+
+   <level id="0" type="games.TimeCrisis.Level">src/games/TimeCrisis/resources/level0.xml</level>
+   <level id="1" type="games.TimeCrisis.Level">src/games/TimeCrisis/resources/level0.xml</level>
+	<source>src/games/TimeCrisis/resources/keymap.xml</source>
+</resources>
