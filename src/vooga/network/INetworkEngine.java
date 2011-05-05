@@ -20,8 +20,8 @@ public interface INetworkEngine {
 	 * Create a host, if the argument is true, then there will be connections
 	 * between each clients connecting to this host. The default argument should
 	 * be false.
-	 * @param visiable TODO
-	 * @param name
+	 * @param visiable shows whether the client would be visiable to others
+	 * @param fullyConnect shows whether to setup connection between clients
 	 * 
 	 * @return false if successfully created
 	 */
@@ -36,7 +36,7 @@ public interface INetworkEngine {
 	/**
 	 * Search for the hosts on the network
 	 * 
-	 * @return
+	 * @return a list of connection information of the available server
 	 */
 	List<ConnectInfo> searchHost();
 
