@@ -79,7 +79,7 @@ public class Main extends VoogaGame implements NetworkGame{
 	@Override
 	public void initResources() {
 		
-			this.setFPS(50);
+			this.setFPS(100);
 			
 			
 			
