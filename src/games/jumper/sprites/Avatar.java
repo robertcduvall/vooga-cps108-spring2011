@@ -12,7 +12,7 @@ import vooga.sprites.spritebuilder.components.physics.PhysicsVelocityC;
 @SuppressWarnings("serial")
 public class Avatar extends Sprite{
 	
-	private static final double AVATAR_JUMP = -3;
+	private static final double AVATAR_JUMP = -2.4;
 	private static final double X_LOCATION = 100;
 	private static final double Y_LOCATION = 300;
 	private VoogaGame myGame;
@@ -54,6 +54,15 @@ public class Avatar extends Sprite{
 			}
 		});
 		
+		game.registerEventHandler("Input.User.Cheat", new IEventHandler() {
+			
+			@Override
+			public void handleEvent(Object o) {
+				myLives=10;
+				
+			}
+		});
+		
 		game.registerEventHandler("Game.Avatar.Died", new IEventHandler() {
 			
 			@Override
@@ -88,7 +97,6 @@ public class Avatar extends Sprite{
 	public void stopMoving(){
 		this.setVerticalSpeed(0);
 		this.setAngle(Direction.SOUTH.getAngle());
-		System.out.println("mySpeed = " + this.getVerticalSpeed());
 	}
 	
 
