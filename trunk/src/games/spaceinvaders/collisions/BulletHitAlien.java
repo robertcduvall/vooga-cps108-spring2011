@@ -1,7 +1,5 @@
 package games.spaceinvaders.collisions;
 
-import games.breakout.sprites.Ball;
-import games.breakout.sprites.Block;
 import games.spaceinvaders.Commons;
 import games.spaceinvaders.sprites.Alien;
 import games.spaceinvaders.sprites.Shot;
