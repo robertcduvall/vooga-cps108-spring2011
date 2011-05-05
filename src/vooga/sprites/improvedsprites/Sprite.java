@@ -467,6 +467,11 @@ public class Sprite extends BaseSprite
     }
 
 
+    @Override
+    public void moveForward(double d){
+    	this.move(d*Math.cos(Math.toRadians(this.getAngle())), d*Math.sin(Math.toRadians(this.getAngle())));
+    }
+    
     /*
      * (non-Javadoc)
      * @see util.buildable.IBuildable#removeComponent(java.lang.Class)

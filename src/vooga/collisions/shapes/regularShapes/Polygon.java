@@ -25,8 +25,8 @@ public class Polygon extends Shape
 	
 	public Polygon(Vertex ... verticies)
 	{
-		this.vertices = verticies.clone();
-		this.topLeftCorner = new Vertex(getTopLeftCorner(this.vertices));
+		setVertices(verticies);
+		
 		center = updateCenter();
 		boundingBox = new BoundingBox(this.topLeftCorner, this.getWidth(), this.getHeight());
 	}
@@ -74,7 +74,7 @@ public class Polygon extends Shape
 			this.vertices[i] = new Vertex(vertices[i]);
 		}
 
-		this.topLeftCorner = new Vertex(getTopLeftCorner(this.vertices));
+		this.topLeftCorner = new Vertex(PolygonMath.findTopLeftCorner(vertices));
 		center = updateCenter();
 		boundingBox = new BoundingBox(this.topLeftCorner, this.getWidth(), this.getHeight());
 	}
@@ -108,7 +108,7 @@ public class Polygon extends Shape
 	public Point2D getTopLeftCorner(Point2D[] vertices)
 	{
 
-		return new Point2D.Double(PolygonMath.getMinX(vertices), PolygonMath.getMinY(vertices));
+		return this.topLeftCorner;
 	}
 
 	public double getMaxDistanceFromCenter()
