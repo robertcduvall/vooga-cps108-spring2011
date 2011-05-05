@@ -12,8 +12,8 @@ import vooga.sprites.improvedsprites.Sprite;
 public class Zap extends AnimatedSprite {
 	public static final double SPEED = 0.015;
 	public Zap(KeenGame game, int x, int y) {
-		super(game.getImageLoader().getAnimation("zap"), x, y);
-		super.setAnimationFrame(0, 0);
+		super(x, y);
+		super.setImages(game.getImageLoader().getAnimation("zap", 0));
 	}
 
 	public void setDirection(Direction d) {

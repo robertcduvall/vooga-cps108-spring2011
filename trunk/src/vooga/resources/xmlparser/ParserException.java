@@ -13,6 +13,9 @@ public class ParserException extends RuntimeException {
 	public static ParserException SYSTEM_ERROR = new ParserException(
 			"System configuration error.");
 	
+	public static ParserException CONSTRUCT_ERROR = new ParserException(
+			"Unable to construct sprite from archetype!");
+	
 	public ParserException(String text) {
 		super(text);
 	}
