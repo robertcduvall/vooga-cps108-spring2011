@@ -69,7 +69,6 @@ public class SpriteBuilder<T extends Sprite>
         ArrayList<Object> args = new  ArrayList<Object>();
         
         for (Class<?> p: params){
-           System.out.println(input.peek().getClass() + " " + p);
             if (p.isInstance(input.peek()))
                 args.add(input.poll());
             else
