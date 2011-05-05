@@ -19,8 +19,8 @@ Where (some small number) might be either positive or negative.
 
 To stop your sprite from passing through the ground, there are unfortunately not particularly good solutions at this point. The best workaround that I've found so far is adding these two lines (assuming s1 is the sprite subject to gravity) to your BasicCollisionGroup:
 
-s1.setY(s2.getY()-s1.getHeight());
-s1.setVerticalSpeed(0);
+{{{s1.setY(s2.getY()-s1.getHeight());
+s1.setVerticalSpeed(0);}}}
 
 
 More General Outline:
