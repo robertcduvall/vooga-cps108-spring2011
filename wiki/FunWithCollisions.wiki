@@ -35,7 +35,3 @@ new CollisionPolygonC(new CollisionPolygon(ShapeFactory.makePolygonFromImage(Ima
 
 
 My game, Arrow, and Asteroids both have examples of proper collision shape and CollisionGroup implementation, please check them out if you want an example immediately. Also feel free to toy around with the collision shape in asteroids to see what kinds of things you can generate...it is currently rendering its shape so you can see how they look, etc. using that as a Test harness if need be.
-
-Hope this helps for now. If any of you want some specific help on your code, I will be in the link with DJ in ~30min. Feel free to drop by and I will see what I can do.
-
-Julian
