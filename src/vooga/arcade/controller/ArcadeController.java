@@ -22,6 +22,7 @@ import vooga.user.voogauser.VoogaUser;
  * Controller for the arcade
  * 
  * @author Andrea Scripa
+ * @author Ethan Goh
  */
 
 public class ArcadeController
@@ -50,22 +51,7 @@ public class ArcadeController
     	model.filterArcadeGameList(tag, query);
         return model.getCurrentGameList();
     }
-    
-//    public List<ArcadeUserObject> queryModel (String[] query)
-//    {
-//    	model.f
-//    }
-    
-    public void sortInModel()
-    {
-        // TODO: Get the text from the search panel and call queryModel??
-    }
-    
-    public void userProperties()
-    {
-        // TODO: Create the actionPerformed for the user button that pops up in login's place.
-    }
-
+   
     /**
      * Uses reflection to call the correct sorting algorithm in the model based on what was selected in 
      * the drop-down menu.
@@ -99,47 +85,12 @@ public class ArcadeController
     {
         return currentUser;
     }
-    
-    public void sortByTitle ()
-    {
-
-    }
-
-
-    public void sortByType ()
-    {
-
-    }
-
-
-    public void sortByAuthor ()
-    {
-
-    }
-
-
-    public void sortByPopularity ()
-    {
-
-    }
-
-
-    public void sortByRating ()
-    {
-
-    }
-
-
-    public void sortByDateAdded ()
-    {
-
-    }
-    
+   
     public void updateGameObjects(List<ArcadeGameObject> arcadeGameList, String searchQuery){
         view.updateGameObjectList(arcadeGameList, searchQuery);
     }
     
-    public void updateColumnText(String s, int index){
+    public void updateOutlineText(String s, int index){
         view.getMiddleFrame().getTextPanes().changePaneToURL(index, s);
     }
     
