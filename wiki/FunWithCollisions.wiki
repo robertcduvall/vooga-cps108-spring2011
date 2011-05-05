@@ -1,14 +1,13 @@
-1) Collision shape is a component = CollisionShapeC --> carries a CollisionShape | Subclasses: CollisionPolygonC, CollisionCircleC
-2) If you just want a collision shape that matches the height/width of your sprite, it will be generated automatically.
-3) To add a specific collision shape to a sprite, use the component interface and add a new CollsionShapeC(collisionshape)
+  # Collision shape is a component = CollisionShapeC --> carries a CollisionShape | Subclasses: CollisionPolygonC, CollisionCircleC
+  # If you just want a collision shape that matches the height/width of your sprite, it will be generated automatically.
+  # To add a specific collision shape to a sprite, use the component interface and add a new CollsionShapeC(collisionshape)
 
 
 Now for creating collisionShapes
-1) CollisionPolygon = polygon = defined by points
-Points must be added in the order they would be on the perimeter of the shape
-If they are added in the incorrect order, they will be corrected wrong, and you will not get the shape you desired.
-2) CollisionCircle = circle = defined by center and radius
-self explanatory
+  # CollisionPolygon = polygon = defined by points
+    *Points must be added in the order they would be on the perimeter of the shape
+    *If they are added in the incorrect order, they will be corrected wrong, and you will not get the shape you desired.
+  # CollisionCircle = circle = defined by center and radius - self explanatory
 
 Other Ways to make Collision Polygons
 1) ShapeFactory
