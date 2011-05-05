@@ -1,0 +1,65 @@
+<level>
+	<background type="image">background</background>
+
+	<sprite group="bullet" class="games.missilecommand.sprites.Bullet"
+		type="bullet" image="bullet" />
+	<sprite group="bomb" class="games.missilecommand.sprites.Bomb"
+		type="bomb" image="bomb" />
+	<sprite group="building" class="games.missilecommand.sprites.Building"
+		type="building" image="building" />
+	<sprite group="turret" class="games.missilecommand.sprites.Turret"
+		type="turret" image="turret" />
+
+	<collision_manager g1="bullet" g2="bomb"
+		class="games.missilecommand.collisions.BulletBombCollision" />
+	<collision_manager g1="bomb" g2="building"
+		class="games.missilecommand.collisions.BombBuildingCollision" />
+		
+	<goal class="games.missilecommand.levels.CityDestroyed" />
+
+	<instance type="turret">
+		<x>270</x>
+		<y>740</y>
+	</instance>
+
+	<instance type="building">
+		<x>0</x>
+		<y>680</y>
+	</instance>
+	<instance type="building">
+		<x>60</x>
+		<y>680</y>
+	</instance>
+	<instance type="building">
+		<x>120</x>
+		<y>680</y>
+	</instance>
+	<instance type="building">
+		<x>180</x>
+		<y>680</y>
+	</instance>
+	<instance type="building">
+		<x>240</x>
+		<y>680</y>
+	</instance>
+	<instance type="building">
+		<x>300</x>
+		<y>680</y>
+	</instance>
+	<instance type="building">
+		<x>360</x>
+		<y>680</y>
+	</instance>
+	<instance type="building">
+		<x>420</x>
+		<y>680</y>
+	</instance>
+	<instance type="building">
+		<x>480</x>
+		<y>680</y>
+	</instance>
+	<instance type="building">
+		<x>540</x>
+		<y>680</y>
+	</instance>
+</level>

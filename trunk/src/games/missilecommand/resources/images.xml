@@ -1,0 +1,20 @@
+<images>
+	<image name="background">
+		<path>src/games/missilecommand/resources/background.png</path>
+	</image>
+	<image name="building">
+		<path>src/games/missilecommand/resources/building.png</path>
+	</image>
+	<image name="bomb">
+		<path>src/games/missilecommand/resources/bomb.png</path>
+	</image>
+	<image name="bullet">
+		<path>src/games/missilecommand/resources/bullet.png</path>
+	</image>
+	<image name="turret">
+		<path>src/games/missilecommand/resources/turret.png</path>
+	</image>
+	<image name="banner">
+		<path>src/games/missilecommand/resources/fail.png</path>
+	</image>
+</images>
