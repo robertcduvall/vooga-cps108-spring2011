@@ -8,10 +8,12 @@ import org.w3c.dom.*;
 /**
  * Represents a sprite drawn on the screen. Stores its properties in XML.
  */
+@SuppressWarnings("serial")
 public class SpriteLabel extends JLabel
 {
 
-    private Viewport owner;
+    @SuppressWarnings("unused")
+	private Viewport owner;
     private ImageIcon icon;
     private Element properties;
     

@@ -7,10 +7,12 @@ import org.w3c.dom.Element;
 /**
  * A simple XML editor.
  */
+@SuppressWarnings("serial")
 public class XMLEditor extends JTree
 {
 
-    private Element properties;
+    @SuppressWarnings("unused")
+	private Element properties;
 
     public XMLEditor(Element e)
     {

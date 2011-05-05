@@ -1,7 +1,6 @@
 package vooga.leveleditor.gui;
 
 import javax.swing.JInternalFrame;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 /**
  * Creates a internal frame that is used as a pop up menu for when the user right clicks
@@ -10,6 +9,7 @@ import javax.swing.JScrollPane;
  * @author Charlie Hatcher
  *
  */
+@SuppressWarnings("serial")
 public class PopupFrame extends JInternalFrame{
 	public PopupFrame(int x, int y){
 		super("Example", true, true, true, true);

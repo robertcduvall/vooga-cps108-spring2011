@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 /**
  * A palette of sprite buttons. To be used with the DrawingBoard.
  */
+@SuppressWarnings("serial")
 public class Palette extends JPanel
 {
 
@@ -25,7 +26,6 @@ public class Palette extends JPanel
     public void addButton(Element e)
     {
         SpriteButton newButton = new SpriteButton(pane, e);
-        System.out.println(newButton);
         this.add(newButton);
         this.revalidate();
     }

@@ -1,18 +1,11 @@
 package vooga.leveleditor.gui;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLayeredPane;
+
 
 import org.w3c.dom.Element;
 
@@ -20,17 +13,18 @@ import org.w3c.dom.Element;
  * A button that holds a sprite.
  * 
  */
+@SuppressWarnings("serial")
 public class SpriteButton extends JButton
 {
 
     private ImageIcon myIcon;
     private Viewport myPane;
-    private String myImageLocation;
+    @SuppressWarnings("unused")
+	private String myImageLocation;
     private Element spriteProperties;
 
     public SpriteButton(Viewport pane, Element spritedata)
     {
-        System.out.println("derp");
     	myPane = pane;
     	spriteProperties = spritedata;
     	String path = spriteProperties.getElementsByTagName("image").item(0).getTextContent();
@@ -51,7 +45,7 @@ public class SpriteButton extends JButton
         	/*
         	 * Need to create a sprite button factory
         	 */
-            DraggableImage s = new DraggableImage(myPane, spriteProperties);
+            DraggableImage s = new DraggableImage(myPane, spriteProperties, true);
             myPane.addMouseMotionListener(s);
             myPane.addImage(s);
         }

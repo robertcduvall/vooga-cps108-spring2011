@@ -1,18 +1,11 @@
 package vooga.leveleditor.gui;
 
-import java.awt.TextComponent;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
+
 
 import org.w3c.dom.Element;
 /**
@@ -20,28 +13,51 @@ import org.w3c.dom.Element;
  * @author Charlie Hatcher
  *
  */
+@SuppressWarnings("serial")
 public class DraggableImage extends JLabel implements MouseMotionListener{
+	private static final int Y_CORNER_OF_LEVEL = 100;
+	private static final int X_CORNER_OF_LEVEL = 100;
 	private int x,y;
 	private ImageIcon myIcon;
 	private Viewport myParent;
 	private Element myProperties;
+	@SuppressWarnings("unused")
+	private String myName;
+	private String myXCoordinate;
+	private String myYCoordinate;
+	private String myImagePath;
+	
 	private boolean myFlag = false;
 	
-	public DraggableImage(Viewport parent, Element data){
+	
+	public DraggableImage(Viewport parent, Element data, boolean b) {
 		super();
 		this.myProperties=data;
-		String name = myProperties.getElementsByTagName("name").item(0).getTextContent();
-        String xs = myProperties.getElementsByTagName("x").item(0).getTextContent();
-        String ys = myProperties.getElementsByTagName("y").item(0).getTextContent();
-        String imgs = myProperties.getElementsByTagName("image").item(0).getTextContent();
-        x = new Integer(xs);
-        y = new Integer(ys);
-        this.myIcon = new ImageIcon(imgs);
+		gatherData(b);
+        this.myIcon = new ImageIcon(myImagePath);
         this.myParent = parent;
         this.setIcon(myIcon);
 		setJLabelValuesForDraggableImage(myIcon, parent, x, y);
 	}
-	
+
+	/**
+	 * 
+	 */
+	private void gatherData(boolean isAddedFromButton) {
+		myName = myProperties.getElementsByTagName("name").item(0).getTextContent();
+        myXCoordinate = myProperties.getElementsByTagName("x").item(0).getTextContent();
+        myYCoordinate = myProperties.getElementsByTagName("y").item(0).getTextContent();
+        myImagePath = myProperties.getElementsByTagName("image").item(0).getTextContent();
+        if(!isAddedFromButton){
+        	 x = new Integer(myXCoordinate);
+             y = new Integer(myYCoordinate);
+        }
+        else{
+        	 x = X_CORNER_OF_LEVEL;
+             y = Y_CORNER_OF_LEVEL;
+        }
+	}
+
 	protected void setSpriteProperties(int x,int y){
 		if(checkIfSelected(x, y)){
 			PopupFrame frame = new PopupFrame(x,y);
