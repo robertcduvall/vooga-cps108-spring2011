@@ -22,10 +22,10 @@ public class SearchByStringFilter implements IArcadeGameListFilter
 		List<ArcadeGameObject> list = new ArrayList<ArcadeGameObject>();
 		for (ArcadeGameObject s : gameList)
 		{
-			String tagName = s.getData(tag);
+			String tagName = s.getData(tag).toLowerCase();
 			for (String t : query)
 			{
-				if (tagName.startsWith(t))
+				if (tagName.startsWith(t.toLowerCase()))
 				{
 					list.add(s);
 				}

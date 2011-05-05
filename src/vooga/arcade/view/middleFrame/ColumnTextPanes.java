@@ -59,10 +59,12 @@ public class ColumnTextPanes extends JPanel
 			// Try to display the page
 			Document doc = editorPanes.get(i).getDocument();
 			doc.putProperty(Document.StreamDescriptionProperty, null);
-			editorPanes.get(i).setPage("file://"+url);
+//			System.out.println(url);
+			editorPanes.get(i).setPage("file:///"+url);
 		}
 		catch (IOException e)
 		{
+//			e.printStackTrace();
 			System.err.println("FAIL URL");
 		}
 	}
