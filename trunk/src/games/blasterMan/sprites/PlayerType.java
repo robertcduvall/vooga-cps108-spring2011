@@ -31,7 +31,7 @@ public class PlayerType extends Sprite {
 		this.initEvents();
 		mySkills = new ArrayList<Skill>();
 		face = 1;
-		this.addComponents(new HealthC(42.0));
+		this.addComponent(new HealthC(42.0));
 	}
 
 	public PlayerType(VoogaGame game, BufferedImage image, double x, double y,
@@ -51,7 +51,7 @@ public class PlayerType extends Sprite {
 		mySkills = new ArrayList<Skill>();
 		originalImage = image;
 		face = 1;
-		this.addComponents(new HealthC(42.0));
+		this.addComponent(new HealthC(42.0));
 	}
 
 	public PlayerType(VoogaGame game, BufferedImage image) {
@@ -61,7 +61,7 @@ public class PlayerType extends Sprite {
 		mySkills = new ArrayList<Skill>();
 		originalImage = image;
 		face = 1;
-		this.addComponents(new HealthC(42.0));
+		this.addComponent(new HealthC(42.0));
 	}
 
 	public PlayerType(VoogaGame game, double x, double y) {
@@ -70,7 +70,7 @@ public class PlayerType extends Sprite {
 		this.initEvents();
 		mySkills = new ArrayList<Skill>();
 		face = 1;
-		this.addComponents(new HealthC(42.0));
+		this.addComponent(new HealthC(42.0));
 	}
 
 	public void toggleDirection() {
