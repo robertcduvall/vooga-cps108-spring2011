@@ -1,0 +1,107 @@
+<images>
+  
+	<image name="MainMenuImg">
+		<path>src/games/TimeCrisis/resources/images/MainMenu.png</path>
+	</image>
+	
+	<image name="LevelCompleteImg">
+		<path>src/games/TimeCrisis/resources/images/LevelComplete.png</path>
+	</image>
+	
+	<image name="ReloadImg">
+		<path>src/games/TimeCrisis/resources/images/ReloadImg.png</path>
+	</image>
+	
+	<image name="EnemyTargetImg0">
+		<path>src/games/TimeCrisis/resources/images/Target0.png</path>
+	</image>
+	
+	<image name="EnemyTargetImg1">
+		<path>src/games/TimeCrisis/resources/images/Target1.png</path>
+	</image>
+	
+	<image name="EnemyTargetImg2">
+		<path>src/games/TimeCrisis/resources/images/Target2.png</path>
+	</image>
+	
+	<image name="EnemyTargetImg3">
+		<path>src/games/TimeCrisis/resources/images/Target3.png</path>
+	</image>
+	
+	<image name="EnemyTargetImg4">
+		<path>src/games/TimeCrisis/resources/images/Target4.png</path>
+	</image>
+	
+	<image name="EnemyTargetImg5">
+		<path>src/games/TimeCrisis/resources/images/Target5.png</path>
+	</image>
+	
+	<image name="EnemyTargetImg6">
+		<path>src/games/TimeCrisis/resources/images/Target6.png</path>
+	</image>
+	
+	<image name="WoundImg0">
+		<path>src/games/TimeCrisis/resources/images/BloodSplatter_1.png</path>
+	</image>
+	
+	<image name="WoundImg1">
+		<path>src/games/TimeCrisis/resources/images/BloodSplatter_2.png</path>
+	</image>
+	
+	<image name="WoundImg2">
+		<path>src/games/TimeCrisis/resources/images/BloodSplatter_3.png</path>
+	</image>
+	
+	<image name="WoundImg3">
+		<path>src/games/TimeCrisis/resources/images/BloodSplatter_4.png</path>
+	</image>
+	
+	<image name="Bullet0">
+		<path>src/games/TimeCrisis/resources/images/BulletAmmo.png</path>
+	</image>
+	
+	<image name="SceneBGLvl0">
+		<path>src/games/TimeCrisis/resources/images/level0/SceneBG.png</path>
+	</image>
+	
+	<image name="Level0_Cover">
+		<path>src/games/TimeCrisis/resources/images/level0/Cover.png</path>
+	</image>
+	
+	<image name="Level0_SO0">
+		<path>src/games/TimeCrisis/resources/images/level0/SO0.png</path>
+	</image>
+	
+	<image name="Level0_SO1">
+		<path>src/games/TimeCrisis/resources/images/level0/SO1.png</path>
+	</image>
+	
+	<image name="Level0_SO2">
+		<path>src/games/TimeCrisis/resources/images/level0/SO2.png</path>
+	</image>
+	
+	<image name="Level0_SO3">
+		<path>src/games/TimeCrisis/resources/images/level0/SO3.png</path>
+	</image>
+	
+	<image name="SceneBGLvl1">
+		<path>src/games/TimeCrisis/resources/images/level1/SceneBG.png</path>
+	</image>
+	
+	<image name="Level1_Cover">
+		<path>src/games/TimeCrisis/resources/images/level1/Cover.png</path>
+	</image>
+	
+	<image name="Level1_SO0">
+		<path>src/games/TimeCrisis/resources/images/level1/SO0.png</path>
+	</image>
+	
+	<image name="Level1_SO1">
+		<path>src/games/TimeCrisis/resources/images/level1/SO1.png</path>
+	</image>
+	
+	<image name="Level1_SO2">
+		<path>src/games/TimeCrisis/resources/images/level1/SO2.png</path>
+	</image>
+	
+</images>

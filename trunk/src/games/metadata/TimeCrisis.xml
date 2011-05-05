@@ -1,0 +1,24 @@
+<game>
+  <title>Time Crisis @ Duke</title>
+  <path>games.TimeCrisis</path>
+  <genre>shooting</genre>
+  <author>Troy Ferrell</author>
+  <description>Terrorists have taken hostages at Duke University and claim to have a WMD in their possession. Your mission is to infiltrate and clear compromised facilities on campus. Remember gentlemen…THIS IS SPARTA!!!</description>
+  <datecreated>2011</datecreated>
+  <highscores>
+    <first>3</first>
+    <second>2</second>
+    <third>1</third>
+  </highscores>
+  <version>1.0</version>
+  <price>0.00</price>
+  <language>english</language>
+  <dimension>
+    <width>1024</width>
+    <height>768</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>./src/games/TimeCrisis/resources/images/GameIcon.png</image>
+</game>
