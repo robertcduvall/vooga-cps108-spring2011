@@ -22,7 +22,12 @@ public class LineMath
         double m2 = findSlope(line2);
         double m1 = findSlope(line2);
         double x;
-        if (m1 == m2) return null;
+        if (m1 == m2) {
+        	// If the slopes are equal, just average the lines and return the point.
+        	return new Point2D.Double((line1.getBounds2D().getCenterX()+line2.getBounds2D().getCenterX())/2.0,
+        			(line2.getBounds2D().getCenterY()+line2.getBounds2D().getCenterY())/2.0);
+        			
+        }
         else if (!line1.intersectsLine(line2)) return null;
 
         else if (line2.getX1() == line2.getX2())

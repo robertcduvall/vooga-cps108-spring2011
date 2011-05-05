@@ -4,5 +4,6 @@
 	<keymap>
 		<key_event event="Input.User.MoveLeft" sensitivity="Level" key="LEFT"/>
 		<key_event event="Input.User.MoveRight" sensitivity="Level" key="RIGHT"/>
+		<key_event event="Input.User.Jump" sensitivity="Edge" key="SPACE"/>
 	</keymap>
 </resources>

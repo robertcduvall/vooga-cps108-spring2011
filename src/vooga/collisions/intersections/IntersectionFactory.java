@@ -1,6 +1,8 @@
 package vooga.collisions.intersections;
 
+import java.awt.geom.Point2D;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
@@ -40,6 +42,17 @@ public class IntersectionFactory
 		return (Boolean) applyOrderGenericIntersectionMethod("areIntersecting", s1, s2);
 	}
 
+	/**
+	 * Gets the angle between shape s1 and the average of the intersection points with s2.
+	 * @author Sterling Dorminey
+	 */
+	public static double getIntersectionAngle(IShape s1, IShape s2) {
+		Intersection intersection = getIntersection(s1, s2);
+		Point2D pointB = intersection.getAverageIntersection();
+		Point2D pointA = s1.getCenter();
+		double slope = (pointB.getY()-pointA.getY())/(pointB.getX()-pointA.getX());
+		return Math.atan(slope);
+	}
 	
 	private static <T extends IShape, S extends IShape>  Object applyOrderGenericIntersectionMethod(String methodString, T s1,S s2)
 	{
@@ -48,6 +61,7 @@ public class IntersectionFactory
 		
 		try
 		{
+
 			for(IntersectionFinder<?, ?> finder : myFinderSet)
 			{
 				Method m = finder.getClass().getMethod(methodString, IShape.class, IShape.class);
@@ -62,8 +76,13 @@ public class IntersectionFactory
 				}
 			}
 		}
+		catch(InvocationTargetException e) {
+			e.getTargetException().printStackTrace();
+			throw new CollisionException(CollisionException.NO_SUCH_METHOD);
+		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			throw new CollisionException(CollisionException.NO_SUCH_METHOD);
 		}
 		throw new CollisionException(CollisionException.BAD_SYNTAX);

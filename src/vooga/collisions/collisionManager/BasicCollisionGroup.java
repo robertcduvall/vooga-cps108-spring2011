@@ -71,6 +71,13 @@ public abstract class BasicCollisionGroup<T extends Sprite, S extends Sprite> ex
     }
     
     /**
+     * Get the intersection angle between two points.
+     */
+    public double getIntersectionAngle(T s1, S s2) {
+    	return IntersectionFactory.getIntersectionAngle(s1.getCollisionShape(), s2.getCollisionShape());
+    }
+    
+    /**
      * Notified when <code>sprite1</code> from group 1 collided with
      * <code>sprite2</code> from group 2.
      * 
