@@ -1,0 +1,19 @@
+<level>
+	<background type="color">black</background>
+	
+	<collision_manager g1="frogger" g2="vehicles" class="games.frogger.collisions.FroggerVehicleCollision" />
+	<collision_manager g1="edge" g2="vehicles" class="games.frogger.collisions.VehicleEdgeCollision" />
+	
+	<sprite class="games.frogger.sprites.CarA" group="vehicles" type="carA" image="car_a">
+		<component class="games.frogger.sprites.components.VelocityC">
+			<mag>0.1</mag>
+			<dir>0.0</dir>
+		</component>
+	</sprite>
+	
+	<instance type="carA">
+		<x>100</x>
+		<y>100</y>
+	</instance>
+	
+</level>
