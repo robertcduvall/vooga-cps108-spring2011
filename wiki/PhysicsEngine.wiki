@@ -1,17 +1,29 @@
-This is a very basic overview of the physics engine. It will be updated at a later date to be a bit more useful.
 
-NOTE: Local forces still need some work. My thought is that they should be held by the sprite, but they could also be held as a map inside of the PhysicsManager class. The problem with that is that then the PhysicsManager would need to be passed around to whatever is adding the local force. Since it seems that many local forces (such as thrust) would be created by the sprite itself, it makes sense to me for the sprite to hold them. Holding them in a component would not be a great idea, because all physics components need to respond to the force. Let me know what you think.
 
-While local forces are not yet implemented as a held list, per say, you can apply them manually by calling "VoogaPhysicsMediator.applyForcesToSprite()"
+To add gravity to your game:
+
+There should be only two steps:
+
+  # Add a PhysicsVelocityC component to your sprites. To do this, insert the line {{{addComponents(new PhysicsVelocityC());}}} to the constructor of your sprite.
+  # Add a "MassProportionalForceGenerator" to the instance of the physics manager which is stored in AbstractLevel. To do this, call
+  
+{{{(level instance).getPhysics().addGlobalForce(new MassProportionalForceGenerator(new Force(xValue, yValue)));}}} 
+
+where xValue would probably be 0 and yValue would probably be 9.8 in the real world, but in vooga world should probably be much smaller (try around 0.00005?). You might also need to fiddle with the sign, because I'm not sure if it gets inverted or not.
+
+
+To add behavior like jumping to your sprites, call:
+
+{{{VoogaPhysicsMediator.applyForceToSprite((your sprite), new MassProportionalForce(new Force(0,(some small number)), 1);}}}
+
+Where (some small number) might be either positive or negative.
+
+
+More General Outline:
 
 In order to implement physics, this is what needs to happen:
-  # The level manager should have an instance of WorldForceManager
-  # Add any forces/vector fields you see fit to the WorldForceManager by getting an instance of it (the "getPhysics" method of AbstractLevel should suffice to get the manager)
+  # Add any forces/vector fields you see fit to the WorldForceManager by getting the instance of the manager (the "getPhysics" method of AbstractLevel should suffice to get the manager) and adding a new force generator
   # Create sprites with the appropriate components (for gravity, this would just be "PhysicsVelocityC"
-  # During each update (preferably before sprites are updated):
-    # Get the lists of active forces and fields from WorldForceManager
-    # Get the list of active sprites from wherever
-    # Call "VoogaPhysicsMediator.applyForces(/Fields)ToSprites(...)"
   # Inside of any collision group you have, call "VoogaPhysicsMediator.collision(...)", passing in the information that the method requires.
 
 
