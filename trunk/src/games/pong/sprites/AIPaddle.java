@@ -22,7 +22,7 @@ public class AIPaddle extends AbstractPaddle{
             @Override
             public void handleEvent (Object o)
             {
-            	System.out.println("aistarts!");
+            	//System.out.println("aistarts!");
             	PongTargetC trackBall = new PongTargetC();
             	removeComponent(trackBall);
             	//System.out.println("asdf");
@@ -50,7 +50,7 @@ public class AIPaddle extends AbstractPaddle{
             @Override
             public void handleEvent (Object o)
             {
-            	System.out.println("rere!");
+            	//System.out.println("rere!");
             	//System.out.println("asdf");
             	VoogaGame game = (VoogaGame) o;
             	SpriteGroup powerupGroup = game.getLevelManager().getCurrentLevel().getSpriteGroup("powerup");
