@@ -95,12 +95,12 @@ public class Polygon extends Shape
 		return center;
 	}
 
-	protected double getWidth()
+	public double getWidth()
 	{
 		return PolygonMath.getMaxX(this) - topLeftCorner.getX();
 	}
 
-	protected double getHeight()
+	public double getHeight()
 	{
 		return PolygonMath.getMaxY(this) - topLeftCorner.getY();
 	}
