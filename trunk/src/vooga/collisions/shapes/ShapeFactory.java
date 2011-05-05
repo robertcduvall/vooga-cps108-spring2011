@@ -14,6 +14,7 @@ import java.util.List;
 import vooga.collisions.shapes.regularShapes.Circle;
 import vooga.collisions.shapes.regularShapes.Polygon;
 import vooga.collisions.shapes.regularShapes.RegularPolygon;
+import vooga.collisions.shapes.util.PolygonMath;
 
 public class ShapeFactory 
 {
@@ -148,4 +149,7 @@ public class ShapeFactory
 
 		return total;
 	}
+	
+	
+	
 }

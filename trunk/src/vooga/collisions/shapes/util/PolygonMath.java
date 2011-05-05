@@ -109,4 +109,11 @@ public class PolygonMath
 		return p;
 }
 
+    public static Point2D findTopLeftCorner(Point2D[] vertices)
+	{
+
+		return new Point2D.Double(PolygonMath.getMinX(vertices), PolygonMath.getMinY(vertices));
+	}
+
+
 }

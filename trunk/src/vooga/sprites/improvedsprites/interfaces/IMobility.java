@@ -136,5 +136,7 @@ public interface IMobility extends IRotation
      * @return
      */
 	double accelerate(double mag);
+
+	void moveForward(double d);
     
 }
