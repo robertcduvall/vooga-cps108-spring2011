@@ -73,9 +73,9 @@ public class TetrisGame extends Game implements ITetrisContext {
 
 	private void initGameEssentials() {
 		playfield = new PlayField();
-		Background windowBackground = new ColorBackground(Color.orange,
-				resources.getInteger("BackgroundWidth"), resources
-						.getInteger("BackgroundHeight"));
+		Background windowBackground = new ColorBackground(Color.pink, resources
+				.getInteger("BackgroundWidth"), resources
+				.getInteger("BackgroundHeight"));
 		playfield.setBackground(windowBackground);
 		font = fontManager.getFont(getImages(resources.getString("FontImage"),
 				20, 3), resources.getString("FontMapping"));
