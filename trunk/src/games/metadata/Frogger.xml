@@ -1,0 +1,20 @@
+<game>
+  <title>Frogger</title>
+  <path>games.frogger.Frogger</path>
+  <genre>Arcade</genre>
+  <author>Wesley Brown</author>
+  <description>So there is a frog. He runs across the road and dies, or doesn't</description>
+  <datecreated>May 5, 2010</datecreated>
+  <highscores>6</highscores>
+  <version>1.0</version>
+  <price>10000000</price>
+  <language>Java</language>
+  <dimension>
+    <width>600</width>
+    <height>646</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/frogger/frogger.png</image>
+</game>
