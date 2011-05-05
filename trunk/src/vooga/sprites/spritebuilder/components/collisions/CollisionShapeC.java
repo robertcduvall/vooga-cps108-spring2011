@@ -11,6 +11,9 @@ public class CollisionShapeC<T extends ICollisionShape> extends BasicComponent i
 
 	private T myCollisionShape;
 
+	public CollisionShapeC ()
+    {}
+	
 	public  T getCollisionShape() {
 		return myCollisionShape;
 	}

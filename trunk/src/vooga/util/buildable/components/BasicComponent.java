@@ -71,7 +71,7 @@ public abstract class BasicComponent implements IComponent
     @Override
     public final boolean equals (IComponent other)
     {
-        CheckLikeness(other);
+//        CheckLikeness(other);
         return this.getClass().isAssignableFrom(other.getClass());
     }
 
