@@ -3,5 +3,6 @@
 		<source>src/games/frogger/resources/images.xml</source>
 	</images>
 	<level id="0" type="games.frogger.Level">src/games/frogger/resources/level0.xml</level>
+	<level id="1" type="games.frogger.Level">src/games/frogger/resources/level1.xml</level>
 	<source>src/games/frogger/resources/keymap.xml</source>
 </resources>

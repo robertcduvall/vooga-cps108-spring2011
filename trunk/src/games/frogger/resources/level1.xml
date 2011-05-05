@@ -1,5 +1,5 @@
 <level>
-	<background type="image">RoadBackground1</background>
+	<background type="image">RoadBackground2</background>
 	
 	<collision_manager g1="frog" g2="vehicles" class="games.frogger.collisions.FroggerVehicleCollision" />
 	<collision_manager g1="edge" g2="vehicles" class="games.frogger.collisions.VehicleEdgeCollision" />
@@ -98,6 +98,26 @@
 	<instance type="vehicleE">
 		<x>200</x>
 		<y>332</y>
+	</instance>
+	<instance type="vehicleE">
+		<x>450</x>
+		<y>332</y>
+	</instance>
+	<instance type="vehicleC">
+		<x>100</x>
+		<y>290</y>
+	</instance>
+	<instance type="vehicleC">
+		<x>420</x>
+		<y>290</y>
+	</instance>
+	<instance type="vehicleD">
+		<x>325</x>
+		<y>248</y>
+	</instance>
+	<instance type="vehicleD">
+		<x>190</x>
+		<y>248</y>
 	</instance>
 	
 	<instance type="pad">
