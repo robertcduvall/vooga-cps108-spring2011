@@ -2,7 +2,7 @@ package games.tetris.src.KeyActions;
 
 import games.tetris.src.Context.ITetrisContext;
 
-public class DecreaseDas implements IKeyAction
+public class SoftDropPiece implements IKeyAction
 {
 	@Override
 	public void performKeyPressed(ITetrisContext tc, long elapsedTime)
@@ -13,6 +13,10 @@ public class DecreaseDas implements IKeyAction
 	@Override
 	public void performKeyDown(ITetrisContext tc, long elapsedTime)
 	{
-		tc.adjustDasBy(-5);
+		if (tc.getSoftDropTimer().action(elapsedTime))
+		{
+			tc.getSoftDropTimer().refresh();
+			tc.getActiveMino().moveY(-1, tc.getTetrisMatrix());
+		}
 	}
 }

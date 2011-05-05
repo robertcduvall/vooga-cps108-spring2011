@@ -1,4 +1,4 @@
-package games.lolcats.src.Helper;
+package games.tetris.src.Helper;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -9,19 +9,25 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class ImageProcessor {
-	public static BufferedImage loadImage(String imageFullPath) {
-		try {
+public class ImageProcessor
+{
+	public static BufferedImage loadImage(String imageFullPath)
+	{
+		try
+		{
 			File f = new File(imageFullPath);
 			System.out.println(f.getAbsolutePath());
 			return ImageIO.read(f);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 		}
 		return null;
 	}
 
 	public static BufferedImage scaleImage(BufferedImage b, double xScale,
-			double yScale) {
+			double yScale)
+	{
 		BufferedImage scaledImage = new BufferedImage(
 				(int) (b.getWidth() * xScale), (int) (b.getHeight() * yScale),
 				BufferedImage.TYPE_INT_ARGB);
@@ -35,12 +41,14 @@ public class ImageProcessor {
 		return scaledImage;
 	}
 
-	public static BufferedImage scaleImageWithSetX(BufferedImage b, int x) {
+	public static BufferedImage scaleImageWithSetX(BufferedImage b, int x)
+	{
 		double yScale = (double) x / (double) b.getWidth();
 		return scaleImage(b, yScale, yScale);
 	}
 
-	public static BufferedImage scaleImageWithSetY(BufferedImage b, int y) {
+	public static BufferedImage scaleImageWithSetY(BufferedImage b, int y)
+	{
 		double xScale = (double) y / (double) b.getHeight();
 		return scaleImage(b, xScale, xScale);
 	}

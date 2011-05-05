@@ -1,24 +1,28 @@
-package games.lolcats.src.KeyActions;
+package games.tetris.src.KeyActions;
 
-import games.lolcats.src.Context.ITetrisContext;
-import games.lolcats.src.Minos.Tetromino;
+import games.tetris.src.Context.ITetrisContext;
 
-public class MovePieceLeft implements IKeyAction {
+public class MovePieceLeft implements IKeyAction
+{
 	@Override
-	public void performKeyPressed(ITetrisContext tc, long elapsedTime) {
-		// tc.getArrTimer().setActive(false);
-		// tc.getDasTimer().refresh();
-		// tc.getActiveMino().moveX(-1, tc.getTetrisMatrix());
+	public void performKeyPressed(ITetrisContext tc, long elapsedTime)
+	{
+		tc.getArrTimer().setActive(false);
+		tc.getDasTimer().refresh();
+		tc.getActiveMino().moveX(-1, tc.getTetrisMatrix());
 	}
 
 	@Override
-	public void performKeyDown(ITetrisContext tc, long elapsedTime) {
-		// if (tc.getDasTimer().action(elapsedTime)) {
-		// tc.getArrTimer().setActive(true);
-		// }
-		// if (tc.getArrTimer().action(elapsedTime)) {
-		// tc.getActiveMino().moveX(-1, tc.getTetrisMatrix());
-		// }
-		tc.getActiveMino().setDirection(Tetromino.LEFT);
+	public void performKeyDown(ITetrisContext tc, long elapsedTime)
+	{
+		if (tc.getDasTimer().action(elapsedTime))
+		{
+			tc.getArrTimer().setActive(true);
+		}
+		if (tc.getArrTimer().action(elapsedTime))
+		{
+			tc.getActiveMino().moveX(-1, tc.getTetrisMatrix());
+		}
+
 	}
 }
