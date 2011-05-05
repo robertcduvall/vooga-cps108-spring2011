@@ -1,4 +1,5 @@
-package games.pacman;
+package games.pacman.goals;
+
 
 import games.pacman.sprites.players.PacMan;
 import vooga.levels.IGoal;
@@ -6,39 +7,36 @@ import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
 
 /**
- * A goal that checks if all the dots on the playfield have
- * been eaten.
+ * Check if PacMan is out of lives.
  * 
  * @author DJ Sharkey
  *
  */
-public class DotsCleared implements IGoal
+public class NoLives implements IGoal
 {   
     private VoogaPlayField playfield;
     private LevelManager levels;
-        
+    
     /**
      * Check whether the goal is completed.
      */
     @Override
     public boolean checkCompletion (LevelManager levelManager)
     {
-    	System.out.println("checking comp "+ playfield.getSpriteGroup("dots").size());
-        return playfield.getSpriteGroup("dots").size()== 0;
+        PacMan pm = (PacMan) playfield.getSpriteGroup("pacman").getActiveSprite(); 
+        
+        if (pm == null) return false;
+        return pm.getLives() <= 0;
     }
 
 
     /**
-     * Progress to the next level, if available.
+     * Lose the game.
      */
     @Override
     public void progress ()
-    {
-		System.out.println("Level comp!");
-		levels.updateNumOfLevelsCompleted(); 
-		PacMan pm = (PacMan) playfield.getSpriteGroup("pacman").getActiveSprite();
-		//set pm pos;
-		levels.loadNextLevel();
+    {   
+    	levels.getCurrentGame().fireEvent(this, "GameOver");
     }
 
 

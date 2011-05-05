@@ -1,7 +1,10 @@
 package games.pacman;
 
+import games.pacman.sprites.players.Players;
+
 import java.util.Collection;
 import vooga.core.VoogaGame;
+import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.levels.AbstractLevel;
@@ -9,17 +12,17 @@ import vooga.levels.AbstractLevel;
 /**
  * A level of PacMan.
  * 
- * @author Misha
+ * @author DJ Sharkey
  *
  */
 public class Level extends AbstractLevel
 {
-	VoogaGame myGame;
+	PacManGame game;
 	
     public Level (Collection<SpriteGroup<Sprite>> players, VoogaGame game)
     {
         super(players, game);
-        this.myGame=game;
+        this.game=(PacManGame) game;
     }
 
     /**
@@ -31,11 +34,27 @@ public class Level extends AbstractLevel
         addAllSpritesFromPool();
         addBackground();
         placeDots();
+        respawnEnemies();
     }
-    protected void placeDots() {
+    
+    private void respawnEnemies() {    	
+    	this.game.registerEventHandler("SpawnEnemies", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+            	for(Sprite sp: getSpriteGroup("enemies").getSprites()){
+            		((Players) sp).respawn();
+            		
+            	}
+            }            
+        });
+	}
+
+	private void placeDots() {
     	for(int i=0;i<15;i++){
     		for(int j=0;j<10;j++){
-    			 myGame.getLevelManager().addArchetypeSprite(
+    			 game.getLevelManager().addArchetypeSprite(
     	    			"dot",i*48+24,j*48+24);
     		}
     	}		

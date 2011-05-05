@@ -2,22 +2,8 @@ package games.pacman.sprites.players;
 
 import games.pacman.sprites.players.Players;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-
-import com.golden.gamedev.util.ImageUtil;
-
-import vooga.collisions.shapes.Vertex;
-import vooga.collisions.shapes.collisionShapes.CollisionCircle;
-import vooga.collisions.shapes.collisionShapes.CollisionPolygon;
-import vooga.collisions.shapes.collisionShapes.CollisionQuadrilateral;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
-import vooga.resources.Direction;
-import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
-import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 
 /**
  * PacMan, controllable by arrows keys.
@@ -35,26 +21,8 @@ public class PacMan extends Players
     
     private VoogaGame game;
     private int numLives;
-    
-    
-	
-    /**
-     * @return The number of balls remaining in the supply.
-     */
-    public int getNumLives ()
-    {
-        return numLives;
-    }
 
-    /**
-     * Set the number of balls in the supply.
-     * 
-     * @param ballCount The new number of balls.
-     */
-    public void setNumLives (int numLives)
-    {
-        this.numLives = numLives;
-    }
+    
 
     /**
      * Creates a new pacman at (x,y)
@@ -65,10 +33,12 @@ public class PacMan extends Players
      */
     public PacMan (VoogaGame game, double x, double y)
     {
-        super(game, x, y, game.getImageLoader().getImage("pacman"));
-        
-      
-       this.numLives = 3;
+        super(game.getImageLoader().getImage("pacman"), (int)x, (int)y);
+        this.game=game;
+        origX=x - getWidth()/2;
+        origY=y - getHeight();
+        setOrigPosition();
+        this.numLives = 3;
      
         game.registerEventHandler("Input.User.Start", new IEventHandler()
         {
@@ -135,6 +105,21 @@ public class PacMan extends Players
     	this.setAngle(angle);
     	this.setAbsoluteSpeed(PACMAN_SPEED);
     }
+
+	@Override
+	public void changeAngle() {		
+	}
+
+	public void loseLife() {
+		this.numLives--;
+		this.game.fireEvent(this, "SpawnEnemies");
+		setOrigPosition();
+	}
+
+	public int getLives() {
+		return numLives;
+	}
+
 	
 
 

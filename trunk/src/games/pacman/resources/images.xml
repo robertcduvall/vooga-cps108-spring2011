@@ -8,4 +8,7 @@
 	<image name="wall">
 		<path>src/games/pacman/resources/Wall.png</path>
 	</image>
+	<image name="dumbie">
+        <path>src/games/pacman/resources/Dumbie.png</path>
+    </image>
 </images>

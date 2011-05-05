@@ -10,17 +10,18 @@ import com.golden.gamedev.util.ImageUtil;
 import vooga.core.VoogaGame;
 import vooga.sprites.improvedsprites.Sprite;
 
-public class Players extends Sprite{
+public abstract class Players extends Sprite{
 	protected VoogaGame game;
-	public Players (VoogaGame game, double x, double y,BufferedImage image)
-    {
-        super(image);
-        setX(x - getWidth()/2);
-        setY(y - getHeight());
-        
+	protected double origX;
+	protected double origY;
+
+
+	public Players(BufferedImage image, int x, int y) {
+		super(image,x,y);
 	}
 
 
+	public abstract void changeAngle();
 	@Override
 	public void render(Graphics2D g,int x,int y) {
 		AffineTransform aTransform = new AffineTransform();
@@ -63,7 +64,14 @@ public class Players extends Sprite{
 	    	yOverlap=(1*(int)(spr.getCollisionShape().getTopLeftCorner().getY()+spr.getCollisionShape().getHeight()-colY))+2;
 	    }
 	    this.move(xOverlap,yOverlap);
-	    System.out.println(this.getAngle()+" "+xOverlap+" "+yOverlap);
-	    System.out.println("collided");		
+	}
+
+	protected void setOrigPosition() {
+        setX(origX);
+        setY(origY);		
+	}
+	
+	public void respawn() {
+		setOrigPosition();
 	}
 }
