@@ -1,11 +1,14 @@
 <level>
-	<background type="color">black</background>
+	<background type="image">background1</background>
 	<collision_manager g1="lander" g2="block" class="games.mariobros.collisions.LanderHitsFloor" />
+	<collision_manager g1="lander" g2="goal" class="games.mariobros.collisions.LanderHitsGoal" />
+	<collision_manager g1="lander" g2="lander" class="games.mariobros.collisions.LanderEdgeHit" />
 	
 	<sprite group="block" class="games.mariobros.sprites.Block" type="block" image="block" />
+	<sprite group="goal" class="games.mariobros.sprites.GoalBlock" type="goal" image="goal" />
 	<sprite group="lander" class="games.mariobros.sprites.Lander" type="lander" image="lander" />
 
-	<goal class="games.mariobros.LandedLevelOne" />
+	<goal class="games.mariobros.Landed" />
 
 <instance type="block"><x>10</x><y>25</y></instance>
 <instance type="block"><x>11</x><y>25</y></instance>
@@ -21,8 +24,8 @@
 <instance type="block"><x>21</x><y>20</y></instance>
 <instance type="block"><x>22</x><y>19</y></instance>
 <instance type="block"><x>23</x><y>19</y></instance>
-<instance type="block"><x>24</x><y>18</y></instance>
-<instance type="block"><x>25</x><y>18</y></instance>
+<instance type="goal"><x>24</x><y>18</y></instance>
+<instance type="goal"><x>25</x><y>18</y></instance>
 <instance type="block"><x>26</x><y>17</y></instance>
 <instance type="block"><x>27</x><y>17</y></instance>
 <instance type="block"><x>28</x><y>16</y></instance>

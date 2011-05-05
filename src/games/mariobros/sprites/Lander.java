@@ -1,18 +1,25 @@
 package games.mariobros.sprites;
 
-import vooga.core.VoogaGame;
+import com.golden.gamedev.util.ImageUtil;
 
+import vooga.collisions.shapes.ShapeFactory;
+import vooga.collisions.shapes.collisionShapes.CollisionPolygon;
+import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.physics.PhysicsVelocityC;
+import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
+import vooga.sprites.spritebuilder.components.physics.MasslessPhysicsC;
 
+/**
+ * The Lunar Lander
+ * 
+ * @author Ethan Goh
+ * 
+ */
 @SuppressWarnings("serial")
 public class Lander extends Sprite
 {
-	/**
-	 * The paddle speed, in pixels per ms.
-	 */
 	public static final Double THRUST_POWER = 0.002D;
 	public static final Double GRAVITY = 0.001D;
 
@@ -23,6 +30,7 @@ public class Lander extends Sprite
 	private boolean safe;
 	private int lives = 3;
 	private double initX, initY;
+	private int fuel = 1000;
 
 	/**
 	 * Places the Lander at the given (x,y) coordinate.
@@ -43,9 +51,14 @@ public class Lander extends Sprite
 		setAngle(Direction.NORTH.getAngle());
 
 		this.game = game;
-		addComponents(new PhysicsVelocityC());
+		this.fuel = 1000;
+		addComponents(new MasslessPhysicsC());
 		initX = x;
 		initY = y;
+
+		this.addComponent(new CollisionPolygonC(new CollisionPolygon(
+				ShapeFactory.makePolygonFromImage(
+						ImageUtil.resize(image, width, height), 2))));
 
 		// game.addEveryTurnEvent("Game.Forces.ShipGravity", new IEventHandler()
 		// {
@@ -101,24 +114,36 @@ public class Lander extends Sprite
 
 	protected void leftThrust(double power)
 	{
+		if(fuel < 0)
+			 return;
 		hspeed -= power;
+		fuel -= 1;
 		setHorizontalSpeed(hspeed);
+		
 	}
 
 	protected void rightThrust(double power)
 	{
+		if(fuel < 0)
+			 return;
 		hspeed += power;
+		fuel -= 1;
 		setHorizontalSpeed(hspeed);
 	}
 
 	protected void downThrust(double power)
 	{
+		if(fuel < 0)
+			 return;
+		fuel -= 1;
 		accelerate(power, 90);
 	}
 
 	private void upThrust(double power)
 	{
-		// setVerticalSpeed(power);
+		if(fuel < 0)
+		 return; 
+		fuel -= 1;
 		accelerate(power, -90);
 	}
 
@@ -147,12 +172,15 @@ public class Lander extends Sprite
 		}
 	}
 
+	public int getFuel()
+	{
+		return fuel;
+	}
 	public void resetLander()
 	{
 		setX(initX - getWidth() / 2);
 		setY(initY - getHeight());
-		setVerticalSpeed(0);
-		setHorizontalSpeed(0);
 		safe = false;
+		fuel = 1000;
 	}
 }
