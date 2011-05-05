@@ -4,7 +4,8 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
-import com.golden.gamedev.object.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
+
 
 /**
  * Encapsulates Sprite data for recording.

@@ -6,8 +6,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import vooga.core.VoogaGame;
+import vooga.core.event.IEventHandler;
+import vooga.levels.VoogaPlayField;
+import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritegroups.SpriteGroup;
+
 import com.golden.gamedev.GameEngine;
-import com.golden.gamedev.object.*;
+import com.golden.gamedev.object.Background;
 import com.golden.gamedev.object.background.ImageBackground;
 
 /**
@@ -23,19 +29,31 @@ public class StateTable implements Serializable {
 	
 	protected Map<Integer, Map<Sprite, SpriteReplayData>> myMap;
 	protected BufferedImageSerialData myBackgroundImageData;
-	protected Background myBackground;
+	protected SerialBackground myBackground;
 	protected int gameTime;
 	protected int replayTime;
 	protected SerialPlayField lastPlayField;
+	protected VoogaGame game;
 
 	public StateTable() {
 		myMap = new HashMap<Integer, Map<Sprite, SpriteReplayData>>();
 		lastPlayField = new SerialPlayField();
 		gameTime = 0;
 	}
-
-	
-	public Replay replayTable(GameEngine parent){
+	public StateTable(VoogaGame game){
+		this();
+		this.game = game;
+		initEvents();
+	}
+	public void initEvents(){
+		this.game.addEveryTurnEvent("Method.record", new IEventHandler(){
+	    	@Override
+	    	public void handleEvent(Object o){
+	    		record(game.getLevelManager().getCurrentLevel());
+	    	}
+	    });
+	}
+	public Replay replayTable(VoogaGame parent){
 		return new Replay(parent, this, gameTime);
 	}
 	/**
@@ -45,11 +63,12 @@ public class StateTable implements Serializable {
 	 * @param field
 	 *            - PlayField passed to the StateTable to be recorded.
 	 */
-	public void updateStateTable(PlayField field) 
+	public void updateStateTable(VoogaPlayField field) 
 	{
-		myBackgroundImageData  = new BufferedImageSerialData(((ImageBackground)field.getBackground()).getImage());
+		//myBackgroundImageData  = new BufferedImageSerialData(((ImageBackground)field.getBackground()).getImage());
+		myBackground = new SerialBackground(field.getBackground());
 		Map<Sprite, SpriteReplayData> tempMap = new HashMap<Sprite, SpriteReplayData>();
-		for (SpriteGroup spriteGroup : field.getGroups()) 
+		for (SpriteGroup<Sprite> spriteGroup : field.getAllSpriteGroups()) 
 		{
 			updateHelper(spriteGroup.getSprites(), tempMap);
 		}
@@ -60,7 +79,7 @@ public class StateTable implements Serializable {
 	/**
 	 * Update helper method.
 	 */
-	private void updateHelper(Sprite[] sprites, Map<Sprite, SpriteReplayData> tempMap) 
+	private void updateHelper(Iterable<Sprite> sprites, Map<Sprite, SpriteReplayData> tempMap) 
 	{	
 		for (Sprite sprite : sprites) 
 		{
@@ -73,7 +92,7 @@ public class StateTable implements Serializable {
 	
 	public void render(Graphics2D g) 
 	{
-		myBackground.render(g);
+		myBackground.getBackground().render(g);
 		Map<Sprite, SpriteReplayData> tempMap = myMap.get(replayTime);
 		for (Sprite sprite : tempMap.keySet()) 
 		{
@@ -92,12 +111,12 @@ public class StateTable implements Serializable {
 	public void transformSpritesToState(int t) 
 	{
 		replayTime = t;
-		myBackground = new ImageBackground(myBackgroundImageData.getImage());
+		//myBackground = new ImageBackground(myBackgroundImageData.getImage());
 		Map<Sprite, SpriteReplayData> tempMap = myMap.get(replayTime);
 		for (Sprite sprite : tempMap.keySet()) 
 		{
 			sprite = tempMap.get(sprite).transformSprite(sprite);
-			sprite.setBackground(myBackground);
+			sprite.setBackground(myBackground.getBackground());
 		}
 	}
 
@@ -107,7 +126,7 @@ public class StateTable implements Serializable {
 	 * @param field
 	 *            - PlayField from which the recording is made
 	 */
-	public void record(PlayField field) 
+	public void record(VoogaPlayField field) 
 	{
 		updateStateTable(field);
 		//if (field != null)
@@ -115,14 +134,14 @@ public class StateTable implements Serializable {
 	}
 
 	public void record(Sprite s) {
-		PlayField tempField = new PlayField();
-		tempField.add(s);
+		VoogaPlayField tempField = new VoogaPlayField();
+		tempField.addSprite(s);
 		this.record(tempField);
 	}
 
-	public void record(SpriteGroup sg) {
-		PlayField tempField = new PlayField();
-		tempField.addGroup(sg);
+	public void record(SpriteGroup<Sprite> sg) {
+		VoogaPlayField tempField = new VoogaPlayField();
+		tempField.addSpriteGroup(sg);
 		this.record(tempField);
 	}
 }
