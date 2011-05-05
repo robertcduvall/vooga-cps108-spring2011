@@ -112,12 +112,13 @@ public class DrawingBoard extends JPanel
                 Element sprite = (Element)sprites.item(i);
                 DraggableImage newSprite = new DraggableImage(viewport, sprite, false);
                 viewport.addImage(newSprite);
+                viewport.addMouseMotionListener(newSprite);
                 palette.addButton(sprite);
             }
         }
         catch(Exception e)
         {
-            // TODO Auto-generated catch block
+            // TODO Add catch
             e.printStackTrace();
         }
     }
