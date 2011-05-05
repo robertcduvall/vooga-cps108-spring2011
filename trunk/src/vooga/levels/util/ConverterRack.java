@@ -60,6 +60,19 @@ public class ConverterRack {
 		}
 	}
 	
+	private class VoogaGameConverter extends Converter<VoogaGame> {
+		private VoogaGame game;
+
+		private VoogaGameConverter(VoogaGame game) {
+			this.game = game;
+		}
+		
+		@Override
+		public VoogaGame convert(String input) {
+			return game;
+		}
+		
+	}
 	public ConverterRack(VoogaGame g) {
 		conversionMap = new HashMap<Class<?>, Converter<?>>();
 		
@@ -71,6 +84,7 @@ public class ConverterRack {
 		addConverter(Double.class, new DoubleConverter());
 		addConverter(double.class, new DoubleConverter());
 		addConverter(BufferedImage.class, new ImageConverter(g.getResourceManager().getImageLoader()));
+		addConverter(VoogaGame.class, new VoogaGameConverter(g));
 	}
 	
 	/**

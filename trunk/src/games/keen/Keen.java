@@ -12,8 +12,7 @@ public class Keen extends VoogaGame {
 
 	@Override
 	public void initResources() {
-		// TODO Auto-generated method stub
-		
+		super.getLevelManager().loadLevel(0);
 	}
 	
 	public static void main(String[] args) {
