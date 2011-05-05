@@ -1,0 +1,44 @@
+<level>
+	<background type="color">black</background>
+	<collision_manager g1="lander" g2="block" class="games.mariobros.collisions.LanderHitsFloor" />
+	
+	<sprite group="block" class="games.mariobros.sprites.Block" type="block" image="block" />
+	<sprite group="lander" class="games.mariobros.sprites.Lander" type="lander" image="lander" />
+
+	<goal class="games.mariobros.LandedLevelOne" />
+
+<instance type="block"><x>10</x><y>25</y></instance>
+<instance type="block"><x>11</x><y>25</y></instance>
+<instance type="block"><x>12</x><y>24</y></instance>
+<instance type="block"><x>13</x><y>24</y></instance>
+<instance type="block"><x>14</x><y>23</y></instance>
+<instance type="block"><x>15</x><y>23</y></instance>
+<instance type="block"><x>16</x><y>22</y></instance>
+<instance type="block"><x>17</x><y>22</y></instance>
+<instance type="block"><x>18</x><y>21</y></instance>
+<instance type="block"><x>19</x><y>21</y></instance>
+<instance type="block"><x>20</x><y>20</y></instance>
+<instance type="block"><x>21</x><y>20</y></instance>
+<instance type="block"><x>22</x><y>19</y></instance>
+<instance type="block"><x>23</x><y>19</y></instance>
+<instance type="block"><x>24</x><y>18</y></instance>
+<instance type="block"><x>25</x><y>18</y></instance>
+<instance type="block"><x>26</x><y>17</y></instance>
+<instance type="block"><x>27</x><y>17</y></instance>
+<instance type="block"><x>28</x><y>16</y></instance>
+<instance type="block"><x>29</x><y>16</y></instance>
+<instance type="block"><x>30</x><y>15</y></instance>
+<instance type="block"><x>31</x><y>15</y></instance>
+<instance type="block"><x>32</x><y>14</y></instance>
+<instance type="block"><x>33</x><y>14</y></instance>
+<instance type="block"><x>34</x><y>13</y></instance>
+<instance type="block"><x>35</x><y>13</y></instance>
+<instance type="block"><x>36</x><y>12</y></instance>
+<instance type="block"><x>37</x><y>12</y></instance>
+<instance type="block"><x>38</x><y>11</y></instance>
+<instance type="block"><x>39</x><y>11</y></instance>
+<instance type="block"><x>40</x><y>10</y></instance>
+
+
+
+</level>
