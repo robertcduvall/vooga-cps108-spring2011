@@ -36,7 +36,6 @@ public class Archer extends GoodSprite implements IPowerupable{
             public void handleEvent (Object o)
             {
                 pullBowstring();
-                releaseBowstring();
             }
         });
         myGame.registerEventHandler("Input.User.Release", new IEventHandler()
@@ -45,6 +44,7 @@ public class Archer extends GoodSprite implements IPowerupable{
             public void handleEvent (Object o)
             {
                 releaseBowstring();
+                
             }
         });
         myGame.registerEventHandler("Input.User.Fire", new IEventHandler()
@@ -53,6 +53,7 @@ public class Archer extends GoodSprite implements IPowerupable{
             public void handleEvent (Object o)
             {
                 fire(getAngle()+45);
+                releaseBowstring();
             }
         });
         myGame.registerEventHandler("Input.User.moveLeft", new IEventHandler()
@@ -93,6 +94,7 @@ public class Archer extends GoodSprite implements IPowerupable{
 		Sprite arrow = ArrowBuilder.buildSprite((Arrow)myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY()), 0.0, .0001);
 	    arrow.move(-arrow.getWidth()/2, -arrow.getHeight()/2);
 	    arrow.setMovement(myTension*.5, angle);
+	    System.out.println(myTension);
 	    
 	}
 
