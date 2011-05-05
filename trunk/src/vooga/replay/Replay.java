@@ -5,7 +5,9 @@ import java.awt.event.KeyEvent;
 
 import vooga.core.VoogaGame;
 import vooga.core.event.EventLayer;
+import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
+import vooga.levels.LevelManager;
 import vooga.sprites.improvedsprites.Sprite;
 
 import com.golden.gamedev.GameEngine;
@@ -21,7 +23,8 @@ public class Replay {
 
 	protected StateTable myTable;
 	protected int start, stop, time;
-	protected VoogaGame game;
+	protected EventManager em;
+	protected LevelManager lm;
 	/**
 	 * Constructs a Replay Object.
 	 * 
@@ -30,29 +33,46 @@ public class Replay {
 	 * @param start - A flag point denoting where in the StateTable Replay will begin to read
 	 * @param stop - A flag point denoting where in the StateTable Replay will finish reading from the StateTable
 	 */
-	private Replay(VoogaGame game, StateTable table, int start, int stop, int time) {
-		//super(ge);
+	private Replay(EventManager eventManager, LevelManager levelManager, StateTable table, int start, int stop, int time) {
 		this.myTable = table;
 		this.start = start;
 		this.stop = (stop <= time) ? stop : time;
 		time = start;
-		this.game = game;
-		this.game.getEventManager().pushFilter();
-		this.game.removeEventHandlers("Input");
-		this.game.removeEventHandlers("Method");
+		this.em = eventManager;
+		this.lm = levelManager;
+		this.em.pushFilter();
+		removeEvents();
 		initEvents();
 	}
+	public void removeEvents(){
+		this.em.removeEventHandlers("Input");
+		this.em.removeEventHandlers("Method");
+		this.em.removeEventHandlers("Level");
+		this.em.removeEventHandlers("User");
+	}
 	public void initEvents(){
-		this.game.addEveryTurnEvent("Method.updateFromTable", new IEventHandler(){
+		this.em.addEveryTurnEvent("Method.updateFromTable", new IEventHandler(){
 			@Override
 			public void handleEvent(Object o){
 				update();
 			}
 		});
-		this.game.registerEventHandler("Method.returnBack", new IEventHandler(){
+		this.em.registerEventHandler("Method.returnBack", new IEventHandler(){
 			@Override
 			public void handleEvent(Object o){
-				game.getEventManager().popFilter();
+				em.popFilter();
+			}
+		});
+		this.em.registerEventHandler("Input.pause", new IEventHandler(){
+			@Override
+			public void handleEvent(Object o){
+				time = time;
+			}
+		});
+		this.em.registerEventHandler("Input.rewind", new IEventHandler(){
+			@Override
+			public void handleEvent(Object o){
+				time = Math.max(--time,start);
 			}
 		});
 	}
@@ -63,8 +83,8 @@ public class Replay {
 	 * @param ge
 	 * @param table
 	 */
-	public Replay(VoogaGame game, StateTable table, int time) {
-		this(game, table, 0, time - 1, time);
+	public Replay(EventManager eventManager, LevelManager levelManager, StateTable table, int time) {
+		this(eventManager, levelManager, table, 0, time - 1, time);
 	}
 
 
@@ -72,16 +92,16 @@ public class Replay {
 	 * Overriden update updates PlayField directly from global StateTable.
 	 */
 	public void update() {
-		if (inRange(time) && !(game.keyDown(KeyEvent.VK_P))) {
+		if (inRange(time)) {
 			myTable.transformSpritesToState(time);
-			time = game.keyDown(KeyEvent.VK_Q) ? Math.max(--time,start) : Math.min(++time,stop);
+			time =  Math.min(++time,stop);
 		}
-		else if(!inRange(time)){
-			game.fireEvent(this, "Method.returnBack");
+		else {
+			em.fireEvent(this, "Method.returnBack");
 		}
-		game.getLevelManager().getCurrentLevel().clearPlayField();
+		lm.getCurrentLevel().clearPlayField();
 		for(Sprite sprite : myTable.myMap.get(time).keySet()){
-			game.getLevelManager().getCurrentLevel().addSprite(sprite);
+			lm.getCurrentLevel().addSprite(sprite);
 		}
 	}
 
