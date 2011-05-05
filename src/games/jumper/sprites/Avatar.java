@@ -6,6 +6,7 @@ import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
+import vooga.sprites.spritebuilder.components.physics.PhysicsVelocityC;
 
 @SuppressWarnings("serial")
 public class Avatar extends Sprite{
@@ -27,9 +28,10 @@ public class Avatar extends Sprite{
 		super(game.getImageLoader().getImage("mario"));
 		setX(X_LOCATION);
 		setY(Y_LOCATION);
+		this.addComponent(new PhysicsVelocityC());
 		this.myGame = game;
 		myLives = 3;
-		setAngle(Direction.WEST.getAngle());
+		setAngle(Direction.SOUTH.getAngle());
 		
 		game.registerEventHandler("Input.User.Left", new IEventHandler() {
 			
