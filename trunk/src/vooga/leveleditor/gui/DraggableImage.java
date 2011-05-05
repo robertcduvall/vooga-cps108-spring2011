@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 import org.w3c.dom.Element;
 /**
+ * Creates a image icon that can be dragged along the jlayeredpane.
  * 
  * @author Charlie Hatcher
  *
@@ -40,23 +41,7 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 		setJLabelValuesForDraggableImage(myIcon, parent, x, y);
 	}
 
-	/**
-	 * 
-	 */
-	private void gatherData(boolean isAddedFromButton) {
-		myName = myProperties.getElementsByTagName("name").item(0).getTextContent();
-        myXCoordinate = myProperties.getElementsByTagName("x").item(0).getTextContent();
-        myYCoordinate = myProperties.getElementsByTagName("y").item(0).getTextContent();
-        myImagePath = myProperties.getElementsByTagName("image").item(0).getTextContent();
-        if(!isAddedFromButton){
-        	 x = new Integer(myXCoordinate);
-             y = new Integer(myYCoordinate);
-        }
-        else{
-        	 x = X_CORNER_OF_LEVEL;
-             y = Y_CORNER_OF_LEVEL;
-        }
-	}
+	
 
 	protected void setSpriteProperties(int x,int y){
 		if(checkIfSelected(x, y)){
@@ -112,6 +97,28 @@ public class DraggableImage extends JLabel implements MouseMotionListener{
 		this.setVisible(true);
 		this.setBounds(x, y, icon.getIconWidth(), icon.getIconWidth());
 		parent.moveToFront(this);
+	}
+	
+	/**
+	 * Used to read the properties from the sprite based upon the xml file.
+	 * If the image is created by a button press, it plases the image in the corner
+	 * of the level image so that the image does not overlap with its root image
+	 * 
+	 * @param isAddedFromButton
+	 */
+	private void gatherData(boolean isAddedFromButton) {
+		myName = myProperties.getElementsByTagName("name").item(0).getTextContent();
+        myXCoordinate = myProperties.getElementsByTagName("x").item(0).getTextContent();
+        myYCoordinate = myProperties.getElementsByTagName("y").item(0).getTextContent();
+        myImagePath = myProperties.getElementsByTagName("image").item(0).getTextContent();
+        if(!isAddedFromButton){
+        	 x = new Integer(myXCoordinate);
+             y = new Integer(myYCoordinate);
+        }
+        else{
+        	 x = X_CORNER_OF_LEVEL;
+             y = Y_CORNER_OF_LEVEL;
+        }
 	}
 	
 	/**
