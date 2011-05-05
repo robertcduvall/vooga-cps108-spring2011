@@ -6,7 +6,6 @@ import vooga.core.VoogaGame;
 import vooga.levels.AbstractLevel;
 import vooga.physics.forceGenerator.MassProportionalForceGenerator;
 import vooga.physics.util.Force;
-import vooga.physics.util.MassProportionalForce;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
