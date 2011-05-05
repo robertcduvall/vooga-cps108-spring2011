@@ -1,7 +1,11 @@
 package games.spaceinvaders;
 
 public interface Commons {
-
+    public static final int PLAYER_SPEED = 2;
+    public static final int PLAYER_LIVES = 3;
+    public static final double BULLET_SPEED = 6.0;
+    public static final double ALIEN_SPEED = 3.0;
+    public static final double BOMB_SPEED = 3.0;
     public static final int BOARD_WIDTH = 358;
     public static final int BOARD_HEIGTH = 350;
     public static final int GROUND = 290;

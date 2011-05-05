@@ -57,7 +57,15 @@ public class Sprites extends Sprite implements Commons
         this.y = y;
     }
 
-    //getX and getY
+    public double getY() 
+    {
+        return y;
+    }
+
+    public double getX() 
+    {
+        return x;
+    }
 
     public void setDying(boolean dying) 
     {
