@@ -56,44 +56,7 @@ public class Level extends AbstractLevel
         for(int i=0; i<mapKey.length; i++){
             modifierMap.put(mapKey[i], mapValue[i]);
         }
-        
-        
-        game.registerEventHandler("Level.spawnTile", new IEventHandler() {
-            
-            @Override
-            public void handleEvent(Object o) {
-                Point p = (Point)o;
-                spawnTile((int)p.getX(), (int)p.getY());
-            }
-        });
-        
-        game.registerEventHandler("Level.consolidateWall", new IEventHandler() {
-            
-            @Override
-            public void handleEvent(Object o) {
-                consolidateWalls();
-            }
-        });
-        
-        game.registerEventHandler("Level.fillWall", new IEventHandler() {
-            
-            @Override
-            public void handleEvent(Object o) {
-                fillWall((List<Point>)o);
-            }
-        });
-        
-        game.registerEventHandler("Level.collideWithTile", new IEventHandler() {
-            
-            @Override
-            public void handleEvent(Object o) {
-                collideWithTile();
-                
-            }
 
-            
-        });
-        
         registerEvents();
         
     }
@@ -120,19 +83,17 @@ public class Level extends AbstractLevel
         }
     }
     
-    public void collideWithTile() {
+    public void resetSpawn() {
         spawning = false;
         NUM_HIT_WALL=0;
         setTileArray(TILE,EMPTY);
-        
         for(Sprite s : getSpriteGroup("tile").getSprites()){
             s.setActive(false);
         }
-        
     }
+    
     public void spawnTile(int x, int y){
         addArchetypeSprite("tile", x, y);
-        
     }
 
     @Override
@@ -142,126 +103,55 @@ public class Level extends AbstractLevel
         addBackground();
     }
     
-    public void consolidateWalls(){
-        for(Sprite s : getSpriteGroup("tile").getSprites()){
+    public void replaceSprites(String replaced, String toReplace){
+        for(Sprite s : getSpriteGroup(replaced).getSprites()){
             if(s.isActive()){
-                addArchetypeSprite("wall", (int)s.getX(), (int)s.getY());
+                addArchetypeSprite(toReplace, (int)s.getX(), (int)s.getY());
                 s.setActive(false);
             }
-            
+        }
+    }
+
+    public void initialSpawn(Point p, boolean vertical){
+        if(spawning) return;
+        spawning = true;
+        tileArray[getTileXCoord(p)][getTileYCoord(p)]=TILE;
+        game.fireEvent(this, "Level.spawnTile", p);
+        if(vertical){
+            game.addTimer("spawnUp", SPAWN_RATE, "Game.spawnUp", p);
+            game.addTimer("spawnDown", SPAWN_RATE, "Game.spawnDown", p);
+        }else{
+            game.addTimer("spawnLeft", SPAWN_RATE, "Game.spawnLeft", p);
+            game.addTimer("spawnRight", SPAWN_RATE, "Game.spawnRight", p);
         }
         
-        System.out.println("Consolidate!");
     }
-    
-    public void fillWall(List<Point> pointList){
-        for(Point p : pointList){
-            addArchetypeSprite("wall", (int)p.getX(), (int)p.getY());
-        }
-    }
-    
-    
-    
 
-    public void spawnVertical(Point p){
-        if(spawning) return;
-        spawning = true;
-        tileArray[getXGrid(p)][getYGrid(p)]=TILE;
-        game.fireEvent(this, "Level.spawnTile", p);
-        game.addTimer("spawnUp", SPAWN_RATE, "Game.spawnUp", p);
-        game.addTimer("spawnDown", SPAWN_RATE, "Game.spawnDown", p);
-    }
-    
-    public void spawnHorizontal(Point p){
-        if(spawning) return;
-        spawning = true;
-        tileArray[getXGrid(p)][getYGrid(p)]=TILE;
-        game.fireEvent(this, "Level.spawnTile", p);
-        game.addTimer("spawnLeft", SPAWN_RATE, "Game.spawnLeft", p);
-        game.addTimer("spawnRight", SPAWN_RATE, "Game.spawnRight", p);
-    }
     
     public void spawnGivenDirection(Point p, String direction){
+        if(!spawning) return;
+        
         p = modifyPoint(p, direction);
         
-        if(!checkToContinue(WALL, p)){
-            return;
-        }
-        setGrid(TILE, p);
+        if(!checkToContinue(WALL, p)) return;
+        
+        setTileArrayGivenPoint(TILE, p);
         game.fireEvent(this, "Level.spawnTile", p);
         game.addTimer("spawn"+direction, SPAWN_RATE, "Game.spawn"+direction, p);
         
         
     }
-    /**
-     * @param p
-     * @param direction
-     * @return
-     */
-    protected Point getNewPoint(Point p, String direction) {
-        try {
-            Method m =this.getClass().getDeclaredMethod(direction, Point.class);
-            p= (Point) m.invoke(this, p);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return p;
-    }
+
     
     public Point modifyPoint(Point p, String direction){
         int[] modifierArray = modifierMap.get(direction);
         return new Point((int)p.getX()+modifierArray[0], (int)p.getY()+modifierArray[1]);
     }
-    
-    public void spawnUp(Point p){
-        if(!spawning) return;
-        p = new Point((int)p.getX(), (int)p.getY()-20);
-        if(!checkToContinue(WALL, p)){
-            return;
-        }
-        setGrid(TILE, p);
-        game.fireEvent(this, "Level.spawnTile", p);
-        game.addTimer("spawnUp", SPAWN_RATE, "Game.spawnUp", p);
-    }
-    
-    public void spawnDown(Point p){
-        if(!spawning) return;
-        p = new Point((int)p.getX(), (int)p.getY()+20);
-        if(!checkToContinue(WALL, p)){
-            return;
-        }
-        setGrid(TILE, p);
-        game.fireEvent(this, "Level.spawnTile", p);
-        game.addTimer("spawnDown", SPAWN_RATE, "Game.spawnDown", p);
-    }
-    
-    public void spawnLeft(Point p){
-        if(!spawning) return;
-        p = new Point((int)p.getX()-20, (int)p.getY());
-        if(!checkToContinue(WALL, p)){
-            return;
-        }
-        setGrid(TILE, p);
-        game.fireEvent(this, "Level.spawnTile", p);
-        game.addTimer("spawnLeft", SPAWN_RATE, "Game.spawnLeft", p);
-    }
-    
-    public void spawnRight(Point p){
-        if(!spawning) return;
-        p = new Point((int)p.getX()+20, (int)p.getY());
-        if(!checkToContinue(WALL, p)){
-            return;
-        }
-        setGrid(TILE, p);
-        game.fireEvent(this, "Level.spawnTile", p);
-        game.addTimer("spawnRight", SPAWN_RATE, "Game.spawnRight", p);
-    }
 
 
 
     private boolean checkToContinue(int type, Point location){
-        if(!checkGrid(type, location)){
+        if(!checkTileArrayGivenPoint(type, location)){
             return true;
         }
         
@@ -269,48 +159,45 @@ public class Level extends AbstractLevel
         if(NUM_HIT_WALL==2){
             NUM_HIT_WALL=0;
             game.fireEvent(this,"Level.consolidateWall");
-            consolidateToWall();
-            fillWalls();
+            setTileArray(TILE, WALL);
+            fillEmptyChamber();
             spawning = false;
         }
         return false;
     }
     
     
-    private void fillWalls() {
+    private void fillEmptyChamber() {
         int[][] tempArray = new int[tileArray.length][tileArray[0].length];
-        SpriteGroup<Sprite> sg = getSpriteGroup("ball");
+        setBallLocations(tempArray);
         
-        for(Sprite s : sg.getSprites()){
+        for(int i = 0; i<tempArray.length; i++){
+            for(int j = 0; j < tempArray.length; j++){
+                recurselyCheckToFill(tempArray, i, j);
+            }
+        }
+    }
+
+    protected void setBallLocations(int[][] tempArray) {
+        for(Sprite s : getSpriteGroup("ball").getSprites()){
             int x = (int) ((s.getX()-TOP_LEFT_CORNER.getX())/20);
             int y = (int) ((s.getY()-TOP_LEFT_CORNER.getY())/20);
             tempArray[x][y]=BALL;
             System.out.println("ball is at " + x + " " + y);
         }
-        
-        for(int i = 0; i<tempArray.length; i++){
-            for(int j = 0; j < tempArray.length; j++){
-                recurseCheck(tempArray, i, j);
-            }
-        }
-        
     }
 
-    private boolean recurseCheck(int[][] tempArray, int i, int j) {
+    private boolean recurselyCheckToFill(int[][] tempArray, int i, int j) {
+        //base case-if there is a ball, cannot fill in the chamber
+        if(tempArray[i][j]==BALL) return false;
+        //Other conditions to end recursion
         if(tempArray[i][j]==CHECKED) return true;
         if(tileArray[i][j]==WALL) return true;
-        if(tempArray[i][j]==BALL) return false;
         if(i<0 || i>=tempArray.length) return true;
         if(j<0 || j >= tempArray[i].length) return true;
-        tempArray[i][j]=CHECKED;
         
-        boolean result = (recurseCheck(tempArray, i+1, j) && recurseCheck(tempArray, i-1, j) && recurseCheck(tempArray, i, j-1) && recurseCheck(tempArray, i, j+1));
-        System.out.println("position " + i + " " + j);
-        if(result){
-            System.out.println("true");
-        }else{
-            System.out.println("false");
-        }
+        tempArray[i][j]=CHECKED;
+        boolean result = (recurselyCheckToFill(tempArray, i+1, j) && recurselyCheckToFill(tempArray, i-1, j) && recurselyCheckToFill(tempArray, i, j-1) && recurselyCheckToFill(tempArray, i, j+1));
         if(result){
             addArchetypeSprite("wall", (int)(TOP_LEFT_CORNER.getX()+i*20), (int)(TOP_LEFT_CORNER.getY()+j*20));
         }else{
@@ -319,77 +206,85 @@ public class Level extends AbstractLevel
         return result;
     }
 
-    private void consolidateToWall() {
-        setTileArray(TILE, WALL);
-    }
-
-    private boolean checkGrid(int type, Point location){
-        int x = getXGrid(location);
-        int y = getYGrid(location);
+    private boolean checkTileArrayGivenPoint(int type, Point location){
+        int x = getTileXCoord(location);
+        int y = getTileYCoord(location);
         return tileArray[x][y] == type;
         
     }
     
-    private void setGrid(int type, Point location){
-        int x = getXGrid(location);
-        int y = getYGrid(location);
+    private void setTileArrayGivenPoint(int type, Point location){
+        int x = getTileXCoord(location);
+        int y = getTileYCoord(location);
         tileArray[x][y] = type;
     }
     
-    private int getXGrid(Point location){
+    private int getTileXCoord(Point location){
         return (int)(location.getX()-TOP_LEFT_CORNER.getX())/20;
     }
     
-    private int getYGrid(Point location){
+    private int getTileYCoord(Point location){
         return (int)(location.getY()-TOP_LEFT_CORNER.getY())/20;
     }
     
     
     private void registerEvents() {
+        
+        
+        game.registerEventHandler("Level.spawnTile", new IEventHandler() {
+            
+            @Override
+            public void handleEvent(Object o) {
+                Point p = (Point)o;
+                spawnTile((int)p.getX(), (int)p.getY());
+            }
+        });
+        
+        game.registerEventHandler("Level.consolidateWall", new IEventHandler() {
+            
+            @Override
+            public void handleEvent(Object o) {
+                replaceSprites("tile", "wall");
+            }
+        });
+
+        
+        game.registerEventHandler("Level.collideWithTile", new IEventHandler() {
+            
+            @Override
+            public void handleEvent(Object o) {
+                resetSpawn();
+            }
+
+            
+        });
         game.registerEventHandler("Game.SpawnVerticalTile", new IEventHandler() {
             
             @Override
             public void handleEvent(Object o) {
-                spawnVertical((Point)o);
+                initialSpawn((Point)o, true);
             }
         });
         
         game.registerEventHandler("Game.SpawnHorizontalTile", new IEventHandler() {
             @Override
             public void handleEvent(Object o) {
-                spawnHorizontal((Point)o);
+                initialSpawn((Point)o, false);
             }
         });
         
-        game.registerEventHandler("Game.spawnUp", new IEventHandler() {
-            @Override
-            public void handleEvent(Object o) {
-                //spawnUp((Point)o);
-                spawnGivenDirection((Point)o, "Up");
-            }
-        });
         
-        game.registerEventHandler("Game.spawnDown", new IEventHandler() {
-            @Override
-            public void handleEvent(Object o) {
-                spawnDown((Point)o);
-            }
-        });
+        final String[] directions = new String[]{"Up", "Down", "Left", "Right"};
         
-        game.registerEventHandler("Game.spawnRight", new IEventHandler() {
-            @Override
-            public void handleEvent(Object o) {
-                spawnRight((Point)o);
-            }
-        });
-        
-        game.registerEventHandler("Game.spawnLeft", new IEventHandler() {
-            @Override
-            public void handleEvent(Object o) {
-                spawnLeft((Point)o);
-            }
-        });
-        
+        for(int i =0; i<directions.length; i++){
+            final int count = i;
+            game.registerEventHandler("Game.spawn"+directions[count], new IEventHandler() {
+                @Override
+                public void handleEvent(Object o) {
+                    spawnGivenDirection((Point)o, directions[count]);
+                }
+            });
+        }
         
     }
 
