@@ -6,6 +6,11 @@ import java.io.FileWriter;
 
 import vooga.arcade.parser.ArcadeGameObject;
 
+/**
+ * 
+ * @author Ethan Goh
+ *
+ */
 public class DescriptionHTMLPage
 {
 	private static String[] aboutFields = { "Description", "Comment", "Rating", "Highscores" };

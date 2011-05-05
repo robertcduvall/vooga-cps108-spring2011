@@ -22,6 +22,9 @@ import vooga.arcade.view.helper.ResourceManager;
 /**
  * A generic class that creates a swing component that creates column of
  * JEditorPane, stacked on top of each other using GridLayout.
+ * 
+ * @author Ethan Goh
+ * @author Andrea Scripa
  */
 public class ColumnTextPanes extends JPanel
 {

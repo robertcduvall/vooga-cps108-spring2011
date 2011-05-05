@@ -59,7 +59,7 @@ public class VoogaViewer extends JFrame implements IView
         ratingsPane = new RatingsPane(pc);
         
         this.add(middleFrame, BorderLayout.CENTER);
-        this.add(ratingsPane, BorderLayout.PAGE_END);
+//        this.add(ratingsPane, BorderLayout.PAGE_END);
         this.setMinimumSize(dim);
         this.setVisible(true);
     }

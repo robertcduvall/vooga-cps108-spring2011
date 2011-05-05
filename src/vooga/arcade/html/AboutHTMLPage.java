@@ -6,6 +6,11 @@ import java.io.FileWriter;
 
 import vooga.arcade.parser.ArcadeGameObject;
 
+/**
+ * 
+ * @author Ethan Goh
+ *
+ */
 public class AboutHTMLPage
 {
 
