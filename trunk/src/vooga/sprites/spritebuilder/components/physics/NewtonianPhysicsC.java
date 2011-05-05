@@ -1,7 +1,6 @@
 package vooga.sprites.spritebuilder.components.physics;
 
 import vooga.physics.collisionBehavior.PhysicalCollisionBehavior;
-import vooga.physics.forceBehavior.FieldForceBehavior;
 import vooga.physics.forceBehavior.PhysicalForceBehavior;
 import vooga.physics.util.VectorField;
 import vooga.physics.util.Velocity;

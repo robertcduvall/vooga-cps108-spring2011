@@ -1,12 +1,7 @@
 package vooga.physics.collisionBehavior;
 
 import java.awt.Point;
-import java.util.List;
-
-import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
-import vooga.sprites.improvedsprites.Sprite;
-import vooga.sprites.spritebuilder.components.physics.AbstractPhysicsC;
 import vooga.util.math.Angle;
 
 /**
@@ -16,7 +11,7 @@ import vooga.util.math.Angle;
  * @author Anne Weng
  *
  */
-public class FrictionCollisionBehavior extends EmptyCollisionBehavior {
+public class FrictionCollisionBehavior extends EmptyCollisionBehavior implements CollisionVisitor {
 
     private Angle collisionAngle;
     private boolean collisionOccurring;
@@ -41,5 +36,15 @@ public class FrictionCollisionBehavior extends EmptyCollisionBehavior {
     
     public Object[] getFields(){
         return new Object[]{collisionOccurring, collisionAngle};
+    }
+    
+    @Override
+    public Velocity visitFirst(CollisionVisitor first, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        return first.visitNext(this, angleOfImpact, pointOfImpact, coefficientOfRestitution);
+    }
+    
+    @Override
+    public Velocity visitNext(FrictionCollisionBehavior friction, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
+        return collisionToVelocityChange(friction, angleOfImpact, pointOfImpact, coefficientOfRestitution);
     }
 }

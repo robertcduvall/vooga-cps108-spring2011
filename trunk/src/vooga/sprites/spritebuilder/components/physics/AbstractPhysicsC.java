@@ -39,6 +39,8 @@ public abstract class AbstractPhysicsC extends BasicComponent implements ISprite
         myCollisionBehavior = collisionBehavior;
         this.isOn = isOn;
         deltaVelocity = new Velocity(0, new Angle(0));
+        isColliding = false;
+        angleOfCollision = new Angle(0);
     }
 
     @Override
@@ -78,7 +80,7 @@ public abstract class AbstractPhysicsC extends BasicComponent implements ISprite
     }
 
     public void applyCollision(EmptyCollisionBehavior otherCollisionBehavior, Angle angleOfImpact, Point pointOfImpact, double coefficientOfRestitution) {
-        addToVelocityChange(myCollisionBehavior.collisionToVelocityChange(otherCollisionBehavior, angleOfImpact, pointOfImpact,
+        addToVelocityChange(myCollisionBehavior.visitFirst(otherCollisionBehavior, angleOfImpact, pointOfImpact,
                 coefficientOfRestitution));
         setCurrentCollision(angleOfImpact);
     }
