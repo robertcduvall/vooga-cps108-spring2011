@@ -11,6 +11,7 @@ import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.resources.Direction;
 import vooga.sprites.spritebuilder.components.collisions.CollisionShapeC;
+import vooga.sprites.spritebuilder.components.physics.MasslessPhysicsC;
 import vooga.sprites.spritebuilder.components.physics.PhysicsVelocityC;
 
 @SuppressWarnings("serial")
@@ -21,11 +22,12 @@ public class Keen extends MonsterSprite {
 	private boolean canJump;
 	
 	private static final double KEEN_SPEED = 1.5;
+	private static final double KEEN_JUMP_VELOCITY = -0.3;
+	private static final int ZAP_MARGIN = 15;
 	
 	public Keen(KeenGame game, int x, int y) {
 		super(game, "keen", x, y);
 		
-		super.addComponent(new PhysicsVelocityC());
 		hasMoved = false;
 		canJump = false;
 		currentDirection = Direction.EAST;
@@ -57,12 +59,28 @@ public class Keen extends MonsterSprite {
 				jump();
 			}
 		});
+		game.registerEventHandler("Input.User.Shoot", new IEventHandler() {
+			@Override
+			public void handleEvent(Object o) {
+				shoot();
+			}
+		});
+	}
+	
+	private void shoot() {
+		super.setAnimation(3, currentDirection);
+		int x = (int) (super.getCenterX()+
+				(currentDirection == Direction.EAST ? 1 : -1)*
+					(super.getWidth()/2+ZAP_MARGIN));
+		int y = 4*(int)super.getCenterY()/3;
+		Zap zap = (Zap) game.getLevelManager().addArchetypeSprite("zap", x, y);
+		zap.setDirection(currentDirection);
 	}
 	
 	private void jump() {
 		if(!canJump) return;
 		super.setAnimation(2, currentDirection);
-		super.setSpeed(0, -0.15);
+		super.setSpeed(0, KEEN_JUMP_VELOCITY);
 		canJump = false;
 	}
 	
@@ -90,10 +108,12 @@ public class Keen extends MonsterSprite {
 		super.update(elapsedTime);
 	}
 	
+	@Override
 	public void handleCollision() {
 		if(!canJump) {
 			super.setAnimation(0, currentDirection);
 		}
 		canJump = true;
+		super.handleCollision();
 	}
 }

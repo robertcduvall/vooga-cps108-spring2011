@@ -1,16 +1,19 @@
 package games.keen.collisions;
 
 import games.keen.sprites.Keen;
+import games.keen.sprites.MonsterSprite;
 import games.keen.sprites.StaticTile;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
 import vooga.resources.Direction;
 
-public class TileCollision extends BasicCollisionGroup<Keen, StaticTile> {
+public class TileCollision extends BasicCollisionGroup<MonsterSprite, StaticTile> {
 
+	public TileCollision() {
+		super.pixelPerfectCollision = true;
+	}
+	
 	@Override
-	public void collided(Keen s1, StaticTile s2) {
-		s1.setVerticalSpeed(0);
-		s1.revertPosition();
+	public void collided(MonsterSprite s1, StaticTile s2) {
 		s1.handleCollision();
 	}
 	

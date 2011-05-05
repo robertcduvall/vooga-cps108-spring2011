@@ -1,16 +1,17 @@
 <level>
 	<strings>
 	<!-- <gravity>0</gravity> -->
-		<gravity>-0.00015</gravity>
+		<gravity>-0.0004</gravity>
 	</strings>
 	
-	<collision_manager class="games.keen.collisions.TileCollision" g1="keen" g2="tiles" />
-		
-	<background type="color">black</background>
+	<collision_manager class="games.keen.collisions.TileCollision" g1="monsters" g2="tiles" />
+
+	<background type="image">universe</background>
 	<sprite class="games.keen.sprites.StaticTile" group="tiles" type="G" image="ground" />
-	<sprite class="games.keen.sprites.Yorp" group="tiles" type="Y" image="" />
+	<sprite class="games.keen.sprites.Yorp" group="monsters" type="Y" image="" />
 	<!--  Keen uses an animated image, so we'll just grab the VoogaGame -->
-	<sprite class="games.keen.sprites.Keen" group="keen" type="K" image="" />
+	<sprite class="games.keen.sprites.Keen" group="monsters" type="K" image="" />
+	<sprite class="games.keen.sprites.Zap" group="zaps" type="zap" image="" />
 		
 <instance type="G">
 	<g>null</g>
@@ -92,19 +93,17 @@
 	<x>768</x>
 	<y>192</y>
 </instance>
-<!--
 <instance type="Y">
 	<x>1056</x>
-	<y>192</y>
+	<y>142</y>
 </instance>
--->
 <instance type="K">
-<!--
 	<x>1184</x>
-	<y>192</y>
--->
+	<y>112</y>
+<!--
 	<x>140</x>
 	<y>32</y>
+-->
 </instance>
 <instance type="G">
 	<g>null</g>
@@ -581,12 +580,10 @@
 	<x>384</x>
 	<y>576</y>
 </instance>
-<!-- 
 <instance type="Y">
 	<x>512</x>
 	<y>576</y>
 </instance>
--->
 <instance type="G">
 	<g>null</g>
 	<x>704</x>
@@ -597,7 +594,6 @@
 	<x>736</x>
 	<y>576</y>
 </instance>
-<!-- 
 <instance type="Y">
 	<x>864</x>
 	<y>576</y>
@@ -606,7 +602,6 @@
 	<x>992</x>
 	<y>576</y>
 </instance>
--->
 <instance type="G">
 	<g>null</g>
 	<x>1184</x>
