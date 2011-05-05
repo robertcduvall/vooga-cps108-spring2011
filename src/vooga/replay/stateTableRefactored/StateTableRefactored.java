@@ -1,4 +1,4 @@
-package vooga.replay;
+package vooga.replay.stateTableRefactored;
 
 import java.awt.Graphics2D;
 import java.io.Serializable;
@@ -8,8 +8,11 @@ import java.util.Map;
 import vooga.core.VoogaGame;
 import vooga.core.event.EventManager;
 import vooga.core.event.IEventHandler;
+import vooga.levels.AbstractLevel;
 import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
+import vooga.replay.Replay;
+import vooga.replay.SerialBackground;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
@@ -26,21 +29,22 @@ import vooga.sprites.spritegroups.SpriteGroup;
 @SuppressWarnings("serial")
 public class StateTableRefactored implements Serializable {
 
-	private Map<Integer, Map<Sprite, SpriteReplayData>> myMap;
+	private Map<Integer, State> myMap;
 	private SerialBackground myBackground;
-	private int gameTime, replayTime;
+	private int replayTime;
+	
 	private EventManager myEventManager;
 	private LevelManager myLevelManager;
 
 	public StateTableRefactored(EventManager eventManager, LevelManager levelManager) {
-		myMap = new HashMap<Integer, Map<Sprite, SpriteReplayData>>();
-		gameTime = 0;
+		myMap = new HashMap<Integer, State>();
 		myEventManager = eventManager;
 		myLevelManager = levelManager;
 		initEvents();
 	}
 
 	public void initEvents() {
+		myBackground = new SerialBackground(myLevelManager.getCurrentLevel().getBackground());
 		myEventManager.addEveryTurnEvent("Method.record", new IEventHandler() {
 			@Override
 			public void handleEvent(Object o) {
@@ -50,7 +54,7 @@ public class StateTableRefactored implements Serializable {
 	}
 
 	public Replay replayTable(VoogaGame parent) {
-		return new Replay(parent, this, gameTime);// REASON - takes a normal StateTable
+		return new Replay(parent, this, myMap.size());// REASON - takes a normal StateTable
 	}
 
 	/**
@@ -61,33 +65,21 @@ public class StateTableRefactored implements Serializable {
 	 *            - PlayField passed to the StateTable to be recorded.
 	 */
 	public void updateStateTable(VoogaPlayField field) {
-		myBackground = new SerialBackground(field.getBackground());
-		Map<Sprite, SpriteReplayData> stateMap = new HashMap<Sprite, SpriteReplayData>();
+		State moment = new State();
 		for (SpriteGroup<Sprite> spriteGroup : field.getAllSpriteGroups()) {
-			updateHelper(spriteGroup.getSprites(), stateMap);
+			moment.addSpriteGroupToState(spriteGroup);
 		}
-		myMap.put(gameTime, stateMap);
-		gameTime++;
+		myMap.put(myMap.size(), moment); //tack the state onto the end
 	}
-
+	
 	/**
-	 * Update helper method. Updates each sprite in Iterable sprites, which represents
-	 * the sprites that are in a sprite group.
+	 * When called by Replay, this updates the PlayField based a single state in the state
+	 * table, at index replayTime.
+	 * @param g
 	 */
-	private void updateHelper(Iterable<Sprite> sprites, Map<Sprite, SpriteReplayData> stateMap) {
-		for (Sprite sprite : sprites) {
-			if (sprite != null && sprite.isActive()) {
-				stateMap.put(sprite, new SpriteReplayData(sprite, sprite.isActive()));
-			}
-		}
-	}
-
 	public void render(Graphics2D g) {
 		myBackground.getBackground().render(g);
-		Map<Sprite, SpriteReplayData> tempMap = myMap.get(replayTime);
-		for (Sprite sprite : tempMap.keySet()) {
-			sprite.render(g);
-		}
+		myMap.get(replayTime).render(g);
 	}
 
 	/**
@@ -97,13 +89,9 @@ public class StateTableRefactored implements Serializable {
 	 * @param t
 	 *            - Time, location in time relative to "StateTable indices"
 	 */
-	public void transformSpritesToState(int t) {
+	public void transformToState(int t) {
 		replayTime = t;
-		Map<Sprite, SpriteReplayData> tempMap = myMap.get(replayTime);
-		for (Sprite sprite : tempMap.keySet()) {
-			sprite = tempMap.get(sprite).transformSprite(sprite);
-			sprite.setBackground(myBackground.getBackground());
-		}
+		myMap.get(replayTime).transformSpritesToState();
 	}
 
 	/**
