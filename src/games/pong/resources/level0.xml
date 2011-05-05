@@ -1,7 +1,9 @@
 <level>
 <background type="color">green</background>
+	<collision_manager g1="ball" g2="PlayerPaddle" class="games.pong.collisions.BallAndPaddleCollision" />
+	<collision_manager g1="ball" g2="ball" class="games.pong.collisions.BallAndEdgeCollision" />
 	<sprite group="ball" class="games.pong.sprites.Ball" type="ball" image="ball" />
-	<sprite group="paddle" class="games.pong.sprites.Paddle" type="paddle" image="paddle" />
+	<sprite group="PlayerPaddle" class="games.pong.sprites.PlayerPaddle" type="PlayerPaddle" image="paddle" />
 
 
 	<goal class="games.pong.BlocksCleared" />
