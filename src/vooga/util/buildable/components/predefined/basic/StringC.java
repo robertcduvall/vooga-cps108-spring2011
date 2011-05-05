@@ -20,7 +20,7 @@ public class StringC extends BasicComponent
         return this.getString().compareTo(((StringC) o).getString());
     }
 
-    private String getString ()
+    public String getString ()
     {
         return myString;
     }
