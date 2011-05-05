@@ -10,4 +10,6 @@ public interface ITargetable
 
     double getY ();
     
+    double getX ();
+    
 }
