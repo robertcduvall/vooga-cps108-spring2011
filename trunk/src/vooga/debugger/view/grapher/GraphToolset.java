@@ -42,7 +42,7 @@ public class GraphToolset extends JToolBar
 	
 	private ArrayList<JButton> toolButtons;
 	
-	private GrapherPanel myParentPanel;
+	private GrapherView myParentPanel;
 	
 	public GraphToolset()
 	{
@@ -70,7 +70,7 @@ public class GraphToolset extends JToolBar
 	 * Pass in the grapher canvas for the toolset to reference.
 	 * @param gp
 	 */
-	public void setGrapherPanel(GrapherPanel gp)
+	public void setGrapherPanel(GrapherView gp)
 	{
 		// Note: has to be public for DebuggerGrapher class to access
 		this.myParentPanel = gp;
