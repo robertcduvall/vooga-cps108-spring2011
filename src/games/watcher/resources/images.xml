@@ -1,0 +1,10 @@
+<images>
+	<image name="children">
+		<path>src/games/watcher/resources/children.png</path>
+	</image>
+	<image name="leader">
+		<path>src/games/watcher/resources/leader.png</path>
+	</image>
+	<image name="monster">
+		<path>src/games/watcher/resources/monster.png</path></image>
+</images>

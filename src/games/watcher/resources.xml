@@ -1,0 +1,8 @@
+<resources>
+	<images>
+		<source>src/games/watcher/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.watcher.Level">src/games/watcher/resources/level0.xml</level>
+	<level id="1" type="games.watcher.Level">src/games/watcher/resources/level1.xml</level>
+	<source>src/games/watcher/resources/keymap.xml</source>
+</resources>

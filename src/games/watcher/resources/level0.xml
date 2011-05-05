@@ -1,0 +1,22 @@
+<level>
+	<background type="color">BLACK</background>
+	<collision_manager g1="children" g2="monster" class="games.watcher.collisions.ChildrenHitsMonster" />
+	<collision_manager g1="children" g2="children" class="games.watcher.collisions.ChildrenHitsEdge" ></collision_manager><collision_manager
+		g1="monster" g2="monster" class="games.watcher.collisions.MonsterHitsEdge">
+</collision_manager>
+	<collision_manager g1="leader" g2="monster" class="games.watcher.collisions.LeaderHitsMonster" ></collision_manager><sprite group="children" class="games.watcher.sprites.Children" type="children" image="children"></sprite>
+	<sprite group="leader" class="games.watcher.sprites.Leader" type="leader" image="leader"></sprite>
+	
+
+	<sprite group="monster" class="games.watcher.sprites.Monster" type="monster" image="monster"></sprite>
+	<goal class="games.watcher.LevelCleared" ></goal>
+	<instance type="leader"><x>100</x><y>200</y><c>1</c></instance>
+	<instance type="children"><x>400</x><y>100</y><c>1</c></instance>
+	<instance type="children"><x>300</x><y>100</y><c>1</c></instance>
+
+	<instance type="monster"><x>200</x><y>300</y><c>1</c></instance>
+	<instance type="monster"><x>500</x><y>300</y><c>1</c></instance>
+	<instance type="monster"><x>600</x><y>300</y><c>1</c></instance>
+
+
+</level>
