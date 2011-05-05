@@ -1,6 +1,0 @@
-<keymap>
-	<key_event event="Input.User.Start" sensitivity="Edge" key="SPACE"/>
-	<key_event event="Input.User.Cheat" sensitivity="Edge" key="X"/>
-	<key_event event="Input.User.Left" sensitivity="Level" key="LEFT"/>
-	<key_event event="Input.User.Right" sensitivity="Level" key="RIGHT"/>
-</keymap>
