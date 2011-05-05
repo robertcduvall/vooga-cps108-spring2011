@@ -6,7 +6,11 @@ import java.awt.Dimension;
 
 import com.golden.gamedev.GameLoader;
 
-
+/**
+ * Why the reflection sometimes work but sometimes don't.
+ * @author Roman
+ *
+ */
 public class Main
 {
     public static void main(String[] args) {
