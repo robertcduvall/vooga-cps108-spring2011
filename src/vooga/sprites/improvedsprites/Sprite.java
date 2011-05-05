@@ -186,7 +186,7 @@ public class Sprite extends BaseSprite
     {
         try
         {
-            myComponents.add(c.newInstance());
+            addComponents(c.newInstance());
         }
         catch (Exception e)
         {

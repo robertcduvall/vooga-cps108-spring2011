@@ -72,7 +72,7 @@ public abstract class BasicComponent implements IComponent
     public final boolean equals (IComponent other)
     {
         CheckLikeness(other);
-        return equals((BasicComponent) other);
+        return this.getClass().isAssignableFrom(other.getClass());
     }
 
 
