@@ -94,7 +94,9 @@ public class AdvancedSpriteRefactored extends Sprite
         this.state = 0;
         this.direction = Direction.NORTH;
         this.animationTime = 0;
-        this.rotationMode = RotationMode.NO_ROTATE;
+        this.rotationMode = RotationMode.ROTATE_360;
+        
+        setAngle(direction.getAngle());
     }
 
     /**
