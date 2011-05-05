@@ -24,7 +24,11 @@ public class ShipEdgeCollision extends EdgeCollisionGroup {
 
 	@Override
 	public void collidedBottom(Sprite s) {
-		s.setSpeed(0, 0);		
+		s.setSpeed(0 , 0);		
+		double dif = this.getGroup2().getBackground().getHeight()-(s.getY()+s.getHeight());
+		System.out.println(dif);
+		if (dif < 0) s.moveY(dif);
+		System.out.println("collided");
 	}
 
 
