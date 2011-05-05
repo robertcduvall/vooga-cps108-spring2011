@@ -7,6 +7,9 @@ import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
 import vooga.core.VoogaGame;
+import vooga.physics.VoogaPhysicsMediator;
+import vooga.physics.forceGenerator.MassProportionalForceGenerator;
+import vooga.physics.util.Force;
 import vooga.physics.util.Velocity;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.physics.PhysicsVelocityC;
@@ -67,6 +70,8 @@ public class Ship extends SpriteGroup<Sprite> {
     // }
 
     public void increaseVelocityByVector(Velocity additionalVelocity) {
+        //This should work, but it doesnt
+        //VoogaPhysicsMediator.applyForceToSprite(commandCenter, new MassProportionalForceGenerator(new Force(0.001,commandCenter.getAngle())), 1);
         commandCenter.addSpeed(additionalVelocity.getXComponent(), additionalVelocity.getYComponent());
     }
 }
