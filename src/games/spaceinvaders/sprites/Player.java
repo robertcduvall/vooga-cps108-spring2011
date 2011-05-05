@@ -36,26 +36,31 @@ public class Player extends Sprite implements Commons
             }
         });
         
-        game.registerEventHandler("Game.State", new IEventHandler() 
+        game.registerEventHandler("Input.User.Fire", new IEventHandler() 
         {
             @Override
             public void handleEvent(Object o) 
             {
-                checkGameOver();
+                fire(BULLET_SPEED);
             }
         });
     }
     
-    private void checkGameOver() 
-    {
-        if(lives > 0)
-        {
-            myGame.getLevelManager().addArchetypeSprite("player", getWidth() / 2, 0);
-        }
-    }
+//    private void checkGameOver() 
+//    {
+//        if(lives > 0)
+//        {
+//            myGame.getLevelManager().addArchetypeSprite("player", getWidth() / 2, 0);
+//        }
+//    }
 
     private void move(double dx) 
     {
         this.moveX(dx);
+    }
+    
+    private void fire(double dy)
+    {
+        this.moveY(dy);
     }
 }

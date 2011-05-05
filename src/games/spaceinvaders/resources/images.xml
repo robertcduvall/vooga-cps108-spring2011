@@ -1,0 +1,20 @@
+<images>
+	<image name="alien">
+		<path>src/games/spaceinvaders/resources/alien.png</path>
+	</image>
+	<image name="player">
+		<path>src/games/spaceinvaders/resources/player.png</path>
+	</image>
+	<image name="shot">
+		<path>src/games/spaceinvaders/resources/shot.png</path>
+	</image>
+	<image name="bomb">
+		<path>src/games/spaceinvaders/resources/bomb.png</path>
+	</image>
+	<image name="explosion">
+		<path>src/games/spaceinvaders/resources/explosion.png</path>
+	</image>
+	<image name="background">
+		<path>src/games/spaceinvaders/resources/background.jpg</path>
+	</image>
+</images>
