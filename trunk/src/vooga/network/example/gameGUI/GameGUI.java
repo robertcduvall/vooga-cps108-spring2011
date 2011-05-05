@@ -287,7 +287,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		if (obj == createItem || obj == createServerButton) {
 			if (networkEngine == null) {
 				networkEngine = new InternetNetworkEngine(port);
-			//	networkEngine = new LocalNetworkEngine(port);
+//				networkEngine = new LocalNetworkEngine(port);
 				networkEngine.getMyInfo().setName(userName);
 			}
 			if (networkEngine.createHost(false, true)) {
@@ -309,7 +309,7 @@ public class GameGUI extends JFrame implements ActionListener {
 		} else if (obj == joinItem || obj == joinButton) {
 			if (networkEngine == null) {
 				networkEngine = new InternetNetworkEngine(port);
-			//	networkEngine = new LocalNetworkEngine(port);
+//				networkEngine = new LocalNetworkEngine(port);
 				networkEngine.getMyInfo().setName(userName);
 			}
 			List<ConnectInfo> result = networkEngine.searchHost();

@@ -15,7 +15,7 @@ public class Constants {
 	static int TCPConnectionBacklogLimit = 20;
 	
 	public static int ServerPort = 5140;
-	static String ServerIP = "152.3.194.20";
+	static String ServerIP = "10.180.100.144";
 	
 	public static int HostRemainConnectivityPort = 5141;
 	
