@@ -19,8 +19,7 @@ public class EnemyWall extends BasicCollisionGroup<Players, Wall>
     public void collided (Players player, Wall wall)
     {
     	player.collided(wall);
-    	player.setAngle(Math.floor((Math.random()*4))*90);
-    	player.setAbsoluteSpeed(.1);
+    	player.respondToWall();
     }
 
 }

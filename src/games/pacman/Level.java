@@ -10,7 +10,7 @@ import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.levels.AbstractLevel;
 
 /**
- * A level of PacMan.
+ * A level of Pacman.
  * 
  * @author DJ Sharkey
  *
@@ -35,6 +35,8 @@ public class Level extends AbstractLevel
         addBackground();
         placeDots();
         respawnEnemies();
+      /*  game.getLevelManager().addArchetypeSprite(
+    			"chaser",0,0,game.getLevelManager().getCurrentLevel().getSpriteGroup("pacman"));*/
     }
     
     private void respawnEnemies() {    	
@@ -46,6 +48,10 @@ public class Level extends AbstractLevel
             	for(Sprite sp: getSpriteGroup("enemies").getSprites()){
             		((Players) sp).respawn();
             		
+            	}
+            	
+            	for(Sprite sp: getSpriteGroup("chaser").getSprites()){
+            		((Players) sp).respawn();
             	}
             }            
         });

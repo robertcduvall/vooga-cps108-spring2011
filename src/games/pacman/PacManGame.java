@@ -1,6 +1,8 @@
 package games.pacman;
 
 import games.pacman.sprites.players.PacMan;
+import games.pacman.sprites.players.enemies.Chaser;
+
 import java.awt.Dimension;
 import vooga.core.VoogaGame;
 import vooga.core.event.EventManager;
@@ -43,6 +45,8 @@ public class PacManGame extends VoogaGame
         PacMan pacman = new PacMan(this, getWidth()/2, getHeight()/2);
         
         getLevelManager().addPlayer(new SpriteGroup<PacMan>("pacman", pacman));
+        Chaser chaser = new Chaser(this.getImageLoader().getImage("dumbie"), 0,0,pacman);
+        getLevelManager().addPlayer(new SpriteGroup<Chaser>("chaser", chaser));
         getLevelManager().loadLevel(0);
 
         eventManager.registerEventHandler("GameOver", new IEventHandler()

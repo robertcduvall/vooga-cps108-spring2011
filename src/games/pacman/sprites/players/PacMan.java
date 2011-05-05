@@ -6,7 +6,7 @@ import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 
 /**
- * PacMan, controllable by arrows keys.
+ * Pacman, controllable by arrows keys.
  * 
  * @author DJ Sharkey
  *
@@ -118,6 +118,12 @@ public class PacMan extends Players
 
 	public int getLives() {
 		return numLives;
+	}
+
+	@Override
+	public void respondToWall() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
