@@ -30,7 +30,7 @@ import vooga.debugger.view.GameTreeNode;
  * 
  * @author Troy Ferrell
  */
-public class GrapherPanel extends JPanel implements MouseListener, MouseMotionListener
+public class GrapherView extends JPanel implements MouseListener, MouseMotionListener
 {	
 	private double pointScaleRatio_X, pointScaleRatio_Y;
 	private double translateX, translateY;
@@ -41,12 +41,13 @@ public class GrapherPanel extends JPanel implements MouseListener, MouseMotionLi
 	private GraphToolset myToolSet;
 	private DebuggerGrapher myDebugGrapher;
 	
+	public ArrayList<GraphData> myGraphData = new ArrayList<GraphData>();
+	
 	private JPopupMenu myCanvasPopup;
 	
-	public GrapherPanel(GraphToolset toolset, DebuggerGrapher debugGrapher)
+	public GrapherView(GraphToolset toolset)
 	{
 		myToolSet = toolset;
-		myDebugGrapher = debugGrapher;
 		
 		resetCanvas();
 		initPopup();
@@ -56,6 +57,16 @@ public class GrapherPanel extends JPanel implements MouseListener, MouseMotionLi
 		this.addMouseMotionListener(this);
 	}
 
+	public void addGraphData(GraphData gd)
+	{
+		myGraphData.add(gd);
+	}
+	
+	public void removeGraphData(GraphData gd)
+	{
+		myGraphData.remove(gd);
+	}
+	
 	/**
 	 * Initi Popup menu for grapher canvas 
 	 */
@@ -157,19 +168,19 @@ public class GrapherPanel extends JPanel implements MouseListener, MouseMotionLi
 	 */
 	private void drawData(Graphics2D g2d)
 	{
-		for(GraphGameField gf : myDebugGrapher.myGraphFields)
+		for(GraphData gfData : myGraphData)
 		{
-			if(gf.isDrawable())
+			if(gfData.isDrawable())
 			{
-				ArrayList<DataPoint> points = new ArrayList<DataPoint>(gf.getData());
-				DataPoint maxPoint = gf.getMaxPoint();
+				ArrayList<DataPoint> points = new ArrayList<DataPoint>(gfData.getData());
+				DataPoint maxPoint = gfData.getMaxPoint();
 				
 				DataPoint firstPoint = transformCoord( points.get(0), maxPoint.getX(), maxPoint.getY());
 				for(int i = 1; i < points.size(); i++)
 				{
 					DataPoint lastPoint = transformCoord(points.get(i), maxPoint.getX(), maxPoint.getY());
 					
-					g2d.setColor(gf.getPlotColor());
+					g2d.setColor(gfData.getColor());
 					
 					g2d.drawLine((int)firstPoint.getX(), (int)firstPoint.getY(), (int)lastPoint.getX(), (int)lastPoint.getY());
 					
@@ -187,7 +198,7 @@ public class GrapherPanel extends JPanel implements MouseListener, MouseMotionLi
 				DataPoint cursorPoint = getClosestPointToCursor(points, maxPoint);
 				if(cursorPoint != null)
 				{
-					gf.updateSelectPoint(cursorPoint);
+					gfData.setSelectedPoint(cursorPoint);
 					
 					g2d.setColor(Color.RED);
 					DataPoint cursorPoint_Transformed = transformCoord(cursorPoint, maxPoint.getX(), maxPoint.getY());
