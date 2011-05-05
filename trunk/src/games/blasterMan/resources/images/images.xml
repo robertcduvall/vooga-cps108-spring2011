@@ -1,0 +1,10 @@
+<images>
+	<image name="blasterman">
+		<path>src/games/blasterMan/resources/images/shippoSideways.png</path></image>
+	<image name="slime">
+		<path>src/games/blasterMan/resources/images/angrySlime.png</path></image>
+	<image name="blasterBackground">
+		<path>src/games/blasterMan/resources/images/BlazeBackground.png</path></image>
+	<image name="fireball">
+		<path>src/games/blasterMan/resources/images/flame_BlasterMan.png</path>
+	</image></images>
