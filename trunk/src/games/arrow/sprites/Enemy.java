@@ -13,6 +13,7 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionShapeC;
+import vooga.sprites.spritebuilder.components.physics.MasslessPhysicsC;
 
 public class Enemy extends GoodSprite {
 
@@ -28,8 +29,14 @@ public class Enemy extends GoodSprite {
 	}
 
 	public void die() {
-		setSpeed(0,.2);
+		this.addComponent(new MasslessPhysicsC());
 		setDead(true);
+	}
+
+	@Override
+	public void render(Graphics2D g, int x, int y) {
+		super.render(g, x, y);
+		this.getCollisionShape().render(g);
 	}
 
 	public void setDead(boolean amDead) {

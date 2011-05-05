@@ -17,13 +17,12 @@ public class Archer extends GoodSprite implements IPowerupable{
 
 	private VoogaGame myGame;
 	private double myTension;
-	private SpriteBuilder<Arrow> ArrowBuilder;
+	
 
 	public Archer (VoogaGame game)
     {
     	super(game.getImageLoader().getImage("archer"));
         myGame = game;
-        ArrowBuilder = new SpriteBuilder<Arrow>(PermAccelerationC.class);
         addComponent(new MouseRotateC(game));
         bindKeys();
     }
@@ -91,7 +90,7 @@ public class Archer extends GoodSprite implements IPowerupable{
 	}
 
 	protected void fire(Double angle) {
-		Sprite arrow = ArrowBuilder.buildSprite((Arrow)myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY()), 0.0, .0001);
+		Sprite arrow = myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY());
 	    arrow.move(-arrow.getWidth()/2, -arrow.getHeight()/2);
 	    arrow.setMovement(myTension*.5, angle);
 	    
@@ -105,7 +104,7 @@ public class Archer extends GoodSprite implements IPowerupable{
 
 	protected void pullBowstring() {
 		
-		myTension = myTension >= 2 ? myTension : (myTension + .02);
+		myTension = myTension >= 2 ? myTension : (myTension + .05);
 		
 	}
 	
