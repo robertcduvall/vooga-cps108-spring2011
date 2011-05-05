@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import vooga.core.VoogaGame;
 import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.AnimatedSprite;
+import vooga.sprites.spritebuilder.components.physics.MasslessPhysicsC;
 
 @SuppressWarnings("serial")
 public class MonsterSprite extends LevelSprite {
@@ -37,6 +38,8 @@ public class MonsterSprite extends LevelSprite {
 	public MonsterSprite(KeenGame game, String name, int x, int y) {
 		super(game, x, y);
 		
+		super.addComponent(new MasslessPhysicsC());
+
 		oldX = x;
 		oldY = y;
 		
@@ -73,5 +76,10 @@ public class MonsterSprite extends LevelSprite {
 	public void revertPosition() {
 		setX(getOldX());
 		setY(getOldY());
+	}
+
+	public void handleCollision() {
+		setVerticalSpeed(0);
+		revertPosition();
 	}
 }

@@ -5,6 +5,7 @@ import games.keen.sprites.Keen;
 import java.awt.Dimension;
 
 import vooga.core.VoogaGame;
+import vooga.sprites.improvedsprites.Sprite;
 
 public class KeenGame extends VoogaGame {
 	private Keen player;
@@ -27,7 +28,13 @@ public class KeenGame extends VoogaGame {
 		offsetX = 0;
 		offsetY = 0;
 		super.getLevelManager().loadLevel(0);
-		player = (Keen) super.getLevelManager().getCurrentLevel().getSpriteGroup("keen").getActiveSprite();
+		for(Sprite sprite : super.getLevelManager().getCurrentLevel().getSpriteGroup("monsters").
+				getSprites()) {
+			if(sprite instanceof Keen) {
+				player = (Keen) sprite;
+				break;
+			}
+		}
 	}
 	
 	public int getOffsetX() {
