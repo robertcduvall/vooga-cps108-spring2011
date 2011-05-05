@@ -1,8 +1,6 @@
 package games.pacman;
 
-import games.breakout.sprites.Ball;
-import games.breakout.sprites.Paddle;
-import games.pacman.sprites.PacMan;
+import games.pacman.sprites.players.PacMan;
 import vooga.levels.IGoal;
 import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
