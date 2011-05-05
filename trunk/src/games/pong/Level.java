@@ -30,7 +30,18 @@ public class Level extends AbstractLevel
             {
             	if((getSpriteGroup("ball").getActiveSprite())!=null) {
             		Ball powerUp = (Ball) addArchetypeSprite("gravity", 300, 300);
-            		powerUp.setSpeed(0.2*Math.random(), 0.2*Math.random());
+            		powerUp.setSpeed(0.2-0.4*Math.random(), 0.2-0.4*Math.random());
+            	}
+            }            
+        });
+		
+		game.registerEventHandler("BallExits", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+            	for(Sprite s: getSpriteGroup("powerup").getSprites()) {
+            		s.setActive(false);
             	}
             }            
         });
