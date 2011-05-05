@@ -1,0 +1,12 @@
+<resources>
+	<images>
+		<source>src/games/missileDefense/resources/images.xml</source>
+	</images>
+	
+	<level id="0" type="games.missileDefense.levels.Level">src/games/missileDefense/resources/level0.xml</level>
+	<level id="1" type="games.missileDefense.levels.Level">src/games/missileDefense/resources/level1.xml</level>
+	<level id="2" type="games.missileDefense.levels.WinLossLevel">src/games/missileDefense/resources/win.xml</level>
+	<level id="3" type="games.missileDefense.levels.WinLossLevel">src/games/missileDefense/resources/lose.xml</level>
+	
+	<source>src/games/missileDefense/resources/keymap.xml</source>
+</resources>
