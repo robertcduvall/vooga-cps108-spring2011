@@ -3,7 +3,7 @@
 	<image name="ground"><path>src/games/keen/resources/images/ground.png</path></image>
 	<image name="zap">
 		<path>src/games/keen/resources/images/zap.png</path>
-		<width>33</width>
+		<width>31</width>
 		<state />
 		<state />
 		<state />

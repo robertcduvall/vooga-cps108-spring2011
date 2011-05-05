@@ -141,7 +141,7 @@ public class LevelParser extends Parser {
 	 */
 	public SpriteConstructor getSpriteConstructor(String type) {
 		SpriteConstructor constructor = spriteFactoryMap.get(type);
-		if(constructor == null) throw ParserException.SYNTAX_ERROR;
+		if(constructor == null) throw ParserException.CONSTRUCT_ERROR;
 		return constructor;
 	}
 	
