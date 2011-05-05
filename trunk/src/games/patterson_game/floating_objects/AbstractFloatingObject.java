@@ -1,8 +1,10 @@
-package games.patterson_game;
+package games.patterson_game.floating_objects;
 
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
 import vooga.util.buildable.components.predefined.basic.HealthC;
+import games.patterson_game.AvoiderGame;
+import games.patterson_game.Ship;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;

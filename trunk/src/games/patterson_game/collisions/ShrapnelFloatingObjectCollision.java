@@ -1,8 +1,8 @@
 package games.patterson_game.collisions;
 
-import games.patterson_game.AbstractFloatingObject;
-import games.patterson_game.Explosive;
-import games.patterson_game.Shrapnel;
+import games.patterson_game.floating_objects.AbstractFloatingObject;
+import games.patterson_game.floating_objects.Explosive;
+import games.patterson_game.floating_objects.Shrapnel;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
 import vooga.util.buildable.components.predefined.basic.HealthC;
 

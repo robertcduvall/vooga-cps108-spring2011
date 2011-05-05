@@ -1,7 +1,7 @@
 package games.patterson_game.collisions;
 
-import games.patterson_game.AbstractFloatingObject;
 import games.patterson_game.Ship;
+import games.patterson_game.floating_objects.AbstractFloatingObject;
 import vooga.collisions.collisionManager.BasicCollisionGroup;
 import vooga.sprites.spritegroups.SpriteGroup;
 

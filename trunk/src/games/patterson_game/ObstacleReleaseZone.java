@@ -72,10 +72,11 @@ public class ObstacleReleaseZone
     public void releaseFloatingObject ()
     {
         int bayToOpen = myGenerator.nextInt(myReleaseZone.length);
-       // if(myReleaseZone[bayToOpen] == true)
+        // if(myReleaseZone[bayToOpen] == true)
         {
             String randomOption = myOptionList.get(myGenerator.nextInt(myOptionList.size()));
             Sprite newObstacle = myLevelManager.addArchetypeSprite(randomOption, myGame.getWidth(), bayToOpen * myBundle.getInteger("obstacle_height"));
+            if(newObstacle == null) return;
             newObstacle.setSpeed(myObstacleSpeedMultipler * myBundle.getDouble("default_obstacle_speed"), 0);
             myReleaseZone[bayToOpen] = false;
             myGame.addTimer("OpenReleaseZone", myBundle.getInteger("open_release_zone_interval"), "OpenReleaseZone", bayToOpen);
@@ -96,7 +97,7 @@ public class ObstacleReleaseZone
             }
         });
     }
-    
+
     /**
      * Sets the obstacle speed multiplier (which is factored into how fast obstacles move)
      * @param multipler
@@ -105,7 +106,7 @@ public class ObstacleReleaseZone
     {
         myObstacleSpeedMultipler = multipler;
     }
-    
+
     /**
      * Returns the obstacle speed multiplier
      */
