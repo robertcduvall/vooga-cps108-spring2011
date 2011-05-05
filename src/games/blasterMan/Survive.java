@@ -1,19 +1,21 @@
 package games.blasterMan;
 
-
-
 import vooga.levels.IGoal;
 import vooga.levels.LevelException;
 import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
-
-public class AllMonsterDestroyed implements IGoal{
+/**
+ * 
+ * @author Josue
+ *
+ */
+public class Survive implements IGoal{
 	 private VoogaPlayField myPlayField;
 	 private LevelManager levels;
 	 private long start;
 	 private long end;
 	 
-	 public AllMonsterDestroyed(){
+	 public Survive(){
 		 start = System.currentTimeMillis();
 	 }
 	@Override

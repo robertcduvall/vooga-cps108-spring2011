@@ -14,7 +14,12 @@ import vooga.levels.AbstractLevel;
 import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
-
+/**
+ * Level class for blasterman.
+ * 
+ * @author Josue
+ *
+ */
 public class Level extends AbstractLevel{
 	private PlayerType player;
 	private VoogaGame game;

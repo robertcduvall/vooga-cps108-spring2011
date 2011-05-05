@@ -6,4 +6,4 @@
 		type="slime" image="slime">
 	</sprite>
 	<sprite group="skill" class="games.blasterMan.sprites.SkillSprite" type="fireball" image="fireball"></sprite>
-	<goal class="games.blasterMan.AllMonsterDestroyed"></goal></level>
+	<goal class="games.blasterMan.Survive"></goal></level>
