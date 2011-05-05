@@ -26,7 +26,8 @@ public class AllShipDestroyedGoal implements IGoal
         }
         catch (LevelException e)
         {
-            System.out.println("awkward"); 
+            System.out.println("You win!");
+            myLevelManager.getCurrentGame().finish(); 
         }
         
     }
