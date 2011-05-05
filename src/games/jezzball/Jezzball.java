@@ -20,7 +20,7 @@ import vooga.sprites.spritegroups.SpriteGroup;
  */
 public class Jezzball extends VoogaGame{
     
-    //{distribute = true;}
+    {distribute = true;}
     
     public static ImageLoader imageLoader;
     
