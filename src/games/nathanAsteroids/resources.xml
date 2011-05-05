@@ -1,0 +1,7 @@
+<resources>
+	<images>
+		<source>src/games/nathanAsteroids/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.nathanAsteroids.Level">src/games/nathanAsteroids/resources/level0.xml</level>
+	<source>src/games/nathanAsteroids/resources/keymap.xml</source>
+</resources>

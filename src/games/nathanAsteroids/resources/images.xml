@@ -1,0 +1,17 @@
+<images>
+	<image name="asteroid">
+		<path>src/games/nathanAsteroids/resources/asteroid.png</path>
+	</image>
+	<image name="commandCenterPiece">
+		<path>src/games/nathanAsteroids/resources/ship1_CommandCenter.png</path>
+	</image>
+	<image name="enginePiece">
+		<path>src/games/nathanAsteroids/resources/ship1_Engine.png</path>
+	</image>
+	<image name="gunPiece">
+		<path>src/games/nathanAsteroids/resources/ship1_Gun.png</path>
+	</image>
+	<image name="hullPiece">
+		<path>src/games/nathanAsteroids/resources/ship1_Hull.png</path>
+	</image>
+</images>
