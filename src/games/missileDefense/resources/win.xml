@@ -1,0 +1,8 @@
+<level>
+	<background type="color">blue</background>
+	
+	<sprite group="win" class="games.missileDefense.sprites.Text" type="win" image="win" />
+	
+	<instance type="win"><x>400</x><y>400</y></instance>
+	
+</level>

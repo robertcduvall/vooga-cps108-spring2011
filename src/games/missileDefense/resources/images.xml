@@ -1,0 +1,26 @@
+<images>
+	<image name="gun">
+		<path>src/games/missileDefense/resources/gun.png</path>
+	</image>
+	
+	<image name="city">
+		<path>src/games/missileDefense/resources/city.png</path>
+	</image>
+	
+	<image name="bullet">
+		<path>src/games/missileDefense/resources/bullet.png</path>
+	</image>
+	
+	<image name="missile">
+		<path>src/games/missileDefense/resources/missile.png</path>
+	</image>
+	
+	<image name="win">
+		<path>src/games/missileDefense/resources/winText.png</path>
+	</image>
+	
+	<image name="lose">
+		<path>src/games/missileDefense/resources/loseText.png</path>
+	</image>
+	
+</images>

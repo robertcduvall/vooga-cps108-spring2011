@@ -1,0 +1,8 @@
+<level>
+	<background type="color">red</background>
+	
+	<sprite group="lose" class="games.missileDefense.sprites.Text" type="lose" image="lose" />
+	
+	<instance type="lose"><x>400</x><y>400</y></instance>
+	
+</level>
