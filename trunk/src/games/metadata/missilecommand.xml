@@ -1,0 +1,20 @@
+<game>
+	<title>MissileCommand</title>
+	<path>games.missileDefense.missilecommand</path>
+	<genre>Arcade</genre>
+	<author>Alex Lee</author>
+	<description>Defend the city from certain destruction.</description>
+	<datecreated>May 5, 2010</datecreated>
+	<highscores></highscores>
+	<version>1.0</version>
+	<price>9002</price>
+	<language>Java</language>
+	<dimension>
+		<width>600</width>
+		<height>800</height>
+	</dimension>
+	<rating></rating>
+	<favorite></favorite>
+	<comment></comment>
+	<image>src/games/missilecommand/resources/building.png</image>
+</game>
