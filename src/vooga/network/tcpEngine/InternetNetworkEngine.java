@@ -52,7 +52,7 @@ public class InternetNetworkEngine extends AbstractNetworkEngine {
 					(new Thread(listenerThread)).start();
 					
 					// start to listen to the check from server
-					HostRemainConnectivity = new ServerSocket(Constants.HostRemainConnectivityPort, 10);
+					//HostRemainConnectivity = new ServerSocket(Constants.HostRemainConnectivityPort, 10);
 					
 					
 					isConnected = true;

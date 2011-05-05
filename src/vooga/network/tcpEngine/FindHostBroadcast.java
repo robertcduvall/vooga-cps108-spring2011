@@ -39,48 +39,4 @@ public class FindHostBroadcast extends Thread {
 			e.printStackTrace();
 		} 
 	}
-	
-	//TODO: delete
-	public static InetAddress[] getAllOnline() {
-		
-//		for (InetAddress addr : onlineNode) {
-//		DatagramPacket packet = new DatagramPacket(data, data.length, addr, Constants.BroadcastPort);
-//		System.out.println(addr);
-//		boardCastSocket.send(packet); 
-//		sleep(100);
-//	}
-	
-		List<InetAddress> v = new ArrayList<InetAddress>(50);
-		try {
-			Process process = Runtime.getRuntime().exec("arp -a");
-			InputStreamReader inputStr = new InputStreamReader(process
-					.getInputStream());
-			BufferedReader br = new BufferedReader(inputStr);
-			String temp = "";
-			br.readLine();
-			br.readLine();
-			br.readLine();
-			while ((temp = br.readLine()) != null) {
-				StringTokenizer tokens = new StringTokenizer(temp);
-				String x;
-				InetAddress add = InetAddress.getByName(x = tokens.nextToken());
-				// System.out.println(x);
-				v.add(add);
-				// System.out.println(add);
-			}
-			v.add(InetAddress.getLocalHost());
-			process.destroy();
-			br.close();
-			inputStr.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		int cap = v.size();
-		InetAddress[] addrs = new InetAddress[cap];
-		for (int i = 0; i < cap; i++) {
-			addrs[i] = (InetAddress) v.get(i);
-		}
-		return addrs;
-
-	}
 }

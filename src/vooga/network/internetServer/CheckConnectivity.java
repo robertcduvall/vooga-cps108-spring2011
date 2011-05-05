@@ -38,7 +38,7 @@ public class CheckConnectivity extends Thread {
 			for (String server : toBeDeleted)
 				availableServers.remove(server);
 			try {
-				sleep(2000);
+				sleep(2000000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
