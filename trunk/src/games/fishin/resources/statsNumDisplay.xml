@@ -1,0 +1,10 @@
+<NumDisplay>
+
+<NumStat type="Integer" value="0" name="fishcaught" operator="+" step="1"></NumStat>
+
+<DisplayGroup name="DisplayGroup">
+<DisplayString x="90" y="100" fontName="Times New Roman" label="Fish caught: " fontSize="36"></DisplayString>
+<DisplayBar x="100" y="100" max="100" stat="fishcaught" color="red" backColor="white"></DisplayBar>
+</DisplayGroup>
+
+</NumDisplay>
