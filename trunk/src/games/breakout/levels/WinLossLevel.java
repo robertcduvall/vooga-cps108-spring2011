@@ -7,6 +7,7 @@ import vooga.core.VoogaGame;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.levels.AbstractLevel;
+import vooga.network.example.plantvszombie.game.LevelSetup;
 
 /**
  * A level where nothing happens except for a "you win" or "you lose" message. 
@@ -16,10 +17,12 @@ import vooga.levels.AbstractLevel;
  */
 public class WinLossLevel extends AbstractLevel
 {    
+    private VoogaGame game;
     
     public WinLossLevel (Collection<SpriteGroup<Sprite>> players, VoogaGame game)
     {
         super(players, game);
+        this.game = game;
     }
 
     /**
@@ -32,7 +35,8 @@ public class WinLossLevel extends AbstractLevel
         addBackground();
         Paddle paddle = (Paddle) getSpriteGroup("paddle").getActiveSprite();
         paddle.setActive(false);
-        Breakout.eventManager.removeEventHandlers("*");
+     
+        game.getEventManager().removeEventHandlers("*");
     }
 
 }

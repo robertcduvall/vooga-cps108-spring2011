@@ -37,9 +37,7 @@ public class BallEdgeBounce extends EdgeCollisionGroup
     @Override
     public void collidedBottom (Sprite s)
     {
-        s.setActive(false);
-        
-        Breakout.eventManager.fireEvent(this, "Game.BallLost");
+        ((Ball) s).destroy();
     }
 
 }

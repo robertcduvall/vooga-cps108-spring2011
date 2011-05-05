@@ -19,10 +19,8 @@ public class Breakout extends VoogaGame
     {distribute = true;}
     
     /*
-     * We need these global variables because the level loader doesn't allow
-     * sprites to access the game class. 
+     * We need this global variable to create blocks.
      */
-    public static EventManager eventManager;
     public static ImageLoader imageLoader;
     
     public static void main (String[] args)
@@ -36,7 +34,6 @@ public class Breakout extends VoogaGame
     @Override
     public void initResources ()
     {
-        eventManager = getEventManager();
         imageLoader = getImageLoader();
         
         Paddle paddle = new Paddle(this, getWidth()/2, getHeight());

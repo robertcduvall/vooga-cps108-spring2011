@@ -97,15 +97,6 @@ public class Paddle extends Sprite
                 shift(PADDLE_SPEED);
             }            
         });
-        
-        game.registerEventHandler("Game.BallLost",  new IEventHandler()
-        {
-            @Override
-            public void handleEvent (Object o)
-            {
-                prepareNewBall();
-            }            
-        });
     }
 
     /**
@@ -139,7 +130,8 @@ public class Paddle extends Sprite
             ballCount--;
             hasTheBall = false;
             
-            game.getLevelManager().addArchetypeSprite("ball", (int) getCenterX(), (int) getY());
+            Ball ball = (Ball) game.getLevelManager().addArchetypeSprite("ball", (int) getCenterX(), (int) getY());
+            ball.setParent(this);
         }
     }
 
