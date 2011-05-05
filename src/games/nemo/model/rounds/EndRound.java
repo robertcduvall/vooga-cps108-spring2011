@@ -29,9 +29,9 @@ public class EndRound extends AbstractTransitRound
 	{
 		super.render(g);
 		
-		myFont.drawString(g, "====================", 340, 307);
-        myFont.drawString(g, myToShow, 350, 317);
-        myFont.drawString(g, "====================", 340, 327);
+		myFont.drawString(g, "      ====================      ", 280, 157);
+        myFont.drawString(g, myToShow, 280, 172);
+        myFont.drawString(g, "      ====================      ", 280, 187);
 	}
 	
 }

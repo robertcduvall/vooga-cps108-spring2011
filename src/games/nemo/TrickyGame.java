@@ -42,7 +42,7 @@ import com.golden.gamedev.object.font.BitmapFont;
  */
 public class TrickyGame extends VoogaGame
 {
-	// { distribute = true; }
+	{ distribute = true; }
 	private ResourceManager myResourceManager;
 	
 	private static String GAME_RESOURCE = "game";
