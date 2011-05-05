@@ -11,6 +11,12 @@ import vooga.core.event.IEventHandler;
 import vooga.resources.images.ImageLoader;
 import vooga.sprites.spritegroups.SpriteGroup;
 
+/**
+ * Jezzball!
+ * 
+ * @author KevinWang
+ *
+ */
 public class Jezzball extends VoogaGame{
     public static ImageLoader imageLoader;
     
