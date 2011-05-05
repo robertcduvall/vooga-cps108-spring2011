@@ -12,6 +12,7 @@ public class PlayerPaddle extends AbstractPaddle{
 	
 	public PlayerPaddle(VoogaGame game, double x, double y) {
 		super(game.getImageLoader().getImage("paddle"), x, y);
+		health=5;
 		
 		this.game = game;
 		BallInPlay = false;
@@ -37,6 +38,16 @@ public class PlayerPaddle extends AbstractPaddle{
             	moveDown();
             }            
         });
+        
+        game.registerEventHandler("DecreasePlayerHealth.bounds", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+            	decreaseHealth();
+            	System.out.println("player HEalth: "+health);
+            }            
+        });		
         
         game.registerEventHandler("StartNewBall", new IEventHandler()
         {

@@ -6,7 +6,7 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.util.buildable.components.IComponent;
 
 public class AbstractPaddle extends Sprite {
-	private int health = 20;
+	int health;
 
 	public AbstractPaddle() {
 		super();
@@ -26,6 +26,14 @@ public class AbstractPaddle extends Sprite {
 
 	public AbstractPaddle(double x, double y) {
 		super(x, y);
+	}
+	
+	public void decreaseHealth(){
+		health = health-1;
+	}
+	
+	public boolean isDead() {
+		return health==0;
 	}
 	
 	@Override

@@ -9,10 +9,10 @@ import vooga.sprites.spritebuilder.components.PongTargetC;
 import vooga.sprites.spritegroups.SpriteGroup;
 
 public class AIPaddle extends AbstractPaddle{
-
 	
 	public AIPaddle(VoogaGame game, double x, double y) {
 		super(game.getImageLoader().getImage("paddle"), x, y);
+		health = 10;
 		
 		
 		//game.getEventManager().addTimer("hi", 500, "AIstart", game);
@@ -34,6 +34,16 @@ public class AIPaddle extends AbstractPaddle{
         		addComponent(trackBall);
             }            
         });
+		
+		game.registerEventHandler("DecreaseAIHealth.bounds", new IEventHandler()
+        {
+            @Override
+            public void handleEvent (Object o)
+            {
+            	decreaseHealth();
+            	System.out.println("AI HEalth: "+health);
+            }            
+        });		
 		
 		game.registerEventHandler("FirePowerUp.one", new IEventHandler() 
         {
