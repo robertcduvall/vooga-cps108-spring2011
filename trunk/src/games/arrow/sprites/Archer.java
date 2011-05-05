@@ -36,6 +36,7 @@ public class Archer extends GoodSprite implements IPowerupable{
             public void handleEvent (Object o)
             {
                 pullBowstring();
+                releaseBowstring();
             }
         });
         myGame.registerEventHandler("Input.User.Release", new IEventHandler()
@@ -76,6 +77,7 @@ public class Archer extends GoodSprite implements IPowerupable{
             public void handleEvent (Object o)
             {
                 mutlishot();
+                releaseBowstring();
             }
         });
        
@@ -91,19 +93,18 @@ public class Archer extends GoodSprite implements IPowerupable{
 		Sprite arrow = ArrowBuilder.buildSprite((Arrow)myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY()), 0.0, .0001);
 	    arrow.move(-arrow.getWidth()/2, -arrow.getHeight()/2);
 	    arrow.setMovement(myTension*.5, angle);
-	    releaseBowstring();
+	    
 	}
 
 	protected void releaseBowstring() {
-//		myTension = 0;
+		myTension = 0;
 	}
 
 	
 
 	protected void pullBowstring() {
 		
-//		myTension = myTension >= 2 ? myTension : (myTension + .01);
-		myTension = 2;
+		myTension = myTension >= 2 ? myTension : (myTension + .02);
 		
 	}
 	
