@@ -9,24 +9,28 @@ public class ArrowEdgeCollision extends EdgeCollisionGroup<Arrow> {
 
 	@Override
 	public void collidedTop(Arrow s) {
-		s.setAbsoluteSpeed(0);
 	}
 
 	@Override
 	public void collidedRight(Arrow s) {
-		//do nothing
+		destroyArrow(s);
 	}
 
 	@Override
 	public void collidedLeft(Arrow s) {
-		//do nothing
+		destroyArrow(s);
 	}
 
 	@Override
 	public void collidedBottom(Arrow s) {
+		destroyArrow(s);
+	}
+
+	private void destroyArrow(Arrow s) {
 		s.setAbsoluteSpeed(0);
 		s.removeComponent(PermAccelerationC.class);
 		getGroup2().remove(s);
+		
 	}
 
 

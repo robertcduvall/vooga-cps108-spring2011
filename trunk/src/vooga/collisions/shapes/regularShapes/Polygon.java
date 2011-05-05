@@ -211,8 +211,8 @@ public class Polygon extends Shape
 	}
 
 	public Polygon simplify(int n) {
-		Vertex[] newSet = new Vertex[vertices.length/n];
-		for (int i = 0; (i+1)*(n) < vertices.length; i++){
+		Vertex[] newSet = new Vertex[(int)Math.floor(vertices.length/n)];
+		for (int i = 0; i < newSet.length; i++){
 			newSet[i] = vertices[i*n];
 		}
 		vertices = newSet;

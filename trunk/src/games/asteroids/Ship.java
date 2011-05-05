@@ -17,21 +17,6 @@ import vooga.util.buildable.components.predefined.movement.Speed2DC;
 
 public class Ship extends Sprite
 {
-	@Override
-	public void render(Graphics2D g,int x,int y) {
-		AffineTransform aTransform = new AffineTransform();
-        aTransform.translate((int) this.getX() +width/2, 
-                             (int) this.getY()+height/2);
-        aTransform.rotate(Math.toRadians(this.getAngle()+90));
-        
-        aTransform.translate((int) -width/2, 
-                             (int) -height/2);
-        if (this.getHorizontalSpeed() < 0) g.drawImage(ImageUtil.flip(ImageUtil.resize(image, width, height)),aTransform,null);
-        else g.drawImage(ImageUtil.resize(image, width, height),aTransform,null);
-        super.renderComponents(g, x, y);
-        g.setColor(Color.BLACK);
-		this.getCollisionShape().render(g);
-	}
 		
 
 
@@ -122,19 +107,19 @@ public class Ship extends Sprite
 
     public void thrust ()
     {
-        super.setAbsoluteSpeed(.1);
+        super.accelerate(.001);
         //TODO PHYSICS!
     }
 
 
     public void turnLeft ()
     {
-       this.setAngle(getAngle() - 1);
+       this.setAngle(getAngle() - 2);
     }
 
 
     public void turnRight ()
     {
-        setAngle(getAngle() + 1);
+        setAngle(getAngle() + 2);
     }
 }
