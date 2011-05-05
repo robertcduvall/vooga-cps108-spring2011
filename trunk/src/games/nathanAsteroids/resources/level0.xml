@@ -1,0 +1,14 @@
+<level>
+	<background type="color">black</background>
+	
+	<sprite group="asteroid" class="games.nathanAsteroids.gameObjects.Asteroid" type="asteroid" image="asteroid" />
+
+	<goal class="games.nathanAsteroids.AsteroidsCleared"></goal>
+	<instance type="asteroid">
+		<x>200</x>
+		<y>200</y>
+		<mass>20</mass>
+		<hp>50</hp>
+		<def>10</def></instance>
+	<collision_manager g1="ship" g2="ship" class="games.nathanAsteroids.collision.ShipEdgeCollision"></collision_manager>
+	<collision_manager g1="asteroid" g2="ship" class="games.nathanAsteroids.collision.AsteroidShipCollision"></collision_manager></level>

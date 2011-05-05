@@ -1,0 +1,8 @@
+<keymap>
+	<key_event event="Input.User.FireBackEngine" sensitivity="Level" key="W"/>
+	<key_event event="Input.User.FireLeftEngine" sensitivity="Level" key="A"/>
+	<key_event event="Input.User.FireFrontEngine" sensitivity="Level" key="S"/>
+	<key_event event="Input.User.FireRightEngine" sensitivity="Level" key="D"/>
+	<key_event event="Input.User.FireLeftGun" sensitivity="Level" key="Q"/>
+	<key_event event="Input.User.FireRightGun" sensitivity="Level" key="E"/>
+</keymap>

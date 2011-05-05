@@ -1,0 +1,39 @@
+<ship>
+<sprite class="games.nathanAsteroids.ship.CommandCenterPiece" 
+	type="commandCenterPiece" image="commandCenterPiece" hp="30" mass="10" def="10" />
+	<sprite class="games.nathanAsteroids.ship.EnginePiece" 
+	type="enginePiece" image="enginePiece" hp="30" mass="10" def="10" />
+	<sprite class="games.nathanAsteroids.ship.HullPiece" 
+	type="hullPiece" image="hullPiece" hp="30" mass="10" def="10" />
+	<sprite class="games.nathanAsteroids.ship.GunPiece" 
+	type="gunPiece" image="gunPiece" hp="30" mass="10" def="10" />
+
+		
+<piece type="commandCenter" rotation="0" x="0" y="0"></piece>
+
+<piece rotation="-90" type="engine" x="-32" y="48">
+	<event>Input.User.FireBackEngine</event></piece>
+<piece rotation="-90" type="engine" x="32" y="48">
+	<event>Input.User.FireBackEngine</event></piece>
+	
+<piece rotation="-90" type="hull" x="-32" y="16"></piece>		
+<piece rotation="-90" type="hull" x="32" y="16"></piece>
+
+<piece rotation="-90" type="hull" x="-32" y="-16"></piece>		
+<piece rotation="-90" type="hull" x="32" y="-16"></piece>
+
+<piece rotation="0" type="engine" x="-64" y="-16">
+	<event>Input.User.FireRightEngine</event></piece>		
+<piece rotation="180" type="engine" x="64" y="-16">
+	<event>Input.User.FireLeftEngine</event></piece>
+
+<piece rotation="-90" type="gun" x="-32" y="-48">
+	<event>Input.User.FireLeftGun</event></piece>		
+<piece rotation="-90" type="gun" x="32" y="-48">
+	<event>Input.User.FireRightGun</event></piece>
+
+<piece rotation="-90" type="hull" x="0" y="-32"></piece>
+<piece rotation="90" type="engine" x="0" y="-64">
+	<event>Input.User.FireFrontEngine</event></piece>
+
+</ship>
