@@ -53,7 +53,7 @@ public class MapLevel extends AbstractLevel
 		myPlayer.mapX = myX;
 		myPlayer.mapY = myY;
 		
-		if(myX < 70 && myY > 95 && myY < 200)	//healing house
+		if(myX < 70 && myY > 95 && myY < 200)	//healing castle
 		{
 			myPlayer.curHP = myPlayer.baseHP;
 			myPlayer.alive = true;
