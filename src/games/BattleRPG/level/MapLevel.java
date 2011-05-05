@@ -56,6 +56,7 @@ public class MapLevel extends AbstractLevel
 		if(myX < 70 && myY > 95 && myY < 200)	//healing house
 		{
 			myPlayer.curHP = myPlayer.baseHP;
+			myPlayer.alive = true;
 			System.out.println("\nYou feel rested, and your hitpoints are restored.");
 		}
 		else if(myX > 300)							//ice environment
