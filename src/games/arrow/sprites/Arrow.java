@@ -19,11 +19,11 @@ public class Arrow extends GoodSprite {
 		return super.getAngle();
 	}
 
-	@Override
-	public void render(Graphics2D g, int x, int y) {
-		super.render(g, x, y);
-		this.getCollisionShape().render(g);
-	}
+//	@Override
+//	public void render(Graphics2D g, int x, int y) {
+//		super.render(g, x, y);
+//		this.getCollisionShape().render(g);
+//	}
 	
 	public Arrow(BufferedImage image, int x, int y)
     {

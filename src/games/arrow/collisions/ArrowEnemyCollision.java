@@ -8,6 +8,7 @@ public class ArrowEnemyCollision extends BasicCollisionGroup<Arrow, Enemy>{
 
 	@Override
 	public void collided(Arrow s1, Enemy s2) {
+		
 		if (!s2.isDead()){
 			getGroup1().remove(s1);
 			s2.die();

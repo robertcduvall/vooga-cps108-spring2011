@@ -88,7 +88,6 @@ public class Archer extends GoodSprite implements IPowerupable{
 	}
 
 	protected void fire(Double angle) {
-		System.out.println("Fire!");
 		Sprite arrow = ArrowBuilder.buildSprite((Arrow)myGame.getLevelManager().addArchetypeSprite("arrow", (int)getCenterX(), (int)getCenterY()), 0.0, .0001);
 	    arrow.move(-arrow.getWidth()/2, -arrow.getHeight()/2);
 	    arrow.setMovement(myTension*.5, angle);
