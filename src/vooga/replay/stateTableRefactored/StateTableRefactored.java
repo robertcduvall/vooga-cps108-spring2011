@@ -34,27 +34,26 @@ public class StateTableRefactored implements Serializable {
 	private int replayTime;
 	
 	private EventManager myEventManager;
-	private LevelManager myLevelManager;
+	private AbstractLevel myLevel;
 
 	public StateTableRefactored(EventManager eventManager, LevelManager levelManager) {
 		myMap = new HashMap<Integer, State>();
 		myEventManager = eventManager;
-		myLevelManager = levelManager;
+		myLevel = levelManager.getCurrentLevel();
 		initEvents();
 	}
 
-	public void initEvents() {
-		myBackground = new SerialBackground(myLevelManager.getCurrentLevel().getBackground());
+	/**
+	 * Initializes background and Record event
+	 */
+	private void initEvents() {
+		myBackground = new SerialBackground(myLevel.getBackground());
 		myEventManager.addEveryTurnEvent("Method.record", new IEventHandler() {
 			@Override
 			public void handleEvent(Object o) {
-				record(myLevelManager.getCurrentLevel());
+				record(myLevel);
 			}
 		});
-	}
-
-	public Replay replayTable(VoogaGame parent) {
-		return new Replay(parent, this, myMap.size());// REASON - takes a normal StateTable
 	}
 
 	/**
@@ -64,7 +63,7 @@ public class StateTableRefactored implements Serializable {
 	 * @param field
 	 *            - PlayField passed to the StateTable to be recorded.
 	 */
-	public void updateStateTable(VoogaPlayField field) {
+	private void updateStateTable(VoogaPlayField field) {
 		State moment = new State();
 		for (SpriteGroup<Sprite> spriteGroup : field.getAllSpriteGroups()) {
 			moment.addSpriteGroupToState(spriteGroup);
@@ -72,6 +71,15 @@ public class StateTableRefactored implements Serializable {
 		myMap.put(myMap.size(), moment); //tack the state onto the end
 	}
 	
+	/**
+	 * Creates a replay object using this StateTable
+	 * @param parent VoogaGame object (In case you wish to return to the VoogaGame?)
+	 * @return Replay object declared with current StateTable
+	 */
+	public Replay replayTable(VoogaGame parent) {
+		return new Replay(parent, this, myMap.size());// REASON - takes a normal StateTable
+	}
+
 	/**
 	 * When called by Replay, this updates the PlayField based a single state in the state
 	 * table, at index replayTime.
