@@ -1,0 +1,14 @@
+Regarding the final refactoring project
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+For the final project I refactored the games.patterson_game.refactoredVooga.levelsRefactored package which includes AbstractLevel, 
+IGoal, IRenderable, IUpdatable, LevelException, LevelManager, SpritePool and VoogaPlayField. 
+I did not, however, work on the levels.util package which was designed primarily by the resources team.
+
+Regarding the game
+~~~~~~~~~~~~~~~~~~
+To play:
+	Use the arrow keys to move your ship.
+	Collect the powerups (which are the blue triangle things floating across the screen) by running into them
+	Shoot floating objects by pressing the space bar (The red blocks are obstacles and the small gray circles are explosives)
+	Some floating objects require many hits to kill
+	Don't die (your health is in the upper left-hand corner)
