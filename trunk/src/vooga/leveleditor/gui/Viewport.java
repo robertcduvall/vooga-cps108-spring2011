@@ -107,23 +107,18 @@ public class Viewport extends JLayeredPane
          */
         @Override
         public void mouseEntered(MouseEvent arg0) {
-            return;
         }
 
         @Override
         public void mouseExited(MouseEvent arg0) {
-            return;
         }
 
         @Override
         public void mousePressed(MouseEvent arg0) {
-
-            return;
         }
 
         @Override
         public void mouseReleased(MouseEvent arg0) {
-            return;
         }
 
     }
