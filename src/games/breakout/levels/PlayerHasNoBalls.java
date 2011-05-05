@@ -1,20 +1,21 @@
-package games.breakout;
+package games.breakout.levels;
 
+import games.breakout.Breakout;
 import games.breakout.sprites.Ball;
 import games.breakout.sprites.Paddle;
 import vooga.levels.IGoal;
 import vooga.levels.LevelException;
 import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
+import vooga.sprites.improvedsprites.Sprite;
 
 /**
- * A goal that checks if all the blocks on the playfield have
- * been destroyed.
+ * A goal that checks if the player has no balls.
  * 
  * @author Misha
  *
  */
-public class BlocksCleared implements IGoal
+public class PlayerHasNoBalls implements IGoal
 {   
     private VoogaPlayField playfield;
     private LevelManager levels;
@@ -25,36 +26,33 @@ public class BlocksCleared implements IGoal
     @Override
     public boolean checkCompletion (LevelManager levelManager)
     {
-        return playfield.getSpriteGroup("block").getActiveSprite() == null;
+        Paddle paddle = (Paddle) playfield.getSpriteGroup("paddle").getActiveSprite(); 
+        
+        if (paddle == null) return false;
+        
+        Ball ball = (Ball) playfield.getSpriteGroup("ball").getActiveSprite();
+
+        return ball == null && paddle.getBallCount() == 0;
     }
 
 
     /**
-     * Progress to the next level, if available.
+     * Lose the game.
      */
     @Override
     public void progress ()
     {
-        levels.updateNumOfLevelsCompleted();
-        
-        
         Ball b = (Ball) playfield.getSpriteGroup("ball").getActiveSprite();
-        Paddle p = (Paddle) playfield.getSpriteGroup("paddle").getActiveSprite();
         
         if (b != null) b.setActive(false);
-        p.setBallCount(1 + p.getBallCount());
-        p.prepareNewBall();
+
+        for(Sprite block : playfield.getSpriteGroup("block").getSprites())
+        {
+            if (block != null)
+                block.setActive(false);
+        }
         
-        try
-        {
-            levels.loadNextLevel();
-        }
-        catch (LevelException e)
-        {
-            /* TODO win the game better */
-            System.out.println("You win!");
-            System.exit(0);  
-        }
+        levels.loadLevel(Level.LOSS_LEVEL);
     }
 
 

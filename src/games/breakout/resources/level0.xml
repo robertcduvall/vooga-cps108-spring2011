@@ -8,7 +8,7 @@
 	<sprite group="ball" class="games.breakout.sprites.Ball" type="ball" image="ball" />
 	<sprite group="paddle" class="games.breakout.sprites.Paddle" type="paddle" image="paddle" />
 
-	<goal class="games.breakout.BlocksCleared" />
+	<goal class="games.breakout.levels.BlocksCleared" />
 
 	<instance type="block"><x>6</x><y>0</y><c>1</c></instance>
 	<instance type="block"><x>7</x><y>0</y><c>1</c></instance>

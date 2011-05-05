@@ -1,0 +1,7 @@
+<level>
+	<background type="color">blue</background>
+	
+	<sprite group="message" class="games.breakout.sprites.Message" type="message" image="lose" />
+	
+	<instance type="message"><x>300</x><y>240</y></instance>
+</level>

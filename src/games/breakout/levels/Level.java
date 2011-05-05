@@ -1,4 +1,4 @@
-package games.breakout;
+package games.breakout.levels;
 
 import java.util.Collection;
 import vooga.core.VoogaGame;
@@ -14,6 +14,10 @@ import vooga.levels.AbstractLevel;
  */
 public class Level extends AbstractLevel
 {
+    public static final int GAME_LEVELS = 2;
+    public static final int WIN_LEVEL = 2;
+    public static final int LOSS_LEVEL = 3;
+    
     public Level (Collection<SpriteGroup<Sprite>> players, VoogaGame game)
     {
         super(players, game);

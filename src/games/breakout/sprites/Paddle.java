@@ -1,5 +1,6 @@
 package games.breakout.sprites;
 
+import games.breakout.Breakout;
 import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.resources.Direction;
@@ -114,13 +115,6 @@ public class Paddle extends Sprite
     public void prepareNewBall ()
     {
         hasTheBall = true;
-        
-        if (ballCount == 0)
-        {
-            /* TODO lose the game better */
-            System.out.println("You lose!");
-            System.exit(0);
-        }
     }
 
     /**
