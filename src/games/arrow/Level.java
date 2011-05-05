@@ -34,7 +34,7 @@ public class Level extends AbstractLevel
                 }
         });
         
-        game.addPeriodicTimer("OneTime", 500, "EnemySpawn");
+        game.addPeriodicTimer("OneTime", 2000, "EnemySpawn");
     }
 
     @Override

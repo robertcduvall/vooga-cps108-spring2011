@@ -33,7 +33,7 @@ public class Asteroids extends VoogaGame
         myShip = new Ship(this);
         myShip.setX(150);
         myShip.setY(150);
-        myShip.addComponent(new CollisionCircleC(myShip.getCenterPoint(), myShip.getHeight()/2));
+        myShip.addComponent(new CollisionPolygonC(ShapeFactory.makePolygonFromImage(myShip.getImage(),3)));
         getLevelManager().addPlayer(new SpriteGroup<Ship>("ship", myShip));
         
         // TODO getResourceManager().getKeyMap().registerEventHandler(this);
