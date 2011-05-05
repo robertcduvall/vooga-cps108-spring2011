@@ -18,10 +18,11 @@ public class ComponentResources
         return ComponentResources.areSameComponent(bc1.getClass(), bc2.getClass());
     }
 
-    public static boolean areSameComponent (Class<? extends IComponent> c1,
+    public static boolean areSameComponent(Class<? extends IComponent> c1,
                                              Class<? extends IComponent> c2)
     {
-        return c1.equals(c2);
+    	
+        return c1.isAssignableFrom(c2) || c2.isAssignableFrom(c1);
     }
 
     public static List<Class<? extends IComponent>> convertToClassList (Set<IComponent> comps)

@@ -27,6 +27,7 @@ import vooga.sprites.improvedsprites.BaseSprite;
 import vooga.sprites.improvedsprites.Sprite;
 
 import com.golden.gamedev.object.Background;
+import com.golden.gamedev.object.PlayField;
 import com.golden.gamedev.object.Timer;
 import com.golden.gamedev.util.Utility;
 
@@ -87,6 +88,8 @@ public class SpriteGroup<T extends Sprite> {
     private Comparator<T> comparator; // comparator for sorting sprite
 
 	private ArrayList<T> mySprites;
+
+	private ArrayList<T> myRemoveGroup;
     
     /** ****************** SPRITES THAT BELONG TO THIS GROUP ******************** */
     
@@ -103,6 +106,7 @@ public class SpriteGroup<T extends Sprite> {
         this.name = name;
         this.background = Background.getDefaultBackground();
         this.mySprites = new ArrayList<T>();
+        this.myRemoveGroup = new ArrayList<T>();
         this.addSprites(sprites);
     }
     
@@ -131,16 +135,19 @@ public class SpriteGroup<T extends Sprite> {
      * @see #getScanFrequence()
      */
     public void update(long elapsedTime) {
+    	mySprites.removeAll(myRemoveGroup);
         for (T sprite: this.mySprites) {
             if (sprite.isActive()) {
                 sprite.update(elapsedTime);
             }
+            else
+            	myRemoveGroup.add(sprite);
         }
         
-        if (this.scanFrequence.action(elapsedTime)) {
-            // remove all inactive sprites
-            this.removeInactiveSprites();
-        }
+//        if (this.scanFrequence.action(elapsedTime)) {
+//            // remove all inactive sprites
+//            this.removeInactiveSprites();
+//        }
     }
     
     /**
@@ -500,7 +507,9 @@ public class SpriteGroup<T extends Sprite> {
 
 
 
-
+	public void remove(T s){
+		myRemoveGroup.add(s);
+	}
 
 
 	public void clear() {

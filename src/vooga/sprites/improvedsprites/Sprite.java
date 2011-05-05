@@ -186,7 +186,7 @@ public class Sprite extends BaseSprite
     {
         try
         {
-            addComponents(c.newInstance());
+            addComponent(c.newInstance());
         }
         catch (Exception e)
         {
@@ -210,9 +210,17 @@ public class Sprite extends BaseSprite
      * 
      * @param c
      */
-    public void addComponent (IComponent c)
+    public void addComponent (IComponent n)
     {
-        myComponents.add(c);
+    	
+    	for (IComponent c : myComponents)
+        {
+            if (ComponentResources.areSameComponent(n, c)) {
+            	myComponents.remove(c);
+            	break;
+            }
+        }
+    	myComponents.add(n);
     }
 
 
@@ -240,7 +248,10 @@ public class Sprite extends BaseSprite
     @Override
     public void addComponents (IComponent ... components)
     {
-        myComponents.addAll(Arrays.asList(components));
+    	for (IComponent c : components)
+        {
+            this.addComponent(c);
+        }
     }
 
 
@@ -362,7 +373,7 @@ public class Sprite extends BaseSprite
     @Override
     public <T extends ICollisionShape> T getCollisionShape ()
     {
-        if (this.getComponent(CollisionShapeC.class) == null)
+        if (!this.carriesComponent(CollisionShapeC.class))
         {
         	
             this.addComponent(new CollisionPolygonC(
@@ -372,7 +383,7 @@ public class Sprite extends BaseSprite
                                   new Vertex(this.getX(),this.getY() + this.getHeight()))));
         }
 
-        return (T) this.getComponentsWhichSubclass(CollisionShapeC.class).get(0).getCollisionShape();
+        return (T) this.getComponent(CollisionShapeC.class).getCollisionShape();
     }
 
 
