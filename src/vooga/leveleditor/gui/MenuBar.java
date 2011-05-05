@@ -13,6 +13,7 @@ import javax.swing.JMenuItem;
 /**
  * The menu bar for the level editor.
  */
+@SuppressWarnings("serial")
 public class MenuBar extends JMenuBar
 {
 

@@ -6,6 +6,7 @@ import javax.swing.JButton;
 /**
  * The toolbar has useful buttons.
  */
+@SuppressWarnings("serial")
 public class ToolBar extends JToolBar
 {
 

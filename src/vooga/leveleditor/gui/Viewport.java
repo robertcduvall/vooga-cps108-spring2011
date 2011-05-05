@@ -4,9 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
+
 
 /**
  * Renders and draws the level. Allows the user to interact with sprites that
@@ -14,6 +13,7 @@ import javax.swing.event.MouseInputListener;
  * @author Alex Lee
  * @author Charlie Hatcher
  */
+@SuppressWarnings("serial")
 public class Viewport extends JLayeredPane
 {
 
@@ -62,6 +62,7 @@ public class Viewport extends JLayeredPane
     }
 
     void addImage(DraggableImage i){
+    	System.out.println("added");
         mySprites.add(i);
     }
 

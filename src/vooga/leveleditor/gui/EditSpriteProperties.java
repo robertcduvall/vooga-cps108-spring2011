@@ -2,10 +2,10 @@ package vooga.leveleditor.gui;
 
 
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.TableColumn;
 
 
+
+@SuppressWarnings("serial")
 public class EditSpriteProperties extends JTable{
 	
 	

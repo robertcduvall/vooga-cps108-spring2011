@@ -1,8 +1,6 @@
 package vooga.leveleditor.gui;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +9,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.*;
 
@@ -23,10 +20,12 @@ import org.w3c.dom.*;
  * @author Alex Lee
  * @author Charlie Hatcher
  */
+@SuppressWarnings("serial")
 public class DrawingBoard extends JPanel
 {
 
-    private SwingGUI owner;
+    @SuppressWarnings("unused")
+	private SwingGUI owner;
 
     private Palette palette;
 
@@ -51,7 +50,8 @@ public class DrawingBoard extends JPanel
          * Load the background image so that we know how big the drawing board
          * should be.
          */
-        BufferedImage bgimage = null;
+        @SuppressWarnings("unused")
+		BufferedImage bgimage = null;
         try
         {
             bgimage = ImageIO.read(new File("src/vooga/leveleditor/images/space.jpg"));
@@ -110,7 +110,8 @@ public class DrawingBoard extends JPanel
             for(int i = 0; i < sprites.getLength(); i++)
             {
                 Element sprite = (Element)sprites.item(i);
-                DraggableImage newSprite = new DraggableImage(viewport, sprite);
+                DraggableImage newSprite = new DraggableImage(viewport, sprite, false);
+                viewport.addImage(newSprite);
                 palette.addButton(sprite);
             }
         }
