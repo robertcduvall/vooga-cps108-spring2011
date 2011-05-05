@@ -9,6 +9,12 @@ import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.view.actions.ActionFactory;
 import vooga.arcade.view.helper.ResourceManager;
 
+/**
+ * Refactor ButtonBar file
+ * @author Chao Chen
+ *
+ */
+
 public class ButtonBarRefactored implements Commons
 {
     /**

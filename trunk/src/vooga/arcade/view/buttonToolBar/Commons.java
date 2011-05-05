@@ -1,5 +1,11 @@
 package vooga.arcade.view.buttonToolBar;
 
+/**
+ * Refactor ButtonBar file
+ * @author Chao Chen
+ *
+ */
+
 public interface Commons {
     public static final String TOOLBAR_MANAGER = "vooga.arcade.resources.ToolbarButtonsResource";   
     public static final String TOOLBAR = "ToolBar";
