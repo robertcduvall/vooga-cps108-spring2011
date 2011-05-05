@@ -72,7 +72,7 @@ public class ObstacleReleaseZone
     public void releaseFloatingObject ()
     {
         int bayToOpen = myGenerator.nextInt(myReleaseZone.length);
-        if(myReleaseZone[bayToOpen] == true)
+       // if(myReleaseZone[bayToOpen] == true)
         {
             String randomOption = myOptionList.get(myGenerator.nextInt(myOptionList.size()));
             Sprite newObstacle = myLevelManager.addArchetypeSprite(randomOption, myGame.getWidth(), bayToOpen * myBundle.getInteger("obstacle_height"));

@@ -5,6 +5,7 @@ import games.patterson_game.refactoredVooga.resources.bundle.Bundle;
 import games.patterson_game.refactoredVooga.sprites.improvedsprites.Sprite;
 import games.patterson_game.refactoredVooga.sprites.spritegroups.SpriteGroup;
 import java.awt.Dimension;
+import com.golden.gamedev.object.background.ImageBackground;
 
 /**
  * Avoider Game!
@@ -19,7 +20,7 @@ public class AvoiderGame extends VoogaGame
     
     public static void main (String[] args)
     {
-        launchGame(AvoiderGame.getInstance(), new Dimension(1000, 500), false);
+        launchGame(AvoiderGame.getInstance(), new Dimension(1000, 700), false);
     }
     
     /**
@@ -32,6 +33,12 @@ public class AvoiderGame extends VoogaGame
         myShip = new Ship(this);
         myLevelManager.addPlayer(new SpriteGroup<Sprite>(myBundle.getString("player_group_name"), myShip));
         myLevelManager.loadLevel(0);
+    }
+    
+    public void lose()
+    {
+        fireEvent("ShowLoseScreen", "ShowLoseScreen",
+                  new ImageBackground(getImage(myBundle.getString("lose_background"))));
     }
     
     /** This method is deprecated in the VoogaGame class */
@@ -47,5 +54,7 @@ public class AvoiderGame extends VoogaGame
     {
         return myBundle;
     }
+    
+    { distribute = true; }    
 
 }

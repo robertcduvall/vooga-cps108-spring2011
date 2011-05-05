@@ -25,5 +25,8 @@
 	</image>	
 	<image name="Spearhead">
 		<path>src/games/patterson_game/resources/images/Spearhead.png</path>
+	</image>	
+	<image name="LoseScreen">
+		<path>src/games/patterson_game/resources/images/loseScreen.jpg</path>
 	</image>		
 </images>
