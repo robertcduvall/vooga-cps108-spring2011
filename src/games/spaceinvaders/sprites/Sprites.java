@@ -1,24 +1,21 @@
-package games.spaceinvaders;
+package games.spaceinvaders.sprites;
 
+import games.spaceinvaders.Commons;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import com.golden.gamedev.object.Sprite;
+import vooga.sprites.improvedsprites.Sprite;
 
 public class Sprites extends Sprite implements Commons
 {
-    private boolean visible;
+    private boolean visible = true;
     private Image image;
-    protected int x;
-    protected int y;
     protected boolean dying;
-    protected int dx;
 
-    public Sprites(BufferedImage image) 
+    public Sprites (BufferedImage image, int x, int y)
     {
-        super(image);
-        visible = true;
+        super(image, x, y);
     }
-
+    
     public void die() 
     {
         visible = false;
@@ -46,26 +43,6 @@ public class Sprites extends Sprite implements Commons
 //    {
 //        return (BufferedImage)image;
 //    }
-
-    public void setX(int x) 
-    {
-        this.x = x;
-    }
-
-    public void setY(int y) 
-    {
-        this.y = y;
-    }
-
-    public double getY() 
-    {
-        return y;
-    }
-
-    public double getX() 
-    {
-        return x;
-    }
 
     public void setDying(boolean dying) 
     {

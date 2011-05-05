@@ -1,10 +1,8 @@
 package games.spaceinvaders.sprites;
 
 import java.awt.image.BufferedImage;
-import vooga.sprites.improvedsprites.Sprite;
-import games.spaceinvaders.Commons;
 
-public class Alien extends Sprite implements Commons
+public class Alien extends Sprites
 {
     private Bomb bomb;
 
@@ -25,8 +23,8 @@ public class Alien extends Sprite implements Commons
     {
         return bomb;
     }
-
-    public class Bomb extends Sprite 
+    
+    public class Bomb extends Sprites 
     {
         private boolean destroyed;
 
