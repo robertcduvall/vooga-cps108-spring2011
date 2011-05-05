@@ -1,0 +1,29 @@
+<images>
+	<image name="Font">
+		<path>src/games/patterson_game/resources/images/BitmapFont2.png</path>
+	</image>	
+	<image name="Ship">
+		<path>src/games/patterson_game/resources/images/Ship.png</path>
+	</image>
+	<image name="Background">
+		<path>src/games/patterson_game/resources/images/Background.jpg</path>
+	</image>	
+	<image name="BulletBall">
+		<path>src/games/patterson_game/resources/images/bullet_ball.png</path>
+	</image>
+	<image name="Obstacle">
+		<path>src/games/patterson_game/resources/images/Obstacle.png</path>
+	</image>
+	<image name="Explosive">
+		<path>src/games/patterson_game/resources/images/Explosive.png</path>
+	</image>
+	<image name="Powerup">
+		<path>src/games/patterson_game/resources/images/Powerup.png</path>
+	</image>
+	<image name="Shrapnel">
+		<path>src/games/patterson_game/resources/images/Shrapnel.png</path>
+	</image>	
+	<image name="Spearhead">
+		<path>src/games/patterson_game/resources/images/Spearhead.png</path>
+	</image>		
+</images>
