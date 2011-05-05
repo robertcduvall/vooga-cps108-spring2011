@@ -39,7 +39,7 @@ public class PhysicsVelocityC extends AbstractPhysicsC{
      * @param isOn
      */
     public PhysicsVelocityC(Velocity velocity, boolean isOn) {
-        super(new MasslessForceBehavior(), new MovableCollisionBehavior(velocity), isOn);
+        super(new EmptyForceBehavior(), new MovableCollisionBehavior(velocity), isOn);
     }
 
     @Override
