@@ -20,7 +20,11 @@ import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 import vooga.sprites.spritegroups.SpriteGroup;
 import vooga.util.math.LineMath;
 
-
+/**
+ * 
+ * @author Julian Genkins
+ *
+ */
 public class ArrowGame extends VoogaGame
 {
     public static void main (String[] args)

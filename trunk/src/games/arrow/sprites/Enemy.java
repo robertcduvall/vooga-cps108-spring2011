@@ -6,6 +6,8 @@ import games.breakout.Breakout;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import com.golden.gamedev.util.ImageUtil;
+
 import vooga.collisions.shapes.ShapeFactory;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.collisions.CollisionCircleC;
@@ -16,18 +18,12 @@ public class Enemy extends GoodSprite {
 
 	private boolean amDead;
 	
-	@Override
-	public void render(Graphics2D g, int x, int y) {
-		super.render(g, x, y);
-		this.getCollisionShape().render(g);
-	}
 
 	public Enemy(BufferedImage image, int x, int y) {
 		super(image, x, y);
 		this.setHorizontalSpeed((Math.random()-.5)*0.1);
-    	this.setSize(getHeight()/4,getWidth()/4);
-//		this.addComponent(new CollisionPolygonC(ShapeFactory.makePolygonFromImage(image, 2)));
-		this.addComponent(new CollisionCircleC(this.getCenterPoint(), this.getWidth()/2));
+//    	this.setSize(getHeight()/4,getWidth()/4);
+		this.addComponent(new CollisionPolygonC(ShapeFactory.makePolygonFromImage(ImageUtil.resize(image, getWidth(), getHeight()), 3)));
 		setDead(false);
 	}
 

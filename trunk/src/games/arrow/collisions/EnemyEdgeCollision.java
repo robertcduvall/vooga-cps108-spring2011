@@ -23,7 +23,6 @@ public class EnemyEdgeCollision extends EdgeCollisionGroup<Enemy> {
 
 	@Override
 	public void collidedBottom(Enemy s) {
-		System.out.println("COllided!");
 		s.setAbsoluteSpeed(0);		
 		getGroup2().remove(s);
 	}

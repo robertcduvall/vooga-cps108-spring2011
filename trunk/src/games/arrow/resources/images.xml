@@ -2,8 +2,20 @@
 	<image name="archer">
 		<path>src/games/arrow/resources/images/archer.gif</path>
 	</image>
-	<image name="enemy">
-		<path>src/games/arrow/resources/images/enemies/zebra.png</path>
+	<image name="enemy0">
+		<path>src/games/arrow/resources/images/enemies/lion.png</path>
+	</image>
+	<image name="enemy1">
+		<path>src/games/arrow/resources/images/enemies/dino.png</path>
+	</image>
+	<image name="enemy2">
+		<path>src/games/arrow/resources/images/enemies/panda.png</path>
+	</image>
+	<image name="enemy3">
+		<path>src/games/arrow/resources/images/enemies/deer.png</path>
+	</image>
+	<image name="enemy4">
+		<path>src/games/arrow/resources/images/enemies/dino.png</path>
 	</image>
 	<image name="arrow">
 		<path>src/games/arrow/resources/images/arrow.gif</path>
