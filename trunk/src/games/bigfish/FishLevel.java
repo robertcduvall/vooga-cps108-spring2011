@@ -23,7 +23,7 @@ public class FishLevel extends AbstractLevel {
 	public FishLevel(Collection<SpriteGroup<Sprite>> players, VoogaGame game) {
 		super(players, game);
 		myGame = game;
-		game.addPeriodicTimer("period1", 1000, "spawnFish");
+		game.addPeriodicTimer("period1", 5000, "spawnFish");
         game.registerEventHandler("spawnFish", new IEventHandler(){
 			@Override
 			public void handleEvent(Object o) {
