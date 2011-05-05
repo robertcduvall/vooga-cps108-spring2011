@@ -1,6 +1,6 @@
-package games.lolcats.src.Minos;
+package games.tetris.src.Minos;
 
-import games.lolcats.src.Context.ITetrisContext;
+import games.tetris.src.Context.ITetrisContext;
 
 import java.awt.image.BufferedImage;
 
