@@ -94,7 +94,7 @@ public class Avatar extends Sprite{
 	private void startLevelOver() {
 		if(myLives==0){
 			System.out.println("GameOver");
-			System.exit(0);
+			myGame.finish();
 		}
 		myLives--;
 		this.setX(X_LOCATION);
