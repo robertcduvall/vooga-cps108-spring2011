@@ -11,11 +11,11 @@ import vooga.sprites.improvedsprites.Sprite;
  * Encapsulates Sprite data for recording.
  * 
  * @author Josue, Chris
+ * 
  */
 @SuppressWarnings("serial")
 public class SpriteReplayData implements Serializable {
 
-	
 	private boolean isActive;
 	private Point2D.Double myPoint;
 	private BufferedImageSerialData myImage;
