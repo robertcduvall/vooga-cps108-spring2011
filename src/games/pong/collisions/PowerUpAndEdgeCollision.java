@@ -5,7 +5,7 @@ import games.pong.sprites.Ball;
 import vooga.collisions.collisionManager.boundaries.EdgeCollisionGroup;
 import vooga.sprites.improvedsprites.Sprite;
 
-public class BallAndEdgeCollision extends EdgeCollisionGroup{     
+public class PowerUpAndEdgeCollision extends EdgeCollisionGroup{     
 	    @Override
 	    public void collidedTop (Sprite s)
 	    {
@@ -16,19 +16,15 @@ public class BallAndEdgeCollision extends EdgeCollisionGroup{
 	    @Override
 	    public void collidedRight (Sprite s)
 	    {
-	        //((Ball) s).bounceLeft();
-	        s.setActive(false);
-	        PongGame.eventManager.fireEvent(this, "BallExitsRight");
-	        PongGame.eventManager.fireEvent(this, "BallExits");
+	    	s.setActive(false);//((Ball) s).bounceLeft();
 	    }
 
 
 	    @Override
 	    public void collidedLeft (Sprite s)
 	    {
-	    	s.setActive(false);
-	        PongGame.eventManager.fireEvent(this, "BallExitsLeft");
-	        PongGame.eventManager.fireEvent(this, "BallExits");	        
+	    	s.setActive(false);//((Ball) s).bounceRight();
+	        
 	    }
 
 
@@ -37,9 +33,7 @@ public class BallAndEdgeCollision extends EdgeCollisionGroup{
 	    {
 	       
 	    	((Ball) s).bounceUp();
-	    	// s.setActive(false);
-	        
-	       // Breakout.eventManager.fireEvent(this, "Game.BallLost");
+
 	    }
 
 }

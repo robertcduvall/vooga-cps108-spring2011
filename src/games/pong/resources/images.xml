@@ -5,4 +5,7 @@
 	<image name="paddle">
 		<path>src/games/pong/resources/images/paddle.gif</path>
 	</image>
+	<image name="powerup1">
+		<path>src/games/pong/resources/images/powerup1.png</path>
+	</image>
 </images>

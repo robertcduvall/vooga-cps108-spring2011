@@ -17,10 +17,10 @@ public class Ball extends Sprite
     public Ball(BufferedImage image, int x, int y)
     {
         super(image,x,y);
-        System.out.println("ballcreated!");
+        //System.out.println("ballcreated!");
         setX(x);
         setY(y);
-        setSpeed(.75, 0);
+        //setSpeed(.75, 0);
         
         //addComponent(new CollisionCircleC(getCenterPoint(), getWidth()/2));
     }
@@ -48,5 +48,10 @@ public class Ball extends Sprite
     {
         if (getHorizontalSpeed() < 0)
             setHorizontalSpeed(-getHorizontalSpeed());
+    }
+    
+	@Override
+    public Double getArbitraryRotate() {
+            return 0D;
     }
 }

@@ -14,7 +14,7 @@ public class PlayerPaddle extends AbstractPaddle{
 		super(game.getImageLoader().getImage("paddle"), x, y);
 		
 		this.game = game;
-		
+		BallInPlay = false;
         game.registerEventHandler("Input.Player.Up", new IEventHandler()
         {
             @Override
@@ -82,7 +82,9 @@ public class PlayerPaddle extends AbstractPaddle{
 	}
 	
 	public void createNewBall() {
-		game.getLevelManager().addArchetypeSprite("ball", (int) getCenterX()+10, (int) getY());
+		Ball ball = (Ball) game.getLevelManager().addArchetypeSprite("ball", (int) getCenterX()+10, (int) getY());
+		ball.setSpeed(.75, 0);
+		//game.getLevelManager().addArchetypeSprite("ball", (int) getCenterX()+10, (int) getY());
 		game.fireEvent(this, "AIstart", game);
 	}
 	
