@@ -8,14 +8,14 @@ import vooga.resources.Direction;
 
 public class AvatarToBlock extends BasicCollisionGroup<Avatar, Block >{
 
+   
 	@Override
 	public void collided(Avatar avatar, Block block) {
-		System.out.println("hello");
 		avatar.stopMoving();
-		
 	}
 
 
+	
 	
 	
 }

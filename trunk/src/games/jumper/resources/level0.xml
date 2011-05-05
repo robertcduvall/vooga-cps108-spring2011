@@ -46,26 +46,32 @@
 	<instance type="block"><x>660</x><y>340</y></instance>
 	<instance type="block"><x>680</x><y>340</y></instance>
 	
-	<instance type="block"><x>100</x><y>270</y></instance>
-	<instance type="block"><x>120</x><y>270</y></instance>
-	<instance type="block"><x>140</x><y>270</y></instance>
-	<instance type="block"><x>160</x><y>270</y></instance>
+	<instance type="block"><x>100</x><y>240</y></instance>
+	<instance type="block"><x>120</x><y>240</y></instance>
+	<instance type="block"><x>140</x><y>240</y></instance>
+	<instance type="block"><x>160</x><y>240</y></instance>
 	
 
-	<instance type="block"><x>220</x><y>260</y></instance>
 	<instance type="block"><x>240</x><y>260</y></instance>
 	<instance type="block"><x>260</x><y>260</y></instance>
+	<instance type="block"><x>280</x><y>260</y></instance>
 	
-	<instance type="block"><x>340</x><y>240</y></instance>
 	<instance type="block"><x>360</x><y>240</y></instance>
 	<instance type="block"><x>380</x><y>240</y></instance>
+	<instance type="block"><x>400</x><y>240</y></instance>
 	
-	<instance type="block"><x>420</x><y>200</y></instance>
-	<instance type="spikes"><x>440</x><y>180</y></instance>
+	<instance type="block"><x>480</x><y>200</y></instance>
+	<instance type="spikes"><x>505</x><y>180</y></instance>
 	
-	<instance type="block"><x>480</x><y>160</y></instance>
+	<instance type="block"><x>560</x><y>160</y></instance>
 	
-	<instance type="block"><x>360</x><y>120</y></instance>
-	<instance type="block"><x>380</x><y>120</y></instance>
-	<instance type="door"><x>360</x><y>50</y></instance>
+	<instance type="block"><x>440</x><y>80</y></instance>
+	<instance type="block"><x>460</x><y>80</y></instance>
+	
+	<instance type="block"><x>200</x><y>80</y></instance>
+	
+	
+	<instance type="block"><x>100</x><y>100</y></instance>
+	<instance type="block"><x>120</x><y>100</y></instance>
+	<instance type="door"><x>100</x><y>30</y></instance>
 </level>
