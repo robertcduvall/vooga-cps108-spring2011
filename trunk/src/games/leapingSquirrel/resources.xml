@@ -1,0 +1,10 @@
+<resources>
+	<images>
+		<source>src/games/leapingSquirrel/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.leapingSquirrel.Level">src/games/leapingSquirrel/resources/level0.xml</level>
+	<level id="1" type="games.leapingSquirrel.Level">src/games/leapingSquirrel/resources/level1.xml</level>
+	<level id="2" type="games.leapingSquirrel.Level">src/games/leapingSquirrel/resources/level2.xml</level>
+	<level id="3" type="games.leapingSquirrel.Level">src/games/leapingSquirrel/resources/level3.xml</level>
+	<source>src/games/leapingSquirrel/resources/keymap.xml</source>
+</resources>
