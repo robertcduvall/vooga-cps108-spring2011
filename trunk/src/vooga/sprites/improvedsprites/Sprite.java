@@ -38,6 +38,7 @@ import vooga.sprites.improvedsprites.interfaces.ISpriteUpdater;
 import vooga.sprites.spritebuilder.components.basic.SpriteVelocityC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionPolygonC;
 import vooga.sprites.spritebuilder.components.collisions.CollisionShapeC;
+import vooga.sprites.spritebuilder.components.physics.LocalForceC;
 import vooga.sprites.spritebuilder.components.physics.PhysicsVelocityC;
 import vooga.util.buildable.BuildException;
 import vooga.util.buildable.IBuildable;
@@ -134,7 +135,7 @@ public class Sprite extends BaseSprite
         this.y = this.oldY = y;
         
         myComponents = new ComponentSet();
-        addComponents(new SpriteVelocityC(), new PhysicsVelocityC());
+        addComponents(new SpriteVelocityC(), new PhysicsVelocityC(), new LocalForceC());
         // sprite image
         if (image != null)
         {
@@ -156,6 +157,8 @@ public class Sprite extends BaseSprite
 //    }
 
 
+    
+    
     /**
      * Creates new <code>Sprite</code> with specified position and null image.
      * <p>
@@ -850,6 +853,23 @@ public class Sprite extends BaseSprite
 
 	public Point2D getCenterPoint(){
 		return new Point2D.Double(getCenterX(), getCenterY());
+		
+	}
+
+
+	public void setWidth(int i) {
+		width = i;
+	}
+
+
+	public void setHeight(int i) {
+		height = i;
+	}
+
+
+	public void setSize(int w, int h) {
+		setWidth(w);
+		setHeight(h);
 		
 	}
 

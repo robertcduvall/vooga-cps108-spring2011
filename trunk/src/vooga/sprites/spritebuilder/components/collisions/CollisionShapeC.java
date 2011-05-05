@@ -10,9 +10,8 @@ import vooga.util.buildable.components.BasicComponent;
 public class CollisionShapeC<T extends ICollisionShape> extends BasicComponent implements IRotation, ISpriteUpdater{
 
 	private T myCollisionShape;
-
-	public CollisionShapeC ()
-    {}
+	
+	
 	
 	public  T getCollisionShape() {
 		return myCollisionShape;

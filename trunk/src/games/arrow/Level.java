@@ -46,7 +46,6 @@ public class Level extends AbstractLevel
     
     protected void spawnEnemy() {
     	Sprite enemy = myGame.getLevelManager().addArchetypeSprite("enemy", (int)(getBackground().getWidth()*Math.random()),(int)((getBackground().getHeight()/2)*Math.random()));
-		enemy.setImage(ImageUtil.resize(enemy.getImage(), enemy.getImage().getWidth()/4,enemy.getImage().getHeight()/4));
     	enemy.setBackground(getBackground());
 		getSpriteGroup("enemy").addSprites(enemy);
 	}

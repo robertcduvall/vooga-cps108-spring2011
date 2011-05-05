@@ -30,7 +30,7 @@ public class Arrow extends GoodSprite {
         super(image, x, y);
         this.height = 25;
         this.width = 50;
-        this.addComponents(new PermAccelerationC(0.0, .0001), new CollisionPolygonC(new CollisionPolygon(ShapeFactory.makePolygonFromImage(ImageUtil.resize(image, width,height), 5))));
+        this.addComponents( new CollisionPolygonC(new CollisionPolygon(ShapeFactory.makePolygonFromImage(ImageUtil.resize(image, width,height), 5))));
     }
     
 	
