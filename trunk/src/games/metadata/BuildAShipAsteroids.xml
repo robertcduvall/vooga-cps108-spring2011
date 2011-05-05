@@ -1,0 +1,24 @@
+<game>
+  <title>Build-A-Ship</title>
+  <path>games.nathanAsteroids.NathanAsteroids</path>
+  <genre>Construction/Spaceflight</genre>
+  <author>Nathan Klug</author>
+  <description>Edit an xml file, then fly a ship</description>
+  <datecreated>4 May 2011</datecreated>
+  <highscores>
+    <first>0</first>
+    <second>0</second>
+    <third>0</third>
+  </highscores>
+  <version>Free</version>
+  <price>Free</price>
+  <language>None</language>
+  <dimension>
+    <width>800</width>
+    <height>600</height>
+  </dimension>
+  <rating>1</rating>
+  <favorite></favorite>
+  <comment>So, you don't actually build a ship in the game, you go to "games/nathanAsteroids/resources/ship.xml" and build it</comment>
+  <image>src/games/nathanAsteroids/resources/NathanAsteroids.png</image>
+</game>
