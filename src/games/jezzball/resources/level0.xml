@@ -319,6 +319,13 @@
 		<speed>0.1</speed>
 	</instance>
 	
+	<strings>
+		<gridSizeX>15</gridSizeX>
+		<gridSizeY>15</gridSizeY>
+		<spawnRate>100</spawnRate>
+		<topLeftX>100</topLeftX>
+		<topLeftY>100</topLeftY>
+	</strings>
 	
 	<!--  
 	<instance type="ball">
