@@ -134,6 +134,23 @@ public class AdvancedSpriteRefactored extends Sprite
     {
         super.update(elapsedTime);
         animationTime += elapsedTime;
+        
+        if (rotationMode == RotationMode.ROTATE_CARDINAL)
+        {
+            Direction bestDir = Direction.NORTH;
+            
+            
+            for(Direction dir : Direction.values())
+            {
+                double bestDiff = Math.abs(bestDir.getAngle() - getAngle()) % 360;
+                double diff = Math.abs(dir.getAngle() - getAngle()) % 360;
+                
+                if (diff < bestDiff)
+                    bestDir = dir;
+            }
+            
+            direction = bestDir;
+        }
     }
     
     public VoogaGame getGame ()
