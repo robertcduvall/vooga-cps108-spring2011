@@ -14,7 +14,7 @@ import vooga.levels.VoogaPlayField;
  * @author Misha
  *
  */
-public class BlocksCleared implements IGoal
+public class BlankGoal implements IGoal
 {   
     private VoogaPlayField playfield;
     private LevelManager levels;

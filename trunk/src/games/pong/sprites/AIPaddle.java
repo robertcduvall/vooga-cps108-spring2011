@@ -6,6 +6,7 @@ import vooga.core.VoogaGame;
 import vooga.core.event.IEventHandler;
 import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritebuilder.components.PongTargetC;
+import vooga.sprites.spritegroups.SpriteGroup;
 
 public class AIPaddle extends AbstractPaddle{
 
@@ -21,7 +22,7 @@ public class AIPaddle extends AbstractPaddle{
             @Override
             public void handleEvent (Object o)
             {
-            	//System.out.println("asdf");
+            	System.out.println("aistarts!");
             	PongTargetC trackBall = new PongTargetC();
             	removeComponent(trackBall);
             	//System.out.println("asdf");
@@ -34,7 +35,7 @@ public class AIPaddle extends AbstractPaddle{
             }            
         });
 		
-		game.registerEventHandler("PowerUpAppears", new IEventHandler()
+		game.registerEventHandler("FirePowerUp.one", new IEventHandler() 
         {
             @Override
             public void handleEvent (Object o)
@@ -42,10 +43,9 @@ public class AIPaddle extends AbstractPaddle{
             	System.out.println("rere!");
             	//System.out.println("asdf");
             	VoogaGame game = (VoogaGame) o;
-            	Sprite newball = game.getLevelManager().getCurrentLevel().getSpriteGroup("ball").getActiveSprite();
-        		//System.out.println(ball.getCenterX());
+            	SpriteGroup powerupGroup = game.getLevelManager().getCurrentLevel().getSpriteGroup("powerup");
         		
-            	getComponent(PongTargetC.class).addSprite(newball);
+            	getComponent(PongTargetC.class).addSpriteGroup(powerupGroup);
             }            
         });
 		
