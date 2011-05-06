@@ -1,0 +1,32 @@
+<level>
+	<background type="image">Background_Library</background>
+	
+	<collision_manager g1="squirrel" g2="platforms" class="games.leapingSquirrel.collisions.SquirrelPlatform" />
+	<collision_manager g1="ground" g2="platforms" class="games.leapingSquirrel.collisions.PlatformGround" />
+	<collision_manager g1="squirrel" g2="prize" class="games.leapingSquirrel.collisions.SquirrelPrize" />
+	<collision_manager g1="squirrel" g2="bonus" class="games.leapingSquirrel.collisions.SquirrelBonus" />
+	<collision_manager g1="squirrel" g2="ground" class="games.leapingSquirrel.collisions.SquirrelGround" />
+	
+	<goal class="games.leapingSquirrel.goals.TimeCompleted" />
+	
+	<sprite class="games.leapingSquirrel.sprites.Platform" group="platforms" type="platform0" image="Platform_Book">
+		<component class="vooga.sprites.spritebuilder.components.basic.SpriteVelocityC">
+			<mag>0.3</mag>
+			<dir>270.0</dir>
+		</component>
+	</sprite>
+	
+	<sprite class="games.leapingSquirrel.sprites.Prize" group="prize" type="prize0" image="Object_Soda">
+		<component class="vooga.sprites.spritebuilder.components.basic.SpriteVelocityC">
+			<mag>0.4</mag>
+			<dir>270.0</dir>
+		</component>
+	</sprite>
+	
+	<sprite class="games.leapingSquirrel.sprites.Bonus" group="bonus" type="bonus0" image="Object_Coffee">
+		<component class="vooga.sprites.spritebuilder.components.basic.SpriteVelocityC">
+			<mag>0.4</mag>
+			<dir>270.0</dir>
+		</component>
+	</sprite>	
+</level>
