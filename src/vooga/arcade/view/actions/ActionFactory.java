@@ -14,6 +14,7 @@ import vooga.arcade.view.helper.ResourceManager;
  * factory.
  * 
  * @author Ethan Yong-Hui Goh
+ * Revised by Andrea Scripa
  * 
  */
 public class ActionFactory {
