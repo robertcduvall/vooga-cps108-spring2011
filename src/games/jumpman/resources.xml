@@ -1,0 +1,9 @@
+<resources>
+	<images>
+		<source>src/games/jumpman/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.jumpman.Level">src/games/jumpman/resources/level0.xml</level>
+	<level id="1" type="games.jumpman.Level">src/games/jumpman/resources/level1.xml</level>
+	<level id="2" type="games.jumpman.Level">src/games/jumpman/resources/level2.xml</level>
+	<source>src/games/jumpman/resources/keymap.xml</source>
+</resources>
