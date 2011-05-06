@@ -1,0 +1,20 @@
+<game>
+  <title>Jump Man</title>
+  <path>games.jumpman.JumpMan</path>
+  <genre>Arcade</genre>
+  <author>David Crowe</author>
+  <description>Fearlessly leap from rooftop to rooftop</description>
+  <datecreated>May 5, 2010</datecreated>
+  <highscores>6</highscores>
+  <version>Vista</version>
+  <price>3</price>
+  <language>Wookie</language>
+  <dimension>
+    <width>750</width>
+    <height>400</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/jumpman/jumpman.png</image>
+</game>
