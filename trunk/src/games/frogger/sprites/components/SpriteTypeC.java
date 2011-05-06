@@ -1,4 +1,4 @@
-package games.frogger.sprites.components;
+package games.jumpman.sprites.components;
 
 import vooga.util.buildable.components.predefined.basic.StringC;
 
