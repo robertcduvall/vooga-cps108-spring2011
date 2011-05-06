@@ -1,0 +1,10 @@
+<resources>
+	<images>
+		<source>src/games/tao_rpsallstars/resources/images.xml</source>
+	</images>
+	<level id="0" type="games.tao_rpsallstars.levels.Level">src/games/breakout/resources/level0.xml</level>
+	<level id="1" type="games.tao_rpsallstars.levels.Level">src/games/breakout/resources/level1.xml</level>
+	<level id="2" type="games.tao_rpsallstars.levels.WinLossLevel">src/games/breakout/resources/win.xml</level>
+	<level id="3" type="games.tao_rpsallstars.levels.WinLossLevel">src/games/breakout/resources/lose.xml</level>
+	<source>src/games/tao_rpsallstars/resources/keymap.xml</source>
+</resources>

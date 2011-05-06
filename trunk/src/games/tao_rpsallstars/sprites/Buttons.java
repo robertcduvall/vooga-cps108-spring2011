@@ -9,6 +9,9 @@ import vooga.sprites.improvedsprites.Sprite;
  * @author Kevin
  *
  */
+@SuppressWarnings("serial")
 public class Buttons extends Sprite{
+	
+	
 	
 }

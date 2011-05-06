@@ -16,13 +16,14 @@ import vooga.sprites.spritegroups.SpriteGroup;
  */
 public class IntroScreen extends AbstractLevel{
 
+	private VoogaGame game;
 	/**
 	 * @param players
 	 * @param game
 	 */
 	public IntroScreen(Collection<SpriteGroup<Sprite>> players, VoogaGame game) {
 		super(players, game);
-		// TODO Auto-generated constructor stub
+        this.game = game;
 	}
 
 	/* (non-Javadoc)
@@ -30,7 +31,8 @@ public class IntroScreen extends AbstractLevel{
 	 */
 	@Override
 	public void loadLevel() {
-		// TODO Auto-generated method stub
+        addAllSpritesFromPool();
+        addBackground();
 		
 	}
 
