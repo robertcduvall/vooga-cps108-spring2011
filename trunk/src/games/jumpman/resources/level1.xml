@@ -1,0 +1,68 @@
+<level>
+	<background type="image">NightBackground</background>
+	
+	<collision_manager g1="player" g2="obstacles" class="games.jumpman.collisions.ObstaclePlayerCollision" />
+	<collision_manager g1="player" g2="surfaces" class="games.jumpman.collisions.SurfacePlayerCollision" />
+	<collision_manager g1="player" g2="finish" class="games.jumpman.collisions.FinishPlayerCollision" />
+	
+	<goal class="games.jumpman.goals.FinishReached" />
+	
+	<sprite class="games.jumpman.sprites.Surface" group="surfaces" type="building1" image="building1" />
+	<sprite class="games.jumpman.sprites.Surface" group="surfaces" type="building2" image="building2" />
+	<sprite class="games.jumpman.sprites.Surface" group="surfaces" type="building3" image="building3" />
+	<sprite class="games.jumpman.sprites.Surface" group="obstacles" type="plant" image="plant" />
+	<sprite class="games.jumpman.sprites.Surface" group="finish" type="finish" image="finish" />
+	
+	
+	<instance type="building1">
+		<x>000</x>
+		<y>300</y>
+	</instance>
+	<instance type="building2">
+		<x>400</x>
+		<y>330</y>
+	</instance>
+	<instance type="building3">
+		<x>800</x>
+		<y>270</y>
+	</instance>
+	<instance type="building1">
+		<x>1200</x>
+		<y>300</y>
+	</instance>
+	<instance type="building1">
+		<x>1600</x>
+		<y>350</y>
+	</instance>
+	<instance type="building2">
+		<x>2000</x>
+		<y>360</y>
+	</instance>
+	<instance type="building2">
+		<x>2500</x>
+		<y>330</y>
+	</instance>
+	<instance type="building2">
+		<x>3000</x>
+		<y>280</y>
+	</instance>
+	<instance type="building2">
+		<x>3600</x>
+		<y>250</y>
+	</instance>
+	<instance type="building2">
+		<x>4200</x>
+		<y>210</y>
+	</instance>
+	<instance type="finish">
+		<x>4700</x>
+		<y>0</y>
+	</instance>
+	
+	
+	<strings>
+		<building1>-50,500</building1>
+		<building2>650,458</building2>
+		<building3>-50,416</building3>
+	</strings>
+</level>

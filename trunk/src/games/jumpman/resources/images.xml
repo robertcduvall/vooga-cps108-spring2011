@@ -1,0 +1,29 @@
+<images>
+	<image name="plant">
+		<path>src/games/jumpman/resources/plant.png</path>
+	</image>
+	<image name="player">
+		<path>src/games/jumpman/resources/run.png</path>
+	</image>
+	<image name="DayBackground">
+		<path>src/games/jumpman/resources/bgday.png</path>
+	</image>
+	<image name="NightBackground">
+		<path>src/games/jumpman/resources/bgnight.png</path>
+	</image>
+	<image name="CityBackground">
+		<path>src/games/jumpman/resources/citybackground.png</path>
+	</image>
+	<image name="building1">
+		<path>src/games/jumpman/resources/building1.png</path>
+	</image>
+	<image name="building2">
+		<path>src/games/jumpman/resources/building2.png</path>
+	</image>
+	<image name="building3">
+		<path>src/games/jumpman/resources/building3.png</path>
+	</image>
+	<image name="finish">
+		<path>src/games/jumpman/resources/finish.png</path>
+	</image>
+</images>
