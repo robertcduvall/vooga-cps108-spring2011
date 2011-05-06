@@ -6,12 +6,13 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+//import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import vooga.arcade.controller.ArcadeController;
 import vooga.arcade.parser.ArcadeGameObject;
 import vooga.arcade.view.buttonToolBar.ButtonBar;
+import vooga.arcade.view.gui.ProductionState.State;
 import vooga.arcade.view.helper.ResourceManager;
 import vooga.arcade.view.iView.IView;
 import vooga.arcade.view.middleFrame.VoogaMiddleFrame;
@@ -29,6 +30,8 @@ public class VoogaViewer extends JFrame implements IView
     private VoogaMiddleFrame middleFrame;
     private RatingsPane ratingsPane;
     private JToolBar toolbar;
+    
+    public ProductionState ps = new ProductionState(State.LOGINTOOLBAR);
     private ResourceManager middleFrameResource =
         new ResourceManager("vooga.arcade.resources.MiddleFrameResource");
 
@@ -51,7 +54,7 @@ public class VoogaViewer extends JFrame implements IView
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         this.setTitle(title);
-        toolbar = ButtonBar.createButtonToolBar(p);
+        toolbar = ButtonBar.createButtonToolBar(p, ps.getStateResources(), ps.currentState);
         this.add(toolbar, BorderLayout.PAGE_START);
         this.setResizable(false);
   
@@ -87,19 +90,6 @@ public class VoogaViewer extends JFrame implements IView
         this.add(toolbar, BorderLayout.PAGE_START);
     }
 
-
-//    public void addVariableListEntry (String str)
-//    {
-//        middleFrame.addVariable(str);
-//    }
-//
-//
-//    public void clearVariables ()
-//    {
-//        middleFrame.clearVariables();
-//    }
-//
-//
    @Override
     public void updateList (String name)
     {

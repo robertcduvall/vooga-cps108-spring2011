@@ -1,0 +1,95 @@
+package vooga.arcade.view.gui;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JToolBar;
+import javax.swing.UIManager;
+import vooga.arcade.controller.ArcadeController;
+import vooga.arcade.parser.ArcadeGameObject;
+import vooga.arcade.view.buttonToolBar.ButtonBar;
+import vooga.arcade.view.helper.ResourceManager;
+import vooga.arcade.view.iView.IView;
+import vooga.arcade.view.middleFrame.VoogaMiddleFrame;
+import vooga.arcade.view.ratingsPane.RatingsPane;
+
+//Original VoogaViewer
+public class VoogaViewer0 extends JFrame implements IView
+{
+    private static final long serialVersionUID = 1L;
+    private VoogaMiddleFrame middleFrame;
+    private RatingsPane ratingsPane;
+    private JToolBar toolbar;
+    private ResourceManager middleFrameResource =
+        new ResourceManager("vooga.arcade.resources.MiddleFrameResource");
+
+    private ArcadeController pc;
+
+    public VoogaViewer0 (String title,
+                        String prompt,
+                        Dimension dim,
+                        ArcadeController p)
+    {
+        try
+        {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        pc = p;
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        this.setTitle(title);
+        toolbar = ButtonBar.createButtonToolBar(p);
+        this.add(toolbar, BorderLayout.PAGE_START);
+        this.setResizable(false);
+  
+        middleFrame = new VoogaMiddleFrame(pc);
+        ratingsPane = new RatingsPane(pc);
+        
+        this.add(middleFrame, BorderLayout.CENTER);
+//        this.add(ratingsPane, BorderLayout.PAGE_END);
+        this.setMinimumSize(dim);
+        this.setVisible(true);
+    }
+
+
+    public VoogaViewer0 (String title,
+                        String prompt,
+                        int dimx,
+                        int dimy,
+                        ArcadeController p)
+    {
+        this(title, prompt, new Dimension(dimx, dimy), p);
+    }
+
+
+    public void showError (String str)
+    {
+        JOptionPane.showMessageDialog(middleFrame, str);
+    }
+    
+    public void switchToolBar(JToolBar newBar)
+    {
+        this.remove(toolbar);
+        toolbar = newBar;
+        this.add(toolbar, BorderLayout.PAGE_START);
+    }
+
+   @Override
+    public void updateList (String name)
+    {
+    }
+   
+   public void updateGameObjectList(List<ArcadeGameObject> arcadeGameList, String searchQuery){
+       middleFrame.updateThumbnails(arcadeGameList, searchQuery);
+   }
+   
+   public VoogaMiddleFrame getMiddleFrame(){
+       return middleFrame;
+   }
+}
