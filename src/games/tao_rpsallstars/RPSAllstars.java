@@ -30,12 +30,11 @@ public class RPSAllstars extends VoogaGame{
 
 	@Override
 	public void initResources() {
-		// TODO Auto-generated method stub
+		
 		eventManager = this.getEventManager();
         imageLoader = this.getImageLoader();
         levelManager = this.getLevelManager();
         
-		
 	}
 	
 	public static void main(String[] args)

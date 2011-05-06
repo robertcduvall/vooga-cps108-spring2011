@@ -9,5 +9,5 @@ import vooga.sprites.improvedsprites.Sprite;
  *
  */
 public class PaperThrow extends Sprite{
-
+	
 }
