@@ -3,6 +3,11 @@
  */
 package games.tao_rpsallstars;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import games.tao_rpsallstars.cpu_player.CpuPlayer;
 import games.tao_rpsallstars.sprites.User;
 import vooga.core.event.EventManager;
@@ -19,11 +24,43 @@ public class RPSReferee {
 	private EventManager eventManager;
 	private CpuPlayer cpu;
 	private User user;
+	private Map<String,Set<String>> aBeatsB = new HashMap<String,Set<String>>();
+	private String userChoice;
+	private String CPUChoice;
+	
 	
 	public RPSReferee(EventManager eventManager){
 		this.eventManager = eventManager;
 		CpuPlayer cpu = new CpuPlayer(eventManager, null);
 		createEventHandlers();
+		
+		putRelationship("Rock", "Scissors");
+		putRelationship("Scissors", "Paper");
+		putRelationship("Paper", "Rock");
+		putRelationship("Fire", "Rock");
+		putRelationship("Fire", "Scissors");
+		putRelationship("Fire", "Paper");
+	}
+	
+	public void putRelationship(String A, String B){
+		if(aBeatsB.containsKey(A)){
+			aBeatsB.get(A).add(B);
+		} else{
+			Set<String> s = new HashSet<String>();
+			s.add(B);
+			aBeatsB.put(A,s);
+		}
+	}
+	
+	public void judge(){
+		if(aBeatsB.get(userChoice).contains(CPUChoice)){
+			// user scores
+		}
+		else if(aBeatsB.get(CPUChoice).contains(userChoice)){
+			// CPU scores
+		} else{
+			// tie
+		}
 	}
 	
 	public CpuPlayer getCPU(){
@@ -39,6 +76,7 @@ public class RPSReferee {
                     {
                             //sayHi();
                     	//Tells CPU to throw
+                    	user.rock();
                     }
             });
             eventManager.registerEventHandler("Input.User.Paper", new IEventHandler()
@@ -48,6 +86,7 @@ public class RPSReferee {
                     {
                             //sayHi();
                     	//Tells CPU to throw
+                    	user.paper();
                     }
             });
             eventManager.registerEventHandler("Input.User.Scissors", new IEventHandler()
@@ -57,6 +96,7 @@ public class RPSReferee {
                     {
                             //sayHi();
                     	//Tells CPU to throw
+                    	user.scissors();
                     }
             });
             eventManager.registerEventHandler("Input.CPU.Rock", new IEventHandler()
