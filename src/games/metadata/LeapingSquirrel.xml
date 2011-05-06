@@ -1,0 +1,20 @@
+<game>
+  <title>Leaping Squirrel</title>
+  <path>games.leapingSquirrel.LeapingSquirrelGame</path>
+  <genre>Addictive</genre>
+  <author>Andrea</author>
+  <description>A Duke squirrel version of the popular game, Kitten Jump</description>
+  <datecreated>May 4, 2011</datecreated>
+  <highscores></highscores>
+  <version>1.0</version>
+  <price></price>
+  <language>Java</language>
+  <dimension>
+    <width>640</width>
+    <height>480</height>
+  </dimension>
+  <rating></rating>
+  <favorite></favorite>
+  <comment></comment>
+  <image>src/games/leapingSquirrel/resources/TitlePage.jpg</image>
+</game>
