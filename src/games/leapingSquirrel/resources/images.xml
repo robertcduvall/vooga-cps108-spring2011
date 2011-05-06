@@ -1,0 +1,62 @@
+<images>
+	<image name="Squirrel_Right">
+		<path>resources/Squirrel_Right.gif</path>
+	</image>
+	<image name="Squirrel_Left">
+		<path>resources/Squirrel_Left.gif</path>
+	</image>
+	<image name="Squirrel_Right_Hat">
+		<path>resources/Squirrel_Right_Hat.gif</path>
+	</image>
+	<image name="Squirrel_Left_Hat">
+		<path>resources/Squirrel_Left_Hat.gif</path>
+	</image>
+	<image name="Background_Quad">
+		<path>resources/Background_Quad.jpg</path>
+	</image>
+	<image name="Background_Library">
+		<path>resources/Background_Library.jpg</path>
+	</image>
+	<image name="Background_Cameron">
+		<path>resources/Background_Cameron.jpg</path>
+	</image>
+	<image name="Background_Party">
+		<path>resources/Background_Party.jpg</path>
+	</image>
+	<image name="Platform_Bush">
+		<path>resources/Platform_Bush.gif</path>
+	</image>
+	<image name="Platform_Book">
+		<path>resources/Platform_Book.gif</path>
+	</image>
+	<image name="Platform_Ball">
+		<path>resources/Platform_Ball.gif</path>
+	</image>
+	<image name="Platform_Cup">
+		<path>resources/Platform_Cup.gif</path>
+	</image>
+	<image name="Object_Acorn">
+		<path>resources/Object_Acorn.gif</path>
+	</image>
+	<image name="Object_ChickenBiscuit">
+		<path>resources/Object_ChickenBiscuit.gif</path>
+	</image>
+	<image name="Object_Soda">
+		<path>resources/Object_Soda.gif</path>
+	</image>
+	<image name="Object_Coffee">
+		<path>resources/Object_Coffee.gif</path>
+	</image>
+	<image name="Object_FoamFinger">
+		<path>resources/Object_FoamFinger.gif</path>
+	</image>
+	<image name="Object_Hat">
+		<path>resources/Object_Hat.gif</path>
+	</image>
+	<image name="Object_Beer">
+		<path>resources/Object_Beer.gif</path>
+	</image>
+	<image name="Object_FourLoko">
+		<path>resources/Object_FourLoko.gif</path>
+	</image>
+</images>
