@@ -8,7 +8,7 @@ import vooga.levels.LevelManager;
 import vooga.levels.VoogaPlayField;
 
 /**
- * @author Kevin
+ * @author Kevin Tao
  *
  */
 public class ReachedScore implements IGoal{

@@ -3,6 +3,8 @@
  */
 package games.tao_rpsallstars;
 
+import games.tao_rpsallstars.sprites.User;
+
 import java.awt.Dimension;
 
 import vooga.core.VoogaGame;
@@ -34,6 +36,9 @@ public class RPSAllstars extends VoogaGame{
 		eventManager = this.getEventManager();
         imageLoader = this.getImageLoader();
         levelManager = this.getLevelManager();
+        
+        User user = new User(eventManager);
+        RPSReferee referee = new RPSReferee(eventManager, user);
         
 	}
 	
