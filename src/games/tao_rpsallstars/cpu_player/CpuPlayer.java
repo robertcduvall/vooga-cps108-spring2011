@@ -24,7 +24,10 @@ public class CpuPlayer extends AISprite {
 		myManager = manager;
 
 	}
-
+	
+	/**
+	 * This is the CPU's response. I'm going to change this to actual AI at some point.
+	 */
 	public void getResponse() {
 
 		int random = (int) Math.floor(Math.random() * 3);

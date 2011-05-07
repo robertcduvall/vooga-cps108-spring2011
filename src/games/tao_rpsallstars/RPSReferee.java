@@ -29,9 +29,10 @@ public class RPSReferee {
 	private String CPUChoice;
 	
 	
-	public RPSReferee(EventManager eventManager){
+	public RPSReferee(EventManager eventManager, User user){
 		this.eventManager = eventManager;
 		CpuPlayer cpu = new CpuPlayer(eventManager, null);
+		this.user = user;
 		createEventHandlers();
 		
 		putRelationship("Rock", "Scissors");
@@ -54,12 +55,12 @@ public class RPSReferee {
 	
 	public void judge(){
 		if(aBeatsB.get(userChoice).contains(CPUChoice)){
-			// user scores
+			//TODO: user scores
 		}
 		else if(aBeatsB.get(CPUChoice).contains(userChoice)){
-			// CPU scores
+			//TODO: CPU scores
 		} else{
-			// tie
+			//TODO: tie
 		}
 	}
 	

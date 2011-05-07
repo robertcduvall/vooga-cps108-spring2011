@@ -11,7 +11,7 @@ import vooga.sprites.improvedsprites.Sprite;
 import vooga.sprites.spritegroups.SpriteGroup;
 
 /**
- * @author Kevin
+ * @author Kevin Tao
  *
  */
 public class IntroScreen extends AbstractLevel{

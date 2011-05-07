@@ -3,5 +3,6 @@
 	<key_event event="Input.User.Rock" sensitivity="Edge" key="R"/>
 	<key_event event="Input.User.Paper" sensitivity="Edge" key="P"/>
 	<key_event event="Input.User.Scissors" sensitivity="Edge" key="S"/>
+	<key_event event="Input.User.Fire" sensitivity="Edge" key="F"/>
 	<key_event event="Input.User.Restart" sensitivity="Edge" key="ESC"/>
 </keymap>
