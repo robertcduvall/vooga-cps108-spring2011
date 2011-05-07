@@ -1,7 +1,7 @@
 <level>
 	<background type="color">blue</background>
 	
-	<sprite group="message" class="games.breakout.sprites.Message" type="message" image="lose" />
+	<sprite group="message" class="games.tao_rpsallstars.sprites.Message" type="message" image="logo" />
 	
 	<instance type="message"><x>300</x><y>240</y></instance>
 </level>
