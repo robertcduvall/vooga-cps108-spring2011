@@ -15,7 +15,7 @@
 		<height>100</height>
 	</image>
 		<image name="intro">
-		<path>src/games/tao_rpsallstars/resources/intro.png</path>
+		<path>src/games/tao_rpsallstars/resources/intro.jpg</path>
 	</image>
 		<image name="logo">
 		<path>src/games/tao_rpsallstars/resources/rpsLogo.gif</path>

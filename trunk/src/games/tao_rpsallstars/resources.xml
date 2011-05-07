@@ -2,7 +2,7 @@
 	<images>
 		<source>src/games/tao_rpsallstars/resources/images.xml</source>
 	</images>
-	<level id="0" type="games.tao_rpsallstars.levels.IntroScreen">src/games/breakout/resources/level0.xml</level>
-	<level id="1" type="games.tao_rpsallstars.levels.GamePlayLevel">src/games/breakout/resources/level1.xml</level>
+	<level id="0" type="games.tao_rpsallstars.levels.IntroScreen">src/games/tao_rpsallstars/resources/intro.xml</level>
+	<level id="1" type="games.tao_rpsallstars.levels.GamePlayLevel">src/games/tao_rpsallstars/resources/level1.xml</level>
 	<source>src/games/tao_rpsallstars/resources/keymap.xml</source>
 </resources>
