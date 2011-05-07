@@ -5,7 +5,6 @@ import vooga.resources.Direction;
 import vooga.sprites.improvedsprites.Sprite;
 
 /**
- * A message saying "You win!" or "You lose!"
  * 
  * @author Misha
  */

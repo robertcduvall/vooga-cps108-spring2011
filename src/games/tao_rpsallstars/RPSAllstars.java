@@ -39,6 +39,7 @@ public class RPSAllstars extends VoogaGame{
         
         User user = new User(eventManager);
         RPSReferee referee = new RPSReferee(eventManager, user);
+        levelManager.loadLevel(0);
         
 	}
 	
