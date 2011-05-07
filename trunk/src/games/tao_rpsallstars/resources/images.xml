@@ -1,16 +1,16 @@
 <images>
 	<image name="rock">
-		<path>src/games/breakout/resources/rock.png</path>
+		<path>src/games/breakout/resources/rockthrow.png</path>
 		<width>122</width>
 		<height>100</height>
 	</image>
 	<image name="scissors">
-		<path>src/games/breakout/resources/scissors.png</path>
+		<path>src/games/breakout/resources/scissorsthrow.png</path>
 		<width>122</width>
 		<height>100</height>
 	</image>
 	<image name="paper">
-		<path>src/games/breakout/resources/paper.png</path>
+		<path>src/games/breakout/resources/paperthrow.png</path>
 		<width>122</width>
 		<height>100</height>
 	</image>
