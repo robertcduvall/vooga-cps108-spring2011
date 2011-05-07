@@ -15,5 +15,6 @@ public class Message extends Sprite
     {
         super(image, x - image.getWidth()/2, y - image.getHeight()/2);
         this.setAngle(Direction.NORTH.getAngle());
+        this.setActive(true);
     }
 }
